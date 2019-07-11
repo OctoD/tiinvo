@@ -1,0 +1,59 @@
+{
+  "name": "typescript-node-lib",
+  "version": "0.0.0",
+  "author": {
+    "name": "name",
+    "email": "email@domain.com"
+  },
+  "main": "dist/index.js",
+  "description": "your typescript library description",
+  "keywords": [
+    "typescript"
+  ],
+  "scripts": {
+    "changelog": "standard-changelog",
+    "lint": "eslint -c ./.eslintrc.json src/**/*.ts --fix",
+    "prepublishOnly": "tsc -p .",
+    "size-limit": "tsc -p . && size-limit",
+    "test": "jest"
+  },
+  "homepage": "https://github.com/yourname/yourrepo#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourname/yourrepo.git"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx,js,jsx}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "size-limit": [
+    {
+      "limit": "1 s",
+      "webpack": false,
+      "path": "dist/*.js"
+    }
+  ],
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.0.12",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "codecov": "^3.5.0",
+    "eslint": "^6.0.1",
+    "husky": "^3.0.0",
+    "jest": "^24.8.0",
+    "lint-staged": "^9.0.2",
+    "prettier": "^1.18.2",
+    "size-limit": "^1.3.7",
+    "standard-changelog": "^2.0.11",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.2"
+  }
+}
