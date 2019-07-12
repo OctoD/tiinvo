@@ -30,12 +30,38 @@ class ResultLike<R, E> {
     return instanceOfError<R, E>(this.value) ? None() : Some(this.value);
   }
 
+  /**
+   * Maps a `ResultLike<T, E>` to `ResultLike<U, E>` by applying a function
+   * to a contained `Ok` value, leaving an `Err` value untouched.
+   *
+   * This function can be used to compose the results of two functions.
+   * @template K
+   * @param {(value: R) => K} f
+   * @returns {ResultLike<K, E>}
+   * @memberof ResultLike
+   */
   public map<K>(f: (value: R) => K): ResultLike<K, E> {
     if (typeof f !== "function") {
       throw new TypeError(`map arg must be a function`);
     }
 
     return new ResultLike<K, E>(f(this.value), this.error);
+  }
+
+  /**
+   * Maps a `Result<T, E>` to `F` by applying a function to a contained `Ok` value, or a `fallback` function to a contained `Err` value.
+   *
+   * This function can be used to unpack a successful result while handling an error.
+   * @template F
+   * @param {F} fallback
+   * @param {(value: R) => F} f
+   * @returns {F}
+   * @memberof ResultLike
+   */
+  public mapOrElse<F>(fallback: (error: Error) => F, f: (value: R) => F): F {
+    return this.isError()
+      ? fallback((this.error as unknown) as Error)
+      : f(this.value);
   }
 
   /**
