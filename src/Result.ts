@@ -1,6 +1,6 @@
 import { Option, None, Some } from "./Option";
 
-class ResultLike<R, E> {
+class Result<R, E> {
   public constructor(protected value: R, protected error: E | null) {}
 
   /**
@@ -37,15 +37,15 @@ class ResultLike<R, E> {
    * This function can be used to compose the results of two functions.
    * @template K
    * @param {(value: R) => K} f
-   * @returns {ResultLike<K, E>}
+   * @returns {Result<K, E>}
    * @memberof ResultLike
    */
-  public map<K>(f: (value: R) => K): ResultLike<K, E> {
+  public map<K>(f: (value: R) => K): Result<K, E> {
     if (typeof f !== "function") {
       throw new TypeError(`map arg must be a function`);
     }
 
-    return new ResultLike<K, E>(f(this.value), this.error);
+    return new Result<K, E>(f(this.value), this.error);
   }
 
   /**
@@ -87,8 +87,8 @@ function instanceOfError<T, E>(value: T | E): value is E {
   );
 }
 
-export type Err = ResultLike<null, Error>;
-export type Ok<T> = ResultLike<T, null>;
+export type Err = Result<null, Error>;
+export type Ok<T> = Result<T, null>;
 
 /**
  * Returns an `Error`
@@ -97,7 +97,7 @@ export type Ok<T> = ResultLike<T, null>;
  * @returns {Err}
  */
 export function Err(message?: string): Err {
-  return new ResultLike<null, Error>(null, new Error(message));
+  return new Result<null, Error>(null, new Error(message));
 }
 
 /**
@@ -108,5 +108,5 @@ export function Err(message?: string): Err {
  * @returns {Ok<T>}
  */
 export function Ok<T>(value: T): Ok<T> {
-  return (new ResultLike<T, Err>(value, null) as unknown) as Ok<T>;
+  return (new Result<T, Err>(value, null) as unknown) as Ok<T>;
 }
