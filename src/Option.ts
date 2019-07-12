@@ -119,6 +119,21 @@ class OptionLike<T> {
   }
 
   /**
+   * Applies a function to the contained value (if any), or computes a default (if not).
+   * @template K
+   * @param {() => K} defFn
+   * @param {(arg: T) => K} f
+   * @returns {K}
+   * @memberof OptionLike
+   */
+  public mapOrElse<K>(
+    defFn: () => K,
+    f: (arg: T extends null ? any : T) => K
+  ): K {
+    return this.isSome() ? f(this.value as any) : defFn();
+  }
+
+  /**
    * Returns the option if it contains a value,
    * otherwise returns `optb`
    *

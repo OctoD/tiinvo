@@ -87,4 +87,12 @@ describe(`Option`, () => {
     expect(Some(100).mapOr("a", a => String(a))).toStrictEqual("100");
     expect(None().mapOr("a", a => String(a))).toStrictEqual("a");
   });
+
+  it(`Applies a function to the contained value (if any), or computes a default (if not).`, () => {
+    const fn1 = () => "a";
+    const fn2 = (arg: number) => String(arg);
+
+    expect(Some(100).mapOrElse(fn1, fn2)).toStrictEqual("100");
+    expect(None().mapOrElse(fn1, fn2)).toStrictEqual("a");
+  });
 });
