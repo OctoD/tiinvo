@@ -10,7 +10,7 @@ class OptionLike<T> {
   }
 
   /**
-   * Returns OptionLike<T> if is `Some`,
+   * Returns `None` if the option is `None`,
    * otherwise returns `optb`
    * @template U
    * @param {OptionLike<U>} optb
@@ -24,13 +24,13 @@ class OptionLike<T> {
   /**
    * Returns `callback` result if `OptionLike<T>` is `Some`,
    * otherwise returns `None`
-   * @param {<R>(arg: T) => R} callback
-   * @returns {OptionLike<ReturnType<typeof callback>>}
+   * @param {<R>(arg: T) => OptionLike<R>} callback
+   * @returns {ReturnType<typeof callback>}
    * @memberof OptionLike
    */
-  public andThen(
-    callback: <R>(arg: T) => R
-  ): OptionLike<ReturnType<typeof callback>> {
+  public andThen<K>(
+    callback: (arg: T) => OptionLike<K>
+  ): Some<T> | ReturnType<typeof callback> {
     return this.foldReturn(callback(this.value));
   }
 
@@ -56,7 +56,7 @@ class OptionLike<T> {
    * @memberof OptionLike
    */
   public isNone(): boolean {
-    return this.value === null && this.value === undefined;
+    return this.value === null || this.value === undefined;
   }
 
   /**
@@ -82,7 +82,7 @@ class OptionLike<T> {
    * @memberof OptionLike
    */
   public or<U>(optb: OptionLike<U>): OptionLike<T> | OptionLike<U> {
-    return this.foldReturn(optb);
+    return this.isSome() ? this : optb;
   }
 
   /**
@@ -94,7 +94,7 @@ class OptionLike<T> {
    * @memberof OptionLike
    */
   public orElse<U>(f: () => OptionLike<U>): Some<T> | OptionLike<U> {
-    return this.foldReturn(f());
+    return this.isSome() ? this : f();
   }
 
   /**
@@ -111,8 +111,6 @@ class OptionLike<T> {
       return this;
     } else if (optb.isSome() && this.isNone()) {
       return optb;
-    } else if ((optb.value as any) === (this.value as any)) {
-      return None();
     }
 
     return (optb.value as any) === (this.value as any) ? None() : this;
@@ -153,7 +151,7 @@ export function None(): None {
  * @returns {Some<T>}
  */
 export function Some<T>(value: T): Some<T> {
-  return Option(value);
+  return Option(value === undefined ? ((null as unknown) as T) : value);
 }
 
 /**
