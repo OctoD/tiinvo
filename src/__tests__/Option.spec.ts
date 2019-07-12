@@ -72,4 +72,9 @@ describe(`Option`, () => {
     expect(Some(100).unwrap()).toBe(100);
     expect(() => None().unwrap()).toThrowError();
   });
+
+  it("Returns the contained value or a default.", () => {
+    expect(Some(100).unwrapOr(1000)).toBe(100);
+    expect(None().unwrapOr(1000)).toBe(1000);
+  });
 });

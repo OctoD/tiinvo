@@ -143,6 +143,16 @@ class OptionLike<T> {
 
     return this.value;
   }
+
+  /**
+   * Returns the contained value or a default.
+   * @param {K} value
+   * @returns {K}
+   * @memberof OptionLike
+   */
+  public unwrapOr<K>(value: K): K {
+    return this.isNone() ? value : (this.value as any);
+  }
 }
 
 export type Option<T> = OptionLike<T | null>;
