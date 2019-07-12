@@ -35,6 +35,21 @@ class OptionLike<T> {
   }
 
   /**
+   * Throws if the value is a `None` with a custom error message provided by msg.
+   *
+   * @param {string} msg
+   * @returns {(Some<T> | never)}
+   * @memberof OptionLike
+   */
+  public expect(msg: string): Some<T> | never {
+    if (this.isNone()) {
+      throw new ReferenceError(msg);
+    }
+
+    return this;
+  }
+
+  /**
    * Returns the `Option` if it's value passes
    * the `predicate` function. Otherwise returns
    * None

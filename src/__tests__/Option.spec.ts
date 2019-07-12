@@ -36,6 +36,13 @@ describe(`Option`, () => {
     expect(some).toStrictEqual(Some(200));
   });
 
+  it("Throws if the value is a `None` with a custom error message provided by msg.", () => {
+    const message = "exxxplooooosioooons 💥💥💥!!!";
+
+    expect(Some(100).expect(message)).toStrictEqual(Some(100));
+    expect(() => None().expect(message)).toThrowError();
+  });
+
   it("Returns the `Option` if it's value passes the`predicate` function.Otherwise returns None", () => {
     expect(Some(100).filter(a => a > 200)).toStrictEqual(None());
     expect(Some(100).filter(a => a < 200)).toStrictEqual(Some(100));
