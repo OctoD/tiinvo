@@ -99,6 +99,26 @@ class OptionLike<T> {
   }
 
   /**
+   * Applies a function to the contained value (if any), or returns the provided default (if not).
+   * @template K
+   * @param {K} def
+   * @param {(arg: T) => K} f
+   * @returns {K}
+   * @memberof OptionLike
+   */
+  public mapOr<K>(def: K, f: (arg: T) => K): K {
+    if (typeof f !== "function") {
+      throw new TypeError(`map argument must be a function`);
+    }
+
+    if (this.isNone()) {
+      return def;
+    }
+
+    return f(this.value);
+  }
+
+  /**
    * Returns the option if it contains a value,
    * otherwise returns `optb`
    *

@@ -82,4 +82,9 @@ describe(`Option`, () => {
     expect(Some(100).map(a => String(a))).toStrictEqual(Some("100"));
     expect(() => Some(100).map(100 as any)).toThrowError();
   });
+
+  it(`Applies a function to the contained value (if any), or returns the provided default (if not).`, () => {
+    expect(Some(100).mapOr("a", a => String(a))).toStrictEqual("100");
+    expect(None().mapOr("a", a => String(a))).toStrictEqual("a");
+  });
 });
