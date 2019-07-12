@@ -84,6 +84,21 @@ class OptionLike<T> {
   }
 
   /**
+   * Maps an `OptionLike<T>` to `OptionLike<U>` by applying a function to a contained value.
+   * @template K
+   * @param {(arg: T) => K} f
+   * @returns {K}
+   * @memberof OptionLike
+   */
+  public map<K>(f: (arg: T) => K): OptionLike<K> {
+    if (typeof f !== "function") {
+      throw new TypeError(`map argument must be a function`);
+    }
+
+    return Option(f(this.value));
+  }
+
+  /**
    * Returns the option if it contains a value,
    * otherwise returns `optb`
    *

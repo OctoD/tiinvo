@@ -77,4 +77,9 @@ describe(`Option`, () => {
     expect(Some(100).unwrapOr(1000)).toBe(100);
     expect(None().unwrapOr(1000)).toBe(1000);
   });
+
+  it("Maps an `OptionLike<T>` to `OptionLike<U>` by applying a function to a contained value.", () => {
+    expect(Some(100).map(a => String(a))).toStrictEqual(Some("100"));
+    expect(() => Some(100).map(100 as any)).toThrowError();
+  });
 });
