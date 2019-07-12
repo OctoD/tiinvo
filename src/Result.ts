@@ -1,7 +1,7 @@
 import { Option, None, Some } from "./Option";
 
 class Result<R, E> {
-  public constructor(protected value: R, protected error: E | null) {}
+  public constructor(protected value: R | E) {}
 
   /**
    * Converts from `Result<T, E>` to `OptionLike<E>`.
@@ -45,7 +45,7 @@ class Result<R, E> {
       throw new TypeError(`map arg must be a function`);
     }
 
-    return new Result<K, E>(f(this.value), this.error);
+    return new Result<K, E>(f(this.value as R));
   }
 
   /**
@@ -60,8 +60,8 @@ class Result<R, E> {
    */
   public mapOrElse<F>(fallback: (error: Error) => F, f: (value: R) => F): F {
     return this.isError()
-      ? fallback((this.error as unknown) as Error)
-      : f(this.value);
+      ? fallback((this.value as unknown) as Error)
+      : f(this.value as R);
   }
 
   /**
@@ -81,6 +81,10 @@ class Result<R, E> {
  * @returns {value is E}
  */
 function instanceOfError<T, E>(value: T | E): value is E {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+
   return (
     value instanceof Err ||
     ("name" in value && "message" in value && "stack" in value)
@@ -97,7 +101,7 @@ export type Ok<T> = Result<T, null>;
  * @returns {Err}
  */
 export function Err(message?: string): Err {
-  return new Result<null, Error>(null, new Error(message));
+  return new Result<null, Error>(new Error(message));
 }
 
 /**
@@ -108,5 +112,5 @@ export function Err(message?: string): Err {
  * @returns {Ok<T>}
  */
 export function Ok<T>(value: T): Ok<T> {
-  return (new Result<T, Err>(value, null) as unknown) as Ok<T>;
+  return new Result<T, null>(value);
 }
