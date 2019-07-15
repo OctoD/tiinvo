@@ -29,4 +29,9 @@ describe(`Result`, () => {
     expect(Ok("foo").map(val => val.length)).toEqual(Ok(3));
     expect(Err("foo").map((val: any) => val.length)).not.toEqual(Ok(3));
   });
+
+  it("Maps a `Result<T, E>` to `F` by applying a function to a contained `Ok` value, or a `fallback` function to a contained `Err` value. This function can be used to unpack a successful result while handling an error.", () => {
+    expect(Ok("test").mapOrElse(() => "aaa", () => "bbb")).toEqual("bbb");
+    expect(Err("test").mapOrElse(() => "aaa", () => "bbb")).toEqual("aaa");
+  });
 });
