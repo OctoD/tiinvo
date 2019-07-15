@@ -19,4 +19,9 @@ describe(`Result`, () => {
   it("Converts from `Result<T, E>` to `OptionLike<E>`.", () => {
     expect(Err("foobar").err()).toStrictEqual(Some(new Error("foobar")));
   });
+
+  it("Converts from Result<T, E> to Option<T>.", () => {
+    expect(Ok("foo").ok()).toStrictEqual(Some("foo"));
+    expect(Err("foo").ok()).not.toStrictEqual(Some("foo"));
+  });
 });
