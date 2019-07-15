@@ -24,4 +24,9 @@ describe(`Result`, () => {
     expect(Ok("foo").ok()).toStrictEqual(Some("foo"));
     expect(Err("foo").ok()).not.toStrictEqual(Some("foo"));
   });
+
+  it("Maps a `Result<T, E>` to `Result<U, E>` by applying a function to a contained`Ok` value, leaving an`Err` value untouched. This function can be used to compose the results of two functions.", () => {
+    expect(Ok("foo").map(val => val.length)).toEqual(Ok(3));
+    expect(Err("foo").map((val: any) => val.length)).not.toEqual(Ok(3));
+  });
 });
