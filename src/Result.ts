@@ -102,6 +102,21 @@ class Result<R, E> {
   public ok(): Option<R> {
     return Some(this.value as R);
   }
+
+  /**
+   * Returns `res` if the result is `Err`, otherwise returns the `Ok` value of self.
+   * @template U
+   * @param {Result<U, E>} res
+   * @returns {(Result<U, E> | Ok<R>)}
+   * @memberof Result
+   */
+  public or<U>(res: Result<U, E>): Result<U, E> | Ok<R> {
+    if (instanceOfError<R, E>(this.value)) {
+      return res;
+    }
+
+    return this;
+  }
 }
 
 /**

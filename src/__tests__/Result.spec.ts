@@ -44,4 +44,9 @@ describe(`Result`, () => {
     expect(Ok("a").andThen(arg => Ok(arg.repeat(2)))).toStrictEqual(Ok("aa"));
     expect(Err("b").andThen(arg => Ok(arg.repeat(2)))).toStrictEqual(Err("b"));
   });
+
+  it("Returns `res` if the result is `Err`, otherwise returns the `Ok` value of self.", () => {
+    expect(Ok("a").or(Ok("b"))).toStrictEqual(Ok("a"));
+    expect(Err("a").or(Ok("b"))).toStrictEqual(Ok("b"));
+  });
 });
