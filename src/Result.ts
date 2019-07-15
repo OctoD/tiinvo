@@ -1,4 +1,5 @@
 import { Option, None, Some } from "./Option";
+import { ensureFunction } from "./common";
 
 class Result<R, E> {
   public constructor(protected value: R | E) {}
@@ -26,6 +27,8 @@ class Result<R, E> {
    * @memberof Result
    */
   public andThen<U>(op: (arg: R) => Result<U, E>): Result<U, E> {
+    ensureFunction("andThen argument must be a function", op);
+
     if (instanceOfError<R, E>(this.value)) {
       return new Result(this.value as any);
     }
@@ -81,11 +84,11 @@ class Result<R, E> {
 
   /**
    * Returns true if the result is `Ok`.
-   * @returns {Option<R>}
+   * @returns {boolean}
    * @memberof Result
    */
-  public isOk(): Option<R> {
-    return instanceOfError<R, E>(this.value) ? None() : Some(this.value);
+  public isOk(): boolean {
+    return !instanceOfError<R, E>(this.value);
   }
 
   /**
@@ -99,9 +102,7 @@ class Result<R, E> {
    * @memberof Result
    */
   public map<K>(f: (value: R) => K): Result<K, E> {
-    if (typeof f !== "function") {
-      throw new TypeError(`map arg must be a function`);
-    }
+    ensureFunction("map argument must be a function", f);
 
     return new Result<K, E>(f(this.value as R));
   }
@@ -117,6 +118,9 @@ class Result<R, E> {
    * @memberof Result
    */
   public mapOrElse<F>(fallback: (error: Error) => F, f: (value: R) => F): F {
+    ensureFunction("mapOrElse first argument must be a function", fallback);
+    ensureFunction("mapOrElse second argument must be a function", f);
+
     return this.isError()
       ? fallback((this.value as unknown) as Error)
       : f(this.value as R);
@@ -128,7 +132,7 @@ class Result<R, E> {
    * @memberof Result
    */
   public ok(): Option<R> {
-    return Some(this.value as R);
+    return !instanceOfError<R, E>(this.value) ? Some(this.value) : None();
   }
 
   /**
@@ -156,6 +160,8 @@ class Result<R, E> {
    * @memberof Result
    */
   public orElse<U>(op: (arg: E) => Result<U, E>): Result<U, E> | Ok<R> {
+    ensureFunction("orElse argument must be a function", op);
+
     if (instanceOfError<R, E>(this.value)) {
       return op(this.value);
     }
@@ -213,6 +219,8 @@ class Result<R, E> {
    * @memberof Result
    */
   public unwrapOrElse<U>(op: (error: E) => U): R | U {
+    ensureFunction("unwrapOrElse argument must be a function", op);
+
     if (instanceOfError<R, E>(this.value)) {
       return op(this.value);
     }

@@ -1,5 +1,5 @@
 import { Err, Ok } from "../Result";
-import { Some } from "../Option";
+import { Some, None } from "../Option";
 
 describe(`Result`, () => {
   it(`Err is different from Ok`, () => {
@@ -14,10 +14,12 @@ describe(`Result`, () => {
   it("Ok isOk", () => {
     expect(Ok(10).isOk()).toBeTruthy();
     expect(Ok(null).isOk()).toBeTruthy();
+    expect(Err("foo").isOk()).toBeFalsy();
   });
 
   it("Converts from `Result<T, E>` to `OptionLike<E>`.", () => {
     expect(Err("foobar").err()).toStrictEqual(Some(new Error("foobar")));
+    expect(Ok("foobar").err()).toStrictEqual(None());
   });
 
   it("Converts from Result<T, E> to Option<T>.", () => {
@@ -28,11 +30,14 @@ describe(`Result`, () => {
   it("Maps a `Result<T, E>` to `Result<U, E>` by applying a function to a contained`Ok` value, leaving an`Err` value untouched. This function can be used to compose the results of two functions.", () => {
     expect(Ok("foo").map(val => val.length)).toEqual(Ok(3));
     expect(Err("foo").map((val: any) => val.length)).not.toEqual(Ok(3));
+    expect(() => Err("foo").map(123 as any)).toThrowError();
   });
 
   it("Maps a `Result<T, E>` to `F` by applying a function to a contained `Ok` value, or a `fallback` function to a contained `Err` value. This function can be used to unpack a successful result while handling an error.", () => {
     expect(Ok("test").mapOrElse(() => "aaa", () => "bbb")).toEqual("bbb");
     expect(Err("test").mapOrElse(() => "aaa", () => "bbb")).toEqual("aaa");
+    expect(() => Err("test").mapOrElse(111 as any, () => "bbb")).toThrowError();
+    expect(() => Err("test").mapOrElse(() => "bbb", 123 as any)).toThrowError();
   });
 
   it("Returns `res` if the result is `Ok`, otherwise returns the `Err` value of self.", () => {
@@ -53,6 +58,7 @@ describe(`Result`, () => {
   it("Calls `op` if the result is `Err`, otherwise returns the `Ok` value of self.", () => {
     expect(Ok("a").orElse(() => Ok("b"))).toStrictEqual(Ok("a"));
     expect(Err("a").orElse(() => Ok("b"))).toStrictEqual(Ok("b"));
+    expect(() => Err("a").orElse(123 as any)).toThrowError();
   });
 
   it("Returns wrapped value or throws an `Error`", () => {

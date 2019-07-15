@@ -1,3 +1,5 @@
+import { ensureFunction } from "./common";
+
 class OptionLike<T> {
   public constructor(protected value: T) {}
 
@@ -31,6 +33,7 @@ class OptionLike<T> {
   public andThen<K>(
     callback: (arg: T) => OptionLike<K>
   ): Some<T> | ReturnType<typeof callback> {
+    ensureFunction("andThen argument must be a function", callback);
     return this.foldReturn(callback(this.value));
   }
 
@@ -91,9 +94,7 @@ class OptionLike<T> {
    * @memberof OptionLike
    */
   public map<K>(f: (arg: T) => K): OptionLike<K> {
-    if (typeof f !== "function") {
-      throw new TypeError(`map argument must be a function`);
-    }
+    ensureFunction("map argument must be a function", f);
 
     return Option(f(this.value));
   }
@@ -107,9 +108,7 @@ class OptionLike<T> {
    * @memberof OptionLike
    */
   public mapOr<K>(def: K, f: (arg: T) => K): K {
-    if (typeof f !== "function") {
-      throw new TypeError(`map argument must be a function`);
-    }
+    ensureFunction("mapOr argument must be a function", f);
 
     if (this.isNone()) {
       return def;
@@ -130,6 +129,8 @@ class OptionLike<T> {
     defFn: () => K,
     f: (arg: T extends null ? any : T) => K
   ): K {
+    ensureFunction("mapOrElse argument must be a function", f);
+
     return this.isSome() ? f(this.value as any) : defFn();
   }
 
@@ -159,6 +160,8 @@ class OptionLike<T> {
    * @memberof OptionLike
    */
   public orElse<U>(f: () => OptionLike<U>): Some<T> | OptionLike<U> {
+    ensureFunction("orElse argument must be a function", f);
+
     return this.isSome() ? this : f();
   }
 
