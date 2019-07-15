@@ -225,6 +225,14 @@ class OptionLike<T> {
    * Returns Some if exactly one of self,
    * optb is Some,
    * otherwise returns None.
+   *
+   * ```ts
+   * Some(10).xor(Some(10)) // None()
+   * Some(10).xor(Some(11)) // Some(10)
+   * None().xor(Some(11)) // Some(11)
+   * None().xor(None()) // None()
+   * ```
+   *
    * @template U
    * @param {OptionLike<U>} optb
    * @returns {(Some<T> | Some<U> | None)}

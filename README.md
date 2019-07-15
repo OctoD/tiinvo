@@ -21,6 +21,7 @@ Heavily inspired by rust [std::option](https://doc.rust-lang.org/std/option/inde
       - [mapOrElse](#mapOrElse)
       - [or](#or)
       - [orElse](#orElse)
+      - [xor](#xor)
   - [Result](#Result)
 - [Contributing](#Contributing)
 - [Licence](#Licence)
@@ -159,6 +160,17 @@ Returns the option if it contains a value, otherwise calls `f` and returns the r
 ```ts
 Some(10).orElse(() => 1000) // Some(10)
 None().orElse(() => 1000) // Some(1000)
+```
+
+#### xor
+
+Returns Some if exactly one of self, optb is Some, otherwise returns None.
+
+```ts
+Some(10).xor(Some(10)) // None()
+Some(10).xor(Some(11)) // Some(10)
+None().xor(Some(11)) // Some(11)
+None().xor(None()) // None()
 ```
 
 ## Result
