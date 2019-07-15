@@ -1,4 +1,5 @@
 import { Err, Ok } from "../Result";
+import { Some } from "../Option";
 
 describe(`Result`, () => {
   it(`Err is different from Ok`, () => {
@@ -13,5 +14,9 @@ describe(`Result`, () => {
   it("Ok isOk", () => {
     expect(Ok(10).isOk()).toBeTruthy();
     expect(Ok(null).isOk()).toBeTruthy();
+  });
+
+  it("Converts from `Result<T, E>` to `OptionLike<E>`.", () => {
+    expect(Err("foobar").err()).toStrictEqual(Some(new Error("foobar")));
   });
 });

@@ -6,7 +6,7 @@ class Result<R, E> {
   /**
    * Converts from `Result<T, E>` to `OptionLike<E>`.
    * @returns {Option<E>}
-   * @memberof ResultLike
+   * @memberof Result
    */
   public err(): Option<E> {
     return instanceOfError<R, E>(this.value) ? Some(this.value) : None();
@@ -15,7 +15,7 @@ class Result<R, E> {
   /**
    * Returns true if the result is `Error`.
    * @returns {boolean}
-   * @memberof ResultLike
+   * @memberof Result
    */
   public isError(): boolean {
     return instanceOfError<R, E>(this.value);
@@ -24,21 +24,21 @@ class Result<R, E> {
   /**
    * Returns true if the result is `Ok`.
    * @returns {Option<R>}
-   * @memberof ResultLike
+   * @memberof Result
    */
   public isOk(): Option<R> {
     return instanceOfError<R, E>(this.value) ? None() : Some(this.value);
   }
 
   /**
-   * Maps a `ResultLike<T, E>` to `ResultLike<U, E>` by applying a function
+   * Maps a `Result<T, E>` to `Result<U, E>` by applying a function
    * to a contained `Ok` value, leaving an `Err` value untouched.
    *
    * This function can be used to compose the results of two functions.
    * @template K
    * @param {(value: R) => K} f
    * @returns {Result<K, E>}
-   * @memberof ResultLike
+   * @memberof Result
    */
   public map<K>(f: (value: R) => K): Result<K, E> {
     if (typeof f !== "function") {
@@ -56,7 +56,7 @@ class Result<R, E> {
    * @param {F} fallback
    * @param {(value: R) => F} f
    * @returns {F}
-   * @memberof ResultLike
+   * @memberof Result
    */
   public mapOrElse<F>(fallback: (error: Error) => F, f: (value: R) => F): F {
     return this.isError()
@@ -67,7 +67,7 @@ class Result<R, E> {
   /**
    * Converts from Result<T, E> to Option<T>.
    * @returns {Option<R>}
-   * @memberof ResultLike
+   * @memberof Result
    */
   public ok(): Option<R> {
     return Some(this.value as R);
