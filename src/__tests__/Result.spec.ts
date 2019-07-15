@@ -34,4 +34,14 @@ describe(`Result`, () => {
     expect(Ok("test").mapOrElse(() => "aaa", () => "bbb")).toEqual("bbb");
     expect(Err("test").mapOrElse(() => "aaa", () => "bbb")).toEqual("aaa");
   });
+
+  it("Returns `res` if the result is `Ok`, otherwise returns the `Err` value of self.", () => {
+    expect(Ok("foo").and(Ok("bar"))).toStrictEqual(Ok("bar"));
+    expect(Err("foo").and(Ok("bar"))).toStrictEqual(Err("foo"));
+  });
+
+  it("Calls `op` if the result is `Ok`, otherwise returns the `Err` value of self.", () => {
+    expect(Ok("a").andThen(arg => Ok(arg.repeat(2)))).toStrictEqual(Ok("aa"));
+    expect(Err("b").andThen(arg => Ok(arg.repeat(2)))).toStrictEqual(Err("b"));
+  });
 });

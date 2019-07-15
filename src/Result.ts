@@ -4,6 +4,36 @@ class Result<R, E> {
   public constructor(protected value: R | E) {}
 
   /**
+   * Returns `res` if the result is `Ok`, otherwise returns the `Err` value of self.
+   * @template U
+   * @param {Result<U, E>} res
+   * @returns {(Result<U, E> | Err)}
+   * @memberof Result
+   */
+  public and<U>(res: Result<U, E>): Result<U, E> | Err {
+    if (instanceOfError<R, E>(this.value)) {
+      return new Result(this.value as any);
+    }
+
+    return res;
+  }
+
+  /**
+   * Calls `op` if the result is `Ok`, otherwise returns the `Err` value of self.
+   * @template U
+   * @param {(arg: R) => Result<U, E>} op
+   * @returns {Result<U, E>}
+   * @memberof Result
+   */
+  public andThen<U>(op: (arg: R) => Result<U, E>): Result<U, E> {
+    if (instanceOfError<R, E>(this.value)) {
+      return new Result(this.value as any);
+    }
+
+    return op(this.value);
+  }
+
+  /**
    * Converts from `Result<T, E>` to `OptionLike<E>`.
    * @returns {Option<E>}
    * @memberof Result
@@ -91,8 +121,8 @@ function instanceOfError<T, E>(value: T | E): value is E {
   );
 }
 
-export type Err = Result<null, Error>;
-export type Ok<T> = Result<T, null>;
+export type Err = Result<any, Error>;
+export type Ok<T> = Result<T, any>;
 
 /**
  * Returns an `Error`
@@ -101,7 +131,7 @@ export type Ok<T> = Result<T, null>;
  * @returns {Err}
  */
 export function Err(message?: string): Err {
-  return new Result<null, Error>(new Error(message));
+  return new Result<any, Error>(new Error(message));
 }
 
 /**
