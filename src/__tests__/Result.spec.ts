@@ -49,4 +49,9 @@ describe(`Result`, () => {
     expect(Ok("a").or(Ok("b"))).toStrictEqual(Ok("a"));
     expect(Err("a").or(Ok("b"))).toStrictEqual(Ok("b"));
   });
+
+  it("Calls `op` if the result is `Err`, otherwise returns the `Ok` value of self.", () => {
+    expect(Ok("a").orElse(() => Ok("b"))).toStrictEqual(Ok("a"));
+    expect(Err("a").orElse(() => Ok("b"))).toStrictEqual(Ok("b"));
+  });
 });

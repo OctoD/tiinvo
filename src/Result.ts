@@ -117,6 +117,23 @@ class Result<R, E> {
 
     return this;
   }
+
+  /**
+   * Calls `op` if the result is `Err`, otherwise returns the `Ok` value of self.
+   *
+   * This function can be used for control flow based on result values.
+   * @template U
+   * @param {(arg: E) => Result<U, E>} op
+   * @returns {(Result<U, E> | Ok<R>)}
+   * @memberof Result
+   */
+  public orElse<U>(op: (arg: E) => Result<U, E>): Result<U, E> | Ok<R> {
+    if (instanceOfError<R, E>(this.value)) {
+      return op(this.value);
+    }
+
+    return this;
+  }
 }
 
 /**
