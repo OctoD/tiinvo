@@ -57,6 +57,20 @@ class Result<R, E> {
   }
 
   /**
+   * Unwraps a result, yielding the content of an `Err`.
+   * @param {string} message
+   * @returns {(E | never)}
+   * @memberof Result
+   */
+  public expectErr(message: string): E | never {
+    if (instanceOfError<R, E>(this.value)) {
+      return this.value;
+    }
+
+    throw new ReferenceError(message);
+  }
+
+  /**
    * Returns true if the result is `Error`.
    * @returns {boolean}
    * @memberof Result
