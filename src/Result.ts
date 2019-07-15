@@ -147,6 +147,21 @@ class Result<R, E> {
 
     return this.value;
   }
+
+  /**
+   * Unwraps a result, yielding the content of an `Ok`. Else, it returns `optb`.
+   * @template U
+   * @param {U} optb
+   * @returns {(R | U)}
+   * @memberof Result
+   */
+  public unwrapOr<U>(optb: U): R | U {
+    if (instanceOfError<R, E>(this.value)) {
+      return optb;
+    }
+
+    return this.value;
+  }
 }
 
 /**

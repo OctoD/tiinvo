@@ -59,4 +59,9 @@ describe(`Result`, () => {
     expect(Ok("a").unwrap()).toBe("a");
     expect(() => Err("a").unwrap()).toThrowError();
   });
+
+  it("Unwraps a result, yielding the content of an `Ok`. Else, it returns `optb`.", () => {
+    expect(Ok("a").unwrapOr(Ok("b"))).toBe("a");
+    expect(Err("a").unwrapOr("b")).toBe("b");
+  });
 });
