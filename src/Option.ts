@@ -213,6 +213,9 @@ export type Some<T> = OptionLike<T>;
 export type None = OptionLike<null>;
 
 /**
+ * Type `Option` represents an optional value: every `Option` is either
+ * `Some` and contains a value, or `None`, and does not.
+ *
  * Returns `None`
  * @export
  * @returns {None}
@@ -222,6 +225,9 @@ export function None(): None {
 }
 
 /**
+ * Type `Option` represents an optional value: every `Option` is either
+ * `Some` and contains a value, or `None`, and does not.
+ *
  * Returns `Some<T>`
  * @export
  * @template T
@@ -233,6 +239,9 @@ export function Some<T>(value: T): Some<T> {
 }
 
 /**
+ * Type `Option` represents an optional value: every `Option` is either
+ * `Some` and contains a value, or `None`, and does not.
+ *
  * Returns an `Option<T>`
  * @export
  * @template T

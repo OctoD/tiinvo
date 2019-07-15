@@ -250,6 +250,11 @@ export type Err = Result<any, Error>;
 export type Ok<T> = Result<T, any>;
 
 /**
+ * `Result<T, E>` is the type used for returning and propagating errors.
+ * It is an enum with the variants, `Ok(T)`, representing success and
+ * containing a value, and `Err(E)`, representing error and containing
+ * an error value.
+ *
  * Returns an `Error`
  * @export
  * @param {string} [message]
@@ -260,6 +265,11 @@ export function Err(message?: string): Err {
 }
 
 /**
+ * `Result<T, E>` is the type used for returning and propagating errors.
+ * It is an enum with the variants, `Ok(T)`, representing success and
+ * containing a value, and `Err(E)`, representing error and containing
+ * an error value.
+ *
  * Returns `Ok`
  * @export
  * @template T
