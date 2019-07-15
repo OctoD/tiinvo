@@ -250,12 +250,18 @@ class OptionLike<T> {
 
   /**
    * Returns wrapped value or throws if is None
+   *
+   * ```ts
+   * Some(10).unwrap() // 10
+   * None().unwrap() // throw ReferenceError
+   * ```
+   *
    * @returns {(T | never)}
    * @memberof OptionLike
    */
   public unwrap(): T | never {
     if (this.isNone()) {
-      throw new ReferenceError();
+      throw new ReferenceError("cannot unwrap null value");
     }
 
     return this.value;
@@ -263,6 +269,12 @@ class OptionLike<T> {
 
   /**
    * Returns the contained value or a default.
+   *
+   * ```ts
+   * None().unwrapOr(10) // 10
+   * Some(20).unwrapOr(10) // 20
+   * ```
+   *
    * @param {K} value
    * @returns {K}
    * @memberof OptionLike

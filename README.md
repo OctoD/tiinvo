@@ -22,6 +22,8 @@ Heavily inspired by rust [std::option](https://doc.rust-lang.org/std/option/inde
       - [or](#or)
       - [orElse](#orElse)
       - [xor](#xor)
+      - [unwrap](#unwrap)
+      - [unwrapOr](#unwrapOr)
   - [Result](#Result)
 - [Contributing](#Contributing)
 - [Licence](#Licence)
@@ -171,6 +173,24 @@ Some(10).xor(Some(10)) // None()
 Some(10).xor(Some(11)) // Some(10)
 None().xor(Some(11)) // Some(11)
 None().xor(None()) // None()
+```
+
+#### unwrap
+
+Returns wrapped value or throws if is None
+
+```ts
+Some(10).unwrap() // 10
+None().unwrap() // throw ReferenceError
+```
+
+#### unwrapOr
+
+Returns the contained value or a default.
+
+```ts
+None().unwrapOr(10) // 10
+Some(20).unwrapOr(10) // 20
 ```
 
 ## Result
