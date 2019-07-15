@@ -43,6 +43,20 @@ class Result<R, E> {
   }
 
   /**
+   * Unwraps a result, yielding the content of an `Ok`.
+   * @param {string} message
+   * @returns {(R | never)}
+   * @memberof Result
+   */
+  public expect(message: string): R | never {
+    if (instanceOfError<R, E>(this.value)) {
+      throw new Error(message);
+    }
+
+    return this.value;
+  }
+
+  /**
    * Returns true if the result is `Error`.
    * @returns {boolean}
    * @memberof Result

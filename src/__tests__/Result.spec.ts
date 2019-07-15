@@ -69,4 +69,9 @@ describe(`Result`, () => {
     expect(Ok("a").unwrapOrElse(e => Ok(e.message.length))).toStrictEqual("a");
     expect(Err("abc").unwrapOrElse(e => e.message.length)).toStrictEqual(3);
   });
+
+  it("Unwraps a result, yielding the content of an `Ok`.", () => {
+    expect(Ok("a").expect("foo")).toBe("a");
+    expect(() => Err("a").expect("foo")).toThrowError("foo");
+  });
 });
