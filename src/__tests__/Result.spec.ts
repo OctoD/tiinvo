@@ -64,4 +64,9 @@ describe(`Result`, () => {
     expect(Ok("a").unwrapOr(Ok("b"))).toBe("a");
     expect(Err("a").unwrapOr("b")).toBe("b");
   });
+
+  it("Unwraps a result, yielding the content of an `Ok`. If the value is an `Err` then it calls op with its value.", () => {
+    expect(Ok("a").unwrapOrElse(e => Ok(e.message.length))).toStrictEqual("a");
+    expect(Err("abc").unwrapOrElse(e => e.message.length)).toStrictEqual(3);
+  });
 });

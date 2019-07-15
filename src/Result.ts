@@ -162,6 +162,21 @@ class Result<R, E> {
 
     return this.value;
   }
+
+  /**
+   * Unwraps a result, yielding the content of an `Ok`. If the value is an `Err` then it calls op with its value.
+   * @template U
+   * @param {(error: E) => U} op
+   * @returns {(R | U)}
+   * @memberof Result
+   */
+  public unwrapOrElse<U>(op: (error: E) => U): R | U {
+    if (instanceOfError<R, E>(this.value)) {
+      return op(this.value);
+    }
+
+    return this.value;
+  }
 }
 
 /**
