@@ -14,6 +14,14 @@ class OptionLike<T> {
   /**
    * Returns `None` if the option is `None`,
    * otherwise returns `optb`
+   *
+   * ```ts
+   * import { Option } from 'some.js';
+   *
+   * Option(10).and(Option(20)).isSome() // true
+   * Option(null).and(Option(20)).isSome() // false
+   * ```
+   *
    * @template U
    * @param {OptionLike<U>} optb
    * @returns {OptionLike<U>}
@@ -40,6 +48,13 @@ class OptionLike<T> {
   /**
    * Throws if the value is a `None` with a custom error message provided by msg.
    *
+   * ```ts
+   * import { Option } from 'some.js';
+   *
+   * Option(1).expect('ok') // Option(1)
+   * Option(null).expect('myerror') // throws ReferenceError('myerror')
+   * ```
+   *
    * @param {string} msg
    * @returns {(Some<T> | never)}
    * @memberof OptionLike
@@ -57,6 +72,11 @@ class OptionLike<T> {
    * the `predicate` function. Otherwise returns
    * None
    *
+   * ```ts
+   * Option(1).filter(a => a > 0).isSome() // true
+   * Option(1).filter(a => a > 10).isSome() // false
+   * ```
+   *
    * @param {(arg: T) => boolean} predicate
    * @returns {ReturnType<typeof predicate> extends true ? Some<T> : None}
    * @memberof OptionLike
@@ -70,6 +90,12 @@ class OptionLike<T> {
 
   /**
    * Returns if has not a value
+   *
+   * ```ts
+   * None().isNone() // true
+   * None().isSome() // false
+   * ```
+   *
    * @returns {boolean}
    * @memberof OptionLike
    */
@@ -79,6 +105,12 @@ class OptionLike<T> {
 
   /**
    * Returns if has a value
+   *
+   * ```ts
+   * Some().isSome() // true
+   * Some().isNone() // false
+   * ```
+   *
    * @returns {boolean}
    * @memberof OptionLike
    */
@@ -88,6 +120,11 @@ class OptionLike<T> {
 
   /**
    * Maps an `OptionLike<T>` to `OptionLike<U>` by applying a function to a contained value.
+   *
+   * ```ts
+   * Option('foobar').map(val => val.length) // Option(6)
+   * ```
+   *
    * @template K
    * @param {(arg: T) => K} f
    * @returns {K}
@@ -101,6 +138,12 @@ class OptionLike<T> {
 
   /**
    * Applies a function to the contained value (if any), or returns the provided default (if not).
+   *
+   * ```ts
+   * Option('foobar').mapOr('abc', arg => arg.length) // Option(6)
+   * None().mapOr('abc', arg => arg.length) // Option('abc')
+   * ```
+   *
    * @template K
    * @param {K} def
    * @param {(arg: T) => K} f
@@ -119,6 +162,12 @@ class OptionLike<T> {
 
   /**
    * Applies a function to the contained value (if any), or computes a default (if not).
+   *
+   * ```ts
+   * Option('helloworld').mapOrElse(() => 0, arg => arg.length) // 10
+   * None().mapOrElse(() => 1000, arg => arg.length) // 1000
+   * ```
+   *
    * @template K
    * @param {() => K} defFn
    * @param {(arg: T) => K} f
@@ -139,7 +188,8 @@ class OptionLike<T> {
    * otherwise returns `optb`
    *
    * ```ts
-   * expect(None().or(Some(100))).toEqual(Some(100))
+   * None().or(Some(100)) // Some(100)
+   * Some(10).or(Some(100)) // Some(10)
    * ```
    *
    * @template U
@@ -154,6 +204,12 @@ class OptionLike<T> {
   /**
    * Returns the option if it contains a value, otherwise calls
    * `f` and returns the result.
+   *
+   * ```ts
+   * Some(10).orElse(() => 1000) // Some(10)
+   * None().orElse(() => 1000) // Some(1000)
+   * ```
+   *
    * @template U
    * @param {() => OptionLike<U>} f
    * @returns {(Some<T> | OptionLike<U>)}
