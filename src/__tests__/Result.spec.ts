@@ -54,4 +54,9 @@ describe(`Result`, () => {
     expect(Ok("a").orElse(() => Ok("b"))).toStrictEqual(Ok("a"));
     expect(Err("a").orElse(() => Ok("b"))).toStrictEqual(Ok("b"));
   });
+
+  it("Returns wrapped value or throws an `Error`", () => {
+    expect(Ok("a").unwrap()).toBe("a");
+    expect(() => Err("a").unwrap()).toThrowError();
+  });
 });

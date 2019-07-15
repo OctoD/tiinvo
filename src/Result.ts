@@ -134,6 +134,19 @@ class Result<R, E> {
 
     return this;
   }
+
+  /**
+   * Returns wrapped value or throws an `Error`
+   * @returns {(R | never)}
+   * @memberof Result
+   */
+  public unwrap(): R | never {
+    if (instanceOfError<R, E>(this.value)) {
+      throw this.value;
+    }
+
+    return this.value;
+  }
 }
 
 /**
