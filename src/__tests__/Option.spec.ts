@@ -7,6 +7,7 @@ describe(`Option`, () => {
     expect(None()).toStrictEqual(Some(undefined));
     expect(None()).toStrictEqual(None());
     expect(Option(null)).toStrictEqual(None());
+    expect(Option(NaN)).toStrictEqual(None());
     expect(Option(100)).toStrictEqual(Some(100));
   });
 
@@ -23,11 +24,16 @@ describe(`Option`, () => {
 
     expect(c.isNone()).toBeFalsy();
     expect(c.isSome()).toBeTruthy();
+
+    // NaN
+    expect(Some(NaN).isNone()).toBeTruthy();
+    expect(Some(NaN).isSome()).toBeFalsy();
   });
 
   it(`Returns None if the option is None, otherwise returns optb`, () => {
     expect(Some(100).and(Some(2))).toStrictEqual(Some(2));
     expect(Some(null).and(Some(2))).toStrictEqual(None());
+    expect(Some(NaN).and(Some(2))).toStrictEqual(None());
   });
 
   it(`Returns 'callback' result if 'OptionLike<T>' is 'Some', otherwise returns 'None'`, () => {
