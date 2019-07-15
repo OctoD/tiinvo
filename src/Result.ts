@@ -163,6 +163,20 @@ class Result<R, E> {
   }
 
   /**
+   * Unwraps a result, yielding the content of an `Err`.
+   * Throws if the value is not an `Err`.
+   * @returns {(E | never)}
+   * @memberof Result
+   */
+  public unwrapErr(): E | never {
+    if (instanceOfError<R, E>(this.value)) {
+      return this.value;
+    }
+
+    throw new ReferenceError(`wrapped value is not an Error`);
+  }
+
+  /**
    * Unwraps a result, yielding the content of an `Ok`. Else, it returns `optb`.
    * @template U
    * @param {U} optb

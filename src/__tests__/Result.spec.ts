@@ -74,4 +74,9 @@ describe(`Result`, () => {
     expect(Ok("a").expect("foo")).toBe("a");
     expect(() => Err("a").expect("foo")).toThrowError("foo");
   });
+
+  it("Unwraps a result, yielding the content of an `Err`.", () => {
+    expect(() => Ok(1).unwrapErr()).toThrowError();
+    expect(Err("aaa").unwrapErr().message).toBe("aaa");
+  });
 });
