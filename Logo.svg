@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240px" height="240px" viewBox="0 0 240 240" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#C28CD2" offset="0%"></stop>
+            <stop stop-color="#9252A5" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="240" height="240" rx="32"></rect>
+        <filter x="-13.3%" y="-6.7%" width="126.7%" height="126.7%" filterUnits="objectBoundingBox" id="filter-3">
+            <feMorphology radius="8" operator="erode" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="16" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="16" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Rectangle">
+            <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+            <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+        </g>
+        <path d="M150,64 L150,152 C150,156.418278 146.418278,160 142,160 L126,160 C121.581722,160 118,156.418278 118,152 L118,56 L118,40 C118,35.581722 121.581722,32 126,32 L206,32 C208.209139,32 210.209139,32.8954305 211.656854,34.3431458 C213.104569,35.790861 214,37.790861 214,40 L214,88 C214,92.418278 210.418278,96 206,96 L190,96 C185.581722,96 182,92.418278 182,88 L182,64 L150,64 Z M126,176 L142,176 C146.418278,176 150,179.581722 150,184 L150,200 C150,204.418278 146.418278,208 142,208 L126,208 C121.581722,208 118,204.418278 118,200 L118,184 C118,179.581722 121.581722,176 126,176 Z M78,32 L94,32 C98.418278,32 102,35.581722 102,40 L102,152 C102,156.418278 98.418278,160 94,160 L78,160 C73.581722,160 70,156.418278 70,152 L70,40 C70,35.581722 73.581722,32 78,32 Z M78,176 L94,176 C98.418278,176 102,179.581722 102,184 L102,200 C102,204.418278 98.418278,208 94,208 L78,208 C73.581722,208 70,204.418278 70,200 L70,184 C70,179.581722 73.581722,176 78,176 Z" id="quexclamation-mark" fill="#FFFFFF"></path>
+    </g>
+</svg>
