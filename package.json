@@ -1,10 +1,16 @@
 {
-  "name": "some.js",
-  "version": "0.0.0",
+  "name": "tiinvo",
+  "version": "1.0.0",
   "author": "Paolo Roth <octod>",
   "main": "dist/index.js",
   "description": "your typescript library description",
   "keywords": [
+    "functional programming",
+    "functional",
+    "octod",
+    "option",
+    "result",
+    "try catch",
     "typescript"
   ],
   "scripts": {
@@ -14,10 +20,10 @@
     "size-limit": "tsc -p . && size-limit",
     "test": "jest"
   },
-  "homepage": "https://github.com/octod/some.js#readme",
+  "homepage": "https://github.com/octod/tiinvo#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/octod/some.js.git"
+    "url": "git+https://github.com/octod/tiinvo.git"
   },
   "husky": {
     "hooks": {

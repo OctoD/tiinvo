@@ -7,7 +7,7 @@ export type FnAsync = () => Promise<any>;
  * Handle sync try/catch.
  *
  * ```ts
- * import { TryCatch, TryCatchAsync } from 'some.js';
+ * import { TryCatch, TryCatchAsync } from 'tiinvo';
  *
  * TryCatch(
  *   (a: number, b: number) => a + b,

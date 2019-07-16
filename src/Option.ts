@@ -17,7 +17,7 @@ class OptionLike<T> {
    * otherwise returns `optb`
    *
    * ```ts
-   * import { Option } from 'some.js';
+   * import { Option } from 'tiinvo';
    *
    * Option(10).and(Option(20)).isSome() // true
    * Option(null).and(Option(20)).isSome() // false
@@ -50,7 +50,7 @@ class OptionLike<T> {
    * Throws if the value is a `None` with a custom error message provided by msg.
    *
    * ```ts
-   * import { Option } from 'some.js';
+   * import { Option } from 'tiinvo';
    *
    * Option(1).expect('ok') // Option(1)
    * Option(null).expect('myerror') // throws ReferenceError('myerror')

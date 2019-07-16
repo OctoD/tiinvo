@@ -1,11 +1,11 @@
-some.js
+tiinvo
 =======
 
 Handling possible errors or values in a functional way.
 
 Heavily inspired by rust [std::option](https://doc.rust-lang.org/std/option/index.html) and [std::result](https://doc.rust-lang.org/std/result/enum.Result.html)
 
-- [some.js](#somejs)
+- [tiinvo](#somejs)
 - [Install](#Install)
 - [Usage](#Usage)
   - [Option](#Option)
@@ -54,10 +54,10 @@ Heavily inspired by rust [std::option](https://doc.rust-lang.org/std/option/inde
 
 ```bash
 # npm
-npm i some.js
+npm i tiinvo
 
 # yarn
-yarn add some.js
+yarn add tiinvo
 ```
 
 # Usage
@@ -67,7 +67,7 @@ yarn add some.js
 Type `Option` represents an optional value: every `Option` is either `Some` and contains a value, or `None`, and does not.
 
 ```ts
-import { Option, Some, None } from 'some.js';
+import { Option, Some, None } from 'tiinvo';
 
 Some('foo'); // this is some
 None() // this is none
@@ -87,7 +87,7 @@ By default, both `null`, `NaN` and `undefined` are considered `None` types.
 Returns `None` if the option is `None`, otherwise returns `optb`
 
 ```ts
-import { Option } from 'some.js';
+import { Option } from 'tiinvo';
 
 Option(10).and(Option(20)).isSome() // true
 Option(null).and(Option(20)).isSome() // false
@@ -98,7 +98,7 @@ Option(null).and(Option(20)).isSome() // false
 Returns `callback` result if `OptionLike<T>` is `Some`, otherwise returns `None`
 
 ```ts
-import { Option } from 'some.js';
+import { Option } from 'tiinvo';
 
 Option(10).andThen(value => Option(value * 2)) // Option(20)
 None().andThen(value => Option(value * 2)) // None()
@@ -109,7 +109,7 @@ None().andThen(value => Option(value * 2)) // None()
 Throws if the value is a `None` with a custom error message provided by msg.
 
 ```ts
-import { Option } from 'some.js';
+import { Option } from 'tiinvo';
 
 Option(1).expect('ok') // Option(1)
 Option(null).expect('myerror') // throws ReferenceError('myerror')
@@ -256,7 +256,7 @@ Some(20).unwrapOr(10) // 20
 It is an enum with the variants, `Ok(T)`, representing success and containing a value, and `Err(E)`, representing error and containing an error value.
 
 ```ts
-import { Ok, Err } from 'some.js';
+import { Ok, Err } from 'tiinvo';
 
 Ok(200)
 Err('this is an error')
@@ -421,7 +421,7 @@ Err('pizza with ananas').unwrapOrElse(err => err.message) // 'pizza with ananas'
 These functions handle try/catch.
 
 ```ts
-import { TryCatch, TryCatchAsync } from 'some.js';
+import { TryCatch, TryCatchAsync } from 'tiinvo';
 
 TryCatch(
   (a: number, b: number) => a + b,
