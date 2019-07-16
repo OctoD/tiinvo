@@ -19,6 +19,7 @@ Heavily inspired by rust [std::option](https://doc.rust-lang.org/std/option/inde
       - [map](#map)
       - [mapOr](#mapOr)
       - [mapOrElse](#mapOrElse)
+      - [okOr](#okOr)
       - [or](#or)
       - [orElse](#orElse)
       - [xor](#xor)
@@ -162,6 +163,15 @@ Applies a function to the contained value (if any), or computes a default (if no
 ```ts
 Option('helloworld').mapOrElse(() => 0, arg => arg.length) // 10
 None().mapOrElse(() => 1000, arg => arg.length) // 1000
+```
+
+#### okOr
+
+Transforms the `OptionLike<T>` into a `Result<T, E>`, mapping `Some(v)` to `Ok(v)` and `None` to `Err(err)`.
+
+```ts
+Some(100).okOr(Err('foo')) // Ok(100)
+None().okOr(Err('foo')) // Err('foo')
 ```
 
 #### or

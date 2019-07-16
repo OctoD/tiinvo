@@ -1,4 +1,5 @@
 import { ensureFunction } from "./common";
+import { Err, Ok } from "./Result";
 
 class OptionLike<T> {
   public constructor(protected value: T) {}
@@ -181,6 +182,26 @@ class OptionLike<T> {
     ensureFunction("mapOrElse argument must be a function", f);
 
     return this.isSome() ? f(this.value as any) : defFn();
+  }
+
+  /**
+   * Transforms the `OptionLike<T>` into a `Result<T, E>`, mapping `Some(v)` to `Ok(v)` and `None` to `Err(err)`.
+   *
+   * ```ts
+   * Some(100).okOr(Err('foo')) // Ok(100)
+   * None().okOr(Err('foo')) // Err('foo')
+   * ```
+   *
+   * @param {Err} err
+   * @returns {(Ok<T> | Err)}
+   * @memberof OptionLike
+   */
+  public okOr(err: Err): Ok<T> | Err {
+    if (this.isSome()) {
+      return Ok(this.value);
+    }
+
+    return err;
   }
 
   /**

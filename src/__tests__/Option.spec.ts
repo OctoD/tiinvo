@@ -1,4 +1,5 @@
 import { None, Some, Option } from "../Option";
+import { Err, Ok } from "../Result";
 
 describe(`Option`, () => {
   it(`None and Some are different`, () => {
@@ -101,5 +102,10 @@ describe(`Option`, () => {
 
     expect(Some(100).mapOrElse(fn1, fn2)).toStrictEqual("100");
     expect(None().mapOrElse(fn1, fn2)).toStrictEqual("a");
+  });
+
+  it("Transforms the `OptionLike<T>` into a `Result<T, E>`, mapping `Some(v)` to `Ok(v)` and `None` to `Err(err)`.", () => {
+    expect(Some(100).okOr(Err("foo"))).toStrictEqual(Ok(100));
+    expect(None().okOr(Err("foo"))).toStrictEqual(Err("foo"));
   });
 });
