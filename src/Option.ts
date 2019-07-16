@@ -263,6 +263,20 @@ class OptionLike<T> {
   }
 
   /**
+   * Transposes an `Option` of a `Result` into a `Result` of an `Option`.
+   *
+   * ```ts
+   * Option(100).transpose() // Ok(Some(100))
+   * ```
+   *
+   * @returns {(Ok<Some<T>> | Ok<None>)}
+   * @memberof OptionLike
+   */
+  public transpose(): Ok<Some<T>> | Ok<None> {
+    return this.isSome() ? Ok(Some(this.value)) : Ok(None());
+  }
+
+  /**
    * Returns Some if exactly one of self,
    * optb is Some,
    * otherwise returns None.

@@ -113,4 +113,9 @@ describe(`Option`, () => {
     expect(Some(100).okOrElse(() => Err("foo"))).toStrictEqual(Ok(100));
     expect(None().okOrElse(() => Err("foo"))).toStrictEqual(Err("foo"));
   });
+
+  it("Transposes an `Option` of a `Result` into a `Result` of an `Option`.", () => {
+    expect(Some(100).transpose()).toStrictEqual(Ok(Some(100)));
+    expect(None().transpose()).toStrictEqual(Ok(None()));
+  });
 });

@@ -23,6 +23,7 @@ Heavily inspired by rust [std::option](https://doc.rust-lang.org/std/option/inde
       - [okOrElse](#okOrElse)
       - [or](#or)
       - [orElse](#orElse)
+      - [transpose](#transpose)
       - [xor](#xor)
       - [unwrap](#unwrap)
       - [unwrapOr](#unwrapOr)
@@ -200,6 +201,14 @@ Returns the option if it contains a value, otherwise calls `f` and returns the r
 ```ts
 Some(10).orElse(() => 1000) // Some(10)
 None().orElse(() => 1000) // Some(1000)
+```
+
+#### transpose
+
+Transposes an `Option` of a `Result` into a `Result` of an `Option`.
+
+```ts
+Option(100).transpose() // Ok(Some(100))
 ```
 
 #### xor
