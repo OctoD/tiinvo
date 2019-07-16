@@ -41,6 +41,8 @@ Heavily inspired by rust [std::option](https://doc.rust-lang.org/std/option/inde
       - [unwrap](#unwrap-1)
       - [unwrapErr](#unwrapErr)
       - [unwrapOr](#unwrapOr-1)
+      - [unwrapOrElse](#unwrapOrElse)
+  - [TryCatch](#TryCatch)
 - [Contributing](#Contributing)
 - [Licence](#Licence)
 
@@ -374,6 +376,36 @@ Unwraps a result, yielding the content of an `Ok`. If the value is an `Err` then
 ```ts
 Ok('pizza').unwrapOrElse(err => err.message) // 'pizza'
 Err('pizza with ananas').unwrapOrElse(err => err.message) // 'pizza with ananas'
+```
+
+## TryCatch
+
+These functions handle try/catch.
+
+```ts
+import { TryCatch, TryCatchAsync } from 'some.js';
+
+TryCatch(
+  (a: number, b: number) => a + b,
+  10,
+  20,
+) // returns Ok(30)
+
+TryCatch(
+  (a: number, b: number) => a + b + c,
+  10,
+  20,
+) // returns Err('c is not defined')
+
+TryCatchAsync(
+  (url: string) => fetch(url).then(r => r.json()),
+  'https://reqres.in/api/users?page=2'
+) // returns Ok({ /* some json data here */ })
+
+TryCatchAsync(
+  (url: string) => fetch(url).then(r => r.document()),
+  'https://reqres.in/api/users?page=2'
+) // returns Err('r.document is not a function)
 ```
 
 # Contributing
