@@ -6,6 +6,12 @@ class Result<R, E> {
 
   /**
    * Returns `res` if the result is `Ok`, otherwise returns the `Err` value of self.
+   *
+   * ```ts
+   * Ok(10).and(Ok(20)) // Ok(20)
+   * Err('meh').and(Ok(30)) // Err('meh')
+   * ```
+   *
    * @template U
    * @param {Result<U, E>} res
    * @returns {(Result<U, E> | Err)}
@@ -21,6 +27,12 @@ class Result<R, E> {
 
   /**
    * Calls `op` if the result is `Ok`, otherwise returns the `Err` value of self.
+   *
+   * ```ts
+   * Ok(20).andThen(a => a * 2) // Ok(40)
+   * Err('aaa').andThen(a => a * 2) // Err('aaa')
+   * ```
+   *
    * @template U
    * @param {(arg: R) => Result<U, E>} op
    * @returns {Result<U, E>}
@@ -38,6 +50,11 @@ class Result<R, E> {
 
   /**
    * Converts from `Result<T, E>` to `OptionLike<E>`.
+   *
+   * ```ts
+   * Err('foo').err() // OptionLike(new Error('foo'))
+   * ```
+   *
    * @returns {Option<E>}
    * @memberof Result
    */
@@ -47,6 +64,12 @@ class Result<R, E> {
 
   /**
    * Unwraps a result, yielding the content of an `Ok`.
+   *
+   * ```ts
+   * Ok(10).expect('does not explode') // 10
+   * Err('argh').expect('will explode') // throws Error('will explode')
+   * ```
+   *
    * @param {string} message
    * @returns {(R | never)}
    * @memberof Result
@@ -61,6 +84,12 @@ class Result<R, E> {
 
   /**
    * Unwraps a result, yielding the content of an `Err`.
+   *
+   * ```ts
+   * Ok(10).expectErr('explosions?') // throws Error('explosions?')
+   * Err('🦄').expectErr('explosions?') // returns Error('🦄')
+   * ```
+   *
    * @param {string} message
    * @returns {(E | never)}
    * @memberof Result
@@ -75,6 +104,12 @@ class Result<R, E> {
 
   /**
    * Returns true if the result is `Error`.
+   *
+   * ```ts
+   * Ok(10).isError() // false
+   * Err('aaa').isError() // true
+   * ```
+   *
    * @returns {boolean}
    * @memberof Result
    */
@@ -84,6 +119,12 @@ class Result<R, E> {
 
   /**
    * Returns true if the result is `Ok`.
+   *
+   * ```ts
+   * Ok(10).isOk() // true
+   * Err('aaa').isOk() // false
+   * ```
+   *
    * @returns {boolean}
    * @memberof Result
    */
@@ -96,6 +137,11 @@ class Result<R, E> {
    * to a contained `Ok` value, leaving an `Err` value untouched.
    *
    * This function can be used to compose the results of two functions.
+   *
+   * ```ts
+   * Ok('asd').map(a => a.length) // Ok(3)
+   * ```
+   *
    * @template K
    * @param {(value: R) => K} f
    * @returns {Result<K, E>}
@@ -111,6 +157,12 @@ class Result<R, E> {
    * Maps a `Result<T, E>` to `F` by applying a function to a contained `Ok` value, or a `fallback` function to a contained `Err` value.
    *
    * This function can be used to unpack a successful result while handling an error.
+   *
+   * ```ts
+   * Ok('asd').mapOrElse(a => a.repeat(2), b => b.message) // 'asdasd'
+   * Err('ohmybad').mapOrElse(a => a.repeat(2), b => b.message) // 'ohmybad'
+   * ```
+   *
    * @template F
    * @param {F} fallback
    * @param {(value: R) => F} f
@@ -128,6 +180,12 @@ class Result<R, E> {
 
   /**
    * Converts from Result<T, E> to Option<T>.
+   *
+   * ```ts
+   * Ok(10).ok() // OptionLike(10)
+   * Err('ahrrrrr').ok() // None()
+   * ```
+   *
    * @returns {Option<R>}
    * @memberof Result
    */
@@ -137,6 +195,12 @@ class Result<R, E> {
 
   /**
    * Returns `res` if the result is `Err`, otherwise returns the `Ok` value of self.
+   *
+   * ```ts
+   * Ok(10).or(Ok(20)) // Ok(10)
+   * Err('').or(Ok(20)) // Ok(20)
+   * ```
+   *
    * @template U
    * @param {Result<U, E>} res
    * @returns {(Result<U, E> | Ok<R>)}
@@ -154,6 +218,12 @@ class Result<R, E> {
    * Calls `op` if the result is `Err`, otherwise returns the `Ok` value of self.
    *
    * This function can be used for control flow based on result values.
+   *
+   * ```ts
+   * Ok('unicorn!').orElse(a => a.message) // Ok('unicorn!')
+   * Err('darn!').orElse(a => a.message) // Ok('darn!')
+   * ```
+   *
    * @template U
    * @param {(arg: E) => Result<U, E>} op
    * @returns {(Result<U, E> | Ok<R>)}
@@ -171,6 +241,12 @@ class Result<R, E> {
 
   /**
    * Returns wrapped value or throws an `Error`
+   *
+   * ```ts
+   * Ok(10).unwrap() // 10
+   * Err('err').unwrap() // throws a ReferenceError
+   * ```
+   *
    * @returns {(R | never)}
    * @memberof Result
    */
@@ -185,6 +261,12 @@ class Result<R, E> {
   /**
    * Unwraps a result, yielding the content of an `Err`.
    * Throws if the value is not an `Err`.
+   *
+   * ```ts
+   * Ok(10).unwrap() // throws a ReferenceError
+   * Err('err').unwrap() // Error('err')
+   * ```
+   *
    * @returns {(E | never)}
    * @memberof Result
    */
@@ -198,6 +280,12 @@ class Result<R, E> {
 
   /**
    * Unwraps a result, yielding the content of an `Ok`. Else, it returns `optb`.
+   *
+   * ```ts
+   * Ok(10).unwrapOr(20) // 10
+   * Err('foo').unwrapOr(30) // 30
+   * ```
+   *
    * @template U
    * @param {U} optb
    * @returns {(R | U)}
@@ -213,6 +301,12 @@ class Result<R, E> {
 
   /**
    * Unwraps a result, yielding the content of an `Ok`. If the value is an `Err` then it calls op with its value.
+   *
+   * ```ts
+   * Ok('pizza').unwrapOrElse(err => err.message) // 'pizza'
+   * Err('pizza with ananas').unwrapOrElse(err => err.message) // 'pizza with ananas'
+   * ```
+   *
    * @template U
    * @param {(error: E) => U} op
    * @returns {(R | U)}

@@ -25,6 +25,22 @@ Heavily inspired by rust [std::option](https://doc.rust-lang.org/std/option/inde
       - [unwrap](#unwrap)
       - [unwrapOr](#unwrapOr)
   - [Result](#Result)
+    - [Result methods](#Result-methods)
+      - [and](#and-1)
+      - [andThen](#andThen-1)
+      - [err](#err)
+      - [expect](#expect-1)
+      - [expectErr](#expectErr)
+      - [isError](#isError)
+      - [isOk](#isOk)
+      - [map](#map-1)
+      - [mapOrElse](#mapOrElse-1)
+      - [ok](#ok)
+      - [or](#or-1)
+      - [orElse](#orElse-1)
+      - [unwrap](#unwrap-1)
+      - [unwrapErr](#unwrapErr)
+      - [unwrapOr](#unwrapOr-1)
 - [Contributing](#Contributing)
 - [Licence](#Licence)
 
@@ -194,6 +210,171 @@ Some(20).unwrapOr(10) // 20
 ```
 
 ## Result
+
+`Result<T, E>` is the type used for returning and propagating errors. 
+
+It is an enum with the variants, `Ok(T)`, representing success and containing a value, and `Err(E)`, representing error and containing an error value.
+
+```ts
+import { Ok, Err } from 'some.js';
+
+Ok(200)
+Err('this is an error')
+```
+
+### Result methods
+
+#### and
+
+Returns `res` if the result is `Ok`, otherwise returns the `Err` value of self.
+
+```ts
+Ok(10).and(Ok(20)) // Ok(20)
+Err('meh').and(Ok(30)) // Err('meh')
+```
+
+#### andThen
+
+Calls `op` if the result is `Ok`, otherwise returns the `Err` value of self.
+
+```ts
+Ok(20).andThen(a => a * 2) // Ok(40)
+Err('aaa').andThen(a => a * 2) // Err('aaa')
+```
+
+#### err
+
+Converts from `Result<T, E>` to `OptionLike<E>`.
+
+```ts
+Err('foo').err() // OptionLike(new Error('foo'))
+```
+
+#### expect
+
+Unwraps a result, yielding the content of an `Ok`.
+
+```ts
+Ok(10).expect('does not explode') // 10
+Err('argh').expect('will explode') // throws Error('will explode')
+```
+
+#### expectErr
+
+Unwraps a result, yielding the content of an `Err`.
+
+```ts
+Ok(10).expectErr('explosions?') // throws Error('explosions?')
+Err('🦄').expectErr('explosions?') // returns Error('🦄')
+```
+
+#### isError
+
+Returns true if the result is `Error`.
+
+```ts
+Ok(10).isError() // false
+Err('aaa').isError() // true
+```
+
+#### isOk
+
+Returns true if the result is `Ok`.
+
+```ts
+Ok(10).isOk() // true
+Err('aaa').isOk() // false
+```
+
+#### map
+
+Maps a `Result<T, E>` to `Result<U, E>` by applying a function to a contained `Ok` value, leaving an `Err` value untouched.
+
+This function can be used to compose the results of two functions.
+
+```ts
+Ok('asd').map(a => a.length) // Ok
+```
+
+#### mapOrElse
+
+Maps a `Result<T, E>` to `F` by applying a function to a contained `Ok` value, or a `fallback` function to a contained `Err` value. 
+
+This function can be used to unpack a successful result while handling an error.
+
+```ts
+Ok('asd').mapOrElse(a => a.repeat(2), b => b.message) // 'asdasd'
+Err('ohmybad').mapOrElse(a => a.repeat(2), b => b.message) // 'ohmybad'
+```
+
+#### ok
+
+Converts from Result<T, E> to Option<T>.
+
+```ts
+Ok(10).ok() // OptionLike(10)
+Err('ahrrrrr').ok() // None()
+```
+
+#### or
+
+Returns `res` if the result is `Err`, otherwise returns the `Ok` value of self.
+
+```ts
+Ok(10).or(Ok(20)) // Ok(10)
+Err('').or(Ok(20)) // Ok(20)
+```
+
+#### orElse
+
+Calls `op` if the result is `Err`, otherwise returns the `Ok` value of self.
+
+This function can be used for control flow based on result values.
+
+```ts
+Ok('unicorn!').orElse(a => a.message) // Ok('unicorn!')
+Err('darn!').orElse(a => a.message) // Ok('darn!')
+```
+
+#### unwrap
+
+Returns wrapped value or throws an `Error`
+
+Throws if the value is not an `Ok`.
+
+```ts
+Ok(10).unwrap() // 10
+Err('err').unwrap() // throws a ReferenceError
+```
+
+#### unwrapErr
+
+Unwraps a result, yielding the content of an `Err`. 
+
+Throws if the value is not an `Err`.
+
+```ts
+Ok(10).unwrap() // throws a ReferenceError
+Err('err').unwrap() // Error('err')
+```
+
+#### unwrapOr
+
+Unwraps a result, yielding the content of an `Ok`. Else, it returns `optb`.
+
+```ts
+Ok(10).unwrapOr(20) // 10
+Err('foo').unwrapOr(30) // 30
+```
+
+#### unwrapOrElse
+
+Unwraps a result, yielding the content of an `Ok`. If the value is an `Err` then it calls op with its value.
+
+```ts
+Ok('pizza').unwrapOrElse(err => err.message) // 'pizza'
+Err('pizza with ananas').unwrapOrElse(err => err.message) // 'pizza with ananas'
+```
 
 # Contributing
 
