@@ -20,6 +20,7 @@ Heavily inspired by rust [std::option](https://doc.rust-lang.org/std/option/inde
       - [mapOr](#mapOr)
       - [mapOrElse](#mapOrElse)
       - [okOr](#okOr)
+      - [okOrElse](#okOrElse)
       - [or](#or)
       - [orElse](#orElse)
       - [xor](#xor)
@@ -172,6 +173,15 @@ Transforms the `OptionLike<T>` into a `Result<T, E>`, mapping `Some(v)` to `Ok(v
 ```ts
 Some(100).okOr(Err('foo')) // Ok(100)
 None().okOr(Err('foo')) // Err('foo')
+```
+
+#### okOrElse
+
+Transforms the `OptionLike<T>` into a `Result<T, E>`, mapping `Some(v)` to `Ok(v)` and `None` to `Err(err())`.
+
+```ts
+Some(100).okOrElse(() => Err("foo")); // Ok(100)
+None().okOrElse(() => Err("foo")); // Err('foo)
 ```
 
 #### or

@@ -205,6 +205,26 @@ class OptionLike<T> {
   }
 
   /**
+   * Transforms the `OptionLike<T>` into a `Result<T, E>`, mapping `Some(v)` to `Ok(v)` and `None` to `Err(err())`.
+   *
+   * ```ts
+   * Some(100).okOrElse(() => Err("foo")); // Ok(100)
+   * None().okOrElse(() => Err("foo")); // Err('foo)
+   * ```
+   *
+   * @param {() => Err} fn
+   * @returns {(Ok<T> | Err)}
+   * @memberof OptionLike
+   */
+  public okOrElse(err: () => Err): Ok<T> | Err {
+    if (this.isSome()) {
+      return Ok(this.value);
+    }
+
+    return err();
+  }
+
+  /**
    * Returns the option if it contains a value,
    * otherwise returns `optb`
    *

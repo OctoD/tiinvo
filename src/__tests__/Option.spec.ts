@@ -108,4 +108,9 @@ describe(`Option`, () => {
     expect(Some(100).okOr(Err("foo"))).toStrictEqual(Ok(100));
     expect(None().okOr(Err("foo"))).toStrictEqual(Err("foo"));
   });
+
+  it("Transforms the `OptionLike<T>` into a `Result<T, E>`, mapping `Some(v)` to `Ok(v)` and `None` to `Err(err())`.", () => {
+    expect(Some(100).okOrElse(() => Err("foo"))).toStrictEqual(Ok(100));
+    expect(None().okOrElse(() => Err("foo"))).toStrictEqual(Err("foo"));
+  });
 });
