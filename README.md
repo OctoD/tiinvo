@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./Logo.svg" />
+  <img src="./banner-readme.png" />
 </div>
 
 tiinvo
