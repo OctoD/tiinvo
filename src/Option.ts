@@ -90,6 +90,24 @@ class OptionLike<T> {
   }
 
   /**
+   * Converts from `Option<Option<T>>` to `Option<T>`
+   *
+   * ```ts
+   * Option(Some(100)).flattern() // Some(100)
+   * ```
+   *
+   * @returns {OptionLike<T>}
+   * @memberof OptionLike
+   */
+  public flattern(): OptionLike<T> {
+    if (this.value instanceof OptionLike) {
+      return this.value;
+    }
+
+    return this;
+  }
+
+  /**
    * Returns if has not a value
    *
    * ```ts

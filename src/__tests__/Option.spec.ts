@@ -118,4 +118,8 @@ describe(`Option`, () => {
     expect(Some(100).transpose()).toStrictEqual(Ok(Some(100)));
     expect(None().transpose()).toStrictEqual(Ok(None()));
   });
+
+  it("Converts from `Option<Option<T>>` to `Option<T>`", () => {
+    expect(Option(Some(100)).flattern()).toStrictEqual(Some(100));
+  });
 });

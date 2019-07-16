@@ -14,6 +14,7 @@ Heavily inspired by rust [std::option](https://doc.rust-lang.org/std/option/inde
       - [andThen](#andThen)
       - [expect](#expect)
       - [filter](#filter)
+      - [flattern](#flattern)
       - [isNone](#isNone)
       - [isSome](#isSome)
       - [map](#map)
@@ -121,6 +122,14 @@ Returns the `Option` if it's value passes the `predicate` function. Otherwise re
 ```ts
 Option(1).filter(a => a > 0).isSome() // true
 Option(1).filter(a => a > 10).isSome() // false
+```
+
+#### flattern
+
+Converts from `Option<Option<T>>` to `Option<T>`
+
+```ts
+Option(Some(100)).flattern() // Some(100)
 ```
 
 #### isNone
