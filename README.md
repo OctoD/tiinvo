@@ -9,7 +9,7 @@ Handling possible errors or values in a functional way.
 
 Heavily inspired by rust [std::option](https://doc.rust-lang.org/std/option/index.html) and [std::result](https://doc.rust-lang.org/std/result/enum.Result.html)
 
-- [tiinvo](#somejs)
+- [tiinvo](#tiinvo)
 - [Install](#Install)
 - [Usage](#Usage)
   - [Option](#Option)
@@ -451,6 +451,12 @@ TryCatchAsync(
 ```
 
 # Contributing
+
+Every contribution is really welcome!
+
+If you feel that something can be improved or should be fixed, feel free to open an issue with the feature or the bug found.
+
+If you want to fork and open a pull request (adding features or fixes), feel free to do it. Remember only to use the `dev` branch as a base.
 
 Read the [contributing guidelines](./CONTRIBUTING.md)
 
