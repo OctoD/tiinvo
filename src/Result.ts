@@ -18,11 +18,9 @@ class ResultLike<R, E> {
    * @memberof Result
    */
   public and<U>(res: ResultLike<U, E>): ResultLike<U, E> | Err {
-    if (instanceOfError<R, E>(this.value)) {
-      return new ResultLike(this.value as any);
-    }
-
-    return res;
+    return instanceOfError<R, E>(this.value)
+      ? new ResultLike(this.value as any)
+      : res;
   }
 
   /**
@@ -41,11 +39,9 @@ class ResultLike<R, E> {
   public andThen<U>(op: (arg: R) => ResultLike<U, E>): ResultLike<U, E> {
     ensureFunction("andThen argument must be a function", op);
 
-    if (instanceOfError<R, E>(this.value)) {
-      return new ResultLike(this.value as any);
-    }
-
-    return op(this.value);
+    return instanceOfError<R, E>(this.value)
+      ? new ResultLike(this.value as any)
+      : op(this.value);
   }
 
   /**
@@ -207,11 +203,7 @@ class ResultLike<R, E> {
    * @memberof Result
    */
   public or<U>(res: ResultLike<U, E>): ResultLike<U, E> | Ok<R> {
-    if (instanceOfError<R, E>(this.value)) {
-      return res;
-    }
-
-    return this;
+    return instanceOfError<R, E>(this.value) ? res : this;
   }
 
   /**
@@ -232,11 +224,7 @@ class ResultLike<R, E> {
   public orElse<U>(op: (arg: E) => ResultLike<U, E>): ResultLike<U, E> | Ok<R> {
     ensureFunction("orElse argument must be a function", op);
 
-    if (instanceOfError<R, E>(this.value)) {
-      return op(this.value);
-    }
-
-    return this;
+    return instanceOfError<R, E>(this.value) ? op(this.value) : this;
   }
 
   /**
@@ -292,11 +280,7 @@ class ResultLike<R, E> {
    * @memberof Result
    */
   public unwrapOr<U>(optb: U): R | U {
-    if (instanceOfError<R, E>(this.value)) {
-      return optb;
-    }
-
-    return this.value;
+    return instanceOfError<R, E>(this.value) ? optb : this.value;
   }
 
   /**
@@ -315,11 +299,7 @@ class ResultLike<R, E> {
   public unwrapOrElse<U>(op: (error: E) => U): R | U {
     ensureFunction("unwrapOrElse argument must be a function", op);
 
-    if (instanceOfError<R, E>(this.value)) {
-      return op(this.value);
-    }
-
-    return this.value;
+    return instanceOfError<R, E>(this.value) ? op(this.value) : this.value;
   }
 }
 

@@ -5,11 +5,7 @@ class OptionLike<T> {
   public constructor(protected value: T) {}
 
   protected foldReturn<U>(value: U): U {
-    if (this.isNone()) {
-      return None() as any;
-    }
-
-    return value;
+    return this.isNone() ? (None() as any) : value;
   }
 
   /**
@@ -84,7 +80,7 @@ class OptionLike<T> {
    */
   public filter(
     predicate: (arg: T) => boolean
-  ): ReturnType<typeof predicate> extends true ? Some<T> : None {
+  ): ReturnType<typeof predicate> extends true ? Some<T> : None<T> {
     const predicateresult = predicate(this.value);
     return predicateresult ? this : (None() as any);
   }
@@ -100,11 +96,7 @@ class OptionLike<T> {
    * @memberof OptionLike
    */
   public flattern(): OptionLike<T> {
-    if (this.value instanceof OptionLike) {
-      return this.value;
-    }
-
-    return this;
+    return this.value instanceof OptionLike ? this.value : this;
   }
 
   /**
@@ -172,11 +164,7 @@ class OptionLike<T> {
   public mapOr<K>(def: K, f: (arg: T) => K): K {
     ensureFunction("mapOr argument must be a function", f);
 
-    if (this.isNone()) {
-      return def;
-    }
-
-    return f(this.value);
+    return this.isNone() ? def : f(this.value);
   }
 
   /**
@@ -215,11 +203,7 @@ class OptionLike<T> {
    * @memberof OptionLike
    */
   public okOr(err: Err): Ok<T> | Err {
-    if (this.isSome()) {
-      return Ok(this.value);
-    }
-
-    return err;
+    return this.isSome() ? Ok(this.value) : err;
   }
 
   /**
@@ -235,11 +219,7 @@ class OptionLike<T> {
    * @memberof OptionLike
    */
   public okOrElse(err: () => Err): Ok<T> | Err {
-    if (this.isSome()) {
-      return Ok(this.value);
-    }
-
-    return err();
+    return this.isSome() ? Ok(this.value) : err();
   }
 
   /**
@@ -290,7 +270,7 @@ class OptionLike<T> {
    * @returns {(Ok<Some<T>> | Ok<None>)}
    * @memberof OptionLike
    */
-  public transpose(): Ok<Some<T>> | Ok<None> {
+  public transpose(): Ok<Some<T>> | Ok<None<T>> {
     return this.isSome() ? Ok(Some(this.value)) : Ok(None());
   }
 
@@ -311,14 +291,14 @@ class OptionLike<T> {
    * @returns {(Some<T> | Some<U> | None)}
    * @memberof OptionLike
    */
-  public xor<U>(optb: OptionLike<U>): Some<T> | Some<U> | None {
+  public xor<U>(optb: OptionLike<U>): Some<T> | Some<U> | None<T> {
     if (optb.isNone() && this.isSome()) {
       return this;
     } else if (optb.isSome() && this.isNone()) {
       return optb;
     }
 
-    return (optb.value as any) === (this.value as any) ? None() : this;
+    return (optb.value as any) === (this.value as any) ? None<T>() : this;
   }
 
   /**
@@ -371,7 +351,7 @@ export type Some<T> = OptionLike<T>;
  * Type `Option` represents an optional value: every `Option` is either
  * `Some` and contains a value, or `None`, and does not.
  */
-export type None = OptionLike<null>;
+export type None<T> = OptionLike<T>;
 
 /**
  * Forces NaN to be considered as null
@@ -398,8 +378,8 @@ function coerceNull(value: unknown) {
  * @export
  * @returns {None}
  */
-export function None(): None {
-  return Option(null);
+export function None<T = null>(): None<T> {
+  return Option<T>((null as unknown) as T);
 }
 
 /**

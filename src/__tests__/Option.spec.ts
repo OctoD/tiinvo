@@ -121,5 +121,6 @@ describe(`Option`, () => {
 
   it("Converts from `Option<Option<T>>` to `Option<T>`", () => {
     expect(Option(Some(100)).flattern()).toStrictEqual(Some(100));
+    expect(Option(100).flattern()).toStrictEqual(Some(100));
   });
 });
