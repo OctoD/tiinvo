@@ -55,7 +55,15 @@ export function TryCatch<FnTry extends (...args: K) => any, K extends any[]>(
 export async function TryCatchAsync<
   FnTry extends (...args: K) => Promise<any>,
   K extends any[]
->(fnTry: FnTry, ...args: K): Promise<Result<ReturnType<FnTry>, Error>> {
+>(
+  fnTry: FnTry,
+  ...args: K
+): Promise<
+  Result<
+    ReturnType<FnTry> extends Promise<infer U> ? U : ReturnType<FnTry>,
+    Error
+  >
+> {
   try {
     return Ok(await fnTry.apply(null, args));
   } catch (error) {
