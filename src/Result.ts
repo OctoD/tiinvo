@@ -1,7 +1,7 @@
 import { Option, None, Some } from "./Option";
 import { ensureFunction } from "./common";
 
-class Result<R, E> {
+class ResultLike<R, E> {
   public constructor(protected value: R | E) {}
 
   /**
@@ -13,13 +13,13 @@ class Result<R, E> {
    * ```
    *
    * @template U
-   * @param {Result<U, E>} res
-   * @returns {(Result<U, E> | Err)}
+   * @param {ResultLike<U, E>} res
+   * @returns {(ResultLike<U, E> | Err)}
    * @memberof Result
    */
-  public and<U>(res: Result<U, E>): Result<U, E> | Err {
+  public and<U>(res: ResultLike<U, E>): ResultLike<U, E> | Err {
     if (instanceOfError<R, E>(this.value)) {
-      return new Result(this.value as any);
+      return new ResultLike(this.value as any);
     }
 
     return res;
@@ -34,15 +34,15 @@ class Result<R, E> {
    * ```
    *
    * @template U
-   * @param {(arg: R) => Result<U, E>} op
-   * @returns {Result<U, E>}
+   * @param {(arg: R) => ResultLike<U, E>} op
+   * @returns {ResultLike<U, E>}
    * @memberof Result
    */
-  public andThen<U>(op: (arg: R) => Result<U, E>): Result<U, E> {
+  public andThen<U>(op: (arg: R) => ResultLike<U, E>): ResultLike<U, E> {
     ensureFunction("andThen argument must be a function", op);
 
     if (instanceOfError<R, E>(this.value)) {
-      return new Result(this.value as any);
+      return new ResultLike(this.value as any);
     }
 
     return op(this.value);
@@ -144,13 +144,13 @@ class Result<R, E> {
    *
    * @template K
    * @param {(value: R) => K} f
-   * @returns {Result<K, E>}
+   * @returns {ResultLike<K, E>}
    * @memberof Result
    */
-  public map<K>(f: (value: R) => K): Result<K, E> {
+  public map<K>(f: (value: R) => K): ResultLike<K, E> {
     ensureFunction("map argument must be a function", f);
 
-    return new Result<K, E>(f(this.value as R));
+    return new ResultLike<K, E>(f(this.value as R));
   }
 
   /**
@@ -202,11 +202,11 @@ class Result<R, E> {
    * ```
    *
    * @template U
-   * @param {Result<U, E>} res
-   * @returns {(Result<U, E> | Ok<R>)}
+   * @param {ResultLike<U, E>} res
+   * @returns {(ResultLike<U, E> | Ok<R>)}
    * @memberof Result
    */
-  public or<U>(res: Result<U, E>): Result<U, E> | Ok<R> {
+  public or<U>(res: ResultLike<U, E>): ResultLike<U, E> | Ok<R> {
     if (instanceOfError<R, E>(this.value)) {
       return res;
     }
@@ -225,11 +225,11 @@ class Result<R, E> {
    * ```
    *
    * @template U
-   * @param {(arg: E) => Result<U, E>} op
-   * @returns {(Result<U, E> | Ok<R>)}
+   * @param {(arg: E) => ResultLike<U, E>} op
+   * @returns {(ResultLike<U, E> | Ok<R>)}
    * @memberof Result
    */
-  public orElse<U>(op: (arg: E) => Result<U, E>): Result<U, E> | Ok<R> {
+  public orElse<U>(op: (arg: E) => ResultLike<U, E>): ResultLike<U, E> | Ok<R> {
     ensureFunction("orElse argument must be a function", op);
 
     if (instanceOfError<R, E>(this.value)) {
@@ -346,14 +346,21 @@ function instanceOfError<T, E>(value: T | E): value is E {
  * containing a value, and `Err(E)`, representing error and containing
  * an error value.
  */
-export type Err = Result<any, Error>;
+export type Err = ResultLike<any, Error>;
 /**
  * `Result<T, E>` is the type used for returning and propagating errors.
  * It is an enum with the variants, `Ok(T)`, representing success and
  * containing a value, and `Err(E)`, representing error and containing
  * an error value.
  */
-export type Ok<T> = Result<T, any>;
+export type Ok<T> = ResultLike<T, any>;
+/**
+ * `Result<T, E>` is the type used for returning and propagating errors.
+ * It is an enum with the variants, `Ok(T)`, representing success and
+ * containing a value, and `Err(E)`, representing error and containing
+ * an error value.
+ */
+export type Result<T, E> = ResultLike<T, E>;
 
 /**
  * `Result<T, E>` is the type used for returning and propagating errors.
@@ -367,7 +374,7 @@ export type Ok<T> = Result<T, any>;
  * @returns {Err}
  */
 export function Err(message?: string): Err {
-  return new Result<any, Error>(new Error(message));
+  return new ResultLike<any, Error>(new Error(message));
 }
 
 /**
@@ -383,5 +390,5 @@ export function Err(message?: string): Err {
  * @returns {Ok<T>}
  */
 export function Ok<T>(value: T): Ok<T> {
-  return new Result<T, null>(value);
+  return new ResultLike<T, null>(value);
 }

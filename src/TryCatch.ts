@@ -1,4 +1,4 @@
-import { Ok, Err } from "./Result";
+import { Ok, Err, Result } from "./Result";
 
 export type Fn = () => any;
 export type FnAsync = () => Promise<any>;
@@ -26,7 +26,7 @@ export type FnAsync = () => Promise<any>;
 export function TryCatch<FnTry extends (...args: K) => any, K extends any[]>(
   fnTry: FnTry,
   ...args: K
-): Ok<ReturnType<FnTry>> | Err {
+): Result<ReturnType<FnTry>, Error> {
   try {
     return Ok(fnTry.apply(null, args));
   } catch (error) {
@@ -55,7 +55,7 @@ export function TryCatch<FnTry extends (...args: K) => any, K extends any[]>(
 export async function TryCatchAsync<
   FnTry extends (...args: K) => Promise<any>,
   K extends any[]
->(fnTry: FnTry, ...args: K): Promise<Ok<ReturnType<FnTry>> | Err> {
+>(fnTry: FnTry, ...args: K): Promise<Result<ReturnType<FnTry>, Error>> {
   try {
     return Ok(await fnTry.apply(null, args));
   } catch (error) {
