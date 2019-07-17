@@ -82,7 +82,7 @@ class OptionLike<T> {
     predicate: (arg: T) => boolean
   ): ReturnType<typeof predicate> extends true ? Some<T> : None<T> {
     const predicateresult = predicate(this.value);
-    return predicateresult ? this : (None() as any);
+    return predicateresult ? this : None<T>();
   }
 
   /**
@@ -181,13 +181,10 @@ class OptionLike<T> {
    * @returns {K}
    * @memberof OptionLike
    */
-  public mapOrElse<K>(
-    defFn: () => K,
-    f: (arg: T extends null ? any : T) => K
-  ): K {
+  public mapOrElse<K>(defFn: () => K, f: (arg: T) => K): K {
     ensureFunction("mapOrElse argument must be a function", f);
 
-    return this.isSome() ? f(this.value as any) : defFn();
+    return this.isSome() ? f(this.value) : defFn();
   }
 
   /**

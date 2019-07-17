@@ -101,7 +101,7 @@ describe(`Option`, () => {
     const fn2 = (arg: number) => String(arg);
 
     expect(Some(100).mapOrElse(fn1, fn2)).toStrictEqual("100");
-    expect(None().mapOrElse(fn1, fn2)).toStrictEqual("a");
+    expect(None<number>().mapOrElse(fn1, fn2)).toStrictEqual("a");
   });
 
   it("Transforms the `OptionLike<T>` into a `Result<T, E>`, mapping `Some(v)` to `Ok(v)` and `None` to `Err(err)`.", () => {
