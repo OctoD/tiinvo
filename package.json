@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "author": "Paolo Roth <octod>",
   "main": "dist/index.js",
+  "license": "MIT",
   "description": "your typescript library description",
   "keywords": [
     "functional programming",
