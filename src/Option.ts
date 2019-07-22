@@ -1,4 +1,4 @@
-import { ensureFunction } from "./common";
+import { coerceToNull, ensureFunction } from "./common";
 import { Err, Ok } from "./Result";
 
 class OptionLike<T> {
@@ -351,23 +351,6 @@ export type Some<T> = OptionLike<T>;
 export type None<T> = OptionLike<T>;
 
 /**
- * Forces NaN to be considered as null
- * @param {unknown} value
- * @returns
- */
-function coerceNull(value: unknown) {
-  if (value === undefined) {
-    return null;
-  }
-
-  if (typeof value !== "number") {
-    return value;
-  }
-
-  return isNaN(value) ? null : value;
-}
-
-/**
  * Type `Option` represents an optional value: every `Option` is either
  * `Some` and contains a value, or `None`, and does not.
  *
@@ -390,7 +373,7 @@ export function None<T = null>(): None<T> {
  * @returns {Some<T>}
  */
 export function Some<T>(value: T): Some<T> {
-  return Option(coerceNull(value) as T);
+  return Option(coerceToNull(value) as T);
 }
 
 /**
@@ -404,5 +387,5 @@ export function Some<T>(value: T): Some<T> {
  * @returns {OptionLike<T>}
  */
 export function Option<T>(value: T): OptionLike<T> {
-  return new OptionLike(coerceNull(value) as T);
+  return new OptionLike(coerceToNull(value) as T);
 }
