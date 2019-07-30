@@ -10,49 +10,60 @@ Handling possible errors or values in a functional way.
 Heavily inspired by rust [std::option](https://doc.rust-lang.org/std/option/index.html) and [std::result](https://doc.rust-lang.org/std/result/enum.Result.html)
 
 - [tiinvo](#tiinvo)
-- [Install](#Install)
-- [Usage](#Usage)
-  - [Option](#Option)
-    - [Option methods](#Option-methods)
+- [Install](#install)
+- [Usage](#usage)
+  - [Option](#option)
+    - [Option methods](#option-methods)
       - [and](#and)
-      - [andThen](#andThen)
+      - [andThen](#andthen)
       - [expect](#expect)
       - [filter](#filter)
       - [flattern](#flattern)
-      - [isNone](#isNone)
-      - [isSome](#isSome)
+      - [isNone](#isnone)
+      - [isSome](#issome)
       - [map](#map)
-      - [mapOr](#mapOr)
-      - [mapOrElse](#mapOrElse)
-      - [okOr](#okOr)
-      - [okOrElse](#okOrElse)
+      - [mapOr](#mapor)
+      - [mapOrElse](#maporelse)
+      - [okOr](#okor)
+      - [okOrElse](#okorelse)
       - [or](#or)
-      - [orElse](#orElse)
+      - [orElse](#orelse)
       - [transpose](#transpose)
       - [xor](#xor)
       - [unwrap](#unwrap)
-      - [unwrapOr](#unwrapOr)
-  - [Result](#Result)
-    - [Result methods](#Result-methods)
+      - [unwrapOr](#unwrapor)
+  - [Result](#result)
+    - [Result methods](#result-methods)
       - [and](#and-1)
-      - [andThen](#andThen-1)
+      - [andThen](#andthen-1)
       - [err](#err)
       - [expect](#expect-1)
-      - [expectErr](#expectErr)
-      - [isError](#isError)
-      - [isOk](#isOk)
+      - [expectErr](#expecterr)
+      - [isError](#iserror)
+      - [isOk](#isok)
       - [map](#map-1)
-      - [mapOrElse](#mapOrElse-1)
+      - [mapOrElse](#maporelse-1)
       - [ok](#ok)
       - [or](#or-1)
-      - [orElse](#orElse-1)
+      - [orElse](#orelse-1)
       - [unwrap](#unwrap-1)
-      - [unwrapErr](#unwrapErr)
-      - [unwrapOr](#unwrapOr-1)
-      - [unwrapOrElse](#unwrapOrElse)
-  - [TryCatch](#TryCatch)
-- [Contributing](#Contributing)
-- [Licence](#Licence)
+      - [unwrapErr](#unwraperr)
+      - [unwrapOr](#unwrapor-1)
+      - [unwrapOrElse](#unwraporelse)
+  - [TryCatch](#trycatch)
+  - [Either](#either)
+    - [Either methods](#either-methods)
+      - [and](#and-2)
+      - [andThen](#andthen-2)
+      - [isLeft](#isleft)
+      - [isRight](#isright)
+      - [fold](#fold)
+      - [option](#option)
+      - [result](#result)
+      - [swap](#swap)
+      - [unwrap](#unwrap-2)
+- [Contributing](#contributing)
+- [Licence](#licence)
 
 # Install
 
@@ -448,6 +459,108 @@ TryCatchAsync(
   (url: string) => fetch(url).then(r => r.document()),
   'https://reqres.in/api/users?page=2'
 ) // returns Err('r.document is not a function)
+```
+
+## Either
+
+The `Either` type represents values with two possibilities: a value of type `Either` is either `Left` or `Right`.
+
+```ts
+import { Left, Right } from 'tiinvo';
+
+function foo(arg: number): Left<boolean> | Right<boolean> {
+  return arg % 2 === 0 ? Right(true) : Left(false);
+}
+
+foo(20).isRight() // true;
+foo(15).isRight() // false;
+
+foo(20).and(foo(15)).and(foo(50)).isRight() // false
+foo(20).and(foo(8)).and(foo(50)).isRight() // true
+```
+
+### Either methods
+
+#### and
+
+Returns `Either<U>` if is `Right`, otherwise returns `Either<T>`
+
+```ts
+Left(100).and(Right(200)) // Left(100)
+Right(100).and(Right(200)) // Right(200)
+Right(100).and(Left(200)) // Left(200)
+```
+
+#### andThen
+
+Returns `Fn` result if is `Right`, otherwise returns `Either<T>`
+
+```ts
+Right(100).andThen(value => Right(value + 1)) // Right(101)
+Left(100).andThen(value => Right(value + 1)) // Left(100)
+```
+
+#### isLeft
+
+Returns `true` if is `Left`
+
+```ts
+Left().isLeft(); // true
+Right().isLeft(); // false
+```
+
+#### isRight
+
+Returns `true` if is `Right`
+
+```ts
+Left().isRight(); // false
+Right().isRight(); // true
+```
+
+#### fold
+
+Returns `leftFn` result if is `Left`, otherwise returns `rightFn` if is `Right`
+
+```ts
+Left(100).fold(a => a / 2, b => b * 2) // 50
+Right(100).fold(a => a / 2, b => b * 2) // 200
+```
+
+#### option
+
+Returns `Some<T>` if is `Right`, otherwise returns `None`
+
+```ts
+Left(100).option() // None()
+Right(100).option() // Some(100)
+```
+
+#### result
+
+Returns `Ok<T>` if is `Right`, otherwise returns `Err` if is `Left`
+
+```ts
+Left(100).result() // Err()
+Right(20).result() // Ok(20)
+```
+
+#### swap
+
+Swaps `Right<T>` to `Left<T>` if is `Right<T>`, otherwise swaps `Left<T>` to `Right<T>` if is `Left<T>`
+
+```ts
+Left(100).swap() // Right(100)
+Right(20).swap() // Left(20)
+```
+
+#### unwrap
+
+Unwraps value `T`
+
+```ts
+Left(10).unwrap() // 10
+Right(`hello world`).unwrap() // 'hello world'
 ```
 
 # Contributing
