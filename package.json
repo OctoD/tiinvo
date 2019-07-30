@@ -4,7 +4,7 @@
   "author": "Paolo Roth <octod>",
   "main": "dist/index.js",
   "license": "MIT",
-  "description": "your typescript library description",
+  "description": "Handling possible errors or values in a functional way.",
   "keywords": [
     "functional programming",
     "functional",
