@@ -2,11 +2,14 @@ import { Option } from "./Option";
 import { Result, Err, Ok } from "./Result";
 import { ensureFunction } from "./common";
 
-class EitherLike<T> {
-  public constructor(protected value: T, protected isLeftType: boolean) {}
+class EitherLike<LeftValue, RightValue> {
+  public constructor(
+    protected value: LeftValue | RightValue,
+    protected isLeftType: boolean
+  ) {}
 
   /**
-   * Returns `Either<U>` if is `Right`, otherwise returns `Either<T>`
+   * Returns `Either<U, X>` if is `Right`, otherwise returns `Either<LeftValue, RightValue>`
    *
    * ```ts
    * Left(100).and(Right(200)) // Left(100)
@@ -16,15 +19,17 @@ class EitherLike<T> {
    *
    * @template U
    * @param {EitherLike<U>} either
-   * @returns {(EitherLike<U> | EitherLike<T>)}
+   * @returns {(EitherLike<U> | EitherLike<LeftValue>)}
    * @memberof EitherLike
    */
-  public and<U>(either: EitherLike<U>): EitherLike<U> | EitherLike<T> {
+  public and<U, X>(
+    either: EitherLike<U, X>
+  ): EitherLike<U, X> | EitherLike<LeftValue, RightValue> {
     return this.isRight() ? either : this;
   }
 
   /**
-   * Returns `Fn` result if is `Right`, otherwise returns `Either<T>`
+   * Returns `Fn` result if is `Right`, otherwise returns `Either<LeftValue>`
    *
    * ```ts
    * Right(100).andThen(value => Right(value + 1)) // Right(101)
@@ -34,14 +39,14 @@ class EitherLike<T> {
    * @template Fn
    * @template U
    * @param {Fn} fn
-   * @returns {(EitherLike<U> | EitherLike<T>)}
+   * @returns {(EitherLike<U> | EitherLike<LeftValue>)}
    * @memberof Either
    */
-  public andThen<Fn extends (value: T) => EitherLike<U>, U>(
+  public andThen<Fn extends (value: RightValue) => EitherLike<LeftValue, U>, U>(
     fn: Fn
-  ): EitherLike<U> | EitherLike<T> {
+  ): EitherLike<LeftValue, U> | EitherLike<LeftValue, RightValue> {
     ensureFunction("andThen", fn);
-    return this.isRight() ? fn(this.value) : this;
+    return this.isRight() ? fn(this.value as any) : this;
   }
 
   /**
@@ -83,83 +88,94 @@ class EitherLike<T> {
    * ```
    *
    * @template A
-   * @param {A} leftFn
-   * @param {A} rightFn
+   * @param {FnLeft} leftFn
+   * @param {FnRight} rightFn
    * @returns
    * @memberof Either
    */
-  public fold<A extends (value: T) => any>(leftFn: A, rightFn: A) {
+  public fold<
+    FnLeft extends (value: LeftValue) => any,
+    FnRight extends (value: RightValue) => any
+  >(leftFn: FnLeft, rightFn: FnRight) {
     ensureFunction("fold", leftFn);
     ensureFunction("fold", rightFn);
-    return this.isLeft() ? leftFn(this.value) : rightFn(this.value);
+    return this.isLeft()
+      ? leftFn(this.value as LeftValue)
+      : rightFn(this.value as RightValue);
   }
 
   /**
-   * Returns `Some<T>` if is `Right`, otherwise returns `None`
+   * Returns `Some<RightValue>` if is `Right`, otherwise returns `None`
    *
    * ```ts
    * Left(100).option() // None()
    * Right(100).option() // Some(100)
    * ```
    *
-   * @returns {Option<T>}
+   * @returns {Option<RightValue>}
    * @memberof Either
    */
-  public option(): Option<T> {
-    return Option(this.isLeft() ? null : this.value);
+  public option(): Option<RightValue> {
+    return Option(this.isLeft() ? null : (this.value as RightValue));
   }
 
   /**
-   * Returns `Ok<T>` if is `Right`, otherwise returns `Err` if is `Left`
+   * Returns `Ok<RightValue>` if is `Right`, otherwise returns `Err` if is `Left`
    *
    * ```ts
    * Left(100).result() // Err()
    * Right(20).result() // Ok(20)
    * ```
    *
-   * @returns {Result<T, Error>}
+   * @returns {Result<RightValue, Error>}
    * @memberof Either
    */
-  public result(): Result<T, Error> {
+  public result(): Result<RightValue, Error> {
     return this.isLeft()
       ? Err(`Value ${this.value} is not right.`)
-      : Ok(this.value);
+      : Ok(this.value as RightValue);
   }
 
   /**
-   * Swaps `Right<T>` to `Left<T>` if is `Right<T>`, otherwise swaps `Left<T>` to `Right<T>` if is `Left<T>`
+   * Swaps `Right<LeftValue, RightValue>` to `Left<RightValue, LeftValue>` if is `Right<RightValue>`, otherwise swaps `Left<LeftValue, RightValue>` to `Right<RightValue, LeftValue>` if is `Left<LeftValue>`
    *
    * ```ts
    * Left(100).swap() // Right(100)
    * Right(20).swap() // Left(20)
    * ```
    *
-   * @returns {EitherLike<T>}
+   * @returns {EitherLike<RightValue, LeftValue>}
    * @memberof Either
    */
-  public swap(): EitherLike<T> {
-    return new EitherLike(this.value, !this.isLeftType);
+  public swap(): EitherLike<RightValue, LeftValue> {
+    return new EitherLike(this.value as any, !this.isLeftType);
   }
 
   /**
-   * Unwraps value `T`
+   * Unwraps value `LeftValue | RightValue`
    *
    * ```ts
    * Left(10).unwrap() // 10
    * Right(`hello world`).unwrap() // 'hello world'
    * ```
    *
-   * @returns {T}
+   * @returns {LeftValue}
    * @memberof Either
    */
-  public unwrap(): T {
+  public unwrap(): LeftValue | RightValue {
     return this.value;
   }
 }
 
-export type Left<T> = EitherLike<T>;
+export type Left<LeftValue, RightValue = LeftValue> = EitherLike<
+  LeftValue,
+  RightValue
+>;
 
-export type Right<T> = EitherLike<T>;
+export type Right<RightValue, LeftValue = RightValue> = EitherLike<
+  LeftValue,
+  RightValue
+>;
 
 /**
  *
@@ -168,8 +184,8 @@ export type Right<T> = EitherLike<T>;
  * @param {T} [value]
  * @returns {EitherLike<T>}
  */
-export function Left<T>(value?: T): EitherLike<T> {
-  return new EitherLike<T>(value as any, true);
+export function Left<T>(value?: T): Left<T> {
+  return new EitherLike(value as any, true);
 }
 
 /**
@@ -177,8 +193,8 @@ export function Left<T>(value?: T): EitherLike<T> {
  * @export
  * @template T
  * @param {T} [value]
- * @returns {EitherLike<T>}
+ * @returns {Right<T>}
  */
-export function Right<T>(value?: T): EitherLike<T> {
-  return new EitherLike<T>(value as any, false);
+export function Right<T>(value?: T): Right<T> {
+  return new EitherLike(value as any, false);
 }

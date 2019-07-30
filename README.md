@@ -483,7 +483,7 @@ foo(20).and(foo(8)).and(foo(50)).isRight() // true
 
 #### and
 
-Returns `Either<U>` if is `Right`, otherwise returns `Either<T>`
+Returns `Either<U, X>` if is `Right`, otherwise returns `Either<LeftValue, RightValue>`
 
 ```ts
 Left(100).and(Right(200)) // Left(100)
@@ -493,7 +493,7 @@ Right(100).and(Left(200)) // Left(200)
 
 #### andThen
 
-Returns `Fn` result if is `Right`, otherwise returns `Either<T>`
+Returns `Fn` result if is `Right`, otherwise returns `Either<LeftValue>`
 
 ```ts
 Right(100).andThen(value => Right(value + 1)) // Right(101)
@@ -529,7 +529,7 @@ Right(100).fold(a => a / 2, b => b * 2) // 200
 
 #### option
 
-Returns `Some<T>` if is `Right`, otherwise returns `None`
+Returns `Some<RightValue>` if is `Right`, otherwise returns `None`
 
 ```ts
 Left(100).option() // None()
@@ -538,7 +538,7 @@ Right(100).option() // Some(100)
 
 #### result
 
-Returns `Ok<T>` if is `Right`, otherwise returns `Err` if is `Left`
+Returns `Ok<RightValue>` if is `Right`, otherwise returns `Err` if is `Left`
 
 ```ts
 Left(100).result() // Err()
@@ -547,7 +547,7 @@ Right(20).result() // Ok(20)
 
 #### swap
 
-Swaps `Right<T>` to `Left<T>` if is `Right<T>`, otherwise swaps `Left<T>` to `Right<T>` if is `Left<T>`
+Swaps `Right<LeftValue, RightValue>` to `Left<RightValue, LeftValue>` if is `Right<RightValue>`, otherwise swaps `Left<LeftValue, RightValue>` to `Right<RightValue, LeftValue>` if is `Left<LeftValue>`
 
 ```ts
 Left(100).swap() // Right(100)
@@ -556,7 +556,7 @@ Right(20).swap() // Left(20)
 
 #### unwrap
 
-Unwraps value `T`
+Unwraps value `LeftValue | RightValue`
 
 ```ts
 Left(10).unwrap() // 10
