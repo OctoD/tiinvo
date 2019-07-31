@@ -358,8 +358,8 @@ Maps a `Result<T, E>` to `F` by applying a function to a contained `Ok` value, o
 This function can be used to unpack a successful result while handling an error.
 
 ```ts
-Ok('asd').mapOrElse(a => a.repeat(2), b => b.message) // 'asdasd'
-Err('ohmybad').mapOrElse(a => a.repeat(2), b => b.message) // 'ohmybad'
+Ok('asd').mapOrElse(b => b.message, a => a.repeat(2)) // 'asdasd'
+Err('ohmybad').mapOrElse(b => b.message, a => a.repeat(2)) // 'ohmybad'
 ```
 
 #### ok
