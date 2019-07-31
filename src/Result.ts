@@ -155,8 +155,8 @@ class ResultLike<R, E> {
    * This function can be used to unpack a successful result while handling an error.
    *
    * ```ts
-   * Ok('asd').mapOrElse(a => a.repeat(2), b => b.message) // 'asdasd'
-   * Err('ohmybad').mapOrElse(a => a.repeat(2), b => b.message) // 'ohmybad'
+   * Ok('asd').mapOrElse(b => b.message, a => a.repeat(2)) // 'asdasd'
+   * Err('ohmybad').mapOrElse(b => b.message, a => a.repeat(2)) // 'ohmybad'
    * ```
    *
    * @template F
