@@ -5,6 +5,10 @@
 tiinvo
 =======
 
+[![Build Status](https://travis-ci.org/OctoD/tiinvo.svg?branch=master)](https://travis-ci.org/OctoD/tiinvo)
+[![Test Coverage](https://codecov.io/gh/octod/tiinvo/branch/master/graph/badge.svg)](https://codecov.io/gh/octod/tiinvo/branch/master)
+
+
 Handling possible errors or values in a functional way.
 
 Heavily inspired by rust [std::option](https://doc.rust-lang.org/std/option/index.html) and [std::result](https://doc.rust-lang.org/std/result/enum.Result.html)
