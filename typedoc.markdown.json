@@ -1,0 +1,11 @@
+{
+  "mode": "modules",
+  "out": "docs",
+  "readme": "none",
+  "exclude": [
+    "src/index.ts",
+    "src/common.ts",
+    "**/__tests__/**"
+  ],
+  "theme": "markdown"
+}
