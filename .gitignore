@@ -62,3 +62,6 @@ typings/
 
 # dist folder
 dist
+
+# site folder
+.site
