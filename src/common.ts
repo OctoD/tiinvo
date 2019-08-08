@@ -25,3 +25,26 @@ export function ensureFunction<T extends (...args: any[]) => any>(
 
   return true;
 }
+
+export function ensureHasKey<T extends {}>(
+  message: string,
+  object: T,
+  key: keyof T
+): boolean | never {
+  if (key in object) {
+    return true;
+  }
+
+  throw new ReferenceError(message);
+}
+
+export function ensureIsObject(
+  message: string,
+  maybeObject: unknown
+): maybeObject is object {
+  if (typeof maybeObject === "object" && maybeObject !== null) {
+    return true;
+  }
+
+  throw new TypeError(message);
+}

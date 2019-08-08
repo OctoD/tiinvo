@@ -21,6 +21,7 @@ Heavily inspired by rust [std::option](https://doc.rust-lang.org/std/option/inde
   - [Result](#result)
   - [TryCatch](#trycatch)
   - [Either](#either)
+  - [Maybe](#maybe)
 - [Contributing](#contributing)
 - [Licence](#licence)
 
@@ -117,6 +118,30 @@ foo(15).isRight() // false;
 
 foo(20).and(foo(15)).and(foo(50)).isRight() // false
 foo(20).and(foo(8)).and(foo(50)).isRight() // true
+```
+
+## Maybe
+
+The Maybe monad represents computations which might "go wrong" by not returning a value.
+
+Every falsy value is considered as `Nothing`
+
+```ts
+import { Maybe } from 'tiinvo';
+
+function foo() {
+   return Math.floor(Math.random() * 1000) ? 'exists' : null
+}
+
+const value = Maybe(foo()) // could be both Just<string> or Nothing<string | null>
+
+value
+   .map(arg => arg % 2 === 0)
+   .map(arg => arg ? 'even' : 'odd')
+   .cata({
+       Nothing: () => 'Not a number',
+       Just: arg => `Value is ${arg}`
+   })
 ```
 
 # Contributing

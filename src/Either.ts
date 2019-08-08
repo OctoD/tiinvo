@@ -2,7 +2,7 @@ import { Option } from "./Option";
 import { Result, Err, Ok } from "./Result";
 import { ensureFunction } from "./common";
 
-class EitherLike<LeftValue, RightValue> {
+export class EitherLike<LeftValue, RightValue> {
   public constructor(
     protected value: LeftValue | RightValue,
     protected isLeftType: boolean

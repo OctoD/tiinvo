@@ -1,7 +1,7 @@
 import { Option, None, Some } from "./Option";
 import { ensureFunction } from "./common";
 
-class ResultLike<R, E> {
+export class ResultLike<R, E> {
   public constructor(protected value: R | E) {}
 
   /**
