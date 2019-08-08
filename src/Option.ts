@@ -1,7 +1,7 @@
 import { coerceToNull, ensureFunction } from "./common";
 import { Err, Ok } from "./Result";
 
-class OptionLike<T> {
+export class OptionLike<T> {
   public constructor(protected value: T) {}
 
   protected foldReturn<U>(value: U): U {
