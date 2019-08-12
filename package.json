@@ -1,6 +1,6 @@
 {
   "name": "tiinvo",
-  "version": "1.1.2",
+  "version": "1.2.1",
   "author": "Paolo Roth <octod>",
   "main": "dist/index.js",
   "license": "MIT",
