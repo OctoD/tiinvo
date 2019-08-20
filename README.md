@@ -7,6 +7,7 @@ tiinvo
 
 [![Build Status](https://travis-ci.org/OctoD/tiinvo.svg?branch=master)](https://travis-ci.org/OctoD/tiinvo)
 [![Test Coverage](https://codecov.io/gh/octod/tiinvo/branch/master/graph/badge.svg)](https://codecov.io/gh/octod/tiinvo/branch/master)
+[![Bundle weight](https://badgen.net/bundlephobia/minzip/tiinvo)](https://bundlephobia.com/result?p=tiinvo)
 
 
 Functional data structures for TypeScript and JavaScript.
