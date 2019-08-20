@@ -14,6 +14,8 @@
 
   * **StackLike**
 
+  * [FunctionStackLike](_stack_.functionstacklike.md)
+
 ## Index
 
 ### Constructors
@@ -43,7 +45,7 @@
 
 *Inherited from [Stackable](_stack_.stackable.md).[constructor](_stack_.stackable.md#constructor)*
 
-Defined in Stack.ts:4
+*Defined in [Stack.ts:6](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Stack.ts#L6)*
 
 **Parameters:**
 
@@ -61,7 +63,7 @@ Name | Type |
 
 *Inherited from [Stackable](_stack_.stackable.md).[elements](_stack_.stackable.md#protected-elements)*
 
-Defined in Stack.ts:5
+*Defined in [Stack.ts:7](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Stack.ts#L7)*
 
 ## Methods
 
@@ -71,7 +73,7 @@ Defined in Stack.ts:5
 
 *Inherited from [Stackable](_stack_.stackable.md).[isEmpty](_stack_.stackable.md#isempty)*
 
-Defined in Stack.ts:20
+*Defined in [Stack.ts:22](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Stack.ts#L22)*
 
 Returns if is empty
 
@@ -94,7 +96,7 @@ ___
 
 *Overrides [Stackable](_stack_.stackable.md).[map](_stack_.stackable.md#abstract-map)*
 
-Defined in Stack.ts:179
+*Defined in [Stack.ts:183](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Stack.ts#L183)*
 
 Maps a `Stack<T>` to a `Stack<U>` applying a function `Fn` to every stacked element.
 
@@ -124,7 +126,7 @@ ___
 
 ▸ **pop**(): *[Option](../modules/_option_.md#option)‹T›*
 
-Defined in Stack.ts:198
+*Defined in [Stack.ts:202](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Stack.ts#L202)*
 
 Pops latest pushed element to the Stack, returning an `Option<T>` if the stack is not empty or a `None` if the stack is empty.
 
@@ -144,9 +146,9 @@ ___
 
 ###  push
 
-▸ **push**(`arg`: T): *[StackLike](_stack_.stacklike.md)‹T›*
+▸ **push**(`arg`: T): *this*
 
-Defined in Stack.ts:217
+*Defined in [Stack.ts:221](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Stack.ts#L221)*
 
 Pushes an element to the Stack, returning `Stacklike<T>`
 
@@ -166,7 +168,7 @@ Name | Type |
 ------ | ------ |
 `arg` | T |
 
-**Returns:** *[StackLike](_stack_.stacklike.md)‹T›*
+**Returns:** *this*
 
 ___
 
@@ -174,7 +176,7 @@ ___
 
 ▸ **queue**(): *[QueueLike](_stack_.queuelike.md)‹T›*
 
-Defined in Stack.ts:232
+*Defined in [Stack.ts:236](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Stack.ts#L236)*
 
 Converts a `StackLike<T>` to a `QueueLike<T>`
 
@@ -194,7 +196,7 @@ ___
 
 *Inherited from [Stackable](_stack_.stackable.md).[size](_stack_.stackable.md#size)*
 
-Defined in Stack.ts:49
+*Defined in [Stack.ts:53](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Stack.ts#L53)*
 
 Returns current size
 
@@ -217,7 +219,7 @@ ___
 
 *Overrides [Stackable](_stack_.stackable.md).[top](_stack_.stackable.md#abstract-top)*
 
-Defined in Stack.ts:249
+*Defined in [Stack.ts:253](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Stack.ts#L253)*
 
 Returns latests pushed element as an `Option<T>` if the Stack is not empty, otherwise returns `None`
 
@@ -240,7 +242,7 @@ ___
 
 *Inherited from [Stackable](_stack_.stackable.md).[value](_stack_.stackable.md#value)*
 
-Defined in Stack.ts:73
+*Defined in [Stack.ts:77](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Stack.ts#L77)*
 
 Returns added elements
 

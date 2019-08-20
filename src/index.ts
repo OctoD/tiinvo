@@ -1,3 +1,4 @@
+export { ArgsOf } from "./common";
 export * from "./Either";
 export * from "./Maybe";
 export * from "./Option";

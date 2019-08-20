@@ -1,5 +1,7 @@
 import { Option, None, Some } from "./Option";
-import { ensureFunction } from "./common";
+import { ensureFunction, ArgsOf } from "./common";
+import { Result, Ok, Err } from "./Result";
+import { TryCatch, TryCatchAsync } from "./TryCatch";
 
 export abstract class Stackable<T> {
   public constructor(protected elements: T[]) {}
@@ -115,7 +117,7 @@ export class QueueLike<T> extends Stackable<T> {
    * @returns {QueueLike<T>}
    * @memberof QueueLike
    */
-  public enqueue(arg: T): QueueLike<T> {
+  public enqueue(arg: T): this {
     this.elements.push(arg);
     return this;
   }
@@ -148,7 +150,7 @@ export class QueueLike<T> extends Stackable<T> {
    * @memberof QueueLike
    */
   public stack(): StackLike<T> {
-    return new StackLike<T>(this.elements);
+    return new StackLike<T>(this.elements.reverse());
   }
 
   /**
@@ -216,7 +218,7 @@ export class StackLike<T> extends Stackable<T> {
    * @returns {StackLike<T>}
    * @memberof StackLike
    */
-  public push(arg: T): StackLike<T> {
+  public push(arg: T): this {
     this.elements.push(arg);
     return this;
   }
@@ -232,7 +234,7 @@ export class StackLike<T> extends Stackable<T> {
    * @memberof StackLike
    */
   public queue(): QueueLike<T> {
-    return new QueueLike(this.elements);
+    return new QueueLike(this.elements.reverse());
   }
 
   /**
@@ -253,8 +255,319 @@ export class StackLike<T> extends Stackable<T> {
   }
 }
 
+export class FunctionQueueLike<
+  Fn extends (...args: any[]) => any
+> extends QueueLike<Fn> {
+  /**
+   * Enqueues an element `T`, returning current `Queuelike<T>`
+   *
+   * ```ts
+   * Queue<number>()
+   *  .enqueue(1)
+   *  .enqueue(2)
+   *  .enqueue(3)
+   * ```
+   *
+   * @param {T} arg
+   * @returns {QueueLike<T>}
+   * @memberof QueueLike
+   */
+  public enqueue(fn: Fn): this {
+    ensureFunction("enqueue argument must be a function", fn);
+
+    super.enqueue(fn);
+
+    return this;
+  }
+
+  /**
+   * Execs a synchronous function queue with a given array of arguments. It returns `Err` and stops execution if a function invokation fails, otherwise returns `Ok<Queue<ReturnType<Fn>>>`;
+   *
+   * ```ts
+   * // note, this is not a real life example
+   * const q = FunctionQueue(
+   *    [
+   *      (url: string) => url.replace(/\s/g, '-'),
+   *      (url: string) => url.length > 255 ? 'Url exceeds max length' : 'Url is ok',
+   *    ]
+   * );
+   * q.exec('https://iamoctod.com/')
+   *    .mapOrElse(
+   *        error => false,
+   *        queue => queue.value().map(console.log) || true,
+   *    );
+   * ```
+   *
+   * @template Returns
+   * @param {Fn extends (... args: infer U) => any ? U : any[]} args
+   * @returns {Result<Queue<ReturnType<Fn>>, Error>}
+   * @memberof FunctionQueue
+   */
+  public exec(
+    args: Fn extends (...args: infer U) => any ? U : any[]
+  ): Result<Queue<ReturnType<Fn>>, Error> {
+    const queue = Queue<ReturnType<Fn>>();
+    let previousResult = Err("queue is empty");
+
+    for (let i = 0; i < this.elements.length; i++) {
+      previousResult = TryCatch(this.elements[i], args);
+
+      if (previousResult.isError()) {
+        return previousResult;
+      }
+
+      queue.enqueue(previousResult.unwrap());
+    }
+
+    return previousResult.isError() ? previousResult : Ok(queue);
+  }
+
+  /**
+   * Execs an asynchronous function queue with a given array of arguments. It returns `Promise<Err>` and stops execution if a function invokation fails, otherwise returns `Promise<Ok<Queue<ReturnType<Fn>>>>`;
+   *
+   * ```ts
+   * function backgroundWork(scriptPath: string, inputForCalculation: Int32Array) {
+   *    return new Promise((resolve, reject) => {
+   *        const worker = new Worker(scriptPath);
+   *
+   *        worker.addEventListener('message', result => {
+   *            resolve(result);
+   *            worker.terminate();
+   *        });
+   *
+   *        worker.addEventListener('messageerror', result => {
+   *            reject(result);
+   *            worker.terminate();
+   *        });
+   *
+   *        worker.postMessage([
+   *          inputForCalculation,
+   *        ]);
+   *    })
+   * }
+   *
+   * const queue = FunctionQueue(
+   *    [
+   *        (input: Int32Array) => backgroundWork('workers/binary-encoded.js', input),
+   *        (input: Int32Array) => backgroundWork('workers/base64-encoded.js', input),
+   *    ]
+   * );
+   *
+   * queue.execAsync('<imagine this is a huge>')
+   * ```
+   *
+   * @param {ArgsOf<Fn>} args
+   * @returns {Promise<Result<Queue<ReturnType<Fn>>, Error>>}
+   * @memberof FunctionQueue
+   */
+  public async execAsync(
+    args: ArgsOf<Fn>
+  ): Promise<Result<Queue<ReturnType<Fn>>, Error>> {
+    const queue = Queue<ReturnType<Fn>>();
+    let previousResult = Err("queue is empty");
+
+    for (let i = 0; i < this.elements.length; i++) {
+      previousResult = await TryCatchAsync(this.elements[i], args);
+
+      if (previousResult.isError()) {
+        return previousResult;
+      }
+
+      queue.enqueue(previousResult.unwrap());
+    }
+
+    return previousResult.isError() ? previousResult : Ok(queue);
+  }
+}
+
+export class FunctionStackLike<
+  Fn extends (...args: any[]) => any
+> extends StackLike<Fn> {
+  /**
+   * Execs a synchronous function stack with a given array of arguments. It returns `Err` and stops execution if a function invokation fails, otherwise returns `Ok<Queue<ReturnType<Fn>>>`;
+   *
+   * ```ts
+   * // note, this is not a real life example
+   * const q = FunctionStack(
+   *    [
+   *      (url: string) => url.replace(/\s/g, '-'),
+   *      (url: string) => url.length > 255 ? 'Url exceeds max length' : 'Url is ok',
+   *    ]
+   * );
+   * q.exec('https://iamoctod.com/')
+   *    .mapOrElse(
+   *        error => false,
+   *        queue => queue.value().map(console.log) || true,
+   *    );
+   * ```
+   *
+   * @template Returns
+   * @param {Fn extends (... args: infer U) => any ? U : any[]} args
+   * @returns {Result<Stack<ReturnType<Fn>>, Error>}
+   * @memberof FunctionStack
+   */
+  public exec(args: ArgsOf<Fn>): Result<Stack<ReturnType<Fn>>, Error> {
+    const queue = Queue<ReturnType<Fn>>();
+    const copy = this.elements.slice();
+    let previousResult = Err("queue is empty");
+
+    while (copy.length > 0) {
+      previousResult = TryCatch(copy.pop()!, args);
+
+      if (previousResult.isError()) {
+        return previousResult;
+      }
+
+      queue.enqueue(previousResult.unwrap());
+    }
+
+    return previousResult.isError() ? previousResult : Ok(queue.stack());
+  }
+
+  /**
+   * Execs an asynchronous functions stack with a given array of arguments. It returns `Promise<Err>` and stops execution if a function invokation fails, otherwise returns `Promise<Ok<Queue<ReturnType<Fn>>>>`;
+   *
+   * ```ts
+   * function backgroundWork(scriptPath: string, inputForCalculation: Int32Array) {
+   *    return new Promise((resolve, reject) => {
+   *        const worker = new Worker(scriptPath);
+   *
+   *        worker.addEventListener('message', result => {
+   *            resolve(result);
+   *            worker.terminate();
+   *        });
+   *
+   *        worker.addEventListener('messageerror', result => {
+   *            reject(result);
+   *            worker.terminate();
+   *        });
+   *
+   *        worker.postMessage([
+   *          inputForCalculation,
+   *        ]);
+   *    })
+   * }
+   *
+   * const stack = FunctionStack(
+   *    [
+   *        (input: Int32Array) => backgroundWork('workers/binary-encoded.js', input),
+   *        (input: Int32Array) => backgroundWork('workers/base64-encoded.js', input),
+   *    ]
+   * );
+   *
+   * stack.execAsync('<imagine this is a huge>')
+   * ```
+   *
+   * @param {ArgsOf<Fn>} args
+   * @returns {Promise<Result<Stack<ReturnType<Fn>>, Error>>}
+   * @memberof FunctionStack
+   */
+  public async execAsync(
+    args: ArgsOf<Fn>
+  ): Promise<Result<Stack<ReturnType<Fn>>, Error>> {
+    const copy = this.elements.slice();
+    const queue = Queue<ReturnType<Fn>>();
+    let previousResult = Err("stack is empty");
+
+    while (copy.length > 0) {
+      previousResult = await TryCatchAsync(copy.pop()!, args);
+
+      if (previousResult.isError()) {
+        return previousResult;
+      }
+
+      queue.enqueue(previousResult.unwrap());
+    }
+
+    return previousResult.isError() ? previousResult : Ok(queue.stack());
+  }
+
+  /**
+   * Pushes an element to the Stack, returning `Stacklike<T>`
+   *
+   * ```ts
+   * const s = Stack();
+   *
+   * s.push(1); // Stack([1])
+   * s.push(2); // Stack([1, 2])
+   * s.push(3); // Stack([1, 2, 3])
+   * ```
+   *
+   * @param {T} arg
+   * @returns {StackLike<T>}
+   * @memberof StackLike
+   */
+  public push(fn: Fn): this {
+    ensureFunction("push argument must be a function", fn);
+
+    super.push(fn);
+
+    return this;
+  }
+}
+
+/**
+ * Represents a Queue of Functions data type
+ *
+ * Queue is a linear data structure in which addition or removal of element follows FIFO (first in, first out).
+ *
+ * ```ts
+ * import { FunctionQueue } from 'tiinvo';
+ *
+ * const q = FunctionQueue();
+ *
+ * q.enqueue((arg: string) => 'name is: ' + arg);
+ * q.enqueue((arg: string) => 'name length is: ' + arg);
+ *
+ * q.exec('FooBar') // Ok(Queue(['name is: FooBar', 'name length is: 6']))
+ * ```
+ *
+ */
+export type FunctionQueue<
+  Fn extends (...args: any[]) => any
+> = FunctionQueueLike<Fn>;
+
+/**
+ * Represents a Stack of Functions data type
+ *
+ * Stack is a linear data structure in which addition or removal of element follows LIFO (last in, first out).
+ *
+ * ```ts
+ * import { FunctionStack } from 'tiinvo';
+ *
+ * const q = FunctionStack();
+ *
+ * q.push((arg: number) => arg * 2);
+ * q.push((arg: number) => arg * 4);
+ * q.push((arg: number) => arg * 6);
+ *
+ * q.exec(10) // Ok(Queue([20, 40, 60]))
+ * ```
+ *
+ */
+export type FunctionStack<
+  Fn extends (...args: any[]) => any
+> = FunctionStackLike<Fn>;
+
 /**
  * Represents a Queue data type
+ *
+ * Queue is a linear data structure in which addition or removal of element follows FIFO (first in, first out).
+ *
+ * ```ts
+ * import { Queue } from 'tiinvo';
+ *
+ * const q = Queue();
+ *
+ * q.enqueue('foo');
+ * q.enqueue('bar');
+ * q.enqueue('baz');
+ *
+ * q.length // 3
+ *
+ * q.top() // 'foo'
+ * ```
+ *
  */
 export type Queue<T> = QueueLike<T>;
 
@@ -287,6 +600,43 @@ export type Queue<T> = QueueLike<T>;
  * ```
  */
 export type Stack<T> = StackLike<T>;
+
+const ensureFunctionArray = (message: string) => (args: any[]) =>
+  args.forEach(arg => ensureFunction(message, arg));
+
+/**
+ * Represents a Queue of Functions
+ *
+ * @export
+ * @template Fn
+ * @param {Fn[]} [args=[]]
+ * @returns {FunctionQueue<Fn>}
+ */
+export function FunctionQueue<Fn extends (...args: any[]) => any>(
+  args: Fn[] = []
+): FunctionQueue<Fn> {
+  ensureFunctionArray("FunctionQueue argument must be an array of functions")(
+    args
+  );
+  return new FunctionQueueLike(args);
+}
+
+/**
+ * Represents a Stack of Functions
+ *
+ * @export
+ * @template Fn
+ * @param {Fn[]} [args=[]]
+ * @returns {FunctionStack<Fn>}
+ */
+export function FunctionStack<Fn extends (...args: any[]) => any>(
+  args: Fn[] = []
+): FunctionStack<Fn> {
+  ensureFunctionArray("FunctionStack argument must be an array of functions")(
+    args
+  );
+  return new FunctionStackLike(args);
+}
 
 /**
  * Represents a Queue data type

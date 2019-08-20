@@ -1,3 +1,9 @@
+export type ArgsOf<Fn extends (...args: any[]) => any> = Fn extends (
+  ...args: infer U
+) => any
+  ? U
+  : any[];
+
 /**
  * Forces NaN to be considered as null
  * @param {unknown} value

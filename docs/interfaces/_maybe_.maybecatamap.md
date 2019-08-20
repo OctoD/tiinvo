@@ -27,7 +27,7 @@
 
 ▸ **Just**(`value`: T): *U*
 
-*Defined in [Maybe.ts:7](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Maybe.ts#L7)*
+*Defined in [Maybe.ts:7](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Maybe.ts#L7)*
 
 **Parameters:**
 
@@ -43,7 +43,7 @@ ___
 
 ▸ **Nothing**(`value`: T): *U*
 
-*Defined in [Maybe.ts:6](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Maybe.ts#L6)*
+*Defined in [Maybe.ts:6](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Maybe.ts#L6)*
 
 **Parameters:**
 

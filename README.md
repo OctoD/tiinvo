@@ -78,6 +78,41 @@ q.length // 3
 q.top() // 'foo'
 ```
 
+`Queue` has also a subtype called `FunctionQueue`.
+
+```ts
+function backgroundWork(scriptPath: string, inputForCalculation: Int32Array) {
+   return new Promise((resolve, reject) => {
+       const worker = new Worker(scriptPath);
+
+       worker.addEventListener('message', result => {
+           resolve(result);
+           worker.terminate();
+       });
+
+       worker.addEventListener('messageerror', result => {
+           reject(result);
+           worker.terminate();
+       });
+
+       worker.postMessage([
+         inputForCalculation,
+       ]);
+   })
+}
+
+const queue = FunctionQueue(
+   [
+       (input: Int32Array) => backgroundWork('workers/binary-encoded.js', input),
+       (input: Int32Array) => backgroundWork('workers/base64-encoded.js', input),
+   ]
+);
+
+stack.execAsync('<imagine this is a huge>');
+
+// this will exec first the 'workers/binary-encoded.js' worken, then 'workers/base64-encoded.js
+```
+
 ## Result
 
 `Result<T, E>` is the type used for returning and propagating errors. 
@@ -107,6 +142,41 @@ s.push(30);
 s.length // 3
 
 s.top() // 30
+```
+
+Like `Queue`, `Stack` has also a subtype called `FunctionStack`.
+
+```ts
+function backgroundWork(scriptPath: string, inputForCalculation: Int32Array) {
+   return new Promise((resolve, reject) => {
+       const worker = new Worker(scriptPath);
+
+       worker.addEventListener('message', result => {
+           resolve(result);
+           worker.terminate();
+       });
+
+       worker.addEventListener('messageerror', result => {
+           reject(result);
+           worker.terminate();
+       });
+
+       worker.postMessage([
+         inputForCalculation,
+       ]);
+   })
+}
+
+const stack = FunctionStack(
+   [
+       (input: Int32Array) => backgroundWork('workers/binary-encoded.js', input),
+       (input: Int32Array) => backgroundWork('workers/base64-encoded.js', input),
+   ]
+);
+
+stack.execAsync('<imagine this is a huge>');
+
+// this will exec first the 'workers/base64-encoded.js' worken, then 'workers/binary-encoded.js
 ```
 
 ## TryCatch
