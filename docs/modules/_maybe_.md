@@ -1,6 +1,6 @@
-> **[tiinvo](../README.md)**
+**[tiinvo](../README.md)**
 
-[Globals](../README.md) / ["Maybe"](_maybe_.md) /
+[Globals](../README.md) › ["Maybe"](_maybe_.md)
 
 # External module: "Maybe"
 
@@ -30,33 +30,33 @@
 
 ###  Just
 
-Ƭ **Just**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹*`T`*, *true*›*
+Ƭ **Just**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹T, true›*
 
-Defined in Maybe.ts:200
+*Defined in [Maybe.ts:203](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Maybe.ts#L203)*
 
 ___
 
 ###  Maybe
 
-Ƭ **Maybe**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹*`T`*, *boolean*›*
+Ƭ **Maybe**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹T, boolean›*
 
-Defined in Maybe.ts:198
+*Defined in [Maybe.ts:201](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Maybe.ts#L201)*
 
 ___
 
 ###  Nothing
 
-Ƭ **Nothing**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹*`T`*, *false*›*
+Ƭ **Nothing**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹T, false›*
 
-Defined in Maybe.ts:202
+*Defined in [Maybe.ts:205](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Maybe.ts#L205)*
 
 ## Functions
 
 ###  Just
 
-▸ **Just**<**T**>(`value`: `T`): *[Just]()‹*`T`*›*
+▸ **Just**<**T**>(`value`: T): *[Just]()‹T›*
 
-Defined in Maybe.ts:218
+*Defined in [Maybe.ts:221](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Maybe.ts#L221)*
 
 `Just<T>` represent a value that has returned
 
@@ -78,17 +78,17 @@ Just(10)
 
 Name | Type |
 ------ | ------ |
-`value` | `T` |
+`value` | T |
 
-**Returns:** *[Just]()‹*`T`*›*
+**Returns:** *[Just]()‹T›*
 
 ___
 
 ###  Maybe
 
-▸ **Maybe**<**T**>(`value`: `T`): *[Maybe]()‹*`T`*›*
+▸ **Maybe**<**T**>(`value`: T): *[Maybe]()‹T›*
 
-Defined in Maybe.ts:242
+*Defined in [Maybe.ts:253](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Maybe.ts#L253)*
 
 The Maybe monad represents computations which might "go wrong" by not returning a value.
 
@@ -101,7 +101,15 @@ function foo() {
    return Math.floor(Math.random() * 1000) ? 'exists' : null
 }
 
-Maybe(foo()) // could be both Just<string> or Nothing<string | null>
+const value = Maybe(foo()) // could be both Just<string> or Nothing<string | null>
+
+value
+   .map(arg => arg % 2 === 0)
+   .map(arg => arg ? 'even' : 'odd')
+   .cata({
+       Nothing: () => 'Not a number',
+       Just: arg => `Value is ${arg}`
+   })
 ```
 
 **`export`** 
@@ -116,17 +124,17 @@ Maybe(foo()) // could be both Just<string> or Nothing<string | null>
 
 Name | Type |
 ------ | ------ |
-`value` | `T` |
+`value` | T |
 
-**Returns:** *[Maybe]()‹*`T`*›*
+**Returns:** *[Maybe]()‹T›*
 
 ___
 
 ###  Nothing
 
-▸ **Nothing**<**T**>(`value`: `T`): *[Nothing]()‹*`T`*›*
+▸ **Nothing**<**T**>(`value`: T): *[Nothing]()‹T›*
 
-Defined in Maybe.ts:254
+*Defined in [Maybe.ts:265](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Maybe.ts#L265)*
 
 `Nothing<T>` represent a value that has not returned
 
@@ -142,6 +150,6 @@ Defined in Maybe.ts:254
 
 Name | Type |
 ------ | ------ |
-`value` | `T` |
+`value` | T |
 
-**Returns:** *[Nothing]()‹*`T`*›*
+**Returns:** *[Nothing]()‹T›*

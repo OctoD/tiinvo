@@ -1,6 +1,6 @@
-> **[tiinvo](../README.md)**
+**[tiinvo](../README.md)**
 
-[Globals](../README.md) / ["Option"](../modules/_option_.md) / [OptionLike](_option_.optionlike.md) /
+[Globals](../README.md) › ["Option"](../modules/_option_.md) › [OptionLike](_option_.optionlike.md)
 
 # Class: OptionLike <**T**>
 
@@ -48,15 +48,15 @@
 
 ###  constructor
 
-\+ **new OptionLike**(`value`: `T`): *[OptionLike](_option_.optionlike.md)*
+\+ **new OptionLike**(`value`: T): *[OptionLike](_option_.optionlike.md)*
 
-*Defined in [Option.ts:4](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L4)*
+*Defined in [Option.ts:4](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L4)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`value` | `T` |
+`value` | T |
 
 **Returns:** *[OptionLike](_option_.optionlike.md)*
 
@@ -64,17 +64,17 @@ Name | Type |
 
 ### `Protected` value
 
-• **value**: *`T`*
+• **value**: *T*
 
-*Defined in [Option.ts:5](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L5)*
+*Defined in [Option.ts:5](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L5)*
 
 ## Methods
 
 ###  and
 
-▸ **and**<**U**>(`optb`: [OptionLike](_option_.optionlike.md)‹*`U`*›): *[OptionLike](_option_.optionlike.md)‹*`U`*›*
+▸ **and**<**U**>(`optb`: [OptionLike](_option_.optionlike.md)‹U›): *[OptionLike](_option_.optionlike.md)‹U›*
 
-*Defined in [Option.ts:27](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L27)*
+*Defined in [Option.ts:27](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L27)*
 
 Returns `None` if the option is `None`,
 otherwise returns `optb`
@@ -98,17 +98,17 @@ Option(null).and(Option(20)).isSome() // false
 
 Name | Type |
 ------ | ------ |
-`optb` | [OptionLike](_option_.optionlike.md)‹*`U`*› |
+`optb` | [OptionLike](_option_.optionlike.md)‹U› |
 
-**Returns:** *[OptionLike](_option_.optionlike.md)‹*`U`*›*
+**Returns:** *[OptionLike](_option_.optionlike.md)‹U›*
 
 ___
 
 ###  andThen
 
-▸ **andThen**<**K**>(`callback`: function): *[Some](../modules/_option_.md#some)‹*`T`*› | `ReturnType<function>`*
+▸ **andThen**<**K**>(`callback`: function): *[Some](../modules/_option_.md#some)‹T› | ReturnType‹function›*
 
-*Defined in [Option.ts:38](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L38)*
+*Defined in [Option.ts:38](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L38)*
 
 Returns `callback` result if `OptionLike<T>` is `Some`,
 otherwise returns `None`
@@ -123,23 +123,23 @@ otherwise returns `None`
 
 ▪ **callback**: *function*
 
-▸ (`arg`: `T`): *[OptionLike](_option_.optionlike.md)‹*`K`*›*
+▸ (`arg`: T): *[OptionLike](_option_.optionlike.md)‹K›*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`arg` | `T` |
+`arg` | T |
 
-**Returns:** *[Some](../modules/_option_.md#some)‹*`T`*› | `ReturnType<function>`*
+**Returns:** *[Some](../modules/_option_.md#some)‹T› | ReturnType‹function›*
 
 ___
 
 ###  expect
 
-▸ **expect**(`msg`: string): *[Some](../modules/_option_.md#some)‹*`T`*› | never*
+▸ **expect**(`msg`: string): *[Some](../modules/_option_.md#some)‹T› | never*
 
-*Defined in [Option.ts:59](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L59)*
+*Defined in [Option.ts:59](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L59)*
 
 Throws if the value is a `None` with a custom error message provided by msg.
 
@@ -158,7 +158,7 @@ Name | Type |
 ------ | ------ |
 `msg` | string |
 
-**Returns:** *[Some](../modules/_option_.md#some)‹*`T`*› | never*
+**Returns:** *[Some](../modules/_option_.md#some)‹T› | never*
 
 ___
 
@@ -166,7 +166,7 @@ ___
 
 ▸ **filter**(`predicate`: function): *[OptionLike](_option_.optionlike.md)*
 
-*Defined in [Option.ts:81](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L81)*
+*Defined in [Option.ts:81](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L81)*
 
 Returns the `Option` if it's value passes
 the `predicate` function. Otherwise returns
@@ -183,13 +183,13 @@ Option(1).filter(a => a > 10).isSome() // false
 
 ▪ **predicate**: *function*
 
-▸ (`arg`: `T`): *boolean*
+▸ (`arg`: T): *boolean*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`arg` | `T` |
+`arg` | T |
 
 **Returns:** *[OptionLike](_option_.optionlike.md)*
 
@@ -197,9 +197,9 @@ ___
 
 ###  flattern
 
-▸ **flattern**(): *[OptionLike](_option_.optionlike.md)‹*`T`*›*
+▸ **flattern**(): *[OptionLike](_option_.optionlike.md)‹T›*
 
-*Defined in [Option.ts:98](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L98)*
+*Defined in [Option.ts:98](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L98)*
 
 Converts from `Option<Option<T>>` to `Option<T>`
 
@@ -209,15 +209,15 @@ Option(Some(100)).flattern() // Some(100)
 
 **`memberof`** OptionLike
 
-**Returns:** *[OptionLike](_option_.optionlike.md)‹*`T`*›*
+**Returns:** *[OptionLike](_option_.optionlike.md)‹T›*
 
 ___
 
 ### `Protected` foldReturn
 
-▸ **foldReturn**<**U**>(`value`: `U`): *`U`*
+▸ **foldReturn**<**U**>(`value`: U): *U*
 
-*Defined in [Option.ts:7](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L7)*
+*Defined in [Option.ts:7](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L7)*
 
 **Type parameters:**
 
@@ -227,9 +227,9 @@ ___
 
 Name | Type |
 ------ | ------ |
-`value` | `U` |
+`value` | U |
 
-**Returns:** *`U`*
+**Returns:** *U*
 
 ___
 
@@ -237,7 +237,7 @@ ___
 
 ▸ **isNone**(): *boolean*
 
-*Defined in [Option.ts:113](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L113)*
+*Defined in [Option.ts:113](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L113)*
 
 Returns if has not a value
 
@@ -256,7 +256,7 @@ ___
 
 ▸ **isSome**(): *boolean*
 
-*Defined in [Option.ts:128](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L128)*
+*Defined in [Option.ts:128](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L128)*
 
 Returns if has a value
 
@@ -273,9 +273,9 @@ ___
 
 ###  map
 
-▸ **map**<**K**>(`f`: function): *[OptionLike](_option_.optionlike.md)‹*`K`*›*
+▸ **map**<**K**>(`f`: function): *[OptionLike](_option_.optionlike.md)‹K›*
 
-*Defined in [Option.ts:144](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L144)*
+*Defined in [Option.ts:144](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L144)*
 
 Maps an `OptionLike<T>` to `OptionLike<U>` by applying a function to a contained value.
 
@@ -295,23 +295,23 @@ Option('foobar').map(val => val.length) // Option(6)
 
 ▪ **f**: *function*
 
-▸ (`arg`: `T`): *`K`*
+▸ (`arg`: T): *K*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`arg` | `T` |
+`arg` | T |
 
-**Returns:** *[OptionLike](_option_.optionlike.md)‹*`K`*›*
+**Returns:** *[OptionLike](_option_.optionlike.md)‹K›*
 
 ___
 
 ###  mapOr
 
-▸ **mapOr**<**K**>(`def`: `K`, `f`: function): *`K`*
+▸ **mapOr**<**K**>(`def`: K, `f`: function): *K*
 
-*Defined in [Option.ts:164](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L164)*
+*Defined in [Option.ts:164](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L164)*
 
 Applies a function to the contained value (if any), or returns the provided default (if not).
 
@@ -330,27 +330,27 @@ None().mapOr('abc', arg => arg.length) // Option('abc')
 
 **Parameters:**
 
-▪ **def**: *`K`*
+▪ **def**: *K*
 
 ▪ **f**: *function*
 
-▸ (`arg`: `T`): *`K`*
+▸ (`arg`: T): *K*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`arg` | `T` |
+`arg` | T |
 
-**Returns:** *`K`*
+**Returns:** *K*
 
 ___
 
 ###  mapOrElse
 
-▸ **mapOrElse**<**K**>(`defFn`: function, `f`: function): *`K`*
+▸ **mapOrElse**<**K**>(`defFn`: function, `f`: function): *K*
 
-*Defined in [Option.ts:184](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L184)*
+*Defined in [Option.ts:184](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L184)*
 
 Applies a function to the contained value (if any), or computes a default (if not).
 
@@ -371,27 +371,27 @@ None().mapOrElse(() => 1000, arg => arg.length) // 1000
 
 ▪ **defFn**: *function*
 
-▸ (): *`K`*
+▸ (): *K*
 
 ▪ **f**: *function*
 
-▸ (`arg`: `T`): *`K`*
+▸ (`arg`: T): *K*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`arg` | `T` |
+`arg` | T |
 
-**Returns:** *`K`*
+**Returns:** *K*
 
 ___
 
 ###  okOr
 
-▸ **okOr**(`err`: [Err](../modules/_result_.md#err)): *[Ok](../modules/_result_.md#ok)‹*`T`*› | [Err](../modules/_result_.md#err)*
+▸ **okOr**(`err`: [Err](../modules/_result_.md#err)): *[Ok](../modules/_result_.md#ok)‹T› | [Err](../modules/_result_.md#err)*
 
-*Defined in [Option.ts:202](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L202)*
+*Defined in [Option.ts:202](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L202)*
 
 Transforms the `OptionLike<T>` into a `Result<T, E>`, mapping `Some(v)` to `Ok(v)` and `None` to `Err(err)`.
 
@@ -408,15 +408,15 @@ Name | Type |
 ------ | ------ |
 `err` | [Err](../modules/_result_.md#err) |
 
-**Returns:** *[Ok](../modules/_result_.md#ok)‹*`T`*› | [Err](../modules/_result_.md#err)*
+**Returns:** *[Ok](../modules/_result_.md#ok)‹T› | [Err](../modules/_result_.md#err)*
 
 ___
 
 ###  okOrElse
 
-▸ **okOrElse**(`err`: function): *[Ok](../modules/_result_.md#ok)‹*`T`*› | [Err](../modules/_result_.md#err)*
+▸ **okOrElse**(`err`: function): *[Ok](../modules/_result_.md#ok)‹T› | [Err](../modules/_result_.md#err)*
 
-*Defined in [Option.ts:218](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L218)*
+*Defined in [Option.ts:218](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L218)*
 
 Transforms the `OptionLike<T>` into a `Result<T, E>`, mapping `Some(v)` to `Ok(v)` and `None` to `Err(err())`.
 
@@ -433,15 +433,15 @@ None().okOrElse(() => Err("foo")); // Err('foo)
 
 ▸ (): *[Err](../modules/_result_.md#err)*
 
-**Returns:** *[Ok](../modules/_result_.md#ok)‹*`T`*› | [Err](../modules/_result_.md#err)*
+**Returns:** *[Ok](../modules/_result_.md#ok)‹T› | [Err](../modules/_result_.md#err)*
 
 ___
 
 ###  or
 
-▸ **or**<**U**>(`optb`: [OptionLike](_option_.optionlike.md)‹*`U`*›): *[OptionLike](_option_.optionlike.md)‹*`T`*› | [OptionLike](_option_.optionlike.md)‹*`U`*›*
+▸ **or**<**U**>(`optb`: [OptionLike](_option_.optionlike.md)‹U›): *[OptionLike](_option_.optionlike.md)‹T› | [OptionLike](_option_.optionlike.md)‹U›*
 
-*Defined in [Option.ts:236](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L236)*
+*Defined in [Option.ts:236](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L236)*
 
 Returns the option if it contains a value,
 otherwise returns `optb`
@@ -463,17 +463,17 @@ Some(10).or(Some(100)) // Some(10)
 
 Name | Type |
 ------ | ------ |
-`optb` | [OptionLike](_option_.optionlike.md)‹*`U`*› |
+`optb` | [OptionLike](_option_.optionlike.md)‹U› |
 
-**Returns:** *[OptionLike](_option_.optionlike.md)‹*`T`*› | [OptionLike](_option_.optionlike.md)‹*`U`*›*
+**Returns:** *[OptionLike](_option_.optionlike.md)‹T› | [OptionLike](_option_.optionlike.md)‹U›*
 
 ___
 
 ###  orElse
 
-▸ **orElse**<**U**>(`f`: function): *[Some](../modules/_option_.md#some)‹*`T`*› | [OptionLike](_option_.optionlike.md)‹*`U`*›*
+▸ **orElse**<**U**>(`f`: function): *[Some](../modules/_option_.md#some)‹T› | [OptionLike](_option_.optionlike.md)‹U›*
 
-*Defined in [Option.ts:254](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L254)*
+*Defined in [Option.ts:254](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L254)*
 
 Returns the option if it contains a value, otherwise calls
 `f` and returns the result.
@@ -495,17 +495,17 @@ None().orElse(() => 1000) // Some(1000)
 
 ▪ **f**: *function*
 
-▸ (): *[OptionLike](_option_.optionlike.md)‹*`U`*›*
+▸ (): *[OptionLike](_option_.optionlike.md)‹U›*
 
-**Returns:** *[Some](../modules/_option_.md#some)‹*`T`*› | [OptionLike](_option_.optionlike.md)‹*`U`*›*
+**Returns:** *[Some](../modules/_option_.md#some)‹T› | [OptionLike](_option_.optionlike.md)‹U›*
 
 ___
 
 ###  transpose
 
-▸ **transpose**(): *[Ok](../modules/_result_.md#ok)‹*[Some](../modules/_option_.md#some)‹*`T`*›*› | [Ok](../modules/_result_.md#ok)‹*[None](../modules/_option_.md#none)‹*`T`*›*›*
+▸ **transpose**(): *[Ok](../modules/_result_.md#ok)‹[Some](../modules/_option_.md#some)‹T›› | [Ok](../modules/_result_.md#ok)‹[None](../modules/_option_.md#none)‹T››*
 
-*Defined in [Option.ts:270](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L270)*
+*Defined in [Option.ts:270](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L270)*
 
 Transposes an `Option` of a `Result` into a `Result` of an `Option`.
 
@@ -515,15 +515,15 @@ Option(100).transpose() // Ok(Some(100))
 
 **`memberof`** OptionLike
 
-**Returns:** *[Ok](../modules/_result_.md#ok)‹*[Some](../modules/_option_.md#some)‹*`T`*›*› | [Ok](../modules/_result_.md#ok)‹*[None](../modules/_option_.md#none)‹*`T`*›*›*
+**Returns:** *[Ok](../modules/_result_.md#ok)‹[Some](../modules/_option_.md#some)‹T›› | [Ok](../modules/_result_.md#ok)‹[None](../modules/_option_.md#none)‹T››*
 
 ___
 
 ###  unwrap
 
-▸ **unwrap**(): *`T` | never*
+▸ **unwrap**(): *T | never*
 
-*Defined in [Option.ts:312](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L312)*
+*Defined in [Option.ts:312](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L312)*
 
 Returns wrapped value or throws if is None
 
@@ -534,15 +534,15 @@ None().unwrap() // throw ReferenceError
 
 **`memberof`** OptionLike
 
-**Returns:** *`T` | never*
+**Returns:** *T | never*
 
 ___
 
 ###  unwrapOr
 
-▸ **unwrapOr**<**K**>(`value`: `K`): *`K`*
+▸ **unwrapOr**<**K**>(`value`: K): *K*
 
-*Defined in [Option.ts:332](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L332)*
+*Defined in [Option.ts:332](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L332)*
 
 Returns the contained value or a default.
 
@@ -561,17 +561,17 @@ Some(20).unwrapOr(10) // 20
 
 Name | Type |
 ------ | ------ |
-`value` | `K` |
+`value` | K |
 
-**Returns:** *`K`*
+**Returns:** *K*
 
 ___
 
 ###  xor
 
-▸ **xor**<**U**>(`optb`: [OptionLike](_option_.optionlike.md)‹*`U`*›): *[Some](../modules/_option_.md#some)‹*`T`*› | [Some](../modules/_option_.md#some)‹*`U`*› | [None](../modules/_option_.md#none)‹*`T`*›*
+▸ **xor**<**U**>(`optb`: [OptionLike](_option_.optionlike.md)‹U›): *[Some](../modules/_option_.md#some)‹T› | [Some](../modules/_option_.md#some)‹U› | [None](../modules/_option_.md#none)‹T›*
 
-*Defined in [Option.ts:291](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Option.ts#L291)*
+*Defined in [Option.ts:291](https://github.com/OctoD/tiinvo/blob/4ba9cf6/src/Option.ts#L291)*
 
 Returns Some if exactly one of self,
 optb is Some,
@@ -596,6 +596,6 @@ None().xor(None()) // None()
 
 Name | Type |
 ------ | ------ |
-`optb` | [OptionLike](_option_.optionlike.md)‹*`U`*› |
+`optb` | [OptionLike](_option_.optionlike.md)‹U› |
 
-**Returns:** *[Some](../modules/_option_.md#some)‹*`T`*› | [Some](../modules/_option_.md#some)‹*`U`*› | [None](../modules/_option_.md#none)‹*`T`*›*
+**Returns:** *[Some](../modules/_option_.md#some)‹T› | [Some](../modules/_option_.md#some)‹U› | [None](../modules/_option_.md#none)‹T›*
