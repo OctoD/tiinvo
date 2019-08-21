@@ -44,6 +44,17 @@ export function ensureHasKey<T extends {}>(
   throw new ReferenceError(message);
 }
 
+export function ensureIsArray(
+  message: string,
+  maybeArray: unknown
+): maybeArray is unknown[] {
+  if (Array.isArray(maybeArray)) {
+    return true;
+  }
+
+  throw new TypeError(message);
+}
+
 export function ensureIsObject(
   message: string,
   maybeObject: unknown

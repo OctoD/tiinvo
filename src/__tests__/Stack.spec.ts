@@ -109,6 +109,9 @@ describe(`Stackables and Queables`, () => {
           .exec([])
           .isError()
       ).toBeTruthy();
+
+      expect(() => FunctionQueue(1 as any)).toThrowError();
+      expect(() => FunctionQueue([1] as any)).toThrowError();
     });
 
     it("Execs a function queue with a given array of arguments. It returns `Ok<Queue<ReturnType<Fn>>>`;", () => {
@@ -171,6 +174,8 @@ describe(`Stackables and Queables`, () => {
         .push(jest.fn().mockReturnValue(10))
         .exec([]);
 
+      expect(() => FunctionStack(1 as any)).toThrowError();
+      expect(() => FunctionStack([1] as any)).toThrowError();
       expect(
         FunctionStack()
           .exec([])

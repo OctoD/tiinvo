@@ -1,5 +1,5 @@
 import { Option, None, Some } from "./Option";
-import { ensureFunction, ArgsOf } from "./common";
+import { ensureFunction, ArgsOf, ensureIsArray } from "./common";
 import { Result, Ok, Err } from "./Result";
 import { TryCatch, TryCatchAsync } from "./TryCatch";
 
@@ -601,8 +601,9 @@ export type Queue<T> = QueueLike<T>;
  */
 export type Stack<T> = StackLike<T>;
 
-const ensureFunctionArray = (message: string) => (args: any[]) =>
+const ensureFunctionArray = (message: string) => (args: any[]) => {
   args.forEach(arg => ensureFunction(message, arg));
+};
 
 /**
  * Represents a Queue of Functions
@@ -615,6 +616,7 @@ const ensureFunctionArray = (message: string) => (args: any[]) =>
 export function FunctionQueue<Fn extends (...args: any[]) => any>(
   args: Fn[] = []
 ): FunctionQueue<Fn> {
+  ensureIsArray("FunctionQueue argument must be an array of functions", args);
   ensureFunctionArray("FunctionQueue argument must be an array of functions")(
     args
   );
@@ -632,6 +634,7 @@ export function FunctionQueue<Fn extends (...args: any[]) => any>(
 export function FunctionStack<Fn extends (...args: any[]) => any>(
   args: Fn[] = []
 ): FunctionStack<Fn> {
+  ensureIsArray("FunctionStack argument must be an array of functions", args);
   ensureFunctionArray("FunctionStack argument must be an array of functions")(
     args
   );
