@@ -1,6 +1,6 @@
-> **[tiinvo](../README.md)**
+**[tiinvo](../README.md)**
 
-[Globals](../README.md) / ["Either"](_either_.md) /
+[Globals](../README.md) › ["Either"](_either_.md)
 
 # External module: "Either"
 
@@ -24,25 +24,25 @@
 
 ###  Left
 
-Ƭ **Left**: *[EitherLike](../classes/_either_.eitherlike.md)‹*`LeftValue`*, *`RightValue`*›*
+Ƭ **Left**: *[EitherLike](../classes/_either_.eitherlike.md)‹LeftValue, RightValue›*
 
-*Defined in [Either.ts:170](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Either.ts#L170)*
+*Defined in [Either.ts:170](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Either.ts#L170)*
 
 ___
 
 ###  Right
 
-Ƭ **Right**: *[EitherLike](../classes/_either_.eitherlike.md)‹*`LeftValue`*, *`RightValue`*›*
+Ƭ **Right**: *[EitherLike](../classes/_either_.eitherlike.md)‹LeftValue, RightValue›*
 
-*Defined in [Either.ts:175](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Either.ts#L175)*
+*Defined in [Either.ts:175](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Either.ts#L175)*
 
 ## Functions
 
 ###  Left
 
-▸ **Left**<**T**>(`value?`: [T]()): *[Left]()‹*`T`*›*
+▸ **Left**<**T**>(`value?`: [T]()): *[Left]()‹T›*
 
-*Defined in [Either.ts:187](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Either.ts#L187)*
+*Defined in [Either.ts:187](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Either.ts#L187)*
 
 **`export`** 
 
@@ -58,15 +58,15 @@ Name | Type |
 ------ | ------ |
 `value?` | [T]() |
 
-**Returns:** *[Left]()‹*`T`*›*
+**Returns:** *[Left]()‹T›*
 
 ___
 
 ###  Right
 
-▸ **Right**<**T**>(`value?`: [T]()): *[Right]()‹*`T`*›*
+▸ **Right**<**T**>(`value?`: [T]()): *[Right]()‹T›*
 
-*Defined in [Either.ts:198](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Either.ts#L198)*
+*Defined in [Either.ts:198](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Either.ts#L198)*
 
 **`export`** 
 
@@ -82,4 +82,4 @@ Name | Type |
 ------ | ------ |
 `value?` | [T]() |
 
-**Returns:** *[Right]()‹*`T`*›*
+**Returns:** *[Right]()‹T›*

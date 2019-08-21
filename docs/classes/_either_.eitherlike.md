@@ -1,6 +1,6 @@
-> **[tiinvo](../README.md)**
+**[tiinvo](../README.md)**
 
-[Globals](../README.md) / ["Either"](../modules/_either_.md) / [EitherLike](_either_.eitherlike.md) /
+[Globals](../README.md) › ["Either"](../modules/_either_.md) › [EitherLike](_either_.eitherlike.md)
 
 # Class: EitherLike <**LeftValue, RightValue**>
 
@@ -41,15 +41,15 @@
 
 ###  constructor
 
-\+ **new EitherLike**(`value`: `LeftValue` | `RightValue`, `isLeftType`: boolean): *[EitherLike](_either_.eitherlike.md)*
+\+ **new EitherLike**(`value`: LeftValue | RightValue, `isLeftType`: boolean): *[EitherLike](_either_.eitherlike.md)*
 
-*Defined in [Either.ts:5](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Either.ts#L5)*
+*Defined in [Either.ts:5](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Either.ts#L5)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`value` | `LeftValue` \| `RightValue` |
+`value` | LeftValue \| RightValue |
 `isLeftType` | boolean |
 
 **Returns:** *[EitherLike](_either_.eitherlike.md)*
@@ -60,23 +60,23 @@ Name | Type |
 
 • **isLeftType**: *boolean*
 
-*Defined in [Either.ts:8](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Either.ts#L8)*
+*Defined in [Either.ts:8](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Either.ts#L8)*
 
 ___
 
 ### `Protected` value
 
-• **value**: *`LeftValue` | `RightValue`*
+• **value**: *LeftValue | RightValue*
 
-*Defined in [Either.ts:7](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Either.ts#L7)*
+*Defined in [Either.ts:7](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Either.ts#L7)*
 
 ## Methods
 
 ###  and
 
-▸ **and**<**U**, **X**>(`either`: [EitherLike](_either_.eitherlike.md)‹*`U`*, *`X`*›): *[EitherLike](_either_.eitherlike.md)‹*`U`*, *`X`*› | [EitherLike](_either_.eitherlike.md)‹*`LeftValue`*, *`RightValue`*›*
+▸ **and**<**U**, **X**>(`either`: [EitherLike](_either_.eitherlike.md)‹U, X›): *[EitherLike](_either_.eitherlike.md)‹U, X› | [EitherLike](_either_.eitherlike.md)‹LeftValue, RightValue›*
 
-*Defined in [Either.ts:25](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Either.ts#L25)*
+*Defined in [Either.ts:25](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Either.ts#L25)*
 
 Returns `Either<U, X>` if is `Right`, otherwise returns `Either<LeftValue, RightValue>`
 
@@ -100,17 +100,17 @@ Right(100).and(Left(200)) // Left(200)
 
 Name | Type |
 ------ | ------ |
-`either` | [EitherLike](_either_.eitherlike.md)‹*`U`*, *`X`*› |
+`either` | [EitherLike](_either_.eitherlike.md)‹U, X› |
 
-**Returns:** *[EitherLike](_either_.eitherlike.md)‹*`U`*, *`X`*› | [EitherLike](_either_.eitherlike.md)‹*`LeftValue`*, *`RightValue`*›*
+**Returns:** *[EitherLike](_either_.eitherlike.md)‹U, X› | [EitherLike](_either_.eitherlike.md)‹LeftValue, RightValue›*
 
 ___
 
 ###  andThen
 
-▸ **andThen**<**Fn**, **U**>(`fn`: `Fn`): *[EitherLike](_either_.eitherlike.md)‹*`LeftValue`*, *`U`*› | [EitherLike](_either_.eitherlike.md)‹*`LeftValue`*, *`RightValue`*›*
+▸ **andThen**<**Fn**, **U**>(`fn`: Fn): *[EitherLike](_either_.eitherlike.md)‹LeftValue, U› | [EitherLike](_either_.eitherlike.md)‹LeftValue, RightValue›*
 
-*Defined in [Either.ts:45](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Either.ts#L45)*
+*Defined in [Either.ts:45](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Either.ts#L45)*
 
 Returns `Fn` result if is `Right`, otherwise returns `Either<LeftValue>`
 
@@ -135,17 +135,17 @@ Left(100).andThen(value => Right(value + 1)) // Left(100)
 
 Name | Type |
 ------ | ------ |
-`fn` | `Fn` |
+`fn` | Fn |
 
-**Returns:** *[EitherLike](_either_.eitherlike.md)‹*`LeftValue`*, *`U`*› | [EitherLike](_either_.eitherlike.md)‹*`LeftValue`*, *`RightValue`*›*
+**Returns:** *[EitherLike](_either_.eitherlike.md)‹LeftValue, U› | [EitherLike](_either_.eitherlike.md)‹LeftValue, RightValue›*
 
 ___
 
 ###  fold
 
-▸ **fold**<**FnLeft**, **FnRight**>(`leftFn`: `FnLeft`, `rightFn`: `FnRight`): *any*
+▸ **fold**<**FnLeft**, **FnRight**>(`leftFn`: FnLeft, `rightFn`: FnRight): *any*
 
-*Defined in [Either.ts:96](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Either.ts#L96)*
+*Defined in [Either.ts:96](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Either.ts#L96)*
 
 Returns `leftFn` result if is `Left`, otherwise returns `rightFn` if is `Right`
 
@@ -168,8 +168,8 @@ Right(100).fold(a => a / 2, b => b * 2) // 200
 
 Name | Type |
 ------ | ------ |
-`leftFn` | `FnLeft` |
-`rightFn` | `FnRight` |
+`leftFn` | FnLeft |
+`rightFn` | FnRight |
 
 **Returns:** *any*
 
@@ -179,7 +179,7 @@ ___
 
 ▸ **isLeft**(): *boolean*
 
-*Defined in [Either.ts:63](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Either.ts#L63)*
+*Defined in [Either.ts:63](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Either.ts#L63)*
 
 Returns `true` if is `Left`
 
@@ -198,7 +198,7 @@ ___
 
 ▸ **isRight**(): *boolean*
 
-*Defined in [Either.ts:78](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Either.ts#L78)*
+*Defined in [Either.ts:78](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Either.ts#L78)*
 
 Returns `true` if is `Right`
 
@@ -215,9 +215,9 @@ ___
 
 ###  option
 
-▸ **option**(): *[Option](../modules/_option_.md#option)‹*`RightValue`*›*
+▸ **option**(): *[Option](../modules/_option_.md#option)‹RightValue›*
 
-*Defined in [Either.ts:118](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Either.ts#L118)*
+*Defined in [Either.ts:118](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Either.ts#L118)*
 
 Returns `Some<RightValue>` if is `Right`, otherwise returns `None`
 
@@ -228,15 +228,15 @@ Right(100).option() // Some(100)
 
 **`memberof`** Either
 
-**Returns:** *[Option](../modules/_option_.md#option)‹*`RightValue`*›*
+**Returns:** *[Option](../modules/_option_.md#option)‹RightValue›*
 
 ___
 
 ###  result
 
-▸ **result**(): *[Result](../modules/_result_.md#result)‹*`RightValue`*, *`Error`*›*
+▸ **result**(): *[Result](../modules/_result_.md#result)‹RightValue, Error›*
 
-*Defined in [Either.ts:133](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Either.ts#L133)*
+*Defined in [Either.ts:133](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Either.ts#L133)*
 
 Returns `Ok<RightValue>` if is `Right`, otherwise returns `Err` if is `Left`
 
@@ -247,15 +247,15 @@ Right(20).result() // Ok(20)
 
 **`memberof`** Either
 
-**Returns:** *[Result](../modules/_result_.md#result)‹*`RightValue`*, *`Error`*›*
+**Returns:** *[Result](../modules/_result_.md#result)‹RightValue, Error›*
 
 ___
 
 ###  swap
 
-▸ **swap**(): *[EitherLike](_either_.eitherlike.md)‹*`RightValue`*, *`LeftValue`*›*
+▸ **swap**(): *[EitherLike](_either_.eitherlike.md)‹RightValue, LeftValue›*
 
-*Defined in [Either.ts:150](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Either.ts#L150)*
+*Defined in [Either.ts:150](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Either.ts#L150)*
 
 Swaps `Right<LeftValue, RightValue>` to `Left<RightValue, LeftValue>` if is `Right<RightValue>`, otherwise swaps `Left<LeftValue, RightValue>` to `Right<RightValue, LeftValue>` if is `Left<LeftValue>`
 
@@ -266,15 +266,15 @@ Right(20).swap() // Left(20)
 
 **`memberof`** Either
 
-**Returns:** *[EitherLike](_either_.eitherlike.md)‹*`RightValue`*, *`LeftValue`*›*
+**Returns:** *[EitherLike](_either_.eitherlike.md)‹RightValue, LeftValue›*
 
 ___
 
 ###  unwrap
 
-▸ **unwrap**(): *`LeftValue` | `RightValue`*
+▸ **unwrap**(): *LeftValue | RightValue*
 
-*Defined in [Either.ts:165](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Either.ts#L165)*
+*Defined in [Either.ts:165](https://github.com/OctoD/tiinvo/blob/e0b0126/src/Either.ts#L165)*
 
 Unwraps value `LeftValue | RightValue`
 
@@ -285,4 +285,4 @@ Right(`hello world`).unwrap() // 'hello world'
 
 **`memberof`** Either
 
-**Returns:** *`LeftValue` | `RightValue`*
+**Returns:** *LeftValue | RightValue*

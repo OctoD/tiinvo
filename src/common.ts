@@ -1,3 +1,9 @@
+export type ArgsOf<Fn extends (...args: any[]) => any> = Fn extends (
+  ...args: infer U
+) => any
+  ? U
+  : any[];
+
 /**
  * Forces NaN to be considered as null
  * @param {unknown} value
@@ -36,6 +42,17 @@ export function ensureHasKey<T extends {}>(
   }
 
   throw new ReferenceError(message);
+}
+
+export function ensureIsArray(
+  message: string,
+  maybeArray: unknown
+): maybeArray is unknown[] {
+  if (Array.isArray(maybeArray)) {
+    return true;
+  }
+
+  throw new TypeError(message);
 }
 
 export function ensureIsObject(

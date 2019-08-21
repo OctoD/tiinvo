@@ -7,18 +7,19 @@ tiinvo
 
 [![Build Status](https://travis-ci.org/OctoD/tiinvo.svg?branch=master)](https://travis-ci.org/OctoD/tiinvo)
 [![Test Coverage](https://codecov.io/gh/octod/tiinvo/branch/master/graph/badge.svg)](https://codecov.io/gh/octod/tiinvo/branch/master)
+[![Bundle weight](https://badgen.net/bundlephobia/minzip/tiinvo)](https://bundlephobia.com/result?p=tiinvo)
 
 
-Handling possible errors or values in a functional way.
-
-Heavily inspired by rust [std::option](https://doc.rust-lang.org/std/option/index.html) and [std::result](https://doc.rust-lang.org/std/result/enum.Result.html)
+Functional data structures for TypeScript and JavaScript.
 
 - [tiinvo](#tiinvo)
 - [Install](#install)
 - [Usage](#usage)
   - [Docs](#docs)
   - [Option](#option)
+  - [Queue](#queue)
   - [Result](#result)
+  - [Stack](#stack)
   - [TryCatch](#trycatch)
   - [Either](#either)
   - [Maybe](#maybe)
@@ -59,6 +60,59 @@ Option(100).isSome() // true
 
 By default, both `null`, `NaN` and `undefined` are considered `None` types.
 
+## Queue
+
+Queue is a linear data structure in which addition or removal of element follows FIFO (first in, first out).
+
+```ts
+import { Queue } from 'tiinvo';
+
+const q = Queue();
+
+q.enqueue('foo');
+q.enqueue('bar');
+q.enqueue('baz');
+
+q.length // 3
+
+q.top() // 'foo'
+```
+
+`Queue` has also a subtype called `FunctionQueue`.
+
+```ts
+function backgroundWork(scriptPath: string, inputForCalculation: Int32Array) {
+   return new Promise((resolve, reject) => {
+       const worker = new Worker(scriptPath);
+
+       worker.addEventListener('message', result => {
+           resolve(result);
+           worker.terminate();
+       });
+
+       worker.addEventListener('messageerror', result => {
+           reject(result);
+           worker.terminate();
+       });
+
+       worker.postMessage([
+         inputForCalculation,
+       ]);
+   })
+}
+
+const queue = FunctionQueue(
+   [
+       (input: Int32Array) => backgroundWork('workers/binary-encoded.js', input),
+       (input: Int32Array) => backgroundWork('workers/base64-encoded.js', input),
+   ]
+);
+
+stack.execAsync('<imagine this is a huge>');
+
+// this will exec first the 'workers/binary-encoded.js' worken, then 'workers/base64-encoded.js
+```
+
 ## Result
 
 `Result<T, E>` is the type used for returning and propagating errors. 
@@ -70,6 +124,59 @@ import { Ok, Err } from 'tiinvo';
 
 Ok(200)
 Err('this is an error')
+```
+
+## Stack
+
+Stack is a linear data structure in which addition or removal of element follows LIFO (last in, first out).
+
+```ts
+import { Stack } from 'tiinvo';
+
+const s = Stack();
+
+s.push(10);
+s.push(20);
+s.push(30);
+
+s.length // 3
+
+s.top() // 30
+```
+
+Like `Queue`, `Stack` has also a subtype called `FunctionStack`.
+
+```ts
+function backgroundWork(scriptPath: string, inputForCalculation: Int32Array) {
+   return new Promise((resolve, reject) => {
+       const worker = new Worker(scriptPath);
+
+       worker.addEventListener('message', result => {
+           resolve(result);
+           worker.terminate();
+       });
+
+       worker.addEventListener('messageerror', result => {
+           reject(result);
+           worker.terminate();
+       });
+
+       worker.postMessage([
+         inputForCalculation,
+       ]);
+   })
+}
+
+const stack = FunctionStack(
+   [
+       (input: Int32Array) => backgroundWork('workers/binary-encoded.js', input),
+       (input: Int32Array) => backgroundWork('workers/base64-encoded.js', input),
+   ]
+);
+
+stack.execAsync('<imagine this is a huge>');
+
+// this will exec first the 'workers/base64-encoded.js' worken, then 'workers/binary-encoded.js
 ```
 
 ## TryCatch
