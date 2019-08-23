@@ -1,8 +1,8 @@
-export type ArgsOf<Fn extends (...args: any[]) => any> = Fn extends (
-  ...args: infer U
-) => any
+export type ArgsOf<Fn extends FnBase> = Fn extends (...args: infer U) => any
   ? U
   : any[];
+
+export type FnBase = (...args: any[]) => any;
 
 /**
  * Forces NaN to be considered as null
@@ -21,7 +21,7 @@ export function coerceToNull(value: unknown) {
   return isNaN(value) ? null : value;
 }
 
-export function ensureFunction<T extends (...args: any[]) => any>(
+export function ensureFunction<T extends FnBase>(
   message: string,
   fn: T
 ): fn is T {
