@@ -17,7 +17,7 @@ export class ResultLike<R, E extends Error> {
    * @returns {(ResultLike<U, E> | Err)}
    * @memberof Result
    */
-  public and<U>(res: ResultLike<U, E>): ResultLike<U, E> | Err {
+  public and<U>(res: ResultLike<U, E>): ResultLike<U, E> {
     return instanceOfError<R, E>(this.value)
       ? new ResultLike(this.value as any)
       : res;
