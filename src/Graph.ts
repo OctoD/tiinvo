@@ -91,7 +91,22 @@ export class GraphLike {
   ) {}
 
   /**
+   * Returns `true` if a `Vertex` is adjacent to another one.
    *
+   * ```ts
+   * const graph = Graph();
+   * const v1 = Vertex('a');
+   * const v2 = Vertex('b');
+   * const v3 = Vertex('c');
+   *
+   * graph.connect(v1, v2)
+   * graph.connect(v2, v3)
+   *
+   * graph.adjacent(v1, v2) // true
+   * graph.adjacent(v1, v3) // false
+   * graph.adjacent(v2, v3) // true
+   * graph.adjacent(v2, v3) // true
+   * ```
    *
    * @param {Vertex} left
    * @param {Vertex} right
@@ -103,7 +118,18 @@ export class GraphLike {
   }
 
   /**
+   * Connects two vertices together, returning `Ok<Edge>` if the two vertices can be connected otherwise retuning an `Err`.
    *
+   * ```ts
+   * const graph = Graph();
+   * const v1 = Vertex('a');
+   * const v2 = Vertex('b');
+   * const v3 = Vertex('c');
+   *
+   * graph.connect(v1, v2) // Ok(Edge())
+   * graph.connect(v2, v3) // Ok(Edge())
+   * graph.connect(v2, v1) // Err()
+   * ```
    *
    * @param {Vertex} left
    * @param {Vertex} right
@@ -118,28 +144,25 @@ export class GraphLike {
   ): Result<EdgeLike, ReferenceError> {
     const edge = new EdgeLike(weight, left, right);
 
-    return left
-      .connect(edge)
-      .and(right.connect(edge))
-      .mapOrElse(
-        err => Err(err),
-        () => {
-          this.edges.add(edge);
-          this.vertices.add(left);
-          this.vertices.add(right);
-          return Ok(edge);
-        }
-      );
+    return left.connect(edge).mapOrElse(
+      err => Err(err),
+      () => {
+        this.edges.add(edge);
+        this.vertices.add(left);
+        this.vertices.add(right);
+        return Ok(edge);
+      }
+    );
   }
 
   /**
-   *
+   * Returns all neighbours to a `Vertex<T>` as a `Option<Vertex[]>` is there are any, otherwise returns `None`.
    *
    * @param {Vertex} vertex
    * @returns {Option<Vertex[]>}
    * @memberof GraphLike
    */
-  public neighbors(vertex: Vertex): Option<Vertex[]> {
+  public neighbours(vertex: Vertex): Option<Vertex[]> {
     return vertex.neighbours();
   }
 }
@@ -182,6 +205,7 @@ export class VertexLike<T = unknown> {
           );
         }
 
+        vertex!.connections.set(this._name, edge);
         this.connections.set(name, edge);
 
         return Ok(vertex!);
@@ -265,6 +289,17 @@ export class VertexLike<T = unknown> {
     );
   }
 
+  /**
+   * Returns `Vertex<T>` value as `Option<T>` if is `Just`, otherwise returns `None`
+   *
+   * ```ts
+   * Vertex('a').value() // None()
+   * Vertex('a', 100).value() // Some(100)
+   * ```
+   *
+   * @returns {Option<T>}
+   * @memberof VertexLike
+   */
   public value(): Option<T> {
     return Maybe(this._value).option();
   }
@@ -301,7 +336,7 @@ export function Edge<T, U>(
  * @param {Edge[]} edges
  * @returns {Graph}
  */
-export function Graph(vertices: Vertex[], edges: Edge[]): Graph {
+export function Graph(vertices: Vertex[] = [], edges: Edge[] = []): Graph {
   return new GraphLike(new Set(vertices), new Set(edges));
 }
 
