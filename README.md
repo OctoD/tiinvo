@@ -16,6 +16,7 @@ Functional data structures for TypeScript and JavaScript.
 - [Install](#install)
 - [Usage](#usage)
   - [Docs](#docs)
+  - [Graph](#graph)
   - [Option](#option)
   - [Queue](#queue)
   - [Result](#result)
@@ -41,6 +42,27 @@ yarn add tiinvo
 ## Docs
 
 Documentation is located [here](./docs/README.md)
+
+## Graph
+
+Type `Graph` represents an abstract data type that is meant to implement the undirected graph and directed graph.
+
+```ts
+import { Graph, Vertex } from 'tiinvo';
+
+const graph = Graph();
+const v1 = Vertex('a');
+const v2 = Vertex('b');
+const v3 = Vertex('c');
+const v4 = Vertex('d');
+
+graph.connect(v1, v2);
+graph.connect(v2, v3);
+graph.connect(v3, v4);
+graph.connect(v1, v4);
+
+graph.neighbours(v1) // Option([Vertex('a'), Vertex('b'), Vertex('c')])
+```
 
 ## Option
 
