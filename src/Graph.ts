@@ -86,8 +86,8 @@ export class EdgeLike {
 
 export class GraphLike {
   public constructor(
-    protected vertices: Set<VertexLike> = new Set(),
-    protected edges: Set<EdgeLike> = new Set()
+    protected vertices: Set<VertexLike>,
+    protected edges: Set<EdgeLike>
   ) {}
 
   /**

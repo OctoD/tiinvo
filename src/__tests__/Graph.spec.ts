@@ -90,12 +90,16 @@ describe(`Graph`, () => {
       v1.connect(Edge(v1, v2));
       v1.connect(Edge(v1, v3));
       v1.connect(Edge(v1, v4));
-
+      v3.neighbours();
       expect(expect.arrayContaining(v1.neighbours().unwrap()!)).toStrictEqual([
         Vertex("a"),
         Vertex("b"),
         Vertex("c"),
         Vertex("d")
+      ]);
+      expect(expect.arrayContaining(v3.neighbours().unwrap()!)).toStrictEqual([
+        v1,
+        v3
       ]);
       expect(v5.neighbours()).toStrictEqual(None());
     });
