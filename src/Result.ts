@@ -1,7 +1,7 @@
 import { Option, None, Some } from "./Option";
 import { ensureFunction } from "./common";
 
-export class ResultLike<R, E> {
+export class ResultLike<R, E extends Error> {
   public constructor(protected value: R | E) {}
 
   /**
@@ -17,7 +17,7 @@ export class ResultLike<R, E> {
    * @returns {(ResultLike<U, E> | Err)}
    * @memberof Result
    */
-  public and<U>(res: ResultLike<U, E>): ResultLike<U, E> | Err {
+  public and<U>(res: ResultLike<U, E>): ResultLike<U, E> {
     return instanceOfError<R, E>(this.value)
       ? new ResultLike(this.value as any)
       : res;
@@ -340,7 +340,7 @@ export type Ok<T> = ResultLike<T, any>;
  * containing a value, and `Err(E)`, representing error and containing
  * an error value.
  */
-export type Result<T, E> = ResultLike<T, E>;
+export type Result<T, E extends Error> = ResultLike<T, E>;
 
 /**
  * `Result<T, E>` is the type used for returning and propagating errors.
@@ -353,8 +353,10 @@ export type Result<T, E> = ResultLike<T, E>;
  * @param {string} [message]
  * @returns {Err}
  */
-export function Err(message?: string): Err {
-  return new ResultLike<any, Error>(new Error(message));
+export function Err(message: string | Error = new Error()): Err {
+  return new ResultLike<any, Error>(
+    typeof message === "string" ? new Error(message) : message
+  );
 }
 
 /**
@@ -370,5 +372,5 @@ export function Err(message?: string): Err {
  * @returns {Ok<T>}
  */
 export function Ok<T>(value: T): Ok<T> {
-  return new ResultLike<T, null>(value);
+  return new ResultLike<T, any>(value);
 }

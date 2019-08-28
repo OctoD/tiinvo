@@ -1,6 +1,6 @@
-> **[tiinvo](../README.md)**
+**[tiinvo](../README.md)**
 
-[Globals](../README.md) / ["Result"](../modules/_result_.md) / [ResultLike](_result_.resultlike.md) /
+[Globals](../README.md) › ["Result"](../modules/_result_.md) › [ResultLike](_result_.resultlike.md)
 
 # Class: ResultLike <**R, E**>
 
@@ -8,7 +8,7 @@
 
 ▪ **R**
 
-▪ **E**
+▪ **E**: *Error*
 
 ## Hierarchy
 
@@ -47,15 +47,15 @@
 
 ###  constructor
 
-\+ **new ResultLike**(`value`: `R` | `E`): *[ResultLike](_result_.resultlike.md)*
+\+ **new ResultLike**(`value`: R | E): *[ResultLike](_result_.resultlike.md)*
 
-*Defined in [Result.ts:4](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L4)*
+*Defined in [Result.ts:4](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L4)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`value` | `R` \| `E` |
+`value` | R \| E |
 
 **Returns:** *[ResultLike](_result_.resultlike.md)*
 
@@ -63,17 +63,17 @@ Name | Type |
 
 ### `Protected` value
 
-• **value**: *`R` | `E`*
+• **value**: *R | E*
 
-*Defined in [Result.ts:5](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L5)*
+*Defined in [Result.ts:5](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L5)*
 
 ## Methods
 
 ###  and
 
-▸ **and**<**U**>(`res`: [ResultLike](_result_.resultlike.md)‹*`U`*, *`E`*›): *[ResultLike](_result_.resultlike.md)‹*`U`*, *`E`*› | [Err](../modules/_result_.md#err)*
+▸ **and**<**U**>(`res`: [ResultLike](_result_.resultlike.md)‹U, E›): *[ResultLike](_result_.resultlike.md)‹U, E›*
 
-*Defined in [Result.ts:20](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L20)*
+*Defined in [Result.ts:20](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L20)*
 
 Returns `res` if the result is `Ok`, otherwise returns the `Err` value of self.
 
@@ -94,17 +94,17 @@ Err('meh').and(Ok(30)) // Err('meh')
 
 Name | Type |
 ------ | ------ |
-`res` | [ResultLike](_result_.resultlike.md)‹*`U`*, *`E`*› |
+`res` | [ResultLike](_result_.resultlike.md)‹U, E› |
 
-**Returns:** *[ResultLike](_result_.resultlike.md)‹*`U`*, *`E`*› | [Err](../modules/_result_.md#err)*
+**Returns:** *[ResultLike](_result_.resultlike.md)‹U, E›*
 
 ___
 
 ###  andThen
 
-▸ **andThen**<**U**>(`op`: function): *[ResultLike](_result_.resultlike.md)‹*`U`*, *`E`*›*
+▸ **andThen**<**U**>(`op`: function): *[ResultLike](_result_.resultlike.md)‹U, E›*
 
-*Defined in [Result.ts:39](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L39)*
+*Defined in [Result.ts:39](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L39)*
 
 Calls `op` if the result is `Ok`, otherwise returns the `Err` value of self.
 
@@ -125,23 +125,23 @@ Err('aaa').andThen(a => a * 2) // Err('aaa')
 
 ▪ **op**: *function*
 
-▸ (`arg`: `R`): *[ResultLike](_result_.resultlike.md)‹*`U`*, *`E`*›*
+▸ (`arg`: R): *[ResultLike](_result_.resultlike.md)‹U, E›*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`arg` | `R` |
+`arg` | R |
 
-**Returns:** *[ResultLike](_result_.resultlike.md)‹*`U`*, *`E`*›*
+**Returns:** *[ResultLike](_result_.resultlike.md)‹U, E›*
 
 ___
 
 ###  err
 
-▸ **err**(): *[Option](../modules/_option_.md#option)‹*`E`*›*
+▸ **err**(): *[Option](../modules/_option_.md#option)‹E›*
 
-*Defined in [Result.ts:57](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L57)*
+*Defined in [Result.ts:57](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L57)*
 
 Converts from `Result<T, E>` to `OptionLike<E>`.
 
@@ -151,15 +151,15 @@ Err('foo').err() // OptionLike(new Error('foo'))
 
 **`memberof`** Result
 
-**Returns:** *[Option](../modules/_option_.md#option)‹*`E`*›*
+**Returns:** *[Option](../modules/_option_.md#option)‹E›*
 
 ___
 
 ###  expect
 
-▸ **expect**(`message`: string): *`R` | never*
+▸ **expect**(`message`: string): *R | never*
 
-*Defined in [Result.ts:73](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L73)*
+*Defined in [Result.ts:73](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L73)*
 
 Unwraps a result, yielding the content of an `Ok`.
 
@@ -176,15 +176,15 @@ Name | Type |
 ------ | ------ |
 `message` | string |
 
-**Returns:** *`R` | never*
+**Returns:** *R | never*
 
 ___
 
 ###  expectErr
 
-▸ **expectErr**(`message`: string): *`E` | never*
+▸ **expectErr**(`message`: string): *E | never*
 
-*Defined in [Result.ts:93](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L93)*
+*Defined in [Result.ts:93](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L93)*
 
 Unwraps a result, yielding the content of an `Err`.
 
@@ -201,7 +201,7 @@ Name | Type |
 ------ | ------ |
 `message` | string |
 
-**Returns:** *`E` | never*
+**Returns:** *E | never*
 
 ___
 
@@ -209,7 +209,7 @@ ___
 
 ▸ **isError**(): *boolean*
 
-*Defined in [Result.ts:112](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L112)*
+*Defined in [Result.ts:112](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L112)*
 
 Returns true if the result is `Error`.
 
@@ -228,7 +228,7 @@ ___
 
 ▸ **isOk**(): *boolean*
 
-*Defined in [Result.ts:127](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L127)*
+*Defined in [Result.ts:127](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L127)*
 
 Returns true if the result is `Ok`.
 
@@ -245,9 +245,9 @@ ___
 
 ###  map
 
-▸ **map**<**K**>(`f`: function): *[ResultLike](_result_.resultlike.md)‹*`K`*, *`E`*›*
+▸ **map**<**K**>(`f`: function): *[ResultLike](_result_.resultlike.md)‹K, E›*
 
-*Defined in [Result.ts:146](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L146)*
+*Defined in [Result.ts:146](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L146)*
 
 Maps a `Result<T, E>` to `Result<U, E>` by applying a function
 to a contained `Ok` value, leaving an `Err` value untouched.
@@ -270,23 +270,23 @@ Ok('asd').map(a => a.length) // Ok(3)
 
 ▪ **f**: *function*
 
-▸ (`value`: `R`): *`K`*
+▸ (`value`: R): *K*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`value` | `R` |
+`value` | R |
 
-**Returns:** *[ResultLike](_result_.resultlike.md)‹*`K`*, *`E`*›*
+**Returns:** *[ResultLike](_result_.resultlike.md)‹K, E›*
 
 ___
 
 ###  mapOrElse
 
-▸ **mapOrElse**<**F**>(`fallback`: function, `f`: function): *`F`*
+▸ **mapOrElse**<**F**>(`fallback`: function, `f`: function): *F*
 
-*Defined in [Result.ts:168](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L168)*
+*Defined in [Result.ts:168](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L168)*
 
 Maps a `Result<T, E>` to `F` by applying a function to a contained `Ok` value, or a `fallback` function to a contained `Err` value.
 
@@ -309,33 +309,33 @@ Err('ohmybad').mapOrElse(b => b.message, a => a.repeat(2)) // 'ohmybad'
 
 ▪ **fallback**: *function*
 
-▸ (`error`: `Error`): *`F`*
+▸ (`error`: Error): *F*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`error` | `Error` |
+`error` | Error |
 
 ▪ **f**: *function*
 
-▸ (`value`: `R`): *`F`*
+▸ (`value`: R): *F*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`value` | `R` |
+`value` | R |
 
-**Returns:** *`F`*
+**Returns:** *F*
 
 ___
 
 ###  ok
 
-▸ **ok**(): *[Option](../modules/_option_.md#option)‹*`R`*›*
+▸ **ok**(): *[Option](../modules/_option_.md#option)‹R›*
 
-*Defined in [Result.ts:188](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L188)*
+*Defined in [Result.ts:188](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L188)*
 
 Converts from Result<T, E> to Option<T>.
 
@@ -346,15 +346,15 @@ Err('ahrrrrr').ok() // None()
 
 **`memberof`** Result
 
-**Returns:** *[Option](../modules/_option_.md#option)‹*`R`*›*
+**Returns:** *[Option](../modules/_option_.md#option)‹R›*
 
 ___
 
 ###  or
 
-▸ **or**<**U**>(`res`: [ResultLike](_result_.resultlike.md)‹*`U`*, *`E`*›): *[ResultLike](_result_.resultlike.md)‹*`U`*, *`E`*› | [Ok](../modules/_result_.md#ok)‹*`R`*›*
+▸ **or**<**U**>(`res`: [ResultLike](_result_.resultlike.md)‹U, E›): *[ResultLike](_result_.resultlike.md)‹U, E› | [Ok](../modules/_result_.md#ok)‹R›*
 
-*Defined in [Result.ts:205](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L205)*
+*Defined in [Result.ts:205](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L205)*
 
 Returns `res` if the result is `Err`, otherwise returns the `Ok` value of self.
 
@@ -375,17 +375,17 @@ Err('').or(Ok(20)) // Ok(20)
 
 Name | Type |
 ------ | ------ |
-`res` | [ResultLike](_result_.resultlike.md)‹*`U`*, *`E`*› |
+`res` | [ResultLike](_result_.resultlike.md)‹U, E› |
 
-**Returns:** *[ResultLike](_result_.resultlike.md)‹*`U`*, *`E`*› | [Ok](../modules/_result_.md#ok)‹*`R`*›*
+**Returns:** *[ResultLike](_result_.resultlike.md)‹U, E› | [Ok](../modules/_result_.md#ok)‹R›*
 
 ___
 
 ###  orElse
 
-▸ **orElse**<**U**>(`op`: function): *[ResultLike](_result_.resultlike.md)‹*`U`*, *`E`*› | [Ok](../modules/_result_.md#ok)‹*`R`*›*
+▸ **orElse**<**U**>(`op`: function): *[ResultLike](_result_.resultlike.md)‹U, E› | [Ok](../modules/_result_.md#ok)‹R›*
 
-*Defined in [Result.ts:224](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L224)*
+*Defined in [Result.ts:224](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L224)*
 
 Calls `op` if the result is `Err`, otherwise returns the `Ok` value of self.
 
@@ -408,23 +408,23 @@ Err('darn!').orElse(a => a.message) // Ok('darn!')
 
 ▪ **op**: *function*
 
-▸ (`arg`: `E`): *[ResultLike](_result_.resultlike.md)‹*`U`*, *`E`*›*
+▸ (`arg`: E): *[ResultLike](_result_.resultlike.md)‹U, E›*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`arg` | `E` |
+`arg` | E |
 
-**Returns:** *[ResultLike](_result_.resultlike.md)‹*`U`*, *`E`*› | [Ok](../modules/_result_.md#ok)‹*`R`*›*
+**Returns:** *[ResultLike](_result_.resultlike.md)‹U, E› | [Ok](../modules/_result_.md#ok)‹R›*
 
 ___
 
 ###  unwrap
 
-▸ **unwrap**(): *`R` | never*
+▸ **unwrap**(): *R | never*
 
-*Defined in [Result.ts:241](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L241)*
+*Defined in [Result.ts:241](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L241)*
 
 Returns wrapped value or throws an `Error`
 
@@ -435,15 +435,15 @@ Err('err').unwrap() // throws a ReferenceError
 
 **`memberof`** Result
 
-**Returns:** *`R` | never*
+**Returns:** *R | never*
 
 ___
 
 ###  unwrapErr
 
-▸ **unwrapErr**(): *`E` | never*
+▸ **unwrapErr**(): *E | never*
 
-*Defined in [Result.ts:261](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L261)*
+*Defined in [Result.ts:261](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L261)*
 
 Unwraps a result, yielding the content of an `Err`.
 Throws if the value is not an `Err`.
@@ -455,15 +455,15 @@ Err('err').unwrap() // Error('err')
 
 **`memberof`** Result
 
-**Returns:** *`E` | never*
+**Returns:** *E | never*
 
 ___
 
 ###  unwrapOr
 
-▸ **unwrapOr**<**U**>(`optb`: `U`): *`R` | `U`*
+▸ **unwrapOr**<**U**>(`optb`: U): *R | U*
 
-*Defined in [Result.ts:282](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L282)*
+*Defined in [Result.ts:282](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L282)*
 
 Unwraps a result, yielding the content of an `Ok`. Else, it returns `optb`.
 
@@ -484,17 +484,17 @@ Err('foo').unwrapOr(30) // 30
 
 Name | Type |
 ------ | ------ |
-`optb` | `U` |
+`optb` | U |
 
-**Returns:** *`R` | `U`*
+**Returns:** *R | U*
 
 ___
 
 ###  unwrapOrElse
 
-▸ **unwrapOrElse**<**U**>(`op`: function): *`R` | `U`*
+▸ **unwrapOrElse**<**U**>(`op`: function): *R | U*
 
-*Defined in [Result.ts:299](https://github.com/OctoD/tiinvo/blob/e04fdb4/src/Result.ts#L299)*
+*Defined in [Result.ts:299](https://github.com/OctoD/tiinvo/blob/191449a/src/Result.ts#L299)*
 
 Unwraps a result, yielding the content of an `Ok`. If the value is an `Err` then it calls op with its value.
 
@@ -515,12 +515,12 @@ Err('pizza with ananas').unwrapOrElse(err => err.message) // 'pizza with ananas'
 
 ▪ **op**: *function*
 
-▸ (`error`: `E`): *`U`*
+▸ (`error`: E): *U*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`error` | `E` |
+`error` | E |
 
-**Returns:** *`R` | `U`*
+**Returns:** *R | U*
