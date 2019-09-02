@@ -32,7 +32,7 @@
 
 Ƭ **Just**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹T, true›*
 
-*Defined in [Maybe.ts:203](https://github.com/OctoD/tiinvo/blob/191449a/src/Maybe.ts#L203)*
+*Defined in [Maybe.ts:203](https://github.com/OctoD/tiinvo/blob/750e283/src/Maybe.ts#L203)*
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 Ƭ **Maybe**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹T, boolean›*
 
-*Defined in [Maybe.ts:201](https://github.com/OctoD/tiinvo/blob/191449a/src/Maybe.ts#L201)*
+*Defined in [Maybe.ts:201](https://github.com/OctoD/tiinvo/blob/750e283/src/Maybe.ts#L201)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 Ƭ **Nothing**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹T, false›*
 
-*Defined in [Maybe.ts:205](https://github.com/OctoD/tiinvo/blob/191449a/src/Maybe.ts#L205)*
+*Defined in [Maybe.ts:205](https://github.com/OctoD/tiinvo/blob/750e283/src/Maybe.ts#L205)*
 
 ## Functions
 
@@ -56,7 +56,7 @@ ___
 
 ▸ **Just**<**T**>(`value`: T): *[Just]()‹T›*
 
-*Defined in [Maybe.ts:221](https://github.com/OctoD/tiinvo/blob/191449a/src/Maybe.ts#L221)*
+*Defined in [Maybe.ts:221](https://github.com/OctoD/tiinvo/blob/750e283/src/Maybe.ts#L221)*
 
 `Just<T>` represent a value that has returned
 
@@ -88,7 +88,7 @@ ___
 
 ▸ **Maybe**<**T**>(`value`: T): *[Maybe]()‹T›*
 
-*Defined in [Maybe.ts:253](https://github.com/OctoD/tiinvo/blob/191449a/src/Maybe.ts#L253)*
+*Defined in [Maybe.ts:253](https://github.com/OctoD/tiinvo/blob/750e283/src/Maybe.ts#L253)*
 
 The Maybe monad represents computations which might "go wrong" by not returning a value.
 
@@ -134,7 +134,7 @@ ___
 
 ▸ **Nothing**<**T**>(`value`: T): *[Nothing]()‹T›*
 
-*Defined in [Maybe.ts:265](https://github.com/OctoD/tiinvo/blob/191449a/src/Maybe.ts#L265)*
+*Defined in [Maybe.ts:265](https://github.com/OctoD/tiinvo/blob/750e283/src/Maybe.ts#L265)*
 
 `Nothing<T>` represent a value that has not returned
 
