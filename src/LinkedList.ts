@@ -165,57 +165,41 @@ export class LinkedListLike<T> {
   protected _tail?: NodeLike<T>;
 
   public constructor(initialValues: T[] = []) {
-    // initialValues.forEach(value => this.)
+    initialValues.forEach(value => this.append(Node(value)));
   }
 
   /**
+   * Appends a `Node<T>` to the `LinkedList<T>`
    *
+   * ```ts
+   * LinkedList().append(Node(1)).append(Node(2)) // LinkedList([1, 2])
+   * ```
    *
-   * @param {NodeLike<T>} node
+   * @param {Node<T>} node
    * @returns {this}
    * @memberof LinkedListLike
    */
-  public addToHead(node: NodeLike<T>): this {
+  public append(node: Node<T>): this {
     this.head().mapOrElse(
-      () => (this._head = node),
-      head => {
-        head.farright().mapOrElse(
-          () => head.setRight(node),
-          farright => {
-            farright.setRight(node);
-            this._tail = node;
-          }
-        );
-      }
-    );
-    return this;
-  }
-
-  /**
-   *
-   *
-   * @param {NodeLike<T>} node
-   * @returns {this}
-   * @memberof LinkedListLike
-   */
-  public addToTail(node: NodeLike<T>): this {
-    this.tail().mapOrElse(
       () => (this._tail = this._head = node),
-      tail => {
-        tail.left().mapOrElse(
-          () => tail.setLeft(node),
-          left => {
-            left.setLeft(node);
-            this._tail = node;
-          }
-        );
-      }
+      head =>
+        head
+          .farright()
+          .mapOrElse(
+            () => head.setRight(node),
+            farright => farright.setRight(node)
+          )
     );
+
     return this;
   }
 
   /**
+   * Calls a function `Fn` for each `Node<T>`.
    *
+   * ```ts
+   * List([1,2,3]).forEach(arg => console.log(arg.unwrap())) // logs 1, 2, 3
+   * ```
    *
    * @template Fn
    * @param {Fn} fn
@@ -233,7 +217,12 @@ export class LinkedListLike<T> {
   }
 
   /**
+   * Returns list's head as `Just<Node<T>>` if the list has a head, otherwise returns a `Nothing<Node<T>>` if the list does not have a head.
    *
+   * ```ts
+   * LinkedList().head() // Nothing()
+   * LinkedList([1]).head() // Just(Node(1))
+   * ```
    *
    * @returns {Maybe<Node<T>>}
    * @memberof LinkedListLike
@@ -266,7 +255,7 @@ export class LinkedListLike<T> {
 
     const list = new LinkedListLike<U>();
 
-    this.forEach(node => list.addToHead(Node(fn(node.unwrap().value()))));
+    this.forEach(node => list.append(Node(fn(node.unwrap().value()))));
 
     return list;
   }
@@ -290,13 +279,43 @@ export class LinkedListLike<T> {
   }
 
   /**
+   * Returns `Just<Node<T>>` if the `LinkedList<T>` has a tail, otherwise returns `Nothing`
    *
+   * ```ts
+   * LinkedList().tail() // Nothing()
+   * LinkedList([1]).tail() // Just(Node(1))
+   * ```
    *
    * @returns {Maybe<Node<T>>}
    * @memberof LinkedListLike
    */
   public tail(): Maybe<Node<T>> {
     return Maybe(this._tail as Node<T>);
+  }
+
+  /**
+   * Returns `LinkedList<T>` value as an array of `T`.
+   *
+   * ```ts
+   * LinkedList([1,2,3]).value() // [1,2,3]
+   * ```
+   *
+   * @returns {T[]}
+   * @memberof LinkedListLike
+   */
+  public value(): T[] {
+    const values: T[] = [];
+
+    this.forEach(arg =>
+      values.push(
+        arg
+          .unwrap()
+          .value()
+          .unwrap()
+      )
+    );
+
+    return values;
   }
 }
 
