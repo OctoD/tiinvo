@@ -21,7 +21,13 @@ export class NodeLike<T> {
   public farleft(): Maybe<Node<T>> {
     let left = this.left();
 
-    while (left.isJust()) {
+    while (
+      left.isJust() &&
+      left
+        .unwrap()
+        .left()
+        .isJust()
+    ) {
       left = left.unwrap().left();
     }
 
@@ -41,7 +47,13 @@ export class NodeLike<T> {
   public farright(): Maybe<Node<T>> {
     let right = this.right();
 
-    while (right.isJust()) {
+    while (
+      right.isJust() &&
+      right
+        .unwrap()
+        .right()
+        .isJust()
+    ) {
       right = right.unwrap().right();
     }
 
@@ -94,10 +106,11 @@ export class NodeLike<T> {
         node._right = this;
       },
       oldleft => {
-        this._left = oldleft._right = node;
+        this._left = node;
 
         node._left = oldleft;
         node._right = this;
+        oldleft._right = node;
       }
     );
     return node;
@@ -118,13 +131,14 @@ export class NodeLike<T> {
     this.right().mapOrElse(
       () => {
         this._right = node;
-        node._right = this;
+        node._left = this;
       },
       oldright => {
-        oldright._right = this._right = node;
+        this._right = node;
 
         node._left = this;
         node._right = oldright;
+        oldright._left = node;
       }
     );
     return node;
