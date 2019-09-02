@@ -1,5 +1,6 @@
 export { ArgsOf } from "./common";
 export * from "./Either";
+export * from "./Graph";
 export * from "./LinkedList";
 export * from "./Maybe";
 export * from "./Option";
