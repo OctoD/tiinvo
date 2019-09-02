@@ -20,7 +20,8 @@
     "lint": "eslint -c ./.eslintrc.json src/**/*.ts --fix",
     "prepublishOnly": "tsc -p .",
     "size-limit": "tsc -p . && size-limit",
-    "test": "jest"
+    "test": "jest",
+    "upgrade-interactive": "npm-check --update"
   },
   "homepage": "https://github.com/octod/tiinvo#readme",
   "repository": {
@@ -46,21 +47,22 @@
     }
   ],
   "devDependencies": {
-    "@types/jest": "^24.0.15",
+    "@types/jest": "^24.0.18",
     "@types/node": "^12.0.12",
-    "@typescript-eslint/eslint-plugin": "^1.11.0",
-    "@typescript-eslint/parser": "^1.11.0",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
     "codecov": "^3.5.0",
-    "eslint": "^6.0.1",
+    "eslint": "^6.2.2",
     "husky": "^3.0.0",
     "jest": "^24.8.0",
-    "lint-staged": "^9.0.2",
+    "lint-staged": "^9.2.5",
+    "npm-check": "^5.9.0",
     "prettier": "^1.18.2",
     "size-limit": "^2.0.2",
     "standard-changelog": "^2.0.11",
     "ts-jest": "^24.0.2",
     "typedoc": "^0.15.0",
-    "typedoc-plugin-markdown": "^2.1.1",
-    "typescript": "^3.5.2"
+    "typedoc-plugin-markdown": "^2.1.4",
+    "typescript": "^3.6.2"
   }
 }
