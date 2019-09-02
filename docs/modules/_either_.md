@@ -26,7 +26,7 @@
 
 Ƭ **Left**: *[EitherLike](../classes/_either_.eitherlike.md)‹LeftValue, RightValue›*
 
-*Defined in [Either.ts:170](https://github.com/OctoD/tiinvo/blob/191449a/src/Either.ts#L170)*
+*Defined in [Either.ts:170](https://github.com/OctoD/tiinvo/blob/750e283/src/Either.ts#L170)*
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 Ƭ **Right**: *[EitherLike](../classes/_either_.eitherlike.md)‹LeftValue, RightValue›*
 
-*Defined in [Either.ts:175](https://github.com/OctoD/tiinvo/blob/191449a/src/Either.ts#L175)*
+*Defined in [Either.ts:175](https://github.com/OctoD/tiinvo/blob/750e283/src/Either.ts#L175)*
 
 ## Functions
 
@@ -42,7 +42,7 @@ ___
 
 ▸ **Left**<**T**>(`value?`: [T]()): *[Left]()‹T›*
 
-*Defined in [Either.ts:187](https://github.com/OctoD/tiinvo/blob/191449a/src/Either.ts#L187)*
+*Defined in [Either.ts:187](https://github.com/OctoD/tiinvo/blob/750e283/src/Either.ts#L187)*
 
 **`export`** 
 
@@ -66,7 +66,7 @@ ___
 
 ▸ **Right**<**T**>(`value?`: [T]()): *[Right]()‹T›*
 
-*Defined in [Either.ts:198](https://github.com/OctoD/tiinvo/blob/191449a/src/Either.ts#L198)*
+*Defined in [Either.ts:198](https://github.com/OctoD/tiinvo/blob/750e283/src/Either.ts#L198)*
 
 **`export`** 
 

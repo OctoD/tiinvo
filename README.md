@@ -17,6 +17,7 @@ Functional data structures for TypeScript and JavaScript.
 - [Usage](#usage)
   - [Docs](#docs)
   - [Graph](#graph)
+  - [LinkedList](#linkedlist)
   - [Option](#option)
   - [Queue](#queue)
   - [Result](#result)
@@ -62,6 +63,30 @@ graph.connect(v3, v4);
 graph.connect(v1, v4);
 
 graph.neighbours(v1) // Option([Vertex('a'), Vertex('b'), Vertex('c')])
+```
+
+## LinkedList
+
+Type `LinkedList` is a linear collection of data elements with each element points to the next. It is a data structure consisting of a collection of nodes which together represent a sequence
+
+```ts
+import { LinkedList, Node } from 'tiinvo';
+
+const list = LinkedList();
+
+list
+  .append(Node(1))
+  .append(Node(2))
+  .append(Node(3))
+
+list.size() // 3
+list.value() // [1, 2, 3]
+list.forEach(
+  node => 
+    console.log(
+      node.unwrap().value().unwrap()
+    )
+)
 ```
 
 ## Option
