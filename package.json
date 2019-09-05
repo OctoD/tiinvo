@@ -15,6 +15,7 @@
     "typescript"
   ],
   "scripts": {
+    "benchmarks": "ts-node benchmarks",
     "changelog": "standard-changelog",
     "docs": "typedoc --options typedoc.markdown.json",
     "lint": "eslint -c ./.eslintrc.json src/**/*.ts --fix",
@@ -47,10 +48,12 @@
     }
   ],
   "devDependencies": {
+    "@types/benchmark": "^1.0.31",
     "@types/jest": "^24.0.18",
     "@types/node": "^12.0.12",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
+    "benchmark": "^2.1.4",
     "codecov": "^3.5.0",
     "eslint": "^6.2.2",
     "husky": "^3.0.5",
@@ -61,6 +64,7 @@
     "size-limit": "^2.0.2",
     "standard-changelog": "^2.0.11",
     "ts-jest": "^24.0.2",
+    "ts-node": "^8.3.0",
     "typedoc": "^0.15.0",
     "typedoc-plugin-markdown": "^2.1.4",
     "typescript": "^3.6.2"
