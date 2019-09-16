@@ -49,7 +49,7 @@
 
 \+ **new ResultLike**(`value`: R | E): *[ResultLike](_result_.resultlike.md)*
 
-*Defined in [Result.ts:4](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L4)*
+*Defined in [Result.ts:4](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L4)*
 
 **Parameters:**
 
@@ -65,7 +65,7 @@ Name | Type |
 
 • **value**: *R | E*
 
-*Defined in [Result.ts:5](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L5)*
+*Defined in [Result.ts:5](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L5)*
 
 ## Methods
 
@@ -73,7 +73,7 @@ Name | Type |
 
 ▸ **and**<**U**>(`res`: [ResultLike](_result_.resultlike.md)‹U, E›): *[ResultLike](_result_.resultlike.md)‹U, E›*
 
-*Defined in [Result.ts:20](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L20)*
+*Defined in [Result.ts:20](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L20)*
 
 Returns `res` if the result is `Ok`, otherwise returns the `Err` value of self.
 
@@ -104,7 +104,7 @@ ___
 
 ▸ **andThen**<**U**>(`op`: function): *[ResultLike](_result_.resultlike.md)‹U, E›*
 
-*Defined in [Result.ts:39](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L39)*
+*Defined in [Result.ts:39](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L39)*
 
 Calls `op` if the result is `Ok`, otherwise returns the `Err` value of self.
 
@@ -141,7 +141,7 @@ ___
 
 ▸ **err**(): *[Option](../modules/_option_.md#option)‹E›*
 
-*Defined in [Result.ts:57](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L57)*
+*Defined in [Result.ts:57](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L57)*
 
 Converts from `Result<T, E>` to `OptionLike<E>`.
 
@@ -159,7 +159,7 @@ ___
 
 ▸ **expect**(`message`: string): *R | never*
 
-*Defined in [Result.ts:73](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L73)*
+*Defined in [Result.ts:73](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L73)*
 
 Unwraps a result, yielding the content of an `Ok`.
 
@@ -184,7 +184,7 @@ ___
 
 ▸ **expectErr**(`message`: string): *E | never*
 
-*Defined in [Result.ts:93](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L93)*
+*Defined in [Result.ts:93](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L93)*
 
 Unwraps a result, yielding the content of an `Err`.
 
@@ -209,7 +209,7 @@ ___
 
 ▸ **isError**(): *boolean*
 
-*Defined in [Result.ts:112](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L112)*
+*Defined in [Result.ts:112](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L112)*
 
 Returns true if the result is `Error`.
 
@@ -228,7 +228,7 @@ ___
 
 ▸ **isOk**(): *boolean*
 
-*Defined in [Result.ts:127](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L127)*
+*Defined in [Result.ts:127](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L127)*
 
 Returns true if the result is `Ok`.
 
@@ -247,7 +247,7 @@ ___
 
 ▸ **map**<**K**>(`f`: function): *[ResultLike](_result_.resultlike.md)‹K, E›*
 
-*Defined in [Result.ts:146](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L146)*
+*Defined in [Result.ts:146](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L146)*
 
 Maps a `Result<T, E>` to `Result<U, E>` by applying a function
 to a contained `Ok` value, leaving an `Err` value untouched.
@@ -286,7 +286,7 @@ ___
 
 ▸ **mapOrElse**<**F**>(`fallback`: function, `f`: function): *F*
 
-*Defined in [Result.ts:168](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L168)*
+*Defined in [Result.ts:168](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L168)*
 
 Maps a `Result<T, E>` to `F` by applying a function to a contained `Ok` value, or a `fallback` function to a contained `Err` value.
 
@@ -335,7 +335,7 @@ ___
 
 ▸ **ok**(): *[Option](../modules/_option_.md#option)‹R›*
 
-*Defined in [Result.ts:188](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L188)*
+*Defined in [Result.ts:188](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L188)*
 
 Converts from Result<T, E> to Option<T>.
 
@@ -354,7 +354,7 @@ ___
 
 ▸ **or**<**U**>(`res`: [ResultLike](_result_.resultlike.md)‹U, E›): *[ResultLike](_result_.resultlike.md)‹U, E› | [Ok](../modules/_result_.md#ok)‹R›*
 
-*Defined in [Result.ts:205](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L205)*
+*Defined in [Result.ts:205](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L205)*
 
 Returns `res` if the result is `Err`, otherwise returns the `Ok` value of self.
 
@@ -385,7 +385,7 @@ ___
 
 ▸ **orElse**<**U**>(`op`: function): *[ResultLike](_result_.resultlike.md)‹U, E› | [Ok](../modules/_result_.md#ok)‹R›*
 
-*Defined in [Result.ts:224](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L224)*
+*Defined in [Result.ts:224](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L224)*
 
 Calls `op` if the result is `Err`, otherwise returns the `Ok` value of self.
 
@@ -424,7 +424,7 @@ ___
 
 ▸ **unwrap**(): *R | never*
 
-*Defined in [Result.ts:241](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L241)*
+*Defined in [Result.ts:241](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L241)*
 
 Returns wrapped value or throws an `Error`
 
@@ -443,7 +443,7 @@ ___
 
 ▸ **unwrapErr**(): *E | never*
 
-*Defined in [Result.ts:261](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L261)*
+*Defined in [Result.ts:261](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L261)*
 
 Unwraps a result, yielding the content of an `Err`.
 Throws if the value is not an `Err`.
@@ -463,7 +463,7 @@ ___
 
 ▸ **unwrapOr**<**U**>(`optb`: U): *R | U*
 
-*Defined in [Result.ts:282](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L282)*
+*Defined in [Result.ts:282](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L282)*
 
 Unwraps a result, yielding the content of an `Ok`. Else, it returns `optb`.
 
@@ -494,7 +494,7 @@ ___
 
 ▸ **unwrapOrElse**<**U**>(`op`: function): *R | U*
 
-*Defined in [Result.ts:299](https://github.com/OctoD/tiinvo/blob/750e283/src/Result.ts#L299)*
+*Defined in [Result.ts:299](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Result.ts#L299)*
 
 Unwraps a result, yielding the content of an `Ok`. If the value is an `Err` then it calls op with its value.
 
