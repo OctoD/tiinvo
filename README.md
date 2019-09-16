@@ -17,6 +17,8 @@ Functional data structures for TypeScript and JavaScript.
 - [Usage](#usage)
   - [Docs](#docs)
   - [Graph](#graph)
+  - [LinkedList](#linkedlist)
+  - [Mediator](#mediator)
   - [Option](#option)
   - [Queue](#queue)
   - [Result](#result)
@@ -62,6 +64,49 @@ graph.connect(v3, v4);
 graph.connect(v1, v4);
 
 graph.neighbours(v1) // Option([Vertex('a'), Vertex('b'), Vertex('c')])
+```
+
+## LinkedList
+
+Type `LinkedList` is a linear collection of data elements with each element points to the next. It is a data structure consisting of a collection of nodes which together represent a sequence
+
+```ts
+import { LinkedList, Node } from 'tiinvo';
+
+const list = LinkedList();
+
+list
+  .append(Node(1))
+  .append(Node(2))
+  .append(Node(3))
+
+list.size() // 3
+list.value() // [1, 2, 3]
+list.forEach(
+  node => 
+    console.log(
+      node.unwrap().value().unwrap()
+    )
+)
+```
+
+## Mediator
+
+Type `Mediator` is the implementation of the mediator pattern. In software engineering, the mediator pattern defines an object that encapsulates how a set of objects interact. This pattern is considered to be a behavioral pattern due to the way it can alter the program's running behavior.
+
+It uses a `FunctionQueue` for storing the subscribed callbacks, so it can publish in synch or async.
+
+```ts
+import { Mediator } from 'tiinvo';
+
+const mediator = Mediator();
+const channel = 'some channel';
+
+mediator.subscribe(channel, (url: string) => fetch(url));
+mediator.subscribe(channel, (url: string) => console.log(`Called url ${url}`));
+mediator.subscribe(channel, (url: string) => console.log(`Url length: ${url.length}`));
+
+mediator.publishAsync('https://google.com');
 ```
 
 ## Option

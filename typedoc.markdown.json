@@ -3,6 +3,7 @@
   "out": "docs",
   "readme": "none",
   "exclude": [
+    "benchmarks/**",
     "src/index.ts",
     "src/common.ts",
     "**/__tests__/**"

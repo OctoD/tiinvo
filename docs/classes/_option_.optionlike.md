@@ -50,7 +50,7 @@
 
 \+ **new OptionLike**(`value`: T): *[OptionLike](_option_.optionlike.md)*
 
-*Defined in [Option.ts:4](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L4)*
+*Defined in [Option.ts:4](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L4)*
 
 **Parameters:**
 
@@ -66,7 +66,7 @@ Name | Type |
 
 • **value**: *T*
 
-*Defined in [Option.ts:5](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L5)*
+*Defined in [Option.ts:5](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L5)*
 
 ## Methods
 
@@ -74,7 +74,7 @@ Name | Type |
 
 ▸ **and**<**U**>(`optb`: [OptionLike](_option_.optionlike.md)‹U›): *[OptionLike](_option_.optionlike.md)‹U›*
 
-*Defined in [Option.ts:27](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L27)*
+*Defined in [Option.ts:27](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L27)*
 
 Returns `None` if the option is `None`,
 otherwise returns `optb`
@@ -108,7 +108,7 @@ ___
 
 ▸ **andThen**<**K**>(`callback`: function): *[Some](../modules/_option_.md#some)‹T› | ReturnType‹function›*
 
-*Defined in [Option.ts:38](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L38)*
+*Defined in [Option.ts:38](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L38)*
 
 Returns `callback` result if `OptionLike<T>` is `Some`,
 otherwise returns `None`
@@ -139,7 +139,7 @@ ___
 
 ▸ **expect**(`msg`: string): *[Some](../modules/_option_.md#some)‹T› | never*
 
-*Defined in [Option.ts:59](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L59)*
+*Defined in [Option.ts:59](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L59)*
 
 Throws if the value is a `None` with a custom error message provided by msg.
 
@@ -166,7 +166,7 @@ ___
 
 ▸ **filter**(`predicate`: function): *[OptionLike](_option_.optionlike.md)*
 
-*Defined in [Option.ts:81](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L81)*
+*Defined in [Option.ts:81](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L81)*
 
 Returns the `Option` if it's value passes
 the `predicate` function. Otherwise returns
@@ -199,7 +199,7 @@ ___
 
 ▸ **flattern**(): *[OptionLike](_option_.optionlike.md)‹T›*
 
-*Defined in [Option.ts:98](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L98)*
+*Defined in [Option.ts:98](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L98)*
 
 Converts from `Option<Option<T>>` to `Option<T>`
 
@@ -217,7 +217,7 @@ ___
 
 ▸ **foldReturn**<**U**>(`value`: U): *U*
 
-*Defined in [Option.ts:7](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L7)*
+*Defined in [Option.ts:7](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L7)*
 
 **Type parameters:**
 
@@ -237,7 +237,7 @@ ___
 
 ▸ **isNone**(): *boolean*
 
-*Defined in [Option.ts:113](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L113)*
+*Defined in [Option.ts:113](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L113)*
 
 Returns if has not a value
 
@@ -256,7 +256,7 @@ ___
 
 ▸ **isSome**(): *boolean*
 
-*Defined in [Option.ts:128](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L128)*
+*Defined in [Option.ts:128](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L128)*
 
 Returns if has a value
 
@@ -275,7 +275,7 @@ ___
 
 ▸ **map**<**K**>(`f`: function): *[OptionLike](_option_.optionlike.md)‹K›*
 
-*Defined in [Option.ts:144](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L144)*
+*Defined in [Option.ts:144](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L144)*
 
 Maps an `OptionLike<T>` to `OptionLike<U>` by applying a function to a contained value.
 
@@ -311,7 +311,7 @@ ___
 
 ▸ **mapOr**<**K**>(`def`: K, `f`: function): *K*
 
-*Defined in [Option.ts:164](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L164)*
+*Defined in [Option.ts:164](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L164)*
 
 Applies a function to the contained value (if any), or returns the provided default (if not).
 
@@ -350,7 +350,7 @@ ___
 
 ▸ **mapOrElse**<**K**>(`defFn`: function, `f`: function): *K*
 
-*Defined in [Option.ts:184](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L184)*
+*Defined in [Option.ts:184](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L184)*
 
 Applies a function to the contained value (if any), or computes a default (if not).
 
@@ -391,7 +391,7 @@ ___
 
 ▸ **okOr**(`err`: [Err](../modules/_result_.md#err)): *[Ok](../modules/_result_.md#ok)‹T› | [Err](../modules/_result_.md#err)*
 
-*Defined in [Option.ts:202](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L202)*
+*Defined in [Option.ts:202](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L202)*
 
 Transforms the `OptionLike<T>` into a `Result<T, E>`, mapping `Some(v)` to `Ok(v)` and `None` to `Err(err)`.
 
@@ -416,7 +416,7 @@ ___
 
 ▸ **okOrElse**(`err`: function): *[Ok](../modules/_result_.md#ok)‹T› | [Err](../modules/_result_.md#err)*
 
-*Defined in [Option.ts:218](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L218)*
+*Defined in [Option.ts:218](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L218)*
 
 Transforms the `OptionLike<T>` into a `Result<T, E>`, mapping `Some(v)` to `Ok(v)` and `None` to `Err(err())`.
 
@@ -441,7 +441,7 @@ ___
 
 ▸ **or**<**U**>(`optb`: [OptionLike](_option_.optionlike.md)‹U›): *[OptionLike](_option_.optionlike.md)‹T› | [OptionLike](_option_.optionlike.md)‹U›*
 
-*Defined in [Option.ts:236](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L236)*
+*Defined in [Option.ts:236](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L236)*
 
 Returns the option if it contains a value,
 otherwise returns `optb`
@@ -473,7 +473,7 @@ ___
 
 ▸ **orElse**<**U**>(`f`: function): *[Some](../modules/_option_.md#some)‹T› | [OptionLike](_option_.optionlike.md)‹U›*
 
-*Defined in [Option.ts:254](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L254)*
+*Defined in [Option.ts:254](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L254)*
 
 Returns the option if it contains a value, otherwise calls
 `f` and returns the result.
@@ -505,7 +505,7 @@ ___
 
 ▸ **transpose**(): *[Ok](../modules/_result_.md#ok)‹[Some](../modules/_option_.md#some)‹T›› | [Ok](../modules/_result_.md#ok)‹[None](../modules/_option_.md#none)‹T››*
 
-*Defined in [Option.ts:270](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L270)*
+*Defined in [Option.ts:270](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L270)*
 
 Transposes an `Option` of a `Result` into a `Result` of an `Option`.
 
@@ -523,7 +523,7 @@ ___
 
 ▸ **unwrap**(): *T | never*
 
-*Defined in [Option.ts:312](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L312)*
+*Defined in [Option.ts:312](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L312)*
 
 Returns wrapped value or throws if is None
 
@@ -542,7 +542,7 @@ ___
 
 ▸ **unwrapOr**<**K**>(`value`: K): *K*
 
-*Defined in [Option.ts:332](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L332)*
+*Defined in [Option.ts:332](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L332)*
 
 Returns the contained value or a default.
 
@@ -571,7 +571,7 @@ ___
 
 ▸ **xor**<**U**>(`optb`: [OptionLike](_option_.optionlike.md)‹U›): *[Some](../modules/_option_.md#some)‹T› | [Some](../modules/_option_.md#some)‹U› | [None](../modules/_option_.md#none)‹T›*
 
-*Defined in [Option.ts:291](https://github.com/OctoD/tiinvo/blob/191449a/src/Option.ts#L291)*
+*Defined in [Option.ts:291](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L291)*
 
 Returns Some if exactly one of self,
 optb is Some,

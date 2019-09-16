@@ -8,7 +8,9 @@
 
 * ["Either"](modules/_either_.md)
 * ["Graph"](modules/_graph_.md)
+* ["LinkedList"](modules/_linkedlist_.md)
 * ["Maybe"](modules/_maybe_.md)
+* ["Mediator"](modules/_mediator_.md)
 * ["Option"](modules/_option_.md)
 * ["Result"](modules/_result_.md)
 * ["Stack"](modules/_stack_.md)

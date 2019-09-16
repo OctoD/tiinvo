@@ -1,6 +1,9 @@
 # tests dirs
 __tests__
 
+# benchmarks dir
+benchmarks 
+
 # source dir
 src
 

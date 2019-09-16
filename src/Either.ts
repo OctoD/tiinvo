@@ -177,6 +177,11 @@ export type Right<RightValue, LeftValue = RightValue> = EitherLike<
   RightValue
 >;
 
+export const Either = {
+  Left,
+  Right
+};
+
 /**
  *
  * @export
