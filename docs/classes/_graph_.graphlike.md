@@ -31,7 +31,7 @@
 
 \+ **new GraphLike**(`vertices`: Set‹[VertexLike](_graph_.vertexlike.md)›, `edges`: Set‹[EdgeLike](_graph_.edgelike.md)›): *[GraphLike](_graph_.graphlike.md)*
 
-*Defined in [Graph.ts:87](https://github.com/OctoD/tiinvo/blob/750e283/src/Graph.ts#L87)*
+*Defined in [Graph.ts:87](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Graph.ts#L87)*
 
 **Parameters:**
 
@@ -48,7 +48,7 @@ Name | Type |
 
 • **edges**: *Set‹[EdgeLike](_graph_.edgelike.md)›*
 
-*Defined in [Graph.ts:90](https://github.com/OctoD/tiinvo/blob/750e283/src/Graph.ts#L90)*
+*Defined in [Graph.ts:90](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Graph.ts#L90)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • **vertices**: *Set‹[VertexLike](_graph_.vertexlike.md)›*
 
-*Defined in [Graph.ts:89](https://github.com/OctoD/tiinvo/blob/750e283/src/Graph.ts#L89)*
+*Defined in [Graph.ts:89](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Graph.ts#L89)*
 
 ## Methods
 
@@ -64,7 +64,7 @@ ___
 
 ▸ **adjacent**(`left`: [Vertex](../modules/_graph_.md#vertex), `right`: [Vertex](../modules/_graph_.md#vertex)): *boolean*
 
-*Defined in [Graph.ts:116](https://github.com/OctoD/tiinvo/blob/750e283/src/Graph.ts#L116)*
+*Defined in [Graph.ts:116](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Graph.ts#L116)*
 
 Returns `true` if a `Vertex` is adjacent to another one.
 
@@ -100,7 +100,7 @@ ___
 
 ▸ **connect**(`left`: [Vertex](../modules/_graph_.md#vertex), `right`: [Vertex](../modules/_graph_.md#vertex), `weight`: number): *[Result](../modules/_result_.md#result)‹[EdgeLike](_graph_.edgelike.md), ReferenceError›*
 
-*Defined in [Graph.ts:140](https://github.com/OctoD/tiinvo/blob/750e283/src/Graph.ts#L140)*
+*Defined in [Graph.ts:140](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Graph.ts#L140)*
 
 Connects two vertices together, returning `Ok<Edge>` if the two vertices can be connected otherwise retuning an `Err`.
 
@@ -133,7 +133,7 @@ ___
 
 ▸ **neighbours**(`vertex`: [Vertex](../modules/_graph_.md#vertex)): *[Option](../modules/_option_.md#option)‹[Vertex](../modules/_graph_.md#vertex)[]›*
 
-*Defined in [Graph.ts:165](https://github.com/OctoD/tiinvo/blob/750e283/src/Graph.ts#L165)*
+*Defined in [Graph.ts:165](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Graph.ts#L165)*
 
 Returns all neighbours to a `Vertex<T>` as a `Option<Vertex[]>` is there are any, otherwise returns `None`.
 

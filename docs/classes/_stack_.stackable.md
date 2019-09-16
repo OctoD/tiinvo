@@ -40,7 +40,7 @@
 
 \+ **new Stackable**(`elements`: T[]): *[Stackable](_stack_.stackable.md)*
 
-*Defined in [Stack.ts:6](https://github.com/OctoD/tiinvo/blob/750e283/src/Stack.ts#L6)*
+*Defined in [Stack.ts:6](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Stack.ts#L6)*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ Name | Type |
 
 • **elements**: *T[]*
 
-*Defined in [Stack.ts:7](https://github.com/OctoD/tiinvo/blob/750e283/src/Stack.ts#L7)*
+*Defined in [Stack.ts:7](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Stack.ts#L7)*
 
 ## Methods
 
@@ -64,7 +64,7 @@ Name | Type |
 
 ▸ **isEmpty**(): *boolean*
 
-*Defined in [Stack.ts:22](https://github.com/OctoD/tiinvo/blob/750e283/src/Stack.ts#L22)*
+*Defined in [Stack.ts:22](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Stack.ts#L22)*
 
 Returns if is empty
 
@@ -85,7 +85,7 @@ ___
 
 ▸ **map**<**Fn**>(`fn`: Fn): *[Stackable](_stack_.stackable.md)‹ReturnType‹Fn››*
 
-*Defined in [Stack.ts:36](https://github.com/OctoD/tiinvo/blob/750e283/src/Stack.ts#L36)*
+*Defined in [Stack.ts:36](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Stack.ts#L36)*
 
 **`abstract`** 
 
@@ -113,7 +113,7 @@ ___
 
 ▸ **size**(): *number*
 
-*Defined in [Stack.ts:53](https://github.com/OctoD/tiinvo/blob/750e283/src/Stack.ts#L53)*
+*Defined in [Stack.ts:53](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Stack.ts#L53)*
 
 Returns current size
 
@@ -134,7 +134,7 @@ ___
 
 ▸ **top**(): *[Option](../modules/_option_.md#option)‹T›*
 
-*Defined in [Stack.ts:69](https://github.com/OctoD/tiinvo/blob/750e283/src/Stack.ts#L69)*
+*Defined in [Stack.ts:69](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Stack.ts#L69)*
 
 Returns nearest element to be removed from the pile
 
@@ -155,7 +155,7 @@ ___
 
 ▸ **value**(): *T[]*
 
-*Defined in [Stack.ts:77](https://github.com/OctoD/tiinvo/blob/750e283/src/Stack.ts#L77)*
+*Defined in [Stack.ts:77](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Stack.ts#L77)*
 
 Returns added elements
 

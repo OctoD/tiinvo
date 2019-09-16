@@ -18,6 +18,7 @@ Functional data structures for TypeScript and JavaScript.
   - [Docs](#docs)
   - [Graph](#graph)
   - [LinkedList](#linkedlist)
+  - [Mediator](#mediator)
   - [Option](#option)
   - [Queue](#queue)
   - [Result](#result)
@@ -87,6 +88,25 @@ list.forEach(
       node.unwrap().value().unwrap()
     )
 )
+```
+
+## Mediator
+
+Type `Mediator` is the implementation of the mediator pattern. In software engineering, the mediator pattern defines an object that encapsulates how a set of objects interact. This pattern is considered to be a behavioral pattern due to the way it can alter the program's running behavior.
+
+It uses a `FunctionQueue` for storing the subscribed callbacks, so it can publish in synch or async.
+
+```ts
+import { Mediator } from 'tiinvo';
+
+const mediator = Mediator();
+const channel = 'some channel';
+
+mediator.subscribe(channel, (url: string) => fetch(url));
+mediator.subscribe(channel, (url: string) => console.log(`Called url ${url}`));
+mediator.subscribe(channel, (url: string) => console.log(`Url length: ${url.length}`));
+
+mediator.publishAsync('https://google.com');
 ```
 
 ## Option

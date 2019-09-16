@@ -28,7 +28,7 @@
 
 Ƭ **None**: *[OptionLike](../classes/_option_.optionlike.md)‹T›*
 
-*Defined in [Option.ts:351](https://github.com/OctoD/tiinvo/blob/750e283/src/Option.ts#L351)*
+*Defined in [Option.ts:351](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L351)*
 
 Type `Option` represents an optional value: every `Option` is either
 `Some` and contains a value, or `None`, and does not.
@@ -39,7 +39,7 @@ ___
 
 Ƭ **Option**: *[OptionLike](../classes/_option_.optionlike.md)‹T | null›*
 
-*Defined in [Option.ts:341](https://github.com/OctoD/tiinvo/blob/750e283/src/Option.ts#L341)*
+*Defined in [Option.ts:341](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L341)*
 
 Type `Option` represents an optional value: every `Option` is either
 `Some` and contains a value, or `None`, and does not.
@@ -50,7 +50,7 @@ ___
 
 Ƭ **Some**: *[OptionLike](../classes/_option_.optionlike.md)‹T›*
 
-*Defined in [Option.ts:346](https://github.com/OctoD/tiinvo/blob/750e283/src/Option.ts#L346)*
+*Defined in [Option.ts:346](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L346)*
 
 Type `Option` represents an optional value: every `Option` is either
 `Some` and contains a value, or `None`, and does not.
@@ -61,7 +61,7 @@ Type `Option` represents an optional value: every `Option` is either
 
 ▸ **None**<**T**>(): *[None]()‹T›*
 
-*Defined in [Option.ts:361](https://github.com/OctoD/tiinvo/blob/750e283/src/Option.ts#L361)*
+*Defined in [Option.ts:361](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L361)*
 
 Type `Option` represents an optional value: every `Option` is either
 `Some` and contains a value, or `None`, and does not.
@@ -82,7 +82,7 @@ ___
 
 ▸ **Option**<**T**>(`value`: T): *[OptionLike](../classes/_option_.optionlike.md)‹T›*
 
-*Defined in [Option.ts:389](https://github.com/OctoD/tiinvo/blob/750e283/src/Option.ts#L389)*
+*Defined in [Option.ts:389](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L389)*
 
 Type `Option` represents an optional value: every `Option` is either
 `Some` and contains a value, or `None`, and does not.
@@ -111,7 +111,7 @@ ___
 
 ▸ **Some**<**T**>(`value`: T): *[Some]()‹T›*
 
-*Defined in [Option.ts:375](https://github.com/OctoD/tiinvo/blob/750e283/src/Option.ts#L375)*
+*Defined in [Option.ts:375](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Option.ts#L375)*
 
 Type `Option` represents an optional value: every `Option` is either
 `Some` and contains a value, or `None`, and does not.
