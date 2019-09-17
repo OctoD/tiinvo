@@ -1,7 +1,7 @@
 import Benchmark from "benchmark";
 import fs from "fs";
 import path from "path";
-import { Maybe } from "../src";
+import { Maybe } from "..";
 
 const benchmarkdir = __dirname;
 const testsdir = path.join(benchmarkdir, "tests");
