@@ -18,6 +18,21 @@ describe(`Either`, () => {
     );
   });
 
+  it("Returns `Either<U>` if is `Left`, otherwise returns `Either<T>`", () => {
+    expect(Left(1).or(Right(2))).toStrictEqual(Right(2));
+    expect(Right(1).or(Right(2))).toStrictEqual(Right(1));
+    expect(Left(1).or(Left(3))).toStrictEqual(Left(3));
+  });
+
+  it("Returns `Fn` result if is `Left`, otherwise returns `Either<T>`", () => {
+    expect(Right(100).orThen(value => Right(value + 1))).toStrictEqual(
+      Right(100)
+    );
+    expect(Left(100).orThen(value => Right(value + 1))).toStrictEqual(
+      Right(101)
+    );
+  });
+
   it("Returns `true` if is `Left`", () => {
     expect(Left().isLeft()).toBeTruthy();
     expect(Right().isLeft()).toBeFalsy();

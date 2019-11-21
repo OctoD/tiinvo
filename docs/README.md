@@ -1,6 +1,6 @@
-**[tiinvo](README.md)**
+[tiinvo](README.md)
 
-[Globals](README.md)
+# tiinvo
 
 ## Index
 
@@ -15,3 +15,7 @@
 * ["Result"](modules/_result_.md)
 * ["Stack"](modules/_stack_.md)
 * ["TryCatch"](modules/_trycatch_.md)
+* ["benchmarks/index"](modules/_benchmarks_index_.md)
+* ["benchmarks/tests/Maybe"](modules/_benchmarks_tests_maybe_.md)
+* ["benchmarks/tests/Option"](modules/_benchmarks_tests_option_.md)
+* ["benchmarks/tests/Result"](modules/_benchmarks_tests_result_.md)

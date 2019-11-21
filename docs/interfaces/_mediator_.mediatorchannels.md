@@ -1,6 +1,4 @@
-**[tiinvo](../README.md)**
-
-[Globals](../README.md) › ["Mediator"](../modules/_mediator_.md) › [MediatorChannels](_mediator_.mediatorchannels.md)
+[tiinvo](../README.md) › ["Mediator"](../modules/_mediator_.md) › [MediatorChannels](_mediator_.mediatorchannels.md)
 
 # Interface: MediatorChannels
 
