@@ -1,5 +1,5 @@
 import { Options, Suite, Event } from "benchmark";
-import { Err, Ok } from "../../src";
+import { Err, Ok } from "../..";
 
 export function run(suite: Suite, options: Options) {
   suite

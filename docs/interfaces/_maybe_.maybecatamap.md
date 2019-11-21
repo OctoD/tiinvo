@@ -1,6 +1,4 @@
-**[tiinvo](../README.md)**
-
-[Globals](../README.md) › ["Maybe"](../modules/_maybe_.md) › [MaybeCataMap](_maybe_.maybecatamap.md)
+[tiinvo](../README.md) › ["Maybe"](../modules/_maybe_.md) › [MaybeCataMap](_maybe_.maybecatamap.md)
 
 # Interface: MaybeCataMap <**T, U**>
 
@@ -27,7 +25,7 @@
 
 ▸ **Just**(`value`: T): *U*
 
-*Defined in [Maybe.ts:7](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Maybe.ts#L7)*
+*Defined in [Maybe.ts:7](https://github.com/OctoD/tiinvo/blob/32d45ae/src/Maybe.ts#L7)*
 
 **Parameters:**
 
@@ -43,7 +41,7 @@ ___
 
 ▸ **Nothing**(`value`: T): *U*
 
-*Defined in [Maybe.ts:6](https://github.com/OctoD/tiinvo/blob/f0cb45e/src/Maybe.ts#L6)*
+*Defined in [Maybe.ts:6](https://github.com/OctoD/tiinvo/blob/32d45ae/src/Maybe.ts#L6)*
 
 **Parameters:**
 

@@ -1,5 +1,5 @@
 import { Event, Options, Suite } from "benchmark";
-import { Just, Maybe, Nothing } from "../../src";
+import { Just, Maybe, Nothing } from "../..";
 
 export function run(suite: Suite, options: Options) {
   suite

@@ -120,6 +120,47 @@ export class EitherLike<LeftValue, RightValue> {
   }
 
   /**
+   * Returns `Either<U, X>` if is `Left`, otherwise returns `Either<LeftValue, RightValue>`
+   *
+   * ```ts
+   * Left(100).or(Right(200)) // Right(100)
+   * Right(100).or(Right(200)) // Right(100)
+   * Right(100).or(Left(200)) // Right(100)
+   * ```
+   *
+   * @template U
+   * @param {EitherLike<U>} either
+   * @returns {(EitherLike<U> | EitherLike<LeftValue>)}
+   * @memberof EitherLike
+   */
+  public or<U, X>(
+    either: EitherLike<U, X>
+  ): EitherLike<U, X> | EitherLike<LeftValue, RightValue> {
+    return this.isRight() ? this : either;
+  }
+
+  /**
+   * Returns `Fn` result if is `Left`, otherwise returns `Either<LeftValue>`
+   *
+   * ```ts
+   * Right(100).andThen(value => Right(value + 1)) // Right(100)
+   * Left(100).andThen(value => Right(value + 1)) // Right(101)
+   * ```
+   *
+   * @template Fn
+   * @template U
+   * @param {Fn} fn
+   * @returns {(EitherLike<U> | EitherLike<LeftValue>)}
+   * @memberof Either
+   */
+  public orThen<Fn extends (value: RightValue) => EitherLike<LeftValue, U>, U>(
+    fn: Fn
+  ): EitherLike<LeftValue, U> | EitherLike<LeftValue, RightValue> {
+    ensureFunction("orThen", fn);
+    return this.isRight() ? this : fn(this.value as any);
+  }
+
+  /**
    * Returns `Ok<RightValue>` if is `Right`, otherwise returns `Err` if is `Left`
    *
    * ```ts

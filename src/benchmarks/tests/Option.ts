@@ -1,5 +1,5 @@
 import benchmark from "benchmark";
-import { Option, Some, None, Err } from "../../src";
+import { Option, Some, None, Err } from "../..";
 
 export function run(suite: benchmark.Suite, options: benchmark.Options) {
   suite
