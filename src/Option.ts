@@ -177,14 +177,14 @@ export class OptionLike<T> {
    *
    * @template K
    * @param {() => K} defFn
-   * @param {(arg: T) => K} f
+   * @param {(arg: NonNullable<T>) => K} f
    * @returns {K}
    * @memberof OptionLike
    */
-  public mapOrElse<K>(defFn: () => K, f: (arg: T) => K): K {
+  public mapOrElse<K>(defFn: () => K, f: (arg: NonNullable<T>) => K): K {
     ensureFunction("mapOrElse argument must be a function", f);
 
-    return this.isSome() ? f(this.value) : defFn();
+    return this.isSome() ? f(this.value as any) : defFn();
   }
 
   /**
@@ -212,10 +212,10 @@ export class OptionLike<T> {
    * ```
    *
    * @param {() => Err} fn
-   * @returns {(Ok<T> | Err)}
+   * @returns {(Ok<NonNullable<T>> | Err)}
    * @memberof OptionLike
    */
-  public okOrElse(err: () => Err): Ok<T> | Err {
+  public okOrElse(err: () => Err): Ok<NonNullable<T>> | Err {
     return this.isSome() ? Ok(this.value) : err();
   }
 
