@@ -324,7 +324,8 @@ Every contribution is really welcome!
 
 If you feel that something can be improved or should be fixed, feel free to open an issue with the feature or the bug found.
 
-If you want to fork and open a pull request (adding features or fixes), feel free to do it. Remember only to use the `dev` branch as a base.
+If you want to fork and open a pull request (adding features or fixes), feel free to do it. 
+Create a new branch from `master` and open your PR.
 
 Read the [contributing guidelines](./CONTRIBUTING.md)
 
