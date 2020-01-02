@@ -1,4 +1,4 @@
-[tiinvo](../README.md) › ["LinkedList"](../modules/_linkedlist_.md) › [LinkedListLike](_linkedlist_.linkedlistlike.md)
+[tiinvo - v1.5.2](../README.md) › ["LinkedList"](../modules/_linkedlist_.md) › [LinkedListLike](_linkedlist_.linkedlistlike.md)
 
 # Class: LinkedListLike <**T**>
 
@@ -37,7 +37,7 @@
 
 \+ **new LinkedListLike**(`initialValues`: T[]): *[LinkedListLike](_linkedlist_.linkedlistlike.md)*
 
-*Defined in [LinkedList.ts:165](https://github.com/OctoD/tiinvo/blob/32d45ae/src/LinkedList.ts#L165)*
+*Defined in [LinkedList.ts:165](https://github.com/OctoD/tiinvo/blob/7d2a102/src/LinkedList.ts#L165)*
 
 **Parameters:**
 
@@ -53,7 +53,7 @@ Name | Type | Default |
 
 • **_head**? : *[NodeLike](_linkedlist_.nodelike.md)‹T›*
 
-*Defined in [LinkedList.ts:164](https://github.com/OctoD/tiinvo/blob/32d45ae/src/LinkedList.ts#L164)*
+*Defined in [LinkedList.ts:164](https://github.com/OctoD/tiinvo/blob/7d2a102/src/LinkedList.ts#L164)*
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 • **_tail**? : *[NodeLike](_linkedlist_.nodelike.md)‹T›*
 
-*Defined in [LinkedList.ts:165](https://github.com/OctoD/tiinvo/blob/32d45ae/src/LinkedList.ts#L165)*
+*Defined in [LinkedList.ts:165](https://github.com/OctoD/tiinvo/blob/7d2a102/src/LinkedList.ts#L165)*
 
 ## Methods
 
@@ -69,7 +69,7 @@ ___
 
 ▸ **append**(`node`: [Node](../modules/_linkedlist_.md#node)‹T›): *this*
 
-*Defined in [LinkedList.ts:182](https://github.com/OctoD/tiinvo/blob/32d45ae/src/LinkedList.ts#L182)*
+*Defined in [LinkedList.ts:182](https://github.com/OctoD/tiinvo/blob/7d2a102/src/LinkedList.ts#L182)*
 
 Appends a `Node<T>` to the `LinkedList<T>`
 
@@ -93,7 +93,7 @@ ___
 
 ▸ **forEach**<**Fn**>(`fn`: Fn): *void*
 
-*Defined in [LinkedList.ts:208](https://github.com/OctoD/tiinvo/blob/32d45ae/src/LinkedList.ts#L208)*
+*Defined in [LinkedList.ts:208](https://github.com/OctoD/tiinvo/blob/7d2a102/src/LinkedList.ts#L208)*
 
 Calls a function `Fn` for each `Node<T>`.
 
@@ -123,7 +123,7 @@ ___
 
 ▸ **head**(): *[Maybe](../modules/_maybe_.md#maybe)‹[Node](../modules/_linkedlist_.md#node)‹T››*
 
-*Defined in [LinkedList.ts:230](https://github.com/OctoD/tiinvo/blob/32d45ae/src/LinkedList.ts#L230)*
+*Defined in [LinkedList.ts:230](https://github.com/OctoD/tiinvo/blob/7d2a102/src/LinkedList.ts#L230)*
 
 Returns list's head as `Just<Node<T>>` if the list has a head, otherwise returns a `Nothing<Node<T>>` if the list does not have a head.
 
@@ -142,7 +142,7 @@ ___
 
 ▸ **map**<**Fn**, **U**>(`fn`: Fn): *[LinkedListLike](_linkedlist_.linkedlistlike.md)‹U›*
 
-*Defined in [LinkedList.ts:253](https://github.com/OctoD/tiinvo/blob/32d45ae/src/LinkedList.ts#L253)*
+*Defined in [LinkedList.ts:253](https://github.com/OctoD/tiinvo/blob/7d2a102/src/LinkedList.ts#L253)*
 
 Applies `Fn` to every `Node<T>` to a `Node<U>` in a `LinkedList<T>` and returns a `LinkedList<U>`
 
@@ -182,7 +182,7 @@ ___
 
 ▸ **size**(): *number*
 
-*Defined in [LinkedList.ts:273](https://github.com/OctoD/tiinvo/blob/32d45ae/src/LinkedList.ts#L273)*
+*Defined in [LinkedList.ts:273](https://github.com/OctoD/tiinvo/blob/7d2a102/src/LinkedList.ts#L273)*
 
 Returns List size
 
@@ -200,7 +200,7 @@ ___
 
 ▸ **tail**(): *[Maybe](../modules/_maybe_.md#maybe)‹[Node](../modules/_linkedlist_.md#node)‹T››*
 
-*Defined in [LinkedList.ts:292](https://github.com/OctoD/tiinvo/blob/32d45ae/src/LinkedList.ts#L292)*
+*Defined in [LinkedList.ts:292](https://github.com/OctoD/tiinvo/blob/7d2a102/src/LinkedList.ts#L292)*
 
 Returns `Just<Node<T>>` if the `LinkedList<T>` has a tail, otherwise returns `Nothing`
 
@@ -219,7 +219,7 @@ ___
 
 ▸ **value**(): *T[]*
 
-*Defined in [LinkedList.ts:306](https://github.com/OctoD/tiinvo/blob/32d45ae/src/LinkedList.ts#L306)*
+*Defined in [LinkedList.ts:306](https://github.com/OctoD/tiinvo/blob/7d2a102/src/LinkedList.ts#L306)*
 
 Returns `LinkedList<T>` value as an array of `T`.
 

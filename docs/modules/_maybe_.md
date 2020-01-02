@@ -1,4 +1,4 @@
-[tiinvo](../README.md) › ["Maybe"](_maybe_.md)
+[tiinvo - v1.5.2](../README.md) › ["Maybe"](_maybe_.md)
 
 # External module: "Maybe"
 
@@ -30,7 +30,7 @@
 
 Ƭ **Just**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹T, true›*
 
-*Defined in [Maybe.ts:203](https://github.com/OctoD/tiinvo/blob/32d45ae/src/Maybe.ts#L203)*
+*Defined in [Maybe.ts:203](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Maybe.ts#L203)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 Ƭ **Maybe**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹T, boolean›*
 
-*Defined in [Maybe.ts:201](https://github.com/OctoD/tiinvo/blob/32d45ae/src/Maybe.ts#L201)*
+*Defined in [Maybe.ts:201](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Maybe.ts#L201)*
 
 ___
 
@@ -46,15 +46,15 @@ ___
 
 Ƭ **Nothing**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹T, false›*
 
-*Defined in [Maybe.ts:205](https://github.com/OctoD/tiinvo/blob/32d45ae/src/Maybe.ts#L205)*
+*Defined in [Maybe.ts:205](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Maybe.ts#L205)*
 
 ## Functions
 
 ###  Just
 
-▸ **Just**<**T**>(`value`: T): *[Just](undefined)‹T›*
+▸ **Just**<**T**>(`value`: T): *Just‹T›*
 
-*Defined in [Maybe.ts:221](https://github.com/OctoD/tiinvo/blob/32d45ae/src/Maybe.ts#L221)*
+*Defined in [Maybe.ts:221](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Maybe.ts#L221)*
 
 `Just<T>` represent a value that has returned
 
@@ -78,15 +78,15 @@ Name | Type |
 ------ | ------ |
 `value` | T |
 
-**Returns:** *[Just](undefined)‹T›*
+**Returns:** *Just‹T›*
 
 ___
 
 ###  Maybe
 
-▸ **Maybe**<**T**>(`value`: T): *[Maybe](undefined)‹T›*
+▸ **Maybe**<**T**>(`value`: T): *Maybe‹T›*
 
-*Defined in [Maybe.ts:253](https://github.com/OctoD/tiinvo/blob/32d45ae/src/Maybe.ts#L253)*
+*Defined in [Maybe.ts:253](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Maybe.ts#L253)*
 
 The Maybe monad represents computations which might "go wrong" by not returning a value.
 
@@ -124,15 +124,15 @@ Name | Type |
 ------ | ------ |
 `value` | T |
 
-**Returns:** *[Maybe](undefined)‹T›*
+**Returns:** *Maybe‹T›*
 
 ___
 
 ###  Nothing
 
-▸ **Nothing**<**T**>(`value`: T): *[Nothing](undefined)‹T›*
+▸ **Nothing**<**T**>(`value`: T): *Nothing‹T›*
 
-*Defined in [Maybe.ts:265](https://github.com/OctoD/tiinvo/blob/32d45ae/src/Maybe.ts#L265)*
+*Defined in [Maybe.ts:265](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Maybe.ts#L265)*
 
 `Nothing<T>` represent a value that has not returned
 
@@ -150,4 +150,4 @@ Name | Type |
 ------ | ------ |
 `value` | T |
 
-**Returns:** *[Nothing](undefined)‹T›*
+**Returns:** *Nothing‹T›*

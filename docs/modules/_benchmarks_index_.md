@@ -1,4 +1,4 @@
-[tiinvo](../README.md) › ["benchmarks/index"](_benchmarks_index_.md)
+[tiinvo - v1.5.2](../README.md) › ["benchmarks/index"](_benchmarks_index_.md)
 
 # External module: "benchmarks/index"
 
@@ -16,7 +16,7 @@
 
 • **benchmarkdir**: *string* =  __dirname
 
-*Defined in [benchmarks/index.ts:6](https://github.com/OctoD/tiinvo/blob/32d45ae/src/benchmarks/index.ts#L6)*
+*Defined in [benchmarks/index.ts:6](https://github.com/OctoD/tiinvo/blob/7d2a102/src/benchmarks/index.ts#L6)*
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 • **benchmarks**: *string[]* =  fs.readdirSync(testsdir)
 
-*Defined in [benchmarks/index.ts:8](https://github.com/OctoD/tiinvo/blob/32d45ae/src/benchmarks/index.ts#L8)*
+*Defined in [benchmarks/index.ts:8](https://github.com/OctoD/tiinvo/blob/7d2a102/src/benchmarks/index.ts#L8)*
 
 ___
 
@@ -32,4 +32,4 @@ ___
 
 • **testsdir**: *string* =  path.join(benchmarkdir, "tests")
 
-*Defined in [benchmarks/index.ts:7](https://github.com/OctoD/tiinvo/blob/32d45ae/src/benchmarks/index.ts#L7)*
+*Defined in [benchmarks/index.ts:7](https://github.com/OctoD/tiinvo/blob/7d2a102/src/benchmarks/index.ts#L7)*

@@ -1,4 +1,4 @@
-[tiinvo](../README.md) › ["Either"](_either_.md)
+[tiinvo - v1.5.2](../README.md) › ["Either"](_either_.md)
 
 # External module: "Either"
 
@@ -28,7 +28,7 @@
 
 Ƭ **Left**: *[EitherLike](../classes/_either_.eitherlike.md)‹LeftValue, RightValue›*
 
-*Defined in [Either.ts:211](https://github.com/OctoD/tiinvo/blob/32d45ae/src/Either.ts#L211)*
+*Defined in [Either.ts:211](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Either.ts#L211)*
 
 ___
 
@@ -36,15 +36,15 @@ ___
 
 Ƭ **Right**: *[EitherLike](../classes/_either_.eitherlike.md)‹LeftValue, RightValue›*
 
-*Defined in [Either.ts:216](https://github.com/OctoD/tiinvo/blob/32d45ae/src/Either.ts#L216)*
+*Defined in [Either.ts:216](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Either.ts#L216)*
 
 ## Functions
 
 ###  Left
 
-▸ **Left**<**T**>(`value?`: [T](undefined)): *[Left](undefined)‹T›*
+▸ **Left**<**T**>(`value?`: T): *Left‹T›*
 
-*Defined in [Either.ts:233](https://github.com/OctoD/tiinvo/blob/32d45ae/src/Either.ts#L233)*
+*Defined in [Either.ts:233](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Either.ts#L233)*
 
 **`export`** 
 
@@ -58,17 +58,17 @@ ___
 
 Name | Type |
 ------ | ------ |
-`value?` | [T](undefined) |
+`value?` | T |
 
-**Returns:** *[Left](undefined)‹T›*
+**Returns:** *Left‹T›*
 
 ___
 
 ###  Right
 
-▸ **Right**<**T**>(`value?`: [T](undefined)): *[Right](undefined)‹T›*
+▸ **Right**<**T**>(`value?`: T): *Right‹T›*
 
-*Defined in [Either.ts:244](https://github.com/OctoD/tiinvo/blob/32d45ae/src/Either.ts#L244)*
+*Defined in [Either.ts:244](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Either.ts#L244)*
 
 **`export`** 
 
@@ -82,9 +82,9 @@ ___
 
 Name | Type |
 ------ | ------ |
-`value?` | [T](undefined) |
+`value?` | T |
 
-**Returns:** *[Right](undefined)‹T›*
+**Returns:** *Right‹T›*
 
 ## Object literals
 
@@ -92,16 +92,16 @@ Name | Type |
 
 ### ▪ **Either**: *object*
 
-*Defined in [Either.ts:221](https://github.com/OctoD/tiinvo/blob/32d45ae/src/Either.ts#L221)*
+*Defined in [Either.ts:221](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Either.ts#L221)*
 
 ###  Left
 
 • **Left**: *[Left](_either_.md#left)*
 
-*Defined in [Either.ts:222](https://github.com/OctoD/tiinvo/blob/32d45ae/src/Either.ts#L222)*
+*Defined in [Either.ts:222](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Either.ts#L222)*
 
 ###  Right
 
 • **Right**: *[Right](_either_.md#right)*
 
-*Defined in [Either.ts:223](https://github.com/OctoD/tiinvo/blob/32d45ae/src/Either.ts#L223)*
+*Defined in [Either.ts:223](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Either.ts#L223)*

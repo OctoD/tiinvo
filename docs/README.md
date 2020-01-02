@@ -1,6 +1,6 @@
-[tiinvo](README.md)
+[tiinvo - v1.5.2](README.md)
 
-# tiinvo
+# tiinvo - v1.5.2
 
 ## Index
 

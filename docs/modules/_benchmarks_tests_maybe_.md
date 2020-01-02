@@ -1,4 +1,4 @@
-[tiinvo](../README.md) › ["benchmarks/tests/Maybe"](_benchmarks_tests_maybe_.md)
+[tiinvo - v1.5.2](../README.md) › ["benchmarks/tests/Maybe"](_benchmarks_tests_maybe_.md)
 
 # External module: "benchmarks/tests/Maybe"
 
@@ -14,7 +14,7 @@
 
 ▸ **run**(`suite`: Suite, `options`: Options): *void*
 
-*Defined in [benchmarks/tests/Maybe.ts:4](https://github.com/OctoD/tiinvo/blob/32d45ae/src/benchmarks/tests/Maybe.ts#L4)*
+*Defined in [benchmarks/tests/Maybe.ts:4](https://github.com/OctoD/tiinvo/blob/7d2a102/src/benchmarks/tests/Maybe.ts#L4)*
 
 **Parameters:**
 
