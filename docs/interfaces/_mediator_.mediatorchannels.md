@@ -1,4 +1,4 @@
-[tiinvo - v1.5.2](../README.md) › ["Mediator"](../modules/_mediator_.md) › [MediatorChannels](_mediator_.mediatorchannels.md)
+[tiinvo - v1.6.0](../README.md) › ["Mediator"](../modules/_mediator_.md) › [MediatorChannels](_mediator_.mediatorchannels.md)
 
 # Interface: MediatorChannels
 

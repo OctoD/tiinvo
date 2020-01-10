@@ -1,12 +1,13 @@
-[tiinvo - v1.5.2](README.md)
+[tiinvo - v1.6.0](README.md)
 
-# tiinvo - v1.5.2
+# tiinvo - v1.6.0
 
 ## Index
 
 ### External modules
 
 * ["Either"](modules/_either_.md)
+* ["GetSet"](modules/_getset_.md)
 * ["Graph"](modules/_graph_.md)
 * ["LinkedList"](modules/_linkedlist_.md)
 * ["Maybe"](modules/_maybe_.md)
