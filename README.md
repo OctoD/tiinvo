@@ -16,6 +16,7 @@ Functional data structures for TypeScript and JavaScript.
 - [Install](#install)
 - [Usage](#usage)
   - [Docs](#docs)
+  - [GetSet](#getset)
   - [Graph](#graph)
   - [LinkedList](#linkedlist)
   - [Mediator](#mediator)
@@ -44,6 +45,20 @@ yarn add tiinvo
 ## Docs
 
 Documentation is located [here](./docs/README.md)
+
+## GetSet
+
+Type `GetSet` is used to handle a value without explicitly reassigning it. 
+
+```ts
+import { GetSet } from 'tiinvo';
+
+const mynumber = GetSet(10);
+
+mynumber.get() // 10
+mynumber.set(11)
+mynumber.get() // 11
+```
 
 ## Graph
 

@@ -1,4 +1,4 @@
-[tiinvo - v1.5.2](../README.md) › ["Mediator"](../modules/_mediator_.md) › [MediatorLike](_mediator_.mediatorlike.md)
+[tiinvo - v1.6.0](../README.md) › ["Mediator"](../modules/_mediator_.md) › [MediatorLike](_mediator_.mediatorlike.md)
 
 # Class: MediatorLike
 
@@ -24,7 +24,7 @@
 
 • **_channels**: *[MediatorChannels](../interfaces/_mediator_.mediatorchannels.md)*
 
-*Defined in [Mediator.ts:10](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Mediator.ts#L10)*
+*Defined in [Mediator.ts:10](https://github.com/OctoD/tiinvo/blob/52c8484/src/Mediator.ts#L10)*
 
 ## Methods
 
@@ -32,7 +32,7 @@
 
 ▸ **publish**(`channel`: string, ...`args`: any[]): *[Result](../modules/_result_.md#result)‹boolean, Error›*
 
-*Defined in [Mediator.ts:26](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Mediator.ts#L26)*
+*Defined in [Mediator.ts:26](https://github.com/OctoD/tiinvo/blob/52c8484/src/Mediator.ts#L26)*
 
 Publishes a list of arguments `args` to all subscribed functions in a channel returning a `Result<boolean, Error>`
 
@@ -59,7 +59,7 @@ ___
 
 ▸ **publishAsync**(`channel`: string, ...`args`: any[]): *Promise‹[Result](../modules/_result_.md#result)‹boolean, Error››*
 
-*Defined in [Mediator.ts:57](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Mediator.ts#L57)*
+*Defined in [Mediator.ts:57](https://github.com/OctoD/tiinvo/blob/52c8484/src/Mediator.ts#L57)*
 
 Publishes a list of arguments `args` to all subscribed functions in a channel returnin a Promise<Result<boolean, Error>>.
 
@@ -89,7 +89,7 @@ ___
 
 ▸ **subscribe**(`channel`: string, `fn`: FnBase): *this*
 
-*Defined in [Mediator.ts:86](https://github.com/OctoD/tiinvo/blob/7d2a102/src/Mediator.ts#L86)*
+*Defined in [Mediator.ts:86](https://github.com/OctoD/tiinvo/blob/52c8484/src/Mediator.ts#L86)*
 
 Subscribes a function `fn` to a `channel` returning the `Mediator` itself.
 
