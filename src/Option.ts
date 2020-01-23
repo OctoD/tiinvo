@@ -1,5 +1,5 @@
 import { coerceToNull, ensureFunction } from "./common";
-import { Err, Ok } from "./Result";
+import { Err, Ok, ResultLike, Result } from "./Result";
 
 export class OptionLike<T> {
   public constructor(protected value: T) {}
@@ -32,12 +32,10 @@ export class OptionLike<T> {
    * Returns `callback` result if `OptionLike<T>` is `Some`,
    * otherwise returns `None`
    * @param {<R>(arg: T) => OptionLike<R>} callback
-   * @returns {ReturnType<typeof callback>}
+   * @returns {OptionLike<T | K>}
    * @memberof OptionLike
    */
-  public andThen<K>(
-    callback: (arg: T) => OptionLike<K>
-  ): Some<T> | ReturnType<typeof callback> {
+  public andThen<K>(callback: (arg: T) => OptionLike<K>): OptionLike<T | K> {
     ensureFunction("andThen argument must be a function", callback);
     return this.foldReturn(callback(this.value));
   }
@@ -75,12 +73,10 @@ export class OptionLike<T> {
    * ```
    *
    * @param {(arg: T) => boolean} predicate
-   * @returns {ReturnType<typeof predicate> extends true ? Some<T> : None}
+   * @returns {OptionLike<T>}
    * @memberof OptionLike
    */
-  public filter(
-    predicate: (arg: T) => boolean
-  ): ReturnType<typeof predicate> extends true ? Some<T> : None<T> {
+  public filter(predicate: (arg: T) => boolean): OptionLike<T> {
     const predicateresult = predicate(this.value);
     return predicateresult ? this : None<T>();
   }
@@ -196,10 +192,10 @@ export class OptionLike<T> {
    * ```
    *
    * @param {Err} err
-   * @returns {(Ok<T> | Err)}
+   * @returns {Result<T>}
    * @memberof OptionLike
    */
-  public okOr(err: Err): Ok<T> | Err {
+  public okOr(err: Err): Result<T> {
     return this.isSome() ? Ok(this.value) : err;
   }
 
@@ -212,11 +208,11 @@ export class OptionLike<T> {
    * ```
    *
    * @param {() => Err} fn
-   * @returns {(Ok<NonNullable<T>> | Err)}
+   * @returns {Result<NonNullable<T>>}
    * @memberof OptionLike
    */
-  public okOrElse(err: () => Err): Ok<NonNullable<T>> | Err {
-    return this.isSome() ? Ok(this.value) : err();
+  public okOrElse(err: () => Err): Result<NonNullable<T>> {
+    return this.isSome() ? Ok(this.value as any) : err();
   }
 
   /**
@@ -248,10 +244,10 @@ export class OptionLike<T> {
    *
    * @template U
    * @param {() => OptionLike<U>} f
-   * @returns {(Some<T> | OptionLike<U>)}
+   * @returns {OptionLike<T | U>}
    * @memberof OptionLike
    */
-  public orElse<U>(f: () => OptionLike<U>): Some<T> | OptionLike<U> {
+  public orElse<U>(f: () => OptionLike<U>): OptionLike<T | U> {
     ensureFunction("orElse argument must be a function", f);
 
     return this.isSome() ? this : f();
@@ -264,10 +260,10 @@ export class OptionLike<T> {
    * Option(100).transpose() // Ok(Some(100))
    * ```
    *
-   * @returns {(Ok<Some<T>> | Ok<None>)}
+   * @returns {Ok<OptionLike<T>>}
    * @memberof OptionLike
    */
-  public transpose(): Ok<Some<T>> | Ok<None<T>> {
+  public transpose(): Ok<OptionLike<T>> {
     return this.isSome() ? Ok(Some(this.value)) : Ok(None());
   }
 

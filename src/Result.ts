@@ -218,10 +218,10 @@ export class ResultLike<R, E extends Error> {
    *
    * @template U
    * @param {(arg: E) => ResultLike<U, E>} op
-   * @returns {(ResultLike<U, E> | Ok<R>)}
+   * @returns {ResultLike<U | R, E>}
    * @memberof Result
    */
-  public orElse<U>(op: (arg: E) => ResultLike<U, E>): ResultLike<U, E> | Ok<R> {
+  public orElse<U>(op: (arg: E) => ResultLike<U, E>): ResultLike<U | R, E> {
     ensureFunction("orElse argument must be a function", op);
 
     return instanceOfError<R, E>(this.value) ? op(this.value) : this;
@@ -340,7 +340,7 @@ export type Ok<T> = ResultLike<T, any>;
  * containing a value, and `Err(E)`, representing error and containing
  * an error value.
  */
-export type Result<T, E extends Error> = ResultLike<T, E>;
+export type Result<T, E extends Error = Error> = ResultLike<T, E>;
 
 /**
  * `Result<T, E>` is the type used for returning and propagating errors.
