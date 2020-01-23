@@ -1,4 +1,4 @@
-[tiinvo - v1.6.0](../README.md) › ["GetSet"](_getset_.md)
+[tiinvo - v1.6.1](../README.md) › ["GetSet"](_getset_.md)
 
 # External module: "GetSet"
 
@@ -18,7 +18,7 @@
 
 ▸ **GetSet**<**T**>(`initialValue`: T): *[GetSet](../interfaces/_getset_.getset.md)‹T›*
 
-Defined in GetSet.ts:48
+*Defined in [GetSet.ts:48](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/GetSet.ts#L48)*
 
 Returns a GetSet
 
