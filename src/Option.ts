@@ -37,7 +37,7 @@ export class OptionLike<T> {
    */
   public andThen<K>(callback: (arg: T) => OptionLike<K>): OptionLike<T | K> {
     ensureFunction("andThen argument must be a function", callback);
-    return this.foldReturn(callback(this.value));
+    return this.isSome() ? callback(this.value) : this;
   }
 
   /**
