@@ -61,7 +61,7 @@
     "lint-staged": "10.0.7",
     "npm-check": "5.9.0",
     "prettier": "1.19.1",
-    "size-limit": "4.0.1",
+    "size-limit": "4.0.2",
     "standard-changelog": "2.0.21",
     "ts-jest": "25.2.0",
     "ts-node": "8.6.2",
