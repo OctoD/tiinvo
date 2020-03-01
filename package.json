@@ -67,6 +67,6 @@
     "ts-node": "8.6.2",
     "typedoc": "0.16.9",
     "typedoc-plugin-markdown": "2.2.16",
-    "typescript": "3.7.5"
+    "typescript": "3.8.3"
   }
 }
