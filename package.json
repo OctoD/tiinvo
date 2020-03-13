@@ -63,7 +63,7 @@
     "prettier": "1.19.1",
     "size-limit": "4.0.1",
     "standard-changelog": "2.0.21",
-    "ts-jest": "25.2.0",
+    "ts-jest": "25.2.1",
     "ts-node": "8.6.2",
     "typedoc": "0.16.9",
     "typedoc-plugin-markdown": "2.2.17",
