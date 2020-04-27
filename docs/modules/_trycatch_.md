@@ -1,6 +1,6 @@
-[tiinvo - v1.6.1](../README.md) › ["TryCatch"](_trycatch_.md)
+[tiinvo](../README.md) › ["TryCatch"](_trycatch_.md)
 
-# External module: "TryCatch"
+# Module: "TryCatch"
 
 ## Index
 
@@ -20,7 +20,7 @@
 
 Ƭ **Fn**: *function*
 
-*Defined in [TryCatch.ts:3](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/TryCatch.ts#L3)*
+*Defined in [TryCatch.ts:3](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/TryCatch.ts#L3)*
 
 #### Type declaration:
 
@@ -32,7 +32,7 @@ ___
 
 Ƭ **FnAsync**: *function*
 
-*Defined in [TryCatch.ts:4](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/TryCatch.ts#L4)*
+*Defined in [TryCatch.ts:4](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/TryCatch.ts#L4)*
 
 #### Type declaration:
 
@@ -44,7 +44,7 @@ ___
 
 ▸ **TryCatch**<**FnTry**, **K**>(`fnTry`: FnTry, ...`args`: K): *[Result](_result_.md#result)‹ReturnType‹FnTry›, Error›*
 
-*Defined in [TryCatch.ts:26](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/TryCatch.ts#L26)*
+*Defined in [TryCatch.ts:26](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/TryCatch.ts#L26)*
 
 Handle sync try/catch.
 
@@ -59,10 +59,6 @@ TryCatch(
 ```
 
 **`export`** 
-
-**`template`** FnTry
-
-**`template`** K
 
 **Type parameters:**
 
@@ -85,7 +81,7 @@ ___
 
 ▸ **TryCatchAsync**<**FnTry**, **K**>(`fnTry`: FnTry, ...`args`: K): *Promise‹[Result](_result_.md#result)‹ReturnType<FnTry> extends Promise<infer U> ? U : ReturnType<FnTry>, Error››*
 
-*Defined in [TryCatch.ts:55](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/TryCatch.ts#L55)*
+*Defined in [TryCatch.ts:55](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/TryCatch.ts#L55)*
 
 Handle sync try/catch.
 
@@ -98,10 +94,6 @@ TryCatchAsync(
 ```
 
 **`export`** 
-
-**`template`** FnTry
-
-**`template`** K
 
 **Type parameters:**
 

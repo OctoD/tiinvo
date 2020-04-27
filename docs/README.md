@@ -1,10 +1,10 @@
-[tiinvo - v1.6.1](README.md)
+[tiinvo](README.md)
 
-# tiinvo - v1.6.1
+# tiinvo
 
 ## Index
 
-### External modules
+### Modules
 
 * ["Either"](modules/_either_.md)
 * ["GetSet"](modules/_getset_.md)

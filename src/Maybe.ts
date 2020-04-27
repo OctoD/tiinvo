@@ -183,6 +183,23 @@ export class MaybeLike<T, IsJustLike extends boolean> {
   }
 
   /**
+   * If T is Nothing, then returns maybeValue
+   *
+   * ```ts
+   * Maybe(undefined).or(Maybe(null)).or(Maybe(10)).unwrap() // 10;
+   * ```
+   *
+   * @param {MaybeLike<Z>} maybeValue
+   * @returns {MaybeLike<unknown, IsJustLike>}
+   * @memberof MaybeLike
+   */
+  public or<Z>(
+    maybeValue: MaybeLike<Z, IsJustLike>
+  ): MaybeLike<unknown, IsJustLike> {
+    return this.isJust() ? this : (maybeValue as any);
+  }
+
+  /**
    * Unwraps `value`
    *
    * ```ts

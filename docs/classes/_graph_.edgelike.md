@@ -1,4 +1,4 @@
-[tiinvo - v1.6.1](../README.md) › ["Graph"](../modules/_graph_.md) › [EdgeLike](_graph_.edgelike.md)
+[tiinvo](../README.md) › ["Graph"](../modules/_graph_.md) › [EdgeLike](_graph_.edgelike.md)
 
 # Class: EdgeLike
 
@@ -31,7 +31,7 @@
 
 \+ **new EdgeLike**(`_value`: number, `_left`: [Vertex](../modules/_graph_.md#vertex), `_right`: [Vertex](../modules/_graph_.md#vertex)): *[EdgeLike](_graph_.edgelike.md)*
 
-*Defined in [Graph.ts:5](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Graph.ts#L5)*
+*Defined in [Graph.ts:5](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L5)*
 
 **Parameters:**
 
@@ -49,7 +49,7 @@ Name | Type |
 
 • **_left**: *[Vertex](../modules/_graph_.md#vertex)*
 
-*Defined in [Graph.ts:8](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Graph.ts#L8)*
+*Defined in [Graph.ts:8](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L8)*
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 • **_right**: *[Vertex](../modules/_graph_.md#vertex)*
 
-*Defined in [Graph.ts:9](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Graph.ts#L9)*
+*Defined in [Graph.ts:9](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L9)*
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 • **_value**: *number*
 
-*Defined in [Graph.ts:7](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Graph.ts#L7)*
+*Defined in [Graph.ts:7](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L7)*
 
 ## Methods
 
@@ -73,7 +73,7 @@ ___
 
 ▸ **left**(): *[Option](../modules/_option_.md#option)‹[VertexLike](_graph_.vertexlike.md)›*
 
-*Defined in [Graph.ts:23](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Graph.ts#L23)*
+*Defined in [Graph.ts:23](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L23)*
 
 Gets the left connected `Vertex<T>` to an edge. It returns `Option<Vertex<T>>` if there is a vertex, otherwise returns `None`
 
@@ -92,7 +92,7 @@ ___
 
 ▸ **opposing**(`vertex`: [Vertex](../modules/_graph_.md#vertex)): *[Option](../modules/_option_.md#option)‹[Vertex](../modules/_graph_.md#vertex)›*
 
-*Defined in [Graph.ts:45](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Graph.ts#L45)*
+*Defined in [Graph.ts:45](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L45)*
 
 Retuns the opposing `Vertex<T>` of `vertex` as `Option<Vertex<T>>` if the `Edge` contains the passed `vertex`. If the `Edge` does not contains `vertex`, it will return `None`.
 
@@ -123,7 +123,7 @@ ___
 
 ▸ **right**(): *[Option](../modules/_option_.md#option)‹[VertexLike](_graph_.vertexlike.md)›*
 
-*Defined in [Graph.ts:67](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Graph.ts#L67)*
+*Defined in [Graph.ts:67](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L67)*
 
 Gets the right connected `Vertex<T>` to an edge. It returns `Option<Vertex<T>>` if there is a vertex, otherwise returns `None`
 
@@ -142,7 +142,7 @@ ___
 
 ▸ **value**(): *number*
 
-*Defined in [Graph.ts:82](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Graph.ts#L82)*
+*Defined in [Graph.ts:82](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L82)*
 
 It returns stored value of an `Edge`.
 

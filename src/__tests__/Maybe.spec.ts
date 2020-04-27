@@ -25,8 +25,8 @@ describe(`Maybe`, () => {
   });
 
   it("Returns `fn` result if `Maybe<T>` is `Just<T>`, otherwise returns `Nothing<T>`", () => {
-    expect(Just(10).andThen(arg => Maybe(arg ** 2))).toStrictEqual(Just(100));
-    expect(Nothing(10).andThen(arg => Maybe(arg ** 2))).toStrictEqual(
+    expect(Just(10).andThen((arg) => Maybe(arg ** 2))).toStrictEqual(Just(100));
+    expect(Nothing(10).andThen((arg) => Maybe(arg ** 2))).toStrictEqual(
       Nothing(10)
     );
   });
@@ -37,11 +37,17 @@ describe(`Maybe`, () => {
   });
 
   it("Applies a function to the contained value (if any), or computes a default (if not).", () => {
-    expect(Just("foobar").mapOrElse(() => 0, arg => arg.length)).toStrictEqual(
-      Just(6)
-    );
     expect(
-      Nothing("foobar").mapOrElse(() => 0, arg => arg.length)
+      Just("foobar").mapOrElse(
+        () => 0,
+        (arg) => arg.length
+      )
+    ).toStrictEqual(Just(6));
+    expect(
+      Nothing("foobar").mapOrElse(
+        () => 0,
+        (arg) => arg.length
+      )
     ).toStrictEqual(Nothing(0));
   });
 
@@ -70,14 +76,14 @@ describe(`Maybe`, () => {
     ).toThrowError();
     expect(
       Just(10).cata({
-        Just: arg => arg + " is just",
-        Nothing: arg => arg + " is nothing"
+        Just: (arg) => arg + " is just",
+        Nothing: (arg) => arg + " is nothing",
       })
     ).toStrictEqual("10 is just");
     expect(
       Nothing(3).cata({
-        Just: arg => arg + " is just",
-        Nothing: arg => arg + " is nothing"
+        Just: (arg) => arg + " is just",
+        Nothing: (arg) => arg + " is nothing",
       })
     ).toStrictEqual("3 is nothing");
   });
@@ -85,17 +91,28 @@ describe(`Maybe`, () => {
   it("Maps current `MaybeLike<T>` to a `new MaybeLike<U>` if is `Just<T>` ", () => {
     expect(
       Maybe("lorem ipsum")
-        .map(arg => arg.replace(/\s/g, ""))
-        .map(arg => arg.length)
+        .map((arg) => arg.replace(/\s/g, ""))
+        .map((arg) => arg.length)
         .unwrap()
     ).toBe(10);
 
     expect(
       Maybe("")
-        .map(arg => arg.replace(/\s/g, ""))
-        .map(arg => arg.length)
+        .map((arg) => arg.replace(/\s/g, ""))
+        .map((arg) => arg.length)
         .unwrap()
     ).toBe("");
+  });
+
+  it("If T is Nothing, then returns maybeValue", () => {
+    expect(Maybe(undefined).or(Maybe(null)).or(Maybe(10)).unwrap()).toBe(10);
+    expect(
+      Maybe(10)
+        .or(Maybe(null))
+        .or(Maybe(void 0))
+        .unwrap()
+    ).toBe(10);
+    expect(Maybe(0).or(Maybe(NaN)).or(Maybe(false)).unwrap()).toBe(false);
   });
 
   it("Unwraps `value`", () => {

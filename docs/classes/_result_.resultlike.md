@@ -1,4 +1,4 @@
-[tiinvo - v1.6.1](../README.md) › ["Result"](../modules/_result_.md) › [ResultLike](_result_.resultlike.md)
+[tiinvo](../README.md) › ["Result"](../modules/_result_.md) › [ResultLike](_result_.resultlike.md)
 
 # Class: ResultLike <**R, E**>
 
@@ -47,7 +47,7 @@
 
 \+ **new ResultLike**(`value`: R | E): *[ResultLike](_result_.resultlike.md)*
 
-*Defined in [Result.ts:4](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L4)*
+*Defined in [Result.ts:4](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L4)*
 
 **Parameters:**
 
@@ -63,7 +63,7 @@ Name | Type |
 
 • **value**: *R | E*
 
-*Defined in [Result.ts:5](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L5)*
+*Defined in [Result.ts:5](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L5)*
 
 ## Methods
 
@@ -71,7 +71,7 @@ Name | Type |
 
 ▸ **and**<**U**>(`res`: [ResultLike](_result_.resultlike.md)‹U, E›): *[ResultLike](_result_.resultlike.md)‹U, E›*
 
-*Defined in [Result.ts:20](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L20)*
+*Defined in [Result.ts:20](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L20)*
 
 Returns `res` if the result is `Ok`, otherwise returns the `Err` value of self.
 
@@ -79,8 +79,6 @@ Returns `res` if the result is `Ok`, otherwise returns the `Err` value of self.
 Ok(10).and(Ok(20)) // Ok(20)
 Err('meh').and(Ok(30)) // Err('meh')
 ```
-
-**`template`** U
 
 **`memberof`** Result
 
@@ -102,7 +100,7 @@ ___
 
 ▸ **andThen**<**U**>(`op`: function): *[ResultLike](_result_.resultlike.md)‹U, E›*
 
-*Defined in [Result.ts:39](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L39)*
+*Defined in [Result.ts:39](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L39)*
 
 Calls `op` if the result is `Ok`, otherwise returns the `Err` value of self.
 
@@ -110,8 +108,6 @@ Calls `op` if the result is `Ok`, otherwise returns the `Err` value of self.
 Ok(20).andThen(a => a * 2) // Ok(40)
 Err('aaa').andThen(a => a * 2) // Err('aaa')
 ```
-
-**`template`** U
 
 **`memberof`** Result
 
@@ -139,7 +135,7 @@ ___
 
 ▸ **err**(): *[Option](../modules/_option_.md#option)‹E›*
 
-*Defined in [Result.ts:57](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L57)*
+*Defined in [Result.ts:57](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L57)*
 
 Converts from `Result<T, E>` to `OptionLike<E>`.
 
@@ -157,7 +153,7 @@ ___
 
 ▸ **expect**(`message`: string): *R | never*
 
-*Defined in [Result.ts:73](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L73)*
+*Defined in [Result.ts:73](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L73)*
 
 Unwraps a result, yielding the content of an `Ok`.
 
@@ -182,7 +178,7 @@ ___
 
 ▸ **expectErr**(`message`: string): *E | never*
 
-*Defined in [Result.ts:93](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L93)*
+*Defined in [Result.ts:93](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L93)*
 
 Unwraps a result, yielding the content of an `Err`.
 
@@ -207,7 +203,7 @@ ___
 
 ▸ **isError**(): *boolean*
 
-*Defined in [Result.ts:112](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L112)*
+*Defined in [Result.ts:112](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L112)*
 
 Returns true if the result is `Error`.
 
@@ -226,7 +222,7 @@ ___
 
 ▸ **isOk**(): *boolean*
 
-*Defined in [Result.ts:127](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L127)*
+*Defined in [Result.ts:127](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L127)*
 
 Returns true if the result is `Ok`.
 
@@ -245,7 +241,7 @@ ___
 
 ▸ **map**<**K**>(`f`: function): *[ResultLike](_result_.resultlike.md)‹K, E›*
 
-*Defined in [Result.ts:146](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L146)*
+*Defined in [Result.ts:146](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L146)*
 
 Maps a `Result<T, E>` to `Result<U, E>` by applying a function
 to a contained `Ok` value, leaving an `Err` value untouched.
@@ -255,8 +251,6 @@ This function can be used to compose the results of two functions.
 ```ts
 Ok('asd').map(a => a.length) // Ok(3)
 ```
-
-**`template`** K
 
 **`memberof`** Result
 
@@ -284,7 +278,7 @@ ___
 
 ▸ **mapOrElse**<**F**>(`fallback`: function, `f`: function): *F*
 
-*Defined in [Result.ts:168](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L168)*
+*Defined in [Result.ts:168](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L168)*
 
 Maps a `Result<T, E>` to `F` by applying a function to a contained `Ok` value, or a `fallback` function to a contained `Err` value.
 
@@ -294,8 +288,6 @@ This function can be used to unpack a successful result while handling an error.
 Ok('asd').mapOrElse(b => b.message, a => a.repeat(2)) // 'asdasd'
 Err('ohmybad').mapOrElse(b => b.message, a => a.repeat(2)) // 'ohmybad'
 ```
-
-**`template`** F
 
 **`memberof`** Result
 
@@ -333,7 +325,7 @@ ___
 
 ▸ **ok**(): *[Option](../modules/_option_.md#option)‹R›*
 
-*Defined in [Result.ts:188](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L188)*
+*Defined in [Result.ts:188](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L188)*
 
 Converts from Result<T, E> to Option<T>.
 
@@ -352,7 +344,7 @@ ___
 
 ▸ **or**<**U**>(`res`: [ResultLike](_result_.resultlike.md)‹U, E›): *[ResultLike](_result_.resultlike.md)‹U, E› | [Ok](../modules/_result_.md#ok)‹R›*
 
-*Defined in [Result.ts:205](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L205)*
+*Defined in [Result.ts:205](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L205)*
 
 Returns `res` if the result is `Err`, otherwise returns the `Ok` value of self.
 
@@ -360,8 +352,6 @@ Returns `res` if the result is `Err`, otherwise returns the `Ok` value of self.
 Ok(10).or(Ok(20)) // Ok(10)
 Err('').or(Ok(20)) // Ok(20)
 ```
-
-**`template`** U
 
 **`memberof`** Result
 
@@ -383,7 +373,7 @@ ___
 
 ▸ **orElse**<**U**>(`op`: function): *[ResultLike](_result_.resultlike.md)‹U | R, E›*
 
-*Defined in [Result.ts:224](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L224)*
+*Defined in [Result.ts:224](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L224)*
 
 Calls `op` if the result is `Err`, otherwise returns the `Ok` value of self.
 
@@ -393,8 +383,6 @@ This function can be used for control flow based on result values.
 Ok('unicorn!').orElse(a => a.message) // Ok('unicorn!')
 Err('darn!').orElse(a => a.message) // Ok('darn!')
 ```
-
-**`template`** U
 
 **`memberof`** Result
 
@@ -422,7 +410,7 @@ ___
 
 ▸ **unwrap**(): *R | never*
 
-*Defined in [Result.ts:241](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L241)*
+*Defined in [Result.ts:241](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L241)*
 
 Returns wrapped value or throws an `Error`
 
@@ -441,7 +429,7 @@ ___
 
 ▸ **unwrapErr**(): *E | never*
 
-*Defined in [Result.ts:261](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L261)*
+*Defined in [Result.ts:261](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L261)*
 
 Unwraps a result, yielding the content of an `Err`.
 Throws if the value is not an `Err`.
@@ -461,7 +449,7 @@ ___
 
 ▸ **unwrapOr**<**U**>(`optb`: U): *R | U*
 
-*Defined in [Result.ts:282](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L282)*
+*Defined in [Result.ts:282](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L282)*
 
 Unwraps a result, yielding the content of an `Ok`. Else, it returns `optb`.
 
@@ -469,8 +457,6 @@ Unwraps a result, yielding the content of an `Ok`. Else, it returns `optb`.
 Ok(10).unwrapOr(20) // 10
 Err('foo').unwrapOr(30) // 30
 ```
-
-**`template`** U
 
 **`memberof`** Result
 
@@ -492,7 +478,7 @@ ___
 
 ▸ **unwrapOrElse**<**U**>(`op`: function): *R | U*
 
-*Defined in [Result.ts:299](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L299)*
+*Defined in [Result.ts:299](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L299)*
 
 Unwraps a result, yielding the content of an `Ok`. If the value is an `Err` then it calls op with its value.
 
@@ -500,8 +486,6 @@ Unwraps a result, yielding the content of an `Ok`. If the value is an `Err` then
 Ok('pizza').unwrapOrElse(err => err.message) // 'pizza'
 Err('pizza with ananas').unwrapOrElse(err => err.message) // 'pizza with ananas'
 ```
-
-**`template`** U
 
 **`memberof`** Result
 

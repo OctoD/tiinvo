@@ -1,4 +1,4 @@
-[tiinvo - v1.6.1](../README.md) › ["GetSet"](../modules/_getset_.md) › [GetSet](_getset_.getset.md)
+[tiinvo](../README.md) › ["GetSet"](../modules/_getset_.md) › [GetSet](_getset_.getset.md)
 
 # Interface: GetSet <**T**>
 
@@ -17,8 +17,6 @@ mynumber.get() // 11
 **`export`** 
 
 **`interface`** GetSet
-
-**`template`** T
 
 ## Type parameters
 
@@ -41,7 +39,7 @@ mynumber.get() // 11
 
 ▸ **get**(): *T*
 
-*Defined in [GetSet.ts:30](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/GetSet.ts#L30)*
+*Defined in [GetSet.ts:30](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/GetSet.ts#L30)*
 
 Gets current value
 
@@ -60,7 +58,7 @@ ___
 
 ▸ **set**(`value`: T): *void*
 
-*Defined in [GetSet.ts:37](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/GetSet.ts#L37)*
+*Defined in [GetSet.ts:37](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/GetSet.ts#L37)*
 
 **`memberof`** GetSet
 

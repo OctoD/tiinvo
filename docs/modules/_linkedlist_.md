@@ -1,6 +1,6 @@
-[tiinvo - v1.6.1](../README.md) › ["LinkedList"](_linkedlist_.md)
+[tiinvo](../README.md) › ["LinkedList"](_linkedlist_.md)
 
-# External module: "LinkedList"
+# Module: "LinkedList"
 
 ## Index
 
@@ -25,7 +25,7 @@
 
 Ƭ **LinkedList**: *[LinkedListLike](../classes/_linkedlist_.linkedlistlike.md)‹T›*
 
-*Defined in [LinkedList.ts:323](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/LinkedList.ts#L323)*
+*Defined in [LinkedList.ts:323](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L323)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 Ƭ **Node**: *[NodeLike](../classes/_linkedlist_.nodelike.md)‹T›*
 
-*Defined in [LinkedList.ts:322](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/LinkedList.ts#L322)*
+*Defined in [LinkedList.ts:322](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L322)*
 
 ## Functions
 
@@ -41,11 +41,9 @@ ___
 
 ▸ **LinkedList**<**T**>(`initialValues`: T[]): *LinkedList‹T›*
 
-*Defined in [LinkedList.ts:345](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/LinkedList.ts#L345)*
+*Defined in [LinkedList.ts:345](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L345)*
 
 **`export`** 
-
-**`template`** T
 
 **Type parameters:**
 
@@ -55,7 +53,7 @@ ___
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`initialValues` | T[] |  [] |
+`initialValues` | T[] | [] |
 
 **Returns:** *LinkedList‹T›*
 
@@ -65,11 +63,9 @@ ___
 
 ▸ **Node**<**T**>(`value?`: T): *Node‹T›*
 
-*Defined in [LinkedList.ts:333](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/LinkedList.ts#L333)*
+*Defined in [LinkedList.ts:333](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L333)*
 
 **`export`** 
-
-**`template`** T
 
 **Type parameters:**
 

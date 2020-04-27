@@ -1,6 +1,6 @@
-[tiinvo - v1.6.1](../README.md) › ["Stack"](_stack_.md)
+[tiinvo](../README.md) › ["Stack"](_stack_.md)
 
-# External module: "Stack"
+# Module: "Stack"
 
 ## Index
 
@@ -33,7 +33,7 @@
 
 Ƭ **FunctionQueue**: *[FunctionQueueLike](../classes/_stack_.functionqueuelike.md)‹Fn›*
 
-*Defined in [Stack.ts:526](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Stack.ts#L526)*
+*Defined in [Stack.ts:526](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L526)*
 
 Represents a Queue of Functions data type
 
@@ -56,7 +56,7 @@ ___
 
 Ƭ **FunctionStack**: *[FunctionStackLike](../classes/_stack_.functionstacklike.md)‹Fn›*
 
-*Defined in [Stack.ts:548](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Stack.ts#L548)*
+*Defined in [Stack.ts:548](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L548)*
 
 Represents a Stack of Functions data type
 
@@ -80,7 +80,7 @@ ___
 
 Ƭ **Queue**: *[QueueLike](../classes/_stack_.queuelike.md)‹T›*
 
-*Defined in [Stack.ts:572](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Stack.ts#L572)*
+*Defined in [Stack.ts:572](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L572)*
 
 Represents a Queue data type
 
@@ -106,7 +106,7 @@ ___
 
 Ƭ **Stack**: *[StackLike](../classes/_stack_.stacklike.md)‹T›*
 
-*Defined in [Stack.ts:602](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Stack.ts#L602)*
+*Defined in [Stack.ts:602](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L602)*
 
 Represents a Stack data type
 
@@ -141,13 +141,11 @@ q.top() // 'foo'
 
 ▸ **FunctionQueue**<**Fn**>(`args`: Fn[]): *FunctionQueue‹Fn›*
 
-*Defined in [Stack.ts:616](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Stack.ts#L616)*
+*Defined in [Stack.ts:616](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L616)*
 
 Represents a Queue of Functions
 
 **`export`** 
-
-**`template`** Fn
 
 **Type parameters:**
 
@@ -157,7 +155,7 @@ Represents a Queue of Functions
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`args` | Fn[] |  [] |
+`args` | Fn[] | [] |
 
 **Returns:** *FunctionQueue‹Fn›*
 
@@ -167,13 +165,11 @@ ___
 
 ▸ **FunctionStack**<**Fn**>(`args`: Fn[]): *FunctionStack‹Fn›*
 
-*Defined in [Stack.ts:634](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Stack.ts#L634)*
+*Defined in [Stack.ts:634](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L634)*
 
 Represents a Stack of Functions
 
 **`export`** 
-
-**`template`** Fn
 
 **Type parameters:**
 
@@ -183,7 +179,7 @@ Represents a Stack of Functions
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`args` | Fn[] |  [] |
+`args` | Fn[] | [] |
 
 **Returns:** *FunctionStack‹Fn›*
 
@@ -193,13 +189,11 @@ ___
 
 ▸ **Queue**<**T**>(`args`: T[]): *Queue‹T›*
 
-*Defined in [Stack.ts:652](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Stack.ts#L652)*
+*Defined in [Stack.ts:652](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L652)*
 
 Represents a Queue data type
 
 **`export`** 
-
-**`template`** T
 
 **Type parameters:**
 
@@ -209,7 +203,7 @@ Represents a Queue data type
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`args` | T[] |  [] |
+`args` | T[] | [] |
 
 **Returns:** *Queue‹T›*
 
@@ -219,13 +213,11 @@ ___
 
 ▸ **Stack**<**T**>(`args`: T[]): *Stack‹T›*
 
-*Defined in [Stack.ts:664](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Stack.ts#L664)*
+*Defined in [Stack.ts:664](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L664)*
 
 Represents a Stack data type
 
 **`export`** 
-
-**`template`** T
 
 **Type parameters:**
 
@@ -235,7 +227,7 @@ Represents a Stack data type
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`args` | T[] |  [] |
+`args` | T[] | [] |
 
 **Returns:** *Stack‹T›*
 
@@ -245,7 +237,7 @@ ___
 
 ▸ **ensureFunctionArray**(`message`: string): *(Anonymous function)*
 
-*Defined in [Stack.ts:604](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Stack.ts#L604)*
+*Defined in [Stack.ts:604](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L604)*
 
 **Parameters:**
 

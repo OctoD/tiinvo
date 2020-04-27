@@ -1,4 +1,4 @@
-[tiinvo - v1.6.1](../README.md) › ["LinkedList"](../modules/_linkedlist_.md) › [NodeLike](_linkedlist_.nodelike.md)
+[tiinvo](../README.md) › ["LinkedList"](../modules/_linkedlist_.md) › [NodeLike](_linkedlist_.nodelike.md)
 
 # Class: NodeLike <**T**>
 
@@ -38,7 +38,7 @@
 
 \+ **new NodeLike**(`_value`: T, `_left?`: [NodeLike](_linkedlist_.nodelike.md)‹T›, `_right?`: [NodeLike](_linkedlist_.nodelike.md)‹T›): *[NodeLike](_linkedlist_.nodelike.md)*
 
-*Defined in [LinkedList.ts:4](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/LinkedList.ts#L4)*
+*Defined in [LinkedList.ts:4](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L4)*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ Name | Type |
 
 • **_left**? : *[NodeLike](_linkedlist_.nodelike.md)‹T›*
 
-*Defined in [LinkedList.ts:7](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/LinkedList.ts#L7)*
+*Defined in [LinkedList.ts:7](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L7)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 • **_right**? : *[NodeLike](_linkedlist_.nodelike.md)‹T›*
 
-*Defined in [LinkedList.ts:8](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/LinkedList.ts#L8)*
+*Defined in [LinkedList.ts:8](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L8)*
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 • **_value**: *T*
 
-*Defined in [LinkedList.ts:6](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/LinkedList.ts#L6)*
+*Defined in [LinkedList.ts:6](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L6)*
 
 ## Methods
 
@@ -80,7 +80,7 @@ ___
 
 ▸ **farleft**(): *[Maybe](../modules/_maybe_.md#maybe)‹[Node](../modules/_linkedlist_.md#node)‹T››*
 
-*Defined in [LinkedList.ts:21](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/LinkedList.ts#L21)*
+*Defined in [LinkedList.ts:21](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L21)*
 
 Returns a `Maybe<Node<T>>` of the farthest linked node to the left
 
@@ -98,7 +98,7 @@ ___
 
 ▸ **farright**(): *[Maybe](../modules/_maybe_.md#maybe)‹[Node](../modules/_linkedlist_.md#node)‹T››*
 
-*Defined in [LinkedList.ts:47](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/LinkedList.ts#L47)*
+*Defined in [LinkedList.ts:47](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L47)*
 
 Returns a `Maybe<Node<T>>` of the farthest linked node to the right
 
@@ -116,7 +116,7 @@ ___
 
 ▸ **left**(): *[Maybe](../modules/_maybe_.md#maybe)‹[Node](../modules/_linkedlist_.md#node)‹T››*
 
-*Defined in [LinkedList.ts:73](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/LinkedList.ts#L73)*
+*Defined in [LinkedList.ts:73](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L73)*
 
 Returns a `Maybe<Node<T>>` of the linked node to the left
 
@@ -134,7 +134,7 @@ ___
 
 ▸ **right**(): *[Maybe](../modules/_maybe_.md#maybe)‹[Node](../modules/_linkedlist_.md#node)‹T››*
 
-*Defined in [LinkedList.ts:87](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/LinkedList.ts#L87)*
+*Defined in [LinkedList.ts:87](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L87)*
 
 Returns a `Maybe<Node<T>>` of the linked node to the right
 
@@ -152,7 +152,7 @@ ___
 
 ▸ **setLeft**(`node`: [NodeLike](_linkedlist_.nodelike.md)‹T›): *[NodeLike](_linkedlist_.nodelike.md)‹T›*
 
-*Defined in [LinkedList.ts:102](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/LinkedList.ts#L102)*
+*Defined in [LinkedList.ts:102](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L102)*
 
 Sets a `Node<T>` to left. Returns linked node to left
 
@@ -176,7 +176,7 @@ ___
 
 ▸ **setRight**(`node`: [NodeLike](_linkedlist_.nodelike.md)‹T›): *[NodeLike](_linkedlist_.nodelike.md)‹T›*
 
-*Defined in [LinkedList.ts:130](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/LinkedList.ts#L130)*
+*Defined in [LinkedList.ts:130](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L130)*
 
 Sets a `Node<T>` to right. Returns linked node to right
 
@@ -200,7 +200,7 @@ ___
 
 ▸ **value**(): *[Maybe](../modules/_maybe_.md#maybe)‹T›*
 
-*Defined in [LinkedList.ts:158](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/LinkedList.ts#L158)*
+*Defined in [LinkedList.ts:158](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L158)*
 
 Returns `Node<T>` shadowed value as a `Maybe<T>`.
 

@@ -1,6 +1,6 @@
-[tiinvo - v1.6.1](../README.md) › ["Option"](_option_.md)
+[tiinvo](../README.md) › ["Option"](_option_.md)
 
-# External module: "Option"
+# Module: "Option"
 
 ## Index
 
@@ -26,7 +26,7 @@
 
 Ƭ **None**: *[OptionLike](../classes/_option_.optionlike.md)‹T›*
 
-*Defined in [Option.ts:351](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Option.ts#L351)*
+*Defined in [Option.ts:347](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Option.ts#L347)*
 
 Type `Option` represents an optional value: every `Option` is either
 `Some` and contains a value, or `None`, and does not.
@@ -37,7 +37,7 @@ ___
 
 Ƭ **Option**: *[OptionLike](../classes/_option_.optionlike.md)‹T | null›*
 
-*Defined in [Option.ts:341](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Option.ts#L341)*
+*Defined in [Option.ts:337](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Option.ts#L337)*
 
 Type `Option` represents an optional value: every `Option` is either
 `Some` and contains a value, or `None`, and does not.
@@ -48,7 +48,7 @@ ___
 
 Ƭ **Some**: *[OptionLike](../classes/_option_.optionlike.md)‹T›*
 
-*Defined in [Option.ts:346](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Option.ts#L346)*
+*Defined in [Option.ts:342](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Option.ts#L342)*
 
 Type `Option` represents an optional value: every `Option` is either
 `Some` and contains a value, or `None`, and does not.
@@ -59,7 +59,7 @@ Type `Option` represents an optional value: every `Option` is either
 
 ▸ **None**<**T**>(): *None‹T›*
 
-*Defined in [Option.ts:361](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Option.ts#L361)*
+*Defined in [Option.ts:357](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Option.ts#L357)*
 
 Type `Option` represents an optional value: every `Option` is either
 `Some` and contains a value, or `None`, and does not.
@@ -80,7 +80,7 @@ ___
 
 ▸ **Option**<**T**>(`value`: T): *[OptionLike](../classes/_option_.optionlike.md)‹T›*
 
-*Defined in [Option.ts:389](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Option.ts#L389)*
+*Defined in [Option.ts:385](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Option.ts#L385)*
 
 Type `Option` represents an optional value: every `Option` is either
 `Some` and contains a value, or `None`, and does not.
@@ -88,8 +88,6 @@ Type `Option` represents an optional value: every `Option` is either
 Returns an `Option<T>`
 
 **`export`** 
-
-**`template`** T
 
 **Type parameters:**
 
@@ -109,7 +107,7 @@ ___
 
 ▸ **Some**<**T**>(`value`: T): *Some‹T›*
 
-*Defined in [Option.ts:375](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Option.ts#L375)*
+*Defined in [Option.ts:371](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Option.ts#L371)*
 
 Type `Option` represents an optional value: every `Option` is either
 `Some` and contains a value, or `None`, and does not.
@@ -117,8 +115,6 @@ Type `Option` represents an optional value: every `Option` is either
 Returns `Some<T>`
 
 **`export`** 
-
-**`template`** T
 
 **Type parameters:**
 

@@ -1,6 +1,6 @@
-[tiinvo - v1.6.1](../README.md) › ["Mediator"](_mediator_.md)
+[tiinvo](../README.md) › ["Mediator"](_mediator_.md)
 
-# External module: "Mediator"
+# Module: "Mediator"
 
 ## Index
 
@@ -26,7 +26,7 @@
 
 Ƭ **Mediator**: *[MediatorLike](../classes/_mediator_.mediatorlike.md)*
 
-*Defined in [Mediator.ts:95](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Mediator.ts#L95)*
+*Defined in [Mediator.ts:95](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Mediator.ts#L95)*
 
 ## Functions
 
@@ -34,7 +34,7 @@
 
 ▸ **Mediator**(): *Mediator*
 
-*Defined in [Mediator.ts:109](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Mediator.ts#L109)*
+*Defined in [Mediator.ts:109](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Mediator.ts#L109)*
 
 Type `Mediator` is the implementation of the mediator pattern.
 

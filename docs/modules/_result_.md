@@ -1,6 +1,6 @@
-[tiinvo - v1.6.1](../README.md) › ["Result"](_result_.md)
+[tiinvo](../README.md) › ["Result"](_result_.md)
 
-# External module: "Result"
+# Module: "Result"
 
 ## Index
 
@@ -26,7 +26,7 @@
 
 Ƭ **Err**: *[ResultLike](../classes/_result_.resultlike.md)‹any, Error›*
 
-*Defined in [Result.ts:329](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L329)*
+*Defined in [Result.ts:329](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L329)*
 
 `Result<T, E>` is the type used for returning and propagating errors.
 It is an enum with the variants, `Ok(T)`, representing success and
@@ -39,7 +39,7 @@ ___
 
 Ƭ **Ok**: *[ResultLike](../classes/_result_.resultlike.md)‹T, any›*
 
-*Defined in [Result.ts:336](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L336)*
+*Defined in [Result.ts:336](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L336)*
 
 `Result<T, E>` is the type used for returning and propagating errors.
 It is an enum with the variants, `Ok(T)`, representing success and
@@ -52,7 +52,7 @@ ___
 
 Ƭ **Result**: *[ResultLike](../classes/_result_.resultlike.md)‹T, E›*
 
-*Defined in [Result.ts:343](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L343)*
+*Defined in [Result.ts:343](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L343)*
 
 `Result<T, E>` is the type used for returning and propagating errors.
 It is an enum with the variants, `Ok(T)`, representing success and
@@ -65,7 +65,7 @@ an error value.
 
 ▸ **Err**(`message`: string | Error): *Err*
 
-*Defined in [Result.ts:356](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L356)*
+*Defined in [Result.ts:356](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L356)*
 
 `Result<T, E>` is the type used for returning and propagating errors.
 It is an enum with the variants, `Ok(T)`, representing success and
@@ -80,7 +80,7 @@ Returns an `Error`
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`message` | string &#124; Error |  new Error() |
+`message` | string &#124; Error | new Error() |
 
 **Returns:** *Err*
 
@@ -90,7 +90,7 @@ ___
 
 ▸ **Ok**<**T**>(`value`: T): *Ok‹T›*
 
-*Defined in [Result.ts:374](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L374)*
+*Defined in [Result.ts:374](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L374)*
 
 `Result<T, E>` is the type used for returning and propagating errors.
 It is an enum with the variants, `Ok(T)`, representing success and
@@ -100,8 +100,6 @@ an error value.
 Returns `Ok`
 
 **`export`** 
-
-**`template`** T
 
 **Type parameters:**
 
@@ -121,11 +119,7 @@ ___
 
 ▸ **instanceOfError**<**T**, **E**>(`value`: T | E): *value is E*
 
-*Defined in [Result.ts:312](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Result.ts#L312)*
-
-**`template`** T
-
-**`template`** E
+*Defined in [Result.ts:312](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Result.ts#L312)*
 
 **Type parameters:**
 

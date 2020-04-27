@@ -1,6 +1,6 @@
-[tiinvo - v1.6.1](../README.md) › ["Maybe"](_maybe_.md)
+[tiinvo](../README.md) › ["Maybe"](_maybe_.md)
 
-# External module: "Maybe"
+# Module: "Maybe"
 
 ## Index
 
@@ -30,7 +30,7 @@
 
 Ƭ **Just**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹T, true›*
 
-*Defined in [Maybe.ts:203](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Maybe.ts#L203)*
+*Defined in [Maybe.ts:218](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L218)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 Ƭ **Maybe**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹T, boolean›*
 
-*Defined in [Maybe.ts:201](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Maybe.ts#L201)*
+*Defined in [Maybe.ts:216](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L216)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 Ƭ **Nothing**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹T, false›*
 
-*Defined in [Maybe.ts:205](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Maybe.ts#L205)*
+*Defined in [Maybe.ts:220](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L220)*
 
 ## Functions
 
@@ -54,7 +54,7 @@ ___
 
 ▸ **Just**<**T**>(`value`: T): *Just‹T›*
 
-*Defined in [Maybe.ts:221](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Maybe.ts#L221)*
+*Defined in [Maybe.ts:236](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L236)*
 
 `Just<T>` represent a value that has returned
 
@@ -65,8 +65,6 @@ Just(10)
 ```
 
 **`export`** 
-
-**`template`** T
 
 **Type parameters:**
 
@@ -86,7 +84,7 @@ ___
 
 ▸ **Maybe**<**T**>(`value`: T): *Maybe‹T›*
 
-*Defined in [Maybe.ts:253](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Maybe.ts#L253)*
+*Defined in [Maybe.ts:268](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L268)*
 
 The Maybe monad represents computations which might "go wrong" by not returning a value.
 
@@ -112,8 +110,6 @@ value
 
 **`export`** 
 
-**`template`** T
-
 **Type parameters:**
 
 ▪ **T**
@@ -132,13 +128,11 @@ ___
 
 ▸ **Nothing**<**T**>(`value`: T): *Nothing‹T›*
 
-*Defined in [Maybe.ts:265](https://github.com/OctoD/tiinvo/blob/2f7d94f/src/Maybe.ts#L265)*
+*Defined in [Maybe.ts:280](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L280)*
 
 `Nothing<T>` represent a value that has not returned
 
 **`export`** 
-
-**`template`** T
 
 **Type parameters:**
 
