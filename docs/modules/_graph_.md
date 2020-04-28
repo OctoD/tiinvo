@@ -28,7 +28,7 @@
 
 Ƭ **Edge**: *[EdgeLike](../classes/_graph_.edgelike.md)*
 
-*Defined in [Graph.ts:309](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L309)*
+*Defined in [Graph.ts:309](https://github.com/OctoD/tiinvo/blob/6df333b/src/Graph.ts#L309)*
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 Ƭ **Graph**: *[GraphLike](../classes/_graph_.graphlike.md)*
 
-*Defined in [Graph.ts:308](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L308)*
+*Defined in [Graph.ts:308](https://github.com/OctoD/tiinvo/blob/6df333b/src/Graph.ts#L308)*
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 Ƭ **Vertex**: *[VertexLike](../classes/_graph_.vertexlike.md)‹T›*
 
-*Defined in [Graph.ts:310](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L310)*
+*Defined in [Graph.ts:310](https://github.com/OctoD/tiinvo/blob/6df333b/src/Graph.ts#L310)*
 
 ## Functions
 
@@ -52,7 +52,7 @@ ___
 
 ▸ **Edge**<**T**, **U**>(`left`: [Vertex](_graph_.md#vertex)‹T›, `right`: [Vertex](_graph_.md#vertex)‹U›, `value`: number): *Edge*
 
-*Defined in [Graph.ts:323](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L323)*
+*Defined in [Graph.ts:323](https://github.com/OctoD/tiinvo/blob/6df333b/src/Graph.ts#L323)*
 
 Creates a new `Edge` from two `Vertex<T>`
 
@@ -80,7 +80,7 @@ ___
 
 ▸ **Graph**(`vertices`: [Vertex](_graph_.md#vertex)[], `edges`: [Edge](_graph_.md#edge)[]): *Graph*
 
-*Defined in [Graph.ts:339](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L339)*
+*Defined in [Graph.ts:339](https://github.com/OctoD/tiinvo/blob/6df333b/src/Graph.ts#L339)*
 
 **`export`** 
 
@@ -99,7 +99,7 @@ ___
 
 ▸ **Vertex**<**T**>(`name`: string, `value`: T): *Vertex‹T›*
 
-*Defined in [Graph.ts:352](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L352)*
+*Defined in [Graph.ts:352](https://github.com/OctoD/tiinvo/blob/6df333b/src/Graph.ts#L352)*
 
 **`export`** 
 

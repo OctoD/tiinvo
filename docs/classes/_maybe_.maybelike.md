@@ -35,6 +35,7 @@
 * [mapOrElse](_maybe_.maybelike.md#maporelse)
 * [option](_maybe_.maybelike.md#option)
 * [or](_maybe_.maybelike.md#or)
+* [orThen](_maybe_.maybelike.md#orthen)
 * [unwrap](_maybe_.maybelike.md#unwrap)
 
 ## Constructors
@@ -43,7 +44,7 @@
 
 \+ **new MaybeLike**(`value`: T, `isJustLike`: IsJustLike): *[MaybeLike](_maybe_.maybelike.md)*
 
-*Defined in [Maybe.ts:10](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L10)*
+*Defined in [Maybe.ts:10](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L10)*
 
 **Parameters:**
 
@@ -60,7 +61,7 @@ Name | Type |
 
 • **isJustLike**: *IsJustLike*
 
-*Defined in [Maybe.ts:11](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L11)*
+*Defined in [Maybe.ts:11](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L11)*
 
 ___
 
@@ -68,7 +69,7 @@ ___
 
 • **value**: *T*
 
-*Defined in [Maybe.ts:11](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L11)*
+*Defined in [Maybe.ts:11](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L11)*
 
 ## Methods
 
@@ -76,7 +77,7 @@ ___
 
 ▸ **and**<**U**>(`maybeb`: [MaybeLike](_maybe_.maybelike.md)‹U, boolean›): *[MaybeLike](_maybe_.maybelike.md)‹U, boolean› | [MaybeLike](_maybe_.maybelike.md)‹T, IsJustLike›*
 
-*Defined in [Maybe.ts:26](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L26)*
+*Defined in [Maybe.ts:26](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L26)*
 
 Returns `Nothing<T>` if the value is `Nothing<T>`, otherwise returns `maybeb`
 
@@ -105,7 +106,7 @@ ___
 
 ▸ **andThen**<**Fn**, **U**>(`fn`: Fn): *[Maybe](../modules/_maybe_.md#maybe)‹U› | [MaybeLike](_maybe_.maybelike.md)‹T, IsJustLike›*
 
-*Defined in [Maybe.ts:43](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L43)*
+*Defined in [Maybe.ts:43](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L43)*
 
 Returns `fn` result if `Maybe<T>` is `Just<T>`, otherwise returns `Nothing<T>`
 
@@ -136,7 +137,7 @@ ___
 
 ▸ **cata**<**U**>(`map`: [MaybeCataMap](../interfaces/_maybe_.maybecatamap.md)‹T, U›): *U*
 
-*Defined in [Maybe.ts:72](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L72)*
+*Defined in [Maybe.ts:72](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L72)*
 
 Calls Just fn if is `Just<T>`, otherwise calls Nothing fn if is `Nothing<T>`
 
@@ -174,7 +175,7 @@ ___
 
 ▸ **either**(): *IsJustLike extends false ? Left<T> : Right<T>*
 
-*Defined in [Maybe.ts:92](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L92)*
+*Defined in [Maybe.ts:92](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L92)*
 
 Returns a `Left<T>` if the value is `Nothing<T>`, otherwise returns `Right<T>` if the value is `Just<T>`
 
@@ -193,7 +194,7 @@ ___
 
 ▸ **isJust**(): *boolean*
 
-*Defined in [Maybe.ts:107](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L107)*
+*Defined in [Maybe.ts:107](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L107)*
 
 Returns if `value` is `Just<T>`
 
@@ -212,7 +213,7 @@ ___
 
 ▸ **isNothing**(): *boolean*
 
-*Defined in [Maybe.ts:122](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L122)*
+*Defined in [Maybe.ts:122](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L122)*
 
 Returns if `value` is `Nothing<T>`
 
@@ -231,7 +232,7 @@ ___
 
 ▸ **map**<**Fn**>(`fn`: Fn): *[Maybe](../modules/_maybe_.md#maybe)‹ReturnType‹Fn››*
 
-*Defined in [Maybe.ts:142](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L142)*
+*Defined in [Maybe.ts:142](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L142)*
 
 Maps an `Maybe<T>` to `Maybe<U>` by applying a function to a contained value.
 
@@ -264,7 +265,7 @@ ___
 
 ▸ **mapOrElse**<**FnNothing**, **FnJust**>(`fnNothing`: FnNothing, `fnJust`: FnJust): *[Maybe](../modules/_maybe_.md#maybe)‹ReturnType‹FnJust››*
 
-*Defined in [Maybe.ts:161](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L161)*
+*Defined in [Maybe.ts:161](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L161)*
 
 Applies a function to the contained value (if any), or computes a default (if not), returning a Maybe.
 
@@ -296,7 +297,7 @@ ___
 
 ▸ **option**(): *IsJustLike extends true ? Some<T> : None<T>*
 
-*Defined in [Maybe.ts:181](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L181)*
+*Defined in [Maybe.ts:181](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L181)*
 
 Returns `Some<T>` if is `Just<T>`, otherwise returns `None<T>` if is `Nothing<T>`
 
@@ -315,7 +316,7 @@ ___
 
 ▸ **or**<**Z**>(`maybeValue`: [MaybeLike](_maybe_.maybelike.md)‹Z, IsJustLike›): *[MaybeLike](_maybe_.maybelike.md)‹unknown, IsJustLike›*
 
-*Defined in [Maybe.ts:196](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L196)*
+*Defined in [Maybe.ts:196](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L196)*
 
 If T is Nothing, then returns maybeValue
 
@@ -339,11 +340,41 @@ Name | Type |
 
 ___
 
+###  orThen
+
+▸ **orThen**<**Fn**, **Z**>(`maybeFn`: Fn): *[Maybe](../modules/_maybe_.md#maybe)‹Z›*
+
+*Defined in [Maybe.ts:215](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L215)*
+
+If T is Nothing, then calls the function Fn
+
+```ts
+Maybe(null).orThen(() => Maybe(undefined)).orThen(() => Maybe(10)).unwrap() // 10
+```
+
+**`memberof`** MaybeLike
+
+**Type parameters:**
+
+▪ **Fn**: *function*
+
+▪ **Z**
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`maybeFn` | Fn |
+
+**Returns:** *[Maybe](../modules/_maybe_.md#maybe)‹Z›*
+
+___
+
 ###  unwrap
 
 ▸ **unwrap**(): *T*
 
-*Defined in [Maybe.ts:211](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Maybe.ts#L211)*
+*Defined in [Maybe.ts:233](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L233)*
 
 Unwraps `value`
 

@@ -25,7 +25,7 @@
 
 Ƭ **LinkedList**: *[LinkedListLike](../classes/_linkedlist_.linkedlistlike.md)‹T›*
 
-*Defined in [LinkedList.ts:323](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L323)*
+*Defined in [LinkedList.ts:323](https://github.com/OctoD/tiinvo/blob/6df333b/src/LinkedList.ts#L323)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 Ƭ **Node**: *[NodeLike](../classes/_linkedlist_.nodelike.md)‹T›*
 
-*Defined in [LinkedList.ts:322](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L322)*
+*Defined in [LinkedList.ts:322](https://github.com/OctoD/tiinvo/blob/6df333b/src/LinkedList.ts#L322)*
 
 ## Functions
 
@@ -41,7 +41,7 @@ ___
 
 ▸ **LinkedList**<**T**>(`initialValues`: T[]): *LinkedList‹T›*
 
-*Defined in [LinkedList.ts:345](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L345)*
+*Defined in [LinkedList.ts:345](https://github.com/OctoD/tiinvo/blob/6df333b/src/LinkedList.ts#L345)*
 
 **`export`** 
 
@@ -63,7 +63,7 @@ ___
 
 ▸ **Node**<**T**>(`value?`: T): *Node‹T›*
 
-*Defined in [LinkedList.ts:333](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/LinkedList.ts#L333)*
+*Defined in [LinkedList.ts:333](https://github.com/OctoD/tiinvo/blob/6df333b/src/LinkedList.ts#L333)*
 
 **`export`** 
 

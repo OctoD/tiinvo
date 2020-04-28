@@ -18,7 +18,7 @@
 
 ▸ **GetSet**<**T**>(`initialValue`: T): *[GetSet](../interfaces/_getset_.getset.md)‹T›*
 
-*Defined in [GetSet.ts:48](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/GetSet.ts#L48)*
+*Defined in [GetSet.ts:48](https://github.com/OctoD/tiinvo/blob/6df333b/src/GetSet.ts#L48)*
 
 Returns a GetSet
 

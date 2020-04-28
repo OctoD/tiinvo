@@ -39,7 +39,7 @@ mynumber.get() // 11
 
 ▸ **get**(): *T*
 
-*Defined in [GetSet.ts:30](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/GetSet.ts#L30)*
+*Defined in [GetSet.ts:30](https://github.com/OctoD/tiinvo/blob/6df333b/src/GetSet.ts#L30)*
 
 Gets current value
 
@@ -58,7 +58,7 @@ ___
 
 ▸ **set**(`value`: T): *void*
 
-*Defined in [GetSet.ts:37](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/GetSet.ts#L37)*
+*Defined in [GetSet.ts:37](https://github.com/OctoD/tiinvo/blob/6df333b/src/GetSet.ts#L37)*
 
 **`memberof`** GetSet
 

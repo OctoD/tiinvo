@@ -14,7 +14,7 @@
 
 ▸ **run**(`suite`: benchmark.Suite, `options`: benchmark.Options): *void*
 
-*Defined in [benchmarks/tests/Option.ts:4](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/benchmarks/tests/Option.ts#L4)*
+*Defined in [benchmarks/tests/Option.ts:4](https://github.com/OctoD/tiinvo/blob/6df333b/src/benchmarks/tests/Option.ts#L4)*
 
 **Parameters:**
 

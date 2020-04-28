@@ -200,6 +200,24 @@ export class MaybeLike<T, IsJustLike extends boolean> {
   }
 
   /**
+   * If T is Nothing, then calls the function Fn
+   *
+   * ```ts
+   * Maybe(null).orThen(() => Maybe(undefined)).orThen(() => Maybe(10)).unwrap() // 10
+   * ```
+   *
+   * @template Fn
+   * @template Z
+   * @param {Fn} maybeFn
+   * @returns {Maybe<Z>}
+   * @memberof MaybeLike
+   */
+  public orThen<Fn extends () => Maybe<Z>, Z>(maybeFn: Fn): Maybe<Z> {
+    ensureFunction("", maybeFn);
+    return this.isJust() ? this : (maybeFn() as any);
+  }
+
+  /**
    * Unwraps `value`
    *
    * ```ts

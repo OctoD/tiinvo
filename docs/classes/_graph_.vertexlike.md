@@ -36,7 +36,7 @@
 
 \+ **new VertexLike**(`_name`: string, `_value`: T): *[VertexLike](_graph_.vertexlike.md)*
 
-*Defined in [Graph.ts:171](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L171)*
+*Defined in [Graph.ts:171](https://github.com/OctoD/tiinvo/blob/6df333b/src/Graph.ts#L171)*
 
 **Parameters:**
 
@@ -53,7 +53,7 @@ Name | Type |
 
 • **_name**: *string*
 
-*Defined in [Graph.ts:173](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L173)*
+*Defined in [Graph.ts:173](https://github.com/OctoD/tiinvo/blob/6df333b/src/Graph.ts#L173)*
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 • **_value**: *T*
 
-*Defined in [Graph.ts:173](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L173)*
+*Defined in [Graph.ts:173](https://github.com/OctoD/tiinvo/blob/6df333b/src/Graph.ts#L173)*
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 • **connections**: *Map‹string, [EdgeLike](_graph_.edgelike.md)›* = new Map()
 
-*Defined in [Graph.ts:171](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L171)*
+*Defined in [Graph.ts:171](https://github.com/OctoD/tiinvo/blob/6df333b/src/Graph.ts#L171)*
 
 ## Methods
 
@@ -77,7 +77,7 @@ ___
 
 ▸ **connect**(`edge`: [Edge](../modules/_graph_.md#edge)): *[Result](../modules/_result_.md#result)‹[Vertex](../modules/_graph_.md#vertex), Error›*
 
-*Defined in [Graph.ts:193](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L193)*
+*Defined in [Graph.ts:193](https://github.com/OctoD/tiinvo/blob/6df333b/src/Graph.ts#L193)*
 
 Connects an `Edge` to the `Vertex<T>`. Returns a `Err<Vertex>` if the `Vertex` cannot be connected, otherwise returns `Ok<Vertex>`.
 
@@ -107,7 +107,7 @@ ___
 
 ▸ **isNeighbourOf**<**U**>(`vertex`: [Vertex](../modules/_graph_.md#vertex)‹U›): *boolean*
 
-*Defined in [Graph.ts:239](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L239)*
+*Defined in [Graph.ts:239](https://github.com/OctoD/tiinvo/blob/6df333b/src/Graph.ts#L239)*
 
 Returns `true` if `Vertex<T>` is neighbour of `Vertex<U>`, otherwise returns `false`
 
@@ -146,7 +146,7 @@ ___
 
 ▸ **name**(): *string*
 
-*Defined in [Graph.ts:253](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L253)*
+*Defined in [Graph.ts:253](https://github.com/OctoD/tiinvo/blob/6df333b/src/Graph.ts#L253)*
 
 Returns Vertex name
 
@@ -164,7 +164,7 @@ ___
 
 ▸ **neighbours**(): *[Option](../modules/_option_.md#option)‹[Vertex](../modules/_graph_.md#vertex)[]›*
 
-*Defined in [Graph.ts:278](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L278)*
+*Defined in [Graph.ts:278](https://github.com/OctoD/tiinvo/blob/6df333b/src/Graph.ts#L278)*
 
 Returns all neighbours to a `Vertex<T>` as a `Option<Vertex[]>` is there are any, otherwise returns `None`.
 
@@ -193,7 +193,7 @@ ___
 
 ▸ **value**(): *[Option](../modules/_option_.md#option)‹T›*
 
-*Defined in [Graph.ts:303](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Graph.ts#L303)*
+*Defined in [Graph.ts:303](https://github.com/OctoD/tiinvo/blob/6df333b/src/Graph.ts#L303)*
 
 Returns `Vertex<T>` value as `Option<T>` if is `Just`, otherwise returns `None`
 

@@ -26,7 +26,7 @@
 
 Ƭ **Mediator**: *[MediatorLike](../classes/_mediator_.mediatorlike.md)*
 
-*Defined in [Mediator.ts:95](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Mediator.ts#L95)*
+*Defined in [Mediator.ts:95](https://github.com/OctoD/tiinvo/blob/6df333b/src/Mediator.ts#L95)*
 
 ## Functions
 
@@ -34,7 +34,7 @@
 
 ▸ **Mediator**(): *Mediator*
 
-*Defined in [Mediator.ts:109](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Mediator.ts#L109)*
+*Defined in [Mediator.ts:109](https://github.com/OctoD/tiinvo/blob/6df333b/src/Mediator.ts#L109)*
 
 Type `Mediator` is the implementation of the mediator pattern.
 

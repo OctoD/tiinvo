@@ -43,7 +43,7 @@
 
 *Inherited from [Stackable](_stack_.stackable.md).[constructor](_stack_.stackable.md#constructor)*
 
-*Defined in [Stack.ts:6](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L6)*
+*Defined in [Stack.ts:6](https://github.com/OctoD/tiinvo/blob/6df333b/src/Stack.ts#L6)*
 
 **Parameters:**
 
@@ -61,7 +61,7 @@ Name | Type |
 
 *Inherited from [Stackable](_stack_.stackable.md).[elements](_stack_.stackable.md#protected-elements)*
 
-*Defined in [Stack.ts:7](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L7)*
+*Defined in [Stack.ts:7](https://github.com/OctoD/tiinvo/blob/6df333b/src/Stack.ts#L7)*
 
 ## Methods
 
@@ -69,7 +69,7 @@ Name | Type |
 
 ▸ **exec**(`args`: ArgsOf‹Fn›): *[Result](../modules/_result_.md#result)‹[Stack](../modules/_stack_.md#stack)‹ReturnType‹Fn››, Error›*
 
-*Defined in [Stack.ts:409](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L409)*
+*Defined in [Stack.ts:409](https://github.com/OctoD/tiinvo/blob/6df333b/src/Stack.ts#L409)*
 
 Execs a synchronous function stack with a given array of arguments. It returns `Err` and stops execution if a function invokation fails, otherwise returns `Ok<Queue<ReturnType<Fn>>>`;
 
@@ -106,7 +106,7 @@ ___
 
 ▸ **execAsync**(`args`: ArgsOf‹Fn›): *Promise‹[Result](../modules/_result_.md#result)‹[Stack](../modules/_stack_.md#stack)‹ReturnType‹Fn››, Error››*
 
-*Defined in [Stack.ts:465](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L465)*
+*Defined in [Stack.ts:465](https://github.com/OctoD/tiinvo/blob/6df333b/src/Stack.ts#L465)*
 
 Execs an asynchronous functions stack with a given array of arguments. It returns `Promise<Err>` and stops execution if a function invokation fails, otherwise returns `Promise<Ok<Queue<ReturnType<Fn>>>>`;
 
@@ -159,7 +159,7 @@ ___
 
 *Inherited from [Stackable](_stack_.stackable.md).[isEmpty](_stack_.stackable.md#isempty)*
 
-*Defined in [Stack.ts:22](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L22)*
+*Defined in [Stack.ts:22](https://github.com/OctoD/tiinvo/blob/6df333b/src/Stack.ts#L22)*
 
 Returns if is empty
 
@@ -184,7 +184,7 @@ ___
 
 *Overrides [Stackable](_stack_.stackable.md).[map](_stack_.stackable.md#abstract-map)*
 
-*Defined in [Stack.ts:183](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L183)*
+*Defined in [Stack.ts:183](https://github.com/OctoD/tiinvo/blob/6df333b/src/Stack.ts#L183)*
 
 Maps a `Stack<T>` to a `Stack<U>` applying a function `Fn` to every stacked element.
 
@@ -214,7 +214,7 @@ ___
 
 *Inherited from [StackLike](_stack_.stacklike.md).[pop](_stack_.stacklike.md#pop)*
 
-*Defined in [Stack.ts:202](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L202)*
+*Defined in [Stack.ts:202](https://github.com/OctoD/tiinvo/blob/6df333b/src/Stack.ts#L202)*
 
 Pops latest pushed element to the Stack, returning an `Option<T>` if the stack is not empty or a `None` if the stack is empty.
 
@@ -238,7 +238,7 @@ ___
 
 *Overrides [StackLike](_stack_.stacklike.md).[push](_stack_.stacklike.md#push)*
 
-*Defined in [Stack.ts:500](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L500)*
+*Defined in [Stack.ts:500](https://github.com/OctoD/tiinvo/blob/6df333b/src/Stack.ts#L500)*
 
 Pushes an element to the Stack, returning `Stacklike<T>`
 
@@ -268,7 +268,7 @@ ___
 
 *Inherited from [StackLike](_stack_.stacklike.md).[queue](_stack_.stacklike.md#queue)*
 
-*Defined in [Stack.ts:236](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L236)*
+*Defined in [Stack.ts:236](https://github.com/OctoD/tiinvo/blob/6df333b/src/Stack.ts#L236)*
 
 Converts a `StackLike<T>` to a `QueueLike<T>`
 
@@ -288,7 +288,7 @@ ___
 
 *Inherited from [Stackable](_stack_.stackable.md).[size](_stack_.stackable.md#size)*
 
-*Defined in [Stack.ts:53](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L53)*
+*Defined in [Stack.ts:53](https://github.com/OctoD/tiinvo/blob/6df333b/src/Stack.ts#L53)*
 
 Returns current size
 
@@ -313,7 +313,7 @@ ___
 
 *Overrides [Stackable](_stack_.stackable.md).[top](_stack_.stackable.md#abstract-top)*
 
-*Defined in [Stack.ts:253](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L253)*
+*Defined in [Stack.ts:253](https://github.com/OctoD/tiinvo/blob/6df333b/src/Stack.ts#L253)*
 
 Returns latests pushed element as an `Option<T>` if the Stack is not empty, otherwise returns `None`
 
@@ -336,7 +336,7 @@ ___
 
 *Inherited from [Stackable](_stack_.stackable.md).[value](_stack_.stackable.md#value)*
 
-*Defined in [Stack.ts:77](https://github.com/OctoD/tiinvo/blob/9b6a9a6/src/Stack.ts#L77)*
+*Defined in [Stack.ts:77](https://github.com/OctoD/tiinvo/blob/6df333b/src/Stack.ts#L77)*
 
 Returns added elements
 

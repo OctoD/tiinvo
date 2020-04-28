@@ -115,6 +115,27 @@ describe(`Maybe`, () => {
     expect(Maybe(0).or(Maybe(NaN)).or(Maybe(false)).unwrap()).toBe(false);
   });
 
+  it("If T is Nothing, then calls the function Fn", () => {
+    expect(
+      Maybe(null)
+        .orThen(() => Maybe(undefined))
+        .orThen(() => Maybe(10))
+        .unwrap()
+    ).toBe(10);
+    expect(
+      Maybe(10)
+        .orThen(() => Maybe(undefined))
+        .orThen(() => Maybe(1))
+        .unwrap()
+    ).toBe(10);
+    expect(
+      Maybe(undefined)
+        .orThen(() => Maybe(2))
+        .orThen(() => Maybe(1))
+        .unwrap()
+    ).toBe(2);
+  });
+
   it("Unwraps `value`", () => {
     expect(Just(1).unwrap()).toBe(1);
     expect(Nothing(2).unwrap()).toBe(2);
