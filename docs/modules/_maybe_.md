@@ -1,70 +1,247 @@
-[tiinvo](../README.md) › ["Maybe"](_maybe_.md)
+[tiinvo](../README.md) › ["maybe"](_maybe_.md)
 
-# Module: "Maybe"
+# Module: "maybe"
 
 ## Index
 
-### Classes
-
-* [MaybeLike](../classes/_maybe_.maybelike.md)
-
 ### Interfaces
 
-* [MaybeCataMap](../interfaces/_maybe_.maybecatamap.md)
+* [Just](../interfaces/_maybe_.just.md)
+* [Nothing](../interfaces/_maybe_.nothing.md)
 
 ### Type aliases
 
-* [Just](_maybe_.md#just)
+* [JustFactory](_maybe_.md#justfactory)
+* [JustTag](_maybe_.md#justtag)
 * [Maybe](_maybe_.md#maybe)
-* [Nothing](_maybe_.md#nothing)
+* [MaybeTag](_maybe_.md#maybetag)
+* [NothingFactory](_maybe_.md#nothingfactory)
+* [NothingTag](_maybe_.md#nothingtag)
+
+### Variables
+
+* [JUSTTAG](_maybe_.md#const-justtag)
+* [NOTHINGTAG](_maybe_.md#const-nothingtag)
+* [expect](_maybe_.md#const-expect)
+* [filter](_maybe_.md#const-filter)
+* [filterOr](_maybe_.md#const-filteror)
+* [fold](_maybe_.md#const-fold)
+* [hasjusttag](_maybe_.md#const-hasjusttag)
+* [hasnothingtag](_maybe_.md#const-hasnothingtag)
+* [isJust](_maybe_.md#const-isjust)
+* [isMaybe](_maybe_.md#const-ismaybe)
+* [isNothing](_maybe_.md#const-isnothing)
+* [unexpect](_maybe_.md#const-unexpect)
+* [unwrap](_maybe_.md#const-unwrap)
+* [unwrapOr](_maybe_.md#const-unwrapor)
+* [unwrapOrElse](_maybe_.md#const-unwraporelse)
 
 ### Functions
 
-* [Just](_maybe_.md#just)
-* [Maybe](_maybe_.md#maybe)
-* [Nothing](_maybe_.md#nothing)
+* [frompredicate](_maybe_.md#const-frompredicate)
+* [just](_maybe_.md#const-just)
+* [maybe](_maybe_.md#const-maybe)
+* [nothing](_maybe_.md#const-nothing)
 
 ## Type aliases
 
-###  Just
+###  JustFactory
 
-Ƭ **Just**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹T, true›*
+Ƭ **JustFactory**: *function*
 
-*Defined in [Maybe.ts:240](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L240)*
+Defined in maybe.ts:49
+
+#### Type declaration:
+
+▸ ‹**T**›(`value`: T): *[Just](../interfaces/_maybe_.just.md)‹T›*
+
+**Type parameters:**
+
+▪ **T**
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`value` | T |
+
+___
+
+###  JustTag
+
+Ƭ **JustTag**: *typeof JUSTTAG*
+
+Defined in maybe.ts:24
 
 ___
 
 ###  Maybe
 
-Ƭ **Maybe**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹T, boolean›*
+Ƭ **Maybe**: *[Nothing](../interfaces/_maybe_.nothing.md) | [Just](../interfaces/_maybe_.just.md)‹T›*
 
-*Defined in [Maybe.ts:238](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L238)*
+Defined in maybe.ts:40
 
 ___
 
-###  Nothing
+###  MaybeTag
 
-Ƭ **Nothing**: *[MaybeLike](../classes/_maybe_.maybelike.md)‹T, false›*
+Ƭ **MaybeTag**: *[JustTag](_maybe_.md#justtag) | [NothingTag](_maybe_.md#nothingtag)*
 
-*Defined in [Maybe.ts:242](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L242)*
+Defined in maybe.ts:26
+
+___
+
+###  NothingFactory
+
+Ƭ **NothingFactory**: *function*
+
+Defined in maybe.ts:45
+
+#### Type declaration:
+
+▸ (): *[Nothing](../interfaces/_maybe_.nothing.md)*
+
+___
+
+###  NothingTag
+
+Ƭ **NothingTag**: *typeof NOTHINGTAG*
+
+Defined in maybe.ts:25
+
+## Variables
+
+### `Const` JUSTTAG
+
+• **JUSTTAG**: *"just"* = "just"
+
+Defined in maybe.ts:21
+
+___
+
+### `Const` NOTHINGTAG
+
+• **NOTHINGTAG**: *"nothing"* = "nothing"
+
+Defined in maybe.ts:22
+
+___
+
+### `Const` expect
+
+• **expect**: *[Expect](_assertables_.md#expect)‹[Just](../interfaces/_maybe_.just.md)‹unknown››* = createExpect<Just>(isJust)
+
+Defined in maybe.ts:105
+
+___
+
+### `Const` filter
+
+• **filter**: *(Anonymous function)* = createFilter(isJust, just, nothing as any)
+
+Defined in maybe.ts:120
+
+___
+
+### `Const` filterOr
+
+• **filterOr**: *(Anonymous function)* = createFilterOr(isJust, just)
+
+Defined in maybe.ts:124
+
+___
+
+### `Const` fold
+
+• **fold**: *(Anonymous function)* = createfold<MaybeTag>(isNothing)
+
+Defined in maybe.ts:133
+
+___
+
+### `Const` hasjusttag
+
+• **hasjusttag**: *[Typeguard](_typeguards_.md#typeguard)‹[Tagged](_tagged_type_.md#tagged)‹unknown, "just"››* = isTaggedWith(JUSTTAG)
+
+Defined in maybe.ts:56
+
+___
+
+### `Const` hasnothingtag
+
+• **hasnothingtag**: *[Typeguard](_typeguards_.md#typeguard)‹[Tagged](_tagged_type_.md#tagged)‹unknown, "nothing"››* = isTaggedWith(NOTHINGTAG)
+
+Defined in maybe.ts:55
+
+___
+
+### `Const` isJust
+
+• **isJust**: *[Typeguard](_typeguards_.md#typeguard)‹[Just](../interfaces/_maybe_.just.md)‹unknown››* = combine<Just>(isTagged, hasjusttag)
+
+Defined in maybe.ts:69
+
+___
+
+### `Const` isMaybe
+
+• **isMaybe**: *[Typeguard](_typeguards_.md#typeguard)‹[Maybe](_maybe_.md#maybe)‹unknown››* = combine<Maybe>(
+  isTagged,
+  anyof(hasnothingtag, hasjusttag),
+)
+
+Defined in maybe.ts:61
+
+___
+
+### `Const` isNothing
+
+• **isNothing**: *[Typeguard](_typeguards_.md#typeguard)‹[Nothing](../interfaces/_maybe_.nothing.md)‹››* = combine<Nothing>(isTagged, hasnothingtag)
+
+Defined in maybe.ts:74
+
+___
+
+### `Const` unexpect
+
+• **unexpect**: *[Expect](_assertables_.md#expect)‹[Nothing](../interfaces/_maybe_.nothing.md)‹››* = createExpect<Nothing>(isNothing)
+
+Defined in maybe.ts:110
+
+___
+
+### `Const` unwrap
+
+• **unwrap**: *(Anonymous function)* = createUnwrap<MaybeTag>(
+  isJust,
+  "Expected Just, got Nothing",
+)
+
+Defined in maybe.ts:142
+
+___
+
+### `Const` unwrapOr
+
+• **unwrapOr**: *(Anonymous function)* = createUnwrapOr<MaybeTag>(isJust)
+
+Defined in maybe.ts:150
+
+___
+
+### `Const` unwrapOrElse
+
+• **unwrapOrElse**: *(Anonymous function)* = createUnwrapOrElse<MaybeTag>(isJust)
+
+Defined in maybe.ts:155
 
 ## Functions
 
-###  Just
+### `Const` frompredicate
 
-▸ **Just**<**T**>(`value`: T): *Just‹T›*
+▸ **frompredicate**‹**T**›(`predicate`: [Predicate](_predicate_.md#predicate)‹T›): *(Anonymous function)*
 
-*Defined in [Maybe.ts:258](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L258)*
-
-`Just<T>` represent a value that has returned
-
-```ts
-import { Just } from 'tiinvo';
-
-Just(10)
-```
-
-**`export`** 
+Defined in maybe.ts:162
 
 **Type parameters:**
 
@@ -74,41 +251,17 @@ Just(10)
 
 Name | Type |
 ------ | ------ |
-`value` | T |
+`predicate` | [Predicate](_predicate_.md#predicate)‹T› |
 
-**Returns:** *Just‹T›*
+**Returns:** *(Anonymous function)*
 
 ___
 
-###  Maybe
+### `Const` just
 
-▸ **Maybe**<**T**>(`value`: T): *Maybe‹T›*
+▸ **just**‹**T**›(`value`: T): *[Tagged](_tagged_type_.md#tagged)‹T, "just"›*
 
-*Defined in [Maybe.ts:290](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L290)*
-
-The Maybe monad represents computations which might "go wrong" by not returning a value.
-
-Every falsy value is considered as `Nothing`
-
-```ts
-import { Maybe } from 'tiinvo';
-
-function foo() {
-   return Math.floor(Math.random() * 1000) ? 'exists' : null
-}
-
-const value = Maybe(foo()) // could be both Just<string> or Nothing<string | null>
-
-value
-   .map(arg => arg % 2 === 0)
-   .map(arg => arg ? 'even' : 'odd')
-   .cata({
-       Nothing: () => 'Not a number',
-       Just: arg => `Value is ${arg}`
-   })
-```
-
-**`export`** 
+Defined in maybe.ts:88
 
 **Type parameters:**
 
@@ -120,19 +273,15 @@ Name | Type |
 ------ | ------ |
 `value` | T |
 
-**Returns:** *Maybe‹T›*
+**Returns:** *[Tagged](_tagged_type_.md#tagged)‹T, "just"›*
 
 ___
 
-###  Nothing
+### `Const` maybe
 
-▸ **Nothing**<**T**>(`value`: T): *Nothing‹T›*
+▸ **maybe**‹**T**›(`arg?`: T): *[Nothing](../interfaces/_maybe_.nothing.md)‹› | [Tagged](_tagged_type_.md#tagged)‹T, "just"›*
 
-*Defined in [Maybe.ts:302](https://github.com/OctoD/tiinvo/blob/6df333b/src/Maybe.ts#L302)*
-
-`Nothing<T>` represent a value that has not returned
-
-**`export`** 
+Defined in maybe.ts:96
 
 **Type parameters:**
 
@@ -142,6 +291,16 @@ ___
 
 Name | Type |
 ------ | ------ |
-`value` | T |
+`arg?` | T |
 
-**Returns:** *Nothing‹T›*
+**Returns:** *[Nothing](../interfaces/_maybe_.nothing.md)‹› | [Tagged](_tagged_type_.md#tagged)‹T, "just"›*
+
+___
+
+### `Const` nothing
+
+▸ **nothing**(): *[Nothing](../interfaces/_maybe_.nothing.md)*
+
+Defined in maybe.ts:83
+
+**Returns:** *[Nothing](../interfaces/_maybe_.nothing.md)*

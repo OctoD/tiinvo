@@ -1,105 +1,339 @@
-[tiinvo](../README.md) › ["Result"](_result_.md)
+[tiinvo](../README.md) › ["result"](_result_.md)
 
-# Module: "Result"
+# Module: "result"
 
 ## Index
 
-### Classes
+### Interfaces
 
-* [ResultLike](../classes/_result_.resultlike.md)
+* [Err](../interfaces/_result_.err.md)
+* [Ok](../interfaces/_result_.ok.md)
 
 ### Type aliases
 
-* [Err](_result_.md#err)
-* [Ok](_result_.md#ok)
+* [ErrFactory](_result_.md#errfactory)
+* [Errtag](_result_.md#errtag)
+* [OkFactory](_result_.md#okfactory)
+* [Oktag](_result_.md#oktag)
 * [Result](_result_.md#result)
+* [ResultFactory](_result_.md#resultfactory)
+* [ResultTag](_result_.md#resulttag)
+
+### Variables
+
+* [ERRTAG](_result_.md#const-errtag)
+* [OKTAG](_result_.md#const-oktag)
+* [RESULTTAG](_result_.md#const-resulttag)
+* [expect](_result_.md#const-expect)
+* [filter](_result_.md#const-filter)
+* [filterOr](_result_.md#const-filteror)
+* [haserrtag](_result_.md#const-haserrtag)
+* [hasoktag](_result_.md#const-hasoktag)
+* [hasresulttag](_result_.md#const-hasresulttag)
+* [isErr](_result_.md#const-iserr)
+* [isOk](_result_.md#const-isok)
+* [isResult](_result_.md#const-isresult)
+* [map](_result_.md#const-map)
+* [mapOr](_result_.md#const-mapor)
+* [mapOrElse](_result_.md#const-maporelse)
+* [unexpect](_result_.md#const-unexpect)
+* [unwrap](_result_.md#const-unwrap)
+* [unwrapOr](_result_.md#const-unwrapor)
+* [unwrapOrElse](_result_.md#const-unwraporelse)
 
 ### Functions
 
-* [Err](_result_.md#err)
-* [Ok](_result_.md#ok)
-* [instanceOfError](_result_.md#instanceoferror)
+* [err](_result_.md#const-err)
+* [ok](_result_.md#const-ok)
+* [result](_result_.md#const-result)
 
 ## Type aliases
 
-###  Err
+###  ErrFactory
 
-Ƭ **Err**: *[ResultLike](../classes/_result_.resultlike.md)‹any, Error›*
+Ƭ **ErrFactory**: *function*
 
-*Defined in [Result.ts:329](https://github.com/OctoD/tiinvo/blob/6df333b/src/Result.ts#L329)*
+Defined in result.ts:60
 
-`Result<T, E>` is the type used for returning and propagating errors.
-It is an enum with the variants, `Ok(T)`, representing success and
-containing a value, and `Err(E)`, representing error and containing
-an error value.
+#### Type declaration:
+
+▸ (`message`: string | Error): *[Err](../interfaces/_result_.err.md)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`message` | string &#124; Error |
 
 ___
 
-###  Ok
+###  Errtag
 
-Ƭ **Ok**: *[ResultLike](../classes/_result_.resultlike.md)‹T, any›*
+Ƭ **Errtag**: *typeof ERRTAG*
 
-*Defined in [Result.ts:336](https://github.com/OctoD/tiinvo/blob/6df333b/src/Result.ts#L336)*
+Defined in result.ts:30
 
-`Result<T, E>` is the type used for returning and propagating errors.
-It is an enum with the variants, `Ok(T)`, representing success and
-containing a value, and `Err(E)`, representing error and containing
-an error value.
+___
+
+###  OkFactory
+
+Ƭ **OkFactory**: *function*
+
+Defined in result.ts:64
+
+#### Type declaration:
+
+▸ ‹**T**›(`arg`: T): *[Ok](../interfaces/_result_.ok.md)‹T›*
+
+**Type parameters:**
+
+▪ **T**
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`arg` | T |
+
+___
+
+###  Oktag
+
+Ƭ **Oktag**: *typeof OKTAG*
+
+Defined in result.ts:35
 
 ___
 
 ###  Result
 
-Ƭ **Result**: *[ResultLike](../classes/_result_.resultlike.md)‹T, E›*
+Ƭ **Result**: *[Ok](../interfaces/_result_.ok.md)‹T› | [Err](../interfaces/_result_.err.md)*
 
-*Defined in [Result.ts:343](https://github.com/OctoD/tiinvo/blob/6df333b/src/Result.ts#L343)*
-
-`Result<T, E>` is the type used for returning and propagating errors.
-It is an enum with the variants, `Ok(T)`, representing success and
-containing a value, and `Err(E)`, representing error and containing
-an error value.
-
-## Functions
-
-###  Err
-
-▸ **Err**(`message`: string | Error): *Err*
-
-*Defined in [Result.ts:356](https://github.com/OctoD/tiinvo/blob/6df333b/src/Result.ts#L356)*
-
-`Result<T, E>` is the type used for returning and propagating errors.
-It is an enum with the variants, `Ok(T)`, representing success and
-containing a value, and `Err(E)`, representing error and containing
-an error value.
-
-Returns an `Error`
-
-**`export`** 
-
-**Parameters:**
-
-Name | Type | Default |
------- | ------ | ------ |
-`message` | string &#124; Error | new Error() |
-
-**Returns:** *Err*
+Defined in result.ts:55
 
 ___
 
-###  Ok
+###  ResultFactory
 
-▸ **Ok**<**T**>(`value`: T): *Ok‹T›*
+Ƭ **ResultFactory**: *function*
 
-*Defined in [Result.ts:374](https://github.com/OctoD/tiinvo/blob/6df333b/src/Result.ts#L374)*
+Defined in result.ts:68
 
-`Result<T, E>` is the type used for returning and propagating errors.
-It is an enum with the variants, `Ok(T)`, representing success and
-containing a value, and `Err(E)`, representing error and containing
-an error value.
+#### Type declaration:
 
-Returns `Ok`
+▸ ‹**T**›(`arg`: T): *[Result](_result_.md#result)‹T›*
 
-**`export`** 
+**Type parameters:**
+
+▪ **T**
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`arg` | T |
+
+___
+
+###  ResultTag
+
+Ƭ **ResultTag**: *[Errtag](_result_.md#errtag) | [Oktag](_result_.md#oktag)*
+
+Defined in result.ts:40
+
+## Variables
+
+### `Const` ERRTAG
+
+• **ERRTAG**: *"err"* = "err"
+
+Defined in result.ts:23
+
+___
+
+### `Const` OKTAG
+
+• **OKTAG**: *"ok"* = "ok"
+
+Defined in result.ts:24
+
+___
+
+### `Const` RESULTTAG
+
+• **RESULTTAG**: *"result"* = "result"
+
+Defined in result.ts:25
+
+___
+
+### `Const` expect
+
+• **expect**: *[Expect](_assertables_.md#expect)‹[Result](_result_.md#result)‹unknown››* = createExpect<Result>(isOk)
+
+Defined in result.ts:128
+
+___
+
+### `Const` filter
+
+• **filter**: *(Anonymous function)* = createFilter<Result, ResultTag>(
+  isOk,
+  result as TaggedFactory<ResultTag>,
+  () => err("filter error") as any,
+)
+
+Defined in result.ts:141
+
+___
+
+### `Const` filterOr
+
+• **filterOr**: *(Anonymous function)* = createFilterOr<Result, ResultTag>(
+  isOk,
+  result as TaggedFactory<ResultTag>,
+)
+
+Defined in result.ts:150
+
+___
+
+### `Const` haserrtag
+
+• **haserrtag**: *[Typeguard](_typeguards_.md#typeguard)‹[Tagged](_tagged_type_.md#tagged)‹unknown, "err"››* = isTaggedWith(ERRTAG)
+
+Defined in result.ts:75
+
+___
+
+### `Const` hasoktag
+
+• **hasoktag**: *[Typeguard](_typeguards_.md#typeguard)‹[Tagged](_tagged_type_.md#tagged)‹unknown, "ok"››* = isTaggedWith(OKTAG)
+
+Defined in result.ts:74
+
+___
+
+### `Const` hasresulttag
+
+• **hasresulttag**: *[Typeguard](_typeguards_.md#typeguard)‹unknown›* = tg.anyof(hasoktag, haserrtag)
+
+Defined in result.ts:76
+
+___
+
+### `Const` isErr
+
+• **isErr**: *[Typeguard](_typeguards_.md#typeguard)‹[Err](../interfaces/_result_.err.md)‹››* = tg.combine(isTagged, haserrtag) as tg.Typeguard<Err>
+
+Defined in result.ts:87
+
+___
+
+### `Const` isOk
+
+• **isOk**: *[Typeguard](_typeguards_.md#typeguard)‹[Ok](../interfaces/_result_.ok.md)‹unknown››* = tg.combine(isTagged, hasoktag) as tg.Typeguard<Ok>
+
+Defined in result.ts:91
+
+___
+
+### `Const` isResult
+
+• **isResult**: *[Typeguard](_typeguards_.md#typeguard)‹[Result](_result_.md#result)‹unknown››* = tg.combine(isTagged, hasresulttag) as tg.Typeguard<
+  Result
+>
+
+Defined in result.ts:81
+
+___
+
+### `Const` map
+
+• **map**: *(Anonymous function)* = createMap<Result, ResultTag>(
+  isOk,
+  result as TaggedFactory<ResultTag>,
+)
+
+Defined in result.ts:162
+
+___
+
+### `Const` mapOr
+
+• **mapOr**: *(Anonymous function)* = createMapOr<Result, ResultTag>(
+  isOk,
+  result as TaggedFactory<ResultTag>,
+)
+
+Defined in result.ts:170
+
+___
+
+### `Const` mapOrElse
+
+• **mapOrElse**: *(Anonymous function)* = createMapOrElse<Result, ResultTag>(
+  isOk,
+  result as TaggedFactory<ResultTag>,
+)
+
+Defined in result.ts:178
+
+___
+
+### `Const` unexpect
+
+• **unexpect**: *[Expect](_assertables_.md#expect)‹[Result](_result_.md#result)‹unknown››* = createExpect<Result>(isErr)
+
+Defined in result.ts:132
+
+___
+
+### `Const` unwrap
+
+• **unwrap**: *(Anonymous function)* = createUnwrap<ResultTag>(isOk, "cannot unwrapp Err")
+
+Defined in result.ts:190
+
+___
+
+### `Const` unwrapOr
+
+• **unwrapOr**: *(Anonymous function)* = createUnwrapOr<ResultTag>(isOk)
+
+Defined in result.ts:194
+
+___
+
+### `Const` unwrapOrElse
+
+• **unwrapOrElse**: *(Anonymous function)* = createUnwrapOrElse<ResultTag>(isOk)
+
+Defined in result.ts:198
+
+## Functions
+
+### `Const` err
+
+▸ **err**(`message`: string | Error): *[Err](../interfaces/_result_.err.md)*
+
+Defined in result.ts:100
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`message` | string &#124; Error |
+
+**Returns:** *[Err](../interfaces/_result_.err.md)*
+
+___
+
+### `Const` ok
+
+▸ **ok**‹**T**›(`value`: T): *[Ok](../interfaces/_result_.ok.md)‹T›*
+
+Defined in result.ts:109
 
 **Type parameters:**
 
@@ -111,26 +345,24 @@ Name | Type |
 ------ | ------ |
 `value` | T |
 
-**Returns:** *Ok‹T›*
+**Returns:** *[Ok](../interfaces/_result_.ok.md)‹T›*
 
 ___
 
-###  instanceOfError
+### `Const` result
 
-▸ **instanceOfError**<**T**, **E**>(`value`: T | E): *value is E*
+▸ **result**‹**T**›(`value`: T): *[Result](_result_.md#result)‹T›*
 
-*Defined in [Result.ts:312](https://github.com/OctoD/tiinvo/blob/6df333b/src/Result.ts#L312)*
+Defined in result.ts:118
 
 **Type parameters:**
 
 ▪ **T**
 
-▪ **E**
-
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`value` | T &#124; E |
+`value` | T |
 
-**Returns:** *value is E*
+**Returns:** *[Result](_result_.md#result)‹T›*

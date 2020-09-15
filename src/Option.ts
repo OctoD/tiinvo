@@ -1,387 +1,178 @@
-import { coerceToNull, ensureFunction } from "./common";
-import { Err, Ok, ResultLike, Result } from "./Result";
+import { check } from "./applicative";
+import { createExpect } from "./assertables";
+import { createFilter, createFilterOr } from "./filterables";
+import { createMap, createMapOr, createMapOrElse } from "./mappables";
+import { tagged, isTagged, isTaggedWith, Tagged } from "./tagged-type";
+import * as typeguardsTs from "./typeguards";
+import {
+  createUnwrap,
+  createUnwrapOr,
+  createUnwrapOrElse,
+} from "./unwrappables";
 
-export class OptionLike<T> {
-  public constructor(protected value: T) {}
+//#region types
 
-  protected foldReturn<U>(value: U): U {
-    return this.isNone() ? (None() as any) : value;
-  }
-
-  /**
-   * Returns `None` if the option is `None`,
-   * otherwise returns `optb`
-   *
-   * ```ts
-   * import { Option } from 'tiinvo';
-   *
-   * Option(10).and(Option(20)).isSome() // true
-   * Option(null).and(Option(20)).isSome() // false
-   * ```
-   *
-   * @template U
-   * @param {OptionLike<U>} optb
-   * @returns {OptionLike<U>}
-   * @memberof OptionLike
-   */
-  public and<U>(optb: OptionLike<U>): OptionLike<U> {
-    return this.foldReturn(optb);
-  }
-
-  /**
-   * Returns `callback` result if `OptionLike<T>` is `Some`,
-   * otherwise returns `None`
-   * @param {<R>(arg: T) => OptionLike<R>} callback
-   * @returns {OptionLike<T | K>}
-   * @memberof OptionLike
-   */
-  public andThen<K>(callback: (arg: T) => OptionLike<K>): OptionLike<T | K> {
-    ensureFunction("andThen argument must be a function", callback);
-    return this.isSome() ? callback(this.value) : this;
-  }
-
-  /**
-   * Throws if the value is a `None` with a custom error message provided by msg.
-   *
-   * ```ts
-   * import { Option } from 'tiinvo';
-   *
-   * Option(1).expect('ok') // Option(1)
-   * Option(null).expect('myerror') // throws ReferenceError('myerror')
-   * ```
-   *
-   * @param {string} msg
-   * @returns {(Some<T> | never)}
-   * @memberof OptionLike
-   */
-  public expect(msg: string): Some<T> | never {
-    if (this.isNone()) {
-      throw new ReferenceError(msg);
-    }
-
-    return this;
-  }
-
-  /**
-   * Returns the `Option` if it's value passes
-   * the `predicate` function. Otherwise returns
-   * None
-   *
-   * ```ts
-   * Option(1).filter(a => a > 0).isSome() // true
-   * Option(1).filter(a => a > 10).isSome() // false
-   * ```
-   *
-   * @param {(arg: T) => boolean} predicate
-   * @returns {OptionLike<T>}
-   * @memberof OptionLike
-   */
-  public filter(predicate: (arg: T) => boolean): OptionLike<T> {
-    const predicateresult = predicate(this.value);
-    return predicateresult ? this : None<T>();
-  }
-
-  /**
-   * Converts from `Option<Option<T>>` to `Option<T>`
-   *
-   * ```ts
-   * Option(Some(100)).flattern() // Some(100)
-   * ```
-   *
-   * @returns {OptionLike<T>}
-   * @memberof OptionLike
-   */
-  public flattern(): OptionLike<T> {
-    return this.value instanceof OptionLike ? this.value : this;
-  }
-
-  /**
-   * Returns if has not a value
-   *
-   * ```ts
-   * None().isNone() // true
-   * None().isSome() // false
-   * ```
-   *
-   * @returns {boolean}
-   * @memberof OptionLike
-   */
-  public isNone(): boolean {
-    return this.value === null || this.value === undefined;
-  }
-
-  /**
-   * Returns if has a value
-   *
-   * ```ts
-   * Some().isSome() // true
-   * Some().isNone() // false
-   * ```
-   *
-   * @returns {boolean}
-   * @memberof OptionLike
-   */
-  public isSome(): boolean {
-    return this.value !== null && this.value !== undefined;
-  }
-
-  /**
-   * Maps an `OptionLike<T>` to `OptionLike<U>` by applying a function to a contained value.
-   *
-   * ```ts
-   * Option('foobar').map(val => val.length) // Option(6)
-   * ```
-   *
-   * @template K
-   * @param {(arg: T) => K} f
-   * @returns {K}
-   * @memberof OptionLike
-   */
-  public map<K>(f: (arg: T) => K): OptionLike<K> {
-    ensureFunction("map argument must be a function", f);
-
-    return Option(f(this.value));
-  }
-
-  /**
-   * Applies a function to the contained value (if any), or returns the provided default (if not).
-   *
-   * ```ts
-   * Option('foobar').mapOr('abc', arg => arg.length) // Option(6)
-   * None().mapOr('abc', arg => arg.length) // Option('abc')
-   * ```
-   *
-   * @template K
-   * @param {K} def
-   * @param {(arg: T) => K} f
-   * @returns {K}
-   * @memberof OptionLike
-   */
-  public mapOr<K>(def: K, f: (arg: T) => K): K {
-    ensureFunction("mapOr argument must be a function", f);
-
-    return this.isNone() ? def : f(this.value);
-  }
-
-  /**
-   * Applies a function to the contained value (if any), or computes a default (if not).
-   *
-   * ```ts
-   * Option('helloworld').mapOrElse(() => 0, arg => arg.length) // 10
-   * None().mapOrElse(() => 1000, arg => arg.length) // 1000
-   * ```
-   *
-   * @template K
-   * @param {() => K} defFn
-   * @param {(arg: NonNullable<T>) => K} f
-   * @returns {K}
-   * @memberof OptionLike
-   */
-  public mapOrElse<K>(defFn: () => K, f: (arg: NonNullable<T>) => K): K {
-    ensureFunction("mapOrElse argument must be a function", f);
-
-    return this.isSome() ? f(this.value as any) : defFn();
-  }
-
-  /**
-   * Transforms the `OptionLike<T>` into a `Result<T, E>`, mapping `Some(v)` to `Ok(v)` and `None` to `Err(err)`.
-   *
-   * ```ts
-   * Some(100).okOr(Err('foo')) // Ok(100)
-   * None().okOr(Err('foo')) // Err('foo')
-   * ```
-   *
-   * @param {Err} err
-   * @returns {Result<T>}
-   * @memberof OptionLike
-   */
-  public okOr(err: Err): Result<T> {
-    return this.isSome() ? Ok(this.value) : err;
-  }
-
-  /**
-   * Transforms the `OptionLike<T>` into a `Result<T, E>`, mapping `Some(v)` to `Ok(v)` and `None` to `Err(err())`.
-   *
-   * ```ts
-   * Some(100).okOrElse(() => Err("foo")); // Ok(100)
-   * None().okOrElse(() => Err("foo")); // Err('foo)
-   * ```
-   *
-   * @param {() => Err} fn
-   * @returns {Result<NonNullable<T>>}
-   * @memberof OptionLike
-   */
-  public okOrElse(err: () => Err): Result<NonNullable<T>> {
-    return this.isSome() ? Ok(this.value as any) : err();
-  }
-
-  /**
-   * Returns the option if it contains a value,
-   * otherwise returns `optb`
-   *
-   * ```ts
-   * None().or(Some(100)) // Some(100)
-   * Some(10).or(Some(100)) // Some(10)
-   * ```
-   *
-   * @template U
-   * @param {OptionLike<U>} optb
-   * @returns {(OptionLike<T> | OptionLike<U>)}
-   * @memberof OptionLike
-   */
-  public or<U>(optb: OptionLike<U>): OptionLike<T> | OptionLike<U> {
-    return this.isSome() ? this : optb;
-  }
-
-  /**
-   * Returns the option if it contains a value, otherwise calls
-   * `f` and returns the result.
-   *
-   * ```ts
-   * Some(10).orElse(() => 1000) // Some(10)
-   * None().orElse(() => 1000) // Some(1000)
-   * ```
-   *
-   * @template U
-   * @param {() => OptionLike<U>} f
-   * @returns {OptionLike<T | U>}
-   * @memberof OptionLike
-   */
-  public orElse<U>(f: () => OptionLike<U>): OptionLike<T | U> {
-    ensureFunction("orElse argument must be a function", f);
-
-    return this.isSome() ? this : f();
-  }
-
-  /**
-   * Transposes an `Option` of a `Result` into a `Result` of an `Option`.
-   *
-   * ```ts
-   * Option(100).transpose() // Ok(Some(100))
-   * ```
-   *
-   * @returns {Ok<OptionLike<T>>}
-   * @memberof OptionLike
-   */
-  public transpose(): Ok<OptionLike<T>> {
-    return this.isSome() ? Ok(Some(this.value)) : Ok(None());
-  }
-
-  /**
-   * Returns Some if exactly one of self,
-   * optb is Some,
-   * otherwise returns None.
-   *
-   * ```ts
-   * Some(10).xor(Some(10)) // None()
-   * Some(10).xor(Some(11)) // Some(10)
-   * None().xor(Some(11)) // Some(11)
-   * None().xor(None()) // None()
-   * ```
-   *
-   * @template U
-   * @param {OptionLike<U>} optb
-   * @returns {(Some<T> | Some<U> | None)}
-   * @memberof OptionLike
-   */
-  public xor<U>(optb: OptionLike<U>): Some<T> | Some<U> | None<T> {
-    if (optb.isNone() && this.isSome()) {
-      return this;
-    } else if (optb.isSome() && this.isNone()) {
-      return optb;
-    }
-
-    return (optb.value as any) === (this.value as any) ? None<T>() : this;
-  }
-
-  /**
-   * Returns wrapped value or throws if is None
-   *
-   * ```ts
-   * Some(10).unwrap() // 10
-   * None().unwrap() // throw ReferenceError
-   * ```
-   *
-   * @returns {(T | never)}
-   * @memberof OptionLike
-   */
-  public unwrap(): T | never {
-    if (this.isNone()) {
-      throw new ReferenceError("cannot unwrap null value");
-    }
-
-    return this.value;
-  }
-
-  /**
-   * Returns the contained value or a default.
-   *
-   * ```ts
-   * None().unwrapOr(10) // 10
-   * Some(20).unwrapOr(10) // 20
-   * ```
-   *
-   * @param {K} value
-   * @returns {K}
-   * @memberof OptionLike
-   */
-  public unwrapOr<K>(value: K): K {
-    return this.isNone() ? value : (this.value as any);
-  }
-}
+const NONETAG = "none";
+const SOMETAG = "some";
+const OPTIONTAG = "option";
 
 /**
- * Type `Option` represents an optional value: every `Option` is either
- * `Some` and contains a value, or `None`, and does not.
- */
-export type Option<T> = OptionLike<T | null>;
-/**
- * Type `Option` represents an optional value: every `Option` is either
- * `Some` and contains a value, or `None`, and does not.
- */
-export type Some<T> = OptionLike<T>;
-/**
- * Type `Option` represents an optional value: every `Option` is either
- * `Some` and contains a value, or `None`, and does not.
- */
-export type None<T> = OptionLike<T>;
-
-/**
- * Type `Option` represents an optional value: every `Option` is either
- * `Some` and contains a value, or `None`, and does not.
  *
- * Returns `None`
- * @export
- * @returns {None}
  */
-export function None<T = null>(): None<T> {
-  return Option<T>((null as unknown) as T);
-}
+export type Nonetag = typeof NONETAG;
+/**
+ *
+ */
+export type Sometag = typeof SOMETAG;
+/**
+ *
+ */
+export type Optiontag = Nonetag | Sometag;
 
 /**
- * Type `Option` represents an optional value: every `Option` is either
- * `Some` and contains a value, or `None`, and does not.
  *
- * Returns `Some<T>`
- * @export
- * @template T
- * @param {T} value
- * @returns {Some<T>}
  */
-export function Some<T>(value: T): Some<T> {
-  return Option(coerceToNull(value) as T);
-}
+export interface None extends Tagged<any, Nonetag> {}
 
 /**
- * Type `Option` represents an optional value: every `Option` is either
- * `Some` and contains a value, or `None`, and does not.
  *
- * Returns an `Option<T>`
- * @export
- * @template T
- * @param {T} value
- * @returns {OptionLike<T>}
  */
-export function Option<T>(value: T): OptionLike<T> {
-  return new OptionLike(coerceToNull(value) as T);
-}
+export interface Some<T = unknown> extends Tagged<T, Sometag> {}
+
+/**
+ *
+ */
+export type Option<T = unknown> = None | Some<T>;
+
+/**
+ *
+ */
+export type NoneFactory = () => None;
+/**
+ *
+ */
+export type SomeFactory = <T>(value: T) => Some;
+/**
+ *
+ */
+export type OptionFactory = <T>(value: T) => Option<T>;
+
+//#endregion
+
+//#region typeguards
+
+const hasnonetag = isTaggedWith(NONETAG) as typeguardsTs.Typeguard<None>;
+const hassometag = isTaggedWith(SOMETAG) as typeguardsTs.Typeguard<Some>;
+const hasoptiontag = typeguardsTs.anyof<Option>(hasnonetag, hassometag);
+
+/**
+ *
+ */
+export const isOption = typeguardsTs.combine<Option>(isTagged, hasoptiontag);
+/**
+ *
+ */
+export const isNone = typeguardsTs.combine<None>(isTagged, hasnonetag);
+/**
+ *
+ */
+export const isSome = typeguardsTs.combine<Some>(isTagged, hassometag);
+/**
+ *
+ */
+export const isOptionOf = <T>(typeguard: typeguardsTs.Typeguard<T>) =>
+  typeguardsTs.combine<Option<T>>(
+    isOption,
+    typeguardsTs.haskeyoftype("value", typeguard)
+  );
+
+//#endregion
+
+//#region assertables
+
+/**
+ *
+ */
+export const expect = createExpect<Option>(isSome);
+/**
+ *
+ */
+export const unexpect = createExpect<Option>(isNone);
+
+//#endregion
+
+//#region factories
+
+/**
+ *
+ */
+export const none = (): None => tagged(void 0, NONETAG);
+
+/**
+ *
+ */
+export const some = <T>(value: T): Some<T> =>
+  check(
+    !typeguardsTs.isnullOrUndefined(value),
+    "some value cannot be undefined nor null"
+  )(tagged(value, SOMETAG));
+
+/**
+ *
+ */
+export const option = <T>(value: T): Option<T> =>
+  typeguardsTs.isnullOrUndefined(value) ? none() : some(value);
+
+//#endregion
+
+//#region filterables
+
+/**
+ *
+ */
+export const filter = createFilter<Option, Optiontag>(isSome, some, none);
+/**
+ *
+ */
+export const filterOr = createFilterOr<Option, Optiontag>(isSome, some);
+
+//#endregion
+
+//#region mappables
+
+/**
+ *
+ */
+export const map = createMap<Option, Optiontag>(isSome, option);
+/**
+ *
+ */
+export const mapOr = createMapOr<Option, Optiontag>(isSome, option);
+/**
+ *
+ */
+export const mapOrElse = createMapOrElse<Option, Optiontag>(isSome, option);
+
+//#endregion
+
+//#region unwrappables
+
+/**
+ *
+ */
+export const unwrap = createUnwrap<Optiontag>(
+  isSome,
+  "option.unwrap argument must be some"
+);
+
+/**
+ *
+ */
+export const unwrapOr = createUnwrapOr<Optiontag>(isSome);
+
+/**
+ *
+ */
+export const unwrapOrElse = createUnwrapOrElse<Optiontag>(isSome);
+
+//#endregion

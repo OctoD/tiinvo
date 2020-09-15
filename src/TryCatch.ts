@@ -1,72 +1,45 @@
-import { Ok, Err, Result } from "./Result";
-
-export type Fn = () => any;
-export type FnAsync = () => Promise<any>;
+import { err, ok, Result } from "./result";
 
 /**
- * Handle sync try/catch.
  *
- * ```ts
- * import { TryCatch, TryCatchAsync } from 'tiinvo';
  *
- * TryCatch(
- *   (a: number, b: number) => a + b,
- *   10,
- *   20,
- * ) // returns Ok(30)
- * ```
- *
- * @export
  * @template FnTry
  * @template K
- * @param {FnTry} fnTry
+ * @param {FnTry} fn
  * @param {...K} args
- * @returns {(Ok<ReturnType<FnTry>> | Err)}
+ * @returns {Result<ReturnType<FnTry>>}
  */
-export function TryCatch<FnTry extends (...args: K) => any, K extends any[]>(
-  fnTry: FnTry,
+export const trycatch = <FnTry extends (...args: K) => any, K extends any[]>(
+  fn: FnTry,
   ...args: K
-): Result<ReturnType<FnTry>, Error> {
+): Result<ReturnType<FnTry>> => {
   try {
-    return Ok(fnTry.apply(null, args));
+    return ok(fn.apply(null, args));
   } catch (error) {
-    return Err(error.message);
+    return err(error);
   }
-}
+};
 
 /**
- * Handle sync try/catch.
  *
- * ```ts
- * TryCatchAsync(
- *   (url: string) => fetch(url).then(r => r.json()),
- *   'https://reqres.in/api/users?page=2'
- * ) // returns Ok({ some json data here })
  *
- * ```
- *
- * @export
  * @template FnTry
  * @template K
- * @param {FnTry} fnTry
+ * @param {FnTry} fn
  * @param {...K} args
- * @returns {(Promise<Ok<ReturnType<FnTry>> | Err>)}
+ * @returns {Promise<ReturnType<FnTry> extends Promise<infer U> ? Result<U> : never>}
  */
-export async function TryCatchAsync<
+export const trycatchAsync = async <
   FnTry extends (...args: K) => Promise<any>,
   K extends any[]
 >(
-  fnTry: FnTry,
+  fn: FnTry,
   ...args: K
-): Promise<
-  Result<
-    ReturnType<FnTry> extends Promise<infer U> ? U : ReturnType<FnTry>,
-    Error
-  >
-> {
+): Promise<ReturnType<FnTry> extends Promise<infer U> ? Result<U> : never> => {
   try {
-    return Ok(await fnTry.apply(null, args));
+    const returnvalue = await fn.apply(null, args);
+    return ok(returnvalue) as any;
   } catch (error) {
-    return Err(error.message);
+    return err(error) as any;
   }
-}
+};

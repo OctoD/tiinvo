@@ -1,246 +1,317 @@
-import { Option } from "./Option";
-import { Result, Err, Ok } from "./Result";
-import { ensureFunction } from "./common";
+import { createFilter, createFilterOr } from "./filterables";
+import { createfold, createSwap } from "./foldables";
+import { createMap, createMapOr, createMapOrElse } from "./mappables";
+import { Predicate } from "./predicate";
+import { tagged, isTagged, isTaggedWith, Tagged } from "./tagged-type";
+import { anyof, combine, haskeyoftype, Typeguard } from "./typeguards";
+import {
+  createUnwrap,
+  createUnwrapOr,
+  createUnwrapOrElse,
+} from "./unwrappables";
 
-export class EitherLike<LeftValue, RightValue> {
-  public constructor(
-    protected value: LeftValue | RightValue,
-    protected isLeftType: boolean
-  ) {}
+//#region types
 
-  /**
-   * Returns `Either<U, X>` if is `Right`, otherwise returns `Either<LeftValue, RightValue>`
-   *
-   * ```ts
-   * Left(100).and(Right(200)) // Left(100)
-   * Right(100).and(Right(200)) // Right(200)
-   * Right(100).and(Left(200)) // Left(200)
-   * ```
-   *
-   * @template U
-   * @param {EitherLike<U>} either
-   * @returns {(EitherLike<U> | EitherLike<LeftValue>)}
-   * @memberof EitherLike
-   */
-  public and<U, X>(
-    either: EitherLike<U, X>
-  ): EitherLike<U, X> | EitherLike<LeftValue, RightValue> {
-    return this.isRight() ? either : this;
-  }
+const LEFTTAG = "left";
+const RIGHTTAG = "right";
 
-  /**
-   * Returns `Fn` result if is `Right`, otherwise returns `Either<LeftValue>`
-   *
-   * ```ts
-   * Right(100).andThen(value => Right(value + 1)) // Right(101)
-   * Left(100).andThen(value => Right(value + 1)) // Left(100)
-   * ```
-   *
-   * @template Fn
-   * @template U
-   * @param {Fn} fn
-   * @returns {(EitherLike<U> | EitherLike<LeftValue>)}
-   * @memberof Either
-   */
-  public andThen<Fn extends (value: RightValue) => EitherLike<LeftValue, U>, U>(
-    fn: Fn
-  ): EitherLike<LeftValue, U> | EitherLike<LeftValue, RightValue> {
-    ensureFunction("andThen", fn);
-    return this.isRight() ? fn(this.value as any) : this;
-  }
+/**
+ * Left tagtype
+ */
+export type LeftTagname = typeof LEFTTAG;
+/**
+ * Right tagtype
+ */
+export type RightTagname = typeof RIGHTTAG;
+/**
+ * Left or Right tagtypes
+ */
+export type EitherTagname = LeftTagname | RightTagname;
 
-  /**
-   * Returns `true` if is `Left`
-   *
-   * ```ts
-   * Left().isLeft(); // true
-   * Right().isLeft(); // false
-   * ```
-   *
-   * @returns {boolean}
-   * @memberof Either
-   */
-  public isLeft(): boolean {
-    return this.isLeftType;
-  }
+/**
+ * Represents a value of one of two possible types (a disjoint union).
+ */
+export interface Left<T = unknown> extends Tagged<T, LeftTagname> {}
+/**
+ * Represents a value of one of two possible types (a disjoint union).
+ */
+export interface Right<T = unknown> extends Tagged<T, RightTagname> {}
 
-  /**
-   * Returns `true` if is `Right`
-   *
-   * ```ts
-   * Left().isRight(); // false
-   * Right().isRight(); // true
-   * ```
-   *
-   * @returns {boolean}
-   * @memberof Either
-   */
-  public isRight(): boolean {
-    return !this.isLeftType;
-  }
+/**
+ * Represents a value of one of two possible types (a disjoint union).
+ */
+export type Either<TLeft = unknown, TRight = unknown> =
+  | Left<TLeft>
+  | Right<TRight>;
 
-  /**
-   * Returns `leftFn` result if is `Left`, otherwise returns `rightFn` if is `Right`
-   *
-   * ```ts
-   * Left(100).fold(a => a / 2, b => b * 2) // 50
-   * Right(100).fold(a => a / 2, b => b * 2) // 200
-   * ```
-   *
-   * @template A
-   * @param {FnLeft} leftFn
-   * @param {FnRight} rightFn
-   * @returns
-   * @memberof Either
-   */
-  public fold<
-    FnLeft extends (value: LeftValue) => any,
-    FnRight extends (value: RightValue) => any
-  >(leftFn: FnLeft, rightFn: FnRight) {
-    ensureFunction("fold", leftFn);
-    ensureFunction("fold", rightFn);
-    return this.isLeft()
-      ? leftFn(this.value as LeftValue)
-      : rightFn(this.value as RightValue);
-  }
+//#endregion
 
-  /**
-   * Returns `Some<RightValue>` if is `Right`, otherwise returns `None`
-   *
-   * ```ts
-   * Left(100).option() // None()
-   * Right(100).option() // Some(100)
-   * ```
-   *
-   * @returns {Option<RightValue>}
-   * @memberof Either
-   */
-  public option(): Option<RightValue> {
-    return Option(this.isLeft() ? null : (this.value as RightValue));
-  }
+//#region typeguards
 
-  /**
-   * Returns `Either<U, X>` if is `Left`, otherwise returns `Either<LeftValue, RightValue>`
-   *
-   * ```ts
-   * Left(100).or(Right(200)) // Right(100)
-   * Right(100).or(Right(200)) // Right(100)
-   * Right(100).or(Left(200)) // Right(100)
-   * ```
-   *
-   * @template U
-   * @param {EitherLike<U>} either
-   * @returns {(EitherLike<U> | EitherLike<LeftValue>)}
-   * @memberof EitherLike
-   */
-  public or<U, X>(
-    either: EitherLike<U, X>
-  ): EitherLike<U, X> | EitherLike<LeftValue, RightValue> {
-    return this.isRight() ? this : either;
-  }
+const hasleftag = isTaggedWith(LEFTTAG) as Typeguard<Left>;
+const hasrighttag = isTaggedWith(RIGHTTAG) as Typeguard<Right>;
+const haseithertag = anyof<Left | Right>(hasleftag, hasrighttag);
 
-  /**
-   * Returns `Fn` result if is `Left`, otherwise returns `Either<LeftValue>`
-   *
-   * ```ts
-   * Right(100).andThen(value => Right(value + 1)) // Right(100)
-   * Left(100).andThen(value => Right(value + 1)) // Right(101)
-   * ```
-   *
-   * @template Fn
-   * @template U
-   * @param {Fn} fn
-   * @returns {(EitherLike<U> | EitherLike<LeftValue>)}
-   * @memberof Either
-   */
-  public orThen<Fn extends (value: RightValue) => EitherLike<LeftValue, U>, U>(
-    fn: Fn
-  ): EitherLike<LeftValue, U> | EitherLike<LeftValue, RightValue> {
-    ensureFunction("orThen", fn);
-    return this.isRight() ? this : fn(this.value as any);
-  }
+/**
+ * Checks if a variable is Either
+ */
+export const isEither = combine<Either>(isTagged, haseithertag);
 
-  /**
-   * Returns `Ok<RightValue>` if is `Right`, otherwise returns `Err` if is `Left`
-   *
-   * ```ts
-   * Left(100).result() // Err()
-   * Right(20).result() // Ok(20)
-   * ```
-   *
-   * @returns {Result<RightValue, Error>}
-   * @memberof Either
-   */
-  public result(): Result<RightValue, Error> {
-    return this.isLeft()
-      ? Err(`Value ${this.value} is not right.`)
-      : Ok(this.value as RightValue);
-  }
+/**
+ * Checks if a variable is Left
+ */
+export const isLeft = combine<Left>(isTagged, hasleftag);
 
-  /**
-   * Swaps `Right<LeftValue, RightValue>` to `Left<RightValue, LeftValue>` if is `Right<RightValue>`, otherwise swaps `Left<LeftValue, RightValue>` to `Right<RightValue, LeftValue>` if is `Left<LeftValue>`
-   *
-   * ```ts
-   * Left(100).swap() // Right(100)
-   * Right(20).swap() // Left(20)
-   * ```
-   *
-   * @returns {EitherLike<RightValue, LeftValue>}
-   * @memberof Either
-   */
-  public swap(): EitherLike<RightValue, LeftValue> {
-    return new EitherLike(this.value as any, !this.isLeftType);
-  }
+/**
+ * Checks if a variable is Right
+ */
+export const isRight = combine<Right>(isTagged, hasrighttag);
 
-  /**
-   * Unwraps value `LeftValue | RightValue`
-   *
-   * ```ts
-   * Left(10).unwrap() // 10
-   * Right(`hello world`).unwrap() // 'hello world'
-   * ```
-   *
-   * @returns {LeftValue}
-   * @memberof Either
-   */
-  public unwrap(): LeftValue | RightValue {
-    return this.value;
-  }
-}
+/**
+ * Checks if a variable is Either with a value of a given type
+ *
+ * @example
+ * const test1 = left(10);
+ * const test2 = right(10);
+ * const iseitherofstring = isEitherOf(isstring);
+ * const iseitherofnumber = isEitherOf(isnumber);
+ *
+ * iseitherofstring(test) // false
+ * iseitherofnumber(test) // true
+ *
+ * @template T
+ * @param {Typeguard<T>} typeguard
+ */
+export const isEitherOf = <T>(typeguard: Typeguard<T>) =>
+  combine(isEither, haskeyoftype("value", typeguard));
 
-export type Left<LeftValue, RightValue = LeftValue> = EitherLike<
-  LeftValue,
-  RightValue
->;
+/**
+ * Checks if a variable is Left with a value of a given type
+ *
+ * @example
+ * const test1 = left(10);
+ * const test2 = right(10);
+ * const isleftofstring = isLeftOf(isstring);
+ * const isleftofnumber = isLeftOf(isnumber);
+ *
+ * isleftofstring(test1) // false
+ * isleftofstring(test2) // false
+ * isleftofnumber(test1) // true
+ * isleftofnumber(test2) // false
+ *
+ * @template T
+ * @param {Typeguard<T>} typeguard
+ */
+export const isLeftOf = <T>(typeguard: Typeguard<T>) =>
+  combine(isLeft, haskeyoftype("value", typeguard));
 
-export type Right<RightValue, LeftValue = RightValue> = EitherLike<
-  LeftValue,
-  RightValue
->;
+/**
+ * Checks if a variable is Right with a value of a given type
+ *
+ * @example
+ * const test1 = left(10);
+ * const test2 = right(10);
+ * const isrightofstring = isRightOf(isstring);
+ * const isrightofnumber = isRightOf(isnumber);
+ *
+ * isrightofstring(test1) // false
+ * isrightofstring(test2) // false
+ * isrightofnumber(test1) // false
+ * isrightofnumber(test2) // true
+ *
+ * @template T
+ * @param {Typeguard<T>} typeguard
+ */
+export const isRightOf = <T>(typeguard: Typeguard<T>) =>
+  combine(isRight, haskeyoftype("value", typeguard));
 
-export const Either = {
-  Left,
-  Right
-};
+//#endregion
+
+//#region ctors
+
+/**
+ * Creates a Left<T> type
+ */
+export const left = <T>(value: T): Left<T> => tagged(value, LEFTTAG);
+
+/**
+ * Creates a Right<T> type
+ */
+export const right = <T>(value: T): Right<T> => tagged(value, RIGHTTAG);
+
+//#endregion
+
+//#region filterables
 
 /**
  *
- * @export
- * @template T
- * @param {T} [value]
- * @returns {EitherLike<T>}
  */
-export function Left<T>(value?: T): Left<T> {
-  return new EitherLike(value as any, true);
-}
+export const filterLeft = createFilter<Either, EitherTagname>(
+  isLeft,
+  left,
+  right
+);
 
 /**
  *
- * @export
- * @template T
- * @param {T} [value]
- * @returns {Right<T>}
  */
-export function Right<T>(value?: T): Right<T> {
-  return new EitherLike(value as any, false);
-}
+export const filterLeftOr = createFilterOr<Either, EitherTagname>(isLeft, left);
+
+/**
+ *
+ */
+export const filterRight = createFilter<Either, EitherTagname>(
+  isRight,
+  right,
+  left
+);
+
+/**
+ *
+ */
+export const filterRightOr = createFilterOr<Either, EitherTagname>(
+  isRight,
+  right
+);
+
+//#endregion
+
+//#region foldables
+
+/**
+ *
+ */
+export const fold = createfold<EitherTagname>(isLeft);
+
+/**
+ *
+ */
+export const swap = createSwap<LeftTagname, RightTagname>(isLeft, left, right);
+
+//#endregion
+
+//#region mappables
+
+/**
+ *
+ */
+export const mapLeft = createMap<Either, EitherTagname>(isLeft, left);
+
+/**
+ *
+ */
+export const mapRight = createMap<Either, EitherTagname>(isRight, right);
+
+/**
+ *
+ */
+export const mapLeftOr = createMapOr<Either, EitherTagname>(isLeft, left);
+
+/**
+ *
+ */
+export const mapRightOr = createMapOr<Either, EitherTagname>(isRight, right);
+
+/**
+ *
+ */
+export const mapLeftOrElse = createMapOrElse<Either, EitherTagname>(
+  isLeft,
+  left
+);
+
+/**
+ *
+ */
+export const mapRigthOrElse = createMapOrElse<Either, EitherTagname>(
+  isRight,
+  right
+);
+
+//#region unwrappables
+
+/**
+ * Unwraps Either Left or Right
+ *
+ * @example
+ * unwrapEither(left(10)) // 10
+ * unwrapEither(right(1)) // 1
+ */
+export const unwrapEither = createUnwrap(isEither, "");
+
+/**
+ * Unwraps value if Left or throws
+ *
+ * @example
+ * unwrapLeft(left(10)) // 10
+ * unwrapLeft(right(1)) // throws
+ */
+export const unwrapLeft = createUnwrap(
+  isLeft,
+  "Cannot unwrap Right, expected to be Left"
+);
+
+/**
+ * Unwraps value if Right or throws
+ *
+ * @example
+ * unwrapRight(left(10)) // throws
+ * unwrapRight(right(1)) // 1
+ */
+export const unwrapRight = createUnwrap(
+  isRight,
+  "Cannot unwrap Left, expected to be Right"
+);
+
+/**
+ * Unwraps Left value if Left or returns the fallback
+ *
+ * @example
+ * unwrapLeftOr(20)(left(10)) // 10
+ * unwrapLeftOr(20)(right(1)) // 20
+ */
+export const unwrapLeftOr = createUnwrapOr(isLeft);
+
+/**
+ * Unwraps Right value if Right or returns the fallback
+ *
+ * @example
+ * unwrapRightOr(20)(left(10)) // 20
+ * unwrapRightOr(20)(right(1)) // 1
+ */
+export const unwrapRightOr = createUnwrapOr(isRight);
+
+/**
+ * Unwraps Left value if Left or returns the fallback
+ *
+ * @example
+ * unwrapLeftOrElse(fallback(20))(left(10)) // 10
+ * unwrapLeftOrElse(fallback(30))(right(1)) // 30
+ */
+export const unwrapLeftOrElse = createUnwrapOrElse(isLeft);
+
+/**
+ * Unwraps Right value if Right or returns the fallback
+ *
+ * @example
+ * unwrapRightOrElse(fallback(20))(left(10)) // 20
+ * unwrapRightOrElse(fallback(30))(right(1)) // 1
+ */
+export const unwrapRightOrElse = createUnwrapOrElse(isRight);
+
+//#endregion
+
+/**
+ * Creates a new either from a given predicate.
+ *
+ * @example
+ * const iseven = (arg: number) => arg % 2 === 0;
+ *
+ * frompredicate(iseven)(20) // Right<20>
+ * frompredicate(iseven)(11) // Left<11>
+ *
+ * @template T
+ * @param {Predicate<T>} predicate
+ */
+export const frompredicate = <T>(predicate: Predicate<T>) => (arg: T) =>
+  predicate(arg) ? right(arg) : left(arg);
