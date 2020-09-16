@@ -77,3 +77,16 @@ export const panic = <E extends ErrorConstructor>(
 ): never => {
   throw new ctor(message);
 };
+
+/**
+ * Converts a sync function to an async one
+ *
+ * @template Fn
+ * @param {Fn} fn
+ * @returns {(... args: ArgsOf<Fn>) => Promise<ReturnType<Fn>>}
+ */
+export const toasync = <Fn extends FnBase>(
+  fn: Fn
+): ((...args: ArgsOf<Fn>) => Promise<ReturnType<Fn>>) => async (
+  ...args: ArgsOf<Fn>
+) => fn(...args);
