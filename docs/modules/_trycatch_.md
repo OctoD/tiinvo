@@ -15,7 +15,7 @@
 
 ▸ **trycatch**‹**FnTry**, **K**›(`fn`: FnTry, ...`args`: K): *[Result](_result_.md#result)‹ReturnType‹FnTry››*
 
-Defined in trycatch.ts:12
+*Defined in [trycatch.ts:12](https://github.com/OctoD/tiinvo/blob/9536b4d/src/trycatch.ts#L12)*
 
 **Type parameters:**
 
@@ -38,7 +38,7 @@ ___
 
 ▸ **trycatchAsync**‹**FnTry**, **K**›(`fn`: FnTry, ...`args`: K): *Promise‹ReturnType‹FnTry› extends Promise‹infer U› ? Result‹U› : never›*
 
-Defined in trycatch.ts:32
+*Defined in [trycatch.ts:32](https://github.com/OctoD/tiinvo/blob/9536b4d/src/trycatch.ts#L32)*
 
 **Type parameters:**
 

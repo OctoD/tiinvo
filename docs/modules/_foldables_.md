@@ -19,7 +19,7 @@
 
 Ƭ **FoldableFn**: *function*
 
-Defined in foldables.ts:4
+*Defined in [foldables.ts:4](https://github.com/OctoD/tiinvo/blob/9536b4d/src/foldables.ts#L4)*
 
 #### Type declaration:
 
@@ -37,7 +37,7 @@ Name | Type |
 
 ▸ **createSwap**‹**LeftTag**, **RightTag**›(`lefthandpredicate`: [Predicate](_predicate_.md#predicate)‹[Tagged](_tagged_type_.md#tagged)‹unknown, LeftTag | RightTag››, `leftcreator`: [TaggedFactory](_tagged_type_.md#taggedfactory)‹LeftTag›, `rightcreator`: [TaggedFactory](_tagged_type_.md#taggedfactory)‹RightTag›): *(Anonymous function)*
 
-Defined in foldables.ts:29
+*Defined in [foldables.ts:30](https://github.com/OctoD/tiinvo/blob/9536b4d/src/foldables.ts#L30)*
 
 **Type parameters:**
 
@@ -61,7 +61,7 @@ ___
 
 ▸ **createfold**‹**Tagname**›(`lefthandpredicate`: [Predicate](_predicate_.md#predicate)‹[Tagged](_tagged_type_.md#tagged)‹any, Tagname››): *(Anonymous function)*
 
-Defined in foldables.ts:13
+*Defined in [foldables.ts:13](https://github.com/OctoD/tiinvo/blob/9536b4d/src/foldables.ts#L13)*
 
 Creates a fold function
 

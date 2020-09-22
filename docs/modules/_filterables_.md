@@ -15,7 +15,7 @@
 
 ▸ **createFilter**‹**Arg**, **Tagname**›(`typeguard`: [Predicate](_predicate_.md#predicate)‹Arg›, `factory`: [TaggedFactory](_tagged_type_.md#taggedfactory)‹Tagname›, `failfactory`: function): *(Anonymous function)*
 
-Defined in filterables.ts:13
+*Defined in [filterables.ts:13](https://github.com/OctoD/tiinvo/blob/9536b4d/src/filterables.ts#L13)*
 
 **Type parameters:**
 
@@ -51,7 +51,7 @@ ___
 
 ▸ **createFilterOr**‹**Arg**, **Tagname**›(`typeguard`: [Predicate](_predicate_.md#predicate)‹Arg›, `factory`: [TaggedFactory](_tagged_type_.md#taggedfactory)‹Tagname›): *(Anonymous function)*
 
-Defined in filterables.ts:35
+*Defined in [filterables.ts:35](https://github.com/OctoD/tiinvo/blob/9536b4d/src/filterables.ts#L35)*
 
 **Type parameters:**
 

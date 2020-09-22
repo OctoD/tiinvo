@@ -16,6 +16,7 @@
 * [check](_applicative_.md#const-check)
 * [fallback](_applicative_.md#const-fallback)
 * [panic](_applicative_.md#const-panic)
+* [toasync](_applicative_.md#const-toasync)
 
 ## Type aliases
 
@@ -23,7 +24,7 @@
 
 Ƭ **ArgsOf**: *Fn extends function ? U : any[]*
 
-Defined in applicative.ts:14
+*Defined in [applicative.ts:14](https://github.com/OctoD/tiinvo/blob/9536b4d/src/applicative.ts#L14)*
 
 Extracts the arguments types from a function
 
@@ -38,7 +39,7 @@ ___
 
 Ƭ **FnBase**: *function*
 
-Defined in applicative.ts:20
+*Defined in [applicative.ts:21](https://github.com/OctoD/tiinvo/blob/9536b4d/src/applicative.ts#L21)*
 
 A generic function type
 
@@ -58,7 +59,7 @@ ___
 
 Ƭ **_**: *undefined*
 
-Defined in applicative.ts:4
+*Defined in [applicative.ts:4](https://github.com/OctoD/tiinvo/blob/9536b4d/src/applicative.ts#L4)*
 
 Shorthand for undefined
 
@@ -68,7 +69,7 @@ Shorthand for undefined
 
 ▸ **bind**‹**Fn**›(`fn`: Fn, ...`args`: [ArgsOf](_applicative_.md#argsof)‹Fn›): *function*
 
-Defined in applicative.ts:34
+*Defined in [applicative.ts:35](https://github.com/OctoD/tiinvo/blob/9536b4d/src/applicative.ts#L35)*
 
 Binds a function to a null `this`, then returns it
 
@@ -99,7 +100,7 @@ ___
 
 ▸ **check**(`condition`: boolean, `errormessage`: string): *(Anonymous function)*
 
-Defined in applicative.ts:49
+*Defined in [applicative.ts:52](https://github.com/OctoD/tiinvo/blob/9536b4d/src/applicative.ts#L52)*
 
 Checks if a given condition is true, otherwise throws an error with the given error message
 
@@ -123,7 +124,7 @@ ___
 
 ▸ **fallback**‹**T**›(`arg`: T): *(Anonymous function)*
 
-Defined in applicative.ts:60
+*Defined in [applicative.ts:64](https://github.com/OctoD/tiinvo/blob/9536b4d/src/applicative.ts#L64)*
 
 Creates a function which returns a fallback function
 
@@ -148,7 +149,7 @@ ___
 
 ▸ **panic**‹**E**›(`message`: string, `ctor`: E): *never*
 
-Defined in applicative.ts:70
+*Defined in [applicative.ts:74](https://github.com/OctoD/tiinvo/blob/9536b4d/src/applicative.ts#L74)*
 
 Throws an error with the given message
 
@@ -164,3 +165,33 @@ Name | Type | Default |
 `ctor` | E | Error as E |
 
 **Returns:** *never*
+
+___
+
+### `Const` toasync
+
+▸ **toasync**‹**Fn**›(`fn`: Fn): *function*
+
+*Defined in [applicative.ts:88](https://github.com/OctoD/tiinvo/blob/9536b4d/src/applicative.ts#L88)*
+
+Converts a sync function to an async one
+
+**Type parameters:**
+
+▪ **Fn**: *[FnBase](_applicative_.md#fnbase)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`fn` | Fn |
+
+**Returns:** *function*
+
+▸ (...`args`: [ArgsOf](_applicative_.md#argsof)‹Fn›): *Promise‹ReturnType‹Fn››*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`...args` | [ArgsOf](_applicative_.md#argsof)‹Fn› |

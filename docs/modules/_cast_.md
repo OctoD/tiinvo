@@ -15,7 +15,7 @@
 
 ▸ **cast**‹**T**, **Tagfrom**, **Tagto**›(`tagged`: T, `totagged`: [TaggedFactory](_tagged_type_.md#taggedfactory)‹Tagto›): *[Tagged](_tagged_type_.md#tagged)‹T["value"], Tagto›*
 
-Defined in cast.ts:20
+*Defined in [cast.ts:17](https://github.com/OctoD/tiinvo/blob/9536b4d/src/cast.ts#L17)*
 
 Cast a TaggetType to another one.
 
@@ -46,7 +46,7 @@ ___
 
 ▸ **createCast**‹**Tagto**›(`totagged`: [TaggedFactory](_tagged_type_.md#taggedfactory)‹Tagto›): *(Anonymous function)*
 
-Defined in cast.ts:41
+*Defined in [cast.ts:38](https://github.com/OctoD/tiinvo/blob/9536b4d/src/cast.ts#L38)*
 
 Creates a cast to function
 

@@ -49,7 +49,7 @@
 
 Ƭ **JustFactory**: *function*
 
-Defined in maybe.ts:49
+Defined in maybe.ts:44
 
 #### Type declaration:
 
@@ -71,7 +71,7 @@ ___
 
 Ƭ **JustTag**: *typeof JUSTTAG*
 
-Defined in maybe.ts:24
+Defined in maybe.ts:19
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 Ƭ **Maybe**: *[Nothing](../interfaces/_maybe_.nothing.md) | [Just](../interfaces/_maybe_.just.md)‹T›*
 
-Defined in maybe.ts:40
+Defined in maybe.ts:35
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 Ƭ **MaybeTag**: *[JustTag](_maybe_.md#justtag) | [NothingTag](_maybe_.md#nothingtag)*
 
-Defined in maybe.ts:26
+Defined in maybe.ts:21
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 Ƭ **NothingFactory**: *function*
 
-Defined in maybe.ts:45
+Defined in maybe.ts:40
 
 #### Type declaration:
 
@@ -107,7 +107,7 @@ ___
 
 Ƭ **NothingTag**: *typeof NOTHINGTAG*
 
-Defined in maybe.ts:25
+Defined in maybe.ts:20
 
 ## Variables
 
@@ -115,7 +115,7 @@ Defined in maybe.ts:25
 
 • **JUSTTAG**: *"just"* = "just"
 
-Defined in maybe.ts:21
+Defined in maybe.ts:16
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 • **NOTHINGTAG**: *"nothing"* = "nothing"
 
-Defined in maybe.ts:22
+Defined in maybe.ts:17
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 • **expect**: *[Expect](_assertables_.md#expect)‹[Just](../interfaces/_maybe_.just.md)‹unknown››* = createExpect<Just>(isJust)
 
-Defined in maybe.ts:105
+Defined in maybe.ts:98
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 • **filter**: *(Anonymous function)* = createFilter(isJust, just, nothing as any)
 
-Defined in maybe.ts:120
+Defined in maybe.ts:113
 
 ___
 
@@ -147,7 +147,7 @@ ___
 
 • **filterOr**: *(Anonymous function)* = createFilterOr(isJust, just)
 
-Defined in maybe.ts:124
+Defined in maybe.ts:117
 
 ___
 
@@ -155,7 +155,7 @@ ___
 
 • **fold**: *(Anonymous function)* = createfold<MaybeTag>(isNothing)
 
-Defined in maybe.ts:133
+Defined in maybe.ts:126
 
 ___
 
@@ -163,7 +163,7 @@ ___
 
 • **hasjusttag**: *[Typeguard](_typeguards_.md#typeguard)‹[Tagged](_tagged_type_.md#tagged)‹unknown, "just"››* = isTaggedWith(JUSTTAG)
 
-Defined in maybe.ts:56
+Defined in maybe.ts:51
 
 ___
 
@@ -171,7 +171,7 @@ ___
 
 • **hasnothingtag**: *[Typeguard](_typeguards_.md#typeguard)‹[Tagged](_tagged_type_.md#tagged)‹unknown, "nothing"››* = isTaggedWith(NOTHINGTAG)
 
-Defined in maybe.ts:55
+Defined in maybe.ts:50
 
 ___
 
@@ -179,7 +179,7 @@ ___
 
 • **isJust**: *[Typeguard](_typeguards_.md#typeguard)‹[Just](../interfaces/_maybe_.just.md)‹unknown››* = combine<Just>(isTagged, hasjusttag)
 
-Defined in maybe.ts:69
+Defined in maybe.ts:64
 
 ___
 
@@ -187,10 +187,10 @@ ___
 
 • **isMaybe**: *[Typeguard](_typeguards_.md#typeguard)‹[Maybe](_maybe_.md#maybe)‹unknown››* = combine<Maybe>(
   isTagged,
-  anyof(hasnothingtag, hasjusttag),
+  anyof(hasnothingtag, hasjusttag)
 )
 
-Defined in maybe.ts:61
+Defined in maybe.ts:56
 
 ___
 
@@ -198,7 +198,7 @@ ___
 
 • **isNothing**: *[Typeguard](_typeguards_.md#typeguard)‹[Nothing](../interfaces/_maybe_.nothing.md)‹››* = combine<Nothing>(isTagged, hasnothingtag)
 
-Defined in maybe.ts:74
+Defined in maybe.ts:69
 
 ___
 
@@ -206,7 +206,7 @@ ___
 
 • **unexpect**: *[Expect](_assertables_.md#expect)‹[Nothing](../interfaces/_maybe_.nothing.md)‹››* = createExpect<Nothing>(isNothing)
 
-Defined in maybe.ts:110
+Defined in maybe.ts:103
 
 ___
 
@@ -214,10 +214,10 @@ ___
 
 • **unwrap**: *(Anonymous function)* = createUnwrap<MaybeTag>(
   isJust,
-  "Expected Just, got Nothing",
+  "Expected Just, got Nothing"
 )
 
-Defined in maybe.ts:142
+Defined in maybe.ts:135
 
 ___
 
@@ -225,7 +225,7 @@ ___
 
 • **unwrapOr**: *(Anonymous function)* = createUnwrapOr<MaybeTag>(isJust)
 
-Defined in maybe.ts:150
+Defined in maybe.ts:143
 
 ___
 
@@ -233,7 +233,7 @@ ___
 
 • **unwrapOrElse**: *(Anonymous function)* = createUnwrapOrElse<MaybeTag>(isJust)
 
-Defined in maybe.ts:155
+Defined in maybe.ts:148
 
 ## Functions
 
@@ -241,7 +241,7 @@ Defined in maybe.ts:155
 
 ▸ **frompredicate**‹**T**›(`predicate`: [Predicate](_predicate_.md#predicate)‹T›): *(Anonymous function)*
 
-Defined in maybe.ts:162
+Defined in maybe.ts:155
 
 **Type parameters:**
 
@@ -261,7 +261,7 @@ ___
 
 ▸ **just**‹**T**›(`value`: T): *[Tagged](_tagged_type_.md#tagged)‹T, "just"›*
 
-Defined in maybe.ts:88
+Defined in maybe.ts:83
 
 **Type parameters:**
 
@@ -281,7 +281,7 @@ ___
 
 ▸ **maybe**‹**T**›(`arg?`: T): *[Nothing](../interfaces/_maybe_.nothing.md)‹› | [Tagged](_tagged_type_.md#tagged)‹T, "just"›*
 
-Defined in maybe.ts:96
+Defined in maybe.ts:89
 
 **Type parameters:**
 
@@ -301,6 +301,6 @@ ___
 
 ▸ **nothing**(): *[Nothing](../interfaces/_maybe_.nothing.md)*
 
-Defined in maybe.ts:83
+Defined in maybe.ts:78
 
 **Returns:** *[Nothing](../interfaces/_maybe_.nothing.md)*

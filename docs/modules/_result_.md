@@ -53,7 +53,7 @@
 
 Ƭ **ErrFactory**: *function*
 
-Defined in result.ts:60
+*Defined in [result.ts:58](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L58)*
 
 #### Type declaration:
 
@@ -71,7 +71,7 @@ ___
 
 Ƭ **Errtag**: *typeof ERRTAG*
 
-Defined in result.ts:30
+*Defined in [result.ts:28](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L28)*
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 Ƭ **OkFactory**: *function*
 
-Defined in result.ts:64
+*Defined in [result.ts:62](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L62)*
 
 #### Type declaration:
 
@@ -101,7 +101,7 @@ ___
 
 Ƭ **Oktag**: *typeof OKTAG*
 
-Defined in result.ts:35
+*Defined in [result.ts:33](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L33)*
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 Ƭ **Result**: *[Ok](../interfaces/_result_.ok.md)‹T› | [Err](../interfaces/_result_.err.md)*
 
-Defined in result.ts:55
+*Defined in [result.ts:53](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L53)*
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 Ƭ **ResultFactory**: *function*
 
-Defined in result.ts:68
+*Defined in [result.ts:66](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L66)*
 
 #### Type declaration:
 
@@ -139,7 +139,7 @@ ___
 
 Ƭ **ResultTag**: *[Errtag](_result_.md#errtag) | [Oktag](_result_.md#oktag)*
 
-Defined in result.ts:40
+*Defined in [result.ts:38](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L38)*
 
 ## Variables
 
@@ -147,7 +147,7 @@ Defined in result.ts:40
 
 • **ERRTAG**: *"err"* = "err"
 
-Defined in result.ts:23
+*Defined in [result.ts:21](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L21)*
 
 ___
 
@@ -155,7 +155,7 @@ ___
 
 • **OKTAG**: *"ok"* = "ok"
 
-Defined in result.ts:24
+*Defined in [result.ts:22](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L22)*
 
 ___
 
@@ -163,7 +163,7 @@ ___
 
 • **RESULTTAG**: *"result"* = "result"
 
-Defined in result.ts:25
+*Defined in [result.ts:23](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L23)*
 
 ___
 
@@ -171,7 +171,7 @@ ___
 
 • **expect**: *[Expect](_assertables_.md#expect)‹[Result](_result_.md#result)‹unknown››* = createExpect<Result>(isOk)
 
-Defined in result.ts:128
+*Defined in [result.ts:123](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L123)*
 
 ___
 
@@ -180,10 +180,10 @@ ___
 • **filter**: *(Anonymous function)* = createFilter<Result, ResultTag>(
   isOk,
   result as TaggedFactory<ResultTag>,
-  () => err("filter error") as any,
+  () => err("filter error") as any
 )
 
-Defined in result.ts:141
+*Defined in [result.ts:136](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L136)*
 
 ___
 
@@ -191,10 +191,10 @@ ___
 
 • **filterOr**: *(Anonymous function)* = createFilterOr<Result, ResultTag>(
   isOk,
-  result as TaggedFactory<ResultTag>,
+  result as TaggedFactory<ResultTag>
 )
 
-Defined in result.ts:150
+*Defined in [result.ts:145](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L145)*
 
 ___
 
@@ -202,7 +202,7 @@ ___
 
 • **haserrtag**: *[Typeguard](_typeguards_.md#typeguard)‹[Tagged](_tagged_type_.md#tagged)‹unknown, "err"››* = isTaggedWith(ERRTAG)
 
-Defined in result.ts:75
+*Defined in [result.ts:73](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L73)*
 
 ___
 
@@ -210,7 +210,7 @@ ___
 
 • **hasoktag**: *[Typeguard](_typeguards_.md#typeguard)‹[Tagged](_tagged_type_.md#tagged)‹unknown, "ok"››* = isTaggedWith(OKTAG)
 
-Defined in result.ts:74
+*Defined in [result.ts:72](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L72)*
 
 ___
 
@@ -218,7 +218,7 @@ ___
 
 • **hasresulttag**: *[Typeguard](_typeguards_.md#typeguard)‹unknown›* = tg.anyof(hasoktag, haserrtag)
 
-Defined in result.ts:76
+*Defined in [result.ts:74](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L74)*
 
 ___
 
@@ -226,7 +226,7 @@ ___
 
 • **isErr**: *[Typeguard](_typeguards_.md#typeguard)‹[Err](../interfaces/_result_.err.md)‹››* = tg.combine(isTagged, haserrtag) as tg.Typeguard<Err>
 
-Defined in result.ts:87
+*Defined in [result.ts:85](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L85)*
 
 ___
 
@@ -234,7 +234,7 @@ ___
 
 • **isOk**: *[Typeguard](_typeguards_.md#typeguard)‹[Ok](../interfaces/_result_.ok.md)‹unknown››* = tg.combine(isTagged, hasoktag) as tg.Typeguard<Ok>
 
-Defined in result.ts:91
+*Defined in [result.ts:89](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L89)*
 
 ___
 
@@ -244,7 +244,7 @@ ___
   Result
 >
 
-Defined in result.ts:81
+*Defined in [result.ts:79](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L79)*
 
 ___
 
@@ -252,10 +252,10 @@ ___
 
 • **map**: *(Anonymous function)* = createMap<Result, ResultTag>(
   isOk,
-  result as TaggedFactory<ResultTag>,
+  result as TaggedFactory<ResultTag>
 )
 
-Defined in result.ts:162
+*Defined in [result.ts:157](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L157)*
 
 ___
 
@@ -263,10 +263,10 @@ ___
 
 • **mapOr**: *(Anonymous function)* = createMapOr<Result, ResultTag>(
   isOk,
-  result as TaggedFactory<ResultTag>,
+  result as TaggedFactory<ResultTag>
 )
 
-Defined in result.ts:170
+*Defined in [result.ts:165](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L165)*
 
 ___
 
@@ -274,10 +274,10 @@ ___
 
 • **mapOrElse**: *(Anonymous function)* = createMapOrElse<Result, ResultTag>(
   isOk,
-  result as TaggedFactory<ResultTag>,
+  result as TaggedFactory<ResultTag>
 )
 
-Defined in result.ts:178
+*Defined in [result.ts:173](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L173)*
 
 ___
 
@@ -285,7 +285,7 @@ ___
 
 • **unexpect**: *[Expect](_assertables_.md#expect)‹[Result](_result_.md#result)‹unknown››* = createExpect<Result>(isErr)
 
-Defined in result.ts:132
+*Defined in [result.ts:127](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L127)*
 
 ___
 
@@ -293,7 +293,7 @@ ___
 
 • **unwrap**: *(Anonymous function)* = createUnwrap<ResultTag>(isOk, "cannot unwrapp Err")
 
-Defined in result.ts:190
+*Defined in [result.ts:185](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L185)*
 
 ___
 
@@ -301,7 +301,7 @@ ___
 
 • **unwrapOr**: *(Anonymous function)* = createUnwrapOr<ResultTag>(isOk)
 
-Defined in result.ts:194
+*Defined in [result.ts:189](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L189)*
 
 ___
 
@@ -309,7 +309,7 @@ ___
 
 • **unwrapOrElse**: *(Anonymous function)* = createUnwrapOrElse<ResultTag>(isOk)
 
-Defined in result.ts:198
+*Defined in [result.ts:193](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L193)*
 
 ## Functions
 
@@ -317,7 +317,7 @@ Defined in result.ts:198
 
 ▸ **err**(`message`: string | Error): *[Err](../interfaces/_result_.err.md)*
 
-Defined in result.ts:100
+*Defined in [result.ts:98](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L98)*
 
 **Parameters:**
 
@@ -333,7 +333,7 @@ ___
 
 ▸ **ok**‹**T**›(`value`: T): *[Ok](../interfaces/_result_.ok.md)‹T›*
 
-Defined in result.ts:109
+*Defined in [result.ts:104](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L104)*
 
 **Type parameters:**
 
@@ -353,7 +353,7 @@ ___
 
 ▸ **result**‹**T**›(`value`: T): *[Result](_result_.md#result)‹T›*
 
-Defined in result.ts:118
+*Defined in [result.ts:113](https://github.com/OctoD/tiinvo/blob/9536b4d/src/result.ts#L113)*
 
 **Type parameters:**
 
