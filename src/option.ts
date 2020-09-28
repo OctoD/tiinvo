@@ -14,7 +14,6 @@ import {
 
 const NONETAG = "none";
 const SOMETAG = "some";
-const OPTIONTAG = "option";
 
 /**
  *
