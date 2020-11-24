@@ -1,0 +1,34 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "docs",
+			"problemMatcher": [],
+			"label": "npm: docs",
+			"detail": "typedoc --options typedoc.markdown.json"
+		},
+		{
+			"type": "npm",
+			"script": "changelog",
+			"problemMatcher": [],
+			"label": "npm: changelog",
+			"detail": "standard-changelog"
+		},
+		{
+			"type": "npm",
+			"script": "test",
+			"group": "test",
+			"problemMatcher": [],
+			"label": "npm: test",
+			"detail": "jest"
+		},
+		{
+			"type": "npm",
+			"script": "size-limit",
+			"problemMatcher": [],
+			"label": "npm: size-limit",
+			"detail": "tsc -p . && size-limit"
+		}
+	]
+}

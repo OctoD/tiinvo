@@ -15,18 +15,11 @@ Functional data structures for TypeScript and JavaScript.
 - [tiinvo](#tiinvo)
 - [Install](#install)
 - [Usage](#usage)
-  - [Docs](#docs)
-  - [GetSet](#getset)
-  - [Graph](#graph)
-  - [LinkedList](#linkedlist)
-  - [Mediator](#mediator)
-  - [Option](#option)
-  - [Queue](#queue)
-  - [Result](#result)
-  - [Stack](#stack)
-  - [TryCatch](#trycatch)
-  - [Either](#either)
-  - [Maybe](#maybe)
+  - [data types](#data-types)
+  - [predicates](#predicates)
+  - [typeguards](#typeguards)
+  - [utilities](#utilities)
+- [Docs](#docs)
 - [Contributing](#contributing)
 - [Licence](#licence)
 
@@ -42,296 +35,118 @@ yarn add tiinvo
 
 # Usage
 
-## Docs
+## data types
+
+tiinvo is a functional data types library. 
+
+It has several data types like Option, Maybe, Result and Either, each one is a Tagged Type.
+
+Option is used for values that can be possibly null or undefined.
+
+Maybe is used for values that can possibly has a truthy or falsy logical value.
+
+Result is used to describe if a function return value is an error or is ok (safe) value.
+
+Either is used to represents a value of one of two possible types (a disjoint union).
+
+## predicates
+
+tiinvo comes with a bunch of predicate utilities
+
+```ts
+import { predicate } from 'tiinvo';
+
+const iseven = (arg: number) => arg % 2 === 0;
+const makeislessthan = (check: number) => (arg: number) => arg < check;
+const islessthan10 = makeislessthan(10);
+const isodd  =  predicate.reverse(iseven);
+const check1 =  predicate.fromvalue(1);
+const check2 =  predicate.fromvalue(2);
+const isevenandlessthan10 = predicate.and(iseven, islessthan10);
+const isevenorlessthan10 = predicate.or(iseven, islessthan10);
+
+check1(iseven)          // false
+check1(isodd)           // true
+check2(iseven)          // true
+check2(isodd)           // false
+isevenandlessthan10(6)  // true
+isevenandlessthan10(5)  // false
+isevenandlessthan10(12) // false
+isevenorlessthan10(12)  // true
+isevenorlessthan10(5)   // true
+isevenorlessthan10(13)  // false
+```
+
+## typeguards
+
+This library also makes complex typeguards building very easy.
+
+```ts
+import { isstring, isoptional, isnumber, isarrayof, createStructOf } from 'tiinvo';
+
+export type UserArray = User[];
+
+export interface User {
+  age: number;
+  email: string;
+  firstname: string;
+  lastname: string;
+  nickname?: string;
+}
+
+export const isUser = createStructOf<User>({
+  age: isnumber,
+  email: isstring,
+  firstname: isstring,
+  lastname: isstring,
+  nickname: isoptional(isstring),
+});
+
+export const isUserArray = isarrayof(isUser);
+
+const user000: User = {
+  age: 22,
+  email: 'hello.world@foo.bar',
+  firstname: 'Hello',
+  lastname: 'World',
+}
+
+const user001: User = {
+  age: 54,
+  email: 'john.doe@domain.com',
+  firstname: 'John',
+  lastname: 'Doe',
+  nickname: 'BionicPizza',
+}
+
+isUser(user000)                 // true, user000 is User
+isUser(user001)                 // true, user001 is User
+isUser(1000000)                 // false
+isUserArray([user000, user001]) // true
+isUserArray(['pizza', user001]) // false
+```
+
+## utilities
+
+tiinvo also has some other utilities functions
+
+```ts
+import { fallback, fi, isnumber, option, pipe } from 'tiinvo';
+
+const numericoption = (arg: number): option.Option<number> => fi(isnumber(arg), option.option(arg), option.none());
+const multiplyby2 = (arg: number) => arg * 2;
+const unwraporelse = option.unwrapOrElse(fallback(0), fallback);
+const getmultipliedby2 = pipe(numericoption, multiplyby2, unwraporelse);
+
+getmultipliedby2('darn')      // 0
+getmultipliedby2(new Date())  // 0
+getmultipliedby2(5)           // 10
+getmultipliedby2(15)          // 30
+```
+
+# Docs
 
 Documentation is located [here](./docs/README.md)
-
-## GetSet
-
-Type `GetSet` is used to handle a value without explicitly reassigning it. 
-
-```ts
-import { GetSet } from 'tiinvo';
-
-const mynumber = GetSet(10);
-
-mynumber.get() // 10
-mynumber.set(11)
-mynumber.get() // 11
-```
-
-## Graph
-
-Type `Graph` represents an abstract data type that is meant to implement the undirected graph and directed graph.
-
-```ts
-import { Graph, Vertex } from 'tiinvo';
-
-const graph = Graph();
-const v1 = Vertex('a');
-const v2 = Vertex('b');
-const v3 = Vertex('c');
-const v4 = Vertex('d');
-
-graph.connect(v1, v2);
-graph.connect(v2, v3);
-graph.connect(v3, v4);
-graph.connect(v1, v4);
-
-graph.neighbours(v1) // Option([Vertex('a'), Vertex('b'), Vertex('c')])
-```
-
-## LinkedList
-
-Type `LinkedList` is a linear collection of data elements with each element points to the next. It is a data structure consisting of a collection of nodes which together represent a sequence
-
-```ts
-import { LinkedList, Node } from 'tiinvo';
-
-const list = LinkedList();
-
-list
-  .append(Node(1))
-  .append(Node(2))
-  .append(Node(3))
-
-list.size() // 3
-list.value() // [1, 2, 3]
-list.forEach(
-  node => 
-    console.log(
-      node.unwrap().value().unwrap()
-    )
-)
-```
-
-## Mediator
-
-Type `Mediator` is the implementation of the mediator pattern. In software engineering, the mediator pattern defines an object that encapsulates how a set of objects interact. This pattern is considered to be a behavioral pattern due to the way it can alter the program's running behavior.
-
-It uses a `FunctionQueue` for storing the subscribed callbacks, so it can publish in synch or async.
-
-```ts
-import { Mediator } from 'tiinvo';
-
-const mediator = Mediator();
-const channel = 'some channel';
-
-mediator.subscribe(channel, (url: string) => fetch(url));
-mediator.subscribe(channel, (url: string) => console.log(`Called url ${url}`));
-mediator.subscribe(channel, (url: string) => console.log(`Url length: ${url.length}`));
-
-mediator.publishAsync('https://google.com');
-```
-
-## Option
-
-Type `Option` represents an optional value: every `Option` is either `Some` and contains a value, or `None`, and does not.
-
-```ts
-import { Option, Some, None } from 'tiinvo';
-
-Some('foo'); // this is some
-None() // this is none
-
-Some('foo').and(Some('bar')).and(Some('baz')).unwrap() // 'baz'
-Some('foo').and(None()).and(Some('baz')).isSome() // false
-Option(null).isSome() // false
-Option(100).isSome() // true
-```
-
-By default, both `null`, `NaN` and `undefined` are considered `None` types.
-
-## Queue
-
-Queue is a linear data structure in which addition or removal of element follows FIFO (first in, first out).
-
-```ts
-import { Queue } from 'tiinvo';
-
-const q = Queue();
-
-q.enqueue('foo');
-q.enqueue('bar');
-q.enqueue('baz');
-
-q.length // 3
-
-q.top() // 'foo'
-```
-
-`Queue` has also a subtype called `FunctionQueue`.
-
-```ts
-function backgroundWork(scriptPath: string, inputForCalculation: Int32Array) {
-   return new Promise((resolve, reject) => {
-       const worker = new Worker(scriptPath);
-
-       worker.addEventListener('message', result => {
-           resolve(result);
-           worker.terminate();
-       });
-
-       worker.addEventListener('messageerror', result => {
-           reject(result);
-           worker.terminate();
-       });
-
-       worker.postMessage([
-         inputForCalculation,
-       ]);
-   })
-}
-
-const queue = FunctionQueue(
-   [
-       (input: Int32Array) => backgroundWork('workers/binary-encoded.js', input),
-       (input: Int32Array) => backgroundWork('workers/base64-encoded.js', input),
-   ]
-);
-
-stack.execAsync('<imagine this is a huge>');
-
-// this will exec first the 'workers/binary-encoded.js' worken, then 'workers/base64-encoded.js
-```
-
-## Result
-
-`Result<T, E>` is the type used for returning and propagating errors. 
-
-It is an enum with the variants, `Ok(T)`, representing success and containing a value, and `Err(E)`, representing error and containing an error value.
-
-```ts
-import { Ok, Err } from 'tiinvo';
-
-Ok(200)
-Err('this is an error')
-```
-
-## Stack
-
-Stack is a linear data structure in which addition or removal of element follows LIFO (last in, first out).
-
-```ts
-import { Stack } from 'tiinvo';
-
-const s = Stack();
-
-s.push(10);
-s.push(20);
-s.push(30);
-
-s.length // 3
-
-s.top() // 30
-```
-
-Like `Queue`, `Stack` has also a subtype called `FunctionStack`.
-
-```ts
-function backgroundWork(scriptPath: string, inputForCalculation: Int32Array) {
-   return new Promise((resolve, reject) => {
-       const worker = new Worker(scriptPath);
-
-       worker.addEventListener('message', result => {
-           resolve(result);
-           worker.terminate();
-       });
-
-       worker.addEventListener('messageerror', result => {
-           reject(result);
-           worker.terminate();
-       });
-
-       worker.postMessage([
-         inputForCalculation,
-       ]);
-   })
-}
-
-const stack = FunctionStack(
-   [
-       (input: Int32Array) => backgroundWork('workers/binary-encoded.js', input),
-       (input: Int32Array) => backgroundWork('workers/base64-encoded.js', input),
-   ]
-);
-
-stack.execAsync('<imagine this is a huge>');
-
-// this will exec first the 'workers/base64-encoded.js' worken, then 'workers/binary-encoded.js
-```
-
-## TryCatch
-
-These functions handle try/catch.
-
-```ts
-import { TryCatch, TryCatchAsync } from 'tiinvo';
-
-TryCatch(
-  (a: number, b: number) => a + b,
-  10,
-  20,
-) // returns Ok(30)
-
-TryCatch(
-  (a: number, b: number) => a + b + c,
-  10,
-  20,
-) // returns Err('c is not defined')
-
-TryCatchAsync(
-  (url: string) => fetch(url).then(r => r.json()),
-  'https://reqres.in/api/users?page=2'
-) // returns Ok({ /* some json data here */ })
-
-TryCatchAsync(
-  (url: string) => fetch(url).then(r => r.document()),
-  'https://reqres.in/api/users?page=2'
-) // returns Err('r.document is not a function)
-```
-
-## Either
-
-The `Either` type represents values with two possibilities: a value of type `Either` is either `Left` or `Right`.
-
-```ts
-import { Left, Right } from 'tiinvo';
-
-function foo(arg: number): Left<boolean> | Right<boolean> {
-  return arg % 2 === 0 ? Right(true) : Left(false);
-}
-
-foo(20).isRight() // true;
-foo(15).isRight() // false;
-
-foo(20).and(foo(15)).and(foo(50)).isRight() // false
-foo(20).and(foo(8)).and(foo(50)).isRight() // true
-```
-
-## Maybe
-
-The Maybe monad represents computations which might "go wrong" by not returning a value.
-
-Every falsy value is considered as `Nothing`
-
-```ts
-import { Maybe } from 'tiinvo';
-
-function foo() {
-   return Math.floor(Math.random() * 1000) ? 'exists' : null
-}
-
-const value = Maybe(foo()) // could be both Just<string> or Nothing<string | null>
-
-value
-   .map(arg => arg % 2 === 0)
-   .map(arg => arg ? 'even' : 'odd')
-   .cata({
-       Nothing: () => 'Not a number',
-       Just: arg => `Value is ${arg}`
-   })
-```
 
 # Contributing
 
