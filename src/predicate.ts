@@ -33,7 +33,7 @@ export const and = <T>(...predicates: Predicate<T>[]): Predicate<T> => (
  *
  * @example
  * const iseven = (arg: number) => arg % 2 === 0;
- * const isodd  = revers(iseven);
+ * const isodd  = reverse(iseven);
  * const check1 = fromvalue(1);
  * const check2 = fromvalue(2);
  *
