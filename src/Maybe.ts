@@ -2,6 +2,7 @@ import { check } from "./applicative";
 import { createExpect } from "./assertables";
 import { createFilter, createFilterOr } from "./filterables";
 import { createfold } from "./foldables";
+import { createMap, createMapOr, createMapOrElse } from "./mappables";
 import { Predicate } from "./predicate";
 import { tagged, isTagged, isTaggedWith, Tagged } from "./tagged-type";
 import { anyof, combine } from "./typeguards";
@@ -124,6 +125,25 @@ export const filterOr = createFilterOr(isJust, just);
  *
  */
 export const fold = createfold<MaybeTag>(isNothing);
+
+//#endregion
+
+//#region mappables
+
+/**
+ *
+ */
+export const map = createMap<Maybe, MaybeTag>(isJust, maybe as any);
+
+/**
+ *
+ */
+export const mapOr = createMapOr<Maybe, MaybeTag>(isJust, maybe as any);
+
+/**
+ *
+ */
+export const mapOrElse = createMapOrElse<Maybe, MaybeTag>(isJust, maybe as any);
 
 //#endregion
 
