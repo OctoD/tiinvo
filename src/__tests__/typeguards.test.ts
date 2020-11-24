@@ -131,4 +131,13 @@ describe("typeguards", () => {
     expect(test2({ foo: 10 })).toBeFalsy();
     expect(test2({ foo: "10", bar: { baz: 100 } })).toBeFalsy();
   });
+
+  it("isexact", () => {
+    const is10 = tg.isexact(10);
+
+    expect(is10(20)).toBeFalsy();
+    expect(is10(2)).toBeFalsy();
+    expect(is10("10")).toBeFalsy();
+    expect(is10(10)).toBeTruthy();
+  });
 });

@@ -449,3 +449,20 @@ export const nullable = <T>(typeguard: Typeguard<T>) =>
  */
 export const optional = <T>(typeguard: Typeguard<T>) =>
   anyof<T | undefined>(isundefined, typeguard);
+
+/**
+ * Creates a typeguard which matches a specific value by type and value equality.
+ *
+ * ```ts
+ * const is10 = isexact(10);
+ *
+ * is10(2);     // false
+ * is10('10');  // false
+ * is10(10);    // true
+ * ```
+ *
+ * @template T
+ * @param {T} value
+ */
+export const isexact = <T>(value: T) => (arg: unknown): arg is T =>
+  typeof value === typeof arg && value === arg;
