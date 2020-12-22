@@ -1,15 +1,21 @@
 {
   "name": "tiinvo",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "author": "Paolo Roth <octod>",
   "main": "dist/index.js",
   "license": "MIT",
-  "description": "Handling possible errors or values in a functional way.",
+  "description": "Functional data structures for TypeScript and JavaScript.",
+  "types": "./dist/index.d.ts",
   "keywords": [
     "functional programming",
     "functional",
     "octod",
     "option",
+    "tagged type",
+    "tagged types",
+    "pipe",
+    "predicate",
+    "typeguards",
     "result",
     "try catch",
     "typescript"
