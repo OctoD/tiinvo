@@ -1,8 +1,9 @@
 import { check } from "./applicative";
 import { createExpect } from "./assertables";
+import { totaggedFn } from "./cast";
 import { createFilter, createFilterOr } from "./filterables";
 import { createMap, createMapOr, createMapOrElse } from "./mappables";
-import { tagged, isTagged, isTaggedWith, Tagged } from "./tagged-type";
+import { isTagged, isTaggedWith, tagged, Tagged } from "./tagged-type";
 import * as typeguardsTs from "./typeguards";
 import {
   createUnwrap,
@@ -121,6 +122,11 @@ export const some = <T>(value: T): Some<T> =>
  */
 export const option = <T>(value: T): Option<T> =>
   typeguardsTs.isnullOrUndefined(value) ? none() : some(value);
+
+/**
+ * Creates a Option<K> factory from a function (arg: T) => K
+ */
+export const fromfn = totaggedFn(option);
 
 //#endregion
 

@@ -29,7 +29,7 @@
 
 Ƭ **Tagged**: *object*
 
-*Defined in [tagged-type.ts:14](https://github.com/OctoD/tiinvo/blob/9536b4d/src/tagged-type.ts#L14)*
+*Defined in [tagged-type.ts:14](https://github.com/OctoD/tiinvo/blob/446c93b/src/tagged-type.ts#L14)*
 
 A `TaggedType` with a value `T`
 
@@ -45,7 +45,7 @@ ___
 
 Ƭ **TaggedFactory**: *function*
 
-*Defined in [tagged-type.ts:22](https://github.com/OctoD/tiinvo/blob/9536b4d/src/tagged-type.ts#L22)*
+*Defined in [tagged-type.ts:22](https://github.com/OctoD/tiinvo/blob/446c93b/src/tagged-type.ts#L22)*
 
 A `TaggedType<T, Tagname>` factory.
 
@@ -72,7 +72,7 @@ Name | Type |
   haskeyoftype("__tag", isstring)
 )
 
-*Defined in [tagged-type.ts:64](https://github.com/OctoD/tiinvo/blob/9536b4d/src/tagged-type.ts#L64)*
+*Defined in [tagged-type.ts:64](https://github.com/OctoD/tiinvo/blob/446c93b/src/tagged-type.ts#L64)*
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 • **hastag**: *(Anonymous function)* = haskey("__tag")
 
-*Defined in [tagged-type.ts:26](https://github.com/OctoD/tiinvo/blob/9536b4d/src/tagged-type.ts#L26)*
+*Defined in [tagged-type.ts:26](https://github.com/OctoD/tiinvo/blob/446c93b/src/tagged-type.ts#L26)*
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 • **hasvalue**: *(Anonymous function)* = haskey("value")
 
-*Defined in [tagged-type.ts:27](https://github.com/OctoD/tiinvo/blob/9536b4d/src/tagged-type.ts#L27)*
+*Defined in [tagged-type.ts:27](https://github.com/OctoD/tiinvo/blob/446c93b/src/tagged-type.ts#L27)*
 
 ___
 
@@ -100,7 +100,7 @@ ___
   _isTagged
 )
 
-*Defined in [tagged-type.ts:74](https://github.com/OctoD/tiinvo/blob/9536b4d/src/tagged-type.ts#L74)*
+*Defined in [tagged-type.ts:74](https://github.com/OctoD/tiinvo/blob/446c93b/src/tagged-type.ts#L74)*
 
 Checks if a variable is a Tagged<unknown, string>
 
@@ -110,7 +110,7 @@ Checks if a variable is a Tagged<unknown, string>
 
 ▸ **isTaggedOf**‹**Tag**, **T**›(`tag`: Tag, `typeguard`: [Typeguard](_typeguards_.md#typeguard)‹T›): *[Typeguard](_typeguards_.md#typeguard)‹[Tagged](_tagged_type_.md#tagged)‹T, Tag››*
 
-*Defined in [tagged-type.ts:102](https://github.com/OctoD/tiinvo/blob/9536b4d/src/tagged-type.ts#L102)*
+*Defined in [tagged-type.ts:102](https://github.com/OctoD/tiinvo/blob/446c93b/src/tagged-type.ts#L102)*
 
 **Type parameters:**
 
@@ -133,7 +133,7 @@ ___
 
 ▸ **isTaggedWith**‹**Tag**›(`tag`: Tag): *[Typeguard](_typeguards_.md#typeguard)‹[Tagged](_tagged_type_.md#tagged)‹unknown, Tag››*
 
-*Defined in [tagged-type.ts:86](https://github.com/OctoD/tiinvo/blob/9536b4d/src/tagged-type.ts#L86)*
+*Defined in [tagged-type.ts:86](https://github.com/OctoD/tiinvo/blob/446c93b/src/tagged-type.ts#L86)*
 
 **Type parameters:**
 
@@ -153,7 +153,7 @@ ___
 
 ▸ **tagged**‹**T**, **Tagname**›(`value`: T, `tagname`: Tagname): *[Tagged](_tagged_type_.md#tagged)‹T, Tagname›*
 
-*Defined in [tagged-type.ts:42](https://github.com/OctoD/tiinvo/blob/9536b4d/src/tagged-type.ts#L42)*
+*Defined in [tagged-type.ts:42](https://github.com/OctoD/tiinvo/blob/446c93b/src/tagged-type.ts#L42)*
 
 Creates a TaggedType<T, Tagname>.
 
@@ -182,7 +182,7 @@ ___
 
 ▸ **taggedFactory**‹**T**›(`tagname`: T): *[TaggedFactory](_tagged_type_.md#taggedfactory)‹T›*
 
-*Defined in [tagged-type.ts:59](https://github.com/OctoD/tiinvo/blob/9536b4d/src/tagged-type.ts#L59)*
+*Defined in [tagged-type.ts:59](https://github.com/OctoD/tiinvo/blob/446c93b/src/tagged-type.ts#L59)*
 
 Creates a factory which returns a `Tagged<K, T>`
 

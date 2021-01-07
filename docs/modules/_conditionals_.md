@@ -15,7 +15,7 @@
 
 ▸ **fi**‹**T**, **F**›(`condition`: boolean, `truthyresult`: T, `falsyresult`: F): *T | F*
 
-*Defined in [conditionals.ts:18](https://github.com/OctoD/tiinvo/blob/9536b4d/src/conditionals.ts#L18)*
+*Defined in [conditionals.ts:18](https://github.com/OctoD/tiinvo/blob/446c93b/src/conditionals.ts#L18)*
 
 Given a condition, returns T or F if the condition is true or false
 
@@ -49,7 +49,7 @@ ___
 
 ▸ **fifn**‹**T**, **F**, **A**, **B**›(`condition`: boolean, `truthyfn`: T, `falsyfn`: F): *A | B*
 
-*Defined in [conditionals.ts:43](https://github.com/OctoD/tiinvo/blob/9536b4d/src/conditionals.ts#L43)*
+*Defined in [conditionals.ts:43](https://github.com/OctoD/tiinvo/blob/446c93b/src/conditionals.ts#L43)*
 
 The same of `fi`, but accepts two functions `A` and `B` with zero parameters and calls.
 Calls `A` if the condition is `true` or `B` if false.

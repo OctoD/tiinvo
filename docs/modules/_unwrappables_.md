@@ -16,7 +16,7 @@
 
 ▸ **createUnwrap**‹**Tag**›(`predicate`: [Predicate](_predicate_.md#predicate)‹[Tagged](_tagged_type_.md#tagged)‹any, Tag››, `erromessage`: string): *(Anonymous function)*
 
-*Defined in [unwrappables.ts:12](https://github.com/OctoD/tiinvo/blob/9536b4d/src/unwrappables.ts#L12)*
+*Defined in [unwrappables.ts:12](https://github.com/OctoD/tiinvo/blob/446c93b/src/unwrappables.ts#L12)*
 
 **Type parameters:**
 
@@ -37,7 +37,7 @@ ___
 
 ▸ **createUnwrapOr**‹**Tag**›(`predicate`: [Predicate](_predicate_.md#predicate)‹[Tagged](_tagged_type_.md#tagged)‹any, Tag››): *(Anonymous function)*
 
-*Defined in [unwrappables.ts:26](https://github.com/OctoD/tiinvo/blob/9536b4d/src/unwrappables.ts#L26)*
+*Defined in [unwrappables.ts:26](https://github.com/OctoD/tiinvo/blob/446c93b/src/unwrappables.ts#L26)*
 
 **Type parameters:**
 
@@ -57,7 +57,7 @@ ___
 
 ▸ **createUnwrapOrElse**‹**Tag**›(`predicate`: [Predicate](_predicate_.md#predicate)‹[Tagged](_tagged_type_.md#tagged)‹any, Tag››): *(Anonymous function)*
 
-*Defined in [unwrappables.ts:37](https://github.com/OctoD/tiinvo/blob/9536b4d/src/unwrappables.ts#L37)*
+*Defined in [unwrappables.ts:37](https://github.com/OctoD/tiinvo/blob/446c93b/src/unwrappables.ts#L37)*
 
 **Type parameters:**
 

@@ -7,6 +7,7 @@
 ### Type aliases
 
 * [ArgsOf](_applicative_.md#argsof)
+* [Fn1](_applicative_.md#fn1)
 * [FnBase](_applicative_.md#fnbase)
 * [_](_applicative_.md#_)
 
@@ -24,7 +25,7 @@
 
 Ƭ **ArgsOf**: *Fn extends function ? U : any[]*
 
-*Defined in [applicative.ts:14](https://github.com/OctoD/tiinvo/blob/9536b4d/src/applicative.ts#L14)*
+*Defined in [applicative.ts:14](https://github.com/OctoD/tiinvo/blob/446c93b/src/applicative.ts#L14)*
 
 Extracts the arguments types from a function
 
@@ -35,11 +36,31 @@ type ArgsOfFoo = ArgsOf<typeof foo> // [string, number]
 
 ___
 
+###  Fn1
+
+Ƭ **Fn1**: *function*
+
+*Defined in [applicative.ts:26](https://github.com/OctoD/tiinvo/blob/446c93b/src/applicative.ts#L26)*
+
+A function which takes one argument
+
+#### Type declaration:
+
+▸ (`arg`: FnIn): *FnOut*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`arg` | FnIn |
+
+___
+
 ###  FnBase
 
 Ƭ **FnBase**: *function*
 
-*Defined in [applicative.ts:21](https://github.com/OctoD/tiinvo/blob/9536b4d/src/applicative.ts#L21)*
+*Defined in [applicative.ts:21](https://github.com/OctoD/tiinvo/blob/446c93b/src/applicative.ts#L21)*
 
 A generic function type
 
@@ -59,7 +80,7 @@ ___
 
 Ƭ **_**: *undefined*
 
-*Defined in [applicative.ts:4](https://github.com/OctoD/tiinvo/blob/9536b4d/src/applicative.ts#L4)*
+*Defined in [applicative.ts:4](https://github.com/OctoD/tiinvo/blob/446c93b/src/applicative.ts#L4)*
 
 Shorthand for undefined
 
@@ -69,7 +90,7 @@ Shorthand for undefined
 
 ▸ **bind**‹**Fn**›(`fn`: Fn, ...`args`: [ArgsOf](_applicative_.md#argsof)‹Fn›): *function*
 
-*Defined in [applicative.ts:35](https://github.com/OctoD/tiinvo/blob/9536b4d/src/applicative.ts#L35)*
+*Defined in [applicative.ts:40](https://github.com/OctoD/tiinvo/blob/446c93b/src/applicative.ts#L40)*
 
 Binds a function to a null `this`, then returns it
 
@@ -100,7 +121,7 @@ ___
 
 ▸ **check**(`condition`: boolean, `errormessage`: string): *(Anonymous function)*
 
-*Defined in [applicative.ts:52](https://github.com/OctoD/tiinvo/blob/9536b4d/src/applicative.ts#L52)*
+*Defined in [applicative.ts:57](https://github.com/OctoD/tiinvo/blob/446c93b/src/applicative.ts#L57)*
 
 Checks if a given condition is true, otherwise throws an error with the given error message
 
@@ -124,7 +145,7 @@ ___
 
 ▸ **fallback**‹**T**›(`arg`: T): *(Anonymous function)*
 
-*Defined in [applicative.ts:64](https://github.com/OctoD/tiinvo/blob/9536b4d/src/applicative.ts#L64)*
+*Defined in [applicative.ts:69](https://github.com/OctoD/tiinvo/blob/446c93b/src/applicative.ts#L69)*
 
 Creates a function which returns a fallback function
 
@@ -149,7 +170,7 @@ ___
 
 ▸ **panic**‹**E**›(`message`: string, `ctor`: E): *never*
 
-*Defined in [applicative.ts:74](https://github.com/OctoD/tiinvo/blob/9536b4d/src/applicative.ts#L74)*
+*Defined in [applicative.ts:79](https://github.com/OctoD/tiinvo/blob/446c93b/src/applicative.ts#L79)*
 
 Throws an error with the given message
 
@@ -172,7 +193,7 @@ ___
 
 ▸ **toasync**‹**Fn**›(`fn`: Fn): *function*
 
-*Defined in [applicative.ts:88](https://github.com/OctoD/tiinvo/blob/9536b4d/src/applicative.ts#L88)*
+*Defined in [applicative.ts:93](https://github.com/OctoD/tiinvo/blob/446c93b/src/applicative.ts#L93)*
 
 Converts a sync function to an async one
 

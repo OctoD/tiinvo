@@ -25,7 +25,7 @@
 
 Ƭ **Predicate**: *function*
 
-*Defined in [predicate.ts:5](https://github.com/OctoD/tiinvo/blob/9536b4d/src/predicate.ts#L5)*
+*Defined in [predicate.ts:5](https://github.com/OctoD/tiinvo/blob/446c93b/src/predicate.ts#L5)*
 
 #### Type declaration:
 
@@ -43,7 +43,7 @@ Name | Type |
 
 ▸ **and**‹**T**›(...`predicates`: [Predicate](_predicate_.md#predicate)‹T›[]): *[Predicate](_predicate_.md#predicate)‹T›*
 
-*Defined in [predicate.ts:26](https://github.com/OctoD/tiinvo/blob/9536b4d/src/predicate.ts#L26)*
+*Defined in [predicate.ts:26](https://github.com/OctoD/tiinvo/blob/446c93b/src/predicate.ts#L26)*
 
 Combines two or more predicates in one. The resulting predicate will return true if
 all predicates are satisfied
@@ -77,14 +77,14 @@ ___
 
 ▸ **fromvalue**‹**T**›(`value`: T): *(Anonymous function)*
 
-*Defined in [predicate.ts:48](https://github.com/OctoD/tiinvo/blob/9536b4d/src/predicate.ts#L48)*
+*Defined in [predicate.ts:48](https://github.com/OctoD/tiinvo/blob/446c93b/src/predicate.ts#L48)*
 
 Creates a new function which accepts a predicate. This predicate will check
 the given value
 
 **`example`** 
 const iseven = (arg: number) => arg % 2 === 0;
-const isodd  = revers(iseven);
+const isodd  = reverse(iseven);
 const check1 = fromvalue(1);
 const check2 = fromvalue(2);
 
@@ -111,7 +111,7 @@ ___
 
 ▸ **fromvalues**‹**T**›(...`values`: T[]): *(Anonymous function)*
 
-*Defined in [predicate.ts:65](https://github.com/OctoD/tiinvo/blob/9536b4d/src/predicate.ts#L65)*
+*Defined in [predicate.ts:65](https://github.com/OctoD/tiinvo/blob/446c93b/src/predicate.ts#L65)*
 
 Returns a function which checks if every value T passes a given predicate
 
@@ -141,7 +141,7 @@ ___
 
 ▸ **noneof**‹**T**›(...`predicates`: [Predicate](_predicate_.md#predicate)‹T›[]): *[Predicate](_predicate_.md#predicate)‹T›*
 
-*Defined in [predicate.ts:89](https://github.com/OctoD/tiinvo/blob/9536b4d/src/predicate.ts#L89)*
+*Defined in [predicate.ts:89](https://github.com/OctoD/tiinvo/blob/446c93b/src/predicate.ts#L89)*
 
 Combines two or more predicates into one. The returned predicate
 will check if no conditions are met.
@@ -177,7 +177,7 @@ ___
 
 ▸ **or**‹**T**›(...`predicates`: [Predicate](_predicate_.md#predicate)‹T›[]): *[Predicate](_predicate_.md#predicate)‹T›*
 
-*Defined in [predicate.ts:113](https://github.com/OctoD/tiinvo/blob/9536b4d/src/predicate.ts#L113)*
+*Defined in [predicate.ts:113](https://github.com/OctoD/tiinvo/blob/446c93b/src/predicate.ts#L113)*
 
 Combines two or more predicates in one. The returned predicate will
 check if at least one condition passes.
@@ -212,7 +212,7 @@ ___
 
 ▸ **reverse**‹**T**›(`arg`: [Predicate](_predicate_.md#predicate)‹T›): *[Predicate](_predicate_.md#predicate)‹T›*
 
-*Defined in [predicate.ts:132](https://github.com/OctoD/tiinvo/blob/9536b4d/src/predicate.ts#L132)*
+*Defined in [predicate.ts:132](https://github.com/OctoD/tiinvo/blob/446c93b/src/predicate.ts#L132)*
 
 Reverses the result of a predicate.
 
@@ -242,7 +242,7 @@ ___
 
 ▸ **withdifferentvalue**‹**T**›(`unexpectedvalue`: T): *[Predicate](_predicate_.md#predicate)‹T›*
 
-*Defined in [predicate.ts:150](https://github.com/OctoD/tiinvo/blob/9536b4d/src/predicate.ts#L150)*
+*Defined in [predicate.ts:150](https://github.com/OctoD/tiinvo/blob/446c93b/src/predicate.ts#L150)*
 
 Creates a new Predicate<T> which checks if the given argument is not the same as the
 one passed to the predicate.
@@ -272,7 +272,7 @@ ___
 
 ▸ **withsamevalue**‹**T**›(`expectedvalue`: T): *[Predicate](_predicate_.md#predicate)‹T›*
 
-*Defined in [predicate.ts:169](https://github.com/OctoD/tiinvo/blob/9536b4d/src/predicate.ts#L169)*
+*Defined in [predicate.ts:169](https://github.com/OctoD/tiinvo/blob/446c93b/src/predicate.ts#L169)*
 
 Creates a new Predicate<T> which checks if the given argument is the same as the
 one passed to the predicate.

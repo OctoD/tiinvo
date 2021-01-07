@@ -24,7 +24,7 @@
 
 Ƭ **ArgType**: *F extends function ? A : Else*
 
-*Defined in [pipe.ts:8](https://github.com/OctoD/tiinvo/blob/9536b4d/src/pipe.ts#L8)*
+*Defined in [pipe.ts:8](https://github.com/OctoD/tiinvo/blob/446c93b/src/pipe.ts#L8)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 Ƭ **AsChain**: *object*
 
-*Defined in [pipe.ts:1](https://github.com/OctoD/tiinvo/blob/9536b4d/src/pipe.ts#L1)*
+*Defined in [pipe.ts:1](https://github.com/OctoD/tiinvo/blob/446c93b/src/pipe.ts#L1)*
 
 #### Type declaration:
 
@@ -42,7 +42,7 @@ ___
 
 Ƭ **FuncType**: *function*
 
-*Defined in [pipe.ts:10](https://github.com/OctoD/tiinvo/blob/9536b4d/src/pipe.ts#L10)*
+*Defined in [pipe.ts:10](https://github.com/OctoD/tiinvo/blob/446c93b/src/pipe.ts#L10)*
 
 #### Type declaration:
 
@@ -60,7 +60,7 @@ ___
 
 Ƭ **LastIndexOf**: *function extends function ? U["length"] : never*
 
-*Defined in [pipe.ts:12](https://github.com/OctoD/tiinvo/blob/9536b4d/src/pipe.ts#L12)*
+*Defined in [pipe.ts:12](https://github.com/OctoD/tiinvo/blob/446c93b/src/pipe.ts#L12)*
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 Ƭ **Lookup**: *K extends keyof T ? T[K] : Else*
 
-*Defined in [pipe.ts:19](https://github.com/OctoD/tiinvo/blob/9536b4d/src/pipe.ts#L19)*
+*Defined in [pipe.ts:19](https://github.com/OctoD/tiinvo/blob/446c93b/src/pipe.ts#L19)*
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 Ƭ **Pipe**: *function*
 
-*Defined in [pipe.ts:30](https://github.com/OctoD/tiinvo/blob/9536b4d/src/pipe.ts#L30)*
+*Defined in [pipe.ts:30](https://github.com/OctoD/tiinvo/blob/446c93b/src/pipe.ts#L30)*
 
 #### Type declaration:
 
@@ -106,7 +106,7 @@ ___
 
 Ƭ **Tail**: *function extends function ? U : never*
 
-*Defined in [pipe.ts:23](https://github.com/OctoD/tiinvo/blob/9536b4d/src/pipe.ts#L23)*
+*Defined in [pipe.ts:23](https://github.com/OctoD/tiinvo/blob/446c93b/src/pipe.ts#L23)*
 
 ## Functions
 
@@ -114,7 +114,7 @@ ___
 
 ▸ **pipe**(...`args`: F & [AsChain](_pipe_.md#aschain)‹F, [Tail](_pipe_.md#tail)‹F››): *(Anonymous function)*
 
-*Defined in [pipe.ts:46](https://github.com/OctoD/tiinvo/blob/9536b4d/src/pipe.ts#L46)*
+*Defined in [pipe.ts:46](https://github.com/OctoD/tiinvo/blob/446c93b/src/pipe.ts#L46)*
 
 **`example`** 
 const add = (toadd: number) => (arg: number) => arg + toadd;

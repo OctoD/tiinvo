@@ -1,3 +1,4 @@
+import { totaggedFn } from "./cast";
 import { createFilter, createFilterOr } from "./filterables";
 import { createfold, createSwap } from "./foldables";
 import { createMap, createMapOr, createMapOrElse } from "./mappables";
@@ -127,7 +128,7 @@ export const isRightOf = <T>(typeguard: Typeguard<T>) =>
 
 //#endregion
 
-//#region ctors
+//#region factories
 
 /**
  * Creates a Left<T> type
@@ -138,6 +139,16 @@ export const left = <T>(value: T): Left<T> => tagged(value, LEFTTAG);
  * Creates a Right<T> type
  */
 export const right = <T>(value: T): Right<T> => tagged(value, RIGHTTAG);
+
+/**
+ * Creates a Left<K> factory from a function (arg: T) => K
+ */
+export const leftfromfn = totaggedFn(left);
+
+/**
+ * Creates a Right<K> factory from a function (arg: T) => K
+ */
+export const rightfromfn = totaggedFn(right);
 
 //#endregion
 

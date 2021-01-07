@@ -20,7 +20,7 @@
 
 Ƭ **MapFn**: *T extends null | undefined ? function : function*
 
-*Defined in [mappables.ts:5](https://github.com/OctoD/tiinvo/blob/9536b4d/src/mappables.ts#L5)*
+*Defined in [mappables.ts:5](https://github.com/OctoD/tiinvo/blob/446c93b/src/mappables.ts#L5)*
 
 ## Functions
 
@@ -28,7 +28,7 @@
 
 ▸ **createMap**‹**K**, **Tagname**›(`predicate`: [Predicate](_predicate_.md#predicate)‹K›, `creator`: [TaggedFactory](_tagged_type_.md#taggedfactory)‹Tagname›): *(Anonymous function)*
 
-*Defined in [mappables.ts:15](https://github.com/OctoD/tiinvo/blob/9536b4d/src/mappables.ts#L15)*
+*Defined in [mappables.ts:15](https://github.com/OctoD/tiinvo/blob/446c93b/src/mappables.ts#L15)*
 
 **Type parameters:**
 
@@ -51,7 +51,7 @@ ___
 
 ▸ **createMapOr**‹**K**, **Tagname**›(`predicate`: [Predicate](_predicate_.md#predicate)‹K›, `creator`: [TaggedFactory](_tagged_type_.md#taggedfactory)‹Tagname›): *(Anonymous function)*
 
-*Defined in [mappables.ts:34](https://github.com/OctoD/tiinvo/blob/9536b4d/src/mappables.ts#L34)*
+*Defined in [mappables.ts:34](https://github.com/OctoD/tiinvo/blob/446c93b/src/mappables.ts#L34)*
 
 **Type parameters:**
 
@@ -74,7 +74,7 @@ ___
 
 ▸ **createMapOrElse**‹**K**, **Tagname**›(`predicate`: [Predicate](_predicate_.md#predicate)‹K›, `creator`: [TaggedFactory](_tagged_type_.md#taggedfactory)‹Tagname›): *(Anonymous function)*
 
-*Defined in [mappables.ts:53](https://github.com/OctoD/tiinvo/blob/9536b4d/src/mappables.ts#L53)*
+*Defined in [mappables.ts:53](https://github.com/OctoD/tiinvo/blob/446c93b/src/mappables.ts#L53)*
 
 **Type parameters:**
 

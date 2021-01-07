@@ -21,6 +21,11 @@ export type ArgsOf<Fn extends FnBase> = Fn extends (...args: infer U) => any
 export type FnBase = (...args: any[]) => any;
 
 /**
+ * A function which takes one argument
+ */
+export type Fn1<FnIn, FnOut> = (arg: FnIn) => FnOut;
+
+/**
  * Binds a function to a null `this`, then returns it
  *
  * @example

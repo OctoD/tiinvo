@@ -31,12 +31,14 @@
 * [isEither](_either_.md#const-iseither)
 * [isLeft](_either_.md#const-isleft)
 * [isRight](_either_.md#const-isright)
+* [leftfromfn](_either_.md#const-leftfromfn)
 * [mapLeft](_either_.md#const-mapleft)
 * [mapLeftOr](_either_.md#const-mapleftor)
 * [mapLeftOrElse](_either_.md#const-mapleftorelse)
 * [mapRight](_either_.md#const-mapright)
 * [mapRightOr](_either_.md#const-maprightor)
 * [mapRigthOrElse](_either_.md#const-maprigthorelse)
+* [rightfromfn](_either_.md#const-rightfromfn)
 * [swap](_either_.md#const-swap)
 * [unwrapEither](_either_.md#const-unwrapeither)
 * [unwrapLeft](_either_.md#const-unwrapleft)
@@ -61,7 +63,7 @@
 
 Ƭ **Either**: *[Left](../interfaces/_either_.left.md)‹TLeft› | [Right](../interfaces/_either_.right.md)‹TRight›*
 
-*Defined in [either.ts:43](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L43)*
+*Defined in [either.ts:44](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L44)*
 
 Represents a value of one of two possible types (a disjoint union).
 
@@ -71,7 +73,7 @@ ___
 
 Ƭ **EitherTagname**: *[LeftTagname](_either_.md#lefttagname) | [RightTagname](_either_.md#righttagname)*
 
-*Defined in [either.ts:29](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L29)*
+*Defined in [either.ts:30](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L30)*
 
 Left or Right tagtypes
 
@@ -81,7 +83,7 @@ ___
 
 Ƭ **LeftTagname**: *typeof LEFTTAG*
 
-*Defined in [either.ts:21](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L21)*
+*Defined in [either.ts:22](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L22)*
 
 Left tagtype
 
@@ -91,7 +93,7 @@ ___
 
 Ƭ **RightTagname**: *typeof RIGHTTAG*
 
-*Defined in [either.ts:25](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L25)*
+*Defined in [either.ts:26](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L26)*
 
 Right tagtype
 
@@ -101,7 +103,7 @@ Right tagtype
 
 • **LEFTTAG**: *"left"* = "left"
 
-*Defined in [either.ts:15](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L15)*
+*Defined in [either.ts:16](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L16)*
 
 ___
 
@@ -109,7 +111,7 @@ ___
 
 • **RIGHTTAG**: *"right"* = "right"
 
-*Defined in [either.ts:16](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L16)*
+*Defined in [either.ts:17](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L17)*
 
 ___
 
@@ -121,7 +123,7 @@ ___
   right
 )
 
-*Defined in [either.ts:149](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L149)*
+*Defined in [either.ts:160](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L160)*
 
 ___
 
@@ -129,7 +131,7 @@ ___
 
 • **filterLeftOr**: *(Anonymous function)* = createFilterOr<Either, EitherTagname>(isLeft, left)
 
-*Defined in [either.ts:158](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L158)*
+*Defined in [either.ts:169](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L169)*
 
 ___
 
@@ -141,7 +143,7 @@ ___
   left
 )
 
-*Defined in [either.ts:163](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L163)*
+*Defined in [either.ts:174](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L174)*
 
 ___
 
@@ -152,7 +154,7 @@ ___
   right
 )
 
-*Defined in [either.ts:172](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L172)*
+*Defined in [either.ts:183](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L183)*
 
 ___
 
@@ -160,7 +162,7 @@ ___
 
 • **fold**: *(Anonymous function)* = createfold<EitherTagname>(isLeft)
 
-*Defined in [either.ts:184](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L184)*
+*Defined in [either.ts:195](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L195)*
 
 ___
 
@@ -168,7 +170,7 @@ ___
 
 • **haseithertag**: *[Typeguard](_typeguards_.md#typeguard)‹[Left](../interfaces/_either_.left.md)‹unknown› | [Right](../interfaces/_either_.right.md)‹unknown››* = anyof<Left | Right>(hasleftag, hasrighttag)
 
-*Defined in [either.ts:53](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L53)*
+*Defined in [either.ts:54](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L54)*
 
 ___
 
@@ -176,7 +178,7 @@ ___
 
 • **hasleftag**: *[Typeguard](_typeguards_.md#typeguard)‹[Left](../interfaces/_either_.left.md)‹unknown››* = isTaggedWith(LEFTTAG) as Typeguard<Left>
 
-*Defined in [either.ts:51](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L51)*
+*Defined in [either.ts:52](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L52)*
 
 ___
 
@@ -184,7 +186,7 @@ ___
 
 • **hasrighttag**: *[Typeguard](_typeguards_.md#typeguard)‹[Right](../interfaces/_either_.right.md)‹unknown››* = isTaggedWith(RIGHTTAG) as Typeguard<Right>
 
-*Defined in [either.ts:52](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L52)*
+*Defined in [either.ts:53](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L53)*
 
 ___
 
@@ -192,7 +194,7 @@ ___
 
 • **isEither**: *[Typeguard](_typeguards_.md#typeguard)‹[Left](../interfaces/_either_.left.md)‹unknown› | [Right](../interfaces/_either_.right.md)‹unknown››* = combine<Either>(isTagged, haseithertag)
 
-*Defined in [either.ts:58](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L58)*
+*Defined in [either.ts:59](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L59)*
 
 Checks if a variable is Either
 
@@ -202,7 +204,7 @@ ___
 
 • **isLeft**: *[Typeguard](_typeguards_.md#typeguard)‹[Left](../interfaces/_either_.left.md)‹unknown››* = combine<Left>(isTagged, hasleftag)
 
-*Defined in [either.ts:63](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L63)*
+*Defined in [either.ts:64](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L64)*
 
 Checks if a variable is Left
 
@@ -212,9 +214,19 @@ ___
 
 • **isRight**: *[Typeguard](_typeguards_.md#typeguard)‹[Right](../interfaces/_either_.right.md)‹unknown››* = combine<Right>(isTagged, hasrighttag)
 
-*Defined in [either.ts:68](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L68)*
+*Defined in [either.ts:69](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L69)*
 
 Checks if a variable is Right
+
+___
+
+### `Const` leftfromfn
+
+• **leftfromfn**: *(Anonymous function)* = totaggedFn(left)
+
+*Defined in [either.ts:146](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L146)*
+
+Creates a Left<K> factory from a function (arg: T) => K
 
 ___
 
@@ -222,7 +234,7 @@ ___
 
 • **mapLeft**: *(Anonymous function)* = createMap<Either, EitherTagname>(isLeft, left)
 
-*Defined in [either.ts:198](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L198)*
+*Defined in [either.ts:209](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L209)*
 
 ___
 
@@ -230,7 +242,7 @@ ___
 
 • **mapLeftOr**: *(Anonymous function)* = createMapOr<Either, EitherTagname>(isLeft, left)
 
-*Defined in [either.ts:208](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L208)*
+*Defined in [either.ts:219](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L219)*
 
 ___
 
@@ -241,7 +253,7 @@ ___
   left
 )
 
-*Defined in [either.ts:218](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L218)*
+*Defined in [either.ts:229](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L229)*
 
 ___
 
@@ -249,7 +261,7 @@ ___
 
 • **mapRight**: *(Anonymous function)* = createMap<Either, EitherTagname>(isRight, right)
 
-*Defined in [either.ts:203](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L203)*
+*Defined in [either.ts:214](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L214)*
 
 ___
 
@@ -257,7 +269,7 @@ ___
 
 • **mapRightOr**: *(Anonymous function)* = createMapOr<Either, EitherTagname>(isRight, right)
 
-*Defined in [either.ts:213](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L213)*
+*Defined in [either.ts:224](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L224)*
 
 ___
 
@@ -268,7 +280,17 @@ ___
   right
 )
 
-*Defined in [either.ts:226](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L226)*
+*Defined in [either.ts:237](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L237)*
+
+___
+
+### `Const` rightfromfn
+
+• **rightfromfn**: *(Anonymous function)* = totaggedFn(right)
+
+*Defined in [either.ts:151](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L151)*
+
+Creates a Right<K> factory from a function (arg: T) => K
 
 ___
 
@@ -276,7 +298,7 @@ ___
 
 • **swap**: *(Anonymous function)* = createSwap<LeftTagname, RightTagname>(isLeft, left, right)
 
-*Defined in [either.ts:189](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L189)*
+*Defined in [either.ts:200](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L200)*
 
 ___
 
@@ -284,7 +306,7 @@ ___
 
 • **unwrapEither**: *(Anonymous function)* = createUnwrap(isEither, "")
 
-*Defined in [either.ts:240](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L240)*
+*Defined in [either.ts:251](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L251)*
 
 Unwraps Either Left or Right
 
@@ -301,7 +323,7 @@ ___
   "Cannot unwrap Right, expected to be Left"
 )
 
-*Defined in [either.ts:249](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L249)*
+*Defined in [either.ts:260](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L260)*
 
 Unwraps value if Left or throws
 
@@ -315,7 +337,7 @@ ___
 
 • **unwrapLeftOr**: *(Anonymous function)* = createUnwrapOr(isLeft)
 
-*Defined in [either.ts:273](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L273)*
+*Defined in [either.ts:284](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L284)*
 
 Unwraps Left value if Left or returns the fallback
 
@@ -329,7 +351,7 @@ ___
 
 • **unwrapLeftOrElse**: *(Anonymous function)* = createUnwrapOrElse(isLeft)
 
-*Defined in [either.ts:291](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L291)*
+*Defined in [either.ts:302](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L302)*
 
 Unwraps Left value if Left or returns the fallback
 
@@ -346,7 +368,7 @@ ___
   "Cannot unwrap Left, expected to be Right"
 )
 
-*Defined in [either.ts:261](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L261)*
+*Defined in [either.ts:272](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L272)*
 
 Unwraps value if Right or throws
 
@@ -360,7 +382,7 @@ ___
 
 • **unwrapRightOr**: *(Anonymous function)* = createUnwrapOr(isRight)
 
-*Defined in [either.ts:282](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L282)*
+*Defined in [either.ts:293](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L293)*
 
 Unwraps Right value if Right or returns the fallback
 
@@ -374,7 +396,7 @@ ___
 
 • **unwrapRightOrElse**: *(Anonymous function)* = createUnwrapOrElse(isRight)
 
-*Defined in [either.ts:300](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L300)*
+*Defined in [either.ts:311](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L311)*
 
 Unwraps Right value if Right or returns the fallback
 
@@ -388,7 +410,7 @@ unwrapRightOrElse(fallback(30))(right(1)) // 1
 
 ▸ **frompredicate**‹**T**›(`predicate`: [Predicate](_predicate_.md#predicate)‹T›): *(Anonymous function)*
 
-*Defined in [either.ts:316](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L316)*
+*Defined in [either.ts:327](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L327)*
 
 Creates a new either from a given predicate.
 
@@ -416,7 +438,7 @@ ___
 
 ▸ **isEitherOf**‹**T**›(`typeguard`: [Typeguard](_typeguards_.md#typeguard)‹T›): *[Typeguard](_typeguards_.md#typeguard)‹unknown›*
 
-*Defined in [either.ts:85](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L85)*
+*Defined in [either.ts:86](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L86)*
 
 Checks if a variable is Either with a value of a given type
 
@@ -447,7 +469,7 @@ ___
 
 ▸ **isLeftOf**‹**T**›(`typeguard`: [Typeguard](_typeguards_.md#typeguard)‹T›): *[Typeguard](_typeguards_.md#typeguard)‹unknown›*
 
-*Defined in [either.ts:105](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L105)*
+*Defined in [either.ts:106](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L106)*
 
 Checks if a variable is Left with a value of a given type
 
@@ -480,7 +502,7 @@ ___
 
 ▸ **isRightOf**‹**T**›(`typeguard`: [Typeguard](_typeguards_.md#typeguard)‹T›): *[Typeguard](_typeguards_.md#typeguard)‹unknown›*
 
-*Defined in [either.ts:125](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L125)*
+*Defined in [either.ts:126](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L126)*
 
 Checks if a variable is Right with a value of a given type
 
@@ -513,7 +535,7 @@ ___
 
 ▸ **left**‹**T**›(`value`: T): *[Left](../interfaces/_either_.left.md)‹T›*
 
-*Defined in [either.ts:135](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L135)*
+*Defined in [either.ts:136](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L136)*
 
 Creates a Left<T> type
 
@@ -535,7 +557,7 @@ ___
 
 ▸ **right**‹**T**›(`value`: T): *[Right](../interfaces/_either_.right.md)‹T›*
 
-*Defined in [either.ts:140](https://github.com/OctoD/tiinvo/blob/9536b4d/src/either.ts#L140)*
+*Defined in [either.ts:141](https://github.com/OctoD/tiinvo/blob/446c93b/src/either.ts#L141)*
 
 Creates a Right<T> type
 

@@ -22,11 +22,11 @@
 ### Variables
 
 * [NONETAG](_option_.md#const-nonetag)
-* [OPTIONTAG](_option_.md#const-optiontag)
 * [SOMETAG](_option_.md#const-sometag)
 * [expect](_option_.md#const-expect)
 * [filter](_option_.md#const-filter)
 * [filterOr](_option_.md#const-filteror)
+* [fromfn](_option_.md#const-fromfn)
 * [hasnonetag](_option_.md#const-hasnonetag)
 * [hasoptiontag](_option_.md#const-hasoptiontag)
 * [hassometag](_option_.md#const-hassometag)
@@ -54,7 +54,7 @@
 
 Ƭ **NoneFactory**: *function*
 
-*Defined in [option.ts:50](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L50)*
+*Defined in [option.ts:50](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L50)*
 
 #### Type declaration:
 
@@ -66,7 +66,7 @@ ___
 
 Ƭ **Nonetag**: *typeof NONETAG*
 
-*Defined in [option.ts:22](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L22)*
+*Defined in [option.ts:22](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L22)*
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 Ƭ **Option**: *[None](../interfaces/_option_.none.md) | [Some](../interfaces/_option_.some.md)‹T›*
 
-*Defined in [option.ts:45](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L45)*
+*Defined in [option.ts:45](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L45)*
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 Ƭ **OptionFactory**: *function*
 
-*Defined in [option.ts:58](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L58)*
+*Defined in [option.ts:58](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L58)*
 
 #### Type declaration:
 
@@ -104,7 +104,7 @@ ___
 
 Ƭ **Optiontag**: *[Nonetag](_option_.md#nonetag) | [Sometag](_option_.md#sometag)*
 
-*Defined in [option.ts:30](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L30)*
+*Defined in [option.ts:30](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L30)*
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 Ƭ **SomeFactory**: *function*
 
-*Defined in [option.ts:54](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L54)*
+*Defined in [option.ts:54](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L54)*
 
 #### Type declaration:
 
@@ -134,7 +134,7 @@ ___
 
 Ƭ **Sometag**: *typeof SOMETAG*
 
-*Defined in [option.ts:26](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L26)*
+*Defined in [option.ts:26](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L26)*
 
 ## Variables
 
@@ -142,15 +142,7 @@ ___
 
 • **NONETAG**: *"none"* = "none"
 
-*Defined in [option.ts:15](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L15)*
-
-___
-
-### `Const` OPTIONTAG
-
-• **OPTIONTAG**: *"option"* = "option"
-
-*Defined in [option.ts:17](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L17)*
+*Defined in [option.ts:16](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L16)*
 
 ___
 
@@ -158,7 +150,7 @@ ___
 
 • **SOMETAG**: *"some"* = "some"
 
-*Defined in [option.ts:16](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L16)*
+*Defined in [option.ts:17](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L17)*
 
 ___
 
@@ -166,7 +158,7 @@ ___
 
 • **expect**: *[Expect](_assertables_.md#expect)‹[Option](_option_.md#option)‹unknown››* = createExpect<Option>(isSome)
 
-*Defined in [option.ts:96](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L96)*
+*Defined in [option.ts:96](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L96)*
 
 ___
 
@@ -174,7 +166,7 @@ ___
 
 • **filter**: *(Anonymous function)* = createFilter<Option, Optiontag>(isSome, some, none)
 
-*Defined in [option.ts:133](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L133)*
+*Defined in [option.ts:138](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L138)*
 
 ___
 
@@ -182,7 +174,17 @@ ___
 
 • **filterOr**: *(Anonymous function)* = createFilterOr<Option, Optiontag>(isSome, some)
 
-*Defined in [option.ts:137](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L137)*
+*Defined in [option.ts:142](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L142)*
+
+___
+
+### `Const` fromfn
+
+• **fromfn**: *(Anonymous function)* = totaggedFn(option)
+
+*Defined in [option.ts:129](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L129)*
+
+Creates a Option<K> factory from a function (arg: T) => K
 
 ___
 
@@ -190,7 +192,7 @@ ___
 
 • **hasnonetag**: *[Typeguard](_typeguards_.md#typeguard)‹[None](../interfaces/_option_.none.md)‹››* = isTaggedWith(NONETAG) as typeguardsTs.Typeguard<None>
 
-*Defined in [option.ts:64](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L64)*
+*Defined in [option.ts:64](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L64)*
 
 ___
 
@@ -198,7 +200,7 @@ ___
 
 • **hasoptiontag**: *[Typeguard](_typeguards_.md#typeguard)‹[Option](_option_.md#option)‹unknown››* = typeguardsTs.anyof<Option>(hasnonetag, hassometag)
 
-*Defined in [option.ts:66](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L66)*
+*Defined in [option.ts:66](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L66)*
 
 ___
 
@@ -206,7 +208,7 @@ ___
 
 • **hassometag**: *[Typeguard](_typeguards_.md#typeguard)‹[Some](../interfaces/_option_.some.md)‹unknown››* = isTaggedWith(SOMETAG) as typeguardsTs.Typeguard<Some>
 
-*Defined in [option.ts:65](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L65)*
+*Defined in [option.ts:65](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L65)*
 
 ___
 
@@ -214,7 +216,7 @@ ___
 
 • **isNone**: *[Typeguard](_typeguards_.md#typeguard)‹[None](../interfaces/_option_.none.md)‹››* = typeguardsTs.combine<None>(isTagged, hasnonetag)
 
-*Defined in [option.ts:75](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L75)*
+*Defined in [option.ts:75](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L75)*
 
 ___
 
@@ -222,7 +224,7 @@ ___
 
 • **isOption**: *[Typeguard](_typeguards_.md#typeguard)‹[Option](_option_.md#option)‹unknown››* = typeguardsTs.combine<Option>(isTagged, hasoptiontag)
 
-*Defined in [option.ts:71](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L71)*
+*Defined in [option.ts:71](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L71)*
 
 ___
 
@@ -230,7 +232,7 @@ ___
 
 • **isSome**: *[Typeguard](_typeguards_.md#typeguard)‹[Some](../interfaces/_option_.some.md)‹unknown››* = typeguardsTs.combine<Some>(isTagged, hassometag)
 
-*Defined in [option.ts:79](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L79)*
+*Defined in [option.ts:79](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L79)*
 
 ___
 
@@ -238,7 +240,7 @@ ___
 
 • **map**: *(Anonymous function)* = createMap<Option, Optiontag>(isSome, option)
 
-*Defined in [option.ts:146](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L146)*
+*Defined in [option.ts:151](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L151)*
 
 ___
 
@@ -246,7 +248,7 @@ ___
 
 • **mapOr**: *(Anonymous function)* = createMapOr<Option, Optiontag>(isSome, option)
 
-*Defined in [option.ts:150](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L150)*
+*Defined in [option.ts:155](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L155)*
 
 ___
 
@@ -254,7 +256,7 @@ ___
 
 • **mapOrElse**: *(Anonymous function)* = createMapOrElse<Option, Optiontag>(isSome, option)
 
-*Defined in [option.ts:154](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L154)*
+*Defined in [option.ts:159](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L159)*
 
 ___
 
@@ -262,7 +264,7 @@ ___
 
 • **unexpect**: *[Expect](_assertables_.md#expect)‹[Option](_option_.md#option)‹unknown››* = createExpect<Option>(isNone)
 
-*Defined in [option.ts:100](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L100)*
+*Defined in [option.ts:100](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L100)*
 
 ___
 
@@ -273,7 +275,7 @@ ___
   "option.unwrap argument must be some"
 )
 
-*Defined in [option.ts:163](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L163)*
+*Defined in [option.ts:168](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L168)*
 
 ___
 
@@ -281,7 +283,7 @@ ___
 
 • **unwrapOr**: *(Anonymous function)* = createUnwrapOr<Optiontag>(isSome)
 
-*Defined in [option.ts:171](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L171)*
+*Defined in [option.ts:176](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L176)*
 
 ___
 
@@ -289,7 +291,7 @@ ___
 
 • **unwrapOrElse**: *(Anonymous function)* = createUnwrapOrElse<Optiontag>(isSome)
 
-*Defined in [option.ts:176](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L176)*
+*Defined in [option.ts:181](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L181)*
 
 ## Functions
 
@@ -297,7 +299,7 @@ ___
 
 ▸ **isOptionOf**‹**T**›(`typeguard`: typeguardsTs.Typeguard‹T›): *[Typeguard](_typeguards_.md#typeguard)‹[Option](_option_.md#option)‹T››*
 
-*Defined in [option.ts:83](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L83)*
+*Defined in [option.ts:83](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L83)*
 
 **Type parameters:**
 
@@ -317,7 +319,7 @@ ___
 
 ▸ **none**(): *[None](../interfaces/_option_.none.md)*
 
-*Defined in [option.ts:109](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L109)*
+*Defined in [option.ts:109](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L109)*
 
 **Returns:** *[None](../interfaces/_option_.none.md)*
 
@@ -327,7 +329,7 @@ ___
 
 ▸ **option**‹**T**›(`value`: T): *[Option](_option_.md#option)‹T›*
 
-*Defined in [option.ts:123](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L123)*
+*Defined in [option.ts:123](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L123)*
 
 **Type parameters:**
 
@@ -347,7 +349,7 @@ ___
 
 ▸ **some**‹**T**›(`value`: T): *[Some](../interfaces/_option_.some.md)‹T›*
 
-*Defined in [option.ts:114](https://github.com/OctoD/tiinvo/blob/9536b4d/src/option.ts#L114)*
+*Defined in [option.ts:114](https://github.com/OctoD/tiinvo/blob/446c93b/src/option.ts#L114)*
 
 **Type parameters:**
 

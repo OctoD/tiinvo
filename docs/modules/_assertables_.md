@@ -18,7 +18,7 @@
 
 Ƭ **Expect**: *function*
 
-*Defined in [assertables.ts:4](https://github.com/OctoD/tiinvo/blob/9536b4d/src/assertables.ts#L4)*
+*Defined in [assertables.ts:4](https://github.com/OctoD/tiinvo/blob/446c93b/src/assertables.ts#L4)*
 
 #### Type declaration:
 
@@ -44,7 +44,7 @@ Name | Type |
 
 ▸ **createExpect**‹**T**›(`predicate`: [Predicate](_predicate_.md#predicate)‹T›): *[Expect](_assertables_.md#expect)‹T›*
 
-*Defined in [assertables.ts:29](https://github.com/OctoD/tiinvo/blob/9536b4d/src/assertables.ts#L29)*
+*Defined in [assertables.ts:29](https://github.com/OctoD/tiinvo/blob/446c93b/src/assertables.ts#L29)*
 
 Creates an expect function. This function checks if a given argument satisfies the given predicate.
 If the condition is not satisfied, it throws

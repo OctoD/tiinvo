@@ -43,6 +43,7 @@
 * [haslengthof](_typeguards_.md#const-haslengthof)
 * [isarrayof](_typeguards_.md#const-isarrayof)
 * [iserror](_typeguards_.md#const-iserror)
+* [isexact](_typeguards_.md#const-isexact)
 * [nullable](_typeguards_.md#const-nullable)
 * [optional](_typeguards_.md#const-optional)
 
@@ -52,7 +53,7 @@
 
 Ƭ **IndexableObject**: *object*
 
-*Defined in [typeguards.ts:14](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L14)*
+*Defined in [typeguards.ts:14](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L14)*
 
 Represents a plain object
 
@@ -66,7 +67,7 @@ ___
 
 Ƭ **TypegardsTuple**: *object*
 
-*Defined in [typeguards.ts:29](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L29)*
+*Defined in [typeguards.ts:29](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L29)*
 
 #### Type declaration:
 
@@ -76,7 +77,7 @@ ___
 
 Ƭ **Typeguard**: *function*
 
-*Defined in [typeguards.ts:9](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L9)*
+*Defined in [typeguards.ts:9](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L9)*
 
 A typeguard
 
@@ -96,7 +97,7 @@ ___
 
 Ƭ **TypeguardsFromStruct**: *object*
 
-*Defined in [typeguards.ts:282](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L282)*
+*Defined in [typeguards.ts:282](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L282)*
 
 #### Type declaration:
 
@@ -106,7 +107,7 @@ ___
 
 Ƭ **TypeguardsStruct**: *object*
 
-*Defined in [typeguards.ts:21](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L21)*
+*Defined in [typeguards.ts:21](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L21)*
 
 #### Type declaration:
 
@@ -116,7 +117,7 @@ ___
 
 Ƭ **WithLength**: *object*
 
-*Defined in [typeguards.ts:19](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L19)*
+*Defined in [typeguards.ts:19](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L19)*
 
 Represents an object with the `length` property
 
@@ -130,7 +131,7 @@ Represents an object with the `length` property
 
 • **haslength**: *[Typeguard](_typeguards_.md#typeguard)‹[WithLength](_typeguards_.md#withlength)›* = haskey("length") as Typeguard<WithLength>
 
-*Defined in [typeguards.ts:259](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L259)*
+*Defined in [typeguards.ts:259](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L259)*
 
 Checks if a value is indexable and has the 'length' key
 
@@ -149,7 +150,7 @@ ___
 
 • **isarray**: *[Typeguard](_typeguards_.md#typeguard)‹unknown[]›* = ((arg) => Array.isArray(arg)) as Typeguard<unknown[]>
 
-*Defined in [typeguards.ts:46](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L46)*
+*Defined in [typeguards.ts:46](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L46)*
 
 Checks if a value is an array
 
@@ -165,7 +166,7 @@ ___
 
 • **isbigint**: *[Typeguard](_typeguards_.md#typeguard)‹bigint›* = ((arg) => typeof arg === "bigint") as Typeguard<bigint>
 
-*Defined in [typeguards.ts:57](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L57)*
+*Defined in [typeguards.ts:57](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L57)*
 
 Checks if a value is a bigint
 
@@ -183,7 +184,7 @@ ___
   boolean
 >
 
-*Defined in [typeguards.ts:68](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L68)*
+*Defined in [typeguards.ts:68](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L68)*
 
 Checks if a value is a boolean
 
@@ -201,7 +202,7 @@ ___
   object
 >
 
-*Defined in [typeguards.ts:82](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L82)*
+*Defined in [typeguards.ts:82](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L82)*
 
 Checks if a value is not undefined
 
@@ -220,7 +221,7 @@ ___
   FnBase
 >
 
-*Defined in [typeguards.ts:96](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L96)*
+*Defined in [typeguards.ts:96](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L96)*
 
 Checks if a value is a function
 
@@ -238,7 +239,7 @@ ___
 • **isindexable**: *[Typeguard](_typeguards_.md#typeguard)‹object›* = ((arg) =>
   isobject(arg) && arg !== null) as Typeguard<{ [index: string]: unknown }>
 
-*Defined in [typeguards.ts:187](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L187)*
+*Defined in [typeguards.ts:187](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L187)*
 
 Checks if a value is an object (so that the `key` in can be used)
 
@@ -255,7 +256,7 @@ ___
 
 • **isnotNullOrUndefined**: *[Typeguard](_typeguards_.md#typeguard)‹object›* = combine<object>(isnotnull, isdefined)
 
-*Defined in [typeguards.ts:401](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L401)*
+*Defined in [typeguards.ts:401](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L401)*
 
 Checks if a variable is not null or undefined
 
@@ -271,7 +272,7 @@ ___
 
 • **isnotnull**: *[Typeguard](_typeguards_.md#typeguard)‹object›* = ((arg) => arg !== null) as Typeguard<object>
 
-*Defined in [typeguards.ts:171](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L171)*
+*Defined in [typeguards.ts:171](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L171)*
 
 Checks if a value is not null
 
@@ -288,7 +289,7 @@ ___
 
 • **isnull**: *[Typeguard](_typeguards_.md#typeguard)‹null›* = ((arg) => arg === null) as Typeguard<null>
 
-*Defined in [typeguards.ts:159](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L159)*
+*Defined in [typeguards.ts:159](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L159)*
 
 Checks if a value is null
 
@@ -305,7 +306,7 @@ ___
 
 • **isnullOrUndefined**: *[Typeguard](_typeguards_.md#typeguard)‹undefined | null›* = anyof<null | undefined>(isnull, isundefined)
 
-*Defined in [typeguards.ts:390](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L390)*
+*Defined in [typeguards.ts:390](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L390)*
 
 Checks if a variable is null or undefined
 
@@ -321,7 +322,7 @@ ___
 
 • **isnumber**: *[Typeguard](_typeguards_.md#typeguard)‹number›* = ((arg) => typeof arg === "number") as Typeguard<number>
 
-*Defined in [typeguards.ts:109](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L109)*
+*Defined in [typeguards.ts:109](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L109)*
 
 Checks if a value is a number
 
@@ -337,7 +338,7 @@ ___
 
 • **isobject**: *[Typeguard](_typeguards_.md#typeguard)‹object›* = ((arg) => typeof arg === "object") as Typeguard<object>
 
-*Defined in [typeguards.ts:121](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L121)*
+*Defined in [typeguards.ts:121](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L121)*
 
 Checks if a value is an object
 
@@ -354,7 +355,7 @@ ___
 
 • **isstring**: *[Typeguard](_typeguards_.md#typeguard)‹string›* = ((arg) => typeof arg === "string") as Typeguard<string>
 
-*Defined in [typeguards.ts:133](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L133)*
+*Defined in [typeguards.ts:133](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L133)*
 
 Checks if a value is a string
 
@@ -373,7 +374,7 @@ ___
   undefined
 >
 
-*Defined in [typeguards.ts:145](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L145)*
+*Defined in [typeguards.ts:145](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L145)*
 
 Checks if a value is undefined
 
@@ -390,7 +391,7 @@ isundefined(undefined)   // true
 
 ▸ **anyof**‹**T**›(...`predicates`: [Typeguard](_typeguards_.md#typeguard)‹unknown›[]): *[Typeguard](_typeguards_.md#typeguard)‹T›*
 
-*Defined in [typeguards.ts:378](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L378)*
+*Defined in [typeguards.ts:378](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L378)*
 
 **Type parameters:**
 
@@ -410,7 +411,7 @@ ___
 
 ▸ **combine**‹**T**›(...`args`: [Typeguard](_typeguards_.md#typeguard)‹any›[]): *[Typeguard](_typeguards_.md#typeguard)‹T›*
 
-*Defined in [typeguards.ts:368](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L368)*
+*Defined in [typeguards.ts:368](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L368)*
 
 **Type parameters:**
 
@@ -430,7 +431,7 @@ ___
 
 ▸ **createStructOf**‹**TG**›(`typeguard`: [TypeguardsFromStruct](_typeguards_.md#typeguardsfromstruct)‹TG›): *(Anonymous function)*
 
-*Defined in [typeguards.ts:315](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L315)*
+*Defined in [typeguards.ts:315](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L315)*
 
 cle * Creates a typeguard representing a complex data structure. It is useful
 for object validation.
@@ -475,7 +476,7 @@ ___
 
 ▸ **createTupleOf**‹**TG**›(...`typeguards`: TG): *(Anonymous function)*
 
-*Defined in [typeguards.ts:348](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L348)*
+*Defined in [typeguards.ts:348](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L348)*
 
 **Type parameters:**
 
@@ -495,7 +496,7 @@ ___
 
 ▸ **haskey**‹**Key**›(`key`: Key): *(Anonymous function)*
 
-*Defined in [typeguards.ts:208](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L208)*
+*Defined in [typeguards.ts:208](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L208)*
 
 Checks if a value is indexable and has a key
 
@@ -517,7 +518,7 @@ ___
 
 ▸ **haskeyWithValue**‹**Key**, **Value**›(`key`: Key, `value`: Value): *(Anonymous function)*
 
-*Defined in [typeguards.ts:242](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L242)*
+*Defined in [typeguards.ts:242](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L242)*
 
 Checks if a value is indexable, has a key and that key has a precise value
 
@@ -546,7 +547,7 @@ ___
 
 ▸ **haskeyoftype**‹**Key**, **T**›(`key`: Key, `typeguard`: [Typeguard](_typeguards_.md#typeguard)‹T›): *(Anonymous function)*
 
-*Defined in [typeguards.ts:224](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L224)*
+*Defined in [typeguards.ts:224](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L224)*
 
 Checks if a value is indexable, has a key and that key has a given type
 
@@ -575,7 +576,7 @@ ___
 
 ▸ **haslengthof**(`length`: number): *(Anonymous function)*
 
-*Defined in [typeguards.ts:274](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L274)*
+*Defined in [typeguards.ts:274](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L274)*
 
 Checks if a value is indexable, has the 'length' key and that the length is equal to a given one
 
@@ -600,7 +601,7 @@ ___
 
 ▸ **isarrayof**‹**T**›(`typeguard`: [Typeguard](_typeguards_.md#typeguard)‹T›): *(Anonymous function)*
 
-*Defined in [typeguards.ts:416](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L416)*
+*Defined in [typeguards.ts:416](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L416)*
 
 Checks if a variable is an array of a given type.
 
@@ -629,7 +630,7 @@ ___
 
 ▸ **iserror**(`arg`: unknown): *arg is Error*
 
-*Defined in [typeguards.ts:196](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L196)*
+*Defined in [typeguards.ts:196](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L196)*
 
 Checks if a value is an Error
 
@@ -643,11 +644,41 @@ Name | Type |
 
 ___
 
+### `Const` isexact
+
+▸ **isexact**‹**T**›(`value`: T): *(Anonymous function)*
+
+*Defined in [typeguards.ts:467](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L467)*
+
+Creates a typeguard which matches a specific value by type and value equality.
+
+```ts
+const is10 = isexact(10);
+
+is10(2);     // false
+is10('10');  // false
+is10(10);    // true
+```
+
+**Type parameters:**
+
+▪ **T**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`value` | T |   |
+
+**Returns:** *(Anonymous function)*
+
+___
+
 ### `Const` nullable
 
 ▸ **nullable**‹**T**›(`typeguard`: [Typeguard](_typeguards_.md#typeguard)‹T›): *[Typeguard](_typeguards_.md#typeguard)‹null | T›*
 
-*Defined in [typeguards.ts:433](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L433)*
+*Defined in [typeguards.ts:433](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L433)*
 
 Makes a Typeguard<T> nullable
 
@@ -676,7 +707,7 @@ ___
 
 ▸ **optional**‹**T**›(`typeguard`: [Typeguard](_typeguards_.md#typeguard)‹T›): *[Typeguard](_typeguards_.md#typeguard)‹undefined | T›*
 
-*Defined in [typeguards.ts:450](https://github.com/OctoD/tiinvo/blob/9536b4d/src/typeguards.ts#L450)*
+*Defined in [typeguards.ts:450](https://github.com/OctoD/tiinvo/blob/446c93b/src/typeguards.ts#L450)*
 
 Makes a Typeguard<T> optional
 
