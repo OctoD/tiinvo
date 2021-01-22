@@ -2,12 +2,15 @@
  * Given a condition, returns T or F if the condition is true or false
  *
  * @example
+ * ```ts
  *
  * const printEvenOrOdd = (arg: number) => fi(arg % 2 === 0, 'Even', 'Odd');
  *
  * printEvenOrOdd(1) // 'Odd'
  * printEvenOrOdd(2) // 'Even'
  * printEvenOrOdd(4) // 'Even'
+ *
+ * ```
  *
  * @template T
  * @template F
@@ -23,6 +26,7 @@ export const fi = <T, F>(condition: boolean, truthyresult: T, falsyresult: F) =>
  * Calls `A` if the condition is `true` or `B` if false.
  *
  * @example
+ * ```ts
  * const printeven = () => 'Even';
  * const printodd = () => 'Odd'
  * const printEvenOrOdd = (arg: number) => fifn(arg % 2 === 0, printeven, printodd);
@@ -30,7 +34,7 @@ export const fi = <T, F>(condition: boolean, truthyresult: T, falsyresult: F) =>
  * printEvenOrOdd(1) // 'Odd'
  * printEvenOrOdd(2) // 'Even'
  * printEvenOrOdd(4) // 'Even'
- *
+ * ```
  *
  * @template T
  * @template F

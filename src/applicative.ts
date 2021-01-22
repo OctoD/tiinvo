@@ -7,9 +7,11 @@ export type _ = undefined;
  * Extracts the arguments types from a function
  *
  * @example
+ * ```ts
  * const foo = (a: string, b: number) => a.repeat(b);
  *
  * type ArgsOfFoo = ArgsOf<typeof foo> // [string, number]
+ * ```
  */
 export type ArgsOf<Fn extends FnBase> = Fn extends (...args: infer U) => any
   ? U
@@ -29,10 +31,12 @@ export type Fn1<FnIn, FnOut> = (arg: FnIn) => FnOut;
  * Binds a function to a null `this`, then returns it
  *
  * @example
+ * ```ts
  * const myfn = (text: string, repeat: number) => text.repeat(repeat);
  * const bound = bind(myfn, 'abc', 3);
  *
  * bound() // 'abcabcabc';
+ * ```
  *
  * @param fn
  * @param args
@@ -46,9 +50,11 @@ export const bind = <Fn extends FnBase>(
  * Checks if a given condition is true, otherwise throws an error with the given error message
  *
  * @example
+ * ```ts
  * check(true, 'does not throw')(10)        // 10
  * check(true, 'does not throw')('hello')   // 'hello'
  * check(false, 'this throws')('hello')     // Uncaught Error: this throws
+ * ```
  *
  * @param {boolean} condition
  * @param {string} errormessage
@@ -62,7 +68,9 @@ export const check = (condition: boolean, errormessage: string) => <T>(
  * Creates a function which returns a fallback function
  *
  * @example
+ * ```ts
  * either.unwrapLeftOrElse(fallback(10))(right(20)) // 10
+ * ```
  *
  * @param arg
  */

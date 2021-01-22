@@ -5,8 +5,10 @@ import { Tagged, TaggedFactory } from "./tagged-type";
  * Cast a TaggetType to another one.
  *
  * @example
+ * ```ts
  * const error = err('this is an error');
  * const someError = cast(error, some);
+ * ```
  *
  * @template T
  * @template Tagfrom
@@ -28,10 +30,12 @@ export const cast = <
  * Creates a cast to function
  *
  * @example
+ * ```ts
  *
  * const toOption = createCast(option);
  *
  * toOption(just('hello')); // Some<'hello'>;
+ * ```
  *
  * @template Tagto
  * @param {TaggedFactory<Tagto>} totagged
