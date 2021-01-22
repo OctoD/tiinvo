@@ -1,5 +1,6 @@
-import { check } from "./applicative";
+import { check, Fn1 } from "./applicative";
 import { createExpect } from "./assertables";
+import { totaggedFn } from "./cast";
 import { createFilter, createFilterOr } from "./filterables";
 import { createMap, createMapOr, createMapOrElse } from "./mappables";
 import {
@@ -20,7 +21,6 @@ import {
 
 const ERRTAG = "err";
 const OKTAG = "ok";
-const RESULTTAG = "result";
 
 /**
  *
@@ -112,6 +112,26 @@ export const ok = <T>(value: T): Ok<T> =>
  */
 export const result = <T>(value: T): Result<T> =>
   tg.iserror(value) ? err(value) : ok(value);
+
+/**
+ * Creates a Err<K> factory from a function (arg: T) => K
+ */
+export const errfromfn = (totaggedFn(err as any) as unknown) as Fn1<
+  string | Error,
+  Err
+>;
+
+/**
+ * Creates a Ok<K> factory from a function (arg: T) => K
+ */
+export const okfromfn = totaggedFn(ok);
+
+/**
+ * Creates a Result<K> factory from a function (arg: T) => K
+ */
+export const fromfn = (totaggedFn(result as any) as unknown) as <T>(
+  arg: T
+) => Result<T>;
 
 //#endregion
 

@@ -6,6 +6,7 @@ export * from "./tagged-type";
 export * from "./trycatch";
 export * from "./typeguards";
 
+import * as array from "./array";
 import * as assertables from "./assertables";
 import * as either from "./either";
 import * as filterables from "./filterables";
@@ -18,6 +19,7 @@ import * as result from "./result";
 import * as unwrappables from "./unwrappables";
 
 export {
+  array,
   assertables,
   either,
   filterables,
