@@ -1,3 +1,4 @@
+import { totaggedFn } from "./cast";
 import { createFilter, createFilterOr } from "./filterables";
 import { createfold, createSwap } from "./foldables";
 import { createMap, createMapOr, createMapOrElse } from "./mappables";
@@ -71,6 +72,7 @@ export const isRight = combine<Right>(isTagged, hasrighttag);
  * Checks if a variable is Either with a value of a given type
  *
  * @example
+ * ```ts
  * const test1 = left(10);
  * const test2 = right(10);
  * const iseitherofstring = isEitherOf(isstring);
@@ -78,6 +80,7 @@ export const isRight = combine<Right>(isTagged, hasrighttag);
  *
  * iseitherofstring(test) // false
  * iseitherofnumber(test) // true
+ * ```
  *
  * @template T
  * @param {Typeguard<T>} typeguard
@@ -89,6 +92,7 @@ export const isEitherOf = <T>(typeguard: Typeguard<T>) =>
  * Checks if a variable is Left with a value of a given type
  *
  * @example
+ * ```ts
  * const test1 = left(10);
  * const test2 = right(10);
  * const isleftofstring = isLeftOf(isstring);
@@ -98,6 +102,7 @@ export const isEitherOf = <T>(typeguard: Typeguard<T>) =>
  * isleftofstring(test2) // false
  * isleftofnumber(test1) // true
  * isleftofnumber(test2) // false
+ * ```
  *
  * @template T
  * @param {Typeguard<T>} typeguard
@@ -109,6 +114,7 @@ export const isLeftOf = <T>(typeguard: Typeguard<T>) =>
  * Checks if a variable is Right with a value of a given type
  *
  * @example
+ * ```ts
  * const test1 = left(10);
  * const test2 = right(10);
  * const isrightofstring = isRightOf(isstring);
@@ -118,6 +124,7 @@ export const isLeftOf = <T>(typeguard: Typeguard<T>) =>
  * isrightofstring(test2) // false
  * isrightofnumber(test1) // false
  * isrightofnumber(test2) // true
+ * ```
  *
  * @template T
  * @param {Typeguard<T>} typeguard
@@ -127,7 +134,7 @@ export const isRightOf = <T>(typeguard: Typeguard<T>) =>
 
 //#endregion
 
-//#region ctors
+//#region factories
 
 /**
  * Creates a Left<T> type
@@ -138,6 +145,16 @@ export const left = <T>(value: T): Left<T> => tagged(value, LEFTTAG);
  * Creates a Right<T> type
  */
 export const right = <T>(value: T): Right<T> => tagged(value, RIGHTTAG);
+
+/**
+ * Creates a Left<K> factory from a function (arg: T) => K
+ */
+export const leftfromfn = totaggedFn(left);
+
+/**
+ * Creates a Right<K> factory from a function (arg: T) => K
+ */
+export const rightfromfn = totaggedFn(right);
 
 //#endregion
 
@@ -255,8 +272,11 @@ export const unwrapLeft = createUnwrap(
  * Unwraps value if Right or throws
  *
  * @example
+ * ```ts
  * unwrapRight(left(10)) // throws
  * unwrapRight(right(1)) // 1
+ *
+ * ```
  */
 export const unwrapRight = createUnwrap(
   isRight,
@@ -267,8 +287,10 @@ export const unwrapRight = createUnwrap(
  * Unwraps Left value if Left or returns the fallback
  *
  * @example
+ * ```ts
  * unwrapLeftOr(20)(left(10)) // 10
  * unwrapLeftOr(20)(right(1)) // 20
+ * ```
  */
 export const unwrapLeftOr = createUnwrapOr(isLeft);
 
@@ -276,8 +298,10 @@ export const unwrapLeftOr = createUnwrapOr(isLeft);
  * Unwraps Right value if Right or returns the fallback
  *
  * @example
+ * ```ts
  * unwrapRightOr(20)(left(10)) // 20
  * unwrapRightOr(20)(right(1)) // 1
+ * ```
  */
 export const unwrapRightOr = createUnwrapOr(isRight);
 
@@ -285,8 +309,10 @@ export const unwrapRightOr = createUnwrapOr(isRight);
  * Unwraps Left value if Left or returns the fallback
  *
  * @example
+ * ```ts
  * unwrapLeftOrElse(fallback(20))(left(10)) // 10
  * unwrapLeftOrElse(fallback(30))(right(1)) // 30
+ * ```
  */
 export const unwrapLeftOrElse = createUnwrapOrElse(isLeft);
 
@@ -294,8 +320,10 @@ export const unwrapLeftOrElse = createUnwrapOrElse(isLeft);
  * Unwraps Right value if Right or returns the fallback
  *
  * @example
+ * ```ts
  * unwrapRightOrElse(fallback(20))(left(10)) // 20
  * unwrapRightOrElse(fallback(30))(right(1)) // 1
+ * ```
  */
 export const unwrapRightOrElse = createUnwrapOrElse(isRight);
 
@@ -305,10 +333,12 @@ export const unwrapRightOrElse = createUnwrapOrElse(isRight);
  * Creates a new either from a given predicate.
  *
  * @example
+ * ```ts
  * const iseven = (arg: number) => arg % 2 === 0;
  *
  * frompredicate(iseven)(20) // Right<20>
  * frompredicate(iseven)(11) // Left<11>
+ * ```
  *
  * @template T
  * @param {Predicate<T>} predicate

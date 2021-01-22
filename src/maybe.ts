@@ -1,5 +1,6 @@
-import { check } from "./applicative";
+import { check, Fn1 } from "./applicative";
 import { createExpect } from "./assertables";
+import { totaggedFn } from "./cast";
 import { createFilter, createFilterOr } from "./filterables";
 import { createfold } from "./foldables";
 import { createMap, createMapOr, createMapOrElse } from "./mappables";
@@ -88,6 +89,18 @@ export const just = <T>(value: T) =>
  *
  */
 export const maybe = <T>(arg?: T) => (arg ? just(arg) : nothing());
+
+/**
+ * Creates a Just<K> factory from a function (arg: T) => K
+ */
+export const justfromfn = totaggedFn(just);
+
+/**
+ * Creates a Maybe<K> factory from a function (arg: T) => K
+ */
+export const fromfn = (totaggedFn(maybe as any) as unknown) as <T>(
+  arg: T
+) => Maybe<T>;
 
 //#endregion
 

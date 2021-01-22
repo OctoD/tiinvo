@@ -8,6 +8,7 @@ export type Expect<T> = (errormessage: string) => (arg: T) => T;
  * If the condition is not satisfied, it throws
  *
  * @example
+ * ```ts
  * const isstring = (arg: unknown): arg is string => typeof arg === 'string';
  * const expectstring = createExpect(isstring);
  *
@@ -21,6 +22,7 @@ export type Expect<T> = (errormessage: string) => (arg: T) => T;
  *
  * myfn('hello', 'world'); // 'hello--world';
  * myfn('hello', 123);     // Uncaught Error: myfn bar argument must be a string
+ * ```
  *
  * @template T
  * @param {Predicate<T>} predicate

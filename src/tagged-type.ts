@@ -30,8 +30,10 @@ const hasvalue = haskey("value");
  * Creates a TaggedType<T, Tagname>.
  *
  * @example
+ * ```ts
  *
  * tagged('hello world', 'foobarbaz'); // Tagged<'hello world', 'foobarbaz'>;
+ * ```
  *
  * @template T
  * @template Tagname
@@ -48,9 +50,11 @@ export const tagged = <T, Tagname extends string>(
  * Creates a factory which returns a `Tagged<K, T>`
  *
  * @example
+ * ```ts
  * const mytype = taggedFactory('foo');
  *
  * mytype(10) // Tagged<10, 'foo'>
+ * ```
  *
  * @template T
  * @param {T} tagname

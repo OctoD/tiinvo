@@ -1,7 +1,7 @@
 {
-  "mode": "modules",
   "out": "docs",
   "readme": "none",
+  "entryPoints": ["src/index.ts"],
   "exclude": [
     "benchmarks/**",
     "src/index.ts",

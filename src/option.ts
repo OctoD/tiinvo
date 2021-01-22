@@ -1,8 +1,9 @@
 import { check } from "./applicative";
 import { createExpect } from "./assertables";
+import { totaggedFn } from "./cast";
 import { createFilter, createFilterOr } from "./filterables";
 import { createMap, createMapOr, createMapOrElse } from "./mappables";
-import { tagged, isTagged, isTaggedWith, Tagged } from "./tagged-type";
+import { isTagged, isTaggedWith, tagged, Tagged } from "./tagged-type";
 import * as typeguardsTs from "./typeguards";
 import {
   createUnwrap,
@@ -36,7 +37,7 @@ export interface None extends Tagged<any, Nonetag> {}
 /**
  *
  */
-export interface Some<T = unknown> extends Tagged<T, Sometag> {}
+export interface Some<T = unknown> extends Tagged<NonNullable<T>, Sometag> {}
 
 /**
  *
@@ -110,17 +111,22 @@ export const none = (): None => tagged(void 0, NONETAG);
 /**
  *
  */
-export const some = <T>(value: T): Some<T> =>
+export const some = <T>(value: T): Some<NonNullable<T>> =>
   check(
     !typeguardsTs.isnullOrUndefined(value),
     "some value cannot be undefined nor null"
-  )(tagged(value, SOMETAG));
+  )(tagged(value as any, SOMETAG));
 
 /**
  *
  */
-export const option = <T>(value: T): Option<T> =>
+export const option = <T>(value: T): Option<NonNullable<T>> =>
   typeguardsTs.isnullOrUndefined(value) ? none() : some(value);
+
+/**
+ * Creates a Option<K> factory from a function (arg: T) => K
+ */
+export const fromfn = totaggedFn(option);
 
 //#endregion
 
