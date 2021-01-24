@@ -18,6 +18,15 @@ tsconfig.json
 # social stuff
 logo.png
 social-banner.png
+tiinvo.sketch
+
+# ignore config files
+.eslintrc.json
+renovate.json
+typedoc.markdown.json
+CODE_OF_CONDUCT.md
+_config.yml
+azure-pipelines.yml
 
 # ignore the .ts files
 *.ts
