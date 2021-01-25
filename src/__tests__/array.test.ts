@@ -74,6 +74,24 @@ describe(`array`, () => {
     expect(expect.arrayContaining(flatnummatris(matrix))).toEqual(expected);
   });
 
+  it(`takefirstnth`, () => {
+    const limit = 2;
+    const takefn = array.takefirstnth(limit);
+    const set = [1, 2, 3, 4];
+    const subset = [1, 2];
+
+    expect(expect.arrayContaining(takefn(set))).toEqual(subset);
+  });
+
+  it(`takelastnth`, () => {
+    const limit = 2;
+    const takefn = array.takelastnth(limit);
+    const set = [1, 2, 3, 4];
+    const subset = [3, 4];
+
+    expect(expect.arrayContaining(takefn(set))).toEqual(subset);
+  });
+
   it(`includes`, () => {
     const includes100 = array.includes(100);
 
@@ -126,6 +144,19 @@ describe(`array`, () => {
       200,
       100,
     ]);
+  });
+
+  it(`shuffle`, () => {
+    const value1 = 1;
+    const value2 = 2;
+    const value3 = 3;
+    const test = [value1, value2, value3];
+
+    const shuffled = array.shuffle()(test);
+
+    expect(shuffled.includes(value1)).toBeTruthy();
+    expect(shuffled.includes(value2)).toBeTruthy();
+    expect(shuffled.includes(value3)).toBeTruthy();
   });
 
   it(`some`, () => {

@@ -300,6 +300,26 @@ export const reduceright = <T, Z>(
 export const reverse = (): (<T>(arg: T[]) => T[]) => (arg) => arg.reverse();
 
 /**
+ * Shuffles an array
+ *
+ * ```ts
+ * shuffle()([1, 2, 3]) // could be [3, 2, 1] or [2, 1, 3] or [1, 3, 2] or...
+ * ```
+ *
+ * @returns
+ */
+export const shuffle = (): (<T>(arg: T[]) => T[]) => (arg) => {
+  const array = [].slice.call(arg);
+
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+
+  return array;
+};
+
+/**
  * Returns true if some elements in the array satisfy the given predicate.
  * @example
  *
@@ -332,6 +352,42 @@ export const some = <T>(fn: (arg: T) => boolean): ((arg: T[]) => boolean) => (
 export const sort = <T>(
   comparefn: (arg1: T, arg2: T) => number
 ): ((arg: T[]) => T[]) => (arg) => arg.sort(comparefn);
+
+/**
+ * Takes only the first elements by `count`
+ *
+ * ```ts
+ * const limit = 2;
+ * const takefn = takefirstnth(limit)
+ * const test = [1, 2, 3, 4];
+ *
+ * takefn(test) // [1, 2]
+ *
+ * ```
+ *
+ * @param count
+ * @returns
+ */
+export const takefirstnth = (count: number): (<T>(arg: T[]) => T[]) => (arg) =>
+  arg.filter((_, index) => index < count);
+
+/**
+ * Takes only the last elements by `count`
+ *
+ * ```ts
+ * const limit = 2;
+ * const takefn = takelastnth(limit)
+ * const test = [1, 2, 3, 4];
+ *
+ * takefn(test) // [3, 4]
+ *
+ * ```
+ *
+ * @param count
+ * @returns
+ */
+export const takelastnth = (count: number): (<T>(arg: T[]) => T[]) => (arg) =>
+  arg.filter((_, index, array) => array.length - 1 - count < index);
 
 /**
  * An unsafe cast to a type. Use it if TypeScript gives you a terrible headache.

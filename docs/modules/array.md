@@ -24,8 +24,11 @@
 - [reduce](array.md#reduce)
 - [reduceright](array.md#reduceright)
 - [reverse](array.md#reverse)
+- [shuffle](array.md#shuffle)
 - [some](array.md#some)
 - [sort](array.md#sort)
+- [takefirstnth](array.md#takefirstnth)
+- [takelastnth](array.md#takelastnth)
 - [unsafecast](array.md#unsafecast)
 
 ## Functions
@@ -52,7 +55,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:15](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L15)
+Defined in: [array.ts:15](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L15)
 
 ___
 
@@ -78,7 +81,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:48](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L48)
+Defined in: [array.ts:48](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L48)
 
 ___
 
@@ -110,7 +113,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:30](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L30)
+Defined in: [array.ts:30](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L30)
 
 ___
 
@@ -141,7 +144,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:67](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L67)
+Defined in: [array.ts:67](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L67)
 
 ___
 
@@ -173,7 +176,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:86](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L86)
+Defined in: [array.ts:86](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L86)
 
 ___
 
@@ -198,7 +201,7 @@ Name |
 
 **Returns:** *function*
 
-Defined in: [array.ts:103](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L103)
+Defined in: [array.ts:103](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L103)
 
 ___
 
@@ -217,7 +220,7 @@ getfirst()([100, 200]) // 100
 
 **Returns:** *function*
 
-Defined in: [array.ts:117](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L117)
+Defined in: [array.ts:117](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L117)
 
 ___
 
@@ -248,7 +251,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:132](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L132)
+Defined in: [array.ts:132](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L132)
 
 ___
 
@@ -267,7 +270,7 @@ getfirst()([100, 200]) // 100
 
 **Returns:** *function*
 
-Defined in: [array.ts:146](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L146)
+Defined in: [array.ts:146](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L146)
 
 ___
 
@@ -299,7 +302,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:165](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L165)
+Defined in: [array.ts:165](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L165)
 
 ___
 
@@ -332,7 +335,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:195](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L195)
+Defined in: [array.ts:195](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L195)
 
 ___
 
@@ -351,7 +354,7 @@ isempty()([1]) // false
 
 **Returns:** *function*
 
-Defined in: [array.ts:179](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L179)
+Defined in: [array.ts:179](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L179)
 
 ___
 
@@ -367,7 +370,7 @@ ___
 
 **Returns:** *function*
 
-Defined in: [array.ts:208](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L208)
+Defined in: [array.ts:208](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L208)
 
 ___
 
@@ -406,7 +409,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:231](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L231)
+Defined in: [array.ts:231](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L231)
 
 ___
 
@@ -424,7 +427,7 @@ arr.includes(random()(arr)) // true
 
 **Returns:** *function*
 
-Defined in: [array.ts:245](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L245)
+Defined in: [array.ts:245](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L245)
 
 ___
 
@@ -458,7 +461,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:264](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L264)
+Defined in: [array.ts:264](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L264)
 
 ___
 
@@ -492,7 +495,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:285](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L285)
+Defined in: [array.ts:285](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L285)
 
 ___
 
@@ -510,7 +513,23 @@ reverse()([1, 2, 3]) // [3, 2, 1]
 
 **Returns:** *function*
 
-Defined in: [array.ts:300](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L300)
+Defined in: [array.ts:300](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L300)
+
+___
+
+### shuffle
+
+▸ `Const`**shuffle**(): *function*
+
+Shuffles an array
+
+```ts
+shuffle()([1, 2, 3]) // could be [3, 2, 1] or [2, 1, 3] or [1, 3, 2] or...
+```
+
+**Returns:** *function*
+
+Defined in: [array.ts:311](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L311)
 
 ___
 
@@ -542,7 +561,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:314](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L314)
+Defined in: [array.ts:334](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L334)
 
 ___
 
@@ -576,7 +595,61 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:332](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L332)
+Defined in: [array.ts:352](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L352)
+
+___
+
+### takefirstnth
+
+▸ `Const`**takefirstnth**(`count`: *number*): *function*
+
+Takes only the first elements by `count`
+
+```ts
+const limit = 2;
+const takefn = takefirstnth(limit)
+const test = [1, 2, 3, 4];
+
+takefn(test) // [1, 2]
+
+```
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`count` | *number* |
+
+**Returns:** *function*
+
+Defined in: [array.ts:371](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L371)
+
+___
+
+### takelastnth
+
+▸ `Const`**takelastnth**(`count`: *number*): *function*
+
+Takes only the last elements by `count`
+
+```ts
+const limit = 2;
+const takefn = takelastnth(limit)
+const test = [1, 2, 3, 4];
+
+takefn(test) // [3, 4]
+
+```
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`count` | *number* |
+
+**Returns:** *function*
+
+Defined in: [array.ts:389](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L389)
 
 ___
 
@@ -597,4 +670,4 @@ Name |
 
 **Returns:** *function*
 
-Defined in: [array.ts:343](https://github.com/OctoD/tiinvo/blob/5042f60/src/array.ts#L343)
+Defined in: [array.ts:399](https://github.com/OctoD/tiinvo/blob/67a8c34/src/array.ts#L399)
