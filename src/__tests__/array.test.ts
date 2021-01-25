@@ -97,6 +97,12 @@ describe(`array`, () => {
     ).toEqual([200, 400, 600, 800, 1000]);
   });
 
+  it(`random`, () => {
+    const fn = array.random();
+
+    expect(testarray.includes(fn(testarray))).toBeTruthy();
+  });
+
   it(`reduce`, () => {
     expect(
       array.reduce(0, (prev: number, next: number) => prev + next)(testarray)

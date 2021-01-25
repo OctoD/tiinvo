@@ -232,6 +232,20 @@ export const map = <T, Z>(fn: (arg: T) => Z): ((arg: T[]) => Z[]) => (arg) =>
   arg.map(fn);
 
 /**
+ * Returns a random element `T` from an array `T[]`
+ *
+ * @example
+ * ```ts
+ * const arr = [1, 2, 3]
+ * arr.includes(random()(arr)) // true
+ * ```
+ *
+ * @returns
+ */
+export const random = (): (<T>(arg: T[]) => T) => (arr) =>
+  arr[Math.floor(Math.random() * arr.length)];
+
+/**
  * Aggregates all values in a single input.
  * This aggregation starts from the first to the last element.
  * @example

@@ -31,7 +31,7 @@ Name |
 ------ |
 `T` |
 
-Defined in: [predicate.ts:5](https://github.com/OctoD/tiinvo/blob/2b2bd76/src/predicate.ts#L5)
+Defined in: [predicate.ts:5](https://github.com/OctoD/tiinvo/blob/5042f60/src/predicate.ts#L5)
 
 ## Functions
 
@@ -69,7 +69,7 @@ Name | Type | Description |
 
 **Returns:** [*Predicate*](predicate.md#predicate)<T\>
 
-Defined in: [predicate.ts:28](https://github.com/OctoD/tiinvo/blob/2b2bd76/src/predicate.ts#L28)
+Defined in: [predicate.ts:28](https://github.com/OctoD/tiinvo/blob/5042f60/src/predicate.ts#L28)
 
 ___
 
@@ -107,7 +107,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [predicate.ts:52](https://github.com/OctoD/tiinvo/blob/2b2bd76/src/predicate.ts#L52)
+Defined in: [predicate.ts:52](https://github.com/OctoD/tiinvo/blob/5042f60/src/predicate.ts#L52)
 
 ___
 
@@ -141,7 +141,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [predicate.ts:71](https://github.com/OctoD/tiinvo/blob/2b2bd76/src/predicate.ts#L71)
+Defined in: [predicate.ts:71](https://github.com/OctoD/tiinvo/blob/5042f60/src/predicate.ts#L71)
 
 ___
 
@@ -181,7 +181,7 @@ Name | Type |
 
 **Returns:** [*Predicate*](predicate.md#predicate)<T\>
 
-Defined in: [predicate.ts:97](https://github.com/OctoD/tiinvo/blob/2b2bd76/src/predicate.ts#L97)
+Defined in: [predicate.ts:97](https://github.com/OctoD/tiinvo/blob/5042f60/src/predicate.ts#L97)
 
 ___
 
@@ -220,7 +220,7 @@ Name | Type |
 
 **Returns:** [*Predicate*](predicate.md#predicate)<T\>
 
-Defined in: [predicate.ts:123](https://github.com/OctoD/tiinvo/blob/2b2bd76/src/predicate.ts#L123)
+Defined in: [predicate.ts:123](https://github.com/OctoD/tiinvo/blob/5042f60/src/predicate.ts#L123)
 
 ___
 
@@ -254,7 +254,7 @@ Name | Type |
 
 **Returns:** [*Predicate*](predicate.md#predicate)<T\>
 
-Defined in: [predicate.ts:144](https://github.com/OctoD/tiinvo/blob/2b2bd76/src/predicate.ts#L144)
+Defined in: [predicate.ts:144](https://github.com/OctoD/tiinvo/blob/5042f60/src/predicate.ts#L144)
 
 ___
 
@@ -288,7 +288,7 @@ Name | Type | Description |
 
 **Returns:** [*Predicate*](predicate.md#predicate)<T\>
 
-Defined in: [predicate.ts:164](https://github.com/OctoD/tiinvo/blob/2b2bd76/src/predicate.ts#L164)
+Defined in: [predicate.ts:164](https://github.com/OctoD/tiinvo/blob/5042f60/src/predicate.ts#L164)
 
 ___
 
@@ -322,4 +322,4 @@ Name | Type | Description |
 
 **Returns:** [*Predicate*](predicate.md#predicate)<T\>
 
-Defined in: [predicate.ts:185](https://github.com/OctoD/tiinvo/blob/2b2bd76/src/predicate.ts#L185)
+Defined in: [predicate.ts:185](https://github.com/OctoD/tiinvo/blob/5042f60/src/predicate.ts#L185)
