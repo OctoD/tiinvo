@@ -196,11 +196,13 @@ export const includes = <T>(value: T): ((arg: T[]) => boolean) => (arg) =>
   arg.includes(value);
 
 /**
- *
+ * Returns the array length
  * @example
  *
  * ```ts
+ * const test = [1, 2, 3, 4];
  *
+ * length()(test) // 4
  * ```
  *
  * @returns

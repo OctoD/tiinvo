@@ -1,6 +1,7 @@
 import { check, Fn1 } from "./applicative";
 import { createExpect } from "./assertables";
 import { totaggedFn } from "./cast";
+import { createderivefromfunction } from "./derivables";
 import { createFilter, createFilterOr } from "./filterables";
 import { createMap, createMapOr, createMapOrElse } from "./mappables";
 import {
@@ -76,9 +77,10 @@ const hasresulttag = tg.anyof(hasoktag, haserrtag);
 /**
  *
  */
-export const isResult = tg.combine(isTagged, hasresulttag) as tg.Typeguard<
-  Result
->;
+export const isResult = tg.combine(
+  isTagged,
+  hasresulttag
+) as tg.Typeguard<Result>;
 /**
  *
  */
@@ -172,7 +174,7 @@ export const filterOr = createFilterOr<Result, ResultTag>(
 //#region mappables
 
 /**
- *
+ * Maps a value `T` if `Ok`
  */
 export const map = createMap<Result, ResultTag>(
   isOk,
@@ -180,7 +182,7 @@ export const map = createMap<Result, ResultTag>(
 );
 
 /**
- *
+ * Maps a value `T` if `Ok`, otherwise maps `Err` to `fallback`
  */
 export const mapOr = createMapOr<Result, ResultTag>(
   isOk,
@@ -188,7 +190,7 @@ export const mapOr = createMapOr<Result, ResultTag>(
 );
 
 /**
- *
+ * Maps a value `T` if `Ok`, otherwise calls `Fn` and maps `Err` to `ReturnValue<Fn>`
  */
 export const mapOrElse = createMapOrElse<Result, ResultTag>(
   isOk,
@@ -200,16 +202,61 @@ export const mapOrElse = createMapOrElse<Result, ResultTag>(
 //#region unwrappable
 
 /**
+ * Unwraps a `Result<T>` `value` or throws
  *
+ * @example
+ * ```ts
+ * import { result, fallback } from 'tiinvo';
+ *
+ * const test1 = result.ok(10);
+ * const test2 = result.ok(new Error());
+ * const unwrapfn = result.unwrap;
+ *
+ * unwrapfn(test1) // 10
+ * unwrapfn(test2) // throws the error
+ * ```
  */
 export const unwrap = createUnwrap<ResultTag>(isOk, "cannot unwrapp Err");
+
 /**
+ * Unwraps a `Result<T>` `value` or returns the `fallback` `value`
  *
+ * @example
+ * ```ts
+ * import { result, fallback } from 'tiinvo';
+ *
+ * const test1 = result.ok(10);
+ * const test2 = result.ok(new Error());
+ * const unwrapfn = result.unwrapOr('error');
+ *
+ * unwrapfn(test1) // 10
+ * unwrapfn(test2) // 'error'
+ * ```
  */
+
 export const unwrapOr = createUnwrapOr<ResultTag>(isOk);
 /**
+ * Unwraps a `Result<T>` `value` or returns the `fallback` function `value`
  *
+ * @example
+ * ```ts
+ * import { result, fallback } from 'tiinvo';
+ *
+ * const test1 = result.ok(10);
+ * const test2 = result.ok(new Error());
+ * const unwrapfn = result.unwrapOrElse(fallback('error'));
+ *
+ * unwrapfn(test1) // 10
+ * unwrapfn(test2) // 'error'
+ * ```
  */
 export const unwrapOrElse = createUnwrapOrElse<ResultTag>(isOk);
 
 //#endregion
+
+/**
+ * Wraps a function `(... args: any[]) => T`, and once called it returns a `Result<T>`
+ */
+export const fromfunction = createderivefromfunction(
+  result as TaggedFactory<ResultTag>
+);
