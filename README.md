@@ -19,6 +19,7 @@ Functional data structures for TypeScript and JavaScript.
   - [predicates](#predicates)
   - [typeguards](#typeguards)
   - [utilities](#utilities)
+  - [array functions](#array-functions)
 - [Docs](#docs)
 - [Contributing](#contributing)
 - [Licence](#licence)
@@ -142,6 +143,24 @@ getmultipliedby2('darn')      // 0
 getmultipliedby2(new Date())  // 0
 getmultipliedby2(5)           // 10
 getmultipliedby2(15)          // 30
+```
+
+## array functions
+
+tiinvo comes with some array functions
+
+```ts
+import { array, pipe } from 'tiinvo';
+
+const iseven = (arg: number) => arg % 2 === 0;
+const double = (arg: number) => arg * 2;
+
+const filterevendoubles = pipe(
+  array.map(double),
+  array.filter(iseven),
+);
+
+filterevendoubles([ 1, 2, 3, 2.5, 3.75 ]) // [2, 4, 6]
 ```
 
 # Docs
