@@ -8,6 +8,7 @@ export * from "./typeguards";
 
 import * as array from "./array";
 import * as assertables from "./assertables";
+import * as derivables from "./derivables";
 import * as either from "./either";
 import * as filterables from "./filterables";
 import * as foldables from "./foldables";
@@ -21,6 +22,7 @@ import * as unwrappables from "./unwrappables";
 export {
   array,
   assertables,
+  derivables,
   either,
   filterables,
   foldables,

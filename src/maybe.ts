@@ -1,11 +1,18 @@
 import { check, Fn1 } from "./applicative";
 import { createExpect } from "./assertables";
 import { totaggedFn } from "./cast";
+import { createderivefromfunction } from "./derivables";
 import { createFilter, createFilterOr } from "./filterables";
 import { createfold } from "./foldables";
 import { createMap, createMapOr, createMapOrElse } from "./mappables";
 import { Predicate } from "./predicate";
-import { tagged, isTagged, isTaggedWith, Tagged } from "./tagged-type";
+import {
+  tagged,
+  isTagged,
+  isTaggedWith,
+  Tagged,
+  TaggedFactory,
+} from "./tagged-type";
 import { anyof, combine } from "./typeguards";
 import {
   createUnwrap,
@@ -187,3 +194,15 @@ export const unwrapOrElse = createUnwrapOrElse<MaybeTag>(isJust);
  */
 export const frompredicate = <T>(predicate: Predicate<T>) => (arg: T) =>
   predicate(arg) ? just(arg) : nothing();
+
+/**
+ * Wraps a function `(... args: any[]) => T`, and once called it returns a `Just<T>`
+ */
+export const justfromfunction = createderivefromfunction(just);
+
+/**
+ * Wraps a function `(... args: any[]) => T`, and once called it returns a `Maybe<T>`
+ */
+export const maybefromfunction = createderivefromfunction(
+  maybe as TaggedFactory<MaybeTag>
+);

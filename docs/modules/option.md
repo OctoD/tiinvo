@@ -25,6 +25,7 @@
 - [filter](option.md#filter)
 - [filterOr](option.md#filteror)
 - [fromfn](option.md#fromfn)
+- [fromfunction](option.md#fromfunction)
 - [isNone](option.md#isnone)
 - [isOption](option.md#isoption)
 - [isOptionOf](option.md#isoptionof)
@@ -46,7 +47,7 @@
 
 Ƭ **NoneFactory**: () => [*None*](../interfaces/option.none.md)
 
-Defined in: [option.ts:50](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L50)
+Defined in: [option.ts:51](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L51)
 
 ___
 
@@ -54,7 +55,7 @@ ___
 
 Ƭ **Nonetag**: *typeof* NONETAG
 
-Defined in: [option.ts:22](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L22)
+Defined in: [option.ts:23](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L23)
 
 ___
 
@@ -68,7 +69,7 @@ Name | Default |
 ------ | ------ |
 `T` | *unknown* |
 
-Defined in: [option.ts:45](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L45)
+Defined in: [option.ts:46](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L46)
 
 ___
 
@@ -76,7 +77,7 @@ ___
 
 Ƭ **OptionFactory**: <T\>(`value`: T) => [*Option*](option.md#option)<T\>
 
-Defined in: [option.ts:58](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L58)
+Defined in: [option.ts:59](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L59)
 
 ___
 
@@ -84,7 +85,7 @@ ___
 
 Ƭ **Optiontag**: [*Nonetag*](option.md#nonetag) | [*Sometag*](option.md#sometag)
 
-Defined in: [option.ts:30](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L30)
+Defined in: [option.ts:31](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L31)
 
 ___
 
@@ -92,7 +93,7 @@ ___
 
 Ƭ **SomeFactory**: <T\>(`value`: T) => [*Some*](../interfaces/option.some.md)
 
-Defined in: [option.ts:54](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L54)
+Defined in: [option.ts:55](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L55)
 
 ___
 
@@ -100,7 +101,7 @@ ___
 
 Ƭ **Sometag**: *typeof* SOMETAG
 
-Defined in: [option.ts:26](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L26)
+Defined in: [option.ts:27](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L27)
 
 ## Functions
 
@@ -116,7 +117,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:96](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L96)
+Defined in: [option.ts:97](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L97)
 
 ___
 
@@ -138,7 +139,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:138](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L138)
+Defined in: [option.ts:139](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L139)
 
 ___
 
@@ -161,7 +162,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:142](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L142)
+Defined in: [option.ts:143](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L143)
 
 ___
 
@@ -186,7 +187,32 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:129](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L129)
+Defined in: [option.ts:130](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L130)
+
+___
+
+### fromfunction
+
+▸ `Const`**fromfunction**<Args, K\>(`fn`: (...`args`: Args) => K): *function*
+
+Wraps a function `(... args: any[]) => T`, and once called it returns a `Option<T>`
+
+#### Type parameters:
+
+Name | Type |
+------ | ------ |
+`Args` | *any*[] |
+`K` | - |
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`fn` | (...`args`: Args) => K |
+
+**Returns:** *function*
+
+Defined in: [option.ts:220](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L220)
 
 ___
 
@@ -202,7 +228,7 @@ Name | Type |
 
 **Returns:** arg is None
 
-Defined in: [option.ts:75](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L75)
+Defined in: [option.ts:76](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L76)
 
 ___
 
@@ -218,7 +244,7 @@ Name | Type |
 
 **Returns:** arg is Option<unknown\>
 
-Defined in: [option.ts:71](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L71)
+Defined in: [option.ts:72](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L72)
 
 ___
 
@@ -240,7 +266,7 @@ Name | Type |
 
 **Returns:** [*Typeguard*](../README.md#typeguard)<[*Option*](option.md#option)<T\>\>
 
-Defined in: [option.ts:83](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L83)
+Defined in: [option.ts:84](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L84)
 
 ___
 
@@ -256,7 +282,7 @@ Name | Type |
 
 **Returns:** arg is Some<unknown\>
 
-Defined in: [option.ts:79](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L79)
+Defined in: [option.ts:80](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L80)
 
 ___
 
@@ -279,7 +305,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:151](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L151)
+Defined in: [option.ts:152](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L152)
 
 ___
 
@@ -303,7 +329,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:155](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L155)
+Defined in: [option.ts:156](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L156)
 
 ___
 
@@ -327,7 +353,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:159](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L159)
+Defined in: [option.ts:160](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L160)
 
 ___
 
@@ -337,7 +363,7 @@ ___
 
 **Returns:** [*None*](../interfaces/option.none.md)
 
-Defined in: [option.ts:109](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L109)
+Defined in: [option.ts:110](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L110)
 
 ___
 
@@ -359,7 +385,7 @@ Name | Type |
 
 **Returns:** [*Option*](option.md#option)<*NonNullable*<T\>\>
 
-Defined in: [option.ts:123](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L123)
+Defined in: [option.ts:124](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L124)
 
 ___
 
@@ -381,7 +407,7 @@ Name | Type |
 
 **Returns:** [*Some*](../interfaces/option.some.md)<*NonNullable*<T\>\>
 
-Defined in: [option.ts:114](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L114)
+Defined in: [option.ts:115](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L115)
 
 ___
 
@@ -397,13 +423,25 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:100](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L100)
+Defined in: [option.ts:101](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L101)
 
 ___
 
 ### unwrap
 
 ▸ `Const`**unwrap**<Arg\>(`arg`: Arg): Arg *extends* [*Tagged*](../README.md#tagged)<U, *none* | *some*\> ? U : *never*
+
+Unwraps an `Option<T>` value `T` if `Some<T>`, otherwise throws
+
+**`example`** 
+```ts
+import { option } from 'tiinvo';
+
+const unwrapfn = option.unwrap;
+
+unwrapfn(option.option(10))  // 10
+unwrapfn(option.none())      // throws error
+```
 
 #### Type parameters:
 
@@ -419,13 +457,25 @@ Name | Type |
 
 **Returns:** Arg *extends* [*Tagged*](../README.md#tagged)<U, *none* | *some*\> ? U : *never*
 
-Defined in: [option.ts:168](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L168)
+Defined in: [option.ts:179](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L179)
 
 ___
 
 ### unwrapOr
 
 ▸ `Const`**unwrapOr**<U\>(`fallback`: U): *function*
+
+Unwraps an `Option<T>` value `T` if `Some<T>`, otherwise returns fallback `T` value
+
+**`example`** 
+```ts
+import { option } from 'tiinvo';
+
+const unwrapfn = option.unwrapOr(0);
+
+unwrapfn(option.option(10))  // 10
+unwrapfn(option.none())      // 0
+```
 
 #### Type parameters:
 
@@ -441,13 +491,26 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:176](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L176)
+Defined in: [option.ts:197](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L197)
 
 ___
 
 ### unwrapOrElse
 
 ▸ `Const`**unwrapOrElse**<U\>(`fallback`: () => U): *function*
+
+Unwraps an `Option<T>` value `T` if `Some<T>`, otherwise returns `Fallback<T>` value
+
+**`example`** 
+```ts
+import { option } from 'tiinvo';
+
+const elsefn = () => 0;
+const unwrapfn = option.unwrapOrElse(elsefn);
+
+unwrapfn(option.option(10))  // 10
+unwrapfn(option.none())      // 0
+```
 
 #### Type parameters:
 
@@ -463,4 +526,4 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:181](https://github.com/OctoD/tiinvo/blob/67a8c34/src/option.ts#L181)
+Defined in: [option.ts:213](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/option.ts#L213)

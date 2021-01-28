@@ -31,10 +31,12 @@
 - [isNothing](maybe.md#isnothing)
 - [just](maybe.md#just)
 - [justfromfn](maybe.md#justfromfn)
+- [justfromfunction](maybe.md#justfromfunction)
 - [map](maybe.md#map)
 - [mapOr](maybe.md#mapor)
 - [mapOrElse](maybe.md#maporelse)
 - [maybe](maybe.md#maybe)
+- [maybefromfunction](maybe.md#maybefromfunction)
 - [nothing](maybe.md#nothing)
 - [unexpect](maybe.md#unexpect)
 - [unwrap](maybe.md#unwrap)
@@ -47,7 +49,7 @@
 
 Ƭ **JustFactory**: <T\>(`value`: T) => [*Just*](../interfaces/maybe.just.md)<T\>
 
-Defined in: [maybe.ts:46](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L46)
+Defined in: [maybe.ts:47](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L47)
 
 ___
 
@@ -55,7 +57,7 @@ ___
 
 Ƭ **JustTag**: *typeof* JUSTTAG
 
-Defined in: [maybe.ts:21](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L21)
+Defined in: [maybe.ts:22](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L22)
 
 ___
 
@@ -69,7 +71,7 @@ Name | Default |
 ------ | ------ |
 `T` | *unknown* |
 
-Defined in: [maybe.ts:37](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L37)
+Defined in: [maybe.ts:38](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L38)
 
 ___
 
@@ -77,7 +79,7 @@ ___
 
 Ƭ **MaybeTag**: [*JustTag*](maybe.md#justtag) | [*NothingTag*](maybe.md#nothingtag)
 
-Defined in: [maybe.ts:23](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L23)
+Defined in: [maybe.ts:24](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L24)
 
 ___
 
@@ -85,7 +87,7 @@ ___
 
 Ƭ **NothingFactory**: () => [*Nothing*](../interfaces/maybe.nothing.md)
 
-Defined in: [maybe.ts:42](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L42)
+Defined in: [maybe.ts:43](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L43)
 
 ___
 
@@ -93,7 +95,7 @@ ___
 
 Ƭ **NothingTag**: *typeof* NOTHINGTAG
 
-Defined in: [maybe.ts:22](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L22)
+Defined in: [maybe.ts:23](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L23)
 
 ## Functions
 
@@ -109,7 +111,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [maybe.ts:112](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L112)
+Defined in: [maybe.ts:113](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L113)
 
 ___
 
@@ -131,7 +133,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [maybe.ts:127](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L127)
+Defined in: [maybe.ts:128](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L128)
 
 ___
 
@@ -154,7 +156,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [maybe.ts:131](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L131)
+Defined in: [maybe.ts:132](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L132)
 
 ___
 
@@ -179,7 +181,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [maybe.ts:140](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L140)
+Defined in: [maybe.ts:141](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L141)
 
 ___
 
@@ -203,7 +205,7 @@ Name | Type |
 
 **Returns:** [*Maybe*](maybe.md#maybe)<T\>
 
-Defined in: [maybe.ts:101](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L101)
+Defined in: [maybe.ts:102](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L102)
 
 ___
 
@@ -225,7 +227,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [maybe.ts:188](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L188)
+Defined in: [maybe.ts:189](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L189)
 
 ___
 
@@ -241,7 +243,7 @@ Name | Type |
 
 **Returns:** arg is Just<unknown\>
 
-Defined in: [maybe.ts:66](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L66)
+Defined in: [maybe.ts:67](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L67)
 
 ___
 
@@ -257,7 +259,7 @@ Name | Type |
 
 **Returns:** arg is Maybe<unknown\>
 
-Defined in: [maybe.ts:58](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L58)
+Defined in: [maybe.ts:59](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L59)
 
 ___
 
@@ -273,7 +275,7 @@ Name | Type |
 
 **Returns:** arg is Nothing
 
-Defined in: [maybe.ts:71](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L71)
+Defined in: [maybe.ts:72](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L72)
 
 ___
 
@@ -295,7 +297,7 @@ Name | Type |
 
 **Returns:** [*Tagged*](../README.md#tagged)<T, *just*\>
 
-Defined in: [maybe.ts:85](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L85)
+Defined in: [maybe.ts:86](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L86)
 
 ___
 
@@ -320,7 +322,32 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [maybe.ts:96](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L96)
+Defined in: [maybe.ts:97](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L97)
+
+___
+
+### justfromfunction
+
+▸ `Const`**justfromfunction**<Args, K\>(`fn`: (...`args`: Args) => K): *function*
+
+Wraps a function `(... args: any[]) => T`, and once called it returns a `Just<T>`
+
+#### Type parameters:
+
+Name | Type |
+------ | ------ |
+`Args` | *any*[] |
+`K` | - |
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`fn` | (...`args`: Args) => K |
+
+**Returns:** *function*
+
+Defined in: [maybe.ts:195](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L195)
 
 ___
 
@@ -343,7 +370,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [maybe.ts:149](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L149)
+Defined in: [maybe.ts:150](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L150)
 
 ___
 
@@ -367,7 +394,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [maybe.ts:154](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L154)
+Defined in: [maybe.ts:155](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L155)
 
 ___
 
@@ -391,7 +418,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [maybe.ts:159](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L159)
+Defined in: [maybe.ts:160](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L160)
 
 ___
 
@@ -413,7 +440,32 @@ Name | Type |
 
 **Returns:** [*Nothing*](../interfaces/maybe.nothing.md) | [*Tagged*](../README.md#tagged)<T, *just*\>
 
-Defined in: [maybe.ts:91](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L91)
+Defined in: [maybe.ts:92](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L92)
+
+___
+
+### maybefromfunction
+
+▸ `Const`**maybefromfunction**<Args, K\>(`fn`: (...`args`: Args) => K): *function*
+
+Wraps a function `(... args: any[]) => T`, and once called it returns a `Maybe<T>`
+
+#### Type parameters:
+
+Name | Type |
+------ | ------ |
+`Args` | *any*[] |
+`K` | - |
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`fn` | (...`args`: Args) => K |
+
+**Returns:** *function*
+
+Defined in: [maybe.ts:200](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L200)
 
 ___
 
@@ -423,7 +475,7 @@ ___
 
 **Returns:** [*Nothing*](../interfaces/maybe.nothing.md)
 
-Defined in: [maybe.ts:80](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L80)
+Defined in: [maybe.ts:81](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L81)
 
 ___
 
@@ -439,7 +491,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [maybe.ts:117](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L117)
+Defined in: [maybe.ts:118](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L118)
 
 ___
 
@@ -461,7 +513,7 @@ Name | Type |
 
 **Returns:** Arg *extends* [*Tagged*](../README.md#tagged)<U, [*MaybeTag*](maybe.md#maybetag)\> ? U : *never*
 
-Defined in: [maybe.ts:168](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L168)
+Defined in: [maybe.ts:169](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L169)
 
 ___
 
@@ -483,7 +535,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [maybe.ts:176](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L176)
+Defined in: [maybe.ts:177](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L177)
 
 ___
 
@@ -505,4 +557,4 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [maybe.ts:181](https://github.com/OctoD/tiinvo/blob/67a8c34/src/maybe.ts#L181)
+Defined in: [maybe.ts:182](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/maybe.ts#L182)

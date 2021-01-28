@@ -1,4 +1,5 @@
 import { totaggedFn } from "./cast";
+import { createderivefromfunction } from "./derivables";
 import { createFilter, createFilterOr } from "./filterables";
 import { createfold, createSwap } from "./foldables";
 import { createMap, createMapOr, createMapOrElse } from "./mappables";
@@ -345,3 +346,13 @@ export const unwrapRightOrElse = createUnwrapOrElse(isRight);
  */
 export const frompredicate = <T>(predicate: Predicate<T>) => (arg: T) =>
   predicate(arg) ? right(arg) : left(arg);
+
+/**
+ * Wraps a function `(... args: any[]) => T`, and once called it returns a `Left<T>`
+ */
+export const leftfromfunction = createderivefromfunction(left);
+
+/**
+ * Wraps a function `(... args: any[]) => T`, and once called it returns a `Right<T>`
+ */
+export const rightfromfunction = createderivefromfunction(right);
