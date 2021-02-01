@@ -92,15 +92,14 @@ export const find = <T>(
  * @example
  *
  * ```ts
- * const flatnummatris = flattern<number>();
+ * const flatnummatris = flattern();
  * flatnummatris([[1, 2], [3, 4]]) // [1, 2, 3, 4];
  * ```
  *
- * @template T
  * @param {(arg: T) => boolean} fn
  * @returns
  */
-export const flattern = <T>(): ((arg: T[][]) => T[]) => (arg) =>
+export const flattern = (): (<T>(arg: T[][]) => T[]) => (arg) =>
   arg.reduce((accumulator, nextarr) => [...accumulator, ...nextarr], []);
 
 /**

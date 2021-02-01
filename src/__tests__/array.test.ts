@@ -64,7 +64,7 @@ describe(`array`, () => {
   });
 
   it(`flattern`, () => {
-    const flatnummatris = array.flattern<number>();
+    const flatnummatris = array.flattern();
     const matrix = [
       [1, 2],
       [3, 4],
