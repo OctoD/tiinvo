@@ -338,7 +338,7 @@ cle * Creates a typeguard representing a complex data structure. It is useful
  */
 export const createStructOf = <TG extends any>(
   typeguard: TypeguardsFromStruct<TG>
-) => (value: unknown): value is TypeguardsStruct<TG> => {
+) => (value: unknown): value is TG => {
   if (!isindexable(typeguard) || !isindexable(value)) {
     return false;
   }

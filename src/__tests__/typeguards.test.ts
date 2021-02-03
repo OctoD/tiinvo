@@ -92,7 +92,12 @@ describe("typeguards", () => {
   });
 
   it("createstructof", () => {
-    const subscribeduser = tg.createStructOf({
+    interface User {
+      name: string;
+      email: string;
+    }
+
+    const subscribeduser = tg.createStructOf<User>({
       name: tg.isstring,
       email: tg.isstring,
     });
