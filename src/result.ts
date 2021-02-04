@@ -46,12 +46,12 @@ export interface Err extends Tagged<Error, Errtag> {}
 /**
  *
  */
-export interface Ok<T = unknown> extends Tagged<T, Oktag> {}
+export type Ok<T = unknown> = T extends Error ? never : Tagged<T, Oktag>;
 
 /**
  *
  */
-export type Result<T = unknown> = Ok<T> | Err;
+export type Result<T = unknown> = T extends Error ? Err : Ok<T>;
 
 /**
  *
@@ -107,13 +107,13 @@ export const ok = <T>(value: T): Ok<T> =>
   tagged(
     check(!tg.iserror(value), "An error cannot be a value of Ok")(value),
     OKTAG
-  );
+  ) as Ok<T>;
 
 /**
  *
  */
 export const result = <T>(value: T): Result<T> =>
-  tg.iserror(value) ? err(value) : ok(value);
+  (tg.iserror(value) ? err(value) : ok(value)) as Result<T>;
 
 /**
  * Creates a Err<K> factory from a function (arg: T) => K
@@ -259,4 +259,8 @@ export const unwrapOrElse = createUnwrapOrElse<ResultTag>(isOk);
  */
 export const fromfunction = createderivefromfunction(
   result as TaggedFactory<ResultTag>
-);
+) as <Fn extends (...args: any[]) => any>(
+  fn: Fn
+) => (
+  ...args: ArgsOf<Fn>
+) => ReturnType<Fn> extends Error ? Err : Ok<ReturnType<Fn>>;
