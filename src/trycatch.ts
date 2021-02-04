@@ -1,4 +1,4 @@
-import { err, ok, Result } from "./result";
+import * as result from "./result";
 
 /**
  *
@@ -7,16 +7,16 @@ import { err, ok, Result } from "./result";
  * @template K
  * @param {FnTry} fn
  * @param {...K} args
- * @returns {Result<ReturnType<FnTry>>}
+ * @returns {result.Result<ReturnType<FnTry>>}
  */
 export const trycatch = <FnTry extends (...args: K) => any, K extends any[]>(
   fn: FnTry,
   ...args: K
-): Result<ReturnType<FnTry>> => {
+): result.Result<ReturnType<FnTry>> => {
   try {
-    return ok(fn.apply(null, args));
+    return result.ok(fn.apply(null, args)) as any;
   } catch (error) {
-    return err(error);
+    return result.err(error) as any;
   }
 };
 
@@ -27,7 +27,7 @@ export const trycatch = <FnTry extends (...args: K) => any, K extends any[]>(
  * @template K
  * @param {FnTry} fn
  * @param {...K} args
- * @returns {Promise<ReturnType<FnTry> extends Promise<infer U> ? Result<U> : never>}
+ * @returns {Promise<ReturnType<FnTry> extends Promise<infer U> ? result.Result<U> : never>}
  */
 export const trycatchAsync = async <
   FnTry extends (...args: K) => Promise<any>,
@@ -35,11 +35,13 @@ export const trycatchAsync = async <
 >(
   fn: FnTry,
   ...args: K
-): Promise<ReturnType<FnTry> extends Promise<infer U> ? Result<U> : never> => {
+): Promise<
+  ReturnType<FnTry> extends Promise<infer U> ? result.Result<U> : never
+> => {
   try {
     const returnvalue = await fn.apply(null, args);
-    return ok(returnvalue) as any;
+    return result.ok(returnvalue) as any;
   } catch (error) {
-    return err(error) as any;
+    return result.err(error) as any;
   }
 };

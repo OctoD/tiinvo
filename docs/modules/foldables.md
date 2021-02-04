@@ -27,13 +27,13 @@ Name | Type |
 `R` | - |
 `Tagname` | *string* |
 
-Defined in: [foldables.ts:4](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/foldables.ts#L4)
+Defined in: [foldables.ts:4](https://github.com/OctoD/tiinvo/blob/16ea627/src/foldables.ts#L4)
 
 ## Functions
 
 ### createSwap
 
-▸ `Const`**createSwap**<LeftTag, RightTag\>(`lefthandpredicate`: [*Predicate*](predicate.md#predicate)<[*Tagged*](../README.md#tagged)<*unknown*, LeftTag | RightTag\>\>, `leftcreator`: [*TaggedFactory*](../README.md#taggedfactory)<LeftTag\>, `rightcreator`: [*TaggedFactory*](../README.md#taggedfactory)<RightTag\>): *function*
+▸ `Const`**createSwap**<LeftTag, RightTag\>(`lefthandpredicate`: [*Predicate*](predicate.md#predicate)<[*Tagged*](../README.md#tagged)<*unknown*, LeftTag \| RightTag\>\>, `leftcreator`: [*TaggedFactory*](../README.md#taggedfactory)<LeftTag\>, `rightcreator`: [*TaggedFactory*](../README.md#taggedfactory)<RightTag\>): *function*
 
 #### Type parameters:
 
@@ -46,13 +46,13 @@ Name | Type |
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`lefthandpredicate` | [*Predicate*](predicate.md#predicate)<[*Tagged*](../README.md#tagged)<*unknown*, LeftTag | RightTag\>\> |  |
+`lefthandpredicate` | [*Predicate*](predicate.md#predicate)<[*Tagged*](../README.md#tagged)<*unknown*, LeftTag \| RightTag\>\> |  |
 `leftcreator` | [*TaggedFactory*](../README.md#taggedfactory)<LeftTag\> |  |
 `rightcreator` | [*TaggedFactory*](../README.md#taggedfactory)<RightTag\> |     |
 
 **Returns:** *function*
 
-Defined in: [foldables.ts:30](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/foldables.ts#L30)
+Defined in: [foldables.ts:30](https://github.com/OctoD/tiinvo/blob/16ea627/src/foldables.ts#L30)
 
 ___
 
@@ -76,4 +76,4 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [foldables.ts:13](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/foldables.ts#L13)
+Defined in: [foldables.ts:13](https://github.com/OctoD/tiinvo/blob/16ea627/src/foldables.ts#L13)

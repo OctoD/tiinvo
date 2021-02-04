@@ -18,7 +18,7 @@
 
 ### MapFn
 
-Ƭ **MapFn**<T, U\>: T *extends* *null* | *undefined* ? () => U : (`arg`: T) => U
+Ƭ **MapFn**<T, U\>: T *extends* *null* \| *undefined* ? () => U : (`arg`: T) => U
 
 #### Type parameters:
 
@@ -27,7 +27,7 @@ Name |
 `T` |
 `U` |
 
-Defined in: [mappables.ts:5](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/mappables.ts#L5)
+Defined in: [mappables.ts:5](https://github.com/OctoD/tiinvo/blob/16ea627/src/mappables.ts#L5)
 
 ## Functions
 
@@ -51,7 +51,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [mappables.ts:15](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/mappables.ts#L15)
+Defined in: [mappables.ts:15](https://github.com/OctoD/tiinvo/blob/16ea627/src/mappables.ts#L15)
 
 ___
 
@@ -75,7 +75,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [mappables.ts:34](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/mappables.ts#L34)
+Defined in: [mappables.ts:34](https://github.com/OctoD/tiinvo/blob/16ea627/src/mappables.ts#L34)
 
 ___
 
@@ -99,4 +99,4 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [mappables.ts:53](https://github.com/OctoD/tiinvo/blob/0d77ce7/src/mappables.ts#L53)
+Defined in: [mappables.ts:53](https://github.com/OctoD/tiinvo/blob/16ea627/src/mappables.ts#L53)

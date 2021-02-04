@@ -1,4 +1,4 @@
-import { check, Fn1 } from "./applicative";
+import { ArgsOf, check, Fn1 } from "./applicative";
 import { createExpect } from "./assertables";
 import { totaggedFn } from "./cast";
 import { createderivefromfunction } from "./derivables";
@@ -65,6 +65,8 @@ export type OkFactory = <T>(arg: T) => Ok<T>;
  *
  */
 export type ResultFactory = <T>(arg: T) => Result<T>;
+
+export type InferredResultFactory<T> = (arg: T) => Result<T>;
 
 //#endregion
 
@@ -140,11 +142,11 @@ export const fromfn = (totaggedFn(result as any) as unknown) as <T>(
 //#region assertables
 
 /**
- *
+ * Throws an error if `Result<T>` is `Err`
  */
 export const expect = createExpect<Result>(isOk);
 /**
- *
+ * Throws an error if `Result<T>` is `Ok<T>`
  */
 export const unexpect = createExpect<Result>(isErr);
 
@@ -153,7 +155,26 @@ export const unexpect = createExpect<Result>(isErr);
 //#region filterables
 
 /**
+ * Filters an `Ok<T>` with a given predicate. If the check
+ * does not satisfy the predicate, it will map the `Ok<T>` to
+ * an `Err`.
  *
+ * @example
+ *
+ * ```ts
+ * import { result, pipe } from 'tiinvo';
+ *
+ * const iseven = (arg: number) => arg % 2 === 0;
+ *
+ * const filterfn = pipe(
+ *    result.result as result.InferredResultFactory<number>,
+ *    result.filter(iseven),
+ *    result.isOk
+ * );
+ *
+ * filterfn(4) // true
+ * filterfn(3) // false
+ * ```
  */
 export const filter = createFilter<Result, ResultTag>(
   isOk,
@@ -162,7 +183,26 @@ export const filter = createFilter<Result, ResultTag>(
 );
 
 /**
+ * Filters an `Ok<T>` with a given predicate. If the check
+ * does not satisfy the predicate, it will return the fallback
+ * `Result<T>`.
  *
+ * @example
+ *
+ * ```ts
+ * import { result, pipe } from 'tiinvo';
+ *
+ * const iseven = (arg: number) => arg % 2 === 0;
+ *
+ * const filterfn = pipe(
+ *    result.result as result.InferredResultFactory<number>,
+ *    result.filterOr(result.ok(0), iseven),
+ *    result.unwrap
+ * );
+ *
+ * filterfn(4) // 4
+ * filterfn(3) // 0
+ * ```
  */
 export const filterOr = createFilterOr<Result, ResultTag>(
   isOk,
@@ -175,6 +215,24 @@ export const filterOr = createFilterOr<Result, ResultTag>(
 
 /**
  * Maps a value `T` if `Ok`
+ *
+ * @example
+ *
+ * ```ts
+ * import { result, pipe } from 'tiinvo';
+ *
+ * const evenorerror = (arg: number) => arg % 2 === 0 ? arg : new Error('argument must be an even number');
+ * const double = (arg: number) => arg * 2;
+ *
+ * const handleerror = pipe(
+ *  result.fromfunction(evenorerror),
+ *  result.map(double),
+ *  result.unwrapOr(0)
+ * );
+ *
+ * handleerror(2) // 4
+ * handleerror(1) // 0
+ * ```
  */
 export const map = createMap<Result, ResultTag>(
   isOk,
@@ -183,6 +241,24 @@ export const map = createMap<Result, ResultTag>(
 
 /**
  * Maps a value `T` if `Ok`, otherwise maps `Err` to `fallback`
+ *
+ * @example
+ *
+ * ```ts
+ * import { result, pipe } from 'tiinvo';
+ *
+ * const evenorerror = (arg: number) => arg % 2 === 0 ? arg : new Error('argument must be an even number');
+ * const double = (arg: number) => arg * 2;
+ *
+ * const handleerror = pipe(
+ *  result.fromfunction(evenorerror),
+ *  result.mapOr(result.ok(0), double),
+ *  result.unwrap
+ * );
+ *
+ * handleerror(2) // 4
+ * handleerror(1) // 0
+ * ```
  */
 export const mapOr = createMapOr<Result, ResultTag>(
   isOk,
@@ -191,6 +267,24 @@ export const mapOr = createMapOr<Result, ResultTag>(
 
 /**
  * Maps a value `T` if `Ok`, otherwise calls `Fn` and maps `Err` to `ReturnValue<Fn>`
+ *
+ * @example
+ * ```ts
+ * import { result, pipe, fallback } from 'tiinvo';
+ *
+ * const evenorerror = (arg: number) => arg % 2 === 0 ? arg : new Error('argument must be an even number');
+ * const double = (arg: number) => arg * 2;
+ * const elsefn = fallback(0);
+ *
+ * const handleerror = pipe(
+ *  result.fromfunction(evenorerror),
+ *  result.mapOrElse(elsefn, double),
+ *  result.unwrap
+ * );
+ *
+ * handleerror(2) // 4
+ * handleerror(1) // 0
+ * ```
  */
 export const mapOrElse = createMapOrElse<Result, ResultTag>(
   isOk,
