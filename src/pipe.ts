@@ -32,6 +32,7 @@ type Pipe = <F extends [(arg: any) => any, ...Array<(arg: any) => any>]>(
 ) => (arg: ArgType<F[0]>) => ReturnType<F[LastIndexOf<F>]>;
 
 /**
+ * Creates a pipeline of synchronous functions
  *
  * @example
  * ```ts

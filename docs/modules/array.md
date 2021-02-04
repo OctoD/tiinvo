@@ -55,7 +55,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:15](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L15)
+Defined in: [array.ts:15](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L15)
 
 ___
 
@@ -81,7 +81,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:48](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L48)
+Defined in: [array.ts:48](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L48)
 
 ___
 
@@ -113,7 +113,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:30](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L30)
+Defined in: [array.ts:30](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L30)
 
 ___
 
@@ -144,7 +144,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:67](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L67)
+Defined in: [array.ts:67](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L67)
 
 ___
 
@@ -176,7 +176,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:86](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L86)
+Defined in: [array.ts:86](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L86)
 
 ___
 
@@ -195,7 +195,7 @@ flatnummatris([[1, 2], [3, 4]]) // [1, 2, 3, 4];
 
 **Returns:** *function*
 
-Defined in: [array.ts:102](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L102)
+Defined in: [array.ts:102](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L102)
 
 ___
 
@@ -214,7 +214,7 @@ getfirst()([100, 200]) // 100
 
 **Returns:** *function*
 
-Defined in: [array.ts:116](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L116)
+Defined in: [array.ts:116](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L116)
 
 ___
 
@@ -245,7 +245,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:131](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L131)
+Defined in: [array.ts:131](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L131)
 
 ___
 
@@ -264,7 +264,7 @@ getfirst()([100, 200]) // 100
 
 **Returns:** *function*
 
-Defined in: [array.ts:145](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L145)
+Defined in: [array.ts:145](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L145)
 
 ___
 
@@ -296,7 +296,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:164](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L164)
+Defined in: [array.ts:164](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L164)
 
 ___
 
@@ -329,7 +329,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:194](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L194)
+Defined in: [array.ts:194](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L194)
 
 ___
 
@@ -348,7 +348,7 @@ isempty()([1]) // false
 
 **Returns:** *function*
 
-Defined in: [array.ts:178](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L178)
+Defined in: [array.ts:178](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L178)
 
 ___
 
@@ -368,7 +368,7 @@ length()(test) // 4
 
 **Returns:** *function*
 
-Defined in: [array.ts:209](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L209)
+Defined in: [array.ts:209](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L209)
 
 ___
 
@@ -407,7 +407,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:232](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L232)
+Defined in: [array.ts:232](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L232)
 
 ___
 
@@ -425,7 +425,7 @@ arr.includes(random()(arr)) // true
 
 **Returns:** *function*
 
-Defined in: [array.ts:246](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L246)
+Defined in: [array.ts:246](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L246)
 
 ___
 
@@ -459,7 +459,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:265](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L265)
+Defined in: [array.ts:265](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L265)
 
 ___
 
@@ -493,7 +493,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:286](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L286)
+Defined in: [array.ts:286](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L286)
 
 ___
 
@@ -511,7 +511,7 @@ reverse()([1, 2, 3]) // [3, 2, 1]
 
 **Returns:** *function*
 
-Defined in: [array.ts:301](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L301)
+Defined in: [array.ts:301](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L301)
 
 ___
 
@@ -527,7 +527,7 @@ shuffle()([1, 2, 3]) // could be [3, 2, 1] or [2, 1, 3] or [1, 3, 2] or...
 
 **Returns:** *function*
 
-Defined in: [array.ts:312](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L312)
+Defined in: [array.ts:312](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L312)
 
 ___
 
@@ -559,7 +559,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:335](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L335)
+Defined in: [array.ts:335](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L335)
 
 ___
 
@@ -593,7 +593,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:353](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L353)
+Defined in: [array.ts:353](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L353)
 
 ___
 
@@ -620,7 +620,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:372](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L372)
+Defined in: [array.ts:372](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L372)
 
 ___
 
@@ -647,7 +647,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [array.ts:390](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L390)
+Defined in: [array.ts:390](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L390)
 
 ___
 
@@ -668,4 +668,4 @@ Name |
 
 **Returns:** *function*
 
-Defined in: [array.ts:400](https://github.com/OctoD/tiinvo/blob/16ea627/src/array.ts#L400)
+Defined in: [array.ts:400](https://github.com/OctoD/tiinvo/blob/63ad268/src/array.ts#L400)

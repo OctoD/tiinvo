@@ -2,6 +2,7 @@ export * from "./applicative";
 export * from "./cast";
 export * from "./conditionals";
 export * from "./pipe";
+export * from "./pipe-async";
 export * from "./tagged-type";
 export * from "./trycatch";
 export * from "./typeguards";
