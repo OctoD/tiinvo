@@ -53,6 +53,78 @@ export const fromvalue = <T>(value: T) => (predicate: Predicate<T>) =>
   predicate(value);
 
 /**
+ * Returns a comparison function
+ *
+ * @example
+ * ```ts
+ * import { predicate } from 'tiinvo';
+ *
+ * const greaterthan0 = predicate.greaterthan(0);
+ * greaterthan0(10) // true
+ * greaterthan0(0)  // false
+ * greaterthan0(-1) // false
+ * ```
+ *
+ * @param comparisonvalue
+ */
+export const greaterthan = <T>(comparisonvalue: T) => (othervalue: T) =>
+  othervalue > comparisonvalue;
+
+/**
+ * Returns a comparison function
+ *
+ * @example
+ * ```ts
+ * import { predicate } from 'tiinvo';
+ *
+ * const greaterequalthan0 = predicate.greaterorequalthan(0);
+ * greaterequalthan0(10) // true
+ * greaterequalthan0(0)  // true
+ * greaterequalthan0(-1) // false
+ * ```
+ *
+ * @param comparisonvalue
+ */
+export const greaterorequalthan = <T>(comparisonvalue: T) => (othervalue: T) =>
+  othervalue >= comparisonvalue;
+
+/**
+ * Returns a comparison function
+ *
+ * @example
+ * ```ts
+ * import { predicate } from 'tiinvo';
+ *
+ * const lessthan0 = predicate.lessthan(0);
+ * lessthan0(10) // false
+ * lessthan0(0)  // false
+ * lessthan0(-1) // true
+ * ```
+ *
+ * @param comparisonvalue
+ */
+export const lessthan = <T>(comparisonvalue: T) => (othervalue: T) =>
+  othervalue < comparisonvalue;
+
+/**
+ * Returns a comparison function
+ *
+ * @example
+ * ```ts
+ * import { predicate } from 'tiinvo';
+ *
+ * const lessequalthan0 = predicate.lessorequalthan(0);
+ * lessequalthan0(10) // false
+ * lessequalthan0(0)  // true
+ * lessequalthan0(-1) // true
+ * ```
+ *
+ * @param comparisonvalue
+ */
+export const lessorequalthan = <T>(comparisonvalue: T) => (othervalue: T) =>
+  othervalue <= comparisonvalue;
+
+/**
  * Returns a function which checks if every value T passes a given predicate
  *
  * @example
