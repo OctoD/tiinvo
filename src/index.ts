@@ -1,6 +1,7 @@
 export * from "./applicative";
 export * from "./cast";
 export * from "./conditionals";
+export * from "./mediator";
 export * from "./pipe";
 export * from "./pipe-async";
 export * from "./push-sub";
