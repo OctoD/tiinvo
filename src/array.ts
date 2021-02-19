@@ -1,4 +1,4 @@
-import { ArgsOf, Fn1, FnBase } from './applicative';
+import { Fn1 } from './applicative';
 
 /**
  * Gets an element in an array at a given index.
