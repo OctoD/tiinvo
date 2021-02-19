@@ -1,3 +1,5 @@
+import { ArgsOf, Fn1, FnBase } from './applicative';
+
 /**
  * Gets an element in an array at a given index.
  * Returns undefined if nothing is found at that index.
@@ -102,6 +104,38 @@ export const find = <T>(
 export const flattern = (): (<T>(arg: T[][]) => T[]) => (arg) =>
   arg.reduce((accumulator, nextarr) => [...accumulator, ...nextarr], []);
 
+/**
+ * Takes a list of functions, then call them passing the argument `Input` and returning an array of `Output`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { array, pipe } from 'tiinvo';
+ * 
+ * const SHIPPING = 5;
+ * const VAT = 20;
+ * const keepprice = (price: number) => price;
+ * const vat = (price: number) => (price / 100) * VAT;
+ * const shipping = (price: number) => price > 200 ? 0 : SHIPPING;
+ * 
+ * const total = pipe(
+ *    array.fromfunctions(keepprice, vat, shipping),
+ *    array.reduce(0, (sum: number, next: number) => sum + next)
+ * );
+ * 
+ * const price = 100;
+ * 
+ * total(price) // 125
+ * total(price) === vat(price) + shipping(price) + price
+ * ```
+ * 
+ * @template Input Function Input type
+ * @template Output Function Output type
+ * @param fns A list of functions
+ */
+export const fromfunctions = <Input, Output>(... fns: Fn1<Input, Output>[]): (arg: Input) => Output[] =>
+  arg => fns.map(fn => fn(arg));
+  
 /**
  * Gets first element of an array.
  * Returns undefined if the array is empty.

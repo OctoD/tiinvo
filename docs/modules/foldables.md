@@ -27,7 +27,7 @@ Name | Type |
 `R` | - |
 `Tagname` | *string* |
 
-Defined in: [foldables.ts:4](https://github.com/OctoD/tiinvo/blob/dab53f7/src/foldables.ts#L4)
+Defined in: [foldables.ts:4](https://github.com/OctoD/tiinvo/blob/65f10a8/src/foldables.ts#L4)
 
 ## Functions
 
@@ -52,7 +52,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [foldables.ts:30](https://github.com/OctoD/tiinvo/blob/dab53f7/src/foldables.ts#L30)
+Defined in: [foldables.ts:30](https://github.com/OctoD/tiinvo/blob/65f10a8/src/foldables.ts#L30)
 
 ___
 
@@ -76,4 +76,4 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [foldables.ts:13](https://github.com/OctoD/tiinvo/blob/dab53f7/src/foldables.ts#L13)
+Defined in: [foldables.ts:13](https://github.com/OctoD/tiinvo/blob/65f10a8/src/foldables.ts#L13)

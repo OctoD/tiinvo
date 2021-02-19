@@ -230,4 +230,23 @@ describe(`array`, () => {
 
     expect(testfn(test)).toBe(expected);
   });
+
+  it(`tests fromfunctions example`, () => {
+    const SHIPPING = 5;
+    const VAT = 20;
+    const keepprice = (price: number) => price;
+    const vat = (price: number) => (price / 100) * VAT;
+    const shipping = (price: number) => price > 200 ? 0 : SHIPPING;
+    
+    const total = pipe(
+       array.fromfunctions(keepprice, shipping, vat),
+       array.reduce(0, (sum: number, next: number) => sum + next)
+    );
+    
+    const price = 100;
+    const expected = 125;
+    
+    expect(total(price)).toBe(expected);
+    expect(total(price) === vat(price) + shipping(price) + price).toBeTruthy();
+  });
 });

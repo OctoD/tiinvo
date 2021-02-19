@@ -24,7 +24,7 @@ Name |
 ------ |
 `T` |
 
-Defined in: [assertables.ts:4](https://github.com/OctoD/tiinvo/blob/dab53f7/src/assertables.ts#L4)
+Defined in: [assertables.ts:4](https://github.com/OctoD/tiinvo/blob/65f10a8/src/assertables.ts#L4)
 
 ## Functions
 
@@ -66,4 +66,4 @@ Name | Type |
 
 **Returns:** [*Expect*](assertables.md#expect)<T\>
 
-Defined in: [assertables.ts:31](https://github.com/OctoD/tiinvo/blob/dab53f7/src/assertables.ts#L31)
+Defined in: [assertables.ts:31](https://github.com/OctoD/tiinvo/blob/65f10a8/src/assertables.ts#L31)

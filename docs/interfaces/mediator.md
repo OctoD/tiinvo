@@ -20,7 +20,7 @@
 
 • **publish**: <T\>(`topic`: *string*, ...`args`: T) => *void*
 
-Defined in: [mediator.ts:6](https://github.com/OctoD/tiinvo/blob/dab53f7/src/mediator.ts#L6)
+Defined in: [mediator.ts:6](https://github.com/OctoD/tiinvo/blob/65f10a8/src/mediator.ts#L6)
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **subscribe**: <Fn\>(`topic`: *string*, `fn`: Fn) => [*PushSub*](pushsub.md)<Fn\>
 
-Defined in: [mediator.ts:7](https://github.com/OctoD/tiinvo/blob/dab53f7/src/mediator.ts#L7)
+Defined in: [mediator.ts:7](https://github.com/OctoD/tiinvo/blob/65f10a8/src/mediator.ts#L7)
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **unsubscribe**: (`channel`: *string*) => *void*
 
-Defined in: [mediator.ts:8](https://github.com/OctoD/tiinvo/blob/dab53f7/src/mediator.ts#L8)
+Defined in: [mediator.ts:8](https://github.com/OctoD/tiinvo/blob/65f10a8/src/mediator.ts#L8)
