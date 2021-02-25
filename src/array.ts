@@ -213,6 +213,20 @@ export const isempty = (): ((arg: unknown[]) => boolean) => (arg) =>
   arg.length === 0;
 
 /**
+ * Returns true if an array is not empty
+ * @example
+ *
+ * ```ts
+ * isempty()([]) // false
+ * isempty()([1]) // true
+ * ```
+ *
+ * @returns
+ */
+export const isnotempty = (): ((arg: unknown[]) => boolean) => (arg) =>
+  arg.length !== 0;
+
+/**
  * Checks if an element is inside an array
  * @example
  *

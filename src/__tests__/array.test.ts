@@ -104,6 +104,11 @@ describe(`array`, () => {
     expect(array.isempty()(testarray)).toBeFalsy();
   });
 
+  it(`isnotempty`, () => {
+    expect(array.isnotempty()([])).toBeFalsy();
+    expect(array.isnotempty()(testarray)).toBeTruthy();
+  });
+
   it(`length`, () => {
     expect(array.length()([])).toBe(0);
     expect(array.length()(testarray)).toBe(5);

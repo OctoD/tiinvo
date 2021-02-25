@@ -25,7 +25,7 @@ Represents a value which is falsy
 
 • `Readonly` **\_\_tag**: *nothing*
 
-Defined in: [tagged-type.ts:15](https://github.com/OctoD/tiinvo/blob/65f10a8/src/tagged-type.ts#L15)
+Defined in: [tagged-type.ts:15](https://github.com/OctoD/tiinvo/blob/0105242/src/tagged-type.ts#L15)
 
 ___
 
@@ -33,4 +33,4 @@ ___
 
 • `Readonly` **value**: *unknown*
 
-Defined in: [tagged-type.ts:16](https://github.com/OctoD/tiinvo/blob/65f10a8/src/tagged-type.ts#L16)
+Defined in: [tagged-type.ts:16](https://github.com/OctoD/tiinvo/blob/0105242/src/tagged-type.ts#L16)
