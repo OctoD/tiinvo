@@ -4,6 +4,9 @@ __tests__
 # benchmarks dir
 benchmarks 
 
+# docs dir
+docs
+
 # source dir
 src
 
