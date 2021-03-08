@@ -162,7 +162,7 @@ export const getfirst = (): (<T>(arg: T[]) => T | undefined) => (arg) => arg[0];
  * @param {T} or
  * @returns
  */
-export const getfirstOr = <T>(or: T): ((arg: T[]) => T | undefined) => (arg) =>
+export const getfirstOr = <T>(or: T): ((arg: T[]) => T) => (arg) =>
   arg[0] ?? or;
 
 /**
@@ -195,7 +195,7 @@ export const getlast = (): (<T>(arg: T[]) => T | undefined) => (arg) =>
  * @param {T} or
  * @returns
  */
-export const getlastOr = <T>(or: T): ((arg: T[]) => T | undefined) => (arg) =>
+export const getlastOr = <T>(or: T): ((arg: T[]) => T) => (arg) =>
   arg[arg.length - 1] ?? or;
 
 /**
