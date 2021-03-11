@@ -77,6 +77,14 @@ export const check = (condition: boolean, errormessage: string) => <T>(
 export const fallback = <T>(arg: T) => () => arg;
 
 /**
+ * A function which passes the given argument.
+ * 
+ * @param arg 
+ * @returns 
+ */
+export const pass = <T>(arg: T): T => arg;
+
+/**
  * Throws an error with the given message
  *
  * @template E

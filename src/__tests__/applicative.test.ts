@@ -1,4 +1,4 @@
-import { check, bind, fallback, panic } from "../applicative";
+import { check, bind, fallback, panic, pass } from "../applicative";
 
 describe("applicative", () => {
   it("bind", () => {
@@ -25,4 +25,10 @@ describe("applicative", () => {
     expect(() => panic("boom")).toThrow();
     expect(() => panic("boom", TypeError)).toThrowError(TypeError);
   });
+
+  it('pass', () => {
+    const value = 1000
+
+    expect(pass(value)).toBe(value);
+  })
 });
