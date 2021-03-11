@@ -27,9 +27,12 @@ type Tail<T extends any[]> = ((...t: T) => void) extends (
   ? U
   : never;
 
-type Pipe = <F extends [(arg: any) => any, ...Array<(arg: any) => any>]>(
+type Pipe = <F extends [((arg: any) => any | (() => any)), ...Array<(arg: any) => any>]>(
   ...f: F & AsChain<F>
-) => (arg: ArgType<F[0]>) => ReturnType<F[LastIndexOf<F>]>;
+) => 
+F[0] extends () => any ? () => ReturnType<F[LastIndexOf<F>]> : F[0] extends (arg: infer U) => any ? (arg: U) => ReturnType<F[LastIndexOf<F>]> : never;
+
+// (arg: ArgType<F[0]>) => ReturnType<F[LastIndexOf<F>]>;
 
 /**
  * Creates a pipeline of synchronous functions
@@ -48,5 +51,5 @@ type Pipe = <F extends [(arg: any) => any, ...Array<(arg: any) => any>]>(
  */
 export const pipe: Pipe = (...args) => {
   const [first, ...othersFns] = args;
-  return (arg) => othersFns.reduce((retval, fn) => fn(retval), first(arg));
+  return ((arg: unknown) => othersFns.reduce((retval, fn) => fn(retval), first(arg))) as any;
 };

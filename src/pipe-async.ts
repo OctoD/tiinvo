@@ -30,10 +30,11 @@ type Tail<T extends any[]> = ((...t: T) => void) extends (
   : never;
 
 type PipeAsync = <
-  F extends [(arg: any) => Promise<any>, ...Array<(arg: any) => Promise<any>>]
+  F extends [((arg: any) => Promise<any> | (() => Promise<any>)), ...Array<(arg: any) => Promise<any>>]
 >(
   ...f: F & AsChain<F>
-) => (arg: ArgType<F[0]>) => Promise<ReturnType<F[LastIndexOf<F>]>>;
+) => 
+F[0] extends () => any ? () => ReturnType<F[LastIndexOf<F>]> : F[0] extends (arg: infer U) => any ? (arg: U) => ReturnType<F[LastIndexOf<F>]> : never;
 
 /**
  * Creates a pipeline of asynchronous functions.
@@ -73,7 +74,7 @@ type PipeAsync = <
  */
 export const pipeasync: PipeAsync = (...args) => {
   const [first, ...othersFns] = args;
-  return async (arg) => {
+  return (async (arg: any) => {
     const firstvalue = await first(arg);
     let latestvalue = firstvalue;
 
@@ -82,5 +83,5 @@ export const pipeasync: PipeAsync = (...args) => {
     }
 
     return latestvalue;
-  };
+  }) as any;
 };
