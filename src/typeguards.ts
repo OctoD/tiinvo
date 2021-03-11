@@ -306,8 +306,69 @@ export type TypeguardsFromStruct<T> = {
 };
 
 /**
-cle * Creates a typeguard representing a complex data structure. It is useful
+ * Creates a Typeguard which checks if a given object is implementing a given interface.
+ * @since 2.10.0
+ * @example
+ * 
+ * ```ts
+ * import { implementing } from 'tiinvo';
+ * 
+ * interface User {
+ *    name: string;
+ *    mail: string;
+ *    age: number;
+ *    status?: string;
+ * }
+ * 
+ * const isUser = implementing<User>({
+ *    name: isstring,
+ *    mail: isstring,
+ *    age: isnumber,
+ *    status: optional(isstring),
+ * });
+ * 
+ * isUser({}) // false
+ * isUser({ age: 100 }) // false
+ * isUser({ age: 100, name: 'foo' }) // false
+ * isUser({ age: 100, name: 'foo', mail: 'hello_at_world.com' }) // true
+ * isUser({ age: '100', name: 'foo', mail: 'hello_at_world.com' }) // false
+ * ```
+ * 
+ * @param typeguard 
+ * @returns 
+ */
+export const implementing = <TG extends any>(
+  typeguard: TypeguardsFromStruct<TG>
+) => (value: unknown): value is TG => {
+  if (!isindexable(typeguard) || !isindexable(value)) {
+    return false;
+  }
+
+  const keys = Object.keys(typeguard);
+
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    const currentvalue = value[key];
+    const currenttg = typeguard[key as keyof typeof typeguard];
+    const case1 =
+      isindexable(currenttg) && implementing(currenttg as any)(currentvalue);
+    const case2 = isfunction(currenttg) && currenttg(currentvalue);
+
+    if (case1 || case2) {
+      continue;
+    }
+
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * Creates a typeguard representing a complex data structure. It is useful
  * for object validation.
+ * 
+ * @deprecated use `implementing` instead
  * 
  * @example
  * ```ts
@@ -336,40 +397,30 @@ cle * Creates a typeguard representing a complex data structure. It is useful
  * @template TG
  * @param {TG} typeguard
  */
-export const createStructOf = <TG extends any>(
-  typeguard: TypeguardsFromStruct<TG>
-) => (value: unknown): value is TG => {
-  if (!isindexable(typeguard) || !isindexable(value)) {
-    return false;
-  }
-
-  const keys = Object.keys(typeguard);
-
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i];
-    const currentvalue = value[key];
-    const currenttg = typeguard[key as keyof typeof typeguard];
-    const case1 =
-      isindexable(currenttg) && createStructOf(currenttg as any)(currentvalue);
-    const case2 = isfunction(currenttg) && currenttg(currentvalue);
-
-    if (case1 || case2) {
-      continue;
-    }
-
-    return false;
-  }
-
-  return true;
-};
+export const createStructOf = implementing;
 
 /**
- *
+ * Creates a typeguard which checks if an array is a tuple 
+ * corresponding the given types
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { istuple, isstring, isnumber } from 'tiinvo';
+ * 
+ * const tg = istuple(isstring, isstring, isnumber);
+ * 
+ * tg([10, 20, 30])         // false
+ * tg(['10', 20, 30])       // false
+ * tg(['10', '20', 30])     // true
+ * tg(['10', '20', 30, 50]) // false
+ * 
+ * ```
  *
  * @template TG
  * @param {...TG} typeguards
  */
-export const createTupleOf = <TG extends Typeguard<any>[]>(
+export const istuple = <TG extends Typeguard<any>[]>(
   ...typeguards: TG
 ) => {
   const tlength = haslengthof(typeguards.length);
@@ -379,6 +430,14 @@ export const createTupleOf = <TG extends Typeguard<any>[]>(
     tlength(value) &&
     value.every((arg, index) => typeguards[index] && typeguards[index](arg));
 };
+
+/**
+ * @deprecated use `istuple` instead
+ * @example
+ * @template TG
+ * @param {...TG} typeguards
+ */
+export const createTupleOf = istuple;
 
 //#endregion
 

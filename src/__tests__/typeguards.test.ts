@@ -75,8 +75,8 @@ describe("typeguards", () => {
     expect(stringarray(t3)).toBeFalsy();
   });
 
-  it("createtupleof", () => {
-    const test = tg.createTupleOf(
+  it("istuple", () => {
+    const test = tg.istuple(
       tg.isstring,
       tg.isnumber,
       tg.isboolean,
@@ -91,23 +91,23 @@ describe("typeguards", () => {
     expect(test([1, "", 0, !0])).toBeFalsy();
   });
 
-  it("createstructof", () => {
+  it("implementing", () => {
     interface User {
       name: string;
       email: string;
     }
 
-    const subscribeduser = tg.createStructOf<User>({
+    const subscribeduser = tg.implementing<User>({
       name: tg.isstring,
       email: tg.isstring,
     });
 
-    const userdata = tg.createStructOf({
+    const userdata = tg.implementing({
       subscribeduser,
       age: tg.anyof(tg.isnull, tg.isnumber, tg.isundefined),
     });
 
-    const test2 = tg.createStructOf({
+    const test2 = tg.implementing({
       foo: tg.isnumber,
       bar: {
         baz: tg.isnumber,
