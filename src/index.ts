@@ -17,6 +17,7 @@ import * as filterables from "./filterables";
 import * as foldables from "./foldables";
 import * as mappables from "./mappables";
 import * as maybe from "./maybe";
+import * as obj from "./obj";
 import * as option from "./option";
 import * as predicate from "./predicate";
 import * as result from "./result";
@@ -31,6 +32,7 @@ export {
   foldables,
   mappables,
   maybe,
+  obj,
   option,
   predicate,
   result,
