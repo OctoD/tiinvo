@@ -17,10 +17,12 @@ import * as filterables from "./filterables";
 import * as foldables from "./foldables";
 import * as mappables from "./mappables";
 import * as maybe from "./maybe";
+import * as num from "./num";
 import * as obj from "./obj";
 import * as option from "./option";
 import * as predicate from "./predicate";
 import * as result from "./result";
+import * as str from "./str";
 import * as unwrappables from "./unwrappables";
 
 export {
@@ -32,9 +34,11 @@ export {
   foldables,
   mappables,
   maybe,
+  num,
   obj,
   option,
   predicate,
   result,
+  str,
   unwrappables,
 };

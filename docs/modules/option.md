@@ -47,7 +47,7 @@
 
 Ƭ **NoneFactory**: () => [*None*](../interfaces/option.none.md)
 
-Defined in: [option.ts:51](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L51)
+Defined in: [src/option.ts:51](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L51)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 Ƭ **Nonetag**: *typeof* NONETAG
 
-Defined in: [option.ts:23](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L23)
+Defined in: [src/option.ts:23](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L23)
 
 ___
 
@@ -69,7 +69,7 @@ Name | Default |
 ------ | ------ |
 `T` | *unknown* |
 
-Defined in: [option.ts:46](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L46)
+Defined in: [src/option.ts:46](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L46)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 Ƭ **OptionFactory**: <T\>(`value`: T) => [*Option*](option.md#option)<T\>
 
-Defined in: [option.ts:59](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L59)
+Defined in: [src/option.ts:59](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L59)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 Ƭ **Optiontag**: [*Nonetag*](option.md#nonetag) \| [*Sometag*](option.md#sometag)
 
-Defined in: [option.ts:31](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L31)
+Defined in: [src/option.ts:31](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L31)
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 Ƭ **SomeFactory**: <T\>(`value`: T) => [*Some*](../interfaces/option.some.md)
 
-Defined in: [option.ts:55](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L55)
+Defined in: [src/option.ts:55](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L55)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 Ƭ **Sometag**: *typeof* SOMETAG
 
-Defined in: [option.ts:27](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L27)
+Defined in: [src/option.ts:27](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L27)
 
 ## Functions
 
@@ -117,7 +117,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:97](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L97)
+Defined in: [src/option.ts:97](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L97)
 
 ___
 
@@ -139,7 +139,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:139](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L139)
+Defined in: [src/option.ts:139](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L139)
 
 ___
 
@@ -162,7 +162,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:143](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L143)
+Defined in: [src/option.ts:143](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L143)
 
 ___
 
@@ -187,7 +187,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:130](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L130)
+Defined in: [src/option.ts:130](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L130)
 
 ___
 
@@ -212,7 +212,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:220](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L220)
+Defined in: [src/option.ts:220](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L220)
 
 ___
 
@@ -228,7 +228,7 @@ Name | Type |
 
 **Returns:** arg is None
 
-Defined in: [option.ts:76](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L76)
+Defined in: [src/option.ts:76](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L76)
 
 ___
 
@@ -244,7 +244,7 @@ Name | Type |
 
 **Returns:** arg is Option<unknown\>
 
-Defined in: [option.ts:72](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L72)
+Defined in: [src/option.ts:72](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L72)
 
 ___
 
@@ -266,7 +266,7 @@ Name | Type |
 
 **Returns:** [*Typeguard*](../README.md#typeguard)<[*Option*](option.md#option)<T\>\>
 
-Defined in: [option.ts:84](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L84)
+Defined in: [src/option.ts:84](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L84)
 
 ___
 
@@ -282,7 +282,7 @@ Name | Type |
 
 **Returns:** arg is Some<unknown\>
 
-Defined in: [option.ts:80](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L80)
+Defined in: [src/option.ts:80](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L80)
 
 ___
 
@@ -305,7 +305,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:152](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L152)
+Defined in: [src/option.ts:152](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L152)
 
 ___
 
@@ -329,7 +329,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:156](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L156)
+Defined in: [src/option.ts:156](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L156)
 
 ___
 
@@ -353,7 +353,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:160](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L160)
+Defined in: [src/option.ts:160](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L160)
 
 ___
 
@@ -363,7 +363,7 @@ ___
 
 **Returns:** [*None*](../interfaces/option.none.md)
 
-Defined in: [option.ts:110](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L110)
+Defined in: [src/option.ts:110](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L110)
 
 ___
 
@@ -385,7 +385,7 @@ Name | Type |
 
 **Returns:** [*Option*](option.md#option)<*NonNullable*<T\>\>
 
-Defined in: [option.ts:124](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L124)
+Defined in: [src/option.ts:124](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L124)
 
 ___
 
@@ -407,7 +407,7 @@ Name | Type |
 
 **Returns:** [*Some*](../interfaces/option.some.md)<*NonNullable*<T\>\>
 
-Defined in: [option.ts:115](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L115)
+Defined in: [src/option.ts:115](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L115)
 
 ___
 
@@ -423,7 +423,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:101](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L101)
+Defined in: [src/option.ts:101](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L101)
 
 ___
 
@@ -457,7 +457,7 @@ Name | Type |
 
 **Returns:** Arg *extends* [*Tagged*](../README.md#tagged)<U, *none* \| *some*\> ? U : *never*
 
-Defined in: [option.ts:179](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L179)
+Defined in: [src/option.ts:179](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L179)
 
 ___
 
@@ -491,7 +491,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:197](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L197)
+Defined in: [src/option.ts:197](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L197)
 
 ___
 
@@ -526,4 +526,4 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [option.ts:213](https://github.com/OctoD/tiinvo/blob/0105242/src/option.ts#L213)
+Defined in: [src/option.ts:213](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/option.ts#L213)

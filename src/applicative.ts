@@ -24,8 +24,29 @@ export type FnBase = (...args: any[]) => any;
 
 /**
  * A function which takes one argument
+ * @deprecated use FnUnary
  */
 export type Fn1<FnIn, FnOut> = (arg: FnIn) => FnOut;
+
+/**
+ * Primitives
+ */
+export type Primitives = string | number | object | symbol;
+
+/**
+ * Maps a primitive type method
+ */
+export type PrimitiveMethodMapper<T extends Primitives> = <key extends keyof T>(key: key) => (... args: T[key] extends (... args: infer Args) => any ? Args : never) => (arg: T) => T[key] extends (... args: any) => infer U ? U : never;
+
+//#region arity types
+
+export type FnNullary<T> = () => T;
+export type FnUnary<T, U> = (arg: T) => U;
+export type FnBinary<T, U, W> = (arg1: T, arg2: U) => W;
+export type FnTernary<T, U, W, Z> = (arg1: T, arg2: U, arg3: W) => Z;
+export type FnNary<T extends any[], U> = (... args: T) => U;
+
+//#endregion
 
 /**
  * Binds a function to a null `this`, then returns it
