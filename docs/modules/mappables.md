@@ -27,7 +27,7 @@ Name |
 `T` |
 `U` |
 
-Defined in: [src/mappables.ts:5](https://github.com/OctoD/tiinvo/blob/c824e02/src/mappables.ts#L5)
+Defined in: [src/mappables.ts:5](https://github.com/OctoD/tiinvo/blob/ad52648/src/mappables.ts#L5)
 
 ## Functions
 
@@ -51,7 +51,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/mappables.ts:15](https://github.com/OctoD/tiinvo/blob/c824e02/src/mappables.ts#L15)
+Defined in: [src/mappables.ts:15](https://github.com/OctoD/tiinvo/blob/ad52648/src/mappables.ts#L15)
 
 ___
 
@@ -75,7 +75,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/mappables.ts:34](https://github.com/OctoD/tiinvo/blob/c824e02/src/mappables.ts#L34)
+Defined in: [src/mappables.ts:34](https://github.com/OctoD/tiinvo/blob/ad52648/src/mappables.ts#L34)
 
 ___
 
@@ -99,4 +99,4 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/mappables.ts:53](https://github.com/OctoD/tiinvo/blob/c824e02/src/mappables.ts#L53)
+Defined in: [src/mappables.ts:53](https://github.com/OctoD/tiinvo/blob/ad52648/src/mappables.ts#L53)

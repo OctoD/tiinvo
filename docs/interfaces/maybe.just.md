@@ -31,7 +31,7 @@ Name | Default |
 
 • `Readonly` **\_\_tag**: *just*
 
-Defined in: [src/tagged-type.ts:15](https://github.com/OctoD/tiinvo/blob/c824e02/src/tagged-type.ts#L15)
+Defined in: [src/tagged-type.ts:15](https://github.com/OctoD/tiinvo/blob/ad52648/src/tagged-type.ts#L15)
 
 ___
 
@@ -39,4 +39,4 @@ ___
 
 • `Readonly` **value**: T
 
-Defined in: [src/tagged-type.ts:16](https://github.com/OctoD/tiinvo/blob/c824e02/src/tagged-type.ts#L16)
+Defined in: [src/tagged-type.ts:16](https://github.com/OctoD/tiinvo/blob/ad52648/src/tagged-type.ts#L16)
