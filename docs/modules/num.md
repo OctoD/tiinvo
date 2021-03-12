@@ -49,7 +49,7 @@
 
 Ƭ **NumberBinaryFn**: [*FnBinary*](../README.md#fnbinary)<*number*, *number*, *number*\>
 
-Defined in: src/num.ts:88
+Defined in: [src/num.ts:88](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L88)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 Ƭ **NumberUnaryFn**: [*FnUnary*](../README.md#fnunary)<*number*, [*FnUnary*](../README.md#fnunary)<*number*, *number*\>\>
 
-Defined in: src/num.ts:72
+Defined in: [src/num.ts:72](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L72)
 
 ## Functions
 
@@ -74,7 +74,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: src/num.ts:90
+Defined in: [src/num.ts:90](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L90)
 
 ___
 
@@ -91,7 +91,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: src/num.ts:91
+Defined in: [src/num.ts:91](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L91)
 
 ___
 
@@ -108,7 +108,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: src/num.ts:93
+Defined in: [src/num.ts:93](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L93)
 
 ___
 
@@ -125,7 +125,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: src/num.ts:94
+Defined in: [src/num.ts:94](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L94)
 
 ___
 
@@ -142,7 +142,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: src/num.ts:92
+Defined in: [src/num.ts:92](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L92)
 
 ___
 
@@ -159,7 +159,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: src/num.ts:95
+Defined in: [src/num.ts:95](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L95)
 
 ___
 
@@ -176,7 +176,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: src/num.ts:96
+Defined in: [src/num.ts:96](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L96)
 
 ___
 
@@ -193,7 +193,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: src/num.ts:97
+Defined in: [src/num.ts:97](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L97)
 
 ___
 
@@ -210,7 +210,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: src/num.ts:98
+Defined in: [src/num.ts:98](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L98)
 
 ___
 
@@ -226,7 +226,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: src/num.ts:56
+Defined in: [src/num.ts:56](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L56)
 
 ___
 
@@ -242,7 +242,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: src/num.ts:58
+Defined in: [src/num.ts:58](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L58)
 
 ___
 
@@ -258,7 +258,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: src/num.ts:57
+Defined in: [src/num.ts:57](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L57)
 
 ___
 
@@ -275,7 +275,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: src/num.ts:62
+Defined in: [src/num.ts:62](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L62)
 
 ___
 
@@ -291,7 +291,7 @@ Name | Type |
 
 **Returns:** *boolean*
 
-Defined in: src/num.ts:65
+Defined in: [src/num.ts:65](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L65)
 
 ___
 
@@ -307,7 +307,7 @@ Name | Type |
 
 **Returns:** *boolean*
 
-Defined in: src/num.ts:66
+Defined in: [src/num.ts:66](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L66)
 
 ___
 
@@ -323,7 +323,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: src/num.ts:60
+Defined in: [src/num.ts:60](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L60)
 
 ___
 
@@ -339,7 +339,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: src/num.ts:59
+Defined in: [src/num.ts:59](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L59)
 
 ___
 
@@ -356,7 +356,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: src/num.ts:63
+Defined in: [src/num.ts:63](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L63)
 
 ___
 
@@ -382,7 +382,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: src/num.ts:17
+Defined in: [src/num.ts:17](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L17)
 
 ___
 
@@ -408,7 +408,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: src/num.ts:28
+Defined in: [src/num.ts:28](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L28)
 
 ___
 
@@ -434,7 +434,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: src/num.ts:39
+Defined in: [src/num.ts:39](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L39)
 
 ___
 
@@ -460,7 +460,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: src/num.ts:50
+Defined in: [src/num.ts:50](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L50)
 
 ___
 
@@ -476,7 +476,7 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: src/num.ts:74
+Defined in: [src/num.ts:74](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L74)
 
 ___
 
@@ -492,7 +492,7 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: src/num.ts:75
+Defined in: [src/num.ts:75](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L75)
 
 ___
 
@@ -508,7 +508,7 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: src/num.ts:76
+Defined in: [src/num.ts:76](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L76)
 
 ___
 
@@ -524,7 +524,7 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: src/num.ts:77
+Defined in: [src/num.ts:77](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L77)
 
 ___
 
@@ -540,7 +540,7 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: src/num.ts:78
+Defined in: [src/num.ts:78](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L78)
 
 ___
 
@@ -556,7 +556,7 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: src/num.ts:79
+Defined in: [src/num.ts:79](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L79)
 
 ___
 
@@ -572,7 +572,7 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: src/num.ts:80
+Defined in: [src/num.ts:80](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L80)
 
 ___
 
@@ -588,7 +588,7 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: src/num.ts:81
+Defined in: [src/num.ts:81](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L81)
 
 ___
 
@@ -604,4 +604,4 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: src/num.ts:82
+Defined in: [src/num.ts:82](https://github.com/OctoD/tiinvo/blob/c824e02/src/num.ts#L82)

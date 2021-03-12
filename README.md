@@ -20,6 +20,7 @@ Functional data structures for TypeScript and JavaScript.
   - [typeguards](#typeguards)
   - [utilities](#utilities)
   - [array functions](#array-functions)
+  - [primitives functions](#primitives-functions)
 - [Docs](#docs)
 - [Contributing](#contributing)
 - [Licence](#licence)
@@ -83,7 +84,7 @@ isevenorlessthan10(13)  // false
 This library also makes complex typeguards building very easy.
 
 ```ts
-import { isstring, isoptional, isnumber, isarrayof, createStructOf } from 'tiinvo';
+import { isstring, isoptional, isnumber, isarrayof, implementing } from 'tiinvo';
 
 export type UserArray = User[];
 
@@ -95,7 +96,7 @@ export interface User {
   nickname?: string;
 }
 
-export const isUser = createStructOf<User>({
+export const isUser = implementing<User>({
   age: isnumber,
   email: isstring,
   firstname: isstring,
@@ -147,21 +148,72 @@ getmultipliedby2(15)          // 30
 
 ## array functions
 
-tiinvo comes with some array functions
+tiinvo comes with some array functions, ideal for pipelines and for tacit programming.
 
 ```ts
-import { array, pipe } from 'tiinvo';
-
-const iseven = (arg: number) => arg % 2 === 0;
-const double = (arg: number) => arg * 2;
+import { array, pipe, num } from 'tiinvo';
 
 const filterevendoubles = pipe(
-  array.map(double),
-  array.filter(iseven),
+  array.map(num.umultiply(2)),
+  array.filter(num.iseven),
 );
 
 filterevendoubles([ 1, 2, 3, 2.5, 3.75 ]) // [2, 4, 6]
 ```
+
+## primitives functions
+
+tiinvo come with some everydays premade primitives functions. 
+
+```ts
+import { num, obj, str, pipe, predicate } from 'tiinvo';
+
+interface User {
+  firstname: string;
+  lastname: string;
+  birthdate: string;
+}
+
+const mapfirstname = obj.mapkey<User>('firstname');
+const maplastname = obj.mapkey<User>('lastname');
+const mapbirthdate = obj.mapkey<User>('birthdate');
+const maptodate = (arg: string) => new Date(arg);
+const mapdateyear = (date: Date) => date.getFullYear();
+
+export const isadult = pipe(
+  mapbirthdate,
+  maptodate,
+  mapdateyear,
+  num.usubtract(new Date().getFullYear()),
+  Math.abs,
+  num.greaterequalthan(18),
+);
+
+export const isvalidname = pipe(
+  str.trim,
+  str.length,
+  num.greaterequalthan(2),
+);
+
+export const isvalidfirstname = pipe(mapfirstname, isvalidname)
+export const isvalidlastname = pipe(maplastname, isvalidname)
+export const isvaliduser = predicate.and(isvalidfirstname, isvalidlastname, isadult);
+
+const testuser1: User = { firstname: 'John', lastname: 'Connor', birthdate: `1983-11-14` };
+const testuser2: User = { firstname: 'Lorem', lastname: 'Ipsum', birthdate: `2018-01-02` };
+const testuser3: User = { firstname: 'foo', lastname: '', birthdate: `2020-04-05` };
+
+isadult(testuser1) // true
+isadult(testuser2) // false
+isadult(testuser3) // false
+
+isvaliduser(testuser1) // true
+isvaliduser(testuser2) // false
+isvaliduser(testuser3) // false
+
+// etc...
+```
+
 
 # Docs
 

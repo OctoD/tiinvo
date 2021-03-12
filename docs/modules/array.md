@@ -6,11 +6,14 @@
 
 ### Functions
 
+- [empty](array.md#empty)
 - [eq](array.md#eq)
 - [eqOr](array.md#eqor)
 - [every](array.md#every)
 - [filter](array.md#filter)
 - [find](array.md#find)
+- [first](array.md#first)
+- [flat](array.md#flat)
 - [flattern](array.md#flattern)
 - [fromfunctions](array.md#fromfunctions)
 - [getfirst](array.md#getfirst)
@@ -18,10 +21,17 @@
 - [getlast](array.md#getlast)
 - [getlastOr](array.md#getlastor)
 - [includes](array.md#includes)
+- [invert](array.md#invert)
 - [isempty](array.md#isempty)
 - [isnotempty](array.md#isnotempty)
+- [join](array.md#join)
+- [last](array.md#last)
+- [len](array.md#len)
 - [length](array.md#length)
 - [map](array.md#map)
+- [mix](array.md#mix)
+- [notempty](array.md#notempty)
+- [rand](array.md#rand)
 - [random](array.md#random)
 - [reduce](array.md#reduce)
 - [reduceright](array.md#reduceright)
@@ -34,6 +44,41 @@
 - [unsafecast](array.md#unsafecast)
 
 ## Functions
+
+### empty
+
+▸ `Const`**empty**<T\>(`arg`: T[]): *boolean*
+
+Returns true if an array is empty
+
+**`since`** 2.11.0
+
+**`example`** 
+
+```ts
+import { array } from 'tiinvo';
+
+array.empty([]) // true
+array.empty([1]) // false
+```
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`arg` | T[] |
+
+**Returns:** *boolean*
+
+Defined in: [src/array.ts:268](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L268)
+
+___
 
 ### eq
 
@@ -57,7 +102,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:17](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L17)
+Defined in: [src/array.ts:17](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L17)
 
 ___
 
@@ -83,7 +128,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:50](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L50)
+Defined in: [src/array.ts:50](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L50)
 
 ___
 
@@ -115,7 +160,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:32](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L32)
+Defined in: [src/array.ts:32](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L32)
 
 ___
 
@@ -146,7 +191,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:69](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L69)
+Defined in: [src/array.ts:69](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L69)
 
 ___
 
@@ -178,7 +223,77 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:88](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L88)
+Defined in: [src/array.ts:88](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L88)
+
+___
+
+### first
+
+▸ `Const`**first**<T\>(`arg`: T[]): *undefined* \| T
+
+Gets first element of an array.
+Returns undefined if the array is empty.
+
+**`since`** 2.11.0
+
+**`example`** 
+
+```ts
+import { array } from 'tiinvo';
+
+array.first([100, 200]) // 100
+array.first([])         // undefined
+```
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`arg` | T[] |
+
+**Returns:** *undefined* \| T
+
+Defined in: [src/array.ts:171](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L171)
+
+___
+
+### flat
+
+▸ `Const`**flat**<T\>(`arg`: T[][]): T[]
+
+Flatterns an array
+
+**`since`** 2.11.0
+
+**`example`** 
+
+```ts
+import { array } from 'tiinvo';
+
+array.flat([[1, 2], [3, 4]]) // [1, 2, 3, 4];
+```
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`arg` | T[][] |
+
+**Returns:** T[]
+
+Defined in: [src/array.ts:106](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L106)
 
 ___
 
@@ -187,6 +302,8 @@ ___
 ▸ `Const`**flattern**(): *function*
 
 Flatterns an array
+
+**`deprecated`** use `flat` instead
 
 **`example`** 
 
@@ -197,13 +314,13 @@ flatnummatris([[1, 2], [3, 4]]) // [1, 2, 3, 4];
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:104](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L104)
+Defined in: [src/array.ts:122](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L122)
 
 ___
 
 ### fromfunctions
 
-▸ `Const`**fromfunctions**<Input, Output\>(...`fns`: [*Fn1*](../README.md#fn1)<Input, Output\>[]): *function*
+▸ `Const`**fromfunctions**<Input, Output\>(...`fns`: [*FnUnary*](../README.md#fnunary)<Input, Output\>[]): *function*
 
 Takes a list of functions, then call them passing the argument `Input` and returning an array of `Output`
 
@@ -240,11 +357,11 @@ Name | Description |
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`...fns` | [*Fn1*](../README.md#fn1)<Input, Output\>[] | A list of functions    |
+`...fns` | [*FnUnary*](../README.md#fnunary)<Input, Output\>[] | A list of functions    |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:136](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L136)
+Defined in: [src/array.ts:153](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L153)
 
 ___
 
@@ -255,6 +372,8 @@ ___
 Gets first element of an array.
 Returns undefined if the array is empty.
 
+**`deprecated`** use `first` instead
+
 **`example`** 
 
 ```ts
@@ -263,7 +382,7 @@ getfirst()([100, 200]) // 100
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:150](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L150)
+Defined in: [src/array.ts:185](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L185)
 
 ___
 
@@ -294,7 +413,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:165](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L165)
+Defined in: [src/array.ts:200](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L200)
 
 ___
 
@@ -305,6 +424,8 @@ ___
 Gets last element of an array.
 Returns undefined if the array is empty.
 
+**`deprecated`** use `last` instead
+
 **`example`** 
 
 ```ts
@@ -313,7 +434,7 @@ getfirst()([100, 200]) // 100
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:179](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L179)
+Defined in: [src/array.ts:233](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L233)
 
 ___
 
@@ -345,7 +466,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:198](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L198)
+Defined in: [src/array.ts:251](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L251)
 
 ___
 
@@ -378,7 +499,41 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:242](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L242)
+Defined in: [src/array.ts:329](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L329)
+
+___
+
+### invert
+
+▸ `Const`**invert**<T\>(`arg`: T[]): T[]
+
+Reverse an array
+
+**`since`** 2.11.0
+
+**`example`** 
+
+```ts
+import { array } from 'tiinvo';
+
+array.invert([1, 2, 3]) // [3, 2, 1]
+```
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`arg` | T[] |
+
+**Returns:** T[]
+
+Defined in: [src/array.ts:487](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L487)
 
 ___
 
@@ -387,6 +542,8 @@ ___
 ▸ `Const`**isempty**(): *function*
 
 Returns true if an array is empty
+
+**`deprecated`** use `empty` instead
 
 **`example`** 
 
@@ -397,7 +554,7 @@ isempty()([1]) // false
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:212](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L212)
+Defined in: [src/array.ts:283](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L283)
 
 ___
 
@@ -406,6 +563,8 @@ ___
 ▸ `Const`**isnotempty**(): *function*
 
 Returns true if an array is not empty
+
+**`deprecated`** use `notempty` instead
 
 **`example`** 
 
@@ -416,7 +575,107 @@ isempty()([1]) // true
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:226](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L226)
+Defined in: [src/array.ts:314](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L314)
+
+___
+
+### join
+
+▸ `Const`**join**(`str`: *string*): *function*
+
+joins an array
+
+**`since`** 2.11.0
+
+**`example`** 
+
+```ts
+const test = [1, 2, 3, 4];
+
+array.join(`-`)(test) // `1-2-3-4`
+```
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`str` | *string* |
+
+**Returns:** *function*
+
+Defined in: [src/array.ts:377](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L377)
+
+___
+
+### last
+
+▸ `Const`**last**<T\>(`arg`: T[]): *undefined* \| T
+
+Gets the last element of an array.
+Returns undefined if the array is empty.
+
+**`since`** 2.11.0
+
+**`example`** 
+
+```ts
+import { array } from 'tiinvo';
+
+array.last([100, 200]) // 100
+array.last([])         // undefined
+```
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`arg` | T[] |
+
+**Returns:** *undefined* \| T
+
+Defined in: [src/array.ts:218](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L218)
+
+___
+
+### len
+
+▸ `Const`**len**<T\>(`arg`: T[]): *number*
+
+Returns the array length
+
+**`since`** 2.11.0
+
+**`example`** 
+
+```ts
+import { array } from 'tiinvo';
+
+const test = [1, 2, 3, 4];
+
+array.len(test) // 4
+```
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`arg` | T[] |
+
+**Returns:** *number*
+
+Defined in: [src/array.ts:347](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L347)
 
 ___
 
@@ -425,6 +684,8 @@ ___
 ▸ `Const`**length**(): *function*
 
 Returns the array length
+
+**`deprecated`** use `len` instead
 
 **`example`** 
 
@@ -436,7 +697,7 @@ length()(test) // 4
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:257](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L257)
+Defined in: [src/array.ts:362](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L362)
 
 ___
 
@@ -475,7 +736,108 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:280](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L280)
+Defined in: [src/array.ts:400](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L400)
+
+___
+
+### mix
+
+▸ `Const`**mix**<T\>(`arg`: T[]): T[]
+
+Shuffles an array
+
+**`since`** 2.11.0
+
+```ts
+import { array } from 'tiinvo';
+
+array.mix([1, 2, 3]) // could be [3, 2, 1] or [2, 1, 3] or [1, 3, 2] or...
+```
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`arg` | T[] |
+
+**Returns:** T[]
+
+Defined in: [src/array.ts:514](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L514)
+
+___
+
+### notempty
+
+▸ `Const`**notempty**<T\>(`arg`: T[]): *boolean*
+
+Returns true if an array is not empty
+
+**`since`** 2.11.0
+
+**`example`** 
+
+```ts
+import { array } from 'tiinvo';
+
+array.notempty([]) // false
+array.notempty([1]) // true
+```
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`arg` | T[] |
+
+**Returns:** *boolean*
+
+Defined in: [src/array.ts:299](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L299)
+
+___
+
+### rand
+
+▸ `Const`**rand**<T\>(`arr`: T[]): T
+
+Returns a random element `T` from an array `T[]`
+
+**`since`** 2.11.0
+
+**`example`** 
+```ts
+import { array } from 'tiinvo';
+
+const arr = [1, 2, 3]
+arr.includes(arr.rand(arr)) // true
+```
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`arr` | T[] |
+
+**Returns:** T
+
+Defined in: [src/array.ts:416](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L416)
 
 ___
 
@@ -485,6 +847,8 @@ ___
 
 Returns a random element `T` from an array `T[]`
 
+**`deprecated`** use `rand` instead
+
 **`example`** 
 ```ts
 const arr = [1, 2, 3]
@@ -493,7 +857,7 @@ arr.includes(random()(arr)) // true
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:294](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L294)
+Defined in: [src/array.ts:430](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L430)
 
 ___
 
@@ -527,7 +891,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:313](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L313)
+Defined in: [src/array.ts:448](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L448)
 
 ___
 
@@ -561,7 +925,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:334](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L334)
+Defined in: [src/array.ts:469](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L469)
 
 ___
 
@@ -571,6 +935,8 @@ ___
 
 Reverse an array
 
+**`deprecated`** use `invert` instead
+
 **`example`** 
 
 ```ts
@@ -579,7 +945,7 @@ reverse()([1, 2, 3]) // [3, 2, 1]
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:349](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L349)
+Defined in: [src/array.ts:500](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L500)
 
 ___
 
@@ -589,13 +955,15 @@ ___
 
 Shuffles an array
 
+**`deprecated`** use `mix` instead
+
 ```ts
 shuffle()([1, 2, 3]) // could be [3, 2, 1] or [2, 1, 3] or [1, 3, 2] or...
 ```
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:360](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L360)
+Defined in: [src/array.ts:535](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L535)
 
 ___
 
@@ -627,7 +995,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:383](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L383)
+Defined in: [src/array.ts:549](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L549)
 
 ___
 
@@ -661,7 +1029,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:401](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L401)
+Defined in: [src/array.ts:567](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L567)
 
 ___
 
@@ -688,7 +1056,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:420](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L420)
+Defined in: [src/array.ts:586](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L586)
 
 ___
 
@@ -715,7 +1083,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:438](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L438)
+Defined in: [src/array.ts:604](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L604)
 
 ___
 
@@ -725,6 +1093,7 @@ ___
 
 An unsafe cast to a type. Use it if TypeScript gives you a terrible headache.
 Note that this operation is not type safe, since no conversion occurs at runtime.
+If you want a real type conversion, use map instead.
 
 **`template`** 
 
@@ -736,4 +1105,4 @@ Name |
 
 **Returns:** *function*
 
-Defined in: [src/array.ts:448](https://github.com/OctoD/tiinvo/blob/6f7ada4/src/array.ts#L448)
+Defined in: [src/array.ts:616](https://github.com/OctoD/tiinvo/blob/c824e02/src/array.ts#L616)

@@ -1,4 +1,4 @@
-import { Fn1 } from './applicative';
+import { fallback, Fn1, FnUnary } from './applicative';
 
 /**
  * Gets an element in an array at a given index.
@@ -91,6 +91,24 @@ export const find = <T>(
 
 /**
  * Flatterns an array
+ * @since 2.11.0
+ * @example
+ *
+ * ```ts
+ * import { array } from 'tiinvo';
+ * 
+ * array.flat([[1, 2], [3, 4]]) // [1, 2, 3, 4];
+ * ```
+ *
+ * @param {(arg: T) => boolean} fn
+ * @returns
+ */
+export const flat = <T>(arg: T[][]): T[] =>
+  arg.reduce((accumulator, nextarr) => [...accumulator, ...nextarr], []);
+
+/**
+ * Flatterns an array
+ * @deprecated use `flat` instead
  * @example
  *
  * ```ts
@@ -101,8 +119,7 @@ export const find = <T>(
  * @param {(arg: T) => boolean} fn
  * @returns
  */
-export const flattern = (): (<T>(arg: T[][]) => T[]) => (arg) =>
-  arg.reduce((accumulator, nextarr) => [...accumulator, ...nextarr], []);
+export const flattern = fallback(flat)
 
 /**
  * Takes a list of functions, then call them passing the argument `Input` and returning an array of `Output`
@@ -133,12 +150,30 @@ export const flattern = (): (<T>(arg: T[][]) => T[]) => (arg) =>
  * @template Output Function Output type
  * @param fns A list of functions
  */
-export const fromfunctions = <Input, Output>(... fns: Fn1<Input, Output>[]): (arg: Input) => Output[] =>
+export const fromfunctions = <Input, Output>(... fns: FnUnary<Input, Output>[]): (arg: Input) => Output[] =>
   arg => fns.map(fn => fn(arg));
   
 /**
  * Gets first element of an array.
  * Returns undefined if the array is empty.
+ * @since 2.11.0
+ * @example
+ *
+ * ```ts
+ * import { array } from 'tiinvo';
+ * 
+ * array.first([100, 200]) // 100
+ * array.first([])         // undefined
+ * ```
+ *
+ * @returns
+ */
+export const first = <T>(arg: T[]): T | undefined => arg[0];
+  
+/**
+ * Gets first element of an array.
+ * Returns undefined if the array is empty.
+ * @deprecated use `first` instead
  * @example
  *
  * ```ts
@@ -147,7 +182,7 @@ export const fromfunctions = <Input, Output>(... fns: Fn1<Input, Output>[]): (ar
  *
  * @returns
  */
-export const getfirst = (): (<T>(arg: T[]) => T | undefined) => (arg) => arg[0];
+export const getfirst = fallback(first);
 
 /**
  * Gets first element of an array.
@@ -166,8 +201,27 @@ export const getfirstOr = <T>(or: T): ((arg: T[]) => T) => (arg) =>
   arg[0] ?? or;
 
 /**
+ * Gets the last element of an array.
+ * Returns undefined if the array is empty.
+ * @since 2.11.0
+ * @example
+ *
+ * ```ts
+ * import { array } from 'tiinvo';
+ * 
+ * array.last([100, 200]) // 100
+ * array.last([])         // undefined
+ * ```
+ *
+ * @returns
+ */
+export const last = <T>(arg: T[]): T | undefined =>
+  arg[arg.length - 1];
+
+/**
  * Gets last element of an array.
  * Returns undefined if the array is empty.
+ * @deprecated use `last` instead
  * @example
  *
  * ```ts
@@ -176,8 +230,7 @@ export const getfirstOr = <T>(or: T): ((arg: T[]) => T) => (arg) =>
  *
  * @returns
  */
-export const getlast = (): (<T>(arg: T[]) => T | undefined) => (arg) =>
-  arg[arg.length - 1];
+export const getlast = fallback(last);
 
 /**
  * Returns the last element of an array or the given fallback.
@@ -200,6 +253,24 @@ export const getlastOr = <T>(or: T): ((arg: T[]) => T) => (arg) =>
 
 /**
  * Returns true if an array is empty
+ * @since 2.11.0
+ * @example
+ *
+ * ```ts
+ * import { array } from 'tiinvo';
+ * 
+ * array.empty([]) // true
+ * array.empty([1]) // false
+ * ```
+ *
+ * @returns
+ */
+export const empty = <T>(arg: T[]): boolean =>
+  arg.length === 0;
+
+/**
+ * Returns true if an array is empty
+ * @deprecated use `empty` instead
  * @example
  *
  * ```ts
@@ -209,11 +280,28 @@ export const getlastOr = <T>(or: T): ((arg: T[]) => T) => (arg) =>
  *
  * @returns
  */
-export const isempty = (): ((arg: unknown[]) => boolean) => (arg) =>
-  arg.length === 0;
+export const isempty = fallback(empty)
 
 /**
  * Returns true if an array is not empty
+ * @since 2.11.0
+ * @example
+ *
+ * ```ts
+ * import { array } from 'tiinvo';
+ * 
+ * array.notempty([]) // false
+ * array.notempty([1]) // true
+ * ```
+ *
+ * @returns
+ */
+export const notempty = <T>(arg: T[]): boolean =>
+  arg.length !== 0;
+
+/**
+ * Returns true if an array is not empty
+ * @deprecated use `notempty` instead
  * @example
  *
  * ```ts
@@ -223,8 +311,7 @@ export const isempty = (): ((arg: unknown[]) => boolean) => (arg) =>
  *
  * @returns
  */
-export const isnotempty = (): ((arg: unknown[]) => boolean) => (arg) =>
-  arg.length !== 0;
+export const isnotempty = fallback(notempty)
 
 /**
  * Checks if an element is inside an array
@@ -244,6 +331,24 @@ export const includes = <T>(value: T): ((arg: T[]) => boolean) => (arg) =>
 
 /**
  * Returns the array length
+ * @since 2.11.0
+ * @example
+ *
+ * ```ts
+ * import { array } from 'tiinvo';
+ * 
+ * const test = [1, 2, 3, 4];
+ *
+ * array.len(test) // 4
+ * ```
+ *
+ * @returns
+ */
+export const len = <T>(arg: T[]) => arg.length;
+
+/**
+ * Returns the array length
+ * @deprecated use `len` instead
  * @example
  *
  * ```ts
@@ -254,7 +359,22 @@ export const includes = <T>(value: T): ((arg: T[]) => boolean) => (arg) =>
  *
  * @returns
  */
-export const length = (): ((arg: unknown[]) => number) => (arg) => arg.length;
+export const length = fallback(len);
+
+/**
+ * joins an array
+ * @since 2.11.0
+ * @example
+ *
+ * ```ts
+ * const test = [1, 2, 3, 4];
+ *
+ * array.join(`-`)(test) // `1-2-3-4`
+ * ```
+ *
+ * @returns
+ */
+export const join = (str: string): ((arg: unknown[]) => string) => (arg) => arg.join(str);
 
 /**
  * Maps an array of elements `T` to an array of elements `Z`
@@ -282,7 +402,23 @@ export const map = <T, Z>(fn: (arg: T) => Z): ((arg: T[]) => Z[]) => (arg) =>
 
 /**
  * Returns a random element `T` from an array `T[]`
+ * @since 2.11.0
+ * @example
+ * ```ts
+ * import { array } from 'tiinvo';
+ * 
+ * const arr = [1, 2, 3]
+ * arr.includes(arr.rand(arr)) // true
+ * ```
  *
+ * @returns
+ */
+export const rand = <T>(arr: T[]): T =>
+  arr[Math.floor(Math.random() * arr.length)];
+
+/**
+ * Returns a random element `T` from an array `T[]`
+ * @deprecated use `rand` instead
  * @example
  * ```ts
  * const arr = [1, 2, 3]
@@ -291,8 +427,7 @@ export const map = <T, Z>(fn: (arg: T) => Z): ((arg: T[]) => Z[]) => (arg) =>
  *
  * @returns
  */
-export const random = (): (<T>(arg: T[]) => T) => (arr) =>
-  arr[Math.floor(Math.random() * arr.length)];
+export const random = fallback(rand);
 
 /**
  * Aggregates all values in a single input.
@@ -338,6 +473,22 @@ export const reduceright = <T, Z>(
 
 /**
  * Reverse an array
+ * @since 2.11.0
+ * @example
+ *
+ * ```ts
+ * import { array } from 'tiinvo';
+ * 
+ * array.invert([1, 2, 3]) // [3, 2, 1]
+ * ```
+ *
+ * @returns
+ */
+export const invert = <T>(arg: T[]): T[] => arg.reverse();
+
+/**
+ * Reverse an array
+ * @deprecated use `invert` instead
  * @example
  *
  * ```ts
@@ -346,18 +497,21 @@ export const reduceright = <T, Z>(
  *
  * @returns
  */
-export const reverse = (): (<T>(arg: T[]) => T[]) => (arg) => arg.reverse();
+export const reverse = fallback(invert)
 
 /**
  * Shuffles an array
+ * @since 2.11.0
  *
  * ```ts
- * shuffle()([1, 2, 3]) // could be [3, 2, 1] or [2, 1, 3] or [1, 3, 2] or...
+ * import { array } from 'tiinvo';
+ * 
+ * array.mix([1, 2, 3]) // could be [3, 2, 1] or [2, 1, 3] or [1, 3, 2] or...
  * ```
  *
  * @returns
  */
-export const shuffle = (): (<T>(arg: T[]) => T[]) => (arg) => {
+export const mix = <T>(arg: T[]): T[] => {
   const array = [].slice.call(arg);
 
   for (let i = array.length - 1; i > 0; i--) {
@@ -367,6 +521,18 @@ export const shuffle = (): (<T>(arg: T[]) => T[]) => (arg) => {
 
   return array;
 };
+
+/**
+ * Shuffles an array
+ * @deprecated use `mix` instead
+ *
+ * ```ts
+ * shuffle()([1, 2, 3]) // could be [3, 2, 1] or [2, 1, 3] or [1, 3, 2] or...
+ * ```
+ *
+ * @returns
+ */
+export const shuffle = fallback(mix)
 
 /**
  * Returns true if some elements in the array satisfy the given predicate.
@@ -441,6 +607,8 @@ export const takelastnth = (count: number): (<T>(arg: T[]) => T[]) => (arg) =>
 /**
  * An unsafe cast to a type. Use it if TypeScript gives you a terrible headache.
  * Note that this operation is not type safe, since no conversion occurs at runtime.
+ * If you want a real type conversion, use map instead.
+ * 
  *
  * @template {T}
  * @returns
