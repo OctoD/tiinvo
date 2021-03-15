@@ -1,4 +1,6 @@
-import { check, bind, fallback, panic, pass } from "../applicative";
+import { array, num } from '..';
+import { check, bind, fallback, panic, pass, callfnwith } from "../applicative";
+import { pipe } from '../pipe';
 
 describe("applicative", () => {
   it("bind", () => {
@@ -7,6 +9,16 @@ describe("applicative", () => {
     const boundfn = bind(fn, teststring);
 
     expect(fn(teststring)).toEqual(boundfn());
+  });
+
+  it("callfnwith", () => {
+    const piped = pipe(
+       num.umultiply(2),
+       num.uadd,
+    );
+    
+    expect(callfnwith(10)(piped)(2)).toBe(22);
+    expect(callfnwith(4)(piped)(2)).toBe(10);
   });
 
   it("check", () => {

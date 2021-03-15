@@ -68,6 +68,31 @@ export const bind = <Fn extends FnBase>(
 ): (() => ReturnType<Fn>) => () => fn(...args) as ReturnType<Fn>;
 
 /**
+ * Given some arguments, returns a function which accepts another function.
+ * This function will be called with the given arguments.
+ * @since 2.13.0
+ * @example
+ * 
+ * ```ts
+ * import { callfnwith, num, pipe } from 'tiinvo';
+ * 
+ * const piped = pipe(
+ *     num.umultiply(2),
+ *     num.uadd,
+ * );
+ * 
+ * callfnwith(10)(piped)(2) // 22
+ * callfnwith(4)(piped)(2)  // 10
+ * 
+ * ```
+ * 
+ * 
+ * @param args 
+ * @returns 
+ */
+export const callfnwith = <Args extends any[]>(... args: Args) => <Fn extends (... args: Args) => any>(fn: Fn): ReturnType<Fn> => fn.apply(null, args);
+
+/**
  * Checks if a given condition is true, otherwise throws an error with the given error message
  *
  * @example
