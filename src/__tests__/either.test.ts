@@ -1,4 +1,5 @@
 import {
+  fromfunction,
   frompredicate,
   isEitherOf,
   isLeft,
@@ -8,6 +9,7 @@ import {
   left,
   right,
 } from "../either";
+import { usubtract, iseven } from '../num';
 import { withsamevalue } from "../predicate";
 import { isnumber, isstring } from "../typeguards";
 
@@ -39,5 +41,12 @@ describe("either", () => {
 
     expect(isLeft(either(20))).toBeTruthy();
     expect(isRight(either(10))).toBeTruthy();
+  });
+
+  it(`fromfunction`, () => {
+    const fn = fromfunction(usubtract(1), iseven);
+    
+    expect(isLeft(fn(10))).toBeTruthy(); // Left<9>
+    expect(isRight(fn(11))).toBeTruthy(); // Right<10>
   });
 });

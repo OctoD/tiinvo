@@ -1,3 +1,4 @@
+import { ArgsOf, FnBase } from './applicative';
 import { totaggedFn } from "./cast";
 import { createderivefromfunction } from "./derivables";
 import { createFilter, createFilterOr } from "./filterables";
@@ -162,7 +163,7 @@ export const rightfromfn = totaggedFn(right);
 //#region filterables
 
 /**
- *
+ * Filters only Left
  */
 export const filterLeft = createFilter<Either, EitherTagname>(
   isLeft,
@@ -171,12 +172,12 @@ export const filterLeft = createFilter<Either, EitherTagname>(
 );
 
 /**
- *
+ * Filters Left Or
  */
 export const filterLeftOr = createFilterOr<Either, EitherTagname>(isLeft, left);
 
 /**
- *
+ * Filters Right
  */
 export const filterRight = createFilter<Either, EitherTagname>(
   isRight,
@@ -185,7 +186,7 @@ export const filterRight = createFilter<Either, EitherTagname>(
 );
 
 /**
- *
+ * Filters Right or
  */
 export const filterRightOr = createFilterOr<Either, EitherTagname>(
   isRight,
@@ -197,12 +198,12 @@ export const filterRightOr = createFilterOr<Either, EitherTagname>(
 //#region foldables
 
 /**
- *
+ * Folds current Either
  */
 export const fold = createfold<EitherTagname>(isLeft);
 
 /**
- *
+ * Swaps Left to Right and Right to Left
  */
 export const swap = createSwap<LeftTagname, RightTagname>(isLeft, left, right);
 
@@ -211,27 +212,27 @@ export const swap = createSwap<LeftTagname, RightTagname>(isLeft, left, right);
 //#region mappables
 
 /**
- *
+ * Maps Left only
  */
 export const mapLeft = createMap<Either, EitherTagname>(isLeft, left);
 
 /**
- *
+ * Maps Right only
  */
 export const mapRight = createMap<Either, EitherTagname>(isRight, right);
 
 /**
- *
+ * Maps Left or
  */
 export const mapLeftOr = createMapOr<Either, EitherTagname>(isLeft, left);
 
 /**
- *
+ * Maps Right or
  */
 export const mapRightOr = createMapOr<Either, EitherTagname>(isRight, right);
 
 /**
- *
+ * Maps Left or else
  */
 export const mapLeftOrElse = createMapOrElse<Either, EitherTagname>(
   isLeft,
@@ -239,7 +240,7 @@ export const mapLeftOrElse = createMapOrElse<Either, EitherTagname>(
 );
 
 /**
- *
+ * Maps Right or else
  */
 export const mapRigthOrElse = createMapOrElse<Either, EitherTagname>(
   isRight,
@@ -261,8 +262,13 @@ export const unwrapEither = createUnwrap(isEither, "");
  * Unwraps value if Left or throws
  *
  * @example
- * unwrapLeft(left(10)) // 10
- * unwrapLeft(right(1)) // throws
+ * 
+ * ```ts
+ * import { either } from 'tiinvo';
+ * 
+ * either.unwrapLeft(left(10)) // 10
+ * either.unwrapLeft(right(1)) // throws
+ * ```
  */
 export const unwrapLeft = createUnwrap(
   isLeft,
@@ -274,8 +280,10 @@ export const unwrapLeft = createUnwrap(
  *
  * @example
  * ```ts
- * unwrapRight(left(10)) // throws
- * unwrapRight(right(1)) // 1
+ * import { either } from 'tiinvo';
+ * 
+ * either.unwrapRight(left(10)) // throws
+ * either.unwrapRight(right(1)) // 1
  *
  * ```
  */
@@ -289,8 +297,10 @@ export const unwrapRight = createUnwrap(
  *
  * @example
  * ```ts
- * unwrapLeftOr(20)(left(10)) // 10
- * unwrapLeftOr(20)(right(1)) // 20
+ * import { either } from 'tiinvo';
+ * 
+ * either.unwrapLeftOr(20)(left(10)) // 10
+ * either.unwrapLeftOr(20)(right(1)) // 20
  * ```
  */
 export const unwrapLeftOr = createUnwrapOr(isLeft);
@@ -300,8 +310,10 @@ export const unwrapLeftOr = createUnwrapOr(isLeft);
  *
  * @example
  * ```ts
- * unwrapRightOr(20)(left(10)) // 20
- * unwrapRightOr(20)(right(1)) // 1
+ * import { either } from 'tiinvo';
+ * 
+ * either.unwrapRightOr(20)(left(10)) // 20
+ * either.unwrapRightOr(20)(right(1)) // 1
  * ```
  */
 export const unwrapRightOr = createUnwrapOr(isRight);
@@ -311,8 +323,10 @@ export const unwrapRightOr = createUnwrapOr(isRight);
  *
  * @example
  * ```ts
- * unwrapLeftOrElse(fallback(20))(left(10)) // 10
- * unwrapLeftOrElse(fallback(30))(right(1)) // 30
+ * import { either } from 'tiinvo';
+ * 
+ * either.unwrapLeftOrElse(fallback(20))(left(10)) // 10
+ * either.unwrapLeftOrElse(fallback(30))(right(1)) // 30
  * ```
  */
 export const unwrapLeftOrElse = createUnwrapOrElse(isLeft);
@@ -322,8 +336,10 @@ export const unwrapLeftOrElse = createUnwrapOrElse(isLeft);
  *
  * @example
  * ```ts
- * unwrapRightOrElse(fallback(20))(left(10)) // 20
- * unwrapRightOrElse(fallback(30))(right(1)) // 1
+ * import { either } from 'tiinvo';
+ * 
+ * either.unwrapRightOrElse(fallback(20))(left(10)) // 20
+ * either.unwrapRightOrElse(fallback(30))(right(1)) // 1
  * ```
  */
 export const unwrapRightOrElse = createUnwrapOrElse(isRight);
@@ -335,10 +351,10 @@ export const unwrapRightOrElse = createUnwrapOrElse(isRight);
  *
  * @example
  * ```ts
- * const iseven = (arg: number) => arg % 2 === 0;
+ * import { either, num } from 'tiinvo';
  *
- * frompredicate(iseven)(20) // Right<20>
- * frompredicate(iseven)(11) // Left<11>
+ * either.frompredicate(num.iseven)(20) // Right<20>
+ * either.frompredicate(num.iseven)(11) // Left<11>
  * ```
  *
  * @template T
@@ -356,3 +372,27 @@ export const leftfromfunction = createderivefromfunction(left);
  * Wraps a function `(... args: any[]) => T`, and once called it returns a `Right<T>`
  */
 export const rightfromfunction = createderivefromfunction(right);
+
+/**
+ * Wraps a function `(... args: any[]) => T` and if the given Predicate<T> is satisfied, returns Right<T>. Otherwise returns Left<T>
+ * @since 2.13.0
+ * @example
+ * 
+ * ```ts
+ * import { either, num } from 'tiinvo';
+ * 
+ * const fn = either.fromfunction(num.usubtract(1), num.iseven);
+ * 
+ * fn(10) // Left<9>
+ * fn(11) // Right<10>
+ * ```
+ * 
+ * @param fn 
+ * @param predicate 
+ * @returns 
+ */
+export const fromfunction = <Fn extends FnBase>(fn: Fn, predicate: Predicate<ReturnType<Fn>>) => (... args: ArgsOf<Fn>) => {
+  const value = fn(...args);
+  return predicate(value) ? right(value) : left(value);
+}
+  
