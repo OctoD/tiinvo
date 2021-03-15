@@ -29,7 +29,7 @@ Name | Default |
 
 • `Readonly` **\_\_tag**: *some*
 
-Defined in: [src/tagged-type.ts:15](https://github.com/OctoD/tiinvo/blob/ad52648/src/tagged-type.ts#L15)
+Defined in: [src/tagged-type.ts:15](https://github.com/OctoD/tiinvo/blob/1d01ad1/src/tagged-type.ts#L15)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • `Readonly` **value**: *NonNullable*<T\>
 
-Defined in: [src/tagged-type.ts:16](https://github.com/OctoD/tiinvo/blob/ad52648/src/tagged-type.ts#L16)
+Defined in: [src/tagged-type.ts:16](https://github.com/OctoD/tiinvo/blob/1d01ad1/src/tagged-type.ts#L16)
