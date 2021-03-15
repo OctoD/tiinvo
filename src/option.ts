@@ -1,4 +1,4 @@
-import { check } from "./applicative";
+import { ArgsOf, check, FnUnary } from "./applicative";
 import { createExpect } from "./assertables";
 import { totaggedFn } from "./cast";
 import { createderivefromfunction } from "./derivables";
@@ -217,4 +217,4 @@ export const unwrapOrElse = createUnwrapOrElse<Optiontag>(isSome);
 /**
  * Wraps a function `(... args: any[]) => T`, and once called it returns a `Option<T>`
  */
-export const fromfunction = createderivefromfunction(option);
+export const fromfunction = createderivefromfunction(option) as <T extends FnUnary<any, any>>(arg: T) => (... args: ArgsOf<T>) => Option<NonNullable<ReturnType<T>>>;

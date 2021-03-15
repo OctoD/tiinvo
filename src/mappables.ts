@@ -20,8 +20,8 @@ export const createMap = <
   creator: TaggedFactory<Tagname>
 ) => <T, U>(fn: MapFn<T, U>) => (
   arg: Tagged<T, Tagname>
-): Tagged<T | U, Tagname> =>
-  predicate(arg as K) ? creator(fn(arg.value)) : arg;
+): Tagged<U, Tagname> =>
+  predicate(arg as K) ? creator(fn(arg.value)) : arg as unknown as Tagged<U, Tagname>;
 
 /**
  *
