@@ -1,4 +1,4 @@
-import { ArgsOf, FnBase, FnUnary } from './applicative';
+import { FnNullary, FnUnary } from './applicative';
 import { Predicate } from './predicate';
 
 /**
@@ -84,3 +84,48 @@ export const branch = <U, R>(
   positive: FnUnary<U, R>,
   negative: FnUnary<U, R>,
 ) => (arg: U): R => condition(arg) ? positive(arg) : negative(arg);
+
+/**
+ * Like a Switch statement, but made with functions
+ * @since 2.13.0
+ * @example
+ * 
+ * ```ts
+ * import { multi, fallback, num, pipe, str } from 'tiinvo';
+ * 
+ * const switchcase = pipe(
+ *    str.length,
+ *    multi(
+ *      fallback(`Not valid`),
+ *      [num.equals(0), fallback(`Required`)],
+ *      [num.lessthan(10), fallback(`Too short`)],
+ *      [num.greaterthan(20), fallback(`Too long`)],
+ *      [num.greaterthan(8), fallback(`Valid`)],
+ *    )
+ * );
+ * 
+ * switchcase('hello world')                    // `Valid`
+ * switchcase('foo')                            // `Too short`
+ * switchcase('123456789012345678901234567890') // `Too long`
+ * switchcase('')                               // `Required`
+ * switchcase(11 as any)                        // `Not valid`
+ * ```
+ * 
+ * @param defaultcase 
+ * @param cases 
+ * @returns 
+ */
+export const multi = <U, R>(
+  defaultcase: FnNullary<R>,
+  ... cases: [... [Predicate<U>, FnNullary<R>]][]
+) => (arg: U): R => {
+  for (let i = 0; i < cases.length; i++) {
+    const current = cases[i];
+
+    if (current[0](arg)) {
+      return current[1]();
+    }
+  }
+
+  return defaultcase();
+}

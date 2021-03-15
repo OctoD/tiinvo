@@ -74,4 +74,4 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/derivables.ts:53](https://github.com/OctoD/tiinvo/blob/1d01ad1/src/derivables.ts#L53)
+Defined in: [src/derivables.ts:53](https://github.com/OctoD/tiinvo/blob/e58f255/src/derivables.ts#L53)

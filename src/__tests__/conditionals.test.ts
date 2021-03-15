@@ -1,5 +1,5 @@
-import { either, num, pipe } from '..';
-import { branch, fi, fifn } from "../conditionals";
+import { fallback, num, pipe, str } from '..';
+import { branch, fi, fifn, multi } from "../conditionals";
 
 describe("conditionals", () => {
   it("fi", () => {
@@ -19,10 +19,29 @@ describe("conditionals", () => {
     const tostring = (label: 'even' | 'odd') => (arg: number) => `${arg} is ${label}`
     const evenstostring = tostring('even');
     const oddstostring = tostring('odd');
-    
+
     const dosomething = branch(num.iseven, evenstostring, oddstostring);
-    
+
     expect(dosomething(10)).toBe(`10 is even`) // "10 is even"
     expect(dosomething(11)).toBe(`11 is odd`) // "11 is odd"
+  })
+
+  it(`multi`, () => {
+    const switchcase = pipe(
+      str.length,
+      multi(
+        fallback(`Not valid`),
+        [num.equals(0), fallback(`Required`)],
+        [num.lessthan(10), fallback(`Too short`)],
+        [num.greaterthan(20), fallback(`Too long`)],
+        [num.greaterthan(8), fallback(`Valid`)],
+      )
+    );
+
+    expect(switchcase('hello world')).toBe(`Valid`);
+    expect(switchcase('foo')).toBe(`Too short`);
+    expect(switchcase('123456789012345678901234567890')).toBe(`Too long`);
+    expect(switchcase('')).toBe(`Required`);
+    expect(switchcase(11 as any)).toBe(`Not valid`);
   })
 });

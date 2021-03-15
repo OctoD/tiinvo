@@ -1,4 +1,4 @@
-import { Fn1 } from "./applicative";
+import { FnUnary } from "./applicative";
 import { Tagged, TaggedFactory } from "./tagged-type";
 
 /**
@@ -69,4 +69,4 @@ export const createCast = <Tagto extends string>(
  */
 export const totaggedFn = <Tagname extends string>(
   factory: TaggedFactory<Tagname>
-) => <FnIn, FnOut>(fn: Fn1<FnIn, FnOut>) => (arg: FnIn) => factory(fn(arg));
+) => <FnIn, FnOut>(fn: FnUnary<FnIn, FnOut>) => (arg: FnIn) => factory(fn(arg));
