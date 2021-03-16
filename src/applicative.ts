@@ -157,3 +157,25 @@ export const toasync = <Fn extends FnBase>(
 ): ((...args: ArgsOf<Fn>) => Promise<ReturnType<Fn>>) => async (
   ...args: ArgsOf<Fn>
 ) => fn(...args);
+
+/**
+ * Waits for a given amount of time (milliseconds), then resolves the promise.
+ * @since 2.13.0
+ * @example
+ * 
+ * ```ts
+ * import { pipeasync, wait } from 'tiinvo';
+ * 
+ * const logasync = async (message: string) => () => console.log(message);
+ * 
+ * pipeasync(
+ *    logasync('The next part of the message will be logged in one second'),
+ *    wait(1000),
+ *    logasync('waited one second'),
+ * )
+ * ```
+ * 
+ * @param milliseconds 
+ * @returns 
+ */
+export const wait = (milliseconds: number) => new Promise(resolve => setTimeout(resolve, milliseconds));

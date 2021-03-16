@@ -1,6 +1,7 @@
 import { array, num } from '..';
-import { check, bind, fallback, panic, pass, callfnwith } from "../applicative";
+import { check, bind, fallback, panic, pass, callfnwith, wait } from "../applicative";
 import { pipe } from '../pipe';
+import { pipeasync } from '../pipe-async';
 
 describe("applicative", () => {
   it("bind", () => {
@@ -43,4 +44,22 @@ describe("applicative", () => {
 
     expect(pass(value)).toBe(value);
   })
+
+  it(`wait`, async () => {
+    let result1: number = 0;
+    let result2: number = 0;
+    
+    const testfn1 = async () => result1 = Date.now();
+    const testfn2 = async () => result2 = Date.now();
+    const timeout = 1000;
+    const fn = pipeasync(
+      testfn1,
+      bind(wait, timeout),
+      testfn2,
+    );
+
+    await fn();
+
+    expect(Math.floor((result2 - result1) / timeout)).toBe(1)
+  });
 });
