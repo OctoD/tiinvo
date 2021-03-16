@@ -1,4 +1,4 @@
-import { FnBinary, FnUnary, PrimitiveMethodMapper } from './applicative';
+import { check, FnBinary, FnUnary, PrimitiveMethodMapper } from './applicative';
 
 const map: PrimitiveMethodMapper<number> = key => (...args) => value => (Number.prototype[key] as any).apply(value, args);
 
@@ -81,6 +81,9 @@ export const uremainder: NumberUnaryFn = a => b => b % a;
 export const uroot: NumberUnaryFn = a => b => b ** (1 / a);
 export const usubtract: NumberUnaryFn = a => b => b - a;
 
+export const urandomint: NumberUnaryFn = min => max => Math.floor(Math.random() * (max - min + 1)) + min;
+export const urandomfloor: NumberUnaryFn = min => max => (Math.random() * (max - min + 1)) + min;
+
 //#endregion
 
 //#region binary functions
@@ -96,5 +99,61 @@ export const bpow: NumberBinaryFn = (a, b) => a ** b;
 export const bremainder: NumberBinaryFn = (a, b) => a % b;
 export const broot: NumberBinaryFn = (a, b) => a ** (1 / b);
 export const bsubtract: NumberBinaryFn = (a, b) => a - b;
+
+export const brandomint: NumberBinaryFn = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+export const brandomfloor: NumberBinaryFn = (min, max) => (Math.random() * (max - min + 1)) + min;
+
+//#endregion
+
+//#region ranges
+
+export type NumberRangeUnaryFn = FnUnary<number, FnUnary<number, number[]>>
+export type NumberRangeBinaryFn = FnBinary<number, number, number[]>
+
+/**
+ * Returns an array for the given numeric range. Each number in range is integer.
+ * It throws if `min` is greater than `max`.
+ * Note: the range is always inclusive, so if you set the min to `0` and max to `5`, you
+ * will get all integer numbers between `0` and `5 `included.
+ * 
+ * @since 2.13.0
+ * @example
+ * 
+ * ```ts
+ * import { num } from 'tiinvo';
+ * 
+ * num.brangeint(0, 5) // [0, 1, 2, 3, 4, 5];
+ * ```
+ * 
+ * @param min 
+ * @param max 
+ * @returns {number[]}
+ */
+export const brangeint: NumberRangeBinaryFn = (min, max) => {
+  const count = check(min < max, 'urangeint min must be less than max')(max - min);
+  const range: number[] = [];
+  while (range.length <= count) range.push(min + range.length);
+  return range;
+}
+
+/**
+ * The unary version for `num.brangeint`.
+ * First function accepts the `min`, returned function accepts `max`.
+ * 
+ * @since 2.13.0
+ * @param min 
+ * @returns {(arg: number) => number[]}
+ */
+export const urangeint: NumberRangeUnaryFn = min => max => brangeint(min, max);
+
+/**
+ * The reversed unary version for `num.brangeint`.
+ * First function accepts the `max`, returned function accepts `min`.
+ * 
+ * @since 2.13.0
+ * @param min 
+ * @returns {(arg: number) => number[]}
+ */
+export const urangeint2: NumberRangeUnaryFn = max => min => brangeint(min, max);
 
 //#endregion

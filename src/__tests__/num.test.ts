@@ -113,4 +113,27 @@ describe(`num`, () => {
   test('bsubtract', () => {
     expect(num.bsubtract(2, 2)).toBe(0);
   })
+  test(`urandomint/brandomint/urandomfloat/brandomfloat`, () => {
+    const min = 2;
+    const max = 6;
+    const check = (value: number) => value >= min && value <= max;
+    const testfn = (value: number) => expect(check(value)).toBeTruthy();
+
+    testfn(num.urandomint(min)(max));
+    testfn(num.brandomint(min, max));
+    testfn(num.urandomfloor(min)(max));
+    testfn(num.brandomfloor(min, max));
+  });
+  test(`brangeint/urangeint/urangeint2`, () => {
+    const expected = [0,1,2,3,4,5];
+    const first = num.brangeint(0, 5);
+    const second = num.urangeint(0)(5);
+    const third = num.urangeint2(5)(0);
+
+    const testfn = (arg: any) => expect(expect.arrayContaining(arg)).toEqual(expected);
+
+    testfn(first);
+    testfn(second);
+    testfn(third);
+  });
 });
