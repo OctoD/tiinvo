@@ -10,7 +10,7 @@ tiinvo
 [![Bundle weight](https://badgen.net/bundlephobia/minzip/tiinvo)](https://bundlephobia.com/result?p=tiinvo)
 
 
-Functional data structures for TypeScript and JavaScript.
+Lot of functions for tacit programming and functional types for TypeScript and JavaScript.
 
 - [tiinvo](#tiinvo)
 - [Install](#install)
@@ -41,7 +41,7 @@ yarn add tiinvo
 
 tiinvo is a functional data types library. 
 
-It has several data types like Option, Maybe, Result and Either, each one is a Tagged Type.
+It has several data types like `Option`, `Maybe`, `Result` and `Either`, each one is a `Tagged Type`.
 
 Option is used for values that can be possibly null or undefined.
 
@@ -50,6 +50,9 @@ Maybe is used for values that can possibly has a truthy or falsy logical value.
 Result is used to describe if a function return value is an error or is ok (safe) value.
 
 Either is used to represents a value of one of two possible types (a disjoint union).
+
+It provides also utilities functions like `pipe` and `pipeasync` for tacit programming,
+`num`, `str`, `obj` functions, `predicates` functions and more.
 
 ## predicates
 
