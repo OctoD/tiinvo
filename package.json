@@ -38,7 +38,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && standard-changelog"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
