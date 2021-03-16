@@ -1,3 +1,16 @@
+# [2.13.0](https://github.com/octod/tiinvo/compare/v2.12.1...v2.13.0) (2021-03-16)
+
+
+### Features
+
+* adds callfnwith ([1d01ad1](https://github.com/octod/tiinvo/commit/1d01ad1a6f7a7eb471a75159b7d7c4e1a40b82a8))
+* adds either.fromfunction ([f9ffd07](https://github.com/octod/tiinvo/commit/f9ffd07eab88dd661471a97b86d3d48c0a385887))
+* adds multi conditional fn ([128b690](https://github.com/octod/tiinvo/commit/128b690a59a9589f734298448bc1ed6daf9b557b))
+* adds random and range fns ([784decf](https://github.com/octod/tiinvo/commit/784decfb0c7a32eb464707f0adfca7784d6541b1))
+* adds wait fn ([f9aceea](https://github.com/octod/tiinvo/commit/f9aceead1852df5e0469fcc36db8031e14b111b4))
+
+
+
 ## [2.12.1](https://github.com/octod/tiinvo/compare/v2.12.0...v2.12.1) (2021-03-15)
 
 

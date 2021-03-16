@@ -24,7 +24,7 @@
   ],
   "scripts": {
     "benchmarks": "ts-node .src/benchmarks",
-    "changelog": "standard-changelog",
+    "changelog": "standard-changelog --first-release",
     "docs": "typedoc --options typedoc.markdown.json",
     "lint": "eslint -c ./.eslintrc.json src/**/*.ts --fix",
     "prepublishOnly": "tsc -p .",
