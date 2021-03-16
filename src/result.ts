@@ -1,21 +1,19 @@
-import { ArgsOf, check, Fn1 } from "./applicative";
+import { ArgsOf, check, FnUnary } from "./applicative";
 import { createExpect } from "./assertables";
 import { totaggedFn } from "./cast";
 import { createderivefromfunction } from "./derivables";
 import { createFilter, createFilterOr } from "./filterables";
 import { createMap, createMapOr, createMapOrElse } from "./mappables";
 import {
-  tagged,
   isTagged,
-  isTaggedWith,
-  Tagged,
-  TaggedFactory,
+  isTaggedWith, tagged, Tagged,
+  TaggedFactory
 } from "./tagged-type";
 import * as tg from "./typeguards";
 import {
   createUnwrap,
   createUnwrapOr,
-  createUnwrapOrElse,
+  createUnwrapOrElse
 } from "./unwrappables";
 
 //#region types
@@ -120,7 +118,7 @@ export const result = <T>(value: T): Result<T> =>
 /**
  * Creates a Err<K> factory from a function (arg: T) => K
  */
-export const errfromfn = (totaggedFn(err as any) as unknown) as Fn1<
+export const errfromfn = (totaggedFn(err as any) as unknown) as FnUnary<
   string | Error,
   Err
 >;
