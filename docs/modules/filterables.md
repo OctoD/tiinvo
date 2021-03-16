@@ -32,7 +32,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/filterables.ts:13](https://github.com/OctoD/tiinvo/blob/e58f255/src/filterables.ts#L13)
+Defined in: [src/filterables.ts:13](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/filterables.ts#L13)
 
 ___
 
@@ -56,4 +56,4 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/filterables.ts:35](https://github.com/OctoD/tiinvo/blob/e58f255/src/filterables.ts#L35)
+Defined in: [src/filterables.ts:35](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/filterables.ts#L35)

@@ -49,7 +49,7 @@
 
 Ƭ **ErrFactory**: (`message`: *string* \| Error) => [*Err*](../interfaces/result.err.md)
 
-Defined in: [src/result.ts:59](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L59)
+Defined in: [src/result.ts:57](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L57)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 Ƭ **Errtag**: *typeof* ERRTAG
 
-Defined in: [src/result.ts:29](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L29)
+Defined in: [src/result.ts:27](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L27)
 
 ___
 
@@ -71,7 +71,7 @@ Name |
 ------ |
 `T` |
 
-Defined in: [src/result.ts:69](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L69)
+Defined in: [src/result.ts:67](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L67)
 
 ___
 
@@ -85,7 +85,7 @@ Name | Default |
 ------ | ------ |
 `T` | *unknown* |
 
-Defined in: [src/result.ts:49](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L49)
+Defined in: [src/result.ts:47](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L47)
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 Ƭ **OkFactory**: <T\>(`arg`: T) => [*Ok*](result.md#ok)<T\>
 
-Defined in: [src/result.ts:63](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L63)
+Defined in: [src/result.ts:61](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L61)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 Ƭ **Oktag**: *typeof* OKTAG
 
-Defined in: [src/result.ts:34](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L34)
+Defined in: [src/result.ts:32](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L32)
 
 ___
 
@@ -115,7 +115,7 @@ Name | Default |
 ------ | ------ |
 `T` | *unknown* |
 
-Defined in: [src/result.ts:54](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L54)
+Defined in: [src/result.ts:52](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L52)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 Ƭ **ResultFactory**: <T\>(`arg`: T) => [*Result*](result.md#result)<T\>
 
-Defined in: [src/result.ts:67](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L67)
+Defined in: [src/result.ts:65](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L65)
 
 ___
 
@@ -131,13 +131,17 @@ ___
 
 Ƭ **ResultTag**: [*Errtag*](result.md#errtag) \| [*Oktag*](result.md#oktag)
 
-Defined in: [src/result.ts:39](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L39)
+Defined in: [src/result.ts:37](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L37)
 
 ## Functions
 
 ### err
 
 ▸ `Const`**err**(`message`: *string* \| Error): [*Err*](../interfaces/result.err.md)
+
+Creates a `Err` type
+
+**`since`** 2.0.0
 
 #### Parameters:
 
@@ -147,7 +151,7 @@ Name | Type |
 
 **Returns:** [*Err*](../interfaces/result.err.md)
 
-Defined in: [src/result.ts:102](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L102)
+Defined in: [src/result.ts:113](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L113)
 
 ___
 
@@ -157,6 +161,8 @@ ___
 
 Creates a Err<K> factory from a function (arg: T) => K
 
+**`since`** 2.0.0
+
 #### Parameters:
 
 Name | Type |
@@ -165,7 +171,7 @@ Name | Type |
 
 **Returns:** [*Err*](../interfaces/result.err.md)
 
-Defined in: [src/result.ts:123](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L123)
+Defined in: [src/result.ts:138](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L138)
 
 ___
 
@@ -175,6 +181,8 @@ ___
 
 Throws an error if `Result<T>` is `Err`
 
+**`since`** 2.0.0
+
 #### Parameters:
 
 Name | Type |
@@ -183,7 +191,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:147](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L147)
+Defined in: [src/result.ts:165](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L165)
 
 ___
 
@@ -194,6 +202,8 @@ ___
 Filters an `Ok<T>` with a given predicate. If the check
 does not satisfy the predicate, it will map the `Ok<T>` to
 an `Err`.
+
+**`since`** 2.0.0
 
 **`example`** 
 
@@ -226,7 +236,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:179](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L179)
+Defined in: [src/result.ts:199](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L199)
 
 ___
 
@@ -237,6 +247,8 @@ ___
 Filters an `Ok<T>` with a given predicate. If the check
 does not satisfy the predicate, it will return the fallback
 `Result<T>`.
+
+**`since`** 2.0.0
 
 **`example`** 
 
@@ -270,7 +282,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:207](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L207)
+Defined in: [src/result.ts:228](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L228)
 
 ___
 
@@ -279,6 +291,8 @@ ___
 ▸ `Const`**fromfn**<T\>(`arg`: T): [*Result*](result.md#result)<T\>
 
 Creates a Result<K> factory from a function (arg: T) => K
+
+**`since`** 2.0.0
 
 #### Type parameters:
 
@@ -294,7 +308,7 @@ Name | Type |
 
 **Returns:** [*Result*](result.md#result)<T\>
 
-Defined in: [src/result.ts:136](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L136)
+Defined in: [src/result.ts:153](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L153)
 
 ___
 
@@ -303,6 +317,8 @@ ___
 ▸ `Const`**fromfunction**<Fn\>(`fn`: Fn): *function*
 
 Wraps a function `(... args: any[]) => T`, and once called it returns a `Result<T>`
+
+**`since`** 2.0.0
 
 #### Type parameters:
 
@@ -318,13 +334,17 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:354](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L354)
+Defined in: [src/result.ts:386](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L386)
 
 ___
 
 ### isErr
 
 ▸ `Const`**isErr**(`arg`: *unknown*): arg is Err
+
+Returns true if a variable is `Err`
+
+**`since`** 2.0.0
 
 #### Parameters:
 
@@ -334,7 +354,7 @@ Name | Type |
 
 **Returns:** arg is Err
 
-Defined in: [src/result.ts:89](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L89)
+Defined in: [src/result.ts:98](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L98)
 
 ___
 
@@ -342,6 +362,10 @@ ___
 
 ▸ `Const`**isOk**(`arg`: *unknown*): arg is Tagged<unknown, "ok"\>
 
+Returns true if a variable is `Ok`
+
+**`since`** 2.0.0
+
 #### Parameters:
 
 Name | Type |
@@ -350,7 +374,7 @@ Name | Type |
 
 **Returns:** arg is Tagged<unknown, "ok"\>
 
-Defined in: [src/result.ts:93](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L93)
+Defined in: [src/result.ts:103](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L103)
 
 ___
 
@@ -358,6 +382,20 @@ ___
 
 ▸ `Const`**isResult**(`arg`: *unknown*): arg is Tagged<unknown, "ok"\>
 
+Returns true if something is `Result<unknown>`;
+
+**`since`** 2.0.0
+
+**`example`** 
+
+```ts
+import { result } from 'tiinvo';
+
+result.isResult(0)                   // false
+result.isResult(result.ok(10))       // true
+result.isResult(result.err('foo'))   // true
+```
+
 #### Parameters:
 
 Name | Type |
@@ -366,7 +404,7 @@ Name | Type |
 
 **Returns:** arg is Tagged<unknown, "ok"\>
 
-Defined in: [src/result.ts:82](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L82)
+Defined in: [src/result.ts:90](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L90)
 
 ___
 
@@ -375,6 +413,8 @@ ___
 ▸ `Const`**map**<T, U\>(`fn`: [*MapFn*](mappables.md#mapfn)<T, U\>): *function*
 
 Maps a value `T` if `Ok`
+
+**`since`** 2.0.0
 
 **`example`** 
 
@@ -409,7 +449,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:237](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L237)
+Defined in: [src/result.ts:259](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L259)
 
 ___
 
@@ -418,6 +458,8 @@ ___
 ▸ `Const`**mapOr**<T, U\>(`fallback`: [*Tagged*](../README.md#tagged)<U, [*ResultTag*](result.md#resulttag)\>, `fn`: [*MapFn*](mappables.md#mapfn)<T, U\>): *function*
 
 Maps a value `T` if `Ok`, otherwise maps `Err` to `fallback`
+
+**`since`** 2.0.0
 
 **`example`** 
 
@@ -453,7 +495,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:263](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L263)
+Defined in: [src/result.ts:286](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L286)
 
 ___
 
@@ -463,7 +505,10 @@ ___
 
 Maps a value `T` if `Ok`, otherwise calls `Fn` and maps `Err` to `ReturnValue<Fn>`
 
+**`since`** 2.0.0
+
 **`example`** 
+
 ```ts
 import { result, pipe, fallback } from 'tiinvo';
 
@@ -497,13 +542,17 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:289](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L289)
+Defined in: [src/result.ts:314](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L314)
 
 ___
 
 ### ok
 
 ▸ `Const`**ok**<T\>(`value`: T): [*Ok*](result.md#ok)<T\>
+
+Creates a `Ok<T>` type
+
+**`since`** 2.0.0
 
 #### Type parameters:
 
@@ -519,7 +568,7 @@ Name | Type |
 
 **Returns:** [*Ok*](result.md#ok)<T\>
 
-Defined in: [src/result.ts:108](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L108)
+Defined in: [src/result.ts:120](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L120)
 
 ___
 
@@ -528,6 +577,8 @@ ___
 ▸ `Const`**okfromfn**<FnIn, FnOut\>(`fn`: [*FnUnary*](../README.md#fnunary)<FnIn, FnOut\>): *function*
 
 Creates a Ok<K> factory from a function (arg: T) => K
+
+**`since`** 2.0.0
 
 #### Type parameters:
 
@@ -544,13 +595,18 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:131](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L131)
+Defined in: [src/result.ts:147](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L147)
 
 ___
 
 ### result
 
 ▸ `Const`**result**<T\>(`value`: T): [*Result*](result.md#result)<T\>
+
+Creates a `Result<T>` type. If the given value is an instance of `Error`, it will
+return `Err`, otherwise will return `Ok<T>`
+
+**`since`** 2.0.0
 
 #### Type parameters:
 
@@ -566,7 +622,7 @@ Name | Type |
 
 **Returns:** [*Result*](result.md#result)<T\>
 
-Defined in: [src/result.ts:117](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L117)
+Defined in: [src/result.ts:131](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L131)
 
 ___
 
@@ -576,6 +632,8 @@ ___
 
 Throws an error if `Result<T>` is `Ok<T>`
 
+**`since`** 2.0.0
+
 #### Parameters:
 
 Name | Type |
@@ -584,7 +642,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:151](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L151)
+Defined in: [src/result.ts:170](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L170)
 
 ___
 
@@ -594,7 +652,10 @@ ___
 
 Unwraps a `Result<T>` `value` or throws
 
+**`since`** 2.0.0
+
 **`example`** 
+
 ```ts
 import { result, fallback } from 'tiinvo';
 
@@ -620,7 +681,7 @@ Name | Type |
 
 **Returns:** Arg *extends* [*Tagged*](../README.md#tagged)<U, [*ResultTag*](result.md#resulttag)\> ? U : *never*
 
-Defined in: [src/result.ts:313](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L313)
+Defined in: [src/result.ts:340](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L340)
 
 ___
 
@@ -630,7 +691,10 @@ ___
 
 Unwraps a `Result<T>` `value` or returns the `fallback` `value`
 
+**`since`** 2.0.0
+
 **`example`** 
+
 ```ts
 import { result, fallback } from 'tiinvo';
 
@@ -656,7 +720,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:331](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L331)
+Defined in: [src/result.ts:360](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L360)
 
 ___
 
@@ -666,7 +730,10 @@ ___
 
 Unwraps a `Result<T>` `value` or returns the `fallback` function `value`
 
+**`since`** 2.0.0
+
 **`example`** 
+
 ```ts
 import { result, fallback } from 'tiinvo';
 
@@ -692,4 +759,4 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:347](https://github.com/OctoD/tiinvo/blob/e58f255/src/result.ts#L347)
+Defined in: [src/result.ts:378](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/result.ts#L378)

@@ -7,6 +7,8 @@
 ### Type aliases
 
 - [NumberBinaryFn](num.md#numberbinaryfn)
+- [NumberRangeBinaryFn](num.md#numberrangebinaryfn)
+- [NumberRangeUnaryFn](num.md#numberrangeunaryfn)
 - [NumberUnaryFn](num.md#numberunaryfn)
 
 ### Functions
@@ -17,6 +19,9 @@
 - [bmin](num.md#bmin)
 - [bmultiply](num.md#bmultiply)
 - [bpow](num.md#bpow)
+- [brandomfloor](num.md#brandomfloor)
+- [brandomint](num.md#brandomint)
+- [brangeint](num.md#brangeint)
 - [bremainder](num.md#bremainder)
 - [broot](num.md#broot)
 - [bsubtract](num.md#bsubtract)
@@ -39,6 +44,10 @@
 - [umin](num.md#umin)
 - [umultiply](num.md#umultiply)
 - [upow](num.md#upow)
+- [urandomfloor](num.md#urandomfloor)
+- [urandomint](num.md#urandomint)
+- [urangeint](num.md#urangeint)
+- [urangeint2](num.md#urangeint2)
 - [uremainder](num.md#uremainder)
 - [uroot](num.md#uroot)
 - [usubtract](num.md#usubtract)
@@ -49,7 +58,23 @@
 
 Ƭ **NumberBinaryFn**: [*FnBinary*](../README.md#fnbinary)<*number*, *number*, *number*\>
 
-Defined in: [src/num.ts:88](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L88)
+Defined in: [src/num.ts:91](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L91)
+
+___
+
+### NumberRangeBinaryFn
+
+Ƭ **NumberRangeBinaryFn**: [*FnBinary*](../README.md#fnbinary)<*number*, *number*, *number*[]\>
+
+Defined in: [src/num.ts:111](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L111)
+
+___
+
+### NumberRangeUnaryFn
+
+Ƭ **NumberRangeUnaryFn**: [*FnUnary*](../README.md#fnunary)<*number*, [*FnUnary*](../README.md#fnunary)<*number*, *number*[]\>\>
+
+Defined in: [src/num.ts:110](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L110)
 
 ___
 
@@ -57,7 +82,7 @@ ___
 
 Ƭ **NumberUnaryFn**: [*FnUnary*](../README.md#fnunary)<*number*, [*FnUnary*](../README.md#fnunary)<*number*, *number*\>\>
 
-Defined in: [src/num.ts:72](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L72)
+Defined in: [src/num.ts:72](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L72)
 
 ## Functions
 
@@ -74,7 +99,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: [src/num.ts:90](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L90)
+Defined in: [src/num.ts:93](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L93)
 
 ___
 
@@ -91,7 +116,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: [src/num.ts:91](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L91)
+Defined in: [src/num.ts:94](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L94)
 
 ___
 
@@ -108,7 +133,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: [src/num.ts:93](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L93)
+Defined in: [src/num.ts:96](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L96)
 
 ___
 
@@ -125,7 +150,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: [src/num.ts:94](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L94)
+Defined in: [src/num.ts:97](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L97)
 
 ___
 
@@ -142,7 +167,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: [src/num.ts:92](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L92)
+Defined in: [src/num.ts:95](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L95)
 
 ___
 
@@ -159,7 +184,73 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: [src/num.ts:95](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L95)
+Defined in: [src/num.ts:98](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L98)
+
+___
+
+### brandomfloor
+
+▸ `Const`**brandomfloor**(`arg1`: *number*, `arg2`: *number*): *number*
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`arg1` | *number* |
+`arg2` | *number* |
+
+**Returns:** *number*
+
+Defined in: [src/num.ts:104](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L104)
+
+___
+
+### brandomint
+
+▸ `Const`**brandomint**(`arg1`: *number*, `arg2`: *number*): *number*
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`arg1` | *number* |
+`arg2` | *number* |
+
+**Returns:** *number*
+
+Defined in: [src/num.ts:103](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L103)
+
+___
+
+### brangeint
+
+▸ `Const`**brangeint**(`arg1`: *number*, `arg2`: *number*): *number*[]
+
+Returns an array for the given numeric range. Each number in range is integer.
+It throws if `min` is greater than `max`.
+Note: the range is always inclusive, so if you set the min to `0` and max to `5`, you
+will get all integer numbers between `0` and `5 `included.
+
+**`since`** 2.13.0
+
+**`example`** 
+
+```ts
+import { num } from 'tiinvo';
+
+num.brangeint(0, 5) // [0, 1, 2, 3, 4, 5];
+```
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`arg1` | *number* |
+`arg2` | *number* |
+
+**Returns:** *number*[]
+
+Defined in: [src/num.ts:132](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L132)
 
 ___
 
@@ -176,7 +267,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: [src/num.ts:96](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L96)
+Defined in: [src/num.ts:99](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L99)
 
 ___
 
@@ -193,7 +284,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: [src/num.ts:97](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L97)
+Defined in: [src/num.ts:100](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L100)
 
 ___
 
@@ -210,7 +301,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: [src/num.ts:98](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L98)
+Defined in: [src/num.ts:101](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L101)
 
 ___
 
@@ -226,7 +317,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/num.ts:56](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L56)
+Defined in: [src/num.ts:56](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L56)
 
 ___
 
@@ -242,7 +333,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/num.ts:58](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L58)
+Defined in: [src/num.ts:58](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L58)
 
 ___
 
@@ -258,7 +349,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/num.ts:57](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L57)
+Defined in: [src/num.ts:57](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L57)
 
 ___
 
@@ -275,7 +366,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/num.ts:62](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L62)
+Defined in: [src/num.ts:62](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L62)
 
 ___
 
@@ -291,7 +382,7 @@ Name | Type |
 
 **Returns:** *boolean*
 
-Defined in: [src/num.ts:65](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L65)
+Defined in: [src/num.ts:65](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L65)
 
 ___
 
@@ -307,7 +398,7 @@ Name | Type |
 
 **Returns:** *boolean*
 
-Defined in: [src/num.ts:66](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L66)
+Defined in: [src/num.ts:66](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L66)
 
 ___
 
@@ -323,7 +414,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/num.ts:60](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L60)
+Defined in: [src/num.ts:60](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L60)
 
 ___
 
@@ -339,7 +430,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/num.ts:59](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L59)
+Defined in: [src/num.ts:59](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L59)
 
 ___
 
@@ -356,7 +447,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/num.ts:63](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L63)
+Defined in: [src/num.ts:63](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L63)
 
 ___
 
@@ -382,7 +473,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/num.ts:17](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L17)
+Defined in: [src/num.ts:17](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L17)
 
 ___
 
@@ -408,7 +499,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/num.ts:28](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L28)
+Defined in: [src/num.ts:28](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L28)
 
 ___
 
@@ -434,7 +525,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/num.ts:39](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L39)
+Defined in: [src/num.ts:39](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L39)
 
 ___
 
@@ -460,7 +551,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/num.ts:50](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L50)
+Defined in: [src/num.ts:50](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L50)
 
 ___
 
@@ -476,7 +567,7 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: [src/num.ts:74](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L74)
+Defined in: [src/num.ts:74](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L74)
 
 ___
 
@@ -492,7 +583,7 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: [src/num.ts:75](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L75)
+Defined in: [src/num.ts:75](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L75)
 
 ___
 
@@ -508,7 +599,7 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: [src/num.ts:76](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L76)
+Defined in: [src/num.ts:76](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L76)
 
 ___
 
@@ -524,7 +615,7 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: [src/num.ts:77](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L77)
+Defined in: [src/num.ts:77](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L77)
 
 ___
 
@@ -540,7 +631,7 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: [src/num.ts:78](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L78)
+Defined in: [src/num.ts:78](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L78)
 
 ___
 
@@ -556,7 +647,81 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: [src/num.ts:79](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L79)
+Defined in: [src/num.ts:79](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L79)
+
+___
+
+### urandomfloor
+
+▸ `Const`**urandomfloor**(`arg`: *number*): [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`arg` | *number* |
+
+**Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
+
+Defined in: [src/num.ts:85](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L85)
+
+___
+
+### urandomint
+
+▸ `Const`**urandomint**(`arg`: *number*): [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`arg` | *number* |
+
+**Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
+
+Defined in: [src/num.ts:84](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L84)
+
+___
+
+### urangeint
+
+▸ `Const`**urangeint**(`arg`: *number*): [*FnUnary*](../README.md#fnunary)<*number*, *number*[]\>
+
+The unary version for `num.brangeint`.
+First function accepts the `min`, returned function accepts `max`.
+
+**`since`** 2.13.0
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`arg` | *number* |
+
+**Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*[]\>
+
+Defined in: [src/num.ts:147](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L147)
+
+___
+
+### urangeint2
+
+▸ `Const`**urangeint2**(`arg`: *number*): [*FnUnary*](../README.md#fnunary)<*number*, *number*[]\>
+
+The reversed unary version for `num.brangeint`.
+First function accepts the `max`, returned function accepts `min`.
+
+**`since`** 2.13.0
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`arg` | *number* |
+
+**Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*[]\>
+
+Defined in: [src/num.ts:157](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L157)
 
 ___
 
@@ -572,7 +737,7 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: [src/num.ts:80](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L80)
+Defined in: [src/num.ts:80](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L80)
 
 ___
 
@@ -588,7 +753,7 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: [src/num.ts:81](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L81)
+Defined in: [src/num.ts:81](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L81)
 
 ___
 
@@ -604,4 +769,4 @@ Name | Type |
 
 **Returns:** [*FnUnary*](../README.md#fnunary)<*number*, *number*\>
 
-Defined in: [src/num.ts:82](https://github.com/OctoD/tiinvo/blob/e58f255/src/num.ts#L82)
+Defined in: [src/num.ts:82](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/num.ts#L82)

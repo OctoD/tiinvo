@@ -108,6 +108,7 @@ tiinvo
 - [totaggedFn](README.md#totaggedfn)
 - [trycatch](README.md#trycatch)
 - [trycatchAsync](README.md#trycatchasync)
+- [wait](README.md#wait)
 
 ## Type aliases
 
@@ -130,7 +131,7 @@ Name | Type |
 ------ | ------ |
 `Fn` | [*FnBase*](README.md#fnbase) |
 
-Defined in: [src/applicative.ts:16](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L16)
+Defined in: [src/applicative.ts:16](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L16)
 
 ___
 
@@ -149,7 +150,7 @@ Name |
 `FnIn` |
 `FnOut` |
 
-Defined in: [src/applicative.ts:29](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L29)
+Defined in: [src/applicative.ts:29](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L29)
 
 ___
 
@@ -159,7 +160,7 @@ ___
 
 A generic function type
 
-Defined in: [src/applicative.ts:23](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L23)
+Defined in: [src/applicative.ts:23](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L23)
 
 ___
 
@@ -175,7 +176,7 @@ Name |
 `U` |
 `W` |
 
-Defined in: [src/applicative.ts:45](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L45)
+Defined in: [src/applicative.ts:45](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L45)
 
 ___
 
@@ -190,7 +191,7 @@ Name | Type |
 `T` | *any*[] |
 `U` | - |
 
-Defined in: [src/applicative.ts:47](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L47)
+Defined in: [src/applicative.ts:47](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L47)
 
 ___
 
@@ -204,7 +205,7 @@ Name |
 ------ |
 `T` |
 
-Defined in: [src/applicative.ts:43](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L43)
+Defined in: [src/applicative.ts:43](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L43)
 
 ___
 
@@ -221,7 +222,7 @@ Name |
 `W` |
 `Z` |
 
-Defined in: [src/applicative.ts:46](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L46)
+Defined in: [src/applicative.ts:46](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L46)
 
 ___
 
@@ -236,7 +237,7 @@ Name |
 `T` |
 `U` |
 
-Defined in: [src/applicative.ts:44](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L44)
+Defined in: [src/applicative.ts:44](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L44)
 
 ___
 
@@ -252,7 +253,7 @@ Name | Default |
 ------ | ------ |
 `T` | *unknown* |
 
-Defined in: [src/typeguards.ts:14](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L14)
+Defined in: [src/typeguards.ts:14](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L14)
 
 ___
 
@@ -266,7 +267,7 @@ Name | Type |
 ------ | ------ |
 `Fn` | [*FnBase*](README.md#fnbase) |
 
-Defined in: [src/push-sub.ts:9](https://github.com/OctoD/tiinvo/blob/e58f255/src/push-sub.ts#L9)
+Defined in: [src/push-sub.ts:9](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/push-sub.ts#L9)
 
 ___
 
@@ -282,7 +283,7 @@ Name | Type |
 ------ | ------ |
 `T` | [*Primitives*](README.md#primitives) |
 
-Defined in: [src/applicative.ts:39](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L39)
+Defined in: [src/applicative.ts:39](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L39)
 
 ___
 
@@ -292,7 +293,7 @@ ___
 
 Primitives
 
-Defined in: [src/applicative.ts:34](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L34)
+Defined in: [src/applicative.ts:34](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L34)
 
 ___
 
@@ -316,7 +317,7 @@ Name | Type |
 `__tag` | Tagname |
 `value` | T |
 
-Defined in: [src/tagged-type.ts:14](https://github.com/OctoD/tiinvo/blob/e58f255/src/tagged-type.ts#L14)
+Defined in: [src/tagged-type.ts:14](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/tagged-type.ts#L14)
 
 ___
 
@@ -332,7 +333,7 @@ Name | Type |
 ------ | ------ |
 `Tagname` | *string* |
 
-Defined in: [src/tagged-type.ts:22](https://github.com/OctoD/tiinvo/blob/e58f255/src/tagged-type.ts#L22)
+Defined in: [src/tagged-type.ts:22](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/tagged-type.ts#L22)
 
 ___
 
@@ -346,7 +347,7 @@ Name | Type |
 ------ | ------ |
 `T` | [*Typeguard*](README.md#typeguard)<*any*\>[] |
 
-Defined in: [src/typeguards.ts:29](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L29)
+Defined in: [src/typeguards.ts:29](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L29)
 
 ___
 
@@ -362,7 +363,7 @@ Name |
 ------ |
 `IsOutput` |
 
-Defined in: [src/typeguards.ts:9](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L9)
+Defined in: [src/typeguards.ts:9](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L9)
 
 ___
 
@@ -376,7 +377,7 @@ Name |
 ------ |
 `T` |
 
-Defined in: [src/typeguards.ts:304](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L304)
+Defined in: [src/typeguards.ts:304](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L304)
 
 ___
 
@@ -390,7 +391,7 @@ Name |
 ------ |
 `T` |
 
-Defined in: [src/typeguards.ts:21](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L21)
+Defined in: [src/typeguards.ts:21](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L21)
 
 ___
 
@@ -398,7 +399,7 @@ ___
 
 Ƭ **UnsubscribeFn**: () => *void*
 
-Defined in: [src/push-sub.ts:10](https://github.com/OctoD/tiinvo/blob/e58f255/src/push-sub.ts#L10)
+Defined in: [src/push-sub.ts:10](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/push-sub.ts#L10)
 
 ___
 
@@ -414,7 +415,7 @@ Name | Type |
 ------ | ------ |
 `length` | *number* |
 
-Defined in: [src/typeguards.ts:19](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L19)
+Defined in: [src/typeguards.ts:19](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L19)
 
 ___
 
@@ -424,7 +425,7 @@ ___
 
 Shorthand for undefined
 
-Defined in: [src/applicative.ts:4](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L4)
+Defined in: [src/applicative.ts:4](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L4)
 
 ## Functions
 
@@ -446,7 +447,7 @@ Name | Type |
 
 **Returns:** [*Typeguard*](README.md#typeguard)<T\>
 
-Defined in: [src/typeguards.ts:461](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L461)
+Defined in: [src/typeguards.ts:461](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L461)
 
 ___
 
@@ -479,7 +480,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/applicative.ts:65](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L65)
+Defined in: [src/applicative.ts:65](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L65)
 
 ___
 
@@ -524,7 +525,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/conditionals.ts:82](https://github.com/OctoD/tiinvo/blob/e58f255/src/conditionals.ts#L82)
+Defined in: [src/conditionals.ts:82](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/conditionals.ts#L82)
 
 ___
 
@@ -566,7 +567,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/applicative.ts:93](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L93)
+Defined in: [src/applicative.ts:93](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L93)
 
 ___
 
@@ -599,7 +600,7 @@ Name | Type |
 
 **Returns:** [*Tagged*](README.md#tagged)<T[*value*], Tagto\>
 
-Defined in: [src/cast.ts:20](https://github.com/OctoD/tiinvo/blob/e58f255/src/cast.ts#L20)
+Defined in: [src/cast.ts:20](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/cast.ts#L20)
 
 ___
 
@@ -625,7 +626,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/applicative.ts:109](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L109)
+Defined in: [src/applicative.ts:109](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L109)
 
 ___
 
@@ -647,7 +648,7 @@ Name | Type |
 
 **Returns:** [*Typeguard*](README.md#typeguard)<T\>
 
-Defined in: [src/typeguards.ts:451](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L451)
+Defined in: [src/typeguards.ts:451](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L451)
 
 ___
 
@@ -679,7 +680,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/cast.ts:43](https://github.com/OctoD/tiinvo/blob/e58f255/src/cast.ts#L43)
+Defined in: [src/cast.ts:43](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/cast.ts#L43)
 
 ___
 
@@ -730,7 +731,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/typeguards.ts:400](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L400)
+Defined in: [src/typeguards.ts:400](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L400)
 
 ___
 
@@ -756,7 +757,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/typeguards.ts:440](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L440)
+Defined in: [src/typeguards.ts:440](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L440)
 
 ___
 
@@ -785,7 +786,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/applicative.ts:123](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L123)
+Defined in: [src/applicative.ts:123](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L123)
 
 ___
 
@@ -823,7 +824,7 @@ Name | Type | Description |
 
 **Returns:** T \| F
 
-Defined in: [src/conditionals.ts:24](https://github.com/OctoD/tiinvo/blob/e58f255/src/conditionals.ts#L24)
+Defined in: [src/conditionals.ts:24](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/conditionals.ts#L24)
 
 ___
 
@@ -864,7 +865,7 @@ Name | Type | Description |
 
 **Returns:** A \| B
 
-Defined in: [src/conditionals.ts:50](https://github.com/OctoD/tiinvo/blob/e58f255/src/conditionals.ts#L50)
+Defined in: [src/conditionals.ts:50](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/conditionals.ts#L50)
 
 ___
 
@@ -888,7 +889,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/typeguards.ts:222](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L222)
+Defined in: [src/typeguards.ts:222](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L222)
 
 ___
 
@@ -920,7 +921,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/typeguards.ts:260](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L260)
+Defined in: [src/typeguards.ts:260](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L260)
 
 ___
 
@@ -952,7 +953,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/typeguards.ts:240](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L240)
+Defined in: [src/typeguards.ts:240](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L240)
 
 ___
 
@@ -977,7 +978,7 @@ Name | Type |
 
 **Returns:** arg is WithLength
 
-Defined in: [src/typeguards.ts:279](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L279)
+Defined in: [src/typeguards.ts:279](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L279)
 
 ___
 
@@ -1004,7 +1005,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/typeguards.ts:296](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L296)
+Defined in: [src/typeguards.ts:296](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L296)
 
 ___
 
@@ -1056,7 +1057,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/typeguards.ts:340](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L340)
+Defined in: [src/typeguards.ts:340](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L340)
 
 ___
 
@@ -1074,7 +1075,7 @@ Name | Type |
 
 **Returns:** arg is Tagged<unknown, string\>
 
-Defined in: [src/tagged-type.ts:78](https://github.com/OctoD/tiinvo/blob/e58f255/src/tagged-type.ts#L78)
+Defined in: [src/tagged-type.ts:78](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/tagged-type.ts#L78)
 
 ___
 
@@ -1098,7 +1099,7 @@ Name | Type | Description |
 
 **Returns:** [*Typeguard*](README.md#typeguard)<[*Tagged*](README.md#tagged)<T, Tag\>\>
 
-Defined in: [src/tagged-type.ts:106](https://github.com/OctoD/tiinvo/blob/e58f255/src/tagged-type.ts#L106)
+Defined in: [src/tagged-type.ts:106](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/tagged-type.ts#L106)
 
 ___
 
@@ -1120,7 +1121,7 @@ Name | Type | Description |
 
 **Returns:** [*Typeguard*](README.md#typeguard)<[*Tagged*](README.md#tagged)<*unknown*, Tag\>\>
 
-Defined in: [src/tagged-type.ts:90](https://github.com/OctoD/tiinvo/blob/e58f255/src/tagged-type.ts#L90)
+Defined in: [src/tagged-type.ts:90](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/tagged-type.ts#L90)
 
 ___
 
@@ -1145,7 +1146,7 @@ Name | Type |
 
 **Returns:** arg is unknown[]
 
-Defined in: [src/typeguards.ts:47](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L47)
+Defined in: [src/typeguards.ts:47](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L47)
 
 ___
 
@@ -1178,7 +1179,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/typeguards.ts:505](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L505)
+Defined in: [src/typeguards.ts:505](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L505)
 
 ___
 
@@ -1203,7 +1204,7 @@ Name | Type |
 
 **Returns:** arg is bigint
 
-Defined in: [src/typeguards.ts:59](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L59)
+Defined in: [src/typeguards.ts:59](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L59)
 
 ___
 
@@ -1228,7 +1229,7 @@ Name | Type |
 
 **Returns:** arg is boolean
 
-Defined in: [src/typeguards.ts:71](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L71)
+Defined in: [src/typeguards.ts:71](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L71)
 
 ___
 
@@ -1254,7 +1255,7 @@ Name | Type |
 
 **Returns:** arg is object
 
-Defined in: [src/typeguards.ts:85](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L85)
+Defined in: [src/typeguards.ts:85](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L85)
 
 ___
 
@@ -1272,7 +1273,7 @@ Name | Type |
 
 **Returns:** arg is Error
 
-Defined in: [src/typeguards.ts:210](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L210)
+Defined in: [src/typeguards.ts:210](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L210)
 
 ___
 
@@ -1305,7 +1306,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/typeguards.ts:561](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L561)
+Defined in: [src/typeguards.ts:561](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L561)
 
 ___
 
@@ -1331,7 +1332,7 @@ Name | Type |
 
 **Returns:** arg is FnBase
 
-Defined in: [src/typeguards.ts:99](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L99)
+Defined in: [src/typeguards.ts:99](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L99)
 
 ___
 
@@ -1358,7 +1359,7 @@ Name | Type |
 
 **Returns:** arg is object
 
-Defined in: [src/typeguards.ts:201](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L201)
+Defined in: [src/typeguards.ts:201](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L201)
 
 ___
 
@@ -1384,7 +1385,7 @@ Name | Type |
 
 **Returns:** arg is object
 
-Defined in: [src/typeguards.ts:488](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L488)
+Defined in: [src/typeguards.ts:488](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L488)
 
 ___
 
@@ -1411,7 +1412,7 @@ Name | Type |
 
 **Returns:** arg is object
 
-Defined in: [src/typeguards.ts:183](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L183)
+Defined in: [src/typeguards.ts:183](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L183)
 
 ___
 
@@ -1438,7 +1439,7 @@ Name | Type |
 
 **Returns:** arg is null
 
-Defined in: [src/typeguards.ts:169](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L169)
+Defined in: [src/typeguards.ts:169](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L169)
 
 ___
 
@@ -1464,7 +1465,7 @@ Name | Type |
 
 **Returns:** arg is undefined \| null
 
-Defined in: [src/typeguards.ts:475](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L475)
+Defined in: [src/typeguards.ts:475](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L475)
 
 ___
 
@@ -1489,7 +1490,7 @@ Name | Type |
 
 **Returns:** arg is number
 
-Defined in: [src/typeguards.ts:112](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L112)
+Defined in: [src/typeguards.ts:112](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L112)
 
 ___
 
@@ -1516,7 +1517,7 @@ Name | Type |
 
 **Returns:** arg is object
 
-Defined in: [src/typeguards.ts:126](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L126)
+Defined in: [src/typeguards.ts:126](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L126)
 
 ___
 
@@ -1543,7 +1544,7 @@ Name | Type |
 
 **Returns:** arg is string
 
-Defined in: [src/typeguards.ts:140](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L140)
+Defined in: [src/typeguards.ts:140](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L140)
 
 ___
 
@@ -1582,7 +1583,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/typeguards.ts:423](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L423)
+Defined in: [src/typeguards.ts:423](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L423)
 
 ___
 
@@ -1609,7 +1610,7 @@ Name | Type |
 
 **Returns:** arg is undefined
 
-Defined in: [src/typeguards.ts:154](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L154)
+Defined in: [src/typeguards.ts:154](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L154)
 
 ___
 
@@ -1652,7 +1653,7 @@ console.log(counter, evennumber, changeset) // logs 21, false, 3
 
 **Returns:** [*Mediator*](interfaces/mediator.md)
 
-Defined in: [src/mediator.ts:47](https://github.com/OctoD/tiinvo/blob/e58f255/src/mediator.ts#L47)
+Defined in: [src/mediator.ts:47](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/mediator.ts#L47)
 
 ___
 
@@ -1703,7 +1704,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/conditionals.ts:118](https://github.com/OctoD/tiinvo/blob/e58f255/src/conditionals.ts#L118)
+Defined in: [src/conditionals.ts:118](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/conditionals.ts#L118)
 
 ___
 
@@ -1736,7 +1737,7 @@ Name | Type | Description |
 
 **Returns:** [*Typeguard*](README.md#typeguard)<*null* \| T\>
 
-Defined in: [src/typeguards.ts:524](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L524)
+Defined in: [src/typeguards.ts:524](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L524)
 
 ___
 
@@ -1770,7 +1771,7 @@ Name | Type | Description |
 
 **Returns:** [*Typeguard*](README.md#typeguard)<*undefined* \| T\>
 
-Defined in: [src/typeguards.ts:543](https://github.com/OctoD/tiinvo/blob/e58f255/src/typeguards.ts#L543)
+Defined in: [src/typeguards.ts:543](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/typeguards.ts#L543)
 
 ___
 
@@ -1795,7 +1796,7 @@ Name | Type | Default value |
 
 **Returns:** *never*
 
-Defined in: [src/applicative.ts:141](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L141)
+Defined in: [src/applicative.ts:141](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L141)
 
 ___
 
@@ -1819,7 +1820,7 @@ Name | Type |
 
 **Returns:** T
 
-Defined in: [src/applicative.ts:131](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L131)
+Defined in: [src/applicative.ts:131](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L131)
 
 ___
 
@@ -1852,7 +1853,7 @@ Name | Type |
 
 **Returns:** F[*0*] *extends* () => *any* ? () => *ReturnType*<F[*LastIndexOf*<F\>]\> : F[*0*] *extends* (`arg`: U) => *any* ? (`arg`: U) => *ReturnType*<F[*LastIndexOf*<F\>]\> : *never*
 
-Defined in: [src/pipe.ts:52](https://github.com/OctoD/tiinvo/blob/e58f255/src/pipe.ts#L52)
+Defined in: [src/pipe.ts:52](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/pipe.ts#L52)
 
 ___
 
@@ -1906,7 +1907,7 @@ Name | Type |
 
 **Returns:** F[*0*] *extends* () => *any* ? () => *ReturnType*<F[*LastIndexOf*<F\>]\> : F[*0*] *extends* (`arg`: U) => *any* ? (`arg`: U) => *ReturnType*<F[*LastIndexOf*<F\>]\> : *never*
 
-Defined in: [src/pipe-async.ts:75](https://github.com/OctoD/tiinvo/blob/e58f255/src/pipe-async.ts#L75)
+Defined in: [src/pipe-async.ts:75](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/pipe-async.ts#L75)
 
 ___
 
@@ -1952,7 +1953,7 @@ Name | Type | Description |
 
 **Returns:** [*PushSub*](interfaces/pushsub.md)<Fn\>
 
-Defined in: [src/push-sub.ts:39](https://github.com/OctoD/tiinvo/blob/e58f255/src/push-sub.ts#L39)
+Defined in: [src/push-sub.ts:39](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/push-sub.ts#L39)
 
 ___
 
@@ -1984,7 +1985,7 @@ Name | Type |
 
 **Returns:** [*Tagged*](README.md#tagged)<T, Tagname\>
 
-Defined in: [src/tagged-type.ts:44](https://github.com/OctoD/tiinvo/blob/e58f255/src/tagged-type.ts#L44)
+Defined in: [src/tagged-type.ts:44](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/tagged-type.ts#L44)
 
 ___
 
@@ -2015,7 +2016,7 @@ Name | Type |
 
 **Returns:** [*TaggedFactory*](README.md#taggedfactory)<T\>
 
-Defined in: [src/tagged-type.ts:63](https://github.com/OctoD/tiinvo/blob/e58f255/src/tagged-type.ts#L63)
+Defined in: [src/tagged-type.ts:63](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/tagged-type.ts#L63)
 
 ___
 
@@ -2039,7 +2040,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/applicative.ts:155](https://github.com/OctoD/tiinvo/blob/e58f255/src/applicative.ts#L155)
+Defined in: [src/applicative.ts:155](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L155)
 
 ___
 
@@ -2078,13 +2079,33 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/cast.ts:70](https://github.com/OctoD/tiinvo/blob/e58f255/src/cast.ts#L70)
+Defined in: [src/cast.ts:70](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/cast.ts#L70)
 
 ___
 
 ### trycatch
 
 ▸ `Const`**trycatch**<FnTry, K\>(`fn`: FnTry, ...`args`: K): [*Result*](modules/result.md#result)<*ReturnType*<FnTry\>\>
+
+Calls a function safely and returns a `Result<T>` where `T` is the return type of that function.
+
+**`since`** 2.0.0
+
+**`example`** 
+
+```ts
+import { trycatch, result } from 'tiinvo';
+
+const thisthrows = () => { throw new Error(`This is Sparta`) }
+const thisisok = (what: string) => `we love ${what}`
+
+const test1 = trycatch(thisthrows);
+const test2 = trycatch(thisisok, 'kittens');
+
+result.isErr(test1)  // true
+result.isOk(test2)   // true
+
+```
 
 #### Type parameters:
 
@@ -2102,13 +2123,28 @@ Name | Type |
 
 **Returns:** [*Result*](modules/result.md#result)<*ReturnType*<FnTry\>\>
 
-Defined in: [src/trycatch.ts:12](https://github.com/OctoD/tiinvo/blob/e58f255/src/trycatch.ts#L12)
+Defined in: [src/trycatch.ts:28](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/trycatch.ts#L28)
 
 ___
 
 ### trycatchAsync
 
 ▸ `Const`**trycatchAsync**<FnTry, K\>(`fn`: FnTry, ...`args`: K): *Promise*<*ReturnType*<FnTry\> *extends* *Promise*<U\> ? [*Result*](modules/result.md#result)<U\> : *never*\>
+
+Calls a function safely and returns a `Promise<Result<T>>` where `T` is the return type of that function.
+
+**`since`** 2.0.0
+
+```ts
+import { trycatchAsync, result } from 'tiinvo';
+
+const fail = async () => { throw new Error('oops I did it again') }
+const success = async (num: number) => num;
+
+trycatchAsync(fail).then(result.isErr)       // Promise<true>
+trycatchAsync(success, 10).then(result.isOk) // Promise<true>
+
+```
 
 #### Type parameters:
 
@@ -2126,4 +2162,38 @@ Name | Type |
 
 **Returns:** *Promise*<*ReturnType*<FnTry\> *extends* *Promise*<U\> ? [*Result*](modules/result.md#result)<U\> : *never*\>
 
-Defined in: [src/trycatch.ts:32](https://github.com/OctoD/tiinvo/blob/e58f255/src/trycatch.ts#L32)
+Defined in: [src/trycatch.ts:60](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/trycatch.ts#L60)
+
+___
+
+### wait
+
+▸ `Const`**wait**(`milliseconds`: *number*): *Promise*<*unknown*\>
+
+Waits for a given amount of time (milliseconds), then resolves the promise.
+
+**`since`** 2.13.0
+
+**`example`** 
+
+```ts
+import { pipeasync, wait } from 'tiinvo';
+
+const logasync = async (message: string) => () => console.log(message);
+
+pipeasync(
+   logasync('The next part of the message will be logged in one second'),
+   wait(1000),
+   logasync('waited one second'),
+)
+```
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`milliseconds` | *number* |
+
+**Returns:** *Promise*<*unknown*\>
+
+Defined in: [src/applicative.ts:181](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/applicative.ts#L181)
