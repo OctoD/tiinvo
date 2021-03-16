@@ -135,6 +135,38 @@ export const keys = <T>(obj: T): Array<keyof T> => Object.keys(obj) as Array<key
 export const mapkey = <T>(key: keyof T): (arg: T) => T[typeof key] => (arg: T) => arg[key]
 
 /**
+ * Omits from a set of keys `Keys` from an object `o`.
+ * @since 2.14.0
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { omit } from 'tiinvo';
+ * 
+ * const myobject = { foo: 10, bar: 20, baz: 'qwerty' };
+ * 
+ * omit('foo', 'bar')(myobject) // { baz: 'qwerty' }
+ * ```
+ * 
+ * @param omitkeys 
+ * @returns 
+ */
+export const omit = <Keys extends string>(... omitkeys: Keys[]) => <T extends Record<Keys, any>>(o: T): Omit<T, Keys> => {
+  const omitted = {} as Exclude<T, Keys>;
+  const ownedkeys = keys(o);
+
+  for (let index = 0; index < ownedkeys.length; index++) {
+    const key = ownedkeys[index];
+    
+    if (!omitkeys.includes(key as Keys)) {
+      (omitted as any)[key] = o[key];
+    }
+  }
+
+  return omitted;
+}
+
+/**
  * Given a set of properties T whose keys are in the object U, returns a new object with all picked properties
  * @since 2.10.0
  * @example

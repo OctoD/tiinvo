@@ -53,6 +53,13 @@ describe(`obj`, () => {
     expect(fn(testobject)).toBe(testobject.baz);
   })
 
+  test(`omit`, () => {
+    const myobject = { foo: 10, bar: 20, baz: 'qwerty' };
+    const omitfn = obj.omit(`foo`, `bar`);
+
+    expect(omitfn(myobject)).toEqual({ baz: `qwerty` });
+  });
+
   test(`pick`, () => {
     expect(obj.pick(`foo`, `baz`)(testobject)).toEqual({ foo: 100, baz: 300 })
   });
