@@ -1,3 +1,21 @@
+## [2.13.1](https://github.com/octod/tiinvo/compare/2.13.0...v2.13.1) (2021-03-17)
+
+
+### Bug Fixes
+
+* fixes typo ([63326ce](https://github.com/octod/tiinvo/commit/63326ce9d8457171a225a6690b312f32f9b20772))
+
+
+
+# [2.13.0](https://github.com/octod/tiinvo/compare/v2.13.0...2.13.0) (2021-03-16)
+
+
+### Features
+
+* adds obj.omit ([5865c20](https://github.com/octod/tiinvo/commit/5865c20237a8acf4d822d536244fd2120392efb1))
+
+
+
 # [2.13.0](https://github.com/octod/tiinvo/compare/v2.12.1...v2.13.0) (2021-03-16)
 
 
