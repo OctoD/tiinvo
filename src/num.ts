@@ -82,7 +82,7 @@ export const uroot: NumberUnaryFn = a => b => b ** (1 / a);
 export const usubtract: NumberUnaryFn = a => b => b - a;
 
 export const urandomint: NumberUnaryFn = min => max => Math.floor(Math.random() * (max - min + 1)) + min;
-export const urandomfloor: NumberUnaryFn = min => max => (Math.random() * (max - min + 1)) + min;
+export const urandomfloat: NumberUnaryFn = min => max => (Math.random() * (max - min + 1)) + min;
 
 //#endregion
 
@@ -101,7 +101,7 @@ export const broot: NumberBinaryFn = (a, b) => a ** (1 / b);
 export const bsubtract: NumberBinaryFn = (a, b) => a - b;
 
 export const brandomint: NumberBinaryFn = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-export const brandomfloor: NumberBinaryFn = (min, max) => (Math.random() * (max - min + 1)) + min;
+export const brandomfloat: NumberBinaryFn = (min, max) => (Math.random() * (max - min + 1)) + min;
 
 //#endregion
 

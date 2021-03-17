@@ -121,8 +121,6 @@ describe(`num`, () => {
 
     testfn(num.urandomint(min)(max));
     testfn(num.brandomint(min, max));
-    testfn(num.urandomfloor(min)(max));
-    testfn(num.brandomfloor(min, max));
   });
   test(`brangeint/urangeint/urangeint2`, () => {
     const expected = [0,1,2,3,4,5];
