@@ -1,3 +1,13 @@
+# [2.14.0](https://github.com/octod/tiinvo/compare/v2.13.1...v2.14.0) (2021-03-21)
+
+
+### Features
+
+* adds isJustOf ([ca6a3ce](https://github.com/octod/tiinvo/commit/ca6a3ce32c73ea1a9ea5a9f6623442f9910648a3))
+* adds isOkOf ([8091189](https://github.com/octod/tiinvo/commit/809118959ae4d9da7f4992d2070e5182ce0eb992))
+
+
+
 ## [2.13.1](https://github.com/octod/tiinvo/compare/2.13.0...v2.13.1) (2021-03-17)
 
 
