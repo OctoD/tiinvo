@@ -54,6 +54,7 @@ export const fromvalue = <T>(value: T) => (predicate: Predicate<T>) =>
 
 /**
  * Returns a comparison function
+ * @deprecated use `num.greaterthan` instead
  *
  * @example
  * ```ts
@@ -72,6 +73,7 @@ export const greaterthan = <T>(comparisonvalue: T) => (othervalue: T) =>
 
 /**
  * Returns a comparison function
+ * @deprecated use `num.greaterequalthan` instead
  *
  * @example
  * ```ts
@@ -90,6 +92,7 @@ export const greaterorequalthan = <T>(comparisonvalue: T) => (othervalue: T) =>
 
 /**
  * Returns a comparison function
+ * @deprecated use `num.lessthan` instead
  *
  * @example
  * ```ts
@@ -108,6 +111,7 @@ export const lessthan = <T>(comparisonvalue: T) => (othervalue: T) =>
 
 /**
  * Returns a comparison function
+ * @deprecated use `num.lessequalthan` instead
  *
  * @example
  * ```ts
