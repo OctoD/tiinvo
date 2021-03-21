@@ -1,6 +1,7 @@
 import { fallback } from "../applicative";
 import { pipe } from "../pipe";
 import * as result from "../result";
+import { isnumber } from '../typeguards';
 
 describe("result", () => {
   it("result", () => {
@@ -10,6 +11,14 @@ describe("result", () => {
     expect(result.isOk(tobeok)).toBeTruthy();
     expect(result.isErr(tobeerr)).toBeTruthy();
   });
+
+  it(`isOkOf`, () => {
+    const isnumok = result.isOkOf(isnumber);
+    
+    expect(isnumok(result.err(`nope`))).toBe(false);
+    expect(isnumok(result.ok(`nope2`))).toBe(false);
+    expect(isnumok(result.ok(1000000))).toBe(true);
+  })
 
   it("filter", () => {
     const test = result.filter((arg: number) => arg >= 0);

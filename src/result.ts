@@ -6,6 +6,7 @@ import { createFilter, createFilterOr } from "./filterables";
 import { createMap, createMapOr, createMapOrElse } from "./mappables";
 import {
   isTagged,
+  isTaggedOf,
   isTaggedWith, tagged, Tagged,
   TaggedFactory
 } from "./tagged-type";
@@ -39,7 +40,7 @@ export type ResultTag = Errtag | Oktag;
 /**
  *
  */
-export interface Err extends Tagged<Error, Errtag> {}
+export interface Err extends Tagged<Error, Errtag> { }
 
 /**
  *
@@ -101,6 +102,28 @@ export const isErr = tg.combine(isTagged, haserrtag) as tg.Typeguard<Err>;
  * @since 2.0.0
  */
 export const isOk = tg.combine(isTagged, hasoktag) as tg.Typeguard<Ok>;
+
+/**
+ * Checks if a value is `Ok<T>`.
+ * 
+ * @since 2.14.0
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { result, isnumber } from 'tiinvo';
+ * 
+ * const isnumok = result.isOkOf(isnumber);
+ * 
+ * isnumok(result.err(`nope`))  // false
+ * isnumok(result.ok(`nope2`))  // false
+ * isnumok(result.ok(1000000))  // true
+ * ```
+ * 
+ * @param type 
+ * @returns 
+ */
+export const isOkOf = <T>(type: tg.Typeguard<T>) => isTaggedOf(OKTAG, type) as tg.Typeguard<Ok<T>>;
 
 //#endregion
 
@@ -386,7 +409,7 @@ export const unwrapOrElse = createUnwrapOrElse<ResultTag>(isOk);
 export const fromfunction = createderivefromfunction(
   result as TaggedFactory<ResultTag>
 ) as <Fn extends (...args: any[]) => any>(
-  fn: Fn
-) => (
-  ...args: ArgsOf<Fn>
-) => ReturnType<Fn> extends Error ? Err : Ok<ReturnType<Fn>>;
+    fn: Fn
+  ) => (
+      ...args: ArgsOf<Fn>
+    ) => ReturnType<Fn> extends Error ? Err : Ok<ReturnType<Fn>>;
