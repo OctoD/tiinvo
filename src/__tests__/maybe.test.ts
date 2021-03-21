@@ -1,7 +1,16 @@
-import { maybe } from "..";
+import { isstring, maybe } from "..";
 import { bind } from "../applicative";
 
 describe(`maybe`, () => {
+  test(`isJustOf`, () => {
+    const isjustStr = maybe.isJustOf(isstring);
+
+    expect(isjustStr(10)).toBe(false);
+    expect(isjustStr(maybe.just(10))).toBe(false);
+    expect(isjustStr(maybe.just('abc'))).toBe(true);
+    expect(isjustStr(maybe.nothing())).toBe(false);
+  });
+
   test(`frompredicate`, () => {
     const isgreaterthan10 = (value: number) => value > 10;
     const fn = maybe.frompredicate(isgreaterthan10);

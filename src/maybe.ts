@@ -8,12 +8,13 @@ import { createMap, createMapOr, createMapOrElse } from "./mappables";
 import { Predicate } from "./predicate";
 import {
   isTagged,
+  isTaggedOf,
   isTaggedWith,
   tagged,
   Tagged,
   TaggedFactory,
 } from "./tagged-type";
-import { anyof, combine } from "./typeguards";
+import { anyof, combine, Typeguard } from "./typeguards";
 import {
   createUnwrap,
   createUnwrapOr,
@@ -69,8 +70,36 @@ export const isMaybe = combine<Maybe>(
 
 /**
  * Checks if a type is `Just<unknown>`
+ * @since 2.0.0
+ * 
+ * @example
+ * ```ts
+ * import { maybe } from 'tiinvo';
+ * 
+ * maybe.isJust(10)               // false
+ * maybe.isJust(maybe.just(10))   // true
+ * maybe.isJust(maybe.nothing())  // false
+ * ```
  */
 export const isJust = combine<Just>(isTagged, hasjusttag);
+
+/**
+ * Checks if a type is `Just<T>`
+ * @since 2.14.0
+ * 
+ * @example
+ * ```ts
+ * import { maybe, isstring } from 'tiinvo';
+ * 
+ * const isjustStr = maybe.isJustOf(isstring);
+ * 
+ * isjustStr(10)                  // false
+ * isjustStr(maybe.just(10))      // false
+ * isjustStr(maybe.just('abc'))   // true
+ * isjustStr(maybe.nothing())     // false
+ * ```
+ */
+export const isJustOf = <T>(type: Typeguard<T>) => isTaggedOf(JUSTTAG, type);
 
 /**
  * Checks if a type if `Nothing`
@@ -95,7 +124,7 @@ export const just = <T>(value: T) =>
 
 /**
  * Creates a `Maybe<T>` tagged type. If the value is truthy, it
- * creates a `Just<T>`, otherwise creates `Nothing`
+ * will be a `Just<T>`, otherwise it will be `Nothing`
  */
 export const maybe = <T>(arg?: T) => (arg ? just(arg) : nothing());
 
