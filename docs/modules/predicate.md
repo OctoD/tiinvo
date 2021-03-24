@@ -35,7 +35,7 @@ Name |
 ------ |
 `T` |
 
-Defined in: [src/predicate.ts:5](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/predicate.ts#L5)
+Defined in: [src/predicate.ts:5](https://github.com/OctoD/tiinvo/blob/5dcae37/src/predicate.ts#L5)
 
 ## Functions
 
@@ -73,7 +73,7 @@ Name | Type | Description |
 
 **Returns:** [*Predicate*](predicate.md#predicate)<T\>
 
-Defined in: [src/predicate.ts:28](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/predicate.ts#L28)
+Defined in: [src/predicate.ts:28](https://github.com/OctoD/tiinvo/blob/5dcae37/src/predicate.ts#L28)
 
 ___
 
@@ -111,7 +111,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/predicate.ts:52](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/predicate.ts#L52)
+Defined in: [src/predicate.ts:52](https://github.com/OctoD/tiinvo/blob/5dcae37/src/predicate.ts#L52)
 
 ___
 
@@ -145,7 +145,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/predicate.ts:143](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/predicate.ts#L143)
+Defined in: [src/predicate.ts:147](https://github.com/OctoD/tiinvo/blob/5dcae37/src/predicate.ts#L147)
 
 ___
 
@@ -154,6 +154,8 @@ ___
 ▸ `Const`**greaterorequalthan**<T\>(`comparisonvalue`: T): *function*
 
 Returns a comparison function
+
+**`deprecated`** use `num.greaterequalthan` instead
 
 **`example`** 
 ```ts
@@ -179,7 +181,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/predicate.ts:88](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/predicate.ts#L88)
+Defined in: [src/predicate.ts:90](https://github.com/OctoD/tiinvo/blob/5dcae37/src/predicate.ts#L90)
 
 ___
 
@@ -188,6 +190,8 @@ ___
 ▸ `Const`**greaterthan**<T\>(`comparisonvalue`: T): *function*
 
 Returns a comparison function
+
+**`deprecated`** use `num.greaterthan` instead
 
 **`example`** 
 ```ts
@@ -213,7 +217,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/predicate.ts:70](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/predicate.ts#L70)
+Defined in: [src/predicate.ts:71](https://github.com/OctoD/tiinvo/blob/5dcae37/src/predicate.ts#L71)
 
 ___
 
@@ -222,6 +226,8 @@ ___
 ▸ `Const`**lessorequalthan**<T\>(`comparisonvalue`: T): *function*
 
 Returns a comparison function
+
+**`deprecated`** use `num.lessequalthan` instead
 
 **`example`** 
 ```ts
@@ -247,7 +253,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/predicate.ts:124](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/predicate.ts#L124)
+Defined in: [src/predicate.ts:128](https://github.com/OctoD/tiinvo/blob/5dcae37/src/predicate.ts#L128)
 
 ___
 
@@ -256,6 +262,8 @@ ___
 ▸ `Const`**lessthan**<T\>(`comparisonvalue`: T): *function*
 
 Returns a comparison function
+
+**`deprecated`** use `num.lessthan` instead
 
 **`example`** 
 ```ts
@@ -281,7 +289,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/predicate.ts:106](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/predicate.ts#L106)
+Defined in: [src/predicate.ts:109](https://github.com/OctoD/tiinvo/blob/5dcae37/src/predicate.ts#L109)
 
 ___
 
@@ -321,7 +329,7 @@ Name | Type |
 
 **Returns:** [*Predicate*](predicate.md#predicate)<T\>
 
-Defined in: [src/predicate.ts:169](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/predicate.ts#L169)
+Defined in: [src/predicate.ts:173](https://github.com/OctoD/tiinvo/blob/5dcae37/src/predicate.ts#L173)
 
 ___
 
@@ -360,7 +368,7 @@ Name | Type |
 
 **Returns:** [*Predicate*](predicate.md#predicate)<T\>
 
-Defined in: [src/predicate.ts:195](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/predicate.ts#L195)
+Defined in: [src/predicate.ts:199](https://github.com/OctoD/tiinvo/blob/5dcae37/src/predicate.ts#L199)
 
 ___
 
@@ -394,7 +402,7 @@ Name | Type |
 
 **Returns:** [*Predicate*](predicate.md#predicate)<T\>
 
-Defined in: [src/predicate.ts:216](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/predicate.ts#L216)
+Defined in: [src/predicate.ts:220](https://github.com/OctoD/tiinvo/blob/5dcae37/src/predicate.ts#L220)
 
 ___
 
@@ -428,7 +436,7 @@ Name | Type | Description |
 
 **Returns:** [*Predicate*](predicate.md#predicate)<T\>
 
-Defined in: [src/predicate.ts:236](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/predicate.ts#L236)
+Defined in: [src/predicate.ts:240](https://github.com/OctoD/tiinvo/blob/5dcae37/src/predicate.ts#L240)
 
 ___
 
@@ -462,4 +470,4 @@ Name | Type | Description |
 
 **Returns:** [*Predicate*](predicate.md#predicate)<T\>
 
-Defined in: [src/predicate.ts:257](https://github.com/OctoD/tiinvo/blob/ea6e8d4/src/predicate.ts#L257)
+Defined in: [src/predicate.ts:261](https://github.com/OctoD/tiinvo/blob/5dcae37/src/predicate.ts#L261)
