@@ -1,3 +1,5 @@
+import { num, predicate, str } from '..';
+import { pipe } from '../pipe';
 import * as tg from "../typeguards";
 
 describe("typeguards", () => {
@@ -51,6 +53,21 @@ describe("typeguards", () => {
     expect(combined("hello world")).toBeTruthy();
   });
 
+  it(`combine example`, () => {
+    const haslengthof5 = pipe(
+      str.length,
+      num.greaterequalthan(5),
+    ) as tg.Typeguard<string>;
+
+    const isstringwithminlengthof5 = tg.combine<string>(
+      tg.isstring,
+      haslengthof5,
+    );
+
+    expect(isstringwithminlengthof5(`a`)).toBe(false);
+    expect(isstringwithminlengthof5(`abcde`)).toBe(true);
+  })
+
   it("anyof", () => {
     const stringornumber = tg.anyof(tg.isstring, tg.isnumber);
 
@@ -58,6 +75,34 @@ describe("typeguards", () => {
     expect(stringornumber("ì")).toBeTruthy();
     expect(stringornumber([])).toBeFalsy();
   });
+
+  it(`anyof example`, () => {
+    const Variadic1 = `hello`;
+    const Variadic2 = 10000000;
+    const Variadic3 = false;
+
+    type Variadic1 = typeof Variadic1;
+    type Variadic2 = typeof Variadic2;
+    type Variadic3 = typeof Variadic3;
+
+    type MyVariadicEnum = Variadic1 | Variadic2 | Variadic3;
+
+    const isVariadic1 = predicate.withsamevalue(Variadic1) as tg.Typeguard<Variadic1>;
+    const isVariadic2 = predicate.withsamevalue(Variadic2) as tg.Typeguard<Variadic2>;
+    const isVariadic3 = predicate.withsamevalue(Variadic3) as tg.Typeguard<Variadic3>;
+    const isMyVariadicEnum = tg.anyof<MyVariadicEnum>(
+      isVariadic1,
+      isVariadic2,
+      isVariadic3,
+    );
+
+    expect(isMyVariadicEnum(123)).toBe(false);
+    expect(isMyVariadicEnum(true)).toBe(false);
+    expect(isMyVariadicEnum('aa')).toBe(false);
+    expect(isMyVariadicEnum('hello')).toBe(true);
+    expect(isMyVariadicEnum(false)).toBe(true);
+    expect(isMyVariadicEnum(10000000)).toBe(true);
+  })
 
   it("isarrayof", () => {
     const numarray = tg.isarrayof(tg.isnumber);

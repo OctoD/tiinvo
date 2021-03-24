@@ -43,6 +43,7 @@ export type TypegardsTuple<T extends Typeguard<any>[]> = {
  * isarray('a') // false
  * isarray(!0)  // false
  * isarray([])  // true
+ * ```
  */
 export const isarray = ((arg) => Array.isArray(arg)) as Typeguard<unknown[]>;
 
@@ -55,6 +56,7 @@ export const isarray = ((arg) => Array.isArray(arg)) as Typeguard<unknown[]>;
  * isbigint('a') // false
  * isbigint(!0)  // false
  * isbigint(10n) // true
+ * ```
  */
 export const isbigint = ((arg) => typeof arg === "bigint") as Typeguard<bigint>;
 
@@ -67,6 +69,7 @@ export const isbigint = ((arg) => typeof arg === "bigint") as Typeguard<bigint>;
  * isboolean('a') // false
  * isboolean(!0)  // true
  * isboolean(10n) // false
+ * ```
  */
 export const isboolean = ((arg) =>
   typeof arg === "boolean") as Typeguard<boolean>;
@@ -81,6 +84,7 @@ export const isboolean = ((arg) =>
  * isdefined('a')         // true
  * isdefined(!0)          // true
  * isdefined(10n)         // true
+ * ```
  */
 export const isdefined = ((arg) =>
   typeof arg !== "undefined") as Typeguard<object>;
@@ -95,6 +99,7 @@ export const isdefined = ((arg) =>
  * isfunction('a')         // false
  * isfunction(!0)          // false
  * isfunction(() => void 0)// true
+ * ```
  */
 export const isfunction = ((arg) =>
   typeof arg === "function") as Typeguard<FnBase>;
@@ -108,6 +113,7 @@ export const isfunction = ((arg) =>
  * isnumber('a') // false
  * isnumber(!0)  // false
  * isnumber(10n) // false
+ * ```
  */
 export const isnumber = ((arg) => typeof arg === "number") as Typeguard<number>;
 
@@ -442,7 +448,30 @@ export const createTupleOf = istuple;
 //#endregion
 
 /**
- *
+ * Combines two or more typeguards in one.
+ * If every typeguard passes, the argument will be of type `T`.
+ * 
+ * @since 2.0.0
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { combine, isstring, Typeguard, num, str, pipe } from 'tiinvo'
+ * 
+ * const haslengthof5 = pipe(
+ *    str.length,
+ *    num.greaterequalthan(5),
+ * ) as Typeguard<string>;
+ * 
+ * const isstringwithminlengthof5 = combine<string>(
+ *    isstring,
+ *    haslengthof5,
+ * );
+ * 
+ * isstringwithminlengthof5(`a`)      // false
+ * isstringwithminlengthof5(`abcde`)  // true
+ * 
+ * ```
  *
  * @template T
  * @param {...Typeguard<T>[]} args
@@ -452,7 +481,40 @@ export const combine = <T>(...args: Typeguard<any>[]): Typeguard<T> =>
   predicate.and.apply(null, args) as Typeguard<T>;
 
 /**
- *
+ * Determines if one or more typeguards are satisfied by the given value.
+ * Ideal for typechecking enums, variadic enums, constants etc.
+ * 
+ * @since 2.0.0
+ * 
+ * ```ts
+ * import { anyof, isstring, isnumber, isbool, Typeguard, predicate } from 'tiinvo';
+ * 
+ * export const Variadic1 = `hello`;
+ * export const Variadic2 = 10000000;
+ * export const Variadic3 = false;
+ * 
+ * export type Variadic1 = typeof Variadic1;
+ * export type Variadic2 = typeof Variadic2;
+ * export type Variadic3 = typeof Variadic3;
+ * 
+ * export type MyVariadicEnum = Variadic1 | Variadic2 | Variadic3;
+ * 
+ * export const isVariadic1 = predicate.withsamevalue(Variadic1) as Typeguard<Variadic1>;
+ * export const isVariadic2 = predicate.withsamevalue(Variadic2) as Typeguard<Variadic2>;
+ * export const isVariadic3 = predicate.withsamevalue(Variadic3) as Typeguard<Variadic3>;
+ * export const isMyVariadicEnum = anyof<MyVariadicEnum>(
+ *    isVariadic1,
+ *    isVariadic2,
+ *    isVariadic3,
+ * );
+ * 
+ * isMyVariadicEnum(123)      // false
+ * isMyVariadicEnum(true)     // false
+ * isMyVariadicEnum('aa')     // false
+ * isMyVariadicEnum('hello')  // true
+ * isMyVariadicEnum(false)    // true
+ * isMyVariadicEnum(10000000) // true
+ * ```
  *
  * @template T
  * @param {...Typeguard<unknown>[]} predicates
