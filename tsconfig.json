@@ -33,7 +33,7 @@
     "esModuleInterop": true,
     "declaration": true,
     "outDir": "dist",
-    "module": "commonjs",
+    "module": "ESNext",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
