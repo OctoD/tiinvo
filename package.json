@@ -4,7 +4,7 @@
   "author": "Paolo Roth <octod>",
   "license": "MIT",
   "description": "Lot of functions for tacit programming and functional types for TypeScript and JavaScript.",
-  "main": "dist/csj/index.cjs",
+  "main": "dist/csj/index.js",
   "module": "dist/esm/index.mjs",
   "types": "dist/cjs/index.d.ts",
   "esnext": "dist/esm/index.mjs",
