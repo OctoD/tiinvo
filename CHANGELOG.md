@@ -1,3 +1,28 @@
+# [2.15.0](https://github.com/octod/tiinvo/compare/v2.14.3...v2.15.0) (2021-04-12)
+
+
+### Features
+
+* adds str and num sort fns ([be51d2b](https://github.com/octod/tiinvo/commit/be51d2bb29afb34380842575d5df4586cb79053e))
+
+
+
+## [2.14.3](https://github.com/octod/tiinvo/compare/v2.14.2...v2.14.3) (2021-04-05)
+
+
+
+## [2.14.2](https://github.com/octod/tiinvo/compare/v2.14.1...v2.14.2) (2021-04-03)
+
+
+
+## [2.14.1](https://github.com/octod/tiinvo/compare/2.14.0...v2.14.1) (2021-04-03)
+
+
+
+# [2.14.0](https://github.com/octod/tiinvo/compare/v2.14.0...2.14.0) (2021-03-21)
+
+
+
 # [2.14.0](https://github.com/octod/tiinvo/compare/v2.13.1...v2.14.0) (2021-03-21)
 
 
