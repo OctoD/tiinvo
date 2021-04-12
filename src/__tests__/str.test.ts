@@ -75,6 +75,18 @@ describe(`str`, () =>{
   test(`lowercase`, () => {
     expect(str.lowercase('LOWER')).toBe(`lower`);
   })
+  test(`sortasc`, () => {
+    const test = ['b', 'a'];
+    const expected = ['a', 'b'];
+
+    expect(expect.arrayContaining(test.sort(str.sortasc))).toEqual(expected);
+  });
+  test(`sortdesc`, () => {
+    const test = ['a', 'b'];
+    const expected = ['b', 'a'];
+
+    expect(expect.arrayContaining(test.sort(str.sortdesc))).toEqual(expected);
+  });
   test(`uppercase`, () => {
     expect(str.uppercase('uppercase')).toBe(`UPPERCASE`);
   })

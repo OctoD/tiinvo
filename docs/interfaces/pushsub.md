@@ -24,7 +24,7 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [src/push-sub.ts:4](https://github.com/OctoD/tiinvo/blob/5dcae37/src/push-sub.ts#L4)
+Defined in: [src/push-sub.ts:4](https://github.com/OctoD/tiinvo/blob/6c664d2/src/push-sub.ts#L4)
 
 ## Table of contents
 
@@ -38,4 +38,4 @@ Defined in: [src/push-sub.ts:4](https://github.com/OctoD/tiinvo/blob/5dcae37/src
 
 • **unsubscribe**: [*UnsubscribeFn*](../README.md#unsubscribefn)
 
-Defined in: [src/push-sub.ts:6](https://github.com/OctoD/tiinvo/blob/5dcae37/src/push-sub.ts#L6)
+Defined in: [src/push-sub.ts:6](https://github.com/OctoD/tiinvo/blob/6c664d2/src/push-sub.ts#L6)

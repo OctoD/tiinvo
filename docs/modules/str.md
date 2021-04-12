@@ -24,6 +24,8 @@
 - [replace](str.md#replace)
 - [search](str.md#search)
 - [slice](str.md#slice)
+- [sortasc](str.md#sortasc)
+- [sortdesc](str.md#sortdesc)
 - [split](str.md#split)
 - [substring](str.md#substring)
 - [substringI](str.md#substringi)
@@ -62,7 +64,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:22](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L22)
+Defined in: [src/str.ts:22](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L22)
 
 ___
 
@@ -84,7 +86,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:29](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L29)
+Defined in: [src/str.ts:29](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L29)
 
 ___
 
@@ -112,7 +114,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:42](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L42)
+Defined in: [src/str.ts:42](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L42)
 
 ___
 
@@ -143,7 +145,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:58](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L58)
+Defined in: [src/str.ts:58](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L58)
 
 ___
 
@@ -165,7 +167,7 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [src/str.ts:277](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L277)
+Defined in: [src/str.ts:277](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L277)
 
 ___
 
@@ -194,7 +196,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:72](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L72)
+Defined in: [src/str.ts:72](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L72)
 
 ___
 
@@ -222,7 +224,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:85](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L85)
+Defined in: [src/str.ts:85](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L85)
 
 ___
 
@@ -251,7 +253,7 @@ Name | Type |
 
 **Returns:** *boolean*
 
-Defined in: [src/str.ts:291](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L291)
+Defined in: [src/str.ts:291](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L291)
 
 ___
 
@@ -279,7 +281,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:98](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L98)
+Defined in: [src/str.ts:98](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L98)
 
 ___
 
@@ -307,7 +309,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: [src/str.ts:304](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L304)
+Defined in: [src/str.ts:304](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L304)
 
 ___
 
@@ -329,7 +331,7 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [src/str.ts:311](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L311)
+Defined in: [src/str.ts:311](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L311)
 
 ___
 
@@ -358,7 +360,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:112](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L112)
+Defined in: [src/str.ts:112](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L112)
 
 ___
 
@@ -386,7 +388,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:125](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L125)
+Defined in: [src/str.ts:125](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L125)
 
 ___
 
@@ -414,7 +416,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:138](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L138)
+Defined in: [src/str.ts:138](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L138)
 
 ___
 
@@ -442,7 +444,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:151](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L151)
+Defined in: [src/str.ts:151](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L151)
 
 ___
 
@@ -471,7 +473,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:163](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L163)
+Defined in: [src/str.ts:163](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L163)
 
 ___
 
@@ -499,7 +501,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:176](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L176)
+Defined in: [src/str.ts:176](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L176)
 
 ___
 
@@ -527,7 +529,45 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:189](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L189)
+Defined in: [src/str.ts:189](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L189)
+
+___
+
+### sortasc
+
+▸ `Const`**sortasc**(`a`: *string*, `b`: *string*): *0* \| *1* \| *-1*
+
+A case-insensitive sorting algh. Sorts strings ascending.
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`a` | *string* |
+`b` | *string* |
+
+**Returns:** *0* \| *1* \| *-1*
+
+Defined in: [src/str.ts:319](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L319)
+
+___
+
+### sortdesc
+
+▸ `Const`**sortdesc**(`a`: *string*, `b`: *string*): *0* \| *1* \| *-1*
+
+A case-insensitive sorting algh. Sorts strings descending.
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`a` | *string* |
+`b` | *string* |
+
+**Returns:** *0* \| *1* \| *-1*
+
+Defined in: [src/str.ts:331](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L331)
 
 ___
 
@@ -556,7 +596,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:202](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L202)
+Defined in: [src/str.ts:202](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L202)
 
 ___
 
@@ -584,7 +624,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:228](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L228)
+Defined in: [src/str.ts:228](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L228)
 
 ___
 
@@ -612,7 +652,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/str.ts:215](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L215)
+Defined in: [src/str.ts:215](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L215)
 
 ___
 
@@ -640,7 +680,7 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [src/str.ts:241](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L241)
+Defined in: [src/str.ts:241](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L241)
 
 ___
 
@@ -668,7 +708,7 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [src/str.ts:254](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L254)
+Defined in: [src/str.ts:254](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L254)
 
 ___
 
@@ -696,7 +736,7 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [src/str.ts:267](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L267)
+Defined in: [src/str.ts:267](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L267)
 
 ___
 
@@ -718,4 +758,4 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [src/str.ts:318](https://github.com/OctoD/tiinvo/blob/5dcae37/src/str.ts#L318)
+Defined in: [src/str.ts:343](https://github.com/OctoD/tiinvo/blob/6c664d2/src/str.ts#L343)

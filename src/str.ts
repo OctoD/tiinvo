@@ -309,6 +309,31 @@ export const length = (arg: string) => arg.length;
  * @example
  */
 export const lowercase = (arg: string) => arg.toLowerCase();
+
+/**
+ * A case-insensitive sorting algh. Sorts strings ascending.
+ * @param a 
+ * @param b 
+ * @returns 
+ */
+export const sortasc = (a: string, b: string) => {
+  const al = a.toLowerCase();
+  const bl = b.toLowerCase();
+  return al > bl ? 1 : al < bl ? -1 : 0;
+};
+
+/**
+ * A case-insensitive sorting algh. Sorts strings descending.
+ * @param a 
+ * @param b 
+ * @returns 
+ */
+export const sortdesc = (a: string, b: string) => {
+  const al = a.toLowerCase();
+  const bl = b.toLowerCase();
+  return bl > al ? 1 : bl < al ? -1 : 0;
+};
+
 /**
  * Returns a copy of a string in upper case
  * 

@@ -31,7 +31,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/unwrappables.ts:12](https://github.com/OctoD/tiinvo/blob/5dcae37/src/unwrappables.ts#L12)
+Defined in: [src/unwrappables.ts:12](https://github.com/OctoD/tiinvo/blob/6c664d2/src/unwrappables.ts#L12)
 
 ___
 
@@ -53,7 +53,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/unwrappables.ts:26](https://github.com/OctoD/tiinvo/blob/5dcae37/src/unwrappables.ts#L26)
+Defined in: [src/unwrappables.ts:26](https://github.com/OctoD/tiinvo/blob/6c664d2/src/unwrappables.ts#L26)
 
 ___
 
@@ -75,4 +75,4 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/unwrappables.ts:37](https://github.com/OctoD/tiinvo/blob/5dcae37/src/unwrappables.ts#L37)
+Defined in: [src/unwrappables.ts:37](https://github.com/OctoD/tiinvo/blob/6c664d2/src/unwrappables.ts#L37)

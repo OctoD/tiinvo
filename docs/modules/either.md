@@ -67,7 +67,7 @@ Name | Default |
 `TLeft` | *unknown* |
 `TRight` | *unknown* |
 
-Defined in: [src/either.ts:46](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L46)
+Defined in: [src/either.ts:46](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L46)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 Left or Right tagtypes
 
-Defined in: [src/either.ts:32](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L32)
+Defined in: [src/either.ts:32](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L32)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 Left tagtype
 
-Defined in: [src/either.ts:24](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L24)
+Defined in: [src/either.ts:24](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L24)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 Right tagtype
 
-Defined in: [src/either.ts:28](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L28)
+Defined in: [src/either.ts:28](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L28)
 
 ## Functions
 
@@ -121,7 +121,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:168](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L168)
+Defined in: [src/either.ts:168](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L168)
 
 ___
 
@@ -146,7 +146,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:177](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L177)
+Defined in: [src/either.ts:177](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L177)
 
 ___
 
@@ -170,7 +170,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:182](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L182)
+Defined in: [src/either.ts:182](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L182)
 
 ___
 
@@ -195,7 +195,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:191](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L191)
+Defined in: [src/either.ts:191](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L191)
 
 ___
 
@@ -222,7 +222,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:203](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L203)
+Defined in: [src/either.ts:203](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L203)
 
 ___
 
@@ -260,7 +260,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:394](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L394)
+Defined in: [src/either.ts:394](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L394)
 
 ___
 
@@ -292,7 +292,7 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:363](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L363)
+Defined in: [src/either.ts:363](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L363)
 
 ___
 
@@ -310,7 +310,7 @@ Name | Type |
 
 **Returns:** arg is Either<unknown, unknown\>
 
-Defined in: [src/either.ts:61](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L61)
+Defined in: [src/either.ts:61](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L61)
 
 ___
 
@@ -345,7 +345,7 @@ Name | Type | Description |
 
 **Returns:** [*Typeguard*](../README.md#typeguard)<*unknown*\>
 
-Defined in: [src/either.ts:90](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L90)
+Defined in: [src/either.ts:90](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L90)
 
 ___
 
@@ -363,7 +363,7 @@ Name | Type |
 
 **Returns:** arg is Left<unknown\>
 
-Defined in: [src/either.ts:66](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L66)
+Defined in: [src/either.ts:66](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L66)
 
 ___
 
@@ -400,7 +400,7 @@ Name | Type | Description |
 
 **Returns:** [*Typeguard*](../README.md#typeguard)<*unknown*\>
 
-Defined in: [src/either.ts:112](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L112)
+Defined in: [src/either.ts:112](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L112)
 
 ___
 
@@ -418,7 +418,7 @@ Name | Type |
 
 **Returns:** arg is Right<unknown\>
 
-Defined in: [src/either.ts:71](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L71)
+Defined in: [src/either.ts:71](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L71)
 
 ___
 
@@ -455,7 +455,7 @@ Name | Type | Description |
 
 **Returns:** [*Typeguard*](../README.md#typeguard)<*unknown*\>
 
-Defined in: [src/either.ts:134](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L134)
+Defined in: [src/either.ts:134](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L134)
 
 ___
 
@@ -479,7 +479,7 @@ Name | Type |
 
 **Returns:** [*Left*](../interfaces/either.left.md)<T\>
 
-Defined in: [src/either.ts:144](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L144)
+Defined in: [src/either.ts:144](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L144)
 
 ___
 
@@ -504,7 +504,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:154](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L154)
+Defined in: [src/either.ts:154](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L154)
 
 ___
 
@@ -529,7 +529,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:369](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L369)
+Defined in: [src/either.ts:369](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L369)
 
 ___
 
@@ -554,7 +554,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:217](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L217)
+Defined in: [src/either.ts:217](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L217)
 
 ___
 
@@ -580,7 +580,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:227](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L227)
+Defined in: [src/either.ts:227](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L227)
 
 ___
 
@@ -606,7 +606,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:237](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L237)
+Defined in: [src/either.ts:237](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L237)
 
 ___
 
@@ -631,7 +631,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:222](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L222)
+Defined in: [src/either.ts:222](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L222)
 
 ___
 
@@ -657,7 +657,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:232](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L232)
+Defined in: [src/either.ts:232](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L232)
 
 ___
 
@@ -683,7 +683,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:245](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L245)
+Defined in: [src/either.ts:245](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L245)
 
 ___
 
@@ -707,7 +707,7 @@ Name | Type |
 
 **Returns:** [*Right*](../interfaces/either.right.md)<T\>
 
-Defined in: [src/either.ts:149](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L149)
+Defined in: [src/either.ts:149](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L149)
 
 ___
 
@@ -732,7 +732,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:159](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L159)
+Defined in: [src/either.ts:159](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L159)
 
 ___
 
@@ -757,7 +757,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:374](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L374)
+Defined in: [src/either.ts:374](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L374)
 
 ___
 
@@ -781,7 +781,7 @@ Name | Type |
 
 **Returns:** T[*__tag*] *extends* *left* ? [*Tagged*](../README.md#tagged)<T[*value*], *right*\> : [*Tagged*](../README.md#tagged)<T[*value*], *left*\>
 
-Defined in: [src/either.ts:208](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L208)
+Defined in: [src/either.ts:208](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L208)
 
 ___
 
@@ -809,7 +809,7 @@ Name | Type |
 
 **Returns:** Arg *extends* [*Tagged*](../README.md#tagged)<U, *string*\> ? U : *never*
 
-Defined in: [src/either.ts:259](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L259)
+Defined in: [src/either.ts:259](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L259)
 
 ___
 
@@ -842,7 +842,7 @@ Name | Type |
 
 **Returns:** Arg *extends* [*Tagged*](../README.md#tagged)<U, *string*\> ? U : *never*
 
-Defined in: [src/either.ts:273](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L273)
+Defined in: [src/either.ts:273](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L273)
 
 ___
 
@@ -874,7 +874,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:306](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L306)
+Defined in: [src/either.ts:306](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L306)
 
 ___
 
@@ -906,7 +906,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:332](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L332)
+Defined in: [src/either.ts:332](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L332)
 
 ___
 
@@ -939,7 +939,7 @@ Name | Type |
 
 **Returns:** Arg *extends* [*Tagged*](../README.md#tagged)<U, *string*\> ? U : *never*
 
-Defined in: [src/either.ts:290](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L290)
+Defined in: [src/either.ts:290](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L290)
 
 ___
 
@@ -971,7 +971,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:319](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L319)
+Defined in: [src/either.ts:319](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L319)
 
 ___
 
@@ -1003,4 +1003,4 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/either.ts:345](https://github.com/OctoD/tiinvo/blob/5dcae37/src/either.ts#L345)
+Defined in: [src/either.ts:345](https://github.com/OctoD/tiinvo/blob/6c664d2/src/either.ts#L345)

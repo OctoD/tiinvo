@@ -50,7 +50,7 @@
 
 Ƭ **ErrFactory**: (`message`: *string* \| Error) => [*Err*](../interfaces/result.err.md)
 
-Defined in: [src/result.ts:58](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L58)
+Defined in: [src/result.ts:58](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L58)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 Ƭ **Errtag**: *typeof* ERRTAG
 
-Defined in: [src/result.ts:28](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L28)
+Defined in: [src/result.ts:28](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L28)
 
 ___
 
@@ -72,7 +72,7 @@ Name |
 ------ |
 `T` |
 
-Defined in: [src/result.ts:68](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L68)
+Defined in: [src/result.ts:68](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L68)
 
 ___
 
@@ -86,7 +86,7 @@ Name | Default |
 ------ | ------ |
 `T` | *unknown* |
 
-Defined in: [src/result.ts:48](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L48)
+Defined in: [src/result.ts:48](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L48)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 Ƭ **OkFactory**: <T\>(`arg`: T) => [*Ok*](result.md#ok)<T\>
 
-Defined in: [src/result.ts:62](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L62)
+Defined in: [src/result.ts:62](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L62)
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 Ƭ **Oktag**: *typeof* OKTAG
 
-Defined in: [src/result.ts:33](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L33)
+Defined in: [src/result.ts:33](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L33)
 
 ___
 
@@ -116,7 +116,7 @@ Name | Default |
 ------ | ------ |
 `T` | *unknown* |
 
-Defined in: [src/result.ts:53](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L53)
+Defined in: [src/result.ts:53](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L53)
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 Ƭ **ResultFactory**: <T\>(`arg`: T) => [*Result*](result.md#result)<T\>
 
-Defined in: [src/result.ts:66](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L66)
+Defined in: [src/result.ts:66](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L66)
 
 ___
 
@@ -132,7 +132,7 @@ ___
 
 Ƭ **ResultTag**: [*Errtag*](result.md#errtag) \| [*Oktag*](result.md#oktag)
 
-Defined in: [src/result.ts:38](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L38)
+Defined in: [src/result.ts:38](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L38)
 
 ## Functions
 
@@ -152,7 +152,7 @@ Name | Type |
 
 **Returns:** [*Err*](../interfaces/result.err.md)
 
-Defined in: [src/result.ts:136](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L136)
+Defined in: [src/result.ts:136](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L136)
 
 ___
 
@@ -172,7 +172,7 @@ Name | Type |
 
 **Returns:** [*Err*](../interfaces/result.err.md)
 
-Defined in: [src/result.ts:161](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L161)
+Defined in: [src/result.ts:161](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L161)
 
 ___
 
@@ -192,7 +192,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:188](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L188)
+Defined in: [src/result.ts:188](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L188)
 
 ___
 
@@ -237,7 +237,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:222](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L222)
+Defined in: [src/result.ts:222](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L222)
 
 ___
 
@@ -283,7 +283,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:251](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L251)
+Defined in: [src/result.ts:251](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L251)
 
 ___
 
@@ -309,7 +309,7 @@ Name | Type |
 
 **Returns:** [*Result*](result.md#result)<T\>
 
-Defined in: [src/result.ts:176](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L176)
+Defined in: [src/result.ts:176](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L176)
 
 ___
 
@@ -335,7 +335,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:409](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L409)
+Defined in: [src/result.ts:409](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L409)
 
 ___
 
@@ -355,7 +355,7 @@ Name | Type |
 
 **Returns:** arg is Err
 
-Defined in: [src/result.ts:99](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L99)
+Defined in: [src/result.ts:99](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L99)
 
 ___
 
@@ -375,7 +375,7 @@ Name | Type |
 
 **Returns:** arg is Tagged<unknown, "ok"\>
 
-Defined in: [src/result.ts:104](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L104)
+Defined in: [src/result.ts:104](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L104)
 
 ___
 
@@ -413,7 +413,7 @@ Name | Type |
 
 **Returns:** [*Typeguard*](../README.md#typeguard)<[*Ok*](result.md#ok)<T\>\>
 
-Defined in: [src/result.ts:126](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L126)
+Defined in: [src/result.ts:126](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L126)
 
 ___
 
@@ -443,7 +443,7 @@ Name | Type |
 
 **Returns:** arg is Tagged<unknown, "ok"\>
 
-Defined in: [src/result.ts:91](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L91)
+Defined in: [src/result.ts:91](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L91)
 
 ___
 
@@ -488,7 +488,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:282](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L282)
+Defined in: [src/result.ts:282](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L282)
 
 ___
 
@@ -534,7 +534,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:309](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L309)
+Defined in: [src/result.ts:309](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L309)
 
 ___
 
@@ -581,7 +581,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:337](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L337)
+Defined in: [src/result.ts:337](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L337)
 
 ___
 
@@ -607,7 +607,7 @@ Name | Type |
 
 **Returns:** [*Ok*](result.md#ok)<T\>
 
-Defined in: [src/result.ts:143](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L143)
+Defined in: [src/result.ts:143](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L143)
 
 ___
 
@@ -634,7 +634,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:170](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L170)
+Defined in: [src/result.ts:170](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L170)
 
 ___
 
@@ -661,7 +661,7 @@ Name | Type |
 
 **Returns:** [*Result*](result.md#result)<T\>
 
-Defined in: [src/result.ts:154](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L154)
+Defined in: [src/result.ts:154](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L154)
 
 ___
 
@@ -681,7 +681,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:193](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L193)
+Defined in: [src/result.ts:193](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L193)
 
 ___
 
@@ -720,7 +720,7 @@ Name | Type |
 
 **Returns:** Arg *extends* [*Tagged*](../README.md#tagged)<U, [*ResultTag*](result.md#resulttag)\> ? U : *never*
 
-Defined in: [src/result.ts:363](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L363)
+Defined in: [src/result.ts:363](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L363)
 
 ___
 
@@ -759,7 +759,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:383](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L383)
+Defined in: [src/result.ts:383](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L383)
 
 ___
 
@@ -798,4 +798,4 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/result.ts:401](https://github.com/OctoD/tiinvo/blob/5dcae37/src/result.ts#L401)
+Defined in: [src/result.ts:401](https://github.com/OctoD/tiinvo/blob/6c664d2/src/result.ts#L401)

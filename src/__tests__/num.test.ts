@@ -134,4 +134,14 @@ describe(`num`, () => {
     testfn(second);
     testfn(third);
   });
+  test(`sortasc`, () => {
+    const test = [2, 1];
+    const expected = [1,2];
+    expect(expect.arrayContaining(test.sort(num.sortasc))).toEqual(expected);
+  })
+  test(`sortdesc`, () => {
+    const test = [1,2];
+    const expected = [2, 1];
+    expect(expect.arrayContaining(test.sort(num.sortdesc))).toEqual(expected);
+  })
 });

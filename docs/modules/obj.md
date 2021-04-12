@@ -49,7 +49,7 @@ Name | Type | Description |
 
 **Returns:** [*string*, T][]
 
-Defined in: [src/obj.ts:15](https://github.com/OctoD/tiinvo/blob/5dcae37/src/obj.ts#L15)
+Defined in: [src/obj.ts:15](https://github.com/OctoD/tiinvo/blob/6c664d2/src/obj.ts#L15)
 
 ___
 
@@ -84,7 +84,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/obj.ts:32](https://github.com/OctoD/tiinvo/blob/5dcae37/src/obj.ts#L32)
+Defined in: [src/obj.ts:32](https://github.com/OctoD/tiinvo/blob/6c664d2/src/obj.ts#L32)
 
 ___
 
@@ -124,7 +124,7 @@ Name | Type |
 
 **Returns:** *boolean*
 
-Defined in: [src/obj.ts:54](https://github.com/OctoD/tiinvo/blob/5dcae37/src/obj.ts#L54)
+Defined in: [src/obj.ts:54](https://github.com/OctoD/tiinvo/blob/6c664d2/src/obj.ts#L54)
 
 ___
 
@@ -164,7 +164,7 @@ Name | Type |
 
 **Returns:** *boolean*
 
-Defined in: [src/obj.ts:76](https://github.com/OctoD/tiinvo/blob/5dcae37/src/obj.ts#L76)
+Defined in: [src/obj.ts:76](https://github.com/OctoD/tiinvo/blob/6c664d2/src/obj.ts#L76)
 
 ___
 
@@ -204,7 +204,7 @@ Name | Type |
 
 **Returns:** *boolean*
 
-Defined in: [src/obj.ts:98](https://github.com/OctoD/tiinvo/blob/5dcae37/src/obj.ts#L98)
+Defined in: [src/obj.ts:98](https://github.com/OctoD/tiinvo/blob/6c664d2/src/obj.ts#L98)
 
 ___
 
@@ -238,7 +238,7 @@ Name | Type |
 
 **Returns:** keyof T[]
 
-Defined in: [src/obj.ts:114](https://github.com/OctoD/tiinvo/blob/5dcae37/src/obj.ts#L114)
+Defined in: [src/obj.ts:114](https://github.com/OctoD/tiinvo/blob/6c664d2/src/obj.ts#L114)
 
 ___
 
@@ -277,7 +277,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/obj.ts:135](https://github.com/OctoD/tiinvo/blob/5dcae37/src/obj.ts#L135)
+Defined in: [src/obj.ts:135](https://github.com/OctoD/tiinvo/blob/6c664d2/src/obj.ts#L135)
 
 ___
 
@@ -313,7 +313,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/obj.ts:154](https://github.com/OctoD/tiinvo/blob/5dcae37/src/obj.ts#L154)
+Defined in: [src/obj.ts:154](https://github.com/OctoD/tiinvo/blob/6c664d2/src/obj.ts#L154)
 
 ___
 
@@ -349,7 +349,7 @@ Name | Type |
 
 **Returns:** *function*
 
-Defined in: [src/obj.ts:185](https://github.com/OctoD/tiinvo/blob/5dcae37/src/obj.ts#L185)
+Defined in: [src/obj.ts:185](https://github.com/OctoD/tiinvo/blob/6c664d2/src/obj.ts#L185)
 
 ___
 
@@ -383,4 +383,4 @@ Name | Type |
 
 **Returns:** T[]
 
-Defined in: [src/obj.ts:204](https://github.com/OctoD/tiinvo/blob/5dcae37/src/obj.ts#L204)
+Defined in: [src/obj.ts:204](https://github.com/OctoD/tiinvo/blob/6c664d2/src/obj.ts#L204)

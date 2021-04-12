@@ -157,3 +157,23 @@ export const urangeint: NumberRangeUnaryFn = min => max => brangeint(min, max);
 export const urangeint2: NumberRangeUnaryFn = max => min => brangeint(min, max);
 
 //#endregion
+
+//#region sortables
+
+/**
+ * Sorts numbers ascending
+ * @param a 
+ * @param b 
+ * @returns 
+ */
+export const sortasc = (a: number, b: number) => a - b;
+
+/**
+ * Sorts numbers descending
+ * @param a 
+ * @param b 
+ * @returns 
+ */
+export const sortdesc = (a: number, b: number) => b - a;
+
+//#endregion
