@@ -35,7 +35,7 @@
   "scripts": {
     "benchmarks": "ts-node .src/benchmarks",
     "changelog": "standard-changelog --first-release",
-    "docs": "typedoc --options typedoc.markdown.json",
+    "docs:serve": "docsify serve docs",
     "lint": "eslint -c ./.eslintrc.json src/**/*.ts --fix",
     "prepublishOnly": "rimraf dist && rollup -c ./rollup.config.js",
     "test": "jest",
@@ -65,6 +65,7 @@
     "@typescript-eslint/parser": "^4.15.0",
     "benchmark": "2.1.4",
     "codecov": "^3.8.1",
+    "docsify-cli": "^4.4.3",
     "eslint": "^7.20.0",
     "husky": "^5.0.9",
     "jest": "^26.6.3",
@@ -78,8 +79,6 @@
     "standard-changelog": "^2.0.27",
     "ts-jest": "^26.5.1",
     "ts-node": "^9.1.1",
-    "typedoc": "^0.20.25",
-    "typedoc-plugin-markdown": "^3.4.5",
     "typescript": "^4.1.5"
   }
 }
