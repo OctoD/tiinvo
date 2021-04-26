@@ -10,11 +10,13 @@ export type Predicate<T> = (arg: T) => boolean;
  *
  * @example
  * ```ts
+ * import { predicate } from 'tiinvo';
+ * 
  * const isString = (arg: unknown): arg is string => typeof arg === 'string';
  * const hasLength = (length: number) => (arg: unknown): boolean => isString(arg) && arg.length >= length;
  * const contains = (str: string) => (arg: unknown): boolean => isString(arg) && arg.contains(str);
  *
- * const combined = and(isString, hasLength(4), contains('foo'))
+ * const combined = predicate.and(isString, hasLength(4), contains('foo'))
  *
  * combined('foobarbaz'); // true
  * combined('helloworld'); // false
@@ -31,15 +33,17 @@ export const and = <T>(...predicates: Predicate<T>[]): Predicate<T> => (
 
 /**
  * Creates a new function which accepts a predicate. This predicate will check
- * the given value
+ * the value used for creating that function.
  *
  * @example
  * ```ts
+ * import { predicate } from 'tiinvo';
+ * 
  * const iseven = (arg: number) => arg % 2 === 0;
- * const isodd  = reverse(iseven);
- * const check1 = fromvalue(1);
- * const check2 = fromvalue(2);
- *
+ * const isodd  = predicate.reverse(iseven);
+ * const check1 = predicate.fromvalue(1);
+ * const check2 = predicate.fromvalue(2);
+ * 
  * check1(iseven)   // false
  * check1(isodd)    // true
  * check2(iseven)   // true
@@ -133,10 +137,12 @@ export const lessorequalthan = <T>(comparisonvalue: T) => (othervalue: T) =>
  *
  * @example
  * ```ts
- * const test1 = fromvalues(1, 2, 3, 4, 5);
- * const test2 = fromvalues(2, 4, 6, 8);
+ * import { predicate } from 'tiinvo'
+ * 
+ * const test1 = predicate.fromvalues(1, 2, 3, 4, 5);
+ * const test2 = predicate.fromvalues(2, 4, 6, 8);
  * const iseven = (arg: number) => arg % 2 === 0;
- *
+ * 
  * test1(iseven); // false
  * test2(iseven); // true
  * ```
@@ -153,13 +159,15 @@ export const fromvalues = <T>(...values: T[]) => (predicate: Predicate<T>) =>
  *
  * @example
  * ```ts
+ * import { predicate } from 'tiinvo';
+ * 
  * const isnumber = (arg: unknown): arg is number => typeof arg === 'number';
  * const isstring = (arg: unknown): arg is string => typeof arg === 'string';
  * const isnull = (arg: unknown): arg is null => typeof arg === 'null';
  * const isundefined = (arg: unknown): arg is undefined => typeof arg === 'null';
- *
- * const noneOfTheAbove = noneof(isnumber, isstring, isnull, isundefined);
- *
+ * 
+ * const noneOfTheAbove = predicate.noneof(isnumber, isstring, isnull, isundefined);
+ * 
  * noneOfTheAbove(10)             // false
  * noneOfTheAbove('hello world')  // false
  * noneOfTheAbove(null)           // false
@@ -180,12 +188,14 @@ export const noneof = <T>(...predicates: Predicate<T>[]): Predicate<T> => (
  *
  * @example
  * ```ts
- * const isester = fromvalue('Ester');
- * const isjoe = fromvalue('Joe');
- * const islisa = fromvalue('Lisa');
- *
- * const orfn = or(isester, isjoe, islisa);
- *
+ * import { predicate } from 'tiinvo';
+ * 
+ * const isester = predicate.fromvalue('Ester');
+ * const isjoe = predicate.fromvalue('Joe');
+ * const islisa = predicate.fromvalue('Lisa');
+ * 
+ * const orfn = predicate.or(isester, isjoe, islisa);
+ * 
  * orfn('Ester');       // true
  * orfn('Lisa');        // true
  * orfn('Joe');         // true
@@ -205,9 +215,11 @@ export const or = <T>(...predicates: Predicate<T>[]): Predicate<T> => (
  *
  * @example
  * ```ts
+ * import { predicate } from 'tiinvo';
+ * 
  * const iseven = (arg: number) => arg % 2 === 0;
- * const isodd = reverse(iseven);
- *
+ * const isodd = predicate.reverse(iseven);
+ * 
  * iseven(2)  // true
  * isodd(2)   // false
  * isodd(1)   // true
@@ -221,13 +233,15 @@ export const reverse = <T>(arg: Predicate<T>): Predicate<T> => (argument) =>
   !arg(argument);
 
 /**
- * Creates a new Predicate<T> which checks if the given argument is not the same as the
+ * Creates a new `Predicate<T>` which checks if the given argument is not the same as the
  * one passed to the predicate.
  *
  * @example
  * ```ts
- * const isnotjoe = withdifferentvalue('Joe');
- *
+ * import { predicate } from 'tiinvo';
+ * 
+ * const isnotjoe = predicate.withdifferentvalue('Joe');
+ * 
  * isnotjoe('John');  // true
  * isnotjoe('Lisa');  // true
  * isnotjoe('Joe');   // false
@@ -242,13 +256,13 @@ export const withdifferentvalue = <T>(unexpectedvalue: T): Predicate<T> => (
 ) => argument !== unexpectedvalue;
 
 /**
- * Creates a new Predicate<T> which checks if the given argument is the same as the
+ * Creates a new `Predicate<T>` which checks if the given argument is the same as the
  * one passed to the predicate.
  *
  * @example
  * ```ts
  * const isnotjoe = withsamevalue('Joe');
- *
+ * 
  * isnotjoe('John');  // false
  * isnotjoe('Lisa');  // false
  * isnotjoe('Joe');   // true
