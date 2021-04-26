@@ -349,6 +349,8 @@ isnotnull(null)        // false
 isnotnull(undefined)   // true
 ```
 
+<!-- tabs:end -->
+
 #### isnullOrUndefined
 
 Checks if a value is null or undefined
@@ -440,6 +442,71 @@ isarrayofStrings(['hello', 'world'])         // true
 ```
 
 <!-- tabs:end -->
+
+#### nullable
+
+Makes a `Typeguard<T>` nullable, so it will check if `T` or `null`
+
+<!-- tabs:start -->
+
+#### **node**
+
+```ts
+import { nullable, isnumber } from 'tiinvo';
+
+const isnullablenumber = nullable(isnumber);
+
+isnullablenumber(null) // true
+isnullablenumber(1000) // true
+isnullablenumber('10') // false
+```
+
+#### **deno/esm**
+
+```ts
+import { nullable, isnumber } from 'https://cdn.skypack.dev/tiinvo';
+
+const isnullablenumber = nullable(isnumber);
+
+isnullablenumber(null) // true
+isnullablenumber(1000) // true
+isnullablenumber('10') // false
+```
+
+<!-- tabs:end -->
+
+#### optional
+
+Makes a `Typeguard<T>` optional, so it will check if `T` or `undefined`
+
+<!-- tabs:start -->
+
+#### **node**
+
+```ts
+import { optional, isnumber } from 'tiinvo';
+
+const isoptionalnumber = optional(isnumber);
+
+isoptionalnumber(null) // true
+isoptionalnumber(1000) // true
+isoptionalnumber('10') // false
+```
+
+#### **deno/esm**
+
+```ts
+import { optional, isnumber } from 'https://cdn.skypack.dev/tiinvo';
+
+const isoptionalnumber = optional(isnumber);
+
+isoptionalnumber(null) // true
+isoptionalnumber(1000) // true
+isoptionalnumber('10') // false
+```
+
+<!-- tabs:end -->
+
 
 ## Object related Typeguards
 
@@ -883,6 +950,40 @@ isMyVariadicEnum('aa')     // false
 isMyVariadicEnum('hello')  // true
 isMyVariadicEnum(false)    // true
 isMyVariadicEnum(10000000) // true
+```
+
+<!-- tabs:end -->
+
+#### isexact
+
+Creates a typeguard which matches a specific value by type and value equality.
+
+<!-- tabs:start -->
+
+#### **node**
+
+```ts
+import { isexact } from 'tiinvo';
+ 
+const is10 = isexact(10);
+ 
+is10(2);     // false
+is10('10');  // false
+is10(10);    // true
+```
+
+#### **deno/esm**
+
+```ts
+import { isexact } from 'https://cdn.skypack.dev/tiinvo';
+
+const tg = istuple(isstring, isstring, isnumber);
+
+const is10 = isexact(10);
+
+is10(2);     // false
+is10('10');  // false
+is10(10);    // true
 ```
 
 <!-- tabs:end -->

@@ -620,7 +620,7 @@ export const isarrayof = <T>(typeguard: Typeguard<T>) => (
 ): arg is T[] => isarray(arg) && arg.every(typeguard);
 
 /**
- * Makes a Typeguard<T> nullable
+ * Makes a `Typeguard<T>` nullable, so it will check if `T` or `null`
  *
  * @example
  * ```ts
@@ -638,10 +638,12 @@ export const nullable = <T>(typeguard: Typeguard<T>) =>
   anyof<T | null>(isnull, typeguard);
 
 /**
- * Makes a Typeguard<T> optional
+ * Makes a `Typeguard<T>` optional, so it will check if `T` or `undefined`
  *
  * @example
  * ```ts
+ * import { optional, isnumber } from 'tiinvo';
+ * 
  * const isoptionalnumber = optional(isnumber);
  *
  * isoptionalnumber(undefined)  // true
