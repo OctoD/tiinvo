@@ -15,7 +15,7 @@ obj.entries({ foo: 10, bar: 20 }) // [["foo", 10], ["bar", 20]]
 #### deno/esm
 
 ```ts
-import { obj } from 'https://cdn.skypack.dev/tiinvo';
+import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 obj.entries({ foo: 10, bar: 20 }) // [["foo", 10], ["bar", 20]]
 ```
@@ -40,7 +40,7 @@ obj.is({ foo: 100 })({ bar: 200 }) // false
 #### deno/esm
 
 ```ts
-import { obj } from 'https://cdn.skypack.dev/tiinvo';
+import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 obj.is({ lorem: "ipsum" })({ lorem: "ipsum" }) // true
 obj.is({ foo: 100 })({ bar: 200 }) // false
@@ -71,7 +71,7 @@ obj.isExtensible(test) // false
 #### deno/esm
 
 ```ts
-import { obj } from 'https://cdn.skypack.dev/tiinvo';
+import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const test = { foo: 100 }
 
@@ -107,7 +107,7 @@ obj.isFrozen(test) // true
 #### deno/esm
 
 ```ts
-import { obj } from 'https://cdn.skypack.dev/tiinvo';
+import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const test = { foo: 100 }
 
@@ -143,7 +143,7 @@ obj.isSealed(test) // true
 #### deno/esm
 
 ```ts
-import { obj } from 'https://cdn.skypack.dev/tiinvo';
+import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const test = { foo: 100 }
 
@@ -173,7 +173,7 @@ obj.keys({ foo: 1, bar: 2, baz: 3 }) // ["foo", "bar", "baz"]
 #### deno/esm
 
 ```ts
-import { obj } from 'https://cdn.skypack.dev/tiinvo';
+import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 obj.keys({ foo: 1, bar: 2, baz: 3 }) // ["foo", "bar", "baz"]
 ```
@@ -201,7 +201,7 @@ map(test) // 200
 #### deno/esm
 
 ```ts
-import { obj } from 'https://cdn.skypack.dev/tiinvo';
+import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const test = { foo: 200, bar: 'baz' };
 
@@ -231,7 +231,7 @@ omit('foo', 'bar')(myobject) // { baz: 'qwerty' }
 #### deno/esm
 
 ```ts
-import { obj } from 'https://cdn.skypack.dev/tiinvo';
+import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const myobject = { foo: 10, bar: 20, baz: 'qwerty' };
 
@@ -259,7 +259,7 @@ obj.pick(`foo`, `baz`)(test) // { foo: 100, baz: 300 }
 #### deno/esm
 
 ```ts
-import { obj } from 'https://cdn.skypack.dev/tiinvo';
+import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const test = { foo: 100, bar: 200, baz: 300 };
 
@@ -285,7 +285,7 @@ obj.values({ foo: 1, bar: 2, baz: 3 }) // [1, 2, 3]
 #### deno/esm
 
 ```ts
-import { obj } from 'https://cdn.skypack.dev/tiinvo';
+import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 obj.values({ foo: 1, bar: 2, baz: 3 }) // [1, 2, 3]
 ```

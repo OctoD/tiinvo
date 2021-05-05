@@ -17,7 +17,7 @@ get2nd([100, 200, 300]); // 200
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const get2nd = array.eq(1);
 get2nd([100, 200, 300]); // 200
@@ -44,7 +44,7 @@ everynumber([1, 2, 3, 'nope']) // false
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const everynumber = array.every(isnumber);
 everynumber([1, 2, 3, 4])      // true
@@ -71,7 +71,7 @@ get100th([100, 200, 300]); // 20
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const get100th = array.eqOr(100)(20);
 get100th([100, 200, 300]); // 20
@@ -97,7 +97,7 @@ onlyeven([1, 2, 3, 4, 5, 6]) // [2, 4, 6]
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const onlyeven = array.filter((arg: number) => arg % 2 === 0);
 onlyeven([1, 2, 3, 4, 5, 6]) // [2, 4, 6]
@@ -124,7 +124,7 @@ findhermione(['Severus', 'Dumbledore', 'Tomarevaca']) // undefined
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const findhermione = array.find(predicate.withsamevalue('Hermione'));
 findhermione(['Harry', 'Hermione', 'Ronald']) // 'Hermione'
@@ -150,7 +150,7 @@ array.flat([[1, 2], [3, 4]]) // [1, 2, 3, 4];
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 array.flat([[1, 2], [3, 4]]) // [1, 2, 3, 4];
 ```
@@ -188,7 +188,7 @@ total(price) === vat(price) + shipping(price) + price
 #### **deno/esm**
 
 ```ts
-import { array, pipe } from 'https://cdn.skypack.dev/tiinvo';
+import { array, pipe } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const SHIPPING = 5;
 const VAT = 20;
@@ -228,7 +228,7 @@ array.first([])         // undefined
 #### **deno/esm**
 
 ```ts
-import { array, pipe } from 'https://cdn.skypack.dev/tiinvo';
+import { array, pipe } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 array.first([100, 200]) // 100
 array.first([])         // undefined
@@ -254,7 +254,7 @@ array.getfirstOr(20)([]) // 20
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 array.getfirstOr(20)([]) // 20
 ```
@@ -280,7 +280,7 @@ array.last([])         // undefined
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 array.last([100, 200]) // 100
 array.last([])         // undefined
@@ -307,7 +307,7 @@ lastnumber([]) // 0
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const lastnumber = array.lastOr(0);
 lastnumber([1, 2, 3]) // 3
@@ -333,7 +333,7 @@ array.empty([1]) // false
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 array.empty([]) // true
 array.empty([1]) // false
@@ -358,7 +358,7 @@ array.notempty([1]) // true
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 array.notempty([]) // false
 array.notempty([1]) // true
@@ -383,7 +383,7 @@ includes100([10, 20, 30, 900]) // false
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 includes100([10, 20, 30, 100]) // true
 includes100([10, 20, 30, 900]) // false
@@ -408,7 +408,7 @@ array.len(test) // 4
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const test = [1, 2, 3, 4];
 array.len(test) // 4
@@ -434,7 +434,7 @@ array.join(`-`)(test) // `1-2-3-4`
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const test = [1, 2, 3, 4];
 array.join(`-`)(test) // `1-2-3-4`
@@ -468,7 +468,7 @@ maptostring([{ name: 'John', age: 21 }, { name: 'Julia', age: 33 }]) // ['John',
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 
 interface Person {
@@ -502,7 +502,7 @@ arr.includes(arr.rand(arr)) // true
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const arr = [1, 2, 3]
 arr.includes(arr.rand(arr)) // true
@@ -529,7 +529,7 @@ sum([1, 2, 3]) // 6
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const sum = array.reduce(0, (prev, next: number) => prev + next);
 sum([1, 2, 3]) // 6
@@ -556,7 +556,7 @@ sum([1, 2, 3]) // 0
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const sum = reduce(0, (next, prev: number) => prev - next);
 sum([1, 2, 3]) // 0
@@ -581,7 +581,7 @@ array.invert([1, 2, 3]) // [3, 2, 1]
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 array.invert([1, 2, 3]) // [3, 2, 1]
 ```
@@ -605,7 +605,7 @@ array.mix([1, 2, 3]) // could be [3, 2, 1] or [2, 1, 3] or [1, 3, 2] or...
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 array.mix([1, 2, 3]) // could be [3, 2, 1] or [2, 1, 3] or [1, 3, 2] or...
 ```
@@ -631,7 +631,7 @@ somenumber([null, undefined, 'nope']) // false
 #### **deno/esm**
 
 ```ts
-import { array, isnumber } from 'https://cdn.skypack.dev/tiinvo';
+import { array, isnumber } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const somenumber = array.some(isnumber);
 somenumber([1, 2, 3, 4]) // true
@@ -658,7 +658,7 @@ sort([3, 5, 1, 2, 10, 21, 12, 20]) // [ 21, 20, 12, 10, 5, 3, 2, 1 ]
 #### **deno/esm**
 
 ```ts
-import { array, num } from 'https://cdn.skypack.dev/tiinvo';
+import { array, num } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const sortdesc = sort(num.sortdesc);
 sort([3, 5, 1, 2, 10, 21, 12, 20]) // [ 21, 20, 12, 10, 5, 3, 2, 1 ]
@@ -687,7 +687,7 @@ takefn(test) // [1, 2]
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const limit = 2;
 const takefn = array.takefirstnth(limit)
@@ -719,7 +719,7 @@ takefn(test) // [3, 4]
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const limit = 2;
 const takefn = array.takelastnth(limit)
@@ -752,7 +752,7 @@ unsafecasttonumber(test) // for TypeScript it's a `Array<number>` type now
 #### **deno/esm**
 
 ```ts
-import { array } from 'https://cdn.skypack.dev/tiinvo';
+import { array } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const test: any = [1n, 2n, 3n, 4n];
 const unsafecasttonumber = array.unsafecast<number>();

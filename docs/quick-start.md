@@ -17,7 +17,7 @@ npm i tiinvo
 if you are using deno just import it
 
 ```ts
-import { } from 'https://cdn.skypack.dev/tiinvo'
+import { } from 'https://cdn.skypack.dev/tiinvo?dts'
 ```
 
 ## Library contents

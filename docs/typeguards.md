@@ -24,7 +24,7 @@ isarray([])  // true
 #### **deno/esm**
 
 ```ts
-import { isarray } from 'https://cdn.skypack.dev/tiinvo';
+import { isarray } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 isarray(10)  // false
 isarray('a') // false
@@ -54,7 +54,7 @@ isbigint(10n) // true
 #### **deno/esm**
 
 ```ts
-import { isbigint } from 'https://cdn.skypack.dev/tiinvo';
+import { isbigint } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 isbigint(10)  // false
 isbigint('a') // false
@@ -84,7 +84,7 @@ isboolean(10n) // false
 #### **deno/esm**
 
 ```ts
-import { isboolean } from 'https://cdn.skypack.dev/tiinvo';
+import { isboolean } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 isboolean(10)  // false
 isboolean('a') // false
@@ -115,7 +115,7 @@ isdefined(10n)         // true
 #### **deno/esm**
 
 ```ts
-import { isdefined } from 'https://cdn.skypack.dev/tiinvo';
+import { isdefined } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 isdefined(undefined)   // false
 isdefined(10)          // true
@@ -147,7 +147,7 @@ isfunction(() => void 0)// true
 #### **deno/esm**
 
 ```ts
-import { isfunction } from 'https://cdn.skypack.dev/tiinvo';
+import { isfunction } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 isfunction(undefined)   // false
 isfunction(10)          // false
@@ -179,7 +179,7 @@ isnumber(10n) // false
 #### **deno/esm**
 
 ```ts
-import { isnumber } from 'https://cdn.skypack.dev/tiinvo';
+import { isnumber } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 isnumber(10)  // true
 isnumber('a') // false
@@ -211,7 +211,7 @@ isobject([])   // true
 #### **deno/esm**
 
 ```ts
-import { isobject } from 'https://cdn.skypack.dev/tiinvo';
+import { isobject } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 isobject(10)   // false
 isobject('a')  // false
@@ -244,7 +244,7 @@ isstring([])   // false
 #### **deno/esm**
 
 ```ts
-import { isstring } from 'https://cdn.skypack.dev/tiinvo';
+import { isstring } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 isstring(10)   // false
 isstring('a')  // true
@@ -276,7 +276,7 @@ isundefined(undefined)   // true
 #### **deno/esm**
 
 ```ts
-import { isundefined } from 'https://cdn.skypack.dev/tiinvo';
+import { isundefined } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 isundefined(10)          // false
 isundefined('a')         // false
@@ -308,7 +308,7 @@ isnull(undefined)   // false
 #### **deno/esm**
 
 ```ts
-import { isnull } from 'https://cdn.skypack.dev/tiinvo';
+import { isnull } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 isnull(10)          // false
 isnull('a')         // false
@@ -340,7 +340,7 @@ isnotnull(undefined)   // true
 #### **deno/esm**
 
 ```ts
-import { isnotnull } from 'https://cdn.skypack.dev/tiinvo';
+import { isnotnull } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 isnotnull(10)          // true
 isnotnull('a')         // true
@@ -371,7 +371,7 @@ isnullOrUndefined([])        // false
 #### **deno/esm**
 
 ```ts
-import { isnullOrUndefined } from 'https://cdn.skypack.dev/tiinvo';
+import { isnullOrUndefined } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 isnullOrUndefined(null)      // true
 isnullOrUndefined(undefined) // true
@@ -401,7 +401,7 @@ isnotNullOrUndefined([])        // true
 #### **deno/esm**
 
 ```ts
-import { isnotNullOrUndefined } from 'https://cdn.skypack.dev/tiinvo';
+import { isnotNullOrUndefined } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 isnotNullOrUndefined(null)      // false
 isnotNullOrUndefined(undefined) // false
@@ -432,7 +432,7 @@ isarrayofStrings(['hello', 'world'])         // true
 #### **deno/esm**
 
 ```ts
-import { isarrayof, isstring } from 'https://cdn.skypack.dev/tiinvo';
+import { isarrayof, isstring } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const isarrayofStrings = isarrayof(isstring);
 
@@ -464,7 +464,7 @@ isnullablenumber('10') // false
 #### **deno/esm**
 
 ```ts
-import { nullable, isnumber } from 'https://cdn.skypack.dev/tiinvo';
+import { nullable, isnumber } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const isnullablenumber = nullable(isnumber);
 
@@ -496,7 +496,7 @@ isoptionalnumber('10') // false
 #### **deno/esm**
 
 ```ts
-import { optional, isnumber } from 'https://cdn.skypack.dev/tiinvo';
+import { optional, isnumber } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const isoptionalnumber = optional(isnumber);
 
@@ -531,7 +531,7 @@ isindexable(undefined)   // false
 #### **deno/esm**
 
 ```ts
-import { isindexable } from 'https://cdn.skypack.dev/tiinvo';
+import { isindexable } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 isindexable(10)          // false
 isindexable('a')         // false
@@ -564,7 +564,7 @@ iserror(undefined)   // false
 #### **deno/esm**
 
 ```ts
-import { iserror } from 'https://cdn.skypack.dev/tiinvo';
+import { iserror } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 iserror(10)          // false
 iserror('a')         // false
@@ -599,7 +599,7 @@ hasfoo({foo: `baz`})   // true
 #### **deno/esm**
 
 ```ts
-import { haskey } from 'https://cdn.skypack.dev/tiinvo';
+import { haskey } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const hasfoo = haskey('foo');
  
@@ -634,7 +634,7 @@ hasfoo({foo: `baz`})   // true
 #### **deno/esm**
 
 ```ts
-import { haskeyoftype, isstring } from 'https://cdn.skypack.dev/tiinvo';
+import { haskeyoftype, isstring } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const hasfoo = haskeyoftype('foo', isstring);
  
@@ -667,7 +667,7 @@ hasfoo({foo: `baz`})   // true
 #### **deno/esm**
 
 ```ts
-import { haskeyWithValue } from 'https://cdn.skypack.dev/tiinvo';
+import { haskeyWithValue } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const hasfoo = haskeyWithValue('foo', `baz`);
  
@@ -696,7 +696,7 @@ haslength({ length: 10 })  // true
 #### **deno/esm**
 
 ```ts
-import { haslength } from 'https://cdn.skypack.dev/tiinvo';
+import { haslength } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 haslength([])              // true
 haslength({})              // false
@@ -724,7 +724,7 @@ test({ length: 10 })  // true
 #### **deno/esm**
 
 ```ts
-import { haslengthof } from 'https://cdn.skypack.dev/tiinvo';
+import { haslengthof } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 test([1, 2, 3])       // false
 test({})              // false
@@ -770,7 +770,7 @@ isUser({ age: '100', name: 'foo', mail: 'hello_at_world.com' }) // false
 #### **deno/esm**
 
 ```ts
-import { implementing } from 'https://cdn.skypack.dev/tiinvo';
+import { implementing } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 interface User {
    name: string;
@@ -818,7 +818,7 @@ tg(['10', '20', 30, 50]) // false
 #### **deno/esm**
 
 ```ts
-import { istuple, isstring, isnumber } from 'https://cdn.skypack.dev/tiinvo';
+import { istuple, isstring, isnumber } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const tg = istuple(isstring, isstring, isnumber);
  
@@ -859,7 +859,7 @@ isstringwithminlengthof5(`abcde`)  // true
 #### **deno/esm**
 
 ```ts
-import { combine, isstring, Typeguard, num, str, pipe } from 'https://cdn.skypack.dev/tiinvo';
+import { combine, isstring, Typeguard, num, str, pipe } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const tg = istuple(isstring, isstring, isnumber);
 
@@ -921,7 +921,7 @@ isMyVariadicEnum(10000000) // true
 #### **deno/esm**
 
 ```ts
-import { anyof, isstring, isnumber, isbool, Typeguard, predicate } from 'https://cdn.skypack.dev/tiinvo';
+import { anyof, isstring, isnumber, isbool, Typeguard, predicate } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const tg = istuple(isstring, isstring, isnumber);
 
@@ -975,7 +975,7 @@ is10(10);    // true
 #### **deno/esm**
 
 ```ts
-import { isexact } from 'https://cdn.skypack.dev/tiinvo';
+import { isexact } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const tg = istuple(isstring, isstring, isnumber);
 

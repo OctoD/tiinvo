@@ -17,7 +17,7 @@ num.toExponential(2) // '2e+0'
 #### **deno/esm**
 
 ```ts
-import { num } from 'https://cdn.skypack.dev/tiinvo';
+import { num } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 num.toExponential(2) // '2e+0'
 ```
@@ -41,7 +41,7 @@ num.toFixed(2)(2) // '2.00'
 #### **deno/esm**
 
 ```ts
-import { num } from 'https://cdn.skypack.dev/tiinvo';
+import { num } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 num.toFixed(2)(2) // '2.00'
 ```
@@ -65,7 +65,7 @@ num.toPrecision(2)(2) // '2.0'
 #### **deno/esm**
 
 ```ts
-import { num } from 'https://cdn.skypack.dev/tiinvo';
+import { num } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 num.toPrecision(2)(2) // '2.0'
 ```
@@ -90,7 +90,7 @@ num.toString(2)(2) // '10'
 #### **deno/esm**
 
 ```ts
-import { num } from 'https://cdn.skypack.dev/tiinvo';
+import { num } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 num.toString()(2) // '2'
 num.toString(2)(2) // '10'
@@ -121,7 +121,7 @@ num.isodd(3)                // true
 #### **deno/esm**
 
 ```ts
-import { num } from 'https://cdn.skypack.dev/tiinvo';
+import { num } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 num.equals(2)(3)            // false
 num.greaterthan(2)(3)       // true
@@ -162,7 +162,7 @@ num.urandomfloat(0)(5)        // a random float between 0 and 5
 #### **deno/esm**
 
 ```ts
-import { num } from 'https://cdn.skypack.dev/tiinvo';
+import { num } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 num.uadd(2)(2)                // 4
 num.udivide(5)(10)            // 2
@@ -204,7 +204,7 @@ num.brandomfloat(0, 5)        // a random float between 0 and 5
 #### **deno/esm**
 
 ```ts
-import { num } from 'https://cdn.skypack.dev/tiinvo';
+import { num } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 num.badd(2, 2)                // 4
 num.bdivide(10, 5)            // 2
@@ -242,7 +242,7 @@ num.brangeint(0, 5) // [0, 1, 2, 3, 4, 5];
 #### **deno/esm**
 
 ```ts
-import { num } from 'https://cdn.skypack.dev/tiinvo';
+import { num } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 num.brangeint(0, 5) // [0, 1, 2, 3, 4, 5];   
 ```
@@ -268,7 +268,7 @@ num.urangeint(0)(5) // [0, 1, 2, 3, 4, 5];
 #### **deno/esm**
 
 ```ts
-import { num } from 'https://cdn.skypack.dev/tiinvo';
+import { num } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 num.urangeint(0)(5) // [0, 1, 2, 3, 4, 5];   
 ```
@@ -293,7 +293,7 @@ num.urangeint2(5)(0) // [0, 1, 2, 3, 4, 5];
 #### **deno/esm**
 
 ```ts
-import { num } from 'https://cdn.skypack.dev/tiinvo';
+import { num } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 num.urangeint2(5)(0) // [0, 1, 2, 3, 4, 5];   
 ```
@@ -318,7 +318,7 @@ test.sort(num.sortdesc);  // [5, 4, 3, 2, 1, 0];
 #### **deno/esm**
 
 ```ts
-import { num } from 'https://cdn.skypack.dev/tiinvo';
+import { num } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const test = [0, 2, 5, 3, 1, 4]
 

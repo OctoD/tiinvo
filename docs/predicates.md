@@ -24,7 +24,7 @@ combined('foo'); // false
 #### **deno/esm**
 
 ```ts
-import { predicate } from 'https://cdn.skypack.dev/tiinvo';
+import { predicate } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const isString = (arg: unknown): arg is string => typeof arg === 'string';
 const hasLength = (length: number) => (arg: unknown): boolean => isString(arg) && arg.length >= length;
@@ -65,7 +65,7 @@ check2(isodd)    // false
 #### **deno/esm**
 
 ```ts
-import { predicate } from 'https://cdn.skypack.dev/tiinvo';
+import { predicate } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const iseven = (arg: number) => arg % 2 === 0;
 const isodd  = predicate.reverse(iseven);
@@ -102,7 +102,7 @@ test2(iseven); // true
 #### **deno/esm**
 
 ```ts
-import { predicate } from 'https://cdn.skypack.dev/tiinvo';
+import { predicate } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const test1 = predicate.fromvalues(1, 2, 3, 4, 5);
 const test2 = predicate.fromvalues(2, 4, 6, 8);
@@ -142,7 +142,7 @@ noneOfTheAbove(undefined)      // false
 #### **deno/esm**
 
 ```ts
-import { predicate } from 'https://cdn.skypack.dev/tiinvo';
+import { predicate } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const isnumber = (arg: unknown): arg is number => typeof arg === 'number';
 const isstring = (arg: unknown): arg is string => typeof arg === 'string';
@@ -186,7 +186,7 @@ orfn('Alexander');   // false
 #### **deno/esm**
 
 ```ts
-import { predicate } from 'https://cdn.skypack.dev/tiinvo';
+import { predicate } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const isester = predicate.fromvalue('Ester');
 const isjoe = predicate.fromvalue('Joe');
@@ -224,7 +224,7 @@ isodd(1)   // true
 #### **deno/esm**
 
 ```ts
-import { predicate } from 'https://cdn.skypack.dev/tiinvo';
+import { predicate } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const iseven = (arg: number) => arg % 2 === 0;
 const isodd = predicate.reverse(iseven);
@@ -258,7 +258,7 @@ isnotjoe('Joe');   // false
 #### **deno/esm**
 
 ```ts
-import { predicate } from 'https://cdn.skypack.dev/tiinvo';
+import { predicate } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const isnotjoe = predicate.withdifferentvalue('Joe');
 
@@ -291,7 +291,7 @@ isnotjoe('Joe');   // true
 #### **deno/esm**
 
 ```ts
-import { predicate } from 'https://cdn.skypack.dev/tiinvo';
+import { predicate } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const isnotjoe = withsamevalue('Joe');
 
