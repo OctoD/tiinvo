@@ -57,6 +57,15 @@
       "git add"
     ]
   },
+  "docsify": {
+    "config": {
+      "basePath": "https://docsify.js.org/",
+      "loadSidebar": true,
+      "loadNavbar": true,
+      "coverpage": true,
+      "name": "docsify"
+    }
+  },
   "devDependencies": {
     "@types/benchmark": "^2.1.0",
     "@types/jest": "^26.0.20",

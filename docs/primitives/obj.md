@@ -2,9 +2,9 @@
 
 Returns an array of key/values of the enumerable properties of an object
 
-<!-- tabs:start -->
+<!-- tabs:start --->
 
-#### node
+#### **node**
 
 ```ts
 import { obj } from 'tiinvo';
@@ -12,7 +12,7 @@ import { obj } from 'tiinvo';
 obj.entries({ foo: 10, bar: 20 }) // [["foo", 10], ["bar", 20]]
 ```
 
-#### deno/esm
+#### **deno/esm**
 
 ```ts
 import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
@@ -20,15 +20,15 @@ import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
 obj.entries({ foo: 10, bar: 20 }) // [["foo", 10], ["bar", 20]]
 ```
 
-<!-- tabs:end -->
+<!-- tabs:end --->
 
 ## is
 
 Returns `true` if the object `T` and object `U` values are the same, `false` otherwise.
 
-<!-- tabs:start -->
+<!-- tabs:start --->
 
-#### node
+#### **node**
 
 ```ts
 import { obj } from 'tiinvo';
@@ -37,7 +37,7 @@ obj.is({ lorem: "ipsum" })({ lorem: "ipsum" }) // true
 obj.is({ foo: 100 })({ bar: 200 }) // false
 ```
 
-#### deno/esm
+#### **deno/esm**
 
 ```ts
 import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
@@ -46,15 +46,15 @@ obj.is({ lorem: "ipsum" })({ lorem: "ipsum" }) // true
 obj.is({ foo: 100 })({ bar: 200 }) // false
 ```
 
-<!-- tabs:end -->
+<!-- tabs:end --->
 
 ## isExtensible
 
 Returns a value that indicates whether new properties can be added to an object.
 
-<!-- tabs:start -->
+<!-- tabs:start --->
 
-#### node
+#### **node**
 
 ```ts
 import { obj } from 'tiinvo';
@@ -68,7 +68,7 @@ Object.preventExtensions(test);
 obj.isExtensible(test) // false
 ```
 
-#### deno/esm
+#### **deno/esm**
 
 ```ts
 import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
@@ -82,15 +82,15 @@ Object.preventExtensions(test);
 obj.isExtensible(test) // false
 ```
 
-<!-- tabs:end -->
+<!-- tabs:end --->
 
 Returns true if existing property attributes and values cannot be modified in an object, and new properties cannot be added to the object.
 
 ## isFrozen
 
-<!-- tabs:start -->
+<!-- tabs:start --->
 
-#### node
+#### **node**
 
 ```ts
 import { obj } from 'tiinvo';
@@ -104,7 +104,7 @@ Object.freeze(test);
 obj.isFrozen(test) // true
 ```
 
-#### deno/esm
+#### **deno/esm**
 
 ```ts
 import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
@@ -118,15 +118,15 @@ Object.freeze(test);
 obj.isFrozen(test) // true
 ```
 
-<!-- tabs:end -->
+<!-- tabs:end --->
 
 ## isSealed
 
 Returns true if existing property attributes cannot be modified in an object and new properties cannot be added to the object.
 
-<!-- tabs:start -->
+<!-- tabs:start --->
 
-#### node
+#### **node**
 
 ```ts
 import { obj } from 'tiinvo';
@@ -140,7 +140,7 @@ Object.seal(test);
 obj.isSealed(test) // true
 ```
 
-#### deno/esm
+#### **deno/esm**
 
 ```ts
 import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
@@ -154,15 +154,15 @@ Object.seal(test);
 obj.isSealed(test) // true
 ```
 
-<!-- tabs:end -->
+<!-- tabs:end --->
 
 ## keys
 
 Returns the names of the enumerable string properties and methods of an object.
 
-<!-- tabs:start -->
+<!-- tabs:start --->
 
-#### node
+#### **node**
 
 ```ts
 import { obj } from 'tiinvo';
@@ -170,7 +170,7 @@ import { obj } from 'tiinvo';
 obj.keys({ foo: 1, bar: 2, baz: 3 }) // ["foo", "bar", "baz"]
 ```
 
-#### deno/esm
+#### **deno/esm**
 
 ```ts
 import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
@@ -178,15 +178,15 @@ import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
 obj.keys({ foo: 1, bar: 2, baz: 3 }) // ["foo", "bar", "baz"]
 ```
 
-<!-- tabs:end -->
+<!-- tabs:end --->
 
 ## mapkey
 
 Creates a mapper function for the type `T`. 
 
-<!-- tabs:start -->
+<!-- tabs:start --->
 
-#### node
+#### **node**
 
 ```ts
 import { obj } from 'tiinvo';
@@ -198,7 +198,7 @@ const map = obj.mapkey<typeof test>('foo')
 map(test) // 200
 ```
 
-#### deno/esm
+#### **deno/esm**
 
 ```ts
 import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
@@ -210,15 +210,15 @@ const map = obj.mapkey<typeof test>('foo')
 map(test) // 200
 ```
 
-<!-- tabs:end -->
+<!-- tabs:end --->
 
 ## omit
 
 Omits from a set of keys `Keys` from an object `o`.
 
-<!-- tabs:start -->
+<!-- tabs:start --->
 
-#### node
+#### **node**
 
 ```ts
 import { obj } from 'tiinvo';
@@ -228,7 +228,7 @@ const myobject = { foo: 10, bar: 20, baz: 'qwerty' };
 omit('foo', 'bar')(myobject) // { baz: 'qwerty' }
 ```
 
-#### deno/esm
+#### **deno/esm**
 
 ```ts
 import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
@@ -238,15 +238,15 @@ const myobject = { foo: 10, bar: 20, baz: 'qwerty' };
 omit('foo', 'bar')(myobject) // { baz: 'qwerty' }
 ```
 
-<!-- tabs:end -->
+<!-- tabs:end --->
 
 ## pick
 
 Given a set of properties `T` whose keys are in the object `U`, returns a new object with all picked properties
 
-<!-- tabs:start -->
+<!-- tabs:start --->
 
-#### node
+#### **node**
 
 ```ts
 import { obj } from 'tiinvo';
@@ -256,7 +256,7 @@ const test = { foo: 100, bar: 200, baz: 300 };
 obj.pick(`foo`, `baz`)(test) // { foo: 100, baz: 300 }
 ```
 
-#### deno/esm
+#### **deno/esm**
 
 ```ts
 import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
@@ -266,15 +266,15 @@ const test = { foo: 100, bar: 200, baz: 300 };
 obj.pick(`foo`, `baz`)(test) // { foo: 100, baz: 300 }
 ```
 
-<!-- tabs:end -->
+<!-- tabs:end --->
 
 ## values
 
 Returns an array of values of the enumerable properties of an object
 
-<!-- tabs:start -->
+<!-- tabs:start --->
 
-#### node
+#### **node**
 
 ```ts
 import { obj } from 'tiinvo';
@@ -282,7 +282,7 @@ import { obj } from 'tiinvo';
 obj.values({ foo: 1, bar: 2, baz: 3 }) // [1, 2, 3]
 ```
 
-#### deno/esm
+#### **deno/esm**
 
 ```ts
 import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
@@ -290,4 +290,4 @@ import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
 obj.values({ foo: 1, bar: 2, baz: 3 }) // [1, 2, 3]
 ```
 
-<!-- tabs:end -->
+<!-- tabs:end --->
