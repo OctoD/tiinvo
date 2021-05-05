@@ -39,11 +39,16 @@ F[0] extends () => any ? () => ReturnType<F[LastIndexOf<F>]> : F[0] extends (arg
  *
  * @example
  * ```ts
- * const add = (toadd: number) => (arg: number) => arg + toadd;
- * const multiply = (multiplier: number) => (arg: number) => arg * multiplier;
- * const printiseven = (arg: number) => arg % 2 === 0 ? 'even' : 'odd';
- *
- * pipe(add(10), multiply(2), printiseven)(2); // 24
+ * import { pipe, num, maybe } from 'tiinvo';
+ * 
+ * const piped = pipe(
+ *    num.uadd(10), 
+ *    num.umultiply(2), 
+ *    maybe.fromfunction(num.iseven), 
+ *    maybe.fold(`odd`, `even`),
+ * );
+ * 
+ * piped(2); // 24
  * ```
  *
  * @param {Array<(... args: any[]) => any>} args

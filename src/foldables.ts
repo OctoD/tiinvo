@@ -1,5 +1,7 @@
+import { FnUnary } from './applicative';
 import { Predicate } from "./predicate";
 import { Tagged, TaggedFactory } from "./tagged-type";
+import { isfunction } from './typeguards';
 
 export type FoldableFn<T, R, Tagname extends string> = (
   arg: T
@@ -12,11 +14,17 @@ export type FoldableFn<T, R, Tagname extends string> = (
  */
 export const createfold = <Tagname extends string>(
   lefthandpredicate: Predicate<Tagged<any, Tagname>>
-) => <T, U, R>(left: (arg: T) => R, right: (arg: U) => R) => <
+) => <T, U, R>(left: R | FnUnary<T, R>, right: R | FnUnary<U, R>) => <
   E extends Tagged<T | U, Tagname>
 >(
   arg: E
-) => (lefthandpredicate(arg) ? left(arg.value as T) : right(arg.value as U));
+) => {
+  if (lefthandpredicate(arg)) {
+    return isfunction(left) ? left(arg.value as T) : left;
+  } else {
+    return isfunction(right) ? right(arg.value as U) : right;
+  }
+}
 
 /**
  *
