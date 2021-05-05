@@ -25,6 +25,12 @@ export const charAt = map('charAt');
  * 
  * @since 2.10.0
  * @example
+ * 
+ * ```ts
+ * import { str } from 'tiinvo';
+ * 
+ * str.charCodeAt(4)('The quick brown fox jumps over the lazy dog.') // 113
+ * ```
  */
 export const charCodeAt = map('charCodeAt');
 /**
@@ -36,7 +42,7 @@ export const charCodeAt = map('charCodeAt');
  * ```ts
  * import { str } from 'tiinvo';
  * 
- * str.concat(`b`, `c`, `d`)(`abcd`) // true
+ * str.concat(`b`, `c`, `d`)(`a`) // 'abcd'
  * ```
  */
 export const concat = map('concat');
@@ -273,6 +279,12 @@ export const trimStart = map('trimStart')();
  * 
  * @since 2.10.0
  * @example
+ * 
+ * ```ts
+ * import { str } from 'tiinvo';
+ * 
+ * str.fromCharCode(102, 103, 104)
+ * ```
  */
 export const fromCharCode = (... args: number[]) => String.fromCharCode.apply('', args);
 /**
@@ -307,6 +319,12 @@ export const length = (arg: string) => arg.length;
  * 
  * @since 2.10.0
  * @example
+ * 
+ * ```ts
+ * import { str } from 'tiinvo';
+ * 
+ * str.lowercase(`HELLO`) // "hello"
+ * ```
  */
 export const lowercase = (arg: string) => arg.toLowerCase();
 
@@ -315,6 +333,14 @@ export const lowercase = (arg: string) => arg.toLowerCase();
  * @param a 
  * @param b 
  * @returns 
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { str } from 'tiinvo';
+ * 
+ * str.sortasc(['B', 'a']) // ['a', 'B']
+ * ```
  */
 export const sortasc = (a: string, b: string) => {
   const al = a.toLowerCase();
@@ -327,6 +353,12 @@ export const sortasc = (a: string, b: string) => {
  * @param a 
  * @param b 
  * @returns 
+ * 
+ * ```ts
+ * import { str } from 'tiinvo';
+ * 
+ * str.sortdesc(['a', 'c', 'B']) // ['c', 'B', 'a']
+ * ```
  */
 export const sortdesc = (a: string, b: string) => {
   const al = a.toLowerCase();
@@ -339,5 +371,11 @@ export const sortdesc = (a: string, b: string) => {
  * 
  * @since 2.10.0
  * @example
+ * 
+ * ```ts
+ * import { str } from 'tiinvo';
+ * 
+ * str.uppercase(`explosions! 💥`) // `EXPLOSIONS! 💥`
+ * ```
  */
 export const uppercase = (arg: string) => arg.toUpperCase();
