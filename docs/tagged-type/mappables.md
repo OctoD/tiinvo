@@ -1,3 +1,5 @@
+Mappables are transformer functions which take a value `T` and return another one `R`.
+
 ## createMap
 
 Creates a map function for `TaggedType`s.

@@ -1,3 +1,18 @@
+Foldables are functions which normalize a branched result from two `TaggedType`s.
+
+A good example for this is `Either.fold`.
+
+```ts
+const foldfn = either.fold(
+  `no records found`, 
+  (args: string[]) => `${args.length} records found`
+);
+
+foldfn(either.left(10))               // 'no records found'
+foldfn(either.right(['a', 'b', 'c'])) // '3 records found'
+```
+
+
 ## createfold
 
 Creates a fold function.

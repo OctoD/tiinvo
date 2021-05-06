@@ -1,3 +1,97 @@
+Derivables are function which wrap a unary function and return a new function with the same signature.
+Calling this new function will return a `TaggedType`.
+
+They are really useful when encapsulating functions and using them in pipelines.
+
+Here it is an example using option:
+
+<!-- tabs:start --->
+
+#### **deno/esm**
+
+
+```ts
+import { array, option, pipe } from 'tiinvo';
+
+interface User { 
+   data: UserData | undefined; 
+}
+
+interface UserData {
+   firstname: string;
+   lastname: string;
+}
+
+const mapuserdata = (user: User) => user.data;
+const mapfirstname = (userdata: UserData) => userdata.firstname;
+const maplastname = (userdata: UserData) => userdata.lastname;
+const mapfullname = pipe(
+   array.fromfunctions(mapfirstname, maplastname), 
+   array.join(' ')
+);
+
+// here we go
+const mapfullnamesafe = pipe(
+   option.fromfunction(mapuserdata),
+   option.map(mapfullname),
+   option.unwrapOr('unknown')
+);
+
+mapfullnamesafe({ 
+   data: undefined 
+})                      // 'unknown'
+mapfullnamesafe({ 
+   data: { 
+      firstname: `hello`, 
+      lastname: `world` 
+   } 
+})                      // 'hello world'
+```
+
+#### **deno/esm**
+
+
+```ts
+import { array, option, pipe } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+
+interface User { 
+   data: UserData | undefined; 
+}
+
+interface UserData {
+   firstname: string;
+   lastname: string;
+}
+
+const mapuserdata = (user: User) => user.data;
+const mapfirstname = (userdata: UserData) => userdata.firstname;
+const maplastname = (userdata: UserData) => userdata.lastname;
+const mapfullname = pipe(
+   array.fromfunctions(mapfirstname, maplastname), 
+   array.join(' ')
+);
+
+// here we go
+const mapfullnamesafe = pipe(
+   option.fromfunction(mapuserdata),
+   option.map(mapfullname),
+   option.unwrapOr('unknown')
+);
+
+mapfullnamesafe({ 
+   data: undefined 
+})                      // 'unknown'
+mapfullnamesafe({ 
+   data: { 
+      firstname: `hello`, 
+      lastname: `world` 
+   } 
+})                      // 'hello world'
+```
+
+<!-- tabs:end --->
+
 ## createderivefromfunction
 
 Creates a function `Fn1` which wraps a function `Fn2`.

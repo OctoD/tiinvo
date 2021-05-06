@@ -1,3 +1,7 @@
+Assertables are functions which create an unsafe assertion.
+
+If that assertion is not correct, an error will be thrown.
+
 ## createExpect
 
 Creates an expect function. This function checks if a given argument satisfies the given predicate.
