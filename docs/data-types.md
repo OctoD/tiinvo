@@ -6,19 +6,19 @@ A `TaggedType` is a structure composed by a tag (which is a unique string identi
 
 The same thing can be achieved using `symbols`, but they cannot be serialised/deserialised in a db, indexedDb or localStorage and cannot be transferred from client to server.
 
-## Either
+#### Either
 
-Represents a disjoint union. Usually it's used to return two possible values/types from a function, where by convenience `Left<T>` is used for the incorrect behavior, whilst `Right<T>` for the correct one. 
+Represents a value of one of two possible types (a disjoint union). Usually it's used to return two possible values/types from a function, where by convenience `Left<T>` is used for the incorrect behavior, whilst `Right<T>` for the correct one. 
 
 [Read more here](data-types/either.md)
 
-## Maybe
+#### Maybe
 
 `Maybe<T>` is a monad which, differently from haskell Maybe, represents a state of truthiness with `Just<T>` or falsiness with `Nothing`. It checks javascript's if a javascript value can be used as true or false.
 
 [Read more here](data-types/maybe.md)
 
-## Option
+#### Option
 
 Option represents a value that could be possibly `null` or `undefined` (nullable or optional).
 
@@ -26,7 +26,7 @@ Option represents a value that could be possibly `null` or `undefined` (nullable
 
 [Read more here](data-types/option.md)
 
-## Result
+#### Result
 
 `Result<T>` can be used to handle runtime errors instead of throwing them and encapsulating code with a `try/catch` block.
 

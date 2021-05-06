@@ -163,7 +163,22 @@ export const rightfromfn = totaggedFn(right);
 //#region filterables
 
 /**
- * Filters only Left
+ * Filters only `Left<T>` values by a given `Predicate<T>`. 
+ * 
+ * If `Either<T>` is `Left<T>` and the `Predicate<T>` is not satisfied, 
+ * it will return `Right<T>`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either, num } from 'tiinvo';
+ * 
+ * const filter = either.filterLeft(num.iseven);
+ * 
+ * filter(either.left(10))   // Right<10>;
+ * filter(either.left(9))    // Left<9>;
+ * filter(either.right(5))   // Right<5>;
+ * ```
  */
 export const filterLeft = createFilter<Either, EitherTagname>(
   isLeft,
@@ -172,12 +187,40 @@ export const filterLeft = createFilter<Either, EitherTagname>(
 );
 
 /**
- * Filters Left Or
+ * Similar to `filterLeft`, but it will return the fallback `or` if filtered.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either, num } from 'tiinvo';
+ * 
+ * const filter = either.filterLeftOr(either.left(10), num.lessthan(10));
+ * 
+ * filter(either.left(10))   // Left<10>
+ * filter(either.left(11))   // Left<11>
+ * filter(either.right(1))   // Right<1>
+ * ```
  */
 export const filterLeftOr = createFilterOr<Either, EitherTagname>(isLeft, left);
 
 /**
- * Filters Right
+ * Filters only `Right<T>` values by a given `Predicate<T>`. 
+ * 
+ * If `Either<T>` is `Right<T>` and the `Predicate<T>` is not satisfied, 
+ * it will return `Left<T>`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either, num } from 'tiinvo';
+ * 
+ * const filter = either.filterRight(num.iseven);
+ * 
+ * filter(either.right(10))   // Left<10>;
+ * filter(either.right(9))    // Right<9>;
+ * filter(either.left(5))     // Left<5>;
+ * ```
+ * 
  */
 export const filterRight = createFilter<Either, EitherTagname>(
   isRight,
@@ -186,7 +229,19 @@ export const filterRight = createFilter<Either, EitherTagname>(
 );
 
 /**
- * Filters Right or
+ * Similar to `filterRight`, but it will return the fallback `or` if filtered.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either, num } from 'tiinvo';
+ * 
+ * const filter = either.filterRightOr(either.right(10), num.lessthan(10));
+ * 
+ * filter(either.right(50))   // Right<10>
+ * filter(either.right(11))   // Right<10>
+ * filter(either.left(1))     // Left<1>
+ * ```
  */
 export const filterRightOr = createFilterOr<Either, EitherTagname>(
   isRight,
