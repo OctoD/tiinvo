@@ -8,7 +8,37 @@ export type FoldableFn<T, R, Tagname extends string> = (
 ) => Tagged<R, Tagname>;
 
 /**
- * Creates a fold function
+ * Creates a fold function.
+ * This function will return `left` if the `Predicate<Tagged<T, any>>` is not satisfied,
+ * otherwise it will return `right`.
+ * 
+ * Both `left` and `right` can be a type `R` or `FnUnary<T, R>`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { createfold, taggedFactory, isTaggedWith } from 'tiinvo';
+ * 
+ * const positive = `my-tagged-type1`;
+ * const negative = `my-tagged-type2`;
+ * 
+ * type positive = typeof positive;
+ * type negative = typeof negative;
+ * 
+ * type mytagged = positive | negative;
+ * 
+ * const tagged1 = taggedFactory(positive);
+ * const tagged2 = taggedFactory(negative);
+ * 
+ * const istagged1 = isTaggedWith(positive);
+ * const istagged2 = isTaggedWith(negative);
+ * 
+ * const fold = createfold<mytagged>(istagged2);
+ * 
+ * fold('is negative', 'is positive')(tagged1('hello')) // is positive
+ * fold('is negative', 'is positive')(tagged2('world')) // is negative
+ * ```
+ * 
  * @template Tagname
  * @param {Predicate<Tagged<any, Tagname>>} lefthandpredicate
  */
@@ -27,7 +57,39 @@ export const createfold = <Tagname extends string>(
 }
 
 /**
+ * Creates a function which swaps `left` to `right` and `right` to `left`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import 
+ * 
+ * ```
+ * import { createSwap, taggedFactory, isTaggedWith } from 'tiinvo';
+ * 
+ * const positive = `my-tagged-type1`;
+ * const negative = `my-tagged-type2`;
+ * 
+ * type positive = typeof positive;
+ * type negative = typeof negative;
+ * 
+ * type mytagged = positive | negative;
+ * 
+ * const tagged1 = taggedFactory(positive);
+ * const tagged2 = taggedFactory(negative);
+ * 
+ * const istagged1 = isTaggedWith(positive);
+ * const istagged2 = isTaggedWith(negative);
+ * 
+ * const swap = createSwap(istagged2, tagged2, tagged1);
+ * 
+ * swap(tagged1('hello')) // Tagged<'hello', 'my-tagged-type2'>
+ * swap(tagged2('hello')) // Tagged<'hello', 'my-tagged-type1'>
+ * ```ts
+ * import { either } from 'tiinvo';
  *
+ * either.swap(either.right(100)) // Left<100>
+ * ```
  *
  * @template LeftTag
  * @template RightTag
