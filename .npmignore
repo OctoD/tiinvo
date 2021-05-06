@@ -16,6 +16,8 @@ src
 .vscode
 coverage
 jest.config.js
+rollup.config.js
+tsconfig.build.json
 tsconfig.json
 
 # social stuff
@@ -24,12 +26,17 @@ social-banner.png
 tiinvo.sketch
 
 # ignore config files
+_config.yml
 .eslintrc.json
+azure-pipelines.yml
+banner-readme.png
+banner.png
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
 renovate.json
 typedoc.markdown.json
-CODE_OF_CONDUCT.md
-_config.yml
-azure-pipelines.yml
+yarn.lock
 
 # ignore the .ts files
 *.ts
