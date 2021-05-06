@@ -4,6 +4,7 @@
   * [Tagged type](tagged-type.md)
     * [Assertables](tagged-type/assertables.md)
     * [Derivables](tagged-type/derivables.md)
+    * [Filterables](tagged-type/filterables.md)
     * [Foldables](tagged-type/foldables.md)
     * [Mappables](tagged-type/mappables.md)
     * [Unwrappables](tagged-type/unwrappables.md)
