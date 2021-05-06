@@ -5,11 +5,12 @@ export type Expect<T> = (errormessage: string) => (arg: T) => T;
 
 /**
  * Creates an expect function. This function checks if a given argument satisfies the given predicate.
- * If the condition is not satisfied, it throws
+ * If the condition is not satisfied, it throws, otherwise returns the checked value.
  *
  * @example
  * ```ts
- * const isstring = (arg: unknown): arg is string => typeof arg === 'string';
+ * import { createExpect, isstring } from 'tiinvo';
+ * 
  * const expectstring = createExpect(isstring);
  *
  * const foocheck = expectstring('myfn foo argument must be a string');
