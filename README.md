@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./banner-readme.png" />
+  <img src="https://raw.githubusercontent.com/OctoD/tiinvo/master/banner-readme.png" height="160"/>
 </div>
 
 tiinvo
