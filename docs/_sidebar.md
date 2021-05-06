@@ -18,4 +18,5 @@
   * [String](primitives/str.md)
 * [Predicates](predicates.md)
 * [Typeguards](typeguards.md)
+* [Conditionals](conditionals.md)
 * [Function types](function-types.md)

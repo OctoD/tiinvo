@@ -89,7 +89,11 @@ export const branch = <U, R>(
 ) => (arg: U): R => condition(arg) ? positive(arg) : negative(arg);
 
 /**
- * Like a Switch statement, but made with functions
+ * Like a Switch statement.
+ * 
+ * It accepts the default case `R` as first argument, then an indefinite number of tuples made
+ * by a `Predicate<T>` as first argument, and a `R` or `FnUnary<T, R>` function as resolver.
+ * 
  * @since 2.13.0
  * @example
  * 
@@ -99,11 +103,11 @@ export const branch = <U, R>(
  * const switchcase = pipe(
  *    str.length,
  *    multi(
- *      fallback(`Not valid`),
- *      [num.equals(0), fallback(`Required`)],
- *      [num.lessthan(10), fallback(`Too short`)],
- *      [num.greaterthan(20), fallback(`Too long`)],
- *      [num.greaterthan(8), fallback(`Valid`)],
+ *      `Not valid`,
+ *      [num.equals(0), `Required`],
+ *      [num.lessthan(10), `Too short`],
+ *      [num.greaterthan(20), `Too long`],
+ *      [num.greaterthan(8), `Valid`],
  *    )
  * );
  * 

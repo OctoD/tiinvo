@@ -35,7 +35,7 @@
   "scripts": {
     "benchmarks": "ts-node .src/benchmarks",
     "changelog": "standard-changelog --first-release",
-    "docs:serve": "docsify serve docs",
+    "docs:serve": "docsify serve docs -p 12345",
     "lint": "eslint -c ./.eslintrc.json src/**/*.ts --fix",
     "prepublishOnly": "rimraf dist && rollup -c ./rollup.config.js",
     "test": "jest",
