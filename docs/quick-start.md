@@ -1,5 +1,3 @@
-# Quick start
-
 ## Installing tiinvo
 
 To install tiinvo 

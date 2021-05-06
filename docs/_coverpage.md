@@ -1,6 +1,6 @@
 <!-- _coverpage.md -->
 
-![logo](banner-readme.png)
+![logo](banner-readme.png ':size=240')
 
 # tiinvo
 
