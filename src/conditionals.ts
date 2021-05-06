@@ -6,6 +6,7 @@ import { Predicate } from './predicate';
  *
  * @example
  * ```ts
+ * import { fi } from 'tiinvo';
  *
  * const printEvenOrOdd = (arg: number) => fi(arg % 2 === 0, 'Even', 'Odd');
  *
@@ -17,6 +18,7 @@ import { Predicate } from './predicate';
  *
  * @template T
  * @template F
+ * @deprecated
  * @param {boolean} condition
  * @param {T} truthyresult
  * @param {F} falsyresult
@@ -39,6 +41,7 @@ export const fi = <T, F>(condition: boolean, truthyresult: T, falsyresult: F) =>
  * printEvenOrOdd(4) // 'Even'
  * ```
  *
+ * @deprecated
  * @template T
  * @template F
  * @template A
@@ -116,16 +119,16 @@ export const branch = <U, R>(
  * @returns 
  */
 export const multi = <U, R>(
-  defaultcase: FnNullary<R>,
-  ... cases: [... [Predicate<U>, FnNullary<R>]][]
+  defaultcase: R | FnNullary<R>,
+  ... cases: [... [Predicate<U>, R | FnNullary<R>]][]
 ) => (arg: U): R => {
   for (let i = 0; i < cases.length; i++) {
     const current = cases[i];
 
     if (current[0](arg)) {
-      return current[1]();
+      return typeof current[1] === 'function' ? (current[1] as any)() : current[1];
     }
   }
 
-  return defaultcase();
+  return typeof defaultcase === 'function' ? (defaultcase as any)() : defaultcase;
 }
