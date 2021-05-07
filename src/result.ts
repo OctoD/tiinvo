@@ -95,11 +95,29 @@ export const isResult = tg.combine(
 /**
  * Returns true if a variable is `Err`
  * @since 2.0.0
+ * @example 
+ * 
+ * ```ts
+ * import { result } from 'tiinvo';
+ * 
+ * result.isErr(0)                   // false
+ * result.isErr(result.ok(10))       // false
+ * result.isErr(result.err('foo'))   // true
+ * ```
  */
 export const isErr = tg.combine(isTagged, haserrtag) as tg.Typeguard<Err>;
 /**
  * Returns true if a variable is `Ok`
  * @since 2.0.0
+ * @example 
+ * 
+ * ```ts
+ * import { result } from 'tiinvo';
+ * 
+ * result.isOk(0)                   // false
+ * result.isOk(result.ok(10))       // true
+ * result.isOk(result.err('foo'))   // false
+ * ```
  */
 export const isOk = tg.combine(isTagged, hasoktag) as tg.Typeguard<Ok>;
 
@@ -137,7 +155,7 @@ export const err = (message: string | Error): Err =>
   tagged(message instanceof Error ? message : new Error(message), ERRTAG);
 
 /**
- * Creates a `Ok<T>` type
+ * Creates a `Ok<T>` type. Throws if `T` is an instance of `Error`.
  * @since 2.0.0
  */
 export const ok = <T>(value: T): Ok<T> =>
@@ -147,8 +165,8 @@ export const ok = <T>(value: T): Ok<T> =>
   ) as Ok<T>;
 
 /**
- * Creates a `Result<T>` type. If the given value is an instance of `Error`, it will
- * return `Err`, otherwise will return `Ok<T>`
+ * Creates a `Result<T>` type. If the given value is an instance of `Error`, 
+ * returns `Err`, otherwise returns `Ok<T>`
  * @since 2.0.0
  */
 export const result = <T>(value: T): Result<T> =>
@@ -157,6 +175,7 @@ export const result = <T>(value: T): Result<T> =>
 /**
  * Creates a Err<K> factory from a function (arg: T) => K
  * @since 2.0.0
+ * @deprecated
  */
 export const errfromfn = (totaggedFn(err as any) as unknown) as FnUnary<
   string | Error,
@@ -166,12 +185,14 @@ export const errfromfn = (totaggedFn(err as any) as unknown) as FnUnary<
 /**
  * Creates a Ok<K> factory from a function (arg: T) => K
  * @since 2.0.0
+ * @deprecated
  */
 export const okfromfn = totaggedFn(ok);
 
 /**
  * Creates a Result<K> factory from a function (arg: T) => K
  * @since 2.0.0
+ * @deprecated
  */
 export const fromfn = (totaggedFn(result as any) as unknown) as <T>(
   arg: T
@@ -184,11 +205,29 @@ export const fromfn = (totaggedFn(result as any) as unknown) as <T>(
 /**
  * Throws an error if `Result<T>` is `Err`
  * @since 2.0.0
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { result } from 'tiinvo';
+ * 
+ * result.expect(result.ok(10))    // Ok<10>
+ * result.expect(result.err(''))   // throws
+ * ```
  */
 export const expect = createExpect<Result>(isOk);
 /**
  * Throws an error if `Result<T>` is `Ok<T>`
  * @since 2.0.0
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { result } from 'tiinvo';
+ * 
+ * result.unexpect(result.ok(10))    // throws
+ * result.unexpect(result.err(''))   // Err<''>
+ * ```
  */
 export const unexpect = createExpect<Result>(isErr);
 
@@ -198,25 +237,17 @@ export const unexpect = createExpect<Result>(isErr);
 
 /**
  * Filters an `Ok<T>` with a given predicate. If the check
- * does not satisfy the predicate, it will map the `Ok<T>` to
+ * does not satisfy the predicate, it maps the `Ok<T>` to
  * an `Err`.
  *
  * @since 2.0.0
  * @example
  *
  * ```ts
- * import { result, pipe } from 'tiinvo';
+ * import { result, num } from 'tiinvo';
  *
- * const iseven = (arg: number) => arg % 2 === 0;
- *
- * const filterfn = pipe(
- *    result.result as result.InferredResultFactory<number>,
- *    result.filter(iseven),
- *    result.isOk
- * );
- *
- * filterfn(4) // true
- * filterfn(3) // false
+ * result.filter(num.iseven)(4) // Ok<4>
+ * result.filter(num.iseven)(3) // Err
  * ```
  */
 export const filter = createFilter<Result, ResultTag>(
@@ -227,7 +258,7 @@ export const filter = createFilter<Result, ResultTag>(
 
 /**
  * Filters an `Ok<T>` with a given predicate. If the check
- * does not satisfy the predicate, it will return the fallback
+ * does not satisfy the predicate, it returns the fallback
  * `Result<T>`.
  *
  * @since 2.0.0
@@ -236,16 +267,10 @@ export const filter = createFilter<Result, ResultTag>(
  * ```ts
  * import { result, pipe } from 'tiinvo';
  *
- * const iseven = (arg: number) => arg % 2 === 0;
+ * const filter = result.filterOr(result.ok(0), num.iseven);
  *
- * const filterfn = pipe(
- *    result.result as result.InferredResultFactory<number>,
- *    result.filterOr(result.ok(0), iseven),
- *    result.unwrap
- * );
- *
- * filterfn(4) // 4
- * filterfn(3) // 0
+ * filter(4) // Ok<4>
+ * filter(3) // Ok<0>
  * ```
  */
 export const filterOr = createFilterOr<Result, ResultTag>(
@@ -258,7 +283,7 @@ export const filterOr = createFilterOr<Result, ResultTag>(
 //#region mappables
 
 /**
- * Maps a value `T` if `Ok`
+ * Returns `Ok<R>` if `Result<T>` is `Ok<T>`, otherwise returns `Err`
  *
  * @since 2.0.0
  * @example
@@ -285,7 +310,7 @@ export const map = createMap<Result, ResultTag>(
 );
 
 /**
- * Maps a value `T` if `Ok`, otherwise maps `Err` to `fallback`
+ * Returns `Ok<R>` if `Result<T>` is `Ok<T>`, otherwise returns fallback `Ok<R>`
  *
  * @since 2.0.0
  * @example
@@ -312,7 +337,7 @@ export const mapOr = createMapOr<Result, ResultTag>(
 );
 
 /**
- * Maps a value `T` if `Ok`, otherwise calls `Fn` and maps `Err` to `ReturnValue<Fn>`
+ * Returns `Ok<R>` if `Result<T>` is `Ok<T>`, otherwise calls `FnNullary<R>` and returns `Ok<R>`
  *
  * @since 2.0.0
  * @example
@@ -344,13 +369,13 @@ export const mapOrElse = createMapOrElse<Result, ResultTag>(
 //#region unwrappable
 
 /**
- * Unwraps a `Result<T>` `value` or throws
+ * Unwraps a `Result<T>` value `T` is `Ok<T>`, otherwise throws
  *
  * @since 2.0.0
  * @example
  * 
  * ```ts
- * import { result, fallback } from 'tiinvo';
+ * import { result } from 'tiinvo';
  *
  * const test1 = result.ok(10);
  * const test2 = result.ok(new Error());
@@ -363,26 +388,26 @@ export const mapOrElse = createMapOrElse<Result, ResultTag>(
 export const unwrap = createUnwrap<ResultTag>(isOk, "cannot unwrapp Err");
 
 /**
- * Unwraps a `Result<T>` `value` or returns the `fallback` `value`
+ * Unwraps a `Result<T>` value `T` if `Ok<T>`, otherwise returns the fallback value `T`
  *
  * @since 2.0.0
  * @example
  * 
  * ```ts
- * import { result, fallback } from 'tiinvo';
+ * import { result } from 'tiinvo';
  *
  * const test1 = result.ok(10);
  * const test2 = result.ok(new Error());
- * const unwrapfn = result.unwrapOr('error');
- *
+ * const unwrapfn = result.unwrapOr(0);
+ * 
  * unwrapfn(test1) // 10
- * unwrapfn(test2) // 'error'
+ * unwrapfn(test2) // 0
  * ```
  */
 
 export const unwrapOr = createUnwrapOr<ResultTag>(isOk);
 /**
- * Unwraps a `Result<T>` `value` or returns the `fallback` function `value`
+ * Unwraps a `Result<T>` value `T` if `Ok<T>`, otherwise calls fallback function `FnNullary<T>`
  *
  * @since 2.0.0
  * @example
@@ -392,10 +417,10 @@ export const unwrapOr = createUnwrapOr<ResultTag>(isOk);
  *
  * const test1 = result.ok(10);
  * const test2 = result.ok(new Error());
- * const unwrapfn = result.unwrapOrElse(fallback('error'));
- *
+ * const unwrapfn = result.unwrapOrElse(fallback(0));
+ * 
  * unwrapfn(test1) // 10
- * unwrapfn(test2) // 'error'
+ * unwrapfn(test2) // 0
  * ```
  */
 export const unwrapOrElse = createUnwrapOrElse<ResultTag>(isOk);
@@ -403,8 +428,23 @@ export const unwrapOrElse = createUnwrapOrElse<ResultTag>(isOk);
 //#endregion
 
 /**
- * Wraps a function `(... args: any[]) => T`, and once called it returns a `Result<T>`
+ * Wraps a function `FnUnary<A, T>`, and once called it returns a `Result<T>`
  * @since 2.0.0
+ * @example
+ * 
+ * ```ts
+ * import { result, num } from 'tiinvo';
+ * 
+ * const couldthrow = () => {
+ *   const a = num.brandomint(0, 10);
+ *   if (num.iseven(a)) {
+ *     return new Error('number is even')
+ *   }
+ *   return a;
+ * }
+ * const unsaferandomInt = result.fromfunction(couldthrow);
+ * unsaferandomInt() // could be either Err<'number is even'> or Ok<number>
+ * ```
  */
 export const fromfunction = createderivefromfunction(
   result as TaggedFactory<ResultTag>
