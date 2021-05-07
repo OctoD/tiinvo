@@ -61,7 +61,20 @@ const hasnothingtag = isTaggedWith(NOTHINGTAG);
 const hasjusttag = isTaggedWith(JUSTTAG);
 
 /**
- * Checks if a type is `Maybe<unknown>`
+ * Checks if a value is `Maybe<unknown>`
+ * 
+ * @since 2.0.0
+ * @example
+ * 
+ * ```ts
+ * import { maybe } from 'tiinvo';
+ * 
+ * maybe.isMaybe(10)                   // false
+ * maybe.isMaybe(maybe.just(20))       // true
+ * maybe.isMaybe(maybe.nothing())      // true
+ * maybe.isMaybe({ __tag: 'a' })       // false
+ * ```
+ * 
  */
 export const isMaybe = combine<Maybe>(
   isTagged,
@@ -103,6 +116,17 @@ export const isJustOf = <T>(type: Typeguard<T>) => isTaggedOf(JUSTTAG, type);
 
 /**
  * Checks if a type if `Nothing`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { maybe } from 'tiinvo';
+ * 
+ * maybe.isnothing(10)                 // false
+ * maybe.isnothing(maybe.just(20))     // false
+ * maybe.isnothing(maybe.maybe(!0))    // true
+ * maybe.isnothing(maybe.nothing())    // true
+ * ```
  */
 export const isNothing = combine<Nothing>(isTagged, hasnothingtag);
 
@@ -118,6 +142,19 @@ export const nothing = (): Nothing => tagged(undefined, NOTHINGTAG);
 /**
  * Creates a `Just<T>`.
  * Throws an error if the given value is falsy.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { maybe } from 'tiinvo';
+ * 
+ * maybe.just(10)          // Just<10>
+ * maybe.just('hi')        // Just<'hi'>
+ * maybe.just('')          // throws
+ * maybe.just(0)           // throws
+ * maybe.just(false)       // throws
+ * ```
+ * 
  */
 export const just = <T>(value: T) =>
   check(!!value, "Just value must be truthy")(tagged(value, JUSTTAG));
@@ -125,16 +162,28 @@ export const just = <T>(value: T) =>
 /**
  * Creates a `Maybe<T>` tagged type. If the value is truthy, it
  * will be a `Just<T>`, otherwise it will be `Nothing`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { maybe } from 'tiinvo';
+ * 
+ * maybe.maybe(0)    // Nothing
+ * maybe.maybe(1)    // Just<1>
+ * ```
+ * 
  */
 export const maybe = <T>(arg?: T) => (arg ? just(arg) : nothing());
 
 /**
  * Creates a Just<K> factory from a function (arg: T) => K
+ * @deprecated
  */
 export const justfromfn = totaggedFn(just);
 
 /**
  * Creates a Maybe<K> factory from a function (arg: T) => K
+ * @deprecated
  */
 export const fromfn = (totaggedFn(maybe as any) as unknown) as <T>(
   arg: T
@@ -146,11 +195,29 @@ export const fromfn = (totaggedFn(maybe as any) as unknown) as <T>(
 
 /**
  * Throws if the tagged type is not `Just`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { maybe } from 'tiinvo';
+ * 
+ * maybe.expect(maybe.maybe(0))  // throws
+ * maybe.expect(maybe.maybe(1))  // `Just<1>`
+ * ```
  */
 export const expect = createExpect<Just>(isJust);
 
 /**
  * Throws if the tagged type is not `Nothing`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { maybe } from 'tiinvo';
+ * 
+ * maybe.unexpect(maybe.maybe(0))  // Nothing
+ * maybe.unexpect(maybe.maybe(1))  // throws
+ * ```
  */
 export const unexpect = createExpect<Nothing>(isNothing);
 
@@ -161,11 +228,33 @@ export const unexpect = createExpect<Nothing>(isNothing);
 /**
  * If the predicate is satisfied, returns previous `Just<T>`, otherwise
  * returns `Nothing`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { maybe, num } from 'tiinvo';
+ * 
+ * const f = maybe.filter(num.iseven);
+ * 
+ * f(either.just(10))  // Just<10>
+ * f(either.just(9))   // Nothing
+ * ```
  */
 export const filter = createFilter(isJust, just, nothing as any);
 /**
  * If the predicate is satisfied, returns previous `Just<T>`, otherwise
  * returns the given fallback `Just<T>`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { maybe, num } from 'tiinvo';
+ * 
+ * const maybeinrange = maybe.filterOr(maybe.just(0), num.inrange(0, 10));
+ * 
+ * maybeinrange(either.just(10))  // Just<10>
+ * maybeinrange(either.just(11))  // Just<0>
+ * ```
  */
 export const filterOr = createFilterOr(isJust, just);
 
@@ -174,8 +263,17 @@ export const filterOr = createFilterOr(isJust, just);
 //#region foldables
 
 /**
- * Calls and returns the `left` function if the value is `Nothing`, otherwise
- * calls and returns the `right` function if the value is `Just<T>`.
+ * If `Maybe<T>` is `Just<T>`, returns `B` or calls `FnUnary<B>`, otherwise returns `A` or calls `FnUnary<A>`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { maybe } from 'tiinvo';
+ * 
+ * const unfold = maybe.fold('does not exists', 'exists');
+ * unfold(maybe.maybe({ user: `foobar` }))   // 'exists'
+ * unfold(maybe.maybe(undefined))            // 'does not exists'
+ * ```
  */
 export const fold = createfold<MaybeTag>(isNothing);
 
@@ -228,20 +326,19 @@ export const unwrapOrElse = createUnwrapOrElse<MaybeTag>(isJust);
  *
  * @example
  * ```ts
- * import { maybe } from 'tiinvo';
+ * import { maybe, num } from 'tiinvo';
  *
- * const isgreaterthan10 = (value: number) => value > 10;
+ * const maybeodd = maybe.frompredicate(num.isodd);
  *
- * maybe.frompredicate(isgreaterthan10)(11); // Just<number>
- * maybe.frompredicate(isgreaterthan10)(9);  // Nothing
- *
+ * maybeodd(10)    // Nothing
+ * maybeodd(11)    // Just<11>
  * ```
  */
 export const frompredicate = <T>(predicate: Predicate<T>) => (arg: T) =>
   predicate(arg) ? just(arg) : nothing();
 
 /**
- * Wraps a function `(... args: any[]) => T`, and once called it returns a `Just<T>`
+ * Wraps a function `FnUnary<A, T>`, and once called it returns a `Just<T>`
  *
  * @example
  *
@@ -259,7 +356,7 @@ export const frompredicate = <T>(predicate: Predicate<T>) => (arg: T) =>
 export const justfromfunction = createderivefromfunction(just);
 
 /**
- * Wraps a function `(... args: any[]) => T`, and once called it returns a `Maybe<T>`
+ * Wraps a function `FnUnary<A, T>`, and once called it returns a `Maybe<T>`
  *
  * @example
  *
