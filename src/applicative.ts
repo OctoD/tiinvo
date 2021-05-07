@@ -53,6 +53,8 @@ export type FnNary<T extends any[], U> = (... args: T) => U;
  *
  * @example
  * ```ts
+ * import { bind } from 'tiinvo';
+ * 
  * const myfn = (text: string, repeat: number) => text.repeat(repeat);
  * const bound = bind(myfn, 'abc', 3);
  *
@@ -97,6 +99,8 @@ export const callfnwith = <Args extends any[]>(... args: Args) => <Fn extends (.
  *
  * @example
  * ```ts
+ * import { check } from 'tiinvo';
+ * 
  * check(true, 'does not throw')(10)        // 10
  * check(true, 'does not throw')('hello')   // 'hello'
  * check(false, 'this throws')('hello')     // Uncaught Error: this throws
@@ -111,11 +115,14 @@ export const check = (condition: boolean, errormessage: string) => <T>(
 ): T | never => (condition ? arg : panic(errormessage));
 
 /**
- * Creates a function which returns a fallback function
+ * Creates a function which returns the passed argument
  *
  * @example
  * ```ts
- * either.unwrapLeftOrElse(fallback(10))(right(20)) // 10
+ * import { fallback } from 'tiinvo';
+ * 
+ * const always10 = fallback(10)
+ * always10() // 10
  * ```
  *
  * @param arg
@@ -146,7 +153,7 @@ export const panic = <E extends ErrorConstructor>(
 };
 
 /**
- * Converts a sync function to an async one
+ * Takes a sync function and returns an async version of it
  *
  * @template Fn
  * @param {Fn} fn
@@ -159,7 +166,7 @@ export const toasync = <Fn extends FnBase>(
 ) => fn(...args);
 
 /**
- * Waits for a given amount of time (milliseconds), then resolves the promise.
+ * Returns a `Promise<void>` which resolves after an amout of milliseconds
  * @since 2.13.0
  * @example
  * 

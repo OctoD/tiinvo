@@ -20,4 +20,4 @@
 * [Predicates](predicates.md)
 * [Typeguards](typeguards.md)
 * [Conditionals](conditionals.md)
-* [Function types](function-types.md)
+* [Utility functions](utility.md)
