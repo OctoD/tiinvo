@@ -1,3 +1,7 @@
+`Result<T>` can be used to handle runtime errors instead of throwing them and encapsulating code with a `try/catch` block.
+
+`Err` represents the error, while `Ok<T>` is the correct result.
+
 ## isResult
 
 Returns true if something is `Result<unknown>`;

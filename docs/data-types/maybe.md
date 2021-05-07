@@ -1,3 +1,5 @@
+`Maybe<T>` is a monad which, differently from haskell Maybe, represents a state of truthiness with `Just<T>` or falsiness with `Nothing`. It checks javascript's if a javascript value can be used as true or false.
+
 ## isMaybe
 
 Checks if a value is `Maybe<unknown>`

@@ -1,3 +1,5 @@
+Option represents a value that could be possibly `null` or `undefined` (nullable or optional).
+
 ## isOption
 
 Checks if a value is `Option<unknown>`
