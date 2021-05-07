@@ -44,11 +44,8 @@ This functions are ideal to work with the [pipe](pipes.md) function
 
 Functions for everyday programming.
 
-* [conditionals](conditionals.md) are functions to deal branching and switch operators functionally
-* [pipes](pipes.md) concatenates sync or async functions
+* [conditionals](conditionals.md) are functions to deal *branching* and *switch* cases functionally
+* [pipes](pipes.md) concatenates *sync* or *async* functions
 * [predicates](predicates.md) are made perform checks
 * [typeguards](typeguards.md) use them to ensure that some values are of an exact type
-
-## TaggedType
-
-* [TaggedType](tagged-type.md)
+* [utility functions](utility.md)
