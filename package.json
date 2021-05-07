@@ -41,7 +41,7 @@
     "test": "jest",
     "upgrade-interactive": "npm-check --update"
   },
-  "homepage": "https://github.com/octod/tiinvo#readme",
+  "homepage": "https://tiinvo.netlify.app",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/octod/tiinvo.git"
