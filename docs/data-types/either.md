@@ -228,36 +228,84 @@ filter(either.left(1))     // Left<1>
 
 ## fold 
 
+Folds current `Either<T>`. It accepts two arguments `L` or `FnUnary<T, L>` and `R` or `FnUnary<T, R>`.
+
+If `Either<T>` is `Left<T>`, it will return `L` or call `FnUnary<T, L>`.
+
+If `Either<T>` is `Right<T>`, it will return `R` or call `FnUnary<T, R>`.
+
 <!-- tabs:start -->
 
 #### **node**
 
 ```ts
 import { either } from 'tiinvo';
+
+const unfold1 = either.fold('is left', 'is right');
+const unfold2 = either.fold(() => 'is left', 'is right');
+const unfold3 = either.fold('is left', () => 'is right');
+const unfold4 = either.fold(() => 'is left', () => 'is right');
+
+const test1 = either.left(10);
+const test2 = either.right(10);
+
+unfold1(test1); // 'is left'
+unfold2(test1); // 'is left'
+unfold3(test1); // 'is left'
+unfold4(test1); // 'is left'
+unfold1(test2); // 'is right'
+unfold2(test2); // 'is right'
+unfold3(test2); // 'is right'
+unfold4(test2); // 'is right'
 ```
 
 #### **deno/esm**
 
 ```ts
 import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+const unfold1 = either.fold('is left', 'is right');
+const unfold2 = either.fold(() => 'is left', 'is right');
+const unfold3 = either.fold('is left', () => 'is right');
+const unfold4 = either.fold(() => 'is left', () => 'is right');
+
+const test1 = either.left(10);
+const test2 = either.right(10);
+
+unfold1(test1); // 'is left'
+unfold2(test1); // 'is left'
+unfold3(test1); // 'is left'
+unfold4(test1); // 'is left'
+unfold1(test2); // 'is right'
+unfold2(test2); // 'is right'
+unfold3(test2); // 'is right'
+unfold4(test2); // 'is right'
 ```
 
 <!-- tabs:end -->
 
 ## swap 
 
+Swaps `Left<T>` to `Right<T>` is `Either<T>` is `Left`, otherwise swaps `Right<T>` to `Left<T>` is `Either<T>` is `Right`
+
 <!-- tabs:start -->
 
 #### **node**
 
 ```ts
 import { either } from 'tiinvo';
+
+either.swap(either.left(10))  // Right<10>
+either.swap(either.right(10)) // Left<10>
 ```
 
 #### **deno/esm**
 
 ```ts
 import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+either.swap(either.left(10))  // Right<10>
+either.swap(either.right(10)) // Left<10>
 ```
 
 <!-- tabs:end -->
@@ -266,48 +314,79 @@ import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 ## mapLeft 
 
+Maps `Either<T>` to `Left<R>` if is `Left`, otherwise returns `Right<T>`.
+
 <!-- tabs:start -->
 
 #### **node**
 
 ```ts
-import { either } from 'tiinvo';
+import { either, num } from 'tiinvo';
+
+const mapleft = either.mapLeft(num.umultiply(2));
+
+mapleft(either.left(5))   // Left<10>
+mapleft(either.right(5))  // Right<5>
 ```
 
 #### **deno/esm**
 
 ```ts
-import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+import { either, num } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+const mapleft = either.mapLeft(num.umultiply(2));
+
+mapleft(either.left(5))   // Left<10>
+mapleft(either.right(5))  // Right<5>
 ```
 
 <!-- tabs:end -->
 
 ## mapRight 
 
+Maps `Either<T>` to `Right<R>` if is `Right`, otherwise returns `Left<T>`.
+
 <!-- tabs:start -->
 
 #### **node**
 
 ```ts
 import { either } from 'tiinvo';
+
+const mapright = either.mapRight(num.umultiply(2));
+
+mapright(either.left(5))   // Left<5>
+mapright(either.right(5))  // Right<10>
 ```
 
 #### **deno/esm**
 
 ```ts
 import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+const mapright = either.mapRight(num.umultiply(2));
+
+mapright(either.left(5))   // Left<5>
+mapright(either.right(5))  // Right<10>
 ```
 
 <!-- tabs:end -->
 
 ## mapLeftOr 
 
+Maps `Either<T>` to `Left<R>` if is `Left`, otherwise returns `or` as `Left<T>`
+
 <!-- tabs:start -->
 
 #### **node**
 
 ```ts
-import { either } from 'tiinvo';
+import { either, num } from 'tiinvo';
+
+const mapleftor = either.mapLeftOr(either.left(0), num.udivide(2));
+
+mapleftor(either.left(10))    //  Left<5>
+mapleftor(either.right(20))   //  Left<0>
 ```
 
 #### **deno/esm**
@@ -320,61 +399,121 @@ import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 ## mapRightOr 
 
+Maps `Either<T>` to `Right<R>` if is `Right`, otherwise returns `or` as `Right<T>`
+
 <!-- tabs:start -->
 
 #### **node**
 
 ```ts
-import { either } from 'tiinvo';
+import { either, num } from 'tiinvo';
+
+const maprightor = either.mapRightOr(either.right(0), num.udivide(2));
+
+maprightor(either.left(10))    //  Right<0>
+maprightor(either.right(20))   //  Right<10>
 ```
 
 #### **deno/esm**
 
 ```ts
 import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+const maprightor = either.mapRightOr(either.right(0), num.udivide(2));
+
+maprightor(either.left(10))    //  Right<0>
+maprightor(either.right(20))   //  Right<10>
 ```
 
 <!-- tabs:end -->
 
 ## mapLeftOrElse 
 
+Maps `Either<T>` to `Left<R>` if is `Left`, otherwise calls `orfn` and returns `Left<T>`
+
 <!-- tabs:start -->
 
 #### **node**
 
 ```ts
-import { either } from 'tiinvo';
+import { either, num, fallback, predicate } from 'tiinvo';
+
+const m = either.mapLeftOrElse(
+  fallback(false), 
+  predicate.and(
+    num.greaterthan(0), 
+    num.lessthan(10)
+  )
+);
+
+m(either.right(5))    // Left<false>
+m(either.left(5))     // Left<true>
 ```
 
 #### **deno/esm**
 
 ```ts
-import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+import { either, num, fallback, predicate } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+const m = either.mapLeftOrElse(
+  fallback(false), 
+  predicate.and(
+    num.greaterthan(0), 
+    num.lessthan(10)
+  )
+);
+
+m(either.right(5))    // Left<false>
+m(either.left(5))     // Left<true>
 ```
 
 <!-- tabs:end -->
 
 ## mapRigthOrElse 
 
+Maps `Either<T>` to `Right<R>` if is `Right`, otherwise calls `orfn` and returns `Right<T>`
+
 <!-- tabs:start -->
 
 #### **node**
 
 ```ts
-import { either } from 'tiinvo';
+import { either, num, fallback, predicate } from 'tiinvo';
+
+const m = either.mapRightOrElse(
+  fallback(false), 
+  predicate.and(
+    num.greaterthan(0), 
+    num.lessthan(10)
+  )
+);
+
+m(either.right(5))    // Right<true>
+m(either.left(5))     // Right<false>
 ```
 
 #### **deno/esm**
 
 ```ts
-import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+import { either, num, fallback, predicate } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+const m = either.mapRightOrElse(
+  fallback(false), 
+  predicate.and(
+    num.greaterthan(0), 
+    num.lessthan(10)
+  )
+);
+
+m(either.right(5))    // Right<true>
+m(either.left(5))     // Right<false>
 ```
 
 <!-- tabs:end -->
 
 ## unwrapEither
 
-
+Unwraps either `Left` or `Right`.
 
 <!-- tabs:start -->
 
@@ -382,19 +521,25 @@ import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 ```ts
 import { either } from 'tiinvo';
+
+either.unwrapEither(either.left(10)) // 10
+either.unwrapEither(either.right(1)) // 1
 ```
 
 #### **deno/esm**
 
 ```ts
 import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+either.unwrapEither(either.left(10)) // 10
+either.unwrapEither(either.right(1)) // 1
 ```
 
 <!-- tabs:end -->
 
 ## unwrapLeft
 
-
+Unwraps value if `Either` is `Left`, otherwise throws an error.
 
 <!-- tabs:start -->
 
@@ -402,19 +547,25 @@ import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 ```ts
 import { either } from 'tiinvo';
+
+either.unwrapLeft(left(10)) // 10
+either.unwrapLeft(right(1)) // throws
 ```
 
 #### **deno/esm**
 
 ```ts
 import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+either.unwrapLeft(left(10)) // 10
+either.unwrapLeft(right(1)) // throws
 ```
 
 <!-- tabs:end -->
 
 ## unwrapRight
 
-
+Unwraps value if `Either` is `Right`, otherwise throws an error.
 
 <!-- tabs:start -->
 
@@ -422,19 +573,25 @@ import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 ```ts
 import { either } from 'tiinvo';
+
+either.unwrapRight(left(10)) // throws
+either.unwrapRight(right(1)) // 1
 ```
 
 #### **deno/esm**
 
 ```ts
 import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+either.unwrapRight(left(10)) // throws
+either.unwrapRight(right(1)) // 1
 ```
 
 <!-- tabs:end -->
 
 ## unwrapLeftOr
 
-
+Unwraps `Left<T>` value `T` if `Either<T>` is `Left`, otherwise returns the fallback `T`.
 
 <!-- tabs:start -->
 
@@ -442,19 +599,25 @@ import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 ```ts
 import { either } from 'tiinvo';
+
+either.unwrapLeftOr(20)(left(10)) // 10
+either.unwrapLeftOr(20)(right(1)) // 20
 ```
 
 #### **deno/esm**
 
 ```ts
 import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+either.unwrapLeftOr(20)(left(10)) // 10
+either.unwrapLeftOr(20)(right(1)) // 20
 ```
 
 <!-- tabs:end -->
 
 ## unwrapRightOr
 
-
+Unwraps `Right<T>` value `T` if `Either<T>` is `Right`, otherwise returns the fallback `T`.
 
 <!-- tabs:start -->
 
@@ -462,19 +625,25 @@ import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 ```ts
 import { either } from 'tiinvo';
+
+either.unwrapRightOr(20)(left(10)) // 20
+either.unwrapRightOr(20)(right(1)) // 1
 ```
 
 #### **deno/esm**
 
 ```ts
 import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+either.unwrapRightOr(20)(left(10)) // 20
+either.unwrapRightOr(20)(right(1)) // 1
 ```
 
 <!-- tabs:end -->
 
 ## unwrapLeftOrElse
 
-
+Unwraps `Left<T>` value `T` if `Either<T>` is `Left`, otherwise calls the fallback `FnNullary<T>`.
 
 <!-- tabs:start -->
 
@@ -482,19 +651,25 @@ import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 ```ts
 import { either } from 'tiinvo';
+
+either.unwrapLeftOrElse(fallback(20))(left(10)) // 10
+either.unwrapLeftOrElse(fallback(30))(right(1)) // 30
 ```
 
 #### **deno/esm**
 
 ```ts
 import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+either.unwrapLeftOrElse(fallback(20))(left(10)) // 10
+either.unwrapLeftOrElse(fallback(30))(right(1)) // 30
 ```
 
 <!-- tabs:end -->
 
 ## unwrapRightOrElse
 
-
+Unwraps `Right<T>` value `T` if `Either<T>` is `Right`, otherwise calls the fallback `FnNullary<T>`.
 
 <!-- tabs:start -->
 
@@ -502,12 +677,18 @@ import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 ```ts
 import { either } from 'tiinvo';
+
+either.unwrapRightOrElse(fallback(20))(left(10)) // 20
+either.unwrapRightOrElse(fallback(30))(right(1)) // 1
 ```
 
 #### **deno/esm**
 
 ```ts
 import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+either.unwrapRightOrElse(fallback(20))(left(10)) // 20
+either.unwrapRightOrElse(fallback(30))(right(1)) // 1
 ```
 
 <!-- tabs:end -->
@@ -515,20 +696,27 @@ import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 ## frompredicate
 
-
+Creates a new `Either<T>` from a given `Predicate<T>`. 
+If the predicate is satisfied, it returns `Right<T>`, otherwise returns `Left<T>`
 
 <!-- tabs:start -->
 
 #### **node**
 
 ```ts
-import { either } from 'tiinvo';
+import { either, num } from 'tiinvo';
+
+either.frompredicate(num.iseven)(20) // Right<20>
+either.frompredicate(num.iseven)(11) // Left<11>
 ```
 
 #### **deno/esm**
 
 ```ts
-import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+import { either, num } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+either.frompredicate(num.iseven)(20) // Right<20>
+either.frompredicate(num.iseven)(11) // Left<11>
 ```
 
 <!-- tabs:end -->
@@ -536,14 +724,18 @@ import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 ## leftfromfunction
 
-
+Wraps a function `FnUnary<A, T>`, and once called it returns a `Left<T>`
 
 <!-- tabs:start -->
 
 #### **node**
 
 ```ts
-import { either } from 'tiinvo';
+import { either, num } from 'tiinvo';
+
+const fn = either.leftfromfunction(num.uadd(5));
+
+fn(10) // Left<15>
 ```
 
 #### **deno/esm**
@@ -557,20 +749,28 @@ import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 ## rightfromfunction
 
-
+Wraps a function `FnUnary<A, T>`, and once called it returns a `Right<T>`
 
 <!-- tabs:start -->
 
 #### **node**
 
 ```ts
-import { either } from 'tiinvo';
+import { either, num } from 'tiinvo';
+
+const fn = either.rightfromfunction(num.uadd(5));
+
+fn(10) // Right<15>
 ```
 
 #### **deno/esm**
 
 ```ts
-import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+import { either, num } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+const fn = either.rightfromfunction(num.uadd(5));
+
+fn(10) // Right<15>
 ```
 
 <!-- tabs:end -->
@@ -578,20 +778,30 @@ import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 ## fromfunction
 
-
+Wraps a function `FnUnary<A, T>` and if the given `Predicate<T>` is satisfied, returns `Right<T>`. Otherwise returns `Left<T>`.
 
 <!-- tabs:start -->
 
 #### **node**
 
 ```ts
-import { either } from 'tiinvo';
+import { either, num } from 'tiinvo';
+
+const fn = either.fromfunction(num.usubtract(1), num.iseven);
+
+fn(10) // Left<9>
+fn(11) // Right<10>
 ```
 
 #### **deno/esm**
 
 ```ts
-import { either } from 'https://cdn.skypack.dev/tiinvo?dts';
+import { either, num } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+const fn = either.fromfunction(num.usubtract(1), num.iseven);
+
+fn(10) // Left<9>
+fn(11) // Right<10>
 ```
 
 <!-- tabs:end -->
