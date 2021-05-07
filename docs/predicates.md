@@ -1,4 +1,4 @@
-#### and
+## and
 
 Combines two or more predicates in one. The resulting predicate will return true if
 all predicates are satisfied
@@ -39,7 +39,7 @@ combined('foo'); // false
 
 <!-- tabs:end -->
 
-#### fromvalue
+## fromvalue
 
 Creates a new function which accepts a predicate. This predicate will check
 the value used for creating that function.
@@ -80,7 +80,7 @@ check2(isodd)    // false
 
 <!-- tabs:end -->
 
-#### fromvalues
+## fromvalues
 
 Returns a function which checks if every value `T` passes a given `Predicate<T>`
 
@@ -114,7 +114,7 @@ test2(iseven); // true
 
 <!-- tabs:end -->
 
-#### noneof
+## noneof
 
 Combines two or more predicates into one. The returned predicate
 will check if no conditions are met.
@@ -159,7 +159,7 @@ noneOfTheAbove(undefined)      // false
 
 <!-- tabs:end -->
 
-#### or
+## or
 
 Combines two or more predicates in one. The returned predicate will
 check if at least one condition passes.
@@ -202,7 +202,7 @@ orfn('Alexander');   // false
 
 <!-- tabs:end -->
 
-#### reverse
+## reverse
 
 Reverses (negates) the result of a predicate.
 
@@ -236,7 +236,7 @@ isodd(1)   // true
 
 <!-- tabs:end -->
 
-#### withdifferentvalue
+## withdifferentvalue
 
 Creates a new `Predicate<T>` which checks if the given argument is not the same as the
 one passed to the predicate.
@@ -269,7 +269,7 @@ isnotjoe('Joe');   // false
 
 <!-- tabs:end -->
 
-#### withsamevalue
+## withsamevalue
 
 Creates a new `Predicate<T>` which checks if the given argument is the same as the
 one passed to the predicate.

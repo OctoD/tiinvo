@@ -82,7 +82,7 @@ export const isTagged = combine<Tagged<unknown, string>>(
 );
 
 /**
- *
+ * Checks if a variable is tagged with a specific `Tag`
  *
  * @template Tag
  * @param {Tag} tag
@@ -96,7 +96,8 @@ export const isTaggedWith = <Tag extends string>(tag: Tag) =>
   );
 
 /**
- *
+ * Checks if a variable is tagged with a specific `Tag` and it's value is 
+ * of a specific type
  *
  * @template Tag
  * @template T

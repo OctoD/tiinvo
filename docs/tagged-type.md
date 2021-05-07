@@ -16,3 +16,29 @@ A set of premade `TaggedType`s are
 * [maybe](data-types/maybe.md)
 * [option](data-types/option.md)
 * [result](data-types/result.md)
+
+
+
+## Assertables
+
+[filename](tagged-type/assertables.md ':include')
+
+## Derivables
+
+[filename](tagged-type/derivables.md ':include')
+
+## Filterables
+
+[filename](tagged-type/filterables.md ':include')
+
+## Foldables
+
+[filename](tagged-type/foldables.md ':include')
+
+## Mappables
+
+[filename](tagged-type/mappables.md ':include')
+
+## Unwrappables
+
+[filename](tagged-type/unwrappables.md ':include')

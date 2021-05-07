@@ -2,12 +2,6 @@
 * [Quick start](quick-start.md)
 * [Data types](data-types.md)
   * [Tagged type](tagged-type.md)
-    * [Assertables](tagged-type/assertables.md)
-    * [Derivables](tagged-type/derivables.md)
-    * [Filterables](tagged-type/filterables.md)
-    * [Foldables](tagged-type/foldables.md)
-    * [Mappables](tagged-type/mappables.md)
-    * [Unwrappables](tagged-type/unwrappables.md)
   * [Either](data-types/either.md)
   * [Maybe](data-types/maybe.md)
   * [Option](data-types/option.md)
@@ -21,3 +15,4 @@
 * [Typeguards](typeguards.md)
 * [Conditionals](conditionals.md)
 * [Utility functions](utility.md)
+  
