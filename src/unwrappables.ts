@@ -4,6 +4,10 @@ import { Tagged } from "./tagged-type";
 
 /**
  *
+ * Takes a `Predicate<T>` and an error message `string`. 
+ *
+ * If the passed `TaggedType<T>` does not satisfied the `Predicate<T>` constraint,
+ * an error will be thrown.
  *
  * @template Tag
  * @param {Predicate<Tagged<any, Tag>>} predicate

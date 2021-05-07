@@ -1,14 +1,11 @@
 import { fallback } from "../applicative";
+import { createMap } from '../mappables';
 import {
-  some,
-  isSome,
-  none,
-  isNone,
   map,
   mapOr,
-  mapOrElse,
-  unwrapOrElse,
+  mapOrElse, none, some, unwrapOrElse
 } from "../option";
+import { isTaggedWith, Tagged, taggedFactory } from '../tagged-type';
 
 const multiply = (arg: number) => arg * 2;
 const fallbackfn = fallback(0);
@@ -43,4 +40,27 @@ describe("mappables", () => {
     expect(u(tsome)).toBe(20);
     expect(u(tnone)).toBe(0);
   });
+
+  test(`createMap example`, () => {
+    const eventag = `even`;
+    const oddtag = `odd`;
+
+    type eventag = typeof eventag;
+    type oddtag = typeof oddtag;
+    type integertag = eventag | oddtag;
+
+    const even = taggedFactory<integertag>(eventag);
+    const odd = taggedFactory<integertag>(oddtag);
+    const integer = <T>(arg: T) => typeof arg === 'number' && arg % 2 === 0 ? even(arg) : odd(arg);
+
+    const iseven = isTaggedWith(eventag);
+
+    const map = createMap<Tagged<number, integertag>, integertag>(iseven, integer);
+    const mapperfn = (arg: number) => arg / 2;
+
+    //  Tagged<'10.00', 'even'>;
+    expect(map(mapperfn)(integer(10)).__tag).toBe(oddtag);
+    //  Tagged<undefined, 'odd'>;
+    expect(map(mapperfn)(integer(4)).__tag).toBe(eventag);
+  })
 });

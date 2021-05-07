@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./banner-readme.png" />
+  <img src="https://raw.githubusercontent.com/OctoD/tiinvo/master/banner-readme.png" height="160"/>
 </div>
 
 tiinvo
@@ -27,12 +27,22 @@ Lot of functions for tacit programming and functional types for TypeScript and J
 
 # Install
 
-```bash
-# npm
-npm i tiinvo
+You can install it using npm
 
-# yarn
+```bash
+npm i tiinvo
+```
+
+Or with yarn
+
+```bash
 yarn add tiinvo
+```
+
+or if you are using Deno, you have to simply import it
+
+```ts
+import { } from 'https://cdn.skypack.dev/tiinvo?dts';
 ```
 
 # Usage

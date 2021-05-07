@@ -6,6 +6,8 @@ import { Tagged, TaggedFactory } from "./tagged-type";
  *
  * @example
  * ```ts
+ * import { taggedFactory } from 'tiinvo'
+ * 
  * const mytagged = taggedFactory('foo');
  * const mytaggedfromfunction = createderivefromfunction(mytagged);
  *

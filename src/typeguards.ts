@@ -39,6 +39,8 @@ export type TypegardsTuple<T extends Typeguard<any>[]> = {
  *
  * @example
  * ```ts
+ * import { isarray } from 'tiinvo';
+ * 
  * isarray(10)  // false
  * isarray('a') // false
  * isarray(!0)  // false
@@ -52,6 +54,8 @@ export const isarray = ((arg) => Array.isArray(arg)) as Typeguard<unknown[]>;
  *
  * @example
  * ```ts
+ * import { isbigint } from 'tiinvo';
+ * 
  * isbigint(10)  // false
  * isbigint('a') // false
  * isbigint(!0)  // false
@@ -79,6 +83,8 @@ export const isboolean = ((arg) =>
  *
  * @example
  * ```ts
+ * import { isdefined } from 'tiinvo';
+ * 
  * isdefined(undefined)   // false
  * isdefined(10)          // true
  * isdefined('a')         // true
@@ -94,6 +100,8 @@ export const isdefined = ((arg) =>
  *
  * @example
  * ```ts
+ * import { isfunction } from 'tiinvo';
+ * 
  * isfunction(undefined)   // false
  * isfunction(10)          // false
  * isfunction('a')         // false
@@ -109,6 +117,8 @@ export const isfunction = ((arg) =>
  *
  * @example
  * ```ts
+ * import { isnumber } from 'tiinvo';
+ * 
  * isnumber(10)  // true
  * isnumber('a') // false
  * isnumber(!0)  // false
@@ -209,7 +219,16 @@ export const isindexable = ((arg) =>
 
 /**
  * Checks if a value is an Error
- *
+ * 
+ * ```ts
+ * import { iserror } from 'tiinvo';
+ * 
+ * iserror(10)          // false
+ * iserror('a')         // false
+ * iserror(new Error()) // true
+ * iserror(null)        // false
+ * iserror(undefined)   // false
+ * ```
  * @param {unknown} arg
  * @returns {arg is Error}
  */
@@ -222,6 +241,19 @@ export const iserror = (arg: unknown): arg is Error => arg instanceof Error;
 /**
  * Checks if a value is indexable and has a key
  *
+ * @example
+ * 
+ * ```ts
+ * import { haskey } from 'tiinvo';
+ * 
+ * const hasfoo = haskey('foo');
+ * 
+ * hasfoo(10)             // false
+ * hasfoo('hello')        // false
+ * hasfoo({bar: 100})     // false
+ * hasfoo({foo: `baz`})   // false
+ * ```
+ * 
  * @template Key
  * @param {Key} key
  */
@@ -234,8 +266,15 @@ export const haskey = <Key extends string | number>(key: Key) => (
  *
  * @example
  * ```ts
- * haskeyoftype('foo', isstring)({ foo: 100 }) // false
- * haskeyoftype('foo', isstring)({ foo: '1' }) // true
+ * import { haskeyoftype, isstring } from 'tiinvo';
+ * 
+ * const hasfoo = haskeyoftype('foo', isstring);
+ *  
+ * hasfoo(10)             // false
+ * hasfoo('hello')        // false
+ * hasfoo({bar: 100})     // false
+ * hasfoo({foo: true})    // false
+ * hasfoo({foo: `baz`})   // true
  * ```
  *
  * @template Key
@@ -254,8 +293,12 @@ export const haskeyoftype = <Key extends string | number, T>(
  *
  * @example
  * ```ts
- * haskeyWithValue('foo', 100)({ foo: 100 }) // true
- * haskeyWithValue('foo', 100)({ foo: '1' }) // false
+ * import { haskeyWithValue } from 'tiinvo';
+ * 
+ * const hasfoo = haskeyWithValue('foo', `baz`);
+ *  
+ * hasfoo({foo: `bar`})   // true
+ * hasfoo({foo: `baz`})   // true
  * ```
  *
  * @template Key
@@ -274,6 +317,8 @@ export const haskeyWithValue = <Key extends string | number, Value>(
  *
  * @example
  * ```ts
+ * import { haslength } from 'tiinvo';
+ * 
  * haslength([])              // true
  * haslength({})              // false
  * haslength({ length: 10 })  // true
@@ -524,10 +569,12 @@ export const anyof = <T>(...predicates: Typeguard<unknown>[]): Typeguard<T> =>
   predicate.or(...predicates) as Typeguard<T>;
 
 /**
- * Checks if a variable is null or undefined
+ * Checks if a value is null or undefined
  *
  * @example
  * ```ts
+ * import { isnullOrUndefined } from 'tiinvo';
+ * 
  * isnullOrUndefined(null)      // true
  * isnullOrUndefined(undefined) // true
  * isnullOrUndefined('foo')     // false
@@ -537,10 +584,12 @@ export const anyof = <T>(...predicates: Typeguard<unknown>[]): Typeguard<T> =>
 export const isnullOrUndefined = anyof<null | undefined>(isnull, isundefined);
 
 /**
- * Checks if a variable is not null or undefined
+ * Checks if a value is not null or undefined
  *
  * @example
  * ```ts
+ * import { isnotNullOrUndefined } from 'tiinvo';
+ * 
  * isnotNullOrUndefined(null)      // false
  * isnotNullOrUndefined(undefined) // false
  * isnotNullOrUndefined('foo')     // true
@@ -550,12 +599,14 @@ export const isnullOrUndefined = anyof<null | undefined>(isnull, isundefined);
 export const isnotNullOrUndefined = combine<object>(isnotnull, isdefined);
 
 /**
- * Checks if a variable is an array of a given type.
+ * Checks if a value is an array of a given type.
  *
  * @example
  * ```ts
+ * import { isarrayof, isstring } from 'tiinvo';
+ * 
  * const isarrayofStrings = isarrayof(isstring);
- *
+ * 
  * isarrayofStrings([10, 20, 'hello', 'world']) // false
  * isarrayofStrings([10, 20])                   // false
  * isarrayofStrings(['hello', 'world'])         // true
@@ -569,7 +620,7 @@ export const isarrayof = <T>(typeguard: Typeguard<T>) => (
 ): arg is T[] => isarray(arg) && arg.every(typeguard);
 
 /**
- * Makes a Typeguard<T> nullable
+ * Makes a `Typeguard<T>` nullable, so it will check if `T` or `null`
  *
  * @example
  * ```ts
@@ -587,10 +638,12 @@ export const nullable = <T>(typeguard: Typeguard<T>) =>
   anyof<T | null>(isnull, typeguard);
 
 /**
- * Makes a Typeguard<T> optional
+ * Makes a `Typeguard<T>` optional, so it will check if `T` or `undefined`
  *
  * @example
  * ```ts
+ * import { optional, isnumber } from 'tiinvo';
+ * 
  * const isoptionalnumber = optional(isnumber);
  *
  * isoptionalnumber(undefined)  // true

@@ -12,6 +12,8 @@ const map: PrimitiveMethodMapper<number> = key => (...args) => value => (Number.
  * 
  * ```ts
  * import { num } from 'tiinvo';
+ * 
+ * num.toExponential(2) // '2e+0'
  * ```
  */
 export const toExponential = map(`toExponential`);
@@ -23,6 +25,8 @@ export const toExponential = map(`toExponential`);
  * 
  * ```ts
  * import { num } from 'tiinvo';
+ * 
+ * num.toFixed(2)(2) // '2.00'
  * ```
  */
 export const toFixed = map(`toFixed`);
@@ -34,6 +38,8 @@ export const toFixed = map(`toFixed`);
  * 
  * ```ts
  * import { num } from 'tiinvo';
+ * 
+ * num.toPrecision(2)(2) // '2.0'
  * ```
  */
 export const toPrecision = map(`toPrecision`);
@@ -45,6 +51,9 @@ export const toPrecision = map(`toPrecision`);
  * 
  * ```ts
  * import { num } from 'tiinvo';
+ * 
+ * num.toString()(2) // '2'
+ * num.toString(2)(2) // '10'
  * ```
  */
 export const toString = map(`toString`);
@@ -53,16 +62,67 @@ export const toString = map(`toString`);
 
 //#region predicates
 
+/**
+ * Checks if `arg` is equal to `comparator`
+ * @param comparator 
+ * @returns 
+ */
 export const equals = (comparator: number) => (arg: number) => arg === comparator;
+
+/**
+ * Checks if `arg` is greater than `comparator`
+ * @param comparator 
+ * @returns 
+ */
 export const greaterthan = (comparator: number) => (arg: number) => arg > comparator;
+
+/**
+ * Checks if `arg` is greater than or equal to `comparator`
+ * @param comparator 
+ * @returns 
+ */
 export const greaterequalthan = (comparator: number) => (arg: number) => arg >= comparator;
+
+/**
+ * Checks if `arg` is less than `comparator`
+ * @param comparator 
+ * @returns 
+ */
 export const lessthan = (comparator: number) => (arg: number) => arg < comparator;
+
+/**
+ * Checks if `arg` is less than or equal to `comparator`
+ * @param comparator 
+ * @returns 
+ */
 export const lessequalthan = (comparator: number) => (arg: number) => arg <= comparator;
 
+/**
+ * Checks if `arg` is included between `min` and `max`
+ * @param comparator 
+ * @returns 
+ */
 export const inrange = (min: number, max: number) => (arg: number) => min <= arg && max >= arg;
+
+/**
+ * Checks if `arg` is not included between `min` and `max`
+ * @param comparator 
+ * @returns 
+ */
 export const outofrange = (min: number, max: number) => (arg: number) => min > arg || max < arg;
 
+/**
+ * Checks if `arg` is an even number
+ * @param comparator 
+ * @returns 
+ */
 export const iseven = (arg: number) => arg % 2 === 0;
+
+/**
+ * Checks if `arg` is an odd number
+ * @param comparator 
+ * @returns 
+ */
 export const isodd = (arg: number) => arg % 2 !== 0;
 
 //#region 
@@ -71,17 +131,76 @@ export const isodd = (arg: number) => arg % 2 !== 0;
 
 export type NumberUnaryFn = FnUnary<number, FnUnary<number, number>>;
 
+/**
+ * Adds `b` to `a`
+ * @param a 
+ * @returns 
+ */
 export const uadd: NumberUnaryFn = a => b => a + b;
+
+/**
+ * Divides `b` from `a`
+ * @param a 
+ * @returns 
+ */
 export const udivide: NumberUnaryFn = a => b => b / a;
+
+/**
+ * Gets the greater between `a` and `b`
+ * @param a 
+ * @returns 
+ */
 export const umax: NumberUnaryFn = a => b => Math.max(a, b);
+
+/**
+ * Gets the smaller between `a` and `b`
+ * @param a 
+ * @returns 
+ */
 export const umin: NumberUnaryFn = a => b => Math.min(a, b);
+
+/**
+ * Multiply `b` by `a`
+ * @param a 
+ * @returns 
+ */
 export const umultiply: NumberUnaryFn = a => b => a * b;
+
+/**
+ * Raises `b` by `a`
+ * @param a 
+ * @returns 
+ */
 export const upow: NumberUnaryFn = a => b => b ** a;
+
+/**
+ * Divide `b` by `a` and returns the remainder
+ * @param a 
+ * @returns 
+ */
 export const uremainder: NumberUnaryFn = a => b => b % a;
+
 export const uroot: NumberUnaryFn = a => b => b ** (1 / a);
+
+/**
+ * Subtracts `a` from `b`
+ * @param a 
+ * @returns 
+ */
 export const usubtract: NumberUnaryFn = a => b => b - a;
 
+/**
+ * Returns a random int between `a` and `b`
+ * @param min 
+ * @returns 
+ */
 export const urandomint: NumberUnaryFn = min => max => Math.floor(Math.random() * (max - min + 1)) + min;
+
+/**
+ * Returns a random float between `a` and `b`
+ * @param min 
+ * @returns 
+ */
 export const urandomfloat: NumberUnaryFn = min => max => (Math.random() * (max - min + 1)) + min;
 
 //#endregion

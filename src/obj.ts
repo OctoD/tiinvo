@@ -15,7 +15,7 @@
 export const entries = <T>(o: { [s: string]: T } | ArrayLike<T>): [string, T][] => Object.entries(o);
 
 /**
- * Returns true if the object T and object U values are the same, false otherwise.
+ * Returns `true` if the object `T` and object `U` values are the same, `false` otherwise.
  * @since 2.10.0
  * @example
  * 
@@ -144,7 +144,6 @@ export const mapkey = <T>(key: keyof T): (arg: T) => T[typeof key] => (arg: T) =
  * import { omit } from 'tiinvo';
  * 
  * const myobject = { foo: 10, bar: 20, baz: 'qwerty' };
- * 
  * omit('foo', 'bar')(myobject) // { baz: 'qwerty' }
  * ```
  * 
@@ -167,7 +166,7 @@ export const omit = <Keys extends string>(... omitkeys: Keys[]) => <T extends Re
 }
 
 /**
- * Given a set of properties T whose keys are in the object U, returns a new object with all picked properties
+ * Given a set of properties `T` whose keys are in the object `U`, returns a new object with all picked properties
  * @since 2.10.0
  * @example
  * 
@@ -175,7 +174,6 @@ export const omit = <Keys extends string>(... omitkeys: Keys[]) => <T extends Re
  * import { obj } from 'tiinvo';
  * 
  * const test = { foo: 100, bar: 200, baz: 300 };
- * 
  * obj.pick(`foo`, `baz`)(test) // { foo: 100, baz: 300 }
  * ```
  * 

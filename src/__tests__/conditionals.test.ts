@@ -30,10 +30,20 @@ describe("conditionals", () => {
     const switchcase = pipe(
       str.length,
       multi(
+        `Not valid`,
+        [num.equals(0), `Required`],
+        [num.lessthan(10), `Too short`],
+        [num.greaterthan(20), `Too long`],
+        [num.greaterthan(8), `Valid`],
+      )
+    );
+    const switchcasefn = pipe(
+      str.length,
+      multi(
         fallback(`Not valid`),
-        [num.equals(0), fallback(`Required`)],
+        [num.equals(0), `Required`],
         [num.lessthan(10), fallback(`Too short`)],
-        [num.greaterthan(20), fallback(`Too long`)],
+        [num.greaterthan(20), `Too long`],
         [num.greaterthan(8), fallback(`Valid`)],
       )
     );
@@ -43,5 +53,11 @@ describe("conditionals", () => {
     expect(switchcase('123456789012345678901234567890')).toBe(`Too long`);
     expect(switchcase('')).toBe(`Required`);
     expect(switchcase(11 as any)).toBe(`Not valid`);
+
+    expect(switchcasefn('hello world')).toBe(`Valid`);
+    expect(switchcasefn('foo')).toBe(`Too short`);
+    expect(switchcasefn('123456789012345678901234567890')).toBe(`Too long`);
+    expect(switchcasefn('')).toBe(`Required`);
+    expect(switchcasefn(11 as any)).toBe(`Not valid`);
   })
 });

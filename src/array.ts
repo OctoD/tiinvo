@@ -7,7 +7,9 @@ import { fallback, FnUnary } from './applicative';
  * @example
  *
  * ```ts
- * const get2nd = eq(1);
+ * import { array } from 'tiinvo';
+ * 
+ * const get2nd = array.eq(1);
  * get2nd([100, 200, 300]); // 200
  * ```
  *
@@ -19,10 +21,13 @@ export const eq = (index: number): (<T>(arg: T[]) => T | undefined) => (arg) =>
 
 /**
  * Returns true if every element in the array satisfy the given predicate.
+ * 
  * @example
  *
  * ```ts
- * const everynumber = every(isnumber);
+ * import { array, isnumber } from 'tiinvo';
+ * 
+ * const everynumber = array.every(isnumber);
  * everynumber([1, 2, 3, 4])      // true
  * everynumber([1, 2, 3, 'nope']) // false
  * ```
@@ -40,7 +45,9 @@ export const every = <T>(fn: (arg: T) => boolean): ((arg: T[]) => boolean) => (
  * @example
  *
  * ```ts
- * const get100th = eqOr(100)(20);
+ * import { array } from 'tiinvo';
+ * 
+ * const get100th = array.eqOr(100)(20);
  * get100th([100, 200, 300]); // 20
  * ```
  *
@@ -58,7 +65,9 @@ export const eqOr = (
  * @example
  *
  * ```ts
- * const onlyeven = filter((arg: number) => arg % 2 === 0);
+ * import { array } from 'tiinvo';
+ * 
+ * const onlyeven = array.filter((arg: number) => arg % 2 === 0);
  * onlyeven([1, 2, 3, 4, 5, 6]) // [2, 4, 6]
  * ```
  *
@@ -76,7 +85,9 @@ export const filter = <T>(fn: (arg: T) => boolean): ((arg: T[]) => T[]) => (
  * @example
  *
  * ```ts
- * const findhermione = find(predicate.withsamevalue('Hermione'));
+ * import { array, predicate } from 'tiinvo';
+ * 
+ * const findhermione = array.find(predicate.withsamevalue('Hermione'));
  * findhermione(['Harry', 'Hermione', 'Ronald']) // 'Hermione'
  * findhermione(['Severus', 'Dumbledore', 'Tomarevaca']) // undefined
  * ```
@@ -190,6 +201,25 @@ export const getfirst = fallback(first);
  * @example
  *
  * ```ts
+ * import { array } from 'tiinvo'
+ * 
+ * array.getfirstOr(20)([]) // 20
+ * ```
+ *
+ * @template T
+ * @param {T} or
+ * @returns
+ */
+export const firstOr = <T>(or: T): ((arg: T[]) => T) => (arg) =>
+  arg[0] ?? or;
+
+/**
+ * Gets first element of an array.
+ * Returns `or` if the array is empty.
+ * @deprecated
+ * @example
+ *
+ * ```ts
  * getfirstOr(20)([]) // 20
  * ```
  *
@@ -197,8 +227,7 @@ export const getfirst = fallback(first);
  * @param {T} or
  * @returns
  */
-export const getfirstOr = <T>(or: T): ((arg: T[]) => T) => (arg) =>
-  arg[0] ?? or;
+export const getfirstOr = firstOr
 
 /**
  * Gets the last element of an array.
@@ -235,7 +264,27 @@ export const getlast = fallback(last);
 /**
  * Returns the last element of an array or the given fallback.
  *
+ * @example
  *
+ * ```ts
+ * import { array } from 'tiinvo';
+ * 
+ * const lastnumber = array.lastOr(0);
+ * lastnumber([1, 2, 3]) // 3
+ * lastnumber([]) // 0
+ * ```
+ *
+ * @template T
+ * @param {T} or
+ * @returns
+ */
+export const lastOr = <T>(or: T): ((arg: T[]) => T) => (arg) =>
+  arg[arg.length - 1] ?? or;
+
+/**
+ * Returns the last element of an array or the given fallback.
+ *
+ * @deprecated
  * @example
  *
  * ```ts
@@ -248,11 +297,10 @@ export const getlast = fallback(last);
  * @param {T} or
  * @returns
  */
-export const getlastOr = <T>(or: T): ((arg: T[]) => T) => (arg) =>
-  arg[arg.length - 1] ?? or;
+export const getlastOr = lastOr;
 
 /**
- * Returns true if an array is empty
+ * Returns `true` if an array is empty, otherwise returns `false`.
  * @since 2.11.0
  * @example
  *
@@ -283,7 +331,7 @@ export const empty = <T>(arg: T[]): boolean =>
 export const isempty = fallback(empty)
 
 /**
- * Returns true if an array is not empty
+ * Returns `true` if an array is not empty, otherwise returns `false`.
  * @since 2.11.0
  * @example
  *
@@ -338,7 +386,6 @@ export const includes = <T>(value: T): ((arg: T[]) => boolean) => (arg) =>
  * import { array } from 'tiinvo';
  * 
  * const test = [1, 2, 3, 4];
- *
  * array.len(test) // 4
  * ```
  *
@@ -362,13 +409,14 @@ export const len = <T>(arg: T[]) => arg.length;
 export const length = fallback(len);
 
 /**
- * joins an array
+ * Joins an array
  * @since 2.11.0
  * @example
  *
  * ```ts
+ * import { array } from 'tiinvo';
+ * 
  * const test = [1, 2, 3, 4];
- *
  * array.join(`-`)(test) // `1-2-3-4`
  * ```
  *
@@ -381,6 +429,8 @@ export const join = (str: string): ((arg: unknown[]) => string) => (arg) => arg.
  * @example
  *
  * ```ts
+ * import { array } from 'tiinvo';
+ * 
  * interface Person {
  *    age: number;
  *    name: string;
@@ -430,12 +480,14 @@ export const rand = <T>(arr: T[]): T =>
 export const random = fallback(rand);
 
 /**
- * Aggregates all values in a single input.
+ * Aggregates all values `T[]` in a single input `Z`.
  * This aggregation starts from the first to the last element.
  * @example
  *
  * ```ts
- * const sum = reduce(0, (prev, next: number) => prev + next);
+ * import { array } from 'tiinvo';
+ * 
+ * const sum = array.reduce(0, (prev, next: number) => prev + next);
  * sum([1, 2, 3]) // 6
  * ```
  *
@@ -451,7 +503,7 @@ export const reduce = <T, Z>(
 ): ((arg: T[]) => Z) => (arg) => arg.reduce(fn, accumulator);
 
 /**
- * Aggregates all values in a single input.
+ * Aggregates all values `T[]` in a single input `Z`.
  * This aggregation starts from the last to the first element.
  * @example
  *
@@ -539,7 +591,9 @@ export const shuffle = fallback(mix)
  * @example
  *
  * ```ts
- * const somenumber = some(isnumber);
+ * import { isnumber, array } from 'tiinvo';
+ * 
+ * const somenumber = array.some(isnumber);
  * somenumber([1, 2, 3, 4]) // true
  * somenumber([null, undefined, 'nope']) // false
  * ```
@@ -555,9 +609,10 @@ export const some = <T>(fn: (arg: T) => boolean): ((arg: T[]) => boolean) => (
  * @example
  *
  * ```ts
- * const sortdesc = sort((num1: number, num2: number) => num2 - num1);
+ * import { array, num } from 'tiinvo';
+ * 
+ * const sortdesc = sort(num.sortdesc);
  * sort([3, 5, 1, 2, 10, 21, 12, 20]) // [ 21, 20, 12, 10, 5, 3, 2, 1 ]
- *
  * ```
  *
  * @template {T}
@@ -572,8 +627,10 @@ export const sort = <T>(
  * Takes only the first elements by `count`
  *
  * ```ts
+ * import { array } from 'array';
+ * 
  * const limit = 2;
- * const takefn = takefirstnth(limit)
+ * const takefn = array.takefirstnth(limit)
  * const test = [1, 2, 3, 4];
  *
  * takefn(test) // [1, 2]
@@ -590,12 +647,13 @@ export const takefirstnth = (count: number): (<T>(arg: T[]) => T[]) => (arg) =>
  * Takes only the last elements by `count`
  *
  * ```ts
+ * import { array } from 'tiinvo';
+ *
  * const limit = 2;
- * const takefn = takelastnth(limit)
+ * const takefn = array.takelastnth(limit)
  * const test = [1, 2, 3, 4];
  *
  * takefn(test) // [3, 4]
- *
  * ```
  *
  * @param count

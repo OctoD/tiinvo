@@ -163,7 +163,22 @@ export const rightfromfn = totaggedFn(right);
 //#region filterables
 
 /**
- * Filters only Left
+ * Filters only `Left<T>` values by a given `Predicate<T>`. 
+ * 
+ * If `Either<T>` is `Left<T>` and the `Predicate<T>` is not satisfied, 
+ * it will return `Right<T>`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either, num } from 'tiinvo';
+ * 
+ * const filter = either.filterLeft(num.iseven);
+ * 
+ * filter(either.left(10))   // Right<10>;
+ * filter(either.left(9))    // Left<9>;
+ * filter(either.right(5))   // Right<5>;
+ * ```
  */
 export const filterLeft = createFilter<Either, EitherTagname>(
   isLeft,
@@ -172,12 +187,40 @@ export const filterLeft = createFilter<Either, EitherTagname>(
 );
 
 /**
- * Filters Left Or
+ * Similar to `filterLeft`, but it will return the fallback `or` if filtered.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either, num } from 'tiinvo';
+ * 
+ * const filter = either.filterLeftOr(either.left(10), num.lessthan(10));
+ * 
+ * filter(either.left(10))   // Left<10>
+ * filter(either.left(11))   // Left<11>
+ * filter(either.right(1))   // Right<1>
+ * ```
  */
 export const filterLeftOr = createFilterOr<Either, EitherTagname>(isLeft, left);
 
 /**
- * Filters Right
+ * Filters only `Right<T>` values by a given `Predicate<T>`. 
+ * 
+ * If `Either<T>` is `Right<T>` and the `Predicate<T>` is not satisfied, 
+ * it will return `Left<T>`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either, num } from 'tiinvo';
+ * 
+ * const filter = either.filterRight(num.iseven);
+ * 
+ * filter(either.right(10))   // Left<10>;
+ * filter(either.right(9))    // Right<9>;
+ * filter(either.left(5))     // Left<5>;
+ * ```
+ * 
  */
 export const filterRight = createFilter<Either, EitherTagname>(
   isRight,
@@ -186,7 +229,19 @@ export const filterRight = createFilter<Either, EitherTagname>(
 );
 
 /**
- * Filters Right or
+ * Similar to `filterRight`, but it will return the fallback `or` if filtered.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either, num } from 'tiinvo';
+ * 
+ * const filter = either.filterRightOr(either.right(10), num.lessthan(10));
+ * 
+ * filter(either.right(50))   // Right<10>
+ * filter(either.right(11))   // Right<10>
+ * filter(either.left(1))     // Left<1>
+ * ```
  */
 export const filterRightOr = createFilterOr<Either, EitherTagname>(
   isRight,
@@ -198,12 +253,48 @@ export const filterRightOr = createFilterOr<Either, EitherTagname>(
 //#region foldables
 
 /**
- * Folds current Either
+ * Folds current `Either<T>`. It accepts two arguments `L` or `FnUnary<T, L>` and `R` or `FnUnary<T, R>`.
+ * 
+ * If `Either<T>` is `Left<T>`, it will return `L` or call `FnUnary<T, L>`.
+ * 
+ * If `Either<T>` is `Right<T>`, it will return `R` or call `FnUnary<T, R>`.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either } from 'tiinvo';
+ * 
+ * const unfold1 = either.fold('is left', 'is right');
+ * const unfold2 = either.fold(() => 'is left', 'is right');
+ * const unfold3 = either.fold('is left', () => 'is right');
+ * const unfold4 = either.fold(() => 'is left', () => 'is right');
+ * 
+ * const test1 = either.left(10)
+ * const test2 = either.right(10)
+ * unfold1(test1) // 'is left'
+ * unfold2(test1) // 'is left'
+ * unfold3(test1) // 'is left'
+ * unfold4(test1) // 'is left'
+ * unfold1(test2) // 'is right'
+ * unfold2(test2) // 'is right'
+ * unfold3(test2) // 'is right'
+ * unfold4(test2) // 'is right'
+ * ```
+ * 
  */
 export const fold = createfold<EitherTagname>(isLeft);
 
 /**
- * Swaps Left to Right and Right to Left
+ * Swaps `Left<T>` to `Right<T>` is `Either<T>` is `Left`, otherwise swaps `Right<T>` to `Left<T>` is `Either<T>` is `Right`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either } from 'tiinvo';
+ * 
+ * either.swap(either.left(10))  // Right<10>
+ * either.swap(either.right(10)) // Left<10>
+ * ```
  */
 export const swap = createSwap<LeftTagname, RightTagname>(isLeft, left, right);
 
@@ -212,27 +303,88 @@ export const swap = createSwap<LeftTagname, RightTagname>(isLeft, left, right);
 //#region mappables
 
 /**
- * Maps Left only
+ * Maps `Either<T>` to `Left<R>` if is `Left`, otherwise returns `Right<T>`.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either, num } from 'tiinvo';
+ * 
+ * const mapleft = either.mapLeft(num.umultiply(2));
+ * 
+ * mapleft(either.left(5))   // Left<10>
+ * mapleft(either.right(5))  // Right<5>
+ * ```
  */
 export const mapLeft = createMap<Either, EitherTagname>(isLeft, left);
 
 /**
- * Maps Right only
+ * Maps `Either<T>` to `Right<R>` if is `Right`, otherwise returns `Left<T>`.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either, num } from 'tiinvo';
+ * 
+ * const mapright = either.mapRight(num.umultiply(2));
+ * 
+ * mapright(either.left(5))   // Left<5>
+ * mapright(either.right(5))  // Right<10>
+ * ```
  */
 export const mapRight = createMap<Either, EitherTagname>(isRight, right);
 
 /**
- * Maps Left or
+ * Maps `Either<T>` to `Left<R>` if is `Left`, otherwise returns `or` as `Left<T>`.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either, num } from 'tiinvo';
+ * 
+ * const mapleftor = either.mapLeftOr(either.left(0), num.udivide(2));
+ * 
+ * mapleftor(either.left(10))    //  Left<5>
+ * mapleftor(either.right(20))   //  Left<0>
+ * ```
  */
 export const mapLeftOr = createMapOr<Either, EitherTagname>(isLeft, left);
 
 /**
- * Maps Right or
+ * Maps `Either<T>` to `Right<R>` if is `Right`, otherwise returns `or` as `Right<T>`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either, num } from 'tiinvo';
+ * 
+ * const maprightor = either.mapRightOr(either.right(0), num.udivide(2));
+ * 
+ * maprightor(either.left(10))    //  Right<0>
+ * maprightor(either.right(20))   //  Right<10>
+ * ```
  */
 export const mapRightOr = createMapOr<Either, EitherTagname>(isRight, right);
 
 /**
- * Maps Left or else
+ * Maps `Either<T>` to `Left<R>` if is `Left`, otherwise calls `orfn` and returns `Left<T>`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either, num, fallback, predicate } from 'tiinvo';
+ * 
+ * const m = either.mapLeftOrElse(
+ *   fallback(false), 
+ *   predicate.and(
+ *     num.greaterthan(0), 
+ *     num.lessthan(10)
+ *   )
+ * );
+ * 
+ * m(either.right(5))    // Left<false>
+ * m(either.left(5))     // Left<true>
+ * ```
  */
 export const mapLeftOrElse = createMapOrElse<Either, EitherTagname>(
   isLeft,
@@ -240,7 +392,24 @@ export const mapLeftOrElse = createMapOrElse<Either, EitherTagname>(
 );
 
 /**
- * Maps Right or else
+ * Maps `Either<T>` to `Right<R>` if is `Right`, otherwise calls `orfn` and returns `Right<T>`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either, num, fallback, predicate } from 'tiinvo';
+ * 
+ * const m = either.mapRightOrElse(
+ *   fallback(false), 
+ *   predicate.and(
+ *     num.greaterthan(0), 
+ *     num.lessthan(10)
+ *   )
+ * );
+ * 
+ * m(either.right(5))    // Right<true>
+ * m(either.left(5))     // Right<false>
+ * ```
  */
 export const mapRigthOrElse = createMapOrElse<Either, EitherTagname>(
   isRight,
@@ -250,16 +419,21 @@ export const mapRigthOrElse = createMapOrElse<Either, EitherTagname>(
 //#region unwrappables
 
 /**
- * Unwraps Either Left or Right
+ * Unwraps either `Left` or `Right`.
  *
  * @example
- * unwrapEither(left(10)) // 10
- * unwrapEither(right(1)) // 1
+ * 
+ * ```ts
+ * import { either } from 'tiinvo';
+ * 
+ * either.unwrapEither(either.left(10)) // 10
+ * either.unwrapEither(either.right(1)) // 1
+ * ```
  */
 export const unwrapEither = createUnwrap(isEither, "");
 
 /**
- * Unwraps value if Left or throws
+ * Unwraps value if `Either` is `Left`, otherwise throws an error.
  *
  * @example
  * 
@@ -276,7 +450,7 @@ export const unwrapLeft = createUnwrap(
 );
 
 /**
- * Unwraps value if Right or throws
+ * Unwraps value if `Either` is `Right`, otherwise throws an error.
  *
  * @example
  * ```ts
@@ -293,7 +467,7 @@ export const unwrapRight = createUnwrap(
 );
 
 /**
- * Unwraps Left value if Left or returns the fallback
+ * Unwraps `Left<T>` value `T` if `Either<T>` is `Left`, otherwise returns the fallback `T`.
  *
  * @example
  * ```ts
@@ -306,7 +480,7 @@ export const unwrapRight = createUnwrap(
 export const unwrapLeftOr = createUnwrapOr(isLeft);
 
 /**
- * Unwraps Right value if Right or returns the fallback
+ * Unwraps `Right<T>` value `T` if `Either<T>` is `Right`, otherwise returns the fallback `T`.
  *
  * @example
  * ```ts
@@ -319,7 +493,7 @@ export const unwrapLeftOr = createUnwrapOr(isLeft);
 export const unwrapRightOr = createUnwrapOr(isRight);
 
 /**
- * Unwraps Left value if Left or returns the fallback
+ * Unwraps `Left<T>` value `T` if `Either<T>` is `Left`, otherwise calls the fallback `FnNullary<T>`.
  *
  * @example
  * ```ts
@@ -332,7 +506,7 @@ export const unwrapRightOr = createUnwrapOr(isRight);
 export const unwrapLeftOrElse = createUnwrapOrElse(isLeft);
 
 /**
- * Unwraps Right value if Right or returns the fallback
+ * Unwraps `Right<T>` value `T` if `Either<T>` is `Right`, otherwise calls the fallback `FnNullary<T>`.
  *
  * @example
  * ```ts
@@ -347,7 +521,8 @@ export const unwrapRightOrElse = createUnwrapOrElse(isRight);
 //#endregion
 
 /**
- * Creates a new either from a given predicate.
+ * Creates a new `Either<T>` from a given `Predicate<T>`. 
+ * If the predicate is satisfied, it returns `Right<T>`, otherwise returns `Left<T>`
  *
  * @example
  * ```ts
@@ -364,17 +539,38 @@ export const frompredicate = <T>(predicate: Predicate<T>) => (arg: T) =>
   predicate(arg) ? right(arg) : left(arg);
 
 /**
- * Wraps a function `(... args: any[]) => T`, and once called it returns a `Left<T>`
+ * Wraps a function `FnUnary<A, T>`, and once called it returns a `Left<T>`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either, num } from 'tiinvo';
+ * 
+ * const fn = either.leftfromfunction(num.uadd(5));
+ * 
+ * fn(10) // Left<15>
+ * ```
  */
 export const leftfromfunction = createderivefromfunction(left);
 
 /**
- * Wraps a function `(... args: any[]) => T`, and once called it returns a `Right<T>`
+ * Wraps a function `FnUnary<A, T>`, and once called it returns a `Right<T>`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { either, num } from 'tiinvo';
+ * 
+ * const fn = either.rightfromfunction(num.uadd(5));
+ * 
+ * fn(10) // Right<15>
+ * ```
  */
 export const rightfromfunction = createderivefromfunction(right);
 
 /**
- * Wraps a function `(... args: any[]) => T` and if the given Predicate<T> is satisfied, returns Right<T>. Otherwise returns Left<T>
+ * Wraps a function `FnUnary<A, T>` and if the given `Predicate<T>` is satisfied, returns `Right<T>`. Otherwise returns `Left<T>`.
+ * 
  * @since 2.13.0
  * @example
  * 
