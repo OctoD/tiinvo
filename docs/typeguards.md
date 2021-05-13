@@ -488,7 +488,7 @@ import { optional, isnumber } from 'tiinvo';
 
 const isoptionalnumber = optional(isnumber);
 
-isoptionalnumber(null) // true
+isoptionalnumber(undefined) // true
 isoptionalnumber(1000) // true
 isoptionalnumber('10') // false
 ```
@@ -500,7 +500,7 @@ import { optional, isnumber } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 const isoptionalnumber = optional(isnumber);
 
-isoptionalnumber(null) // true
+isoptionalnumber(undefined) // true
 isoptionalnumber(1000) // true
 isoptionalnumber('10') // false
 ```
