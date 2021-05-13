@@ -59,5 +59,17 @@ describe("conditionals", () => {
     expect(switchcasefn('123456789012345678901234567890')).toBe(`Too long`);
     expect(switchcasefn('')).toBe(`Required`);
     expect(switchcasefn(11 as any)).toBe(`Not valid`);
+
+    // callable multi
+    const mockfn = jest.fn().mockReturnValue(10);
+
+    const testcallable = multi(
+      0,
+      [num.greaterthan(0), mockfn]
+    );
+
+    expect(testcallable(-1)).toBe(0);
+    expect(testcallable(1)).toBe(10);
+    expect(mockfn).toHaveBeenCalledWith(1);
   })
 });

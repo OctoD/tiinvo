@@ -42,7 +42,7 @@ dosomething(11) // "11 is odd"
 Like a Switch statement.
 
 It accepts the default case `R` as first argument, then an indefinite number of tuples made
-by a `Predicate<T>` as first argument, and a `R` or `FnUnary<T, R>` function as resolver.
+by a `Predicate<T>` as first argument, and a `R` or `FnNullary<R>` or `FnUnary<T, R>` function as resolver.
 
 <!-- tabs:start --->
 

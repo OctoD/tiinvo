@@ -92,7 +92,7 @@ export const branch = <U, R>(
  * Like a Switch statement.
  * 
  * It accepts the default case `R` as first argument, then an indefinite number of tuples made
- * by a `Predicate<T>` as first argument, and a `R` or `FnUnary<T, R>` function as resolver.
+ * by a `Predicate<T>` as first argument, and a `R` or `FnNullary<R>` or `FnUnary<T, R>` function as resolver.
  * 
  * @since 2.13.0
  * @example
@@ -124,13 +124,13 @@ export const branch = <U, R>(
  */
 export const multi = <U, R>(
   defaultcase: R | FnNullary<R>,
-  ... cases: [... [Predicate<U>, R | FnNullary<R>]][]
+  ... cases: [... [Predicate<U>, R | FnNullary<R> | FnUnary<U, R>]][]
 ) => (arg: U): R => {
   for (let i = 0; i < cases.length; i++) {
     const current = cases[i];
 
     if (current[0](arg)) {
-      return typeof current[1] === 'function' ? (current[1] as any)() : current[1];
+      return typeof current[1] === 'function' ? (current[1] as any)(arg) : current[1];
     }
   }
 
