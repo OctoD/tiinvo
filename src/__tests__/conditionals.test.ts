@@ -21,9 +21,13 @@ describe("conditionals", () => {
     const oddstostring = tostring('odd');
 
     const dosomething = branch(num.iseven, evenstostring, oddstostring);
+    const dosomething2 = branch(num.iseven, 'even', `odd`);
 
     expect(dosomething(10)).toBe(`10 is even`) // "10 is even"
     expect(dosomething(11)).toBe(`11 is odd`) // "11 is odd"
+
+    expect(dosomething2(10)).toBe(`even`);
+    expect(dosomething2(11)).toBe(`odd`);
   })
 
   it(`multi`, () => {

@@ -57,8 +57,7 @@ export const fifn = <T extends () => A, F extends () => B, A, B>(
 ) => (condition ? truthyfn() : falsyfn());
 
 /**
- * Creates a branching function. If the predicate is satisfied, calls Positive fn, otherwise calls Negative fn.
- * Note: Both Predicate, Positive and Negative fns are unaries.
+ * Creates a branching function. If the predicate is satisfied, calls `Positive` is is a `FnUnary<U, R>` or returns it, otherwise calls or returns `Negative`.
  * 
  * @since 2.12.0
  * 
@@ -84,9 +83,9 @@ export const fifn = <T extends () => A, F extends () => B, A, B>(
  */
 export const branch = <U, R>(
   condition: Predicate<U>,
-  positive: FnUnary<U, R>,
-  negative: FnUnary<U, R>,
-) => (arg: U): R => condition(arg) ? positive(arg) : negative(arg);
+  positive: R | FnUnary<U, R>,
+  negative: R | FnUnary<U, R>,
+) => (arg: U): R => condition(arg) ? typeof positive === 'function' ? (positive as any)(arg) : positive : typeof negative === 'function' ? (negative as any)(arg) : negative;
 
 /**
  * Like a Switch statement.

@@ -14,10 +14,14 @@ const tostring = (label: 'even' | 'odd') => (arg: number) => `${arg} is ${label}
 const evenstostring = tostring('even');
 const oddstostring = tostring('odd');
 
-const dosomething = const dosomething = branch(num.iseven, evenstostring, oddstostring);
+const dosomething = branch(num.iseven, evenstostring, oddstostring);
+const dosomething2 = branch(num.iseven, 'even', 'odd');
 
 dosomething(10) // "10 is even"
 dosomething(11) // "11 is odd"
+
+dosomething2(10) // "even"
+dosomething2(11) // "odd"
 ```
 
 #### **deno/esm**
@@ -29,10 +33,14 @@ const tostring = (label: 'even' | 'odd') => (arg: number) => `${arg} is ${label}
 const evenstostring = tostring('even');
 const oddstostring = tostring('odd');
 
-const dosomething = const dosomething = branch(num.iseven, evenstostring, oddstostring);
+const dosomething = branch(num.iseven, evenstostring, oddstostring);
+const dosomething2 = branch(num.iseven, 'even', 'odd');
 
 dosomething(10) // "10 is even"
 dosomething(11) // "11 is odd"
+
+dosomething2(10) // "even"
+dosomething2(11) // "odd"
 ```
 
 <!-- tabs:end --->
