@@ -7,6 +7,16 @@ describe(`obj`, () => {
     expect(expect.arrayContaining(obj.entries(testobject))).toEqual(Object.entries(testobject));
   });
 
+  test(`flatten`, () => {
+    const myobj = { a: { b: { c: 100 } }, d: 20 };
+    const testa = obj.flattern(myobj);
+    const expectedkeys = obj.keys(testa);
+
+    expect(expect.arrayContaining(expectedkeys)).toEqual(['a.b.c', 'd']);
+    expect(testa['a.b.c']).toBe(100);
+    expect(testa.d).toBe(20);
+  })
+
   test(`is`, () => {
     expect(obj.is(testobject)(testobject)).toBeTruthy();
     expect(obj.is(1)(1)).toBeTruthy();

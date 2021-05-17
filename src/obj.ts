@@ -14,6 +14,58 @@
  */
 export const entries = <T>(o: { [s: string]: T } | ArrayLike<T>): [string, T][] => Object.entries(o);
 
+export type Flatten<T extends object> = object extends T ? object : {
+  [K in keyof T]-?: (x: NonNullable<T[K]> extends infer V ? V extends object ?
+      V extends readonly any[] ? Pick<T, K> : Flatten<V> extends infer FV ? ({
+          [P in keyof FV as `${Extract<K, string | number>}.${Extract<P, string | number>}`]:
+          FV[P] }) : never : Pick<T, K> : never
+  ) => void } extends Record<keyof T, (y: infer O) => void> ?
+  O extends infer _U ? { [K in keyof O]: O[K] } : never : never
+
+/**
+ * Returns a flat object of `T`. 
+ * Ideal to use it for mongodb queries/inserts.
+ * 
+ * @since 2.19.0
+ * 
+ * ```ts
+ * import { obj } from 'tiinvo';
+ * 
+ * const myobject = {
+ *    a: {
+ *      b: {
+ *        c: 100
+ *      }
+ *    },
+ *    d: 20
+ * }
+ * 
+ * obj.flattern(myobject) // { 'a.b.c': 100, d: 20 }
+ * ```
+ * 
+ * @param obj 
+ * @param prefix 
+ * @returns 
+ */
+export const flattern = <T extends object>(obj: T, prefix = ``): Flatten<T> => {
+  const flattened = {} as any
+  const kl = keys(obj)
+
+  for (let i = 0; i < kl.length; i++) {
+    const key = kl[i] as string;
+    const prefixed = prefix ? `${prefix}.${key}` : key;
+    const value = (obj as any)[key]
+
+    if (typeof value === 'object' && value !== null) {
+      Object.assign(flattened, flattern(value, prefixed))
+    } else {
+      flattened[prefixed] = value
+    }
+  }
+
+  return flattened
+}
+
 /**
  * Returns `true` if the object `T` and object `U` values are the same, `false` otherwise.
  * @since 2.10.0
@@ -150,13 +202,13 @@ export const mapkey = <T>(key: keyof T): (arg: T) => T[typeof key] => (arg: T) =
  * @param omitkeys 
  * @returns 
  */
-export const omit = <Keys extends string>(... omitkeys: Keys[]) => <T extends Record<Keys, any>>(o: T): Omit<T, Keys> => {
+export const omit = <Keys extends string>(...omitkeys: Keys[]) => <T extends Record<Keys, any>>(o: T): Omit<T, Keys> => {
   const omitted = {} as Exclude<T, Keys>;
   const ownedkeys = keys(o);
 
   for (let index = 0; index < ownedkeys.length; index++) {
     const key = ownedkeys[index];
-    
+
     if (!omitkeys.includes(key as Keys)) {
       (omitted as any)[key] = o[key];
     }
@@ -180,8 +232,8 @@ export const omit = <Keys extends string>(... omitkeys: Keys[]) => <T extends Re
  * @param keys 
  * @returns 
  */
-export const pick = <T extends string>(... keys: T[]): (<U extends Record<T, any>>(o: U) => Pick<U, T>) => o => keys.reduce(
-  (obj, key) => ({... obj, [key]: o[key] }),
+export const pick = <T extends string>(...keys: T[]): (<U extends Record<T, any>>(o: U) => Pick<U, T>) => o => keys.reduce(
+  (obj, key) => ({ ...obj, [key]: o[key] }),
   {} as Pick<any, T>
 );
 

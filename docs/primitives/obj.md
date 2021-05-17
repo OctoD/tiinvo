@@ -22,6 +22,49 @@ obj.entries({ foo: 10, bar: 20 }) // [["foo", 10], ["bar", 20]]
 
 <!-- tabs:end --->
 
+## flattern
+
+Returns a flat object of `T`. 
+Ideal to use it for mongodb queries/inserts.
+
+<!-- tabs:start --->
+
+#### **node**
+
+```ts
+import { obj } from 'tiinvo';
+
+const myobject = {
+   a: {
+     b: {
+       c: 100
+     }
+   },
+   d: 20
+}
+
+obj.flattern(myobject) // { 'a.b.c': 100, d: 20 }
+```
+
+#### **deno/esm**
+
+```ts
+import { obj } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+const myobject = {
+   a: {
+     b: {
+       c: 100
+     }
+   },
+   d: 20
+}
+
+obj.flattern(myobject) // { 'a.b.c': 100, d: 20 }
+```
+
+<!-- tabs:end --->
+
 ## is
 
 Returns `true` if the object `T` and object `U` values are the same, `false` otherwise.
