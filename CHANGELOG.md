@@ -1,3 +1,35 @@
+# [2.19.0](https://github.com/octod/tiinvo/compare/v2.18.0...v2.19.0) (2021-05-17)
+
+
+### Features
+
+* adds obj.flattern ([fd34c3a](https://github.com/octod/tiinvo/commit/fd34c3a8c080455986dba2f68b130c20129b90f2))
+
+
+
+# [2.18.0](https://github.com/octod/tiinvo/compare/v2.17.0...v2.18.0) (2021-05-16)
+
+
+
+# [2.17.0](https://github.com/octod/tiinvo/compare/v2.16.0...v2.17.0) (2021-05-13)
+
+
+### Features
+
+* adds fnbinary case in multi ([2dfd78d](https://github.com/octod/tiinvo/commit/2dfd78d0150845f537d2bca04d3d45a6031b29ba))
+
+
+
+# [2.16.0](https://github.com/octod/tiinvo/compare/2.16.0...v2.16.0) (2021-05-07)
+
+
+### Features
+
+* fold now accepts both functions and values ([bf2f2b8](https://github.com/octod/tiinvo/commit/bf2f2b814e73a76ebbf7bc6f11fd033a128ad365))
+* multi accepts also non functions ([868ca99](https://github.com/octod/tiinvo/commit/868ca9975bd034518eb4ce87ef486e4e0c7d62a5))
+
+
+
 # [2.15.0](https://github.com/octod/tiinvo/compare/v2.14.3...v2.15.0) (2021-04-12)
 
 
