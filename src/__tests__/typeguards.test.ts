@@ -190,4 +190,41 @@ describe("typeguards", () => {
     expect(is10("10")).toBeFalsy();
     expect(is10(10)).toBeTruthy();
   });
+
+  it("isFloat32Array", () => {
+    expect(tg.isFloat32Array(new Float32Array())).toBeTruthy();
+    expect(tg.isFloat32Array([])).toBeFalsy();
+  })
+  it("isFloat64Array", () => {
+    expect(tg.isFloat64Array(new Float64Array())).toBeTruthy();
+    expect(tg.isFloat64Array([])).toBeFalsy();
+  })
+  it("isInt8Array", () => {
+    expect(tg.isInt8Array(new Int8Array())).toBeTruthy();
+    expect(tg.isInt8Array([])).toBeFalsy();
+  })
+  it("isInt16Array", () => {
+    expect(tg.isInt16Array(new Int16Array())).toBeTruthy();
+    expect(tg.isInt16Array([])).toBeFalsy();
+  })
+  it("isInt32Array", () => {
+    expect(tg.isInt32Array(new Int32Array())).toBeTruthy();
+    expect(tg.isInt32Array([])).toBeFalsy();
+  })
+  it("isUint8Array", () => {
+    expect(tg.isUint8Array(new Uint8Array())).toBeTruthy();
+    expect(tg.isUint8Array([])).toBeFalsy();
+  })
+  it("isUint8ClampedArray", () => {
+    expect(tg.isUint8ClampedArray(new Uint8ClampedArray())).toBeTruthy();
+    expect(tg.isUint8ClampedArray([])).toBeFalsy();
+  })
+  it("isUint16Array", () => {
+    expect(tg.isUint16Array(new Uint16Array())).toBeTruthy();
+    expect(tg.isUint16Array([])).toBeFalsy();
+  })
+  it("isUint32Array", () => {
+    expect(tg.isUint32Array(new Uint32Array())).toBeTruthy();
+    expect(tg.isUint32Array([])).toBeFalsy();
+  })
 });
