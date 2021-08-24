@@ -675,3 +675,19 @@ export const optional = <T>(typeguard: Typeguard<T>) =>
  */
 export const isexact = <T>(value: T) => (arg: unknown): arg is T =>
   typeof value === typeof arg && value === arg;
+
+//#region typed arrays
+
+export const isFloat32Array = (arg: unknown): arg is Float32Array => Object.prototype.toString.call(arg) === '[object Float32Array]';
+export const isFloat64Array = (arg: unknown): arg is Float64Array => Object.prototype.toString.call(arg) === '[object Float64Array]';
+
+export const isInt8Array = (arg: unknown): arg is Int8Array => Object.prototype.toString.call(arg) === '[object Int8Array]';
+export const isInt16Array = (arg: unknown): arg is Int16Array => Object.prototype.toString.call(arg) === '[object Int16Array]';
+export const isInt32Array = (arg: unknown): arg is Int32Array => Object.prototype.toString.call(arg) === '[object Int32Array]';
+
+export const isUint8Array = (arg: unknown): arg is Uint8Array => Object.prototype.toString.call(arg) === '[object Uint8Array]';
+export const isUint8ClampedArray = (arg: unknown): arg is Uint8ClampedArray => Object.prototype.toString.call(arg) === '[object Uint8ClampedArray]';
+export const isUint16Array = (arg: unknown): arg is Uint16Array => Object.prototype.toString.call(arg) === '[object Uint16Array]';
+export const isUint32Array = (arg: unknown): arg is Uint32Array => Object.prototype.toString.call(arg) === '[object Uint32Array]';
+
+//#endregion
