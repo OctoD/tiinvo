@@ -1,6 +1,6 @@
 {
   "name": "tiinvo",
-  "version": "2.19.0",
+  "version": "2.20.0",
   "author": "Paolo Roth <octod>",
   "license": "MIT",
   "description": "Lot of functions for tacit programming and functional types for TypeScript and JavaScript.",
