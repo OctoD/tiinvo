@@ -443,6 +443,36 @@ isarrayofStrings(['hello', 'world'])         // true
 
 <!-- tabs:end -->
 
+#### isrecordof
+
+Checks if a value is a record of a given type.
+
+<!-- tabs:start -->
+
+#### **node**
+
+```ts
+import { isrecordof, isnumber } from 'tiinvo';
+
+const isrecordofNumbers = isrecordof(isnumber);
+
+isrecordofNumbers({ a: 10, b: 20, c: 'hello' }) // false
+isrecordofNumbers({ a: 10, b: 20 })             // true
+```
+
+#### **deno/esm**
+
+```ts
+import { isrecordof, isnumber } from 'https://cdn.skypack.dev/tiinvo?dts';
+
+const isrecordofNumbers = isrecordof(isnumber);
+
+isrecordofNumbers({ a: 10, b: 20, c: 'hello' }) // false
+isrecordofNumbers({ a: 10, b: 20 })             // true
+```
+
+<!-- tabs:end -->
+
 #### nullable
 
 Makes a `Typeguard<T>` nullable, so it will check if `T` or `null`

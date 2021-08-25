@@ -227,4 +227,10 @@ describe("typeguards", () => {
     expect(tg.isUint32Array(new Uint32Array())).toBeTruthy();
     expect(tg.isUint32Array([])).toBeFalsy();
   })
+  it('isrecordof', () => {
+    const isrecordofNumbers = tg.isrecordof(tg.isnumber);
+
+    expect(isrecordofNumbers({ a: 10, b: 20, c: 'hello' })).toBeFalsy();
+    expect(isrecordofNumbers({ a: 10, b: 20 })).toBeTruthy();
+  })
 });

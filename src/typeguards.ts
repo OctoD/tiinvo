@@ -619,6 +619,24 @@ export const isarrayof = <T>(typeguard: Typeguard<T>) => (
   arg: unknown
 ): arg is T[] => isarray(arg) && arg.every(typeguard);
 
+
+/**
+ * Checks if a value is a record of a given type.
+ * 
+ * @example
+ * ```ts
+ * import { isrecordof, isnumber } from 'tiinvo';
+ * 
+ * const isrecordofNumbers = isrecordof(isnumber);
+ * 
+ * isrecordofNumbers({ a: 10, b: 20, c: 'hello' }) // false
+ * isrecordofNumbers({ a: 10, b: 20 })             // true
+ * ```
+ */
+export const isrecordof = <T>(typeguard: Typeguard<T>) => (
+  arg: unknown
+): arg is Record<string, T> => isobject(arg) && Object.values(arg).every(typeguard);
+
 /**
  * Makes a `Typeguard<T>` nullable, so it will check if `T` or `null`
  *
