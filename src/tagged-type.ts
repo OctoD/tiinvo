@@ -17,6 +17,16 @@ export type Tagged<T, Tagname extends string> = {
 };
 
 /**
+ * Gets a tagged type __tag
+ */
+export type TagOf<T> = T extends Tagged<any, infer Tagname> ? Tagname : never;
+
+/**
+ * Gets a tagged type value
+ */
+export type TypeOf<T> = T extends Tagged<infer T, any> ? T : never;
+
+/**
  * A `TaggedType<T, Tagname>` factory.
  */
 export type TaggedFactory<Tagname extends string> = <T>(
