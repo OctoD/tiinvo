@@ -8,7 +8,9 @@
   "exports": {
     "./*": "./src/*",
     "./f": "./src/functors.mjs",
+    "./fn": "./src/fn.mjs",
     "./m": "./src/maybe.mjs",
+    "./num": "./src/num.mjs",
     "./o": "./src/option.mjs",
     "./p": "./src/predicate.mjs",
     "./r": "./src/result.mjs"
