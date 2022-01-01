@@ -15,6 +15,20 @@ describe(`maybe`, () => {
     expect(m.isnothing(0)).toBe(true);
   });
 
+  test(`isMaybeOf`, () => {
+    const g = (x: unknown): x is number => typeof x === 'number';
+    const gof = m.isMaybeOf(g);
+
+    expect(gof(10)).toBe(true);
+    expect(gof(new Date())).toBe(false);
+    expect(gof(null)).toBe(true);
+    expect(gof(undefined)).toBe(true);
+    expect(gof(false)).toBe(true);
+    expect(gof(0)).toBe(true);
+    expect(gof('')).toBe(true);
+    expect(gof('hello')).toBe(false);
+  })
+
   test(`cmp`, () => {
     expect(m.cmp(null, null)).toBe(0);
     expect(m.cmp(undefined, undefined)).toBe(0);

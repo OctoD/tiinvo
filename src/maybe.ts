@@ -10,6 +10,8 @@ export const isjust = <a>(value: maybe<a>): value is just<a> => !!value;
 
 export const isnothing = <a>(value: maybe<a>): value is nothing => !value;
 
+export const isMaybeOf = <a>(guard: f.guard<a>) => (value: unknown): value is maybe<a> => isjust(value) ? guard(value) : true;
+
 export const cmp: f.comparable = <a, b>(value: maybe<a>, value2: maybe<b>) => isnothing(value) && isnothing(value2) ? 0 : isnothing(value) ? -1 : isnothing(value2) ? 1 : value as any === value2 ? 0 : value as any < value2 ? -1 : 1;
 
 export const eq: f.equatable = <a>(value: maybe<a>, value2: maybe<a>) => isjust(value) && isjust(value2) ? value as any === value2 : isnothing(value) && isnothing(value2);

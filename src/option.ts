@@ -10,6 +10,8 @@ export const isNone = (value: unknown): value is none => value === null || value
 
 export const isSome = (value: unknown): value is some<unknown> => value !== null && value !== undefined;
 
+export const isOptionOf = <a>(guard: f.guard<a>) => (value: unknown): value is option<a> => isSome(value) ? guard(value) : true;
+
 export const cmp: f.comparable = <a, b>(a: a, b: b): -1 | 0 | 1 => ((a === null || a === undefined) && (b === null || b === undefined)) ? 0 : a as any > b as any ? 1 : a as any < b as any ? -1 : 0;
 
 export const eq: f.equatable = <a>(a: a, b: a): boolean => isNone(a) && isNone(b) ? true : a === b;

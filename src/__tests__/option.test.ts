@@ -13,6 +13,17 @@ describe(`option`, () => {
     expect(o.isSome(undefined)).toBe(false);
   });
 
+  test(`isOptionOf`, () => {
+    const g = (x: unknown): x is number => typeof x === 'number';
+    const gof = o.isOptionOf(g);
+
+    expect(gof(10)).toBe(true);
+    expect(gof(Error)).toBe(false);
+    expect(gof(null)).toBe(true);
+    expect(gof(undefined)).toBe(true);
+    expect(gof('hello')).toBe(false);
+  })
+
   test(`mappables`, () => {
     const mapfn = (s: string) => s.length;
     const map = o.map(mapfn);

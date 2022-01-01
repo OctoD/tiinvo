@@ -2,12 +2,22 @@ import * as r from '../result';
 
 describe(`result`, () => {
   test(`checks if is ok or err`, () => {
-    expect(r.isok(10)).toBe(true);
-    expect(r.isok(Error)).toBe(true);
-    expect(r.isok(new Error())).toBe(false);
-    expect(r.iserr(new Error())).toBe(true);
-    expect(r.iserr(Error)).toBe(false);
+    expect(r.isOk(10)).toBe(true);
+    expect(r.isOk(Error)).toBe(true);
+    expect(r.isOk(new Error())).toBe(false);
+    expect(r.isErr(new Error())).toBe(true);
+    expect(r.isErr(Error)).toBe(false);
   });
+
+  test(`isResultOf`, () => {
+    const g = (x: unknown): x is number => typeof x === 'number';
+    const gof = r.isResultOf(g);
+
+    expect(gof(10)).toBe(true);
+    expect(gof(Error)).toBe(false);
+    expect(gof(new Error())).toBe(true);
+    expect(gof('hello')).toBe(false);
+  })
 
   test(`comparables`, () => {
     expect(r.cmp(10, 20)).toBe(-1);

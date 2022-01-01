@@ -2,6 +2,8 @@ export type comparable = <a, b>(a: a, b: b) => -1 | 0 | 1;
 
 export type equatable = <a>(a: a, b: a) => boolean;
 
+export type guard<a> = (a: unknown) => a is a;
+
 export type predicate = <a>(value: a) => boolean;
 
 export type predicateA = (value: any) => boolean;
