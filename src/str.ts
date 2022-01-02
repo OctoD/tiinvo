@@ -95,18 +95,18 @@ export const desc: f.comparableE<string, string> = (a, b) => cmp(b.toLowerCase()
  * ```typescript
  * import * as s from 'tiinvo/str';
  * 
- * s.charAt('hello', 0); // 'h'
- * s.charAt('hello', 1); // 'e'
- * s.charAt('hello', 2); // 'l'
- * s.charAt('hello', 3); // 'l'
- * s.charAt('hello', 4); // 'o'
- * s.charAt('hello', 5); // ''
+ * s.ucharAt(0)('hello'); // 'h'
+ * s.ucharAt(1)('hello'); // 'e'
+ * s.ucharAt(2)('hello'); // 'l'
+ * s.ucharAt(3)('hello'); // 'l'
+ * s.ucharAt(4)('hello'); // 'o'
+ * s.ucharAt(5)('hello'); // ''
  * ```
  * 
  * @param at 
  * @returns 
  */
-export const charAt: fn.unary<number, fn.unary<string, string>> = at => str => str.charAt(at) ?? ``;
+export const ucharAt: fn.unary<number, fn.unary<string, string>> = at => str => str.charAt(at) ?? ``;
 
 /**
  * Returns the Unicode value of the character at the specified location.
@@ -116,18 +116,18 @@ export const charAt: fn.unary<number, fn.unary<string, string>> = at => str => s
  * ```typescript
  * import * as s from 'tiinvo/str';
  * 
- * s.codePointAt('hello', 0); // 72
- * s.codePointAt('hello', 1); // 101
- * s.codePointAt('hello', 2); // 108
- * s.codePointAt('hello', 3); // 108
- * s.codePointAt('hello', 4); // 111
- * s.codePointAt('hello', 5); // null
+ * s.ucharCodeAt(0)('hello'); // 72
+ * s.ucharCodeAt(1)('hello'); // 101
+ * s.ucharCodeAt(2)('hello'); // 108
+ * s.ucharCodeAt(3)('hello'); // 108
+ * s.ucharCodeAt(4)('hello'); // 111
+ * s.ucharCodeAt(5)('hello'); // null
  * ```
  * 
  * @param at 
  * @returns 
  */
-export const charCodeAt: fn.unary<number, fn.unary<string, number | null>> = at => str => {
+export const ucharCodeAt: fn.unary<number, fn.unary<string, number | null>> = at => str => {
   const r = str.charCodeAt(at);
   return isNaN(r) ? null : r;
 };
@@ -159,7 +159,7 @@ export const fromCharCode: fn.unary<number, string> = code => String.fromCharCod
  * @param a 
  * @returns 
  */
-export const uconcat: fn.unary<string, fn.unary<string, string>> = a => b => a + b;
+export const uconcat: fn.unary<string, fn.unary<string, string>> = a => b => b + a;
 /**
  * Concatenates a and b.
  * 
@@ -179,14 +179,14 @@ export const bconcat: fn.binary<string, string, string> = (a, b) => a + b;
  * ```typescript
  * import * as s from 'tiinvo/str';
  * 
- * s.endsWith('hello', 'lo'); // true
- * s.endsWith('hello', 'll'); // false
+ * s.uendsWith('lo')('hello'); // true
+ * s.uendsWith('ll')('hello'); // false
  * ```
  * 
  * @param a 
  * @returns 
  */
-export const endsWith: fn.unary<string, fn.unary<string, boolean>> = a => b => b.endsWith(a);
+export const uendsWith: fn.unary<string, fn.unary<string, boolean>> = a => b => b.endsWith(a);
 /**
  * Returns true if `a` appears as a substring of `b`, returs false otherwise.
  * 
@@ -214,7 +214,7 @@ export const uincludes: fn.unary<string, fn.unary<string, boolean>> = a => b => 
  * @param a 
  * @returns 
  */
-export const bincludes: fn.binary<string, string, boolean> = (a, b) => b.includes(a);
+export const bincludes: fn.binary<string, string, boolean> = (a, b) => a.includes(b);
 /**
  * Returns the position of the first occurrence of `a` in `b`.
  * 
@@ -245,7 +245,7 @@ export const uindexOf: fn.binary<string, number | void, fn.unary<string, number>
  * @param index The index at which to begin searching the String object. If omitted, search starts at the beginning of the string. 
  * @returns 
  */
-export const bindexOf: fn.ternary<string, string, number | void, number> = (a, b, index) => b.indexOf(a, index ?? 0);
+export const bindexOf: fn.ternary<string, string, number | void, number> = (a, b, index) => a.indexOf(b, index ?? 0);
 /**
  * Returns the last occurrence of a substring in the string.
  * 
@@ -279,7 +279,7 @@ export const ulastIndexOf: fn.binary<string, void | number, fn.unary<string, num
  * @param index The index at which to begin searching. If omitted, the search begins at the end of the string.
  * @returns 
  */
-export const blastIndexOf: fn.ternary<string, string, void | number, number> = (a, b, index) => b.lastIndexOf(a, index ?? b.length);
+export const blastIndexOf: fn.ternary<string, string, void | number, number> = (a, b, index) => a.lastIndexOf(b, index ?? undefined);
 /**
  * Matches a string or an object that supports being matched against, and returns an array containing the results of that search, or null if no matches are found.
  * 
@@ -305,7 +305,7 @@ export const umatch: fn.unary<RegExp | string, fn.unary<string, RegExpMatchArray
  * @param r 
  * @returns 
  */
-export const bmatch: fn.binary<RegExp | string, string, RegExpMatchArray | null> = (r, b) => b.match(r);
+export const bmatch: fn.binary<string, RegExp | string, RegExpMatchArray | null> = (b, r) => b.match(r);
 /**
  * Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length. The padding is applied from the start (left) of the current string.
  * 
@@ -319,13 +319,14 @@ export const bmatch: fn.binary<RegExp | string, string, RegExpMatchArray | null>
  * @param fs 
  * @returns 
  */
-export const upadstart: fn.binary<number, string, fn.unary<string, string>> = (ml, fs) => b => b.padStart(ml, fs);
+export const upadstart: fn.binary<number, string | void, fn.unary<string, string>> = (ml, fs) => b => b.padStart(ml, fs ?? ' ');
 /**
  * Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length. The padding is applied from the start (left) of the current string.
  * 
  * ```typescript
  * import * as s from 'tiinvo/str';
  * 
+ * s.padStart('1', 5); // '    1'
  * s.padStart('1', 5, '0'); // '00001'
  * s.padStart('1', 6, '0'); // '000001'
  * ```
@@ -333,7 +334,7 @@ export const upadstart: fn.binary<number, string, fn.unary<string, string>> = (m
  * @param fs 
  * @returns 
  */
-export const bpadstart: fn.ternary<string, number, string, string> = (b, ml, fs) => b.padStart(ml, fs);
+export const bpadstart: fn.ternary<string, number, string | void, string> = (b, ml, fs) => b.padStart(ml, fs ?? ' ');
 /**
  * Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length. The padding is applied from the end (right) of the current string.
  * 
@@ -347,13 +348,14 @@ export const bpadstart: fn.ternary<string, number, string, string> = (b, ml, fs)
  * @param fs 
  * @returns 
  */
-export const upadend: fn.binary<number, string, fn.unary<string, string>> = (ml, fs) => b => b.padEnd(ml, fs);
+export const upadend: fn.binary<number, string | void, fn.unary<string, string>> = (ml, fs) => b => b.padEnd(ml, fs ?? ' ');
 /**
  * Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length. The padding is applied from the end (right) of the current string.
  * 
  * ```typescript
  * import * as s from 'tiinvo/str';
  * 
+ * s.padEnd('1', 5); // '1    '
  * s.padEnd('1', 5, '0'); // '10000'
  * s.padEnd('1', 6, '0'); // '100000'
  * ```
@@ -362,7 +364,7 @@ export const upadend: fn.binary<number, string, fn.unary<string, string>> = (ml,
  * @param fs 
  * @returns 
  */
-export const bpadend: fn.ternary<string, number, string, string> = (b, ml, fs) => b.padEnd(ml, fs);
+export const bpadend: fn.ternary<string, number, string | void, string> = (b, ml, fs) => b.padEnd(ml, fs ?? ` `);
 /**
  * Returns a String value that is made from count copies appended together. If count is 0, the empty string is returned.
  * 
@@ -440,8 +442,8 @@ export const usearch: fn.unary<RegExp | string, fn.unary<string, number>> = rx =
  * ```typescript
  * import * as s from 'tiinvo/str';
  * 
- * s.search('hello', 'll'); // 1
- * s.search('hello', /l/g); // 1
+ * s.bsearch('hello', 'll'); // 1
+ * s.bsearch('hello', /l/g); // 1
  * ```
  * @param b 
  * @param rx 
@@ -454,8 +456,8 @@ export const bsearch: fn.binary<string, RegExp | string, number> = (b, rx) => b.
  * ```typescript
  * import * as s from 'tiinvo/str';
  * 
- * s.slice(1, 3)('hello'); // 'el'
- * s.slice(1)('hello'); // 'ello'
+ * s.uslice(1, 3)('hello'); // 'el'
+ * s.uslice(1)('hello'); // 'ello'
  * ```
  * @param start 
  * @param end 
@@ -468,8 +470,8 @@ export const uslice: fn.binary<number | void, number | void, fn.unary<string, st
  * ```typescript
  * import * as s from 'tiinvo/str';
  * 
- * s.slice('hello', 1, 3); // 'el'
- * s.slice('hello', 1); // 'ello'
+ * s.bslice('hello', 1, 3); // 'el'
+ * s.bslice('hello', 1); // 'ello'
  * ```
  * @param b 
  * @param start 
@@ -483,8 +485,8 @@ export const bslice: fn.ternary<string, number | void, number | void, string> = 
  * ```typescript
  * import * as s from 'tiinvo/str';
  * 
- * s.split(' ')('hello world'); // ['hello', 'world']
- * s.split(/\s+/)('hello world'); // ['hello', 'world']
+ * s.usplit(' ')('hello world'); // ['hello', 'world']
+ * s.usplit(/\s+/)('hello world'); // ['hello', 'world']
  * ```
  * 
  * @param rx 
@@ -498,8 +500,8 @@ export const usplit: fn.binary<RegExp | string, number | void, fn.unary<string, 
  * ```typescript
  * import * as s from 'tiinvo/str';
  * 
- * s.split('hello', ' '); // ['hello', 'world']
- * s.split('hello', /\s+/); // ['hello', 'world']
+ * s.bsplit('hello', ' '); // ['hello', 'world']
+ * s.bsplit('hello', /\s+/); // ['hello', 'world']
  * ```
  * @param b 
  * @param rx 
@@ -611,7 +613,7 @@ export const pascal: fn.unary<string, string> = b => b.replace(/\s(.)/g, (_, c) 
  * @param b 
  * @returns 
  */
-export const kebab: fn.unary<string, string> = b => b.replace(/\s/g, '-');
+export const kebab: fn.unary<string, string> = b => b.replace(/[A-Z]/g, word => ' ' + word.replace(/[A-Z]/, b => b.toLowerCase())).replace(/\s/g, '-');
 /**
  * Formats a string to snake case.
  * 
@@ -624,6 +626,6 @@ export const kebab: fn.unary<string, string> = b => b.replace(/\s/g, '-');
  * @param b 
  * @returns 
  */
-export const snake: fn.unary<string, string> = b => b.replace(/\s/g, '_');
+export const snake: fn.unary<string, string> = b => b.replace(/[A-Z]/g, word => ' ' + word.replace(/[A-Z]/, b => b.toLowerCase())).replace(/\s/g, '_');
 
 //#endregion
