@@ -22,11 +22,11 @@ describe('num', () => {
   });
   test(`sortasc`, () => {
     const array = [10, 20, 30, 40, 50];
-    expect(expect.arrayContaining(array.sort(n.sortasc))).toEqual([10, 20, 30, 40, 50]);
+    expect(expect.arrayContaining(array.sort(n.asc))).toEqual([10, 20, 30, 40, 50]);
   });
   test(`sortdesc`, () => {
     const array = [10, 20, 30, 40, 50];
-    expect(expect.arrayContaining(array.sort(n.sortdesc))).toEqual([50, 40, 30, 20, 10]);
+    expect(expect.arrayContaining(array.sort(n.desc))).toEqual([50, 40, 30, 20, 10]);
   });
   test(`eq`, () => {
     expect(n.eq(10)(10)).toBe(true);

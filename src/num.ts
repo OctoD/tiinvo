@@ -78,7 +78,7 @@ export const isOdd: f.predicateE<number> = n => n % 2 !== 0;
  * @param b 
  * @returns 
  */
-export const sortasc: f.comparableE<number, number> = (a, b) => cmp(a, b);
+export const asc: f.comparableE<number, number> = (a, b) => cmp(a, b);
 
 /**
  * Used to sort numbers descending.
@@ -95,7 +95,7 @@ export const sortasc: f.comparableE<number, number> = (a, b) => cmp(a, b);
  * @param b 
  * @returns 
  */
-export const sortdesc: f.comparableE<number, number> = (a, b) => cmp(b, a);
+export const desc: f.comparableE<number, number> = (a, b) => cmp(b, a);
 
 //#endregion
 
