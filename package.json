@@ -13,7 +13,8 @@
     "./num": "./src/num.mjs",
     "./o": "./src/option.mjs",
     "./p": "./src/predicate.mjs",
-    "./r": "./src/result.mjs"
+    "./r": "./src/result.mjs",
+    "./str": "./src/str.mjs"
   },
   "keywords": [
     "functional programming",
