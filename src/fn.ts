@@ -41,3 +41,5 @@ export type nonary<a, b, c, d, e, f, g, h, i, j> = (a: a, b: b, c: c, d: d, e: e
 export type decenary<a, b, c, d, e, f, g, h, i, j, k> = (a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h, i: i, j: j) => k;
 
 export type nary<a extends any[]> = (... args: a extends [... infer b, any] ? b : [void]) => a extends [... any, infer c] ? c : void;
+
+export type asyncFnReturnType<a extends (... arg: any[]) => Promise<any>> = a extends (... arg: any[]) => Promise<infer r> ? r : never;

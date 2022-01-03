@@ -5,6 +5,7 @@
   "license": "MIT",
   "description": "A lib of types and utilities for your TypeScript and JavaScript projects",
   "types": "./src/index.d.ts",
+  "module": "./src/index.mjs",
   "exports": {
     "./*": "./src/*",
     "./a": "./src/array.mjs",
@@ -17,7 +18,8 @@
     "./pipe": "./src/pipe.mjs",
     "./pipe.async": "./src/pipe.async.mjs",
     "./r": "./src/result.mjs",
-    "./str": "./src/str.mjs"
+    "./str": "./src/str.mjs",
+    "./try": "./src/try.mjs"
   },
   "keywords": [
     "functional programming",
