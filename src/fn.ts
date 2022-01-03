@@ -1,8 +1,24 @@
 export type argsOf<a extends (... args: any) => any> = a extends (... args: infer A) => any ? A : never;
 
+export type argsOfMany<a extends ((... args: any) => any)[]> = [
+  ... {
+    [k in keyof a]: a[k] extends ((i: infer b) => any) ? b : never
+  }
+];
+
 export type firstArgOf<a extends (... args: any) => any> = a extends (first: infer A, ... args: any[]) => any ? A : void;
 
 export type lastArgOf<a extends (... args: any) => any> = a extends (... args: infer A) => any ? A extends [... any, infer b] ? b : void : void;
+
+export type returnTypeOf<a extends (... args: any) => any> = a extends (... args: any) => infer r ? r : void;
+
+export type returnTypeOfMany<a extends ((... args: any) => any)[]> = [
+  ... {
+    [k in keyof a]: a[k] extends ((i: any) => infer r) ? r : never
+  }
+];
+
+export type nullary<a> = () => a;
 
 export type unary<a, b> = (a: a) => b;
 
