@@ -2,17 +2,17 @@ import * as m from '../maybe';
 
 describe(`maybe`, () => {
   test(`isjust or isnothing`, () => {
-    expect(m.isjust(10)).toBe(true);
-    expect(m.isjust(true)).toBe(true);
-    expect(m.isjust(`hello world`)).toBe(true);
-    expect(m.isjust(null)).toBe(false);
-    expect(m.isjust(false)).toBe(false);
-    expect(m.isjust(undefined)).toBe(false);
-    expect(m.isnothing(10)).toBe(false);
-    expect(m.isnothing(null)).toBe(true);
-    expect(m.isnothing(``)).toBe(true);
-    expect(m.isnothing(undefined)).toBe(true);
-    expect(m.isnothing(0)).toBe(true);
+    expect(m.isJust(10)).toBe(true);
+    expect(m.isJust(true)).toBe(true);
+    expect(m.isJust(`hello world`)).toBe(true);
+    expect(m.isJust(null)).toBe(false);
+    expect(m.isJust(false)).toBe(false);
+    expect(m.isJust(undefined)).toBe(false);
+    expect(m.isNothing(10)).toBe(false);
+    expect(m.isNothing(null)).toBe(true);
+    expect(m.isNothing(``)).toBe(true);
+    expect(m.isNothing(undefined)).toBe(true);
+    expect(m.isNothing(0)).toBe(true);
   });
 
   test(`isMaybeOf`, () => {
