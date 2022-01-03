@@ -106,7 +106,7 @@ export const desc: f.comparableE<string, string> = (a, b) => cmp(b.toLowerCase()
  * @param at 
  * @returns 
  */
-export const ucharAt: fn.unary<number, fn.unary<string, string>> = at => str => str.charAt(at) ?? ``;
+export const ucharAt: fn.unary<number, fn.unary<string, string>> = at => str => str.charAt(at);
 
 /**
  * Returns the Unicode value of the character at the specified location.

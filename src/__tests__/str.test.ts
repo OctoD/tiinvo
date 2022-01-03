@@ -70,6 +70,7 @@ describe(`str`, () => {
 
   test(s.ucharAt.name, () => {
     expect(s.ucharAt(-1)('hello')).toBe('');
+    expect(s.ucharAt(200)('hello')).toBe('');
     expect(s.ucharAt(0)('hello')).toBe('h');
     expect(s.ucharAt(1)('hello')).toBe('e');
     expect(s.ucharAt(2)('hello')).toBe('l');
