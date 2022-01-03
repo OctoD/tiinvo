@@ -14,6 +14,7 @@
     "./num": "./src/num.mjs",
     "./o": "./src/option.mjs",
     "./p": "./src/predicate.mjs",
+    "./pipe": "./src/pipe.mjs",
     "./r": "./src/result.mjs",
     "./str": "./src/str.mjs"
   },
