@@ -8,6 +8,8 @@ describe(`array`, () => {
     const a2 = [1, 2, 3];
     const a3 = [1, 2, 4];
 
+    expect(a.cmp(null as any, null as any)).toBe(0);
+    expect(a.cmp(undefined as any, undefined as any)).toBe(0);
     expect(a.cmp(a1, a2)).toBe(0);
     expect(a.cmp(a1, a3)).toBe(-1);
     expect(a.cmp(a3, a1)).toBe(1);

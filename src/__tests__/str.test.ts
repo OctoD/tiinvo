@@ -126,6 +126,7 @@ describe(`str`, () => {
 
   test(s.pascal.name, () => {
     expect(s.pascal('helloWorld')).toBe('HelloWorld');
+    expect(s.pascal('hello world')).toBe('HelloWorld');
   })
 
   test(s.snake.name, () => {
