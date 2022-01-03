@@ -15,6 +15,7 @@
     "./o": "./src/option.mjs",
     "./p": "./src/predicate.mjs",
     "./pipe": "./src/pipe.mjs",
+    "./pipe.async": "./src/pipe.async.mjs",
     "./r": "./src/result.mjs",
     "./str": "./src/str.mjs"
   },
