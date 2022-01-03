@@ -7,6 +7,7 @@
   "types": "./src/index.d.ts",
   "exports": {
     "./*": "./src/*",
+    "./a": "./src/array.mjs",
     "./f": "./src/functors.mjs",
     "./fn": "./src/fn.mjs",
     "./m": "./src/maybe.mjs",
