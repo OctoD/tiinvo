@@ -19,6 +19,7 @@ jest.config.js
 rollup.config.js
 tsconfig.build.json
 tsconfig.json
+scripts
 
 # social stuff
 logo.png

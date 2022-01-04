@@ -5,22 +5,63 @@
   "license": "MIT",
   "description": "A lib of types and utilities for your TypeScript and JavaScript projects",
   "types": "./src/index.d.ts",
-  "module": "./src/index.mjs",
+  "directories": {
+    "lib": "./src"
+  },
   "exports": {
     "./*": "./src/*",
-    "./a": "./src/array.mjs",
-    "./f": "./src/functors.mjs",
-    "./fn": "./src/fn.mjs",
-    "./m": "./src/maybe.mjs",
-    "./num": "./src/num.mjs",
-    "./o": "./src/option.mjs",
-    "./obj": "./src/obj.mjs",
-    "./p": "./src/predicate.mjs",
-    "./pipe": "./src/pipe.mjs",
-    "./pipe.async": "./src/pipe.async.mjs",
-    "./r": "./src/result.mjs",
-    "./str": "./src/str.mjs",
-    "./try": "./src/try.mjs"
+    "./a": {
+      "import": "./src/array.mjs",
+      "require": "./src/array.js"
+    },
+    "./f": {
+      "import": "./src/functors.mjs",
+      "require": "./src/functors.js"
+    },
+    "./fn": {
+      "import": "./src/fn.mjs",
+      "require": "./src/fn.js"
+    },
+    "./m": {
+      "import": "./src/maybe.mjs",
+      "require": "./src/maybe.js"
+    },
+    "./num": {
+      "import": "./src/num.mjs",
+      "require": "./src/num.js"
+    },
+    "./o": {
+      "import": "./src/option.mjs",
+      "require": "./src/option.js"
+    },
+    "./obj": {
+      "import": "./src/obj.mjs",
+      "require": "./src/obj.js"
+    },
+    "./p": {
+      "import": "./src/predicate.mjs",
+      "require": "./src/predicate.js"
+    },
+    "./pipe": {
+      "import": "./src/pipe.mjs",
+      "require": "./src/pipe.js"
+    },
+    "./pipe.async": {
+      "import": "./src/pipe.async.mjs",
+      "require": "./src/pipe.async.js"
+    },
+    "./r": {
+      "import": "./src/result.mjs",
+      "require": "./src/result.js"
+    },
+    "./str": {
+      "import": "./src/str.mjs",
+      "require": "./src/str.js"
+    },
+    "./try": {
+      "import": "./src/try.mjs",
+      "require": "./src/try.js"
+    }
   },
   "keywords": [
     "functional programming",
@@ -28,8 +69,11 @@
     "utility"
   ],
   "scripts": {
+    "build": "tsc -p . && tsc -p ./tsconfig.commonjs.json && node scripts/rename.js",
     "changelog": "npx standard-changelog --first-release",
+    "clean": "tsc --build --clean && node scripts/clean.js",
     "test": "jest",
+    "prepublishOnly": "npm test && npm run clean && npm run build",
     "upgrade-interactive": "npx npm-check --update"
   },
   "homepage": "https://tiinvo.netlify.app",
