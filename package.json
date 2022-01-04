@@ -14,6 +14,7 @@
     "./m": "./src/maybe.mjs",
     "./num": "./src/num.mjs",
     "./o": "./src/option.mjs",
+    "./obj": "./src/obj.mjs",
     "./p": "./src/predicate.mjs",
     "./pipe": "./src/pipe.mjs",
     "./pipe.async": "./src/pipe.async.mjs",
