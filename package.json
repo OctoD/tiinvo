@@ -61,6 +61,10 @@
     "./try": {
       "import": "./src/try.mjs",
       "require": "./src/try.js"
+    },
+    "./tuple": {
+      "import": "./src/tuple.mjs",
+      "require": "./src/tuple.js"
     }
   },
   "keywords": [

@@ -12,9 +12,17 @@ export type lastArgOf<a extends (... args: any) => any> = a extends (... args: i
 
 export type returnTypeOf<a extends (... args: any) => any> = a extends (... args: any) => infer r ? r : void;
 
+export type returnTypeOfGuard<a extends (a: unknown) => any> = a extends (a: unknown) => a is infer r ? r : void;
+
 export type returnTypeOfMany<a extends ((... args: any) => any)[]> = [
   ... {
     [k in keyof a]: a[k] extends ((i: any) => infer r) ? r : never
+  }
+];
+
+export type returnTypeOfManyGuards<a extends ((a: unknown) => any)[]> = [
+  ... {
+    [k in keyof a]: a[k] extends ((a: unknown) => a is infer r) ? r : never
   }
 ];
 
