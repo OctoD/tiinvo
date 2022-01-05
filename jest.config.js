@@ -23,6 +23,8 @@ module.exports = {
     "__ignore__",
     "__mocks__",
     "dist",
+    "\.d.ts",
+    "\.js",
     "node_modules"
   ],
   transform: {
