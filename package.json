@@ -14,6 +14,10 @@
       "import": "./src/array.mjs",
       "require": "./src/array.js"
     },
+    "./b": {
+      "import": "./src/bool.mjs",
+      "require": "./src/bool.js"
+    },
     "./f": {
       "import": "./src/functors.mjs",
       "require": "./src/functors.js"
