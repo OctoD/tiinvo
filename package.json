@@ -18,6 +18,10 @@
       "import": "./src/bool.mjs",
       "require": "./src/bool.js"
     },
+    "./d": {
+      "import": "./src/date.mjs",
+      "require": "./src/date.js"
+    },
     "./f": {
       "import": "./src/functors.mjs",
       "require": "./src/functors.js"
