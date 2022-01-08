@@ -29,6 +29,10 @@ export type entries<a> = {
 
 export type keys<a> = (keyof a)[];
 
+export type guardsFromStruct<T> = {
+  [key in keyof T]: f.guard<T[key]> | guardsFromStruct<T[key]>;
+};
+
 export type values<a> = (a[keyof a])[];
 
 /**
@@ -153,6 +157,53 @@ export const get = <a extends string>(a: a) => <b>(b: b): o.option<b extends Rec
  * @since 3.0.0
  */
 export const guard = (a => typeof a === 'object' && a !== null) as f.guard<object>
+/**
+ * Returns `true` if a value `v` implements a shape `s`
+ * 
+ * ```typescript
+ * import * as obj from 'tiinvo/obj';
+ * import * as str from 'tiinvo/str';
+ * import * as num from 'tiinvo/num';
+ * import * as bool from 'tiinvo/bool';
+ * 
+ * const isshape = obj.guardOf({
+ *    a: str.guard,
+ *    b: num.guard,
+ *    c: bool.guard
+ * });
+ * 
+ * console.log(isshape({ a: `foo`, b: 1, c: true })); // true
+ * console.log(isshape({ a: `foo`, b: false, c: 1 })); // false
+ * ```
+ * 
+ * @param s 
+ * @returns 
+ * @since 3.0.0
+ */
+export const guardOf = <a extends any>(
+  s: guardsFromStruct<a>
+) => (v: unknown): v is a => {
+  if (!guard(s) || !guard(v)) {
+    return false;
+  }
+
+  const keys = Object.keys(s);
+
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    const currentvalue = v[key as keyof typeof v];
+    const currenttg = s[key as keyof typeof s];
+    const case1 = guard(currenttg) && guardOf(currenttg as any)(currentvalue);
+    const case2 = typeof currenttg === 'function' && currenttg(currentvalue);
+
+    if (!case1 && !case2) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
 /**
  * Returns object entries
  * 

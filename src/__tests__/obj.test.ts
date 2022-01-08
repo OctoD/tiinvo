@@ -1,6 +1,8 @@
 import * as obj from '../obj';
+import * as bool from '../bool';
 import * as num from '../num';
 import * as str from '../str';
+import * as o from '../option';
 
 describe('obj', () => {
   test(obj.cmp.name, () => {
@@ -42,6 +44,40 @@ describe('obj', () => {
     expect(obj.guard(null)).toBeFalsy();
     expect(obj.guard(undefined)).toBeFalsy();
   });
+
+  test(obj.guardOf.name, () => {
+    const isshape = obj.guardOf({
+      a: str.guard,
+      b: num.guard,
+      c: bool.guard
+    });
+    const isshapeb = obj.guardOf({
+      a: isshape,
+      b: bool.guard,
+    })
+    const isshapec = obj.guardOf({
+      b: bool.guard,
+      c: o.isOptionOf(num.guard),
+    })
+    const isshaped = obj.guardOf({
+      a: {
+        b: num.guard
+      }
+    })
+
+    expect(isshape({ a: `foo`, b: 1, c: true })).toBe(true);
+    expect(isshape({ a: `foo`, b: false, c: 1 })).toBe(false);
+    expect(isshape(0)).toBe(false);
+    expect(isshapeb({ a: { a: `foo`, b: 1, c: true }, b: true })).toBe(true);
+    expect(isshapeb({ a: { a: `foo`, b: false, c: 1 }, b: true })).toBe(false);
+    expect(isshapeb({ a: 2, b: false })).toBe(false);
+    expect(isshapec({ b: true, c: 1 })).toBe(true);
+    expect(isshapec({ b: true })).toBe(true);
+    expect(isshapec({ b: 2, c: false })).toBe(false);
+    expect(isshapec({ b: 2 })).toBe(false);
+    expect(isshaped({ a: { b: 1 } })).toBe(true);
+    expect(isshaped({ a: { b: false } })).toBe(false);
+  })
 
   test(obj.haskey.name, () => {
     expect(obj.haskey('a')({ a: 1 })).toBeTruthy();
