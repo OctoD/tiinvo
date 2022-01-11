@@ -548,6 +548,20 @@ export const trimend: fn.unary<string, string> = b => b.trimEnd();
  */
 export const trimstart: fn.unary<string, string> = b => b.trimStart();
 /**
+ * Returns a string length
+ * 
+ * ```typescript
+ * import * as s from 'tiinvo/str';
+ * 
+ * s.length('hello'); // 5
+ * ```
+ * 
+ * @param b 
+ * @returns 
+ * @since 3.0.0
+ */
+export const length: fn.unary<string, number> = b => b.length;
+/**
  * Converts all the alphabetic characters in a string to lowercase.
  * 
  * ```typescript

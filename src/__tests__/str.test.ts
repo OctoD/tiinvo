@@ -224,4 +224,8 @@ describe(`str`, () => {
     expect(s.ucharAt(4)('hello')).toBe('o');
     expect(s.ucharAt(5)('hello')).toBe(``);
   })
+
+  test(s.length.name, () => {
+    expect(s.length('hello')).toBe(5);
+  })
 })
