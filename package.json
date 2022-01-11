@@ -22,6 +22,10 @@
       "import": "./src/date.mjs",
       "require": "./src/date.js"
     },
+    "./e": {
+      "import": "./src/either.mjs",
+      "require": "./src/either.js"
+    },
     "./f": {
       "import": "./src/functors.mjs",
       "require": "./src/functors.js"
