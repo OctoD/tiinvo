@@ -4,79 +4,83 @@
   "author": "Paolo Roth <octod>",
   "license": "MIT",
   "description": "A lib of types and utilities for your TypeScript and JavaScript projects",
-  "types": "./src/index.d.ts",
+  "types": "./index.d.ts",
   "directories": {
-    "lib": "./src"
+    "lib": "."
   },
   "exports": {
-    "./*": "./src/*",
+    "./*": "./*",
     "./a": {
-      "import": "./src/array.mjs",
-      "require": "./src/array.js"
+      "import": "./array.mjs",
+      "require": "./array.js"
     },
     "./b": {
-      "import": "./src/bool.mjs",
-      "require": "./src/bool.js"
+      "import": "./bool.mjs",
+      "require": "./bool.js"
     },
     "./d": {
-      "import": "./src/date.mjs",
-      "require": "./src/date.js"
+      "import": "./date.mjs",
+      "require": "./date.js"
     },
     "./e": {
-      "import": "./src/either.mjs",
-      "require": "./src/either.js"
+      "import": "./either.mjs",
+      "require": "./either.js"
     },
     "./f": {
-      "import": "./src/functors.mjs",
-      "require": "./src/functors.js"
+      "import": "./functors.mjs",
+      "require": "./functors.js"
     },
     "./fn": {
-      "import": "./src/fn.mjs",
-      "require": "./src/fn.js"
+      "import": "./fn.mjs",
+      "require": "./fn.js"
+    },
+    "./fx": {
+      "import": "./function.mjs",
+      "require": "./function.js"
     },
     "./m": {
-      "import": "./src/maybe.mjs",
-      "require": "./src/maybe.js"
+      "import": "./maybe.mjs",
+      "require": "./maybe.js"
     },
     "./num": {
-      "import": "./src/num.mjs",
-      "require": "./src/num.js"
+      "import": "./num.mjs",
+      "require": "./num.js"
     },
     "./o": {
-      "import": "./src/option.mjs",
-      "require": "./src/option.js"
+      "import": "./option.mjs",
+      "require": "./option.js"
     },
     "./obj": {
-      "import": "./src/obj.mjs",
-      "require": "./src/obj.js"
+      "import": "./obj.mjs",
+      "require": "./obj.js"
     },
     "./p": {
-      "import": "./src/predicate.mjs",
-      "require": "./src/predicate.js"
+      "import": "./predicate.mjs",
+      "require": "./predicate.js"
     },
     "./pipe": {
-      "import": "./src/pipe.mjs",
-      "require": "./src/pipe.js"
+      "import": "./pipe.mjs",
+      "require": "./pipe.js"
     },
     "./pipe.async": {
-      "import": "./src/pipe.async.mjs",
-      "require": "./src/pipe.async.js"
+      "import": "./pipe.async.mjs",
+      "require": "./pipe.async.js"
     },
     "./r": {
-      "import": "./src/result.mjs",
-      "require": "./src/result.js"
+      "import": "./result.mjs",
+      "require": "./result.js"
     },
     "./str": {
-      "import": "./src/str.mjs",
-      "require": "./src/str.js"
+      "import": "./str.mjs",
+      "require": "./str.js"
     },
     "./try": {
-      "import": "./src/try.mjs",
-      "require": "./src/try.js"
+      "import": "./try.mjs",
+      "require": "./try.js"
     },
     "./tuple": {
-      "import": "./src/tuple.mjs",
-      "require": "./src/tuple.js"
+      "import": "./tuple.mjs",
+      "require": "./tuple.js"
     }
   },
   "keywords": [
@@ -85,11 +89,12 @@
     "utility"
   ],
   "scripts": {
-    "build": "tsc -p . && tsc -p ./tsconfig.commonjs.json && node scripts/rename.js",
+    "build": "tsc -p . && tsc -p ./tsconfig.commonjs.json && node scripts/rename.js && node scripts/copy.js",
     "changelog": "npx standard-changelog --first-release",
     "clean": "tsc --build --clean && node scripts/clean.js",
     "test": "jest",
     "prepublishOnly": "npm test && npm run clean && npm run build",
+    "postpublish": "npm run clean",
     "upgrade-interactive": "npx npm-check --update"
   },
   "homepage": "https://tiinvo.netlify.app",

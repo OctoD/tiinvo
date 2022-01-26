@@ -7,6 +7,6 @@ const filenames = fs.readdirSync(srcdir).filter(a => a.endsWith('.js'));
 
 filenames.forEach(filename => {
   const filepath = path.join(srcdir, filename);
-  const newfilepath = filepath.replace('.js', '.mjs')
+  const newfilepath = filepath.replace('.js', '.mjs').replace(`src`, `dist`);
   fs.renameSync(filepath, newfilepath)
 });
