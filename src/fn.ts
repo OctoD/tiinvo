@@ -26,6 +26,8 @@ export type returnTypeOfManyGuards<a extends ((a: unknown) => any)[]> = [
   }
 ];
 
+export type anyfn<a extends any[] = any, b = any> = (... args: a) => b;
+
 export type nullary<a> = () => a;
 
 export type unary<a, b> = (a: a) => b;
