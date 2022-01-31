@@ -1,6 +1,6 @@
 {
   "name": "tiinvo",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "author": "Paolo Roth <octod>",
   "license": "MIT",
   "description": "A lib of types and utilities for your TypeScript and JavaScript projects",
@@ -12,75 +12,75 @@
   },
   "exports": {
     "./*": "./*",
-    "./array": {
+    "./Array": {
       "import": "./array.mjs",
       "require": "./array.js"
     },
-    "./bool": {
+    "./Bool": {
       "import": "./bool.mjs",
       "require": "./bool.js"
     },
-    "./date": {
+    "./Date": {
       "import": "./date.mjs",
       "require": "./date.js"
     },
-    "./either": {
+    "./Either": {
       "import": "./either.mjs",
       "require": "./either.js"
     },
-    "./functors": {
+    "./Functors": {
       "import": "./functors.mjs",
       "require": "./functors.js"
     },
-    "./fn": {
+    "./Fn": {
       "import": "./fn.mjs",
       "require": "./fn.js"
     },
-    "./functions": {
+    "./Functions": {
       "import": "./function.mjs",
       "require": "./function.js"
     },
-    "./maybe": {
+    "./Maybe": {
       "import": "./maybe.mjs",
       "require": "./maybe.js"
     },
-    "./num": {
+    "./Num": {
       "import": "./num.mjs",
       "require": "./num.js"
     },
-    "./option": {
+    "./Option": {
       "import": "./option.mjs",
       "require": "./option.js"
     },
-    "./obj": {
+    "./Obj": {
       "import": "./obj.mjs",
       "require": "./obj.js"
     },
-    "./predicate": {
+    "./Predicate": {
       "import": "./predicate.mjs",
       "require": "./predicate.js"
     },
-    "./pipe": {
+    "./Pipe": {
       "import": "./pipe.mjs",
       "require": "./pipe.js"
     },
-    "./pipeAsync": {
+    "./PipeAsync": {
       "import": "./pipe.async.mjs",
       "require": "./pipe.async.js"
     },
-    "./result": {
+    "./Result": {
       "import": "./result.mjs",
       "require": "./result.js"
     },
-    "./str": {
+    "./Str": {
       "import": "./str.mjs",
       "require": "./str.js"
     },
-    "./try": {
+    "./Try": {
       "import": "./try.mjs",
       "require": "./try.js"
     },
-    "./tuple": {
+    "./Tuple": {
       "import": "./tuple.mjs",
       "require": "./tuple.js"
     }
