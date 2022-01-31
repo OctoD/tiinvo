@@ -1,6 +1,6 @@
 {
   "name": "tiinvo",
-  "version": "3.0.6",
+  "version": "3.0.7",
   "author": "Paolo Roth <octod>",
   "license": "MIT",
   "description": "A lib of types and utilities for your TypeScript and JavaScript projects",
@@ -9,84 +9,6 @@
   "module": "index.mjs",
   "directories": {
     "lib": "."
-  },
-  "exports": {
-    ".": {
-      "import": "./index.mjs",
-      "require": "./index.js"
-    },
-    "./Array": {
-      "import": "./array.mjs",
-      "require": "./array.js"
-    },
-    "./Bool": {
-      "import": "./bool.mjs",
-      "require": "./bool.js"
-    },
-    "./Date": {
-      "import": "./date.mjs",
-      "require": "./date.js"
-    },
-    "./Either": {
-      "import": "./either.mjs",
-      "require": "./either.js"
-    },
-    "./Functors": {
-      "import": "./functors.mjs",
-      "require": "./functors.js"
-    },
-    "./Fn": {
-      "import": "./fn.mjs",
-      "require": "./fn.js"
-    },
-    "./Functions": {
-      "import": "./function.mjs",
-      "require": "./function.js"
-    },
-    "./Maybe": {
-      "import": "./maybe.mjs",
-      "require": "./maybe.js"
-    },
-    "./Num": {
-      "import": "./num.mjs",
-      "require": "./num.js"
-    },
-    "./Option": {
-      "import": "./option.mjs",
-      "require": "./option.js"
-    },
-    "./Obj": {
-      "import": "./obj.mjs",
-      "require": "./obj.js"
-    },
-    "./Predicate": {
-      "import": "./predicate.mjs",
-      "require": "./predicate.js"
-    },
-    "./Pipe": {
-      "import": "./pipe.mjs",
-      "require": "./pipe.js"
-    },
-    "./PipeAsync": {
-      "import": "./pipe.async.mjs",
-      "require": "./pipe.async.js"
-    },
-    "./Result": {
-      "import": "./result.mjs",
-      "require": "./result.js"
-    },
-    "./Str": {
-      "import": "./str.mjs",
-      "require": "./str.js"
-    },
-    "./Try": {
-      "import": "./try.mjs",
-      "require": "./try.js"
-    },
-    "./Tuple": {
-      "import": "./tuple.mjs",
-      "require": "./tuple.js"
-    }
   },
   "keywords": [
     "functional programming",
