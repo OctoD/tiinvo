@@ -212,4 +212,24 @@ describe(`array`, () => {
     expect(expect.arrayContaining(a.sort(n.asc)(a2))).toEqual([1, 2, 3]);
     expect(expect.arrayContaining(a.sort(n.desc)(a1))).toEqual([3, 2, 1]);
   });
+
+  test(a.from.name, () => {
+    const a1 = [1, 2, 3];
+    const s = new Set(a1);
+
+    expect(expect.arrayContaining(a.from(a1))).toEqual([1, 2, 3]);
+    expect(expect.arrayContaining(a.from(s))).toEqual([1, 2, 3]);
+  })
+
+  test(a.length.name, () => {
+    const a1 = [1, 2, 3];
+
+    expect(a.length(a1)).toBe(3);
+  })
+
+  test(a.of.name, () => {
+    const a1 = [1, 2, 3];
+
+    expect(expect.arrayContaining(a.of(1, 2, 3))).toEqual([1, 2, 3]);
+  })
 })

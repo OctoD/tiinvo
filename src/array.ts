@@ -144,6 +144,20 @@ export const contains = <a>(a: a) => (b: a[]) => b.indexOf(a) >= 0;
  */
 export const every = <a>(p: f.predicateE<a>) => (a: a[]) => a.every(p);
 /**
+ * Creates an array from an array-like object.
+ * 
+ * ```typescript
+ * import * as a from 'tiinvo/array';
+ * 
+ * console.log(a.from([1, 2, 3])) // [1, 2, 3]
+ * ```
+ * 
+ * @param a
+ * @returns
+ * @since 3.0.8
+ */
+export const from = Array.from;
+/**
  * Returns the element `result<a>` at index `i` of an array `a[]`. 
  * 
  * ```ts
@@ -271,6 +285,22 @@ export const last = <a>(a: a[]) => a[a.length - 1] as option<a>;
  */
 export const lastOr = <a>(a: a) => (b: a[]) => b[b.length - 1] ?? a;
 /**
+ * Gets the length of the array. This is a number one higher than the highest index in the array.
+ * 
+ * ```typescript
+ * import * as a from 'tiinvo/array';
+ * 
+ * console.log(a.length(['a', 'b'])) // 2
+ * console.log(a.length([])) // 0
+ * ```
+ * 
+ * @param a 
+ * @returns 
+ * 
+ * @since 3.0.8
+ */
+export const length = <a>(a: a[]) => a.length;
+/**
  * Adds all the elements of an array into a string, separated by the specified separator string.
  * 
  * ```typescript
@@ -314,6 +344,21 @@ export const map = <a, b>(f: f.map<a, b>) => (a: a[]) => a.map(f);
  * @returns 
  */
 export const none = <a>(p: f.predicateE<a>) => (a: a[]) => !a.some(p);
+/**
+ * Returns a new array from a set of elements.
+ * 
+ * ```typescript
+ * import * as a from 'tiinvo/array';
+ * 
+ * console.log(a.of(1, 2, 3)) // [1, 2, 3]
+ * ```
+ * 
+ * @param a
+ * 
+ * @returns
+ * @since 3.0.8
+ */
+export const of = Array.of;
 /**
  * Returns a random element of an array `a`.
  * 
