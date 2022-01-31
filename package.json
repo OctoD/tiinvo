@@ -1,32 +1,34 @@
 {
   "name": "tiinvo",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "author": "Paolo Roth <octod>",
   "license": "MIT",
   "description": "A lib of types and utilities for your TypeScript and JavaScript projects",
   "types": "./index.d.ts",
+  "main": "index.js",
+  "module": "index.mjs",
   "directories": {
     "lib": "."
   },
   "exports": {
     "./*": "./*",
-    "./a": {
+    "./array": {
       "import": "./array.mjs",
       "require": "./array.js"
     },
-    "./b": {
+    "./bool": {
       "import": "./bool.mjs",
       "require": "./bool.js"
     },
-    "./d": {
+    "./date": {
       "import": "./date.mjs",
       "require": "./date.js"
     },
-    "./e": {
+    "./either": {
       "import": "./either.mjs",
       "require": "./either.js"
     },
-    "./f": {
+    "./functors": {
       "import": "./functors.mjs",
       "require": "./functors.js"
     },
@@ -34,11 +36,11 @@
       "import": "./fn.mjs",
       "require": "./fn.js"
     },
-    "./fx": {
+    "./functions": {
       "import": "./function.mjs",
       "require": "./function.js"
     },
-    "./m": {
+    "./maybe": {
       "import": "./maybe.mjs",
       "require": "./maybe.js"
     },
@@ -46,7 +48,7 @@
       "import": "./num.mjs",
       "require": "./num.js"
     },
-    "./o": {
+    "./option": {
       "import": "./option.mjs",
       "require": "./option.js"
     },
@@ -54,7 +56,7 @@
       "import": "./obj.mjs",
       "require": "./obj.js"
     },
-    "./p": {
+    "./predicate": {
       "import": "./predicate.mjs",
       "require": "./predicate.js"
     },
@@ -62,11 +64,11 @@
       "import": "./pipe.mjs",
       "require": "./pipe.js"
     },
-    "./pipe.async": {
+    "./pipeAsync": {
       "import": "./pipe.async.mjs",
       "require": "./pipe.async.js"
     },
-    "./r": {
+    "./result": {
       "import": "./result.mjs",
       "require": "./result.js"
     },

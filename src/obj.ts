@@ -30,7 +30,7 @@ export type entries<a> = {
 export type keys<a> = (keyof a)[];
 
 export type guardsFromStruct<T> = {
-  [key in keyof T]: f.guard<T[key]> | guardsFromStruct<T[key]>;
+  [key in keyof T]: T[key] extends o.option<infer b> ? f.guard<o.option<b>> | guardsFromStruct<T[key]> : f.guard<T[key]> | guardsFromStruct<T[key]>;
 };
 
 export type values<a> = (a[keyof a])[];
