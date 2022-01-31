@@ -96,7 +96,6 @@
     "clean": "tsc --build --clean && node scripts/clean.js",
     "test": "jest",
     "deploy": "npm test && npm run clean && npm run build && cd dist && npm publish && cd .. && npm run clean",
-    "postpublish": "npm run clean",
     "upgrade-interactive": "npx npm-check --update"
   },
   "homepage": "https://tiinvo.netlify.app",
