@@ -36,6 +36,28 @@ export type guardsFromStruct<T> = {
 export type values<a> = (a[keyof a])[];
 
 /**
+ * Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object.
+ * 
+ * ```ts
+ * import { Obj } from 'tiinvo';
+ * 
+ * const a = { a: 1, b: 2 };
+ * const b = { b: 3, c: 4 };
+ * const c = { c: 5, d: 6 };
+ * 
+ * Obj.assign(a, b, c);
+ * // { a: 1, b: 3, c: 5, d: 6 }
+ * ```
+ * 
+ * @param target The target object to copy to.
+ * @param sources One or more source objects from which to copy properties
+ * @returns The target object
+ * 
+ * @since 3.0.9
+ */
+export const assign = Object.assign;
+
+/**
  * Compares two objects deeply.
  * 
  * ```typescript

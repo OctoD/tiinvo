@@ -26,7 +26,7 @@ describe('obj', () => {
   });
 
   test(obj.flat.name, () => {
-    const a  = { a: 1, b: { c: 2 } };
+    const a = { a: 1, b: { c: 2 } };
 
     expect(obj.flat(a)).toEqual({ a: 1, 'b.c': 2 });
   });
@@ -107,4 +107,12 @@ describe('obj', () => {
     const v = obj.values(a);
     expect(expect.arrayContaining(v)).toEqual([1, { c: 2 }]);
   });
+
+  test(obj.assign.name, () => {
+    const a = { a: 1, b: 2 };
+    const b = { b: 3, c: 4 };
+    const c = { c: 5, d: 6 };
+
+    expect(obj.assign(a, b, c)).toEqual({ a: 1, b: 3, c: 5, d: 6 });
+  })
 });
