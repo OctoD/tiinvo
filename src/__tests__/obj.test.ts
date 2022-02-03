@@ -115,4 +115,12 @@ describe('obj', () => {
 
     expect(obj.assign(a, b, c)).toEqual({ a: 1, b: 3, c: 5, d: 6 });
   })
+
+  test(obj.size.name, () => {
+    const a = { a: 1, b: { c: 2 } };
+    const b = {};
+
+    expect(obj.size(a)).toBe(2);
+    expect(obj.size(b)).toBe(0);
+  })
 });

@@ -352,6 +352,21 @@ export const pick = <a extends string>(keys: a[]) => <b extends Record<string, a
   return o;
 }
 /**
+ * Returns an object size
+ * 
+ * ```typescript
+ * import { Obj } from 'tiinvo';
+ * 
+ * console.log(Obj.size({ a: 1, b: 2 })); // 2
+ * console.log(Obj.size({})); // 0
+ * ```
+ * 
+ * @param a
+ * @returns
+ * @since 3.0.10
+ **/
+export const size = <a extends Record<string, any>>(a: a): number => Object.keys(a).length;
+/**
  * Returns an array of values of the enumerable properties of an object
  * 
  * ```typescript

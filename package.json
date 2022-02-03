@@ -1,15 +1,12 @@
 {
   "name": "tiinvo",
-  "version": "3.0.9",
+  "version": "3.0.10",
   "author": "Paolo Roth <octod>",
   "license": "MIT",
   "description": "A lib of types and utilities for your TypeScript and JavaScript projects",
   "types": "./index.d.ts",
-  "main": "index.js",
-  "module": "index.mjs",
-  "directories": {
-    "lib": "."
-  },
+  "main": "./index.js",
+  "module": "./index.mjs",
   "keywords": [
     "functional programming",
     "functions",
