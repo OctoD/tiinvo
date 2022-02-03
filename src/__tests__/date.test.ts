@@ -171,4 +171,10 @@ describe(`date`, () => {
     expect(d.toString(d1)).toBe(`2018-01-01`);
     expect(d.toString(d2)).toBe(`2018-11-20`);
   });
+  test(d.fromstr.name, () => {
+    const d1 = d.make(2018, d.Month.January, 1);
+    const d2 = d.make(2018, d.Month.Nov, 20);
+    expect(d.fromstr(`2018-01-01`)).toEqual(d1);
+    expect(d.fromstr(`2018-11-20`)).toEqual(d2);
+  })
 })

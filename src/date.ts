@@ -98,6 +98,24 @@ export const eq: f.equatableE<Date> = (a, b) => cmp(a, b) === 0;
  */
 export const make = (year: number, month: Month, day: number) => new Date(year, month - 1, day, 0, 0, 0, 0);
 
+/**
+ * Makes a date from a string
+ * 
+ * ```typescript
+ * import * as d from 'tiinvo/date';
+ * 
+ * d.fromstr('2018-01-01'); // 2018-01-01T00:00:00.000Z
+ * ```
+ * @param datestr 
+ * @returns 
+ * 
+ * @since 3.0.10
+ */
+export const fromstr = (datestr: `${string}-${string}-${string}`) => {
+  const [year, month, day] = datestr.split('-');
+  return make(Number(year), Number(month), Number(day));
+}
+
 //#region predicates
 
 /**
