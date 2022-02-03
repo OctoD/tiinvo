@@ -1,5 +1,6 @@
 import * as a from '../array';
 import * as n from '../num';
+import * as s from '../str';
 import * as o from '../option';
 
 describe(`array`, () => {
@@ -231,5 +232,11 @@ describe(`array`, () => {
     const a1 = [1, 2, 3];
 
     expect(expect.arrayContaining(a.of(1, 2, 3))).toEqual([1, 2, 3]);
+  })
+
+  test(a.flatmap.name, () => {
+    const map = a.flatmap(s.length);
+
+    expect(expect.arrayContaining(map([['abc'], ['cdef']]))).toEqual([3, 4]);
   })
 })

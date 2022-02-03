@@ -246,6 +246,22 @@ export const firstOr = <a>(a: a) => (b: a[]) => b[0] ?? a;
  */
 export const flat = <a>(a: a[][]) => a.reduce((ac, n) => [...ac, ...n], []);
 /**
+ * Maps a matrix `a[][]` to a `b[]` using the mapping function `f`.
+ * 
+ * ```typescript
+ * import { Array } from 'tiinvo';
+ * 
+ * const map = Array.flatmap((a: string) => a.length);
+ * 
+ * console.log(map([['abc'], ['cdef']])) // [3, 4]
+ * 
+ * @param f 
+ * @returns 
+ * 
+ * @since 3.0.10
+ */
+export const flatmap = <a, b>(f: f.map<a, b>) => (a: a[][]): b[] => flat(a.map(e => e.map(f)));
+/**
  * Calls all functions in the array `a` with the related index of arguments `b`.
  * @param a 
  * @returns 
