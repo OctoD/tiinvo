@@ -5,9 +5,11 @@ describe(`promise`, () => {
     const m = p.map((a: string) => a.length);
     const ok = Promise.resolve('hello');
     const ko = Promise.reject('hello');
+    const ko2 = Promise.reject(new TypeError('err'));
 
     expect(await m(ok)).toBe(5);
-    expect(await m(ko)).toBe(null);
+    expect(await m(ko)).toBeInstanceOf(Error);
+    expect(await m(ko2)).toBeInstanceOf(Error);
   })
 
   test(p.mapOr.name, async () => {

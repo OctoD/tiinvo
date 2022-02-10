@@ -7,30 +7,30 @@ import type * as r from './result';
  * Calls a function `fn` with it's arguments and returns a `maybe<returnTypeOf<fn>>`
  * 
  * ```typescript
- * import { trymaybe } from 'tiinvo/try';
- * import * as m from 'tiinvo/maybe';
- * import * as num from 'tiinvo/num';
+ * import { Try, Maybe, Number } from 'tiinvo';
  * 
  * const fn = (arg: number) => {
- *   if (num.isEven(arg)) {  
+ *   if (Number.isEven(arg)) {  
  *     return arg * 2;  
  *   }
  *  
  *   throw new Error(`${arg} is not even`);
  * }
  * 
- * console.log(trymaybe(fn)(2)); // 4
- * console.log(trymaybe(fn)(3)); // null
+ * const safe = Try.maybe(fn);
  * 
- * console.log(m.isjust(trymaybe(fn)(2))); // true
- * console.log(m.isnothing(trymaybe(fn)(3))); // true
+ * console.log(safe(2)); // 4
+ * console.log(safe(3)); // null
+ * 
+ * console.log(Maybe.isJust(safe(2))); // true
+ * console.log(Maybe.isNothing(safe(3))); // true
  * ```
  * 
  * @param fn 
  * @returns 
  * @since 3.0.0
  */
-export const trymaybe = <fn extends (... a: any[]) => any | never>(fn: fn) => (... args: fn.argsOf<fn>): m.maybe<fn.returnTypeOf<fn>> => {
+export const maybe = <fn extends (... a: any[]) => any | never>(fn: fn) => (... args: fn.argsOf<fn>): m.maybe<fn.returnTypeOf<fn>> => {
   try {
     return fn(... args) as m.just<fn.returnTypeOf<fn>>;
   } catch (e) {
@@ -44,7 +44,7 @@ export const trymaybe = <fn extends (... a: any[]) => any | never>(fn: fn) => (.
  * @returns 
  * @since 3.0.0
  */
-export const trymaybeasync = <fn extends (... a: any[]) => any | Promise<any> | never>(fn: fn) => async (... args: fn.argsOf<fn>): Promise<m.maybe<fn.asyncFnReturnType<fn>>> => {
+export const maybeAsync = <fn extends (... a: any[]) => any | Promise<any> | never>(fn: fn) => async (... args: fn.argsOf<fn>): Promise<m.maybe<fn.asyncFnReturnType<fn>>> => {
   try {
     return await fn(... args) as m.just<fn.returnTypeOf<fn>>;
   } catch (e) {
@@ -56,30 +56,30 @@ export const trymaybeasync = <fn extends (... a: any[]) => any | Promise<any> | 
  * Calls a function `fn` with it's arguments and returns a `option<returnTypeOf<fn>>`
  * 
  * ```typescript
- * import { tryoption } from 'tiinvo/try';
- * import * as o from 'tiinvo/option';
- * import * as num from 'tiinvo/num';
+ * import { Try, Option, Number } from 'tiinvo';
  * 
  * const fn = (arg: number) => {
- *   if (num.isEven(arg)) {  
+ *   if (Number.isEven(arg)) {  
  *     return arg * 2;  
  *   }
  *  
  *   throw new Error(`${arg} is not even`);
  * }
  * 
- * console.log(tryoption(fn)(2)); // 4
- * console.log(tryoption(fn)(3)); // null
+ * const safe = Try.option(fn);
  * 
- * console.log(o.isSome(tryoption(fn)(2))); // true
- * console.log(o.isNone(tryoption(fn)(3))); // true
+ * console.log(safe(2)); // 4
+ * console.log(safe(3)); // null
+ * 
+ * console.log(Option.isSome(safe(2))); // true
+ * console.log(Option.isNone(safe(3))); // true
  * ```
  * 
  * @param fn 
  * @returns 
  * @since 3.0.0
  */
-export const tryoption = <fn extends (... a: any[]) => any | never>(fn: fn) => (... args: fn.argsOf<fn>): o.option<fn.returnTypeOf<fn>> => {
+export const option = <fn extends (... a: any[]) => any | never>(fn: fn) => (... args: fn.argsOf<fn>): o.option<fn.returnTypeOf<fn>> => {
   try {
     return fn(... args) as o.some<fn.returnTypeOf<fn>>;
   } catch (e) {
@@ -94,7 +94,7 @@ export const tryoption = <fn extends (... a: any[]) => any | never>(fn: fn) => (
  * @returns 
  * @since 3.0.0
  */
-export const tryoptionasync = <fn extends (... a: any[]) => any | Promise<any> | never>(fn: fn) => async (... args: fn.argsOf<fn>): Promise<o.option<fn.asyncFnReturnType<fn>>> => {
+export const optionAsync = <fn extends (... a: any[]) => any | Promise<any> | never>(fn: fn) => async (... args: fn.argsOf<fn>): Promise<o.option<fn.asyncFnReturnType<fn>>> => {
   try {
     return await fn(... args) as o.some<fn.returnTypeOf<fn>>;
   } catch (e) {
@@ -106,30 +106,30 @@ export const tryoptionasync = <fn extends (... a: any[]) => any | Promise<any> |
  * Calls a function `fn` with it's arguments and returns a `result<returnTypeOf<fn>>`
  * 
  * ```typescript
- * import { tryresult } from 'tiinvo/try';
- * import * as r from 'tiinvo/result';
- * import * as num from 'tiinvo/num';
+ * import { Try, Option, Number } from 'tiinvo';
  * 
  * const fn = (arg: number) => {
- *   if (num.isEven(arg)) {
+ *   if (Number.isEven(arg)) {
  *     return arg * 2;
  *   }
  * 
  *   throw new Error(`${arg} is not even`);
  * }
  * 
- * console.log(tryresult(fn)(2)); // 4
- * console.log(tryresult(fn)(3)); // Error: 3 is not even
+ * const safe = Try.result(fn);
  * 
- * console.log(r.isOk(tryresult(fn)(2))); // true
- * console.log(r.isErr(tryresult(fn)(3))); // true
+ * console.log(safe(2)); // 4
+ * console.log(safe(3)); // Error: 3 is not even
+ * 
+ * console.log(r.isOk(safe(2))); // true
+ * console.log(r.isErr(safe(3))); // true
  * ```
  * 
  * @param fn 
  * @returns 
  * @since 3.0.0
  */
-export const tryresult = <fn extends (... a: any[]) => any | never>(fn: fn) => (... args: fn.argsOf<fn>): r.result<fn.returnTypeOf<fn>> => {
+export const result = <fn extends (... a: any[]) => any | never>(fn: fn) => (... args: fn.argsOf<fn>): r.result<fn.returnTypeOf<fn>> => {
   try {
     return fn(... args) as r.ok<fn.returnTypeOf<fn>>;
   } catch (error) {
@@ -144,7 +144,7 @@ export const tryresult = <fn extends (... a: any[]) => any | never>(fn: fn) => (
  * @returns 
  * @since 3.0.0
  */
-export const tryresultasync = <fn extends (... a: any[]) => any | Promise<any> | never>(fn: fn) => async (... args: fn.argsOf<fn>): Promise<r.result<fn.asyncFnReturnType<fn>>> => {
+export const resultAsync = <fn extends (... a: any[]) => any | Promise<any> | never>(fn: fn) => async (... args: fn.argsOf<fn>): Promise<r.result<fn.asyncFnReturnType<fn>>> => {
   try {
     return await fn(... args) as r.ok<fn.returnTypeOf<fn>>;
   } catch (error) {

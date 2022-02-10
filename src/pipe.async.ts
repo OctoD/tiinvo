@@ -42,9 +42,7 @@ f[0] extends () => any ? () => ReturnType<f[lastIndexOf<f>]> : f[0] extends (arg
  * Creates a pipeline of asynchronous functions.
  *
  * ```typescript
- * import { pipeasync, toasync } from 'tiinvo/pipe.async'
- * import * as array from 'tiinvo/array'
- * import * as f from 'tiinvo/functors'
+ * import { PipeAsync, Array, Functors } from 'tiinvo/pipe.async'
  *
  * interface Todo {
  *   completed: boolean;
@@ -55,17 +53,17 @@ f[0] extends () => any ? () => ReturnType<f[lastIndexOf<f>]> : f[0] extends (arg
  *
  * const fetchapi = (url: string) => fetch(url);
  * const tojson = (response: Response) => response.json();
- * const filtercompleted: f.predicateE<Todo> = todo => todo.completed;
- * const mapid: f.map<Todo, number> = todo => todo.id;
+ * const filtercompleted: Functors.predicateE<Todo> = todo => todo.completed;
+ * const mapid: Functors.map<Todo, number> = todo => todo.id;
  *
  * const mapcompletedids = pipe(
- *   array.filter(filtercompleted),
- *   array.map(mapid),
+ *   Array.filter(filtercompleted),
+ *   Array.map(mapid),
  * )
  * 
- * const mapcompleteidsasync = toasync(mapcompletedids);
+ * const mapcompleteidsasync = PipeAsync.toasync(mapcompletedids);
  *
- * const getactivetodoids = pipeasync(
+ * const getactivetodoids = PipeAsync.pipeasync(
  *   fetchapi,
  *   tojson,
  *   mapcompleteidsasync,
@@ -96,12 +94,10 @@ export const pipeasync: pipeasync = (...args) => {
  * Returns an async version of a function `f`
  * 
  * ```typescript
- * import { toasync } from 'tiinvo/pipe.async'
+ * import { PipeAsync } from 'tiinvo'
  * 
  * const f = (x: number) => x + 1;
- * 
- * const g = toasync(f);
- * 
+ * const g = PipeAsync.toasync(f);
  * g(1) // returns a Promise<number>
  * ```
  * 

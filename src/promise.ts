@@ -1,5 +1,5 @@
 import type * as fn from './fn';
-import type * as o from './option';
+import type * as r from './result';
 
 export type promiseOf<a> = a extends Promise<infer b> ? b : never;
 
@@ -26,7 +26,7 @@ export type promisesOf<a extends any[]> = {
 export const all = Promise.all.bind(Promise);
 /**
  * Maps a promise to a new promise.
- * If the promise catches, the new promise returns `none`, otherwise returns `some<b>`.
+ * If the promise catches, the new promise returns `err`, otherwise returns `ok<b>`.
  * 
  * ```ts
  * import { Promise } from 'tiinvo';
@@ -36,14 +36,14 @@ export const all = Promise.all.bind(Promise);
  * const map = Promise.map((a: string) => a.length);
  * 
  * map(p1).then(console.log); // => 5
- * map(p2).then(console.log); // => null
+ * map(p2).then(console.log); // => Error('whoops')
  * ```
  * @param f 
  * @returns 
  * 
  * @since 3.0.10
  */
-export const map = <a, b>(f: fn.unary<a, b>) => (p: Promise<a>): Promise<o.option<b>> => p.then(f).catch(_ => null as any);
+export const map = <a, b>(f: fn.unary<a, b>) => (p: Promise<a>): Promise<r.result<b>> => p.then(f).catch(e => Object.prototype.toString.call(e).includes('Error') ? e : new Error(e));
 /**
  * Maps a promise<a> to a new promise<b> if it does not catch, otherwise maps to a promise<or>.
  * 

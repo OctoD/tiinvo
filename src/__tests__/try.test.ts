@@ -21,45 +21,45 @@ describe(`try`, () => {
     return Promise.reject(new Error(`${arg} is not even`));
   }
 
-  test(tryto.trymaybe.name, () => {
-    expect(tryto.trymaybe(fn)(2)).toEqual(4);
-    expect(tryto.trymaybe(fn)(3)).toEqual(null);
-    expect(m.isJust(tryto.trymaybe(fn)(2))).toBeTruthy();
-    expect(m.isNothing(tryto.trymaybe(fn)(3))).toBeTruthy();
+  test(tryto.maybe.name, () => {
+    expect(tryto.maybe(fn)(2)).toEqual(4);
+    expect(tryto.maybe(fn)(3)).toEqual(null);
+    expect(m.isJust(tryto.maybe(fn)(2))).toBeTruthy();
+    expect(m.isNothing(tryto.maybe(fn)(3))).toBeTruthy();
   })
 
-  test(tryto.trymaybeasync.name, async () => {
-    expect(await tryto.trymaybeasync(fnasync)(2)).toEqual(4);
-    expect(await tryto.trymaybeasync(fnasync)(3)).toEqual(null);
-    expect(m.isJust(await tryto.trymaybeasync(fnasync)(2))).toBeTruthy();
-    expect(m.isNothing(await tryto.trymaybeasync(fnasync)(3))).toBeTruthy();
+  test(tryto.maybeAsync.name, async () => {
+    expect(await tryto.maybeAsync(fnasync)(2)).toEqual(4);
+    expect(await tryto.maybeAsync(fnasync)(3)).toEqual(null);
+    expect(m.isJust(await tryto.maybeAsync(fnasync)(2))).toBeTruthy();
+    expect(m.isNothing(await tryto.maybeAsync(fnasync)(3))).toBeTruthy();
   })
 
-  test(tryto.tryoption.name, () => {
-    expect(tryto.tryoption(fn)(2)).toEqual(4);
-    expect(tryto.tryoption(fn)(3)).toEqual(null);
-    expect(o.isSome(tryto.tryoption(fn)(2))).toBeTruthy();
-    expect(o.isNone(tryto.tryoption(fn)(3))).toBeTruthy();
+  test(tryto.option.name, () => {
+    expect(tryto.option(fn)(2)).toEqual(4);
+    expect(tryto.option(fn)(3)).toEqual(null);
+    expect(o.isSome(tryto.option(fn)(2))).toBeTruthy();
+    expect(o.isNone(tryto.option(fn)(3))).toBeTruthy();
   });
 
-  test(tryto.tryoptionasync.name, async () => {
-    expect(await tryto.tryoptionasync(fnasync)(2)).toEqual(4);
-    expect(await tryto.tryoptionasync(fnasync)(3)).toEqual(null);
-    expect(o.isSome(await tryto.tryoptionasync(fnasync)(2))).toBeTruthy();
-    expect(o.isNone(await tryto.tryoptionasync(fnasync)(3))).toBeTruthy();
+  test(tryto.optionAsync.name, async () => {
+    expect(await tryto.optionAsync(fnasync)(2)).toEqual(4);
+    expect(await tryto.optionAsync(fnasync)(3)).toEqual(null);
+    expect(o.isSome(await tryto.optionAsync(fnasync)(2))).toBeTruthy();
+    expect(o.isNone(await tryto.optionAsync(fnasync)(3))).toBeTruthy();
   });
 
-  test(tryto.tryresult.name, () => {
-    expect(tryto.tryresult(fn)(2)).toEqual(4);
-    expect(tryto.tryresult(fn)(3)).toEqual(new Error(`3 is not even`));
-    expect(r.isOk(tryto.tryresult(fn)(2))).toBeTruthy();
-    expect(r.isErr(tryto.tryresult(fn)(3))).toBeTruthy();
+  test(tryto.result.name, () => {
+    expect(tryto.result(fn)(2)).toEqual(4);
+    expect(tryto.result(fn)(3)).toEqual(new Error(`3 is not even`));
+    expect(r.isOk(tryto.result(fn)(2))).toBeTruthy();
+    expect(r.isErr(tryto.result(fn)(3))).toBeTruthy();
   });
 
-  test(tryto.tryresultasync.name, async () => {
-    expect(await tryto.tryresultasync(fnasync)(2)).toEqual(4);
-    expect(await tryto.tryresultasync(fnasync)(3)).toEqual(new Error(`3 is not even`));
-    expect(r.isOk(await tryto.tryresultasync(fnasync)(2))).toBeTruthy();
-    expect(r.isErr(await tryto.tryresultasync(fnasync)(3))).toBeTruthy();
+  test(tryto.resultAsync.name, async () => {
+    expect(await tryto.resultAsync(fnasync)(2)).toEqual(4);
+    expect(await tryto.resultAsync(fnasync)(3)).toEqual(new Error(`3 is not even`));
+    expect(r.isOk(await tryto.resultAsync(fnasync)(2))).toBeTruthy();
+    expect(r.isErr(await tryto.resultAsync(fnasync)(3))).toBeTruthy();
   });
 });

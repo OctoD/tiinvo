@@ -39,7 +39,7 @@ export type values<a> = (a[keyof a])[];
  * Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object.
  * 
  * ```ts
- * import { Obj } from 'tiinvo';
+ * import { Object } from 'tiinvo';
  * 
  * const a = { a: 1, b: 2 };
  * const b = { b: 3, c: 4 };
@@ -61,15 +61,15 @@ export const assign = Object.assign;
  * Compares two objects deeply.
  * 
  * ```typescript
- * import * as obj from 'tiinvo/obj';
+ * import { Object } from 'tiinvo';
  * 
  * const a = { a: 1, b: { c: 2 } };
  * const b = { a: 1, b: { c: 2 } };
  * const c = { a: 1, b: { c: 3 } };
  * 
- * obj.cmp(a, b); // 0
- * obj.cmp(a, c); // -1
- * obj.cmp(c, a); // 1
+ * Obj.cmp(a, b); // 0
+ * Obj.cmp(a, c); // -1
+ * Obj.cmp(c, a); // 1
  * ```
  * 
  * @param a 
@@ -109,7 +109,7 @@ export const cmp: f.comparableE<Record<string, any>, Record<string, any>> = (a, 
  * Ideal to use it for diff or for mongodb queries/inserts.
  * 
  * ```ts
- * import * as obj from 'tiinvo/obj';
+ * import { Object } from 'tiinvo';
  * 
  * const myobject = {
  *    a: {
@@ -120,7 +120,7 @@ export const cmp: f.comparableE<Record<string, any>, Record<string, any>> = (a, 
  *    d: 20
  * }
  * 
- * obj.flat(myobject) // { 'a.b.c': 100, d: 20 }
+ * Obj.flat(myobject) // { 'a.b.c': 100, d: 20 }
  * ```
  * 
  * @param obj 
@@ -150,9 +150,9 @@ export const flat = <a extends Record<string, any>>(obj: a, prefix = ``): flat<a
  * Gets a property `a` from an object `b` and returns a `option<c>`
  * 
  * ```typescript
- * import * as obj from 'tiinvo/obj';
+ * import { Object } from 'tiinvo';
  * 
- * const get = obj.get(`foo`);
+ * const get = Object.get(`foo`);
  * 
  * console.log(get({ foo: `bar` })); // some<`bar`>
  * console.log(get({})); // none
@@ -168,10 +168,10 @@ export const get = <a extends string>(a: a) => <b>(b: b): o.option<b extends Rec
  * Returns true if a is a `object` and not null
  * 
  * ```typescript
- * import * as obj from 'tiinvo/obj';
+ * import { Object } from 'tiinvo';
  * 
- * console.log(obj.isobject({})); // true
- * console.log(obj.isobject(null)); // false
+ * console.log(Object.isobject({})); // true
+ * console.log(Object.isobject(null)); // false
  * ```
  * 
  * @param a
@@ -183,15 +183,12 @@ export const guard = (a => typeof a === 'object' && a !== null) as f.guard<objec
  * Returns `true` if a value `v` implements a shape `s`
  * 
  * ```typescript
- * import * as obj from 'tiinvo/obj';
- * import * as str from 'tiinvo/str';
- * import * as num from 'tiinvo/num';
- * import * as bool from 'tiinvo/bool';
+ * import { Obj, String, Number, Boolean } from 'tiinvo';
  * 
- * const isshape = obj.guardOf({
- *    a: str.guard,
- *    b: num.guard,
- *    c: bool.guard
+ * const isshape = Object.guardOf({
+ *    a: String.guard,
+ *    b: Number.guard,
+ *    c: Boolean.guard
  * });
  * 
  * console.log(isshape({ a: `foo`, b: 1, c: true })); // true
@@ -230,10 +227,9 @@ export const guardOf = <a extends any>(
  * Returns object entries
  * 
  * ```typescript
- * import * as obj from 'tiinvo/obj';
+ * import { Object } from 'tiinvo';
  * 
- * const entries = obj.entries({ a: 1, b: 2 });
- * 
+ * const entries = Object.entries({ a: 1, b: 2 });
  * console.log(entries); // [ ['a', 1], ['b', 2] ]
  * ```
  * @param o 
@@ -245,10 +241,9 @@ export const entries = <a>(o: a): entries<a> => Object.entries(o) as entries<a>;
  * Returns true if a is a `object` and has property `k`
  * 
  * ```typescript
- * import * as obj from 'tiinvo/obj';
+ * import { Object } from 'tiinvo';
  * 
- * const hasa = obj.haskey('a');
- * 
+ * const hasa = Object.haskey('a');
  * console.log(hasa({})); // false
  * console.log(hasa({ a: 1 })); // true
  * ```
@@ -262,10 +257,10 @@ export const haskey = <k extends string>(k: k) => (o: unknown): o is Record<k, u
  * Returns true if a is a `object` and has property `k` of type `g`
  * 
  * ```typescript
- * import * as obj from 'tiinvo/obj';
+ * import { Object } from 'tiinvo';
  * import * as num from 'tiinvo/num';
  * 
- * const hasa = obj.haskeyOf('a', num.guard);
+ * const hasa = Object.haskeyOf('a', num.guard);
  * 
  * console.log(hasa({})); // false
  * console.log(hasa({ a: 1 })); // true
@@ -282,10 +277,10 @@ export const haskeyOf = <a, k extends string>(k: k, g: f.guard<a>) => (o: unknow
  * Returns the names of the enumerable string properties and methods of an object.
  * 
  * ```typescript
- * import * as obj from 'tiinvo/obj';
+ * import { Object } from 'tiinvo';
  * 
- * console.log(obj.keys({ a: 1, b: 2 })); // ['a', 'b']
- * console.log(obj.keys({})); // []
+ * console.log(Object.keys({ a: 1, b: 2 })); // ['a', 'b']
+ * console.log(Object.keys({})); // []
  * ```
  * 
  * @param a 
@@ -297,10 +292,9 @@ export const keys = <a extends { [index: string]: unknown }>(a: a): keys<a> => O
  * Omits the keys in `a` that are in `b`
  * 
  * ```typescript
- * import * as obj from 'tiinvo/obj';
+ * import { Object } from 'tiinvo';
  * 
- * const omit = obj.omit(['a', 'b']);
- * 
+ * const omit = Object.omit(['a', 'b']);
  * console.log(omit({ a: 1, b: 2, c: 3 })); // { c: 3 }
  * console.log(omit({ a: 1, b: 2 })); // {}
  * ```
@@ -326,10 +320,9 @@ export const omit = <a extends string>(k: a[]) => <b extends Record<string, any>
  * Returns a new object with the keys of `a` that are in `b`
  * 
  * ```typescript
- * import * as obj from 'tiinvo/obj';
+ * import { Object } from 'tiinvo';
  * 
- * const pick = obj.pick(['a', 'b']);
- * 
+ * const pick = Object.pick(['a', 'b']);
  * console.log(pick({ a: 1, b: 2, c: 3 })); // { a: 1, b: 2 }
  * console.log(pick({ a: 1, b: 2 })); // { a: 1, b: 2 }
  * ```
@@ -355,10 +348,10 @@ export const pick = <a extends string>(keys: a[]) => <b extends Record<string, a
  * Returns an object size
  * 
  * ```typescript
- * import { Obj } from 'tiinvo';
+ * import { Object } from 'tiinvo';
  * 
- * console.log(Obj.size({ a: 1, b: 2 })); // 2
- * console.log(Obj.size({})); // 0
+ * console.log(Object.size({ a: 1, b: 2 })); // 2
+ * console.log(Object.size({})); // 0
  * ```
  * 
  * @param a
@@ -370,10 +363,10 @@ export const size = <a extends Record<string, any>>(a: a): number => Object.keys
  * Returns an array of values of the enumerable properties of an object
  * 
  * ```typescript
- * import * as obj from 'tiinvo/obj';
+ * import { Object } from 'tiinvo';
  * 
- * console.log(obj.values({ a: 1, b: 2 })); // [1, 2]
- * console.log(obj.values({})); // []
+ * console.log(Object.values({ a: 1, b: 2 })); // [1, 2]
+ * console.log(Object.values({})); // []
  * ```
  * 
  * @param a 

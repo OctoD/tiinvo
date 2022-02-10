@@ -39,15 +39,13 @@ f[0] extends () => any ? () => ReturnType<f[lastIndexOf<f>]> : f[0] extends (arg
  *
  * @example
  * ```ts
- * import { pipe } from 'tiinvo/pipe';
- * import * as num from 'tiinvo/num';
- * import * as maybe from 'tiinvo/maybe';
+ * import { Pipe, Number, Maybe } from 'tiinvo/pipe';
  * 
  * const piped = pipe(
- *    num.uadd(10), 
- *    num.umultiply(2), 
- *    num.iseven, 
- *    maybe.mapOrElse(() => 'odd', () => 'even'),
+ *    Number.uadd(10), 
+ *    Number.umultiply(2), 
+ *    Number.iseven, 
+ *    Maybe.mapOrElse(() => 'odd', () => 'even'),
  * );
  * 
  * piped(2); // `even`

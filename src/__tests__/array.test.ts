@@ -117,6 +117,7 @@ describe(`array`, () => {
     const a1 = [1, 2, 3];
 
     expect(a.join(`-`)(a1)).toBe(`1-2-3`);
+    expect(a.join()(a1)).toBe(`123`);
   });
 
   test(a.last.name, () => {

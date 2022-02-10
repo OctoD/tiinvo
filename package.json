@@ -17,6 +17,8 @@
     "changelog": "npx standard-changelog --first-release",
     "clean": "tsc --build --clean && node scripts/clean.js",
     "test": "jest",
+    "build:docs": "npm --prefix docs run build",
+    "dev:docs": "npm --prefix docs run dev",
     "deploy": "npm test && npm run clean && npm run build && cd dist && npm publish && cd .. && npm run clean",
     "upgrade-interactive": "npx npm-check --update"
   },

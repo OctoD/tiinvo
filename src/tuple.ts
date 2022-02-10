@@ -10,20 +10,20 @@ export type tuple<T extends any[]> = {
  * Compares two tuples. 
  * 
  * ```typescript
- * import * as t from 'tuple'
+ * import { Tuple } from 'tiinvo';
  * 
- * const a: t.tuple<[number, number, number]> = [1, 2, 3]
- * const b: t.tuple<[number, number, number]> = [1, 2, 3]
- * const c: t.tuple<[number, number, number]> = [1, 2, 4]
- * const d: t.tuple<[number, number]> = [1, 2];
+ * const a: Tuple.tuple<[number, number, number]> = [1, 2, 3]
+ * const b: Tuple.tuple<[number, number, number]> = [1, 2, 3]
+ * const c: Tuple.tuple<[number, number, number]> = [1, 2, 4]
+ * const d: Tuple.tuple<[number, number]> = [1, 2];
  * 
- * console.log(t.cmp(a, b)) // 0
- * console.log(t.cmp(a, c)) // -1
- * console.log(t.cmp(c, a)) // 1
- * console.log(t.cmp(d, a)) // -1
- * console.log(t.cmp(a, d)) // 1
- * console.log(t.cmp(null, a)) // -1
- * console.log(t.cmp(null, undefined)) // 0
+ * console.log(Tuple.cmp(a, b)) // 0
+ * console.log(Tuple.cmp(a, c)) // -1
+ * console.log(Tuple.cmp(c, a)) // 1
+ * console.log(Tuple.cmp(d, a)) // -1
+ * console.log(Tuple.cmp(a, d)) // 1
+ * console.log(Tuple.cmp(null, a)) // -1
+ * console.log(Tuple.cmp(null, undefined)) // 0
  * ```
  * 
  * @param a 
@@ -61,20 +61,20 @@ export const cmp: f.comparable = (a, b) => {
  * Returns `true` if the tuple are equal, otherwise `false`.
  * 
  * ```typescript
- * import * as t from 'tuple'
+ * import { Tuple } from 'tiinvo';
  * 
- * const a: t.tuple<[number, number, number]> = [1, 2, 3]
- * const b: t.tuple<[number, number, number]> = [1, 2, 3]
- * const c: t.tuple<[number, number, number]> = [1, 2, 4]
- * const d: t.tuple<[number, number]> = [1, 2];
+ * const a: Tuple.tuple<[number, number, number]> = [1, 2, 3]
+ * const b: Tuple.tuple<[number, number, number]> = [1, 2, 3]
+ * const c: Tuple.tuple<[number, number, number]> = [1, 2, 4]
+ * const d: Tuple.tuple<[number, number]> = [1, 2];
  * 
- * console.log(t.eq(a, b)) // true
- * console.log(t.eq(a, c)) // false
- * console.log(t.eq(c, a)) // false
- * console.log(t.eq(d, a)) // false
- * console.log(t.eq(a, d)) // false
- * console.log(t.eq(null, a)) // false
- * console.log(t.eq(null, undefined)) // true
+ * console.log(Tuple.eq(a, b)) // true
+ * console.log(Tuple.eq(a, c)) // false
+ * console.log(Tuple.eq(c, a)) // false
+ * console.log(Tuple.eq(d, a)) // false
+ * console.log(Tuple.eq(a, d)) // false
+ * console.log(Tuple.eq(null, a)) // false
+ * console.log(Tuple.eq(null, undefined)) // true
  * ```
  * 
  * @param a 
@@ -88,11 +88,9 @@ export const eq: f.equatable = (a, b) => cmp(a, b) === 0;
  * Makes a guard function from a tuple of guards.
  * 
  * ```typescript
- * import * as t from 'tiinvo/tuple';
- * import * as num from 'tiinvo/num';
- * import * as str from 'tiinvo/str';
+ * import { Number, String, Tuple } from 'tiinvo';
  * 
- * const guard = t.guardOf(num.guard, str.guard, num.guard);
+ * const guard = Tuple.guardOf(Number.guard, String.guard, Number.guard);
  * 
  * guard([1, 'a', 2]); // true
  * guard([1, 'a', 'b']); // false
@@ -109,10 +107,10 @@ export const guardOf = <g extends f.guard<any>[]>(... guards: g) => (value: unkn
  * Gets the first element `a` of a tuple as an option<a[i]>.
  * 
  * ```typescript
- * import * as t from 'tiinvo/tuple';
+ * import { Tuple } from 'tiinvo';
  * 
- * t.get(2)([1, 2, 3]); // 3
- * t.get(2)([1, 2]);    // null
+ * Tuple.get(2)([1, 2, 3]); // 3
+ * Tuple.get(2)([1, 2]);    // null
  * ```
  * 
  * @param i 
@@ -125,11 +123,11 @@ export const get = <i extends number>(i: i) => <a extends tuple<any>>(a: a): o.o
  * Intersects two tuples `a` and `b` returning a new `tuple<c>`
  * 
  * ```typescript
- * import * as t from 'tiinvo/tuple';
+ * import { Tuple } from 'tiinvo';
  * 
- * t.intersect([1, 2, 3])([1, 2, 3]); // [1, 2, 3]
- * t.intersect([1, 2, 3])([1, 2, 4]); // [1, 2]
- * t.intersect([1, 2, 3])([1, 2, 4, 5]); // [1, 2]
+ * Tuple.intersect([1, 2, 3])([1, 2, 3]); // [1, 2, 3]
+ * Tuple.intersect([1, 2, 3])([1, 2, 4]); // [1, 2]
+ * Tuple.intersect([1, 2, 3])([1, 2, 4, 5]); // [1, 2]
  * ```
  * 
  * @param a 
@@ -154,10 +152,10 @@ export const intersect = <a extends tuple<any>>(a: a) => <b extends tuple<any>>(
  * Returns tuple length
  * 
  * ```typescript
- * import * as t from 'tiinvo/tuple';
+ * import { Tuple } from 'tiinvo';
  * 
- * t.length([1, 2, 3]); // 3
- * t.length([1, 2, 3, 4, 5]); // 5
+ * Tuple.length([1, 2, 3]); // 3
+ * Tuple.length([1, 2, 3, 4, 5]); // 5
  * ```
  * 
  * @param a 
@@ -170,7 +168,7 @@ export const length = <a extends tuple<any>>(a: a) => a.length;
  * Maps a tuple<a> to a tuple<b> using some functions `m[]`.
  * 
  * ```typescript
- * import * as t from 'tiinvo/tuple';
+ * import { Tuple } from 'tiinvo';
  * 
  * const m = [
  *   (a: number) => a + 1,
@@ -178,7 +176,7 @@ export const length = <a extends tuple<any>>(a: a) => a.length;
  *   (a: number) => a * 3
  * ];
  * 
- * t.map(m)([1, 2, 3]); // [2, 4, 6]
+ * Tuple.map(m)([1, 2, 3]); // [2, 4, 6]
  * ```
  * 
  * @param map 
@@ -197,11 +195,11 @@ export const map = <m extends ((arg: any) => any)[]>(... map: m) => <b extends t
  * Returns the union of two tuples `a` and `b`.
  * 
  * ```typescript
- * import * as t from 'tiinvo/tuple';
+ * import { Tuple } from 'tiinvo';
  * 
- * t.union([1, 2, 3])([1, 2, 3]); // [1, 2, 3]
- * t.union([1, 2, 3])([1, 2, 4]); // [1, 2, 3, 4]
- * t.union([1, 2, 3])([1, 2, 4, 5]); // [1, 2, 3, 4, 5]
+ * Tuple.union([1, 2, 3])([1, 2, 3]); // [1, 2, 3]
+ * Tuple.union([1, 2, 3])([1, 2, 4]); // [1, 2, 3, 4]
+ * Tuple.union([1, 2, 3])([1, 2, 4, 5]); // [1, 2, 3, 4, 5]
  * ```
  * 
  * @param a 

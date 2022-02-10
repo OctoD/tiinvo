@@ -39,9 +39,11 @@ describe(`result`, () => {
   test(`filter`, () => {
     const filterfn = (arg: number) => arg > 0;
     const filter = r.filter(filterfn);
+    const e = new TypeError('hello');
 
     expect(filter(10)).toBe(10);
     expect(filter(0)).toEqual(new Error(`0 is not ok`));
+    expect(filter(e)).toEqual(e);
   });
 
   test(`mappables`, () => {

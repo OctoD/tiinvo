@@ -7,6 +7,9 @@ benchmarks
 # docs dir
 docs
 
+# examples dir
+docs
+
 # source dir
 src
 

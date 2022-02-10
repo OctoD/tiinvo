@@ -4,11 +4,11 @@ import type * as f from './functors';
  * Compares two `booleans`.
  * 
  * ```typescript
- * import * as b from 'bool'
+ * import { Boolean } from 'bool'
  * 
- * console.log(b.cmp(true, true)) // 0
- * console.log(b.cmp(true, false)) // 1
- * console.log(b.cmp(false, true)) // -1
+ * console.log(Boolean.cmp(true, true)) // 0
+ * console.log(Boolean.cmp(true, false)) // 1
+ * console.log(Boolean.cmp(false, true)) // -1
  * ```
  * 
  * @param a 
@@ -22,11 +22,11 @@ export const cmp: f.comparableE<boolean, boolean> = (a, b) => a > b ? 1 : a < b 
  * Returns `true` if two booleans are equal, otherwise `false`.
  * 
  * ```typescript
- * import * as b from 'bool'
+ * import { Boolean } 'tiinvo';
  * 
- * console.log(b.eq(true, true)) // true
- * console.log(b.eq(true, false)) // false
- * console.log(b.eq(false, true)) // false
+ * console.log(Boolean.eq(true, true)) // true
+ * console.log(Boolean.eq(true, false)) // false
+ * console.log(Boolean.eq(false, true)) // false
  * ```
  * 
  * @param a 
@@ -40,10 +40,10 @@ export const eq: f.equatableE<boolean> = (a, b) => a === b;
  * Flips a boolean.
  * 
  * ```typescript
- * import * as b from 'bool'
+ * import { Boolean } 'tiinvo';
  * 
- * console.log(b.flip(true)) // false
- * console.log(b.flip(false)) // true
+ * console.log(Boolean.flip(true)) // false
+ * console.log(Boolean.flip(false)) // true
  * ```
  * 
  * @param a 
@@ -56,12 +56,12 @@ export const flip = (a: boolean): boolean => !a;
  * Returns `true` if the given value is a `boolean`.
  * 
  * ```typescript
- * import * as t from 'tuple'
+ * import { Boolean } from 'tiinvo'
  * 
- * console.log(t.guard(true)) // true
- * console.log(t.guard(false)) // true
- * console.log(t.guard(1)) // false
- * console.log(t.guard(null)) // false
+ * console.log(Boolean.guard(true)) // true
+ * console.log(Boolean.guard(false)) // true
+ * console.log(Boolean.guard(1)) // false
+ * console.log(Boolean.guard(null)) // false
  * ```
  * 
  * @param a
@@ -71,13 +71,13 @@ export const flip = (a: boolean): boolean => !a;
 export const guard = (a => typeof a === 'boolean') as f.guard<boolean>;
 
 /**
- * Converts a `boolean` to a number `0 | 1`.
+ * Converts a `boolean` to a bit (`0 | 1`).
  * 
  * ```typescript
- * import * as b from 'bool'
+ * import { Boolean } from 'tiinvo'
  * 
- * console.log(b.toBit(true)) // 1
- * console.log(b.toBit(false)) // 0
+ * console.log(Boolean.toBit(true)) // 1
+ * console.log(Boolean.toBit(false)) // 0
  * ```
  * 
  * @param a 

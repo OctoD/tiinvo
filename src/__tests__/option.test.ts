@@ -57,6 +57,16 @@ describe(`option`, () => {
     expect(o.cmp(a, a)).toBe(0);
     expect(o.cmp(a, b)).toBe(-1);
     expect(o.cmp(b, a)).toBe(1);
+
+    const x = 1
+    const y = null
+    const z = undefined
+
+    expect(o.cmp(x, y)).toBe(1);
+    expect(o.cmp(x, z)).toBe(1);
+    expect(o.cmp(y, z)).toBe(0);
+    expect(o.cmp(x, x)).toBe(0);
+    expect(o.cmp(z, x)).toBe(-1);
   })
 
   test(`equatables`, () => {

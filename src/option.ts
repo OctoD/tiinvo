@@ -18,15 +18,11 @@ export type option<a = unknown> = some<a> | none;
  * Returns `true` if the option is `none`, `false` otherwise.
  * 
  * ```typescript
- * import * as o from 'tiinvo/option';
+ * import { Option } from 'tiinvo';
  * 
- * const x = 1
- * const y = null
- * const z = undefined
- * 
- * o.isNone(x); // false
- * o.isNone(y); // true
- * o.isNone(z); // true
+ * Option.isNone(1); // false
+ * Option.isNone(null); // true
+ * Option.isNone(undefined); // true
  * ```
  * @param value 
  * @returns 
@@ -37,15 +33,15 @@ export const isNone = (value: unknown): value is none => value === null || value
  * Returns `true` if the option is `some`, `false` otherwise.
  * 
  * ```typescript
- * import * as o from 'tiinvo/option';
+ * import { Option } from 'tiinvo';
  * 
  * const x = 1
  * const y = null
  * const z = undefined
  * 
- * o.isSome(x); // true
- * o.isSome(y); // false
- * o.isSome(z); // false
+ * Option.isSome(1); // true
+ * Option.isSome(null); // false
+ * Option.isSome(undefined); // false
  * ```
  * 
  * @param value 
@@ -59,7 +55,7 @@ export const isSome = (value: unknown): value is some<unknown> => value !== null
  * If the option is `none`, it will always return `true`.
  * 
  * ```typescript
- * import * as o from 'tiinvo/option';
+ * import { Option } from 'tiinvo';
  * import * as num from 'tiinvo/num';
  * 
  * const x = 1
@@ -67,7 +63,7 @@ export const isSome = (value: unknown): value is some<unknown> => value !== null
  * const z = undefined
  * const w = `a`
  * 
- * const isnumsome = o.isOptionOf(num.guard);
+ * const isnumsome = Option.isOptionOf(num.guard);
  * 
  * isnumsome(x); // true
  * isnumsome(y); // true
@@ -84,37 +80,47 @@ export const isOptionOf = <a>(guard: f.guard<a>) => (value: unknown): value is o
  * Compares two options for equality.
  * 
  * ```typescript
- * import * as o from 'tiinvo/option';
+ * import { Option } from 'tiinvo';
  * 
  * const x = 1
  * const y = null
  * const z = undefined
  * 
- * o.eq(x, y); // false
- * o.eq(x, z); // false
- * o.eq(y, z); // true
- * o.eq(x, x); // true
+ * Option.cmp(x, y); // 1
+ * Option.cmp(x, z); // 1
+ * Option.cmp(y, z); // 0
+ * Option.cmp(x, x); // 0
  * ```
  * @param a 
  * @param b 
  * @returns 
  * @since 3.0.0
  */
-export const cmp: f.comparable = <a, b>(a: a, b: b): -1 | 0 | 1 => ((a === null || a === undefined) && (b === null || b === undefined)) ? 0 : a as any > b as any ? 1 : a as any < b as any ? -1 : 0;
+export const cmp: f.comparable = <a, b>(a: a, b: b): -1 | 0 | 1 => {
+  if (isNone(a) && isNone(b)) {
+    return 0;
+  } else if (isNone(a)) {
+    return -1;
+  } else if (isNone(b)) {
+    return 1;
+  } else {
+    return a as any > b ? 1 : a as any < b ? -1 : 0;
+  }
+}
 /**
  * Returns true if two options are equal.
  * 
  * ```typescript
- * import * as o from 'tiinvo/option';
+ * import { Option } from 'tiinvo';
  * 
  * const x = 1
  * const y = null
  * const z = undefined
  * 
- * o.eq(x, y); // false
- * o.eq(x, z); // false
- * o.eq(y, z); // true
- * o.eq(x, x); // true
+ * Option.eq(x, y); // false
+ * Option.eq(x, z); // false
+ * Option.eq(y, z); // true
+ * Option.eq(x, x); // true
  * ```
  * @param a 
  * @param b 
@@ -126,11 +132,10 @@ export const eq: f.equatable = <a>(a: a, b: a): boolean => isNone(a) && isNone(b
  * Returns some if the value is some and the predicate returns true, otherwise returns none.
  * 
  * ```typescript
- * import * as o from 'tiinvo/option';
- * import * as num from 'tiinvo/num';
+ * import { Option, Number } from 'tiinvo';
  * 
- * const p = num.gt(1);
- * const f = o.filter(p);
+ * const p = Number.gt(1);
+ * const f = Option.filter(p);
  * 
  * f(1);    // null
  * f(2);    // 2
@@ -145,10 +150,9 @@ export const filter = <a>(f: f.predicateE<a>) => (value: a) => (isSome(value) &&
  * Maps an `option<a>` to another `option<b>` if is `some<a>`, otherwise returns none.
  * 
  * ```typescript
- * import * as o from 'tiinvo/option';
- * import * as num from 'tiinvo/num';
+ * import { Option, Number } from 'tiinvo';
  * 
- * const m = o.map(num.uadd(1));
+ * const m = Option.map(Number.uadd(1));
  * 
  * m(1);    // 2
  * m(null); // null
@@ -162,10 +166,9 @@ export const map = <a, b>(map: f.map<a, b>) => (value: option<a>) => isSome(valu
  * Maps an `option<a>` to another `option<b>` if is `some<a>`, otherwise returns `or`.
  * 
  * ```typescript
- * import * as o from 'tiinvo/option';
- * import * as num from 'tiinvo/num';
+ * import { Option, Number } from 'tiinvo';
  * 
- * const m = o.mapOr(0, num.uadd(2));
+ * const m = Option.mapOr(0, Number.uadd(2));
  * 
  * m(1);    // 3
  * m(null); // 0
@@ -181,10 +184,9 @@ export const mapOr = <a, b>(or: option<b>, map: f.map<a, b>) => (value: option<a
  * Maps an `option<a>` to another `option<b>` if is `some<a>`, otherwise calls `orElse`.
  * 
  * ```typescript
- * import * as o from 'tiinvo/option';
- * import * as num from 'tiinvo/num';
+ * import { Option, Number } from 'tiinvo';
  * 
- * const m = o.mapOrElse(() => 0, num.uadd(2));
+ * const m = Option.mapOrElse(() => 0, Number.uadd(2));
  * 
  * m(1);    // 3
  * m(null); // 0
@@ -200,15 +202,15 @@ export const mapOrElse = <a, b>(or: f.map<void, b>, map: f.map<a, b>) => (value:
  * Returns the boxed value if the option is `some`, otherwise throws an `Error`.
  * 
  * ```typescript
- * import * as o from 'tiinvo/option';
+ * import { Option } from 'tiinvo';
  * 
  * const x = 1
  * const y = null
  * const z = undefined
  * 
- * o.unwrap(x); // 1
- * o.unwrap(y); // throws Error
- * o.unwrap(z); // throws Error
+ * Option.unwrap(x); // 1
+ * Option.unwrap(y); // throws Error
+ * Option.unwrap(z); // throws Error
  * ```
  * 
  * @param value 
@@ -220,13 +222,13 @@ export const unwrap: f.unwrappable = value => isSome(value) ? value as any : (()
  * Returns the boxed value if the option is `some`, otherwise returns `or`.
  * 
  * ```typescript
- * import * as o from 'tiinvo/option';
+ * import { Option } from 'tiinvo';
  * 
  * const x = 1
  * const y = null
  * const z = undefined
  * 
- * const f = o.unwrapOr(0);
+ * const f = Option.unwrapOr(0);
  * 
  * f(x);    // 1
  * f(y);    // 0
@@ -242,13 +244,13 @@ export const unwrapOr: f.unwrappableOr = or => value => isSome(value) ? value : 
  * Returns the boxed value if the option is `some`, otherwise calls `orElse`.
  * 
  * ```typescript
- * import * as o from 'tiinvo/option';
+ * import { Option } from 'tiinvo';
  * 
  * const x = 1
  * const y = null
  * const z = undefined
  * 
- * const f = o.unwrapOrElse(() => 0);
+ * const f = Option.unwrapOrElse(() => 0);
  * 
  * f(x);    // 1
  * f(y);    // 0

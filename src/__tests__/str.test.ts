@@ -11,14 +11,14 @@ describe(`str`, () => {
     expect(s.bconcat('a', 'b')).toBe('ab');
   })
 
-  test(s.bincludes.name, () => {
-    expect(s.bincludes('hello', 'll')).toBe(true);
-    expect(s.bincludes('hello', 'x')).toBe(false);
+  test(s.includes.name, () => {
+    expect(s.includes('hello', 'll')).toBe(true);
+    expect(s.includes('hello', 'x')).toBe(false);
   })
 
-  test(s.bindexOf.name, () => {
-    expect(s.bindexOf('hello', 'l')).toBe(2);
-    expect(s.bindexOf('hello', 'x')).toBe(-1);
+  test(s.indexOf.name, () => {
+    expect(s.indexOf('hello', 'l')).toBe(2);
+    expect(s.indexOf('hello', 'x')).toBe(-1);
   })
 
   test(s.blastIndexOf.name, () => {
@@ -26,42 +26,42 @@ describe(`str`, () => {
     expect(s.blastIndexOf('hello', 'x')).toBe(-1);
   })
 
-  test(s.bmatch.name, () => {
-    expect(expect.arrayContaining(s.bmatch('hello', /l/)!)).toEqual(["l"]);
-    expect(s.bmatch('hello', /x/)).toBe(null);
+  test(s.match.name, () => {
+    expect(expect.arrayContaining(s.match('hello', /l/)!)).toEqual(["l"]);
+    expect(s.match('hello', /x/)).toBe(null);
   })
 
-  test(s.bpadend.name, () => {
-    expect(s.bpadend('1', 5)).toBe('1    ');
-    expect(s.bpadend('1', 5, 'x')).toBe('1xxxx');
+  test(s.padEnd.name, () => {
+    expect(s.padEnd('1', 5)).toBe('1    ');
+    expect(s.padEnd('1', 5, 'x')).toBe('1xxxx');
   })
 
-  test(s.bpadstart.name, () => {
-    expect(s.bpadstart('1', 5)).toBe('    1');
-    expect(s.bpadstart('1', 5, 'x')).toBe('xxxx1');
+  test(s.padstart.name, () => {
+    expect(s.padstart('1', 5)).toBe('    1');
+    expect(s.padstart('1', 5, 'x')).toBe('xxxx1');
   })
 
   test(s.brepeat.name, () => {
     expect(s.brepeat('1', 5)).toBe('11111');
   })
 
-  test(s.breplace.name, () => {
-    expect(s.breplace('hello', 'l', 'x')).toBe('hexlo');
-    expect(s.breplace('hello', 'x', 'l')).toBe('hello');
+  test(s.replace.name, () => {
+    expect(s.replace('hello', 'l', 'x')).toBe('hexlo');
+    expect(s.replace('hello', 'x', 'l')).toBe('hello');
   })
 
-  test(s.bsearch.name, () => {
-    expect(s.bsearch('hello', 'll')).toBe(2);
+  test(s.search.name, () => {
+    expect(s.search('hello', 'll')).toBe(2);
   })
 
-  test(s.bslice.name, () => {
-    expect(s.bslice('hello')).toBe('hello');
-    expect(s.bslice('hello', 2)).toBe('llo');
-    expect(s.bslice('hello', 1, 3)).toBe('el');
+  test(s.slice.name, () => {
+    expect(s.slice('hello')).toBe('hello');
+    expect(s.slice('hello', 2)).toBe('llo');
+    expect(s.slice('hello', 1, 3)).toBe('el');
   })
 
-  test(s.bsplit.name, () => {
-    expect(s.bsplit('hello', 'l')).toEqual(['he', '', 'o']);
+  test(s.split.name, () => {
+    expect(s.split('hello', 'l')).toEqual(['he', '', 'o']);
   })
 
   test(s.camel.name, () => {
@@ -137,12 +137,12 @@ describe(`str`, () => {
     expect(s.trim(' hello ')).toBe('hello');
   })
 
-  test(s.trimend.name, () => {
-    expect(s.trimend(' hello ')).toBe(' hello');
+  test(s.trimEnd.name, () => {
+    expect(s.trimEnd(' hello ')).toBe(' hello');
   })
 
-  test(s.trimstart.name, () => {
-    expect(s.trimstart(' hello ')).toBe('hello ');
+  test(s.trimStart.name, () => {
+    expect(s.trimStart(' hello ')).toBe('hello ');
   })
 
   test(s.uconcat.name, () => {
@@ -169,9 +169,9 @@ describe(`str`, () => {
     expect(s.umatch(/x/)('hello')).toBe(null);
   })
 
-  test(s.upadend.name, () => {
-    expect(s.upadend(5)('1')).toBe('1    ');
-    expect(s.upadend(5, 'x')('1')).toBe('1xxxx');
+  test(s.upadEnd.name, () => {
+    expect(s.upadEnd(5)('1')).toBe('1    ');
+    expect(s.upadEnd(5, 'x')('1')).toBe('1xxxx');
   })
 
   test(s.upadstart.name, () => {
