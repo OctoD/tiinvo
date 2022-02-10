@@ -1,45 +1,46 @@
-import * as Array from './array';
-import * as Boolean from './bool';
-import * as Date from './date';
+import * as Arr from './array';
+import * as Bool from './bool';
+import * as Dt from './date';
 import * as Either from './either';
 import type * as Fn from './fn';
-import * as Function from './function';
+import * as Func from './function';
 import type * as Functors from './functors';
 import * as Maybe from './maybe';
-import * as Number from './num';
-import * as Object from './obj';
+import * as Num from './num';
+import * as Obj from './obj';
 import * as Option from './option';
 import * as PipeAsync from './pipe.async';
 import * as Pipe from './pipe';
 import * as Predicate from './predicate';
-import * as Promise from './promise';
+import * as Prms from './promise';
 import * as Result from './result';
-import * as String from './str';
+import * as Str from './str';
 import * as Try from './try';
 import * as Tuple from './tuple';
 
 export {
-  Array,
-  Boolean as Bool,
-  Boolean,
-  Date,
+  Arr,
+  Arr as Array,
+  Bool,
+  Bool as Boolean,
+  Dt as Date,
   Either,
   Fn,
-  Function,
+  Func as Function,
   Functors,
   Maybe,
-  Number as Num,
-  Number,
-  Object as Obj,
-  Object,
+  Num,
+  Num as Number,
+  Obj,
+  Obj as Object,
   Option,
   PipeAsync,
   Pipe,
   Predicate,
-  Promise,
+  Prms as Promise,
   Result,
-  String as Str,
-  String,
+  Str,
+  Str as String,
   Try,
   Tuple,
 }
