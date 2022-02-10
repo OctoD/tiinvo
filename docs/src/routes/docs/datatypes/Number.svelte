@@ -1,13 +1,11 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+  import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
 </script>
 
-<svelte:head>
-  <title>tiinvo - docs - Number</title>
-  <meta name="description" content="Number methods" />
-</svelte:head>
+<PageTitle title="docs - Number" description="Number methods" />
 
 <h2>Number</h2>
 

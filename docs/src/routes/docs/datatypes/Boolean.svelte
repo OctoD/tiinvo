@@ -1,13 +1,11 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+  import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
 </script>
 
-<svelte:head>
-  <title>tiinvo - docs - Boolean</title>
-  <meta name="description" content="Boolean methods" />
-</svelte:head>
+<PageTitle title="docs - Boolean" description="Boolean methods" />
 
 <h2>Boolean</h2>
 

@@ -1,10 +1,13 @@
 <script>
   import HomepageClickableBox from "$lib/HomepageClickableBox.svelte";
+  import PageTitle from "$lib/PageTitle.svelte";
   import Version from "$lib/Version.svelte";
 
   const installcmd = `npm i tiinvo`;
   const copytoclipboard = () => navigator.clipboard.writeText(installcmd);
 </script>
+
+<PageTitle />
 
 <div
   class="fixed top-0 left-0 h-screen w-screen bg-slate-50 dark:bg-slate-900 z-50 flex flex-col justify-center"

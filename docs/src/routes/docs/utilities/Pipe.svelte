@@ -1,13 +1,11 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+  import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
 </script>
 
-<svelte:head>
-  <title>tiinvo - docs - Pipe</title>
-  <meta name="description" content="Pipe methods" />
-</svelte:head>
+<PageTitle title="docs - Pipe" description="Pipe" />
 
 <h2>Pipe</h2>
 

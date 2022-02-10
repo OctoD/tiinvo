@@ -1,7 +1,10 @@
 <script>
   import Doclink from "$lib/Doclink.svelte";
+  import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
 </script>
+
+<PageTitle title="docs" />
 
 <h1>Documentation</h1>
 <hr />
@@ -10,9 +13,7 @@
 
 <article>
   <h4>What is tiinvo?</h4>
-  <p>
-    tiinvo a library which aims to provide a standardized Javascript API.
-  </p>
+  <p>tiinvo a library which aims to provide a standardized Javascript API.</p>
   <p>It adds functions and new data types to the existing ones.</p>
 </article>
 

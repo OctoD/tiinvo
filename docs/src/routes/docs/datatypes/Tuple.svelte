@@ -1,13 +1,11 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+  import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
 </script>
 
-<svelte:head>
-  <title>tiinvo - docs - Tuple</title>
-  <meta name="description" content="Tuple methods" />
-</svelte:head>
+<PageTitle title="docs - Tuple" description="Tuple methods" />
 
 <h2>Tuple</h2>
 

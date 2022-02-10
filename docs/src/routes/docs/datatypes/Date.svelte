@@ -1,13 +1,11 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+  import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
 </script>
 
-<svelte:head>
-  <title>tiinvo - docs - Date</title>
-  <meta name="description" content="Date methods" />
-</svelte:head>
+<PageTitle title="docs - Date" description="Date methods" />
 
 <h2>Date</h2>
 

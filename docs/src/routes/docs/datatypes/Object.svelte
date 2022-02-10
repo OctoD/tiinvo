@@ -1,13 +1,11 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+import PageTitle from '$lib/PageTitle.svelte';
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
 </script>
 
-<svelte:head>
-  <title>tiinvo - docs - Object</title>
-  <meta name="description" content="Object methods" />
-</svelte:head>
+<PageTitle title="docs - Object" description="Object methods" />
 
 <h2>Object</h2>
 
