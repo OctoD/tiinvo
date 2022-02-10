@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="description" content="" />
+	<link rel="icon" href="%svelte.assets%/favicon.png" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js"></script>
+	<script src="https://prismjs.com/components/prism-typescript.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	%svelte.head%
+</head>
+
+<body class="bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+	<div>%svelte.body%</div>
+</body>
+<script>
+	if (localStorage.darkmode) {
+		document.querySelector(`html`).classList.add(`dark`)
+	}
+</script>
+</html>

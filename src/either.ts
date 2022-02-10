@@ -1,594 +1,541 @@
-import { ArgsOf, FnBase } from './applicative';
-import { totaggedFn } from "./cast";
-import { createderivefromfunction } from "./derivables";
-import { createFilter, createFilterOr } from "./filterables";
-import { createfold, createSwap } from "./foldables";
-import { createMap, createMapOr, createMapOrElse } from "./mappables";
-import { Predicate } from "./predicate";
-import { tagged, isTagged, isTaggedWith, Tagged } from "./tagged-type";
-import { anyof, combine, haskeyoftype, Typeguard } from "./typeguards";
-import {
-  createUnwrap,
-  createUnwrapOr,
-  createUnwrapOrElse,
-} from "./unwrappables";
-
-//#region types
-
-const LEFTTAG = "left";
-const RIGHTTAG = "right";
-
-/**
- * Left tagtype
- */
-export type LeftTagname = typeof LEFTTAG;
-/**
- * Right tagtype
- */
-export type RightTagname = typeof RIGHTTAG;
-/**
- * Left or Right tagtypes
- */
-export type EitherTagname = LeftTagname | RightTagname;
+import type * as f from './functors';
+import type * as o from './option';
 
 /**
  * Represents a value of one of two possible types (a disjoint union).
  */
-export interface Left<T = unknown> extends Tagged<T, LeftTagname> {}
-/**
- * Represents a value of one of two possible types (a disjoint union).
- */
-export interface Right<T = unknown> extends Tagged<T, RightTagname> {}
+export type left<a> = [a, o.none];
 
 /**
  * Represents a value of one of two possible types (a disjoint union).
  */
-export type Either<TLeft = unknown, TRight = unknown> =
-  | Left<TLeft>
-  | Right<TRight>;
-
-//#endregion
-
-//#region typeguards
-
-const hasleftag = isTaggedWith(LEFTTAG) as Typeguard<Left>;
-const hasrighttag = isTaggedWith(RIGHTTAG) as Typeguard<Right>;
-const haseithertag = anyof<Left | Right>(hasleftag, hasrighttag);
+export type right<b> = [o.none, b];
 
 /**
- * Checks if a variable is Either
+ * Represents a value of one of two possible types (a disjoint union).
  */
-export const isEither = combine<Either>(isTagged, haseithertag);
+export type either<l, r> = left<l> | right<r>;
 
 /**
- * Checks if a variable is Left
+ * Extracts `left<a>` type `a`
  */
-export const isLeft = combine<Left>(isTagged, hasleftag);
+export type leftType<a> = a extends either<infer b, any> ? b : null;
 
 /**
- * Checks if a variable is Right
+ * Extracts `right<a>` type `a`
  */
-export const isRight = combine<Right>(isTagged, hasrighttag);
+export type rightType<a> = a extends either<any, infer b> ? b : null;
 
 /**
- * Checks if a variable is Either with a value of a given type
- *
- * @example
- * ```ts
- * const test1 = left(10);
- * const test2 = right(10);
- * const iseitherofstring = isEitherOf(isstring);
- * const iseitherofnumber = isEitherOf(isnumber);
- *
- * iseitherofstring(test) // false
- * iseitherofnumber(test) // true
- * ```
- *
- * @template T
- * @param {Typeguard<T>} typeguard
- */
-export const isEitherOf = <T>(typeguard: Typeguard<T>) =>
-  combine(isEither, haskeyoftype("value", typeguard));
-
-/**
- * Checks if a variable is Left with a value of a given type
- *
- * @example
- * ```ts
- * const test1 = left(10);
- * const test2 = right(10);
- * const isleftofstring = isLeftOf(isstring);
- * const isleftofnumber = isLeftOf(isnumber);
- *
- * isleftofstring(test1) // false
- * isleftofstring(test2) // false
- * isleftofnumber(test1) // true
- * isleftofnumber(test2) // false
- * ```
- *
- * @template T
- * @param {Typeguard<T>} typeguard
- */
-export const isLeftOf = <T>(typeguard: Typeguard<T>) =>
-  combine(isLeft, haskeyoftype("value", typeguard));
-
-/**
- * Checks if a variable is Right with a value of a given type
- *
- * @example
- * ```ts
- * const test1 = left(10);
- * const test2 = right(10);
- * const isrightofstring = isRightOf(isstring);
- * const isrightofnumber = isRightOf(isnumber);
- *
- * isrightofstring(test1) // false
- * isrightofstring(test2) // false
- * isrightofnumber(test1) // false
- * isrightofnumber(test2) // true
- * ```
- *
- * @template T
- * @param {Typeguard<T>} typeguard
- */
-export const isRightOf = <T>(typeguard: Typeguard<T>) =>
-  combine(isRight, haskeyoftype("value", typeguard));
-
-//#endregion
-
-//#region factories
-
-/**
- * Creates a Left<T> type
- */
-export const left = <T>(value: T): Left<T> => tagged(value, LEFTTAG);
-
-/**
- * Creates a Right<T> type
- */
-export const right = <T>(value: T): Right<T> => tagged(value, RIGHTTAG);
-
-/**
- * Creates a Left<K> factory from a function (arg: T) => K
- */
-export const leftfromfn = totaggedFn(left);
-
-/**
- * Creates a Right<K> factory from a function (arg: T) => K
- */
-export const rightfromfn = totaggedFn(right);
-
-//#endregion
-
-//#region filterables
-
-/**
- * Filters only `Left<T>` values by a given `Predicate<T>`. 
+ * Checks if `a` is `left<unknown>`
  * 
- * If `Either<T>` is `Left<T>` and the `Predicate<T>` is not satisfied, 
- * it will return `Right<T>`
+ * ```typescript
+ * import { Either } from 'tiinvo';
  * 
- * @example
- * 
- * ```ts
- * import { either, num } from 'tiinvo';
- * 
- * const filter = either.filterLeft(num.iseven);
- * 
- * filter(either.left(10))   // Right<10>;
- * filter(either.left(9))    // Left<9>;
- * filter(either.right(5))   // Right<5>;
- * ```
- */
-export const filterLeft = createFilter<Either, EitherTagname>(
-  isLeft,
-  left,
-  right
-);
-
-/**
- * Similar to `filterLeft`, but it will return the fallback `or` if filtered.
- * 
- * @example
- * 
- * ```ts
- * import { either, num } from 'tiinvo';
- * 
- * const filter = either.filterLeftOr(either.left(10), num.lessthan(10));
- * 
- * filter(either.left(10))   // Left<10>
- * filter(either.left(11))   // Left<11>
- * filter(either.right(1))   // Right<1>
- * ```
- */
-export const filterLeftOr = createFilterOr<Either, EitherTagname>(isLeft, left);
-
-/**
- * Filters only `Right<T>` values by a given `Predicate<T>`. 
- * 
- * If `Either<T>` is `Right<T>` and the `Predicate<T>` is not satisfied, 
- * it will return `Left<T>`
- * 
- * @example
- * 
- * ```ts
- * import { either, num } from 'tiinvo';
- * 
- * const filter = either.filterRight(num.iseven);
- * 
- * filter(either.right(10))   // Left<10>;
- * filter(either.right(9))    // Right<9>;
- * filter(either.left(5))     // Left<5>;
+ * expect(Either.isLeft([1, null])).toBe(true);
+ * expect(Either.isLeft([null, 2])).toBe(false);
+ * expect(Either.isLeft([null, null])).toBe(false);
  * ```
  * 
+ * @param a Either to check
+ * @returns `true` if `a` is `left<unknown>`
+ * @since 3.0.0
  */
-export const filterRight = createFilter<Either, EitherTagname>(
-  isRight,
-  right,
-  left
-);
+export const isLeft = (a => Array.isArray(a) && a.length === 2 && a[0] !== undefined && a[0] !== null && (a[1] === undefined || a[1] === null)) as f.guard<left<unknown>>;
 
 /**
- * Similar to `filterRight`, but it will return the fallback `or` if filtered.
+ * Checks if `b` is `left<a>` if `b` is both `left` and it's value satisfies the `a` typeguard.
  * 
- * @example
+ * ```typescript
+ * import { Either, Num } from 'tiinvo';
  * 
- * ```ts
- * import { either, num } from 'tiinvo';
+ * const isnumleft = Either.isLeftOf(Num.guard);
  * 
- * const filter = either.filterRightOr(either.right(10), num.lessthan(10));
- * 
- * filter(either.right(50))   // Right<10>
- * filter(either.right(11))   // Right<10>
- * filter(either.left(1))     // Left<1>
+ * expect(isnumleft([1, null])).toBe(true);
+ * expect(isnumleft(["hello world", null])).toBe(false);
+ * expect(isnumleft([null, 2])).toBe(false);
+ * expect(isnumleft([null, null])).toBe(false);
  * ```
+ * 
+ * @param a The typeguard to check against
+ * @param b Either to check
+ * @returns `true` if `b` is `left<a>`
+ * @since 3.0.0
  */
-export const filterRightOr = createFilterOr<Either, EitherTagname>(
-  isRight,
-  right
-);
-
-//#endregion
-
-//#region foldables
+export const isLeftOf = <a>(a: f.guard<a>) => (b: unknown): b is left<a> => isLeft(b) && a(b[0]);
 
 /**
- * Folds current `Either<T>`. It accepts two arguments `L` or `FnUnary<T, L>` and `R` or `FnUnary<T, R>`.
+ * Checks if `a` is `right<unknown>`
  * 
- * If `Either<T>` is `Left<T>`, it will return `L` or call `FnUnary<T, L>`.
+ * ```typescript
+ * import { Either } from 'tiinvo';
  * 
- * If `Either<T>` is `Right<T>`, it will return `R` or call `FnUnary<T, R>`.
- * 
- * @example
- * 
- * ```ts
- * import { either } from 'tiinvo';
- * 
- * const unfold1 = either.fold('is left', 'is right');
- * const unfold2 = either.fold(() => 'is left', 'is right');
- * const unfold3 = either.fold('is left', () => 'is right');
- * const unfold4 = either.fold(() => 'is left', () => 'is right');
- * 
- * const test1 = either.left(10)
- * const test2 = either.right(10)
- * unfold1(test1) // 'is left'
- * unfold2(test1) // 'is left'
- * unfold3(test1) // 'is left'
- * unfold4(test1) // 'is left'
- * unfold1(test2) // 'is right'
- * unfold2(test2) // 'is right'
- * unfold3(test2) // 'is right'
- * unfold4(test2) // 'is right'
+ * expect(Either.isRight([null, 2])).toBe(true);
+ * expect(Either.isRight([1, null])).toBe(false);
+ * expect(Either.isRight([null, null])).toBe(false);
  * ```
  * 
+ * @param a Either to check
+ * @returns `true` if `a` is `right<unknown>`
+ * @since 3.0.0
  */
-export const fold = createfold<EitherTagname>(isLeft);
+export const isRight = (a => Array.isArray(a) && a.length === 2 && (a[0] === undefined || a[0] === null) && a[1] !== undefined && a[1] !== null) as f.guard<right<unknown>>;
 
 /**
- * Swaps `Left<T>` to `Right<T>` is `Either<T>` is `Left`, otherwise swaps `Right<T>` to `Left<T>` is `Either<T>` is `Right`
+ * Checks if `b` is `right<a>` if `b` is both `right` and it's value satisfies the `a` typeguard.
  * 
- * @example
+ * ```typescript
+ * import { Either, Number } from 'tiinvo';
  * 
- * ```ts
- * import { either } from 'tiinvo';
+ * const isnumRight = Either.isRightOf(Number.guard);
  * 
- * either.swap(either.left(10))  // Right<10>
- * either.swap(either.right(10)) // Left<10>
+ * expect(isnumright([null, 2])).toBe(true);
+ * expect(isnumright([1, null])).toBe(false);
+ * expect(isnumright([null, null])).toBe(false);
  * ```
+ * 
+ * @param a The typeguard to check against
+ * @param b Either to check
+ * @returns `true` if `b` is `right<a>`
+ * @since 3.0.0
  */
-export const swap = createSwap<LeftTagname, RightTagname>(isLeft, left, right);
-
-//#endregion
-
-//#region mappables
+export const isRightOf = <a>(a: f.guard<a>) => (b: unknown): b is right<a> => isRight(b) && a(b[1]);
 
 /**
- * Maps `Either<T>` to `Left<R>` if is `Left`, otherwise returns `Right<T>`.
+ * Checks if `a` is `either<unknown, unknown>`
  * 
- * @example
+ * ```typescript
+ * import { Either } from 'tiinvo';
  * 
- * ```ts
- * import { either, num } from 'tiinvo';
- * 
- * const mapleft = either.mapLeft(num.umultiply(2));
- * 
- * mapleft(either.left(5))   // Left<10>
- * mapleft(either.right(5))  // Right<5>
+ * expect(Either.isEither([1, null])).toBe(true);
+ * expect(Either.isEither([null, 2])).toBe(true);
+ * expect(Either.isEither([null, null])).toBe(false);
+ * expect(Either.isEither(`hello world`)).toBe(false);
  * ```
+ * 
+ * @param a Either to check
+ * @returns `true` if `a` is `either<unknown, unknown>`
+ * @since 3.0.0
  */
-export const mapLeft = createMap<Either, EitherTagname>(isLeft, left);
+export const guard = (a => isLeft(a) || isRight(a)) as f.guard<either<unknown, unknown>>;
 
 /**
- * Maps `Either<T>` to `Right<R>` if is `Right`, otherwise returns `Left<T>`.
+ * Checks if `c` is `either<a, b>` and if `c` is `left` checks if it's value satisfies the `a` typeguard, otherwise if it's `right` checks if it's value satisfies the `b` typeguard.
  * 
- * @example
+ * ```typescript
+ * import { Either, Number, String } from 'tiinvo';
  * 
- * ```ts
- * import { either, num } from 'tiinvo';
+ * const g = Either.guardOf(Number.guard, String.guard);
  * 
- * const mapright = either.mapRight(num.umultiply(2));
- * 
- * mapright(either.left(5))   // Left<5>
- * mapright(either.right(5))  // Right<10>
+ * expect(g([1, null])).toBe(true);
+ * expect(g([null, "hello world"])).toBe(true);
+ * expect(g([null, null])).toBe(false);
+ * expect(g([null, 1])).toBe(false);
+ * expect(g(["hello world", null])).toBe(false);
  * ```
+ * 
+ * @param a The typeguard to check against if `c` is left
+ * @param b The typeguard to check against if `c` is right
+ * @param c Either to check
+ * 
+ * @returns `true` if `c` is `either<a, b>` and if `c` is `left` checks if it's value satisfies the `a` typeguard, otherwise if it's `right` checks if it's value satisfies the `b` typeguard.
+ * @since 3.0.0
  */
-export const mapRight = createMap<Either, EitherTagname>(isRight, right);
+export const guardOf = <a, b>(a: f.guard<a>, b: f.guard<b>) => (c: unknown): c is either<a, b> => guard(c) && (isLeftOf(a)(c) || isRightOf(b)(c));
 
 /**
- * Maps `Either<T>` to `Left<R>` if is `Left`, otherwise returns `or` as `Left<T>`.
+ * Makes a `left<a>` from `a`
  * 
- * @example
+ * ```typescript
+ * import { Either } from 'tiinvo';
  * 
- * ```ts
- * import { either, num } from 'tiinvo';
- * 
- * const mapleftor = either.mapLeftOr(either.left(0), num.udivide(2));
- * 
- * mapleftor(either.left(10))    //  Left<5>
- * mapleftor(either.right(20))   //  Left<0>
+ * expect(Either.left(1)).toEqual([1, null]);
  * ```
+ * 
+ * @param a The value to make `left<a>`
+ * @returns `left<a>`
+ * @since 3.0.0
  */
-export const mapLeftOr = createMapOr<Either, EitherTagname>(isLeft, left);
+export const left = <a>(a: a): left<a> => [a, null];
 
 /**
- * Maps `Either<T>` to `Right<R>` if is `Right`, otherwise returns `or` as `Right<T>`
+ * Makes a `right<b>` from `b`
  * 
- * @example
+ * ```typescript
+ * import { Either } from 'tiinvo';
  * 
- * ```ts
- * import { either, num } from 'tiinvo';
- * 
- * const maprightor = either.mapRightOr(either.right(0), num.udivide(2));
- * 
- * maprightor(either.left(10))    //  Right<0>
- * maprightor(either.right(20))   //  Right<10>
+ * expect(Either.right(1)).toEqual([null, 1]);
  * ```
+ * 
+ * @param b The value to make `right<b>`
+ * @returns `right<b>`
  */
-export const mapRightOr = createMapOr<Either, EitherTagname>(isRight, right);
+export const right = <b>(b: b): right<b> => [null, b];
 
 /**
- * Maps `Either<T>` to `Left<R>` if is `Left`, otherwise calls `orfn` and returns `Left<T>`
+ * Compares two `either`s
  * 
- * @example
+ * ```typescript
+ * import { Either } from 'tiinvo';
  * 
- * ```ts
- * import { either, num, fallback, predicate } from 'tiinvo';
- * 
- * const m = either.mapLeftOrElse(
- *   fallback(false), 
- *   predicate.and(
- *     num.greaterthan(0), 
- *     num.lessthan(10)
- *   )
- * );
- * 
- * m(either.right(5))    // Left<false>
- * m(either.left(5))     // Left<true>
- * ```
- */
-export const mapLeftOrElse = createMapOrElse<Either, EitherTagname>(
-  isLeft,
-  left
-);
-
-/**
- * Maps `Either<T>` to `Right<R>` if is `Right`, otherwise calls `orfn` and returns `Right<T>`
- * 
- * @example
- * 
- * ```ts
- * import { either, num, fallback, predicate } from 'tiinvo';
- * 
- * const m = either.mapRightOrElse(
- *   fallback(false), 
- *   predicate.and(
- *     num.greaterthan(0), 
- *     num.lessthan(10)
- *   )
- * );
- * 
- * m(either.right(5))    // Right<true>
- * m(either.left(5))     // Right<false>
- * ```
- */
-export const mapRigthOrElse = createMapOrElse<Either, EitherTagname>(
-  isRight,
-  right
-);
-
-//#region unwrappables
-
-/**
- * Unwraps either `Left` or `Right`.
- *
- * @example
- * 
- * ```ts
- * import { either } from 'tiinvo';
- * 
- * either.unwrapEither(either.left(10)) // 10
- * either.unwrapEither(either.right(1)) // 1
- * ```
- */
-export const unwrapEither = createUnwrap(isEither, "");
-
-/**
- * Unwraps value if `Either` is `Left`, otherwise throws an error.
- *
- * @example
- * 
- * ```ts
- * import { either } from 'tiinvo';
- * 
- * either.unwrapLeft(left(10)) // 10
- * either.unwrapLeft(right(1)) // throws
- * ```
- */
-export const unwrapLeft = createUnwrap(
-  isLeft,
-  "Cannot unwrap Right, expected to be Left"
-);
-
-/**
- * Unwraps value if `Either` is `Right`, otherwise throws an error.
- *
- * @example
- * ```ts
- * import { either } from 'tiinvo';
- * 
- * either.unwrapRight(left(10)) // throws
- * either.unwrapRight(right(1)) // 1
- *
- * ```
- */
-export const unwrapRight = createUnwrap(
-  isRight,
-  "Cannot unwrap Left, expected to be Right"
-);
-
-/**
- * Unwraps `Left<T>` value `T` if `Either<T>` is `Left`, otherwise returns the fallback `T`.
- *
- * @example
- * ```ts
- * import { either } from 'tiinvo';
- * 
- * either.unwrapLeftOr(20)(left(10)) // 10
- * either.unwrapLeftOr(20)(right(1)) // 20
- * ```
- */
-export const unwrapLeftOr = createUnwrapOr(isLeft);
-
-/**
- * Unwraps `Right<T>` value `T` if `Either<T>` is `Right`, otherwise returns the fallback `T`.
- *
- * @example
- * ```ts
- * import { either } from 'tiinvo';
- * 
- * either.unwrapRightOr(20)(left(10)) // 20
- * either.unwrapRightOr(20)(right(1)) // 1
- * ```
- */
-export const unwrapRightOr = createUnwrapOr(isRight);
-
-/**
- * Unwraps `Left<T>` value `T` if `Either<T>` is `Left`, otherwise calls the fallback `FnNullary<T>`.
- *
- * @example
- * ```ts
- * import { either } from 'tiinvo';
- * 
- * either.unwrapLeftOrElse(fallback(20))(left(10)) // 10
- * either.unwrapLeftOrElse(fallback(30))(right(1)) // 30
- * ```
- */
-export const unwrapLeftOrElse = createUnwrapOrElse(isLeft);
-
-/**
- * Unwraps `Right<T>` value `T` if `Either<T>` is `Right`, otherwise calls the fallback `FnNullary<T>`.
- *
- * @example
- * ```ts
- * import { either } from 'tiinvo';
- * 
- * either.unwrapRightOrElse(fallback(20))(left(10)) // 20
- * either.unwrapRightOrElse(fallback(30))(right(1)) // 1
- * ```
- */
-export const unwrapRightOrElse = createUnwrapOrElse(isRight);
-
-//#endregion
-
-/**
- * Creates a new `Either<T>` from a given `Predicate<T>`. 
- * If the predicate is satisfied, it returns `Right<T>`, otherwise returns `Left<T>`
- *
- * @example
- * ```ts
- * import { either, num } from 'tiinvo';
- *
- * either.frompredicate(num.iseven)(20) // Right<20>
- * either.frompredicate(num.iseven)(11) // Left<11>
- * ```
- *
- * @template T
- * @param {Predicate<T>} predicate
- */
-export const frompredicate = <T>(predicate: Predicate<T>) => (arg: T) =>
-  predicate(arg) ? right(arg) : left(arg);
-
-/**
- * Wraps a function `FnUnary<A, T>`, and once called it returns a `Left<T>`
- * 
- * @example
- * 
- * ```ts
- * import { either, num } from 'tiinvo';
- * 
- * const fn = either.leftfromfunction(num.uadd(5));
- * 
- * fn(10) // Left<15>
- * ```
- */
-export const leftfromfunction = createderivefromfunction(left);
-
-/**
- * Wraps a function `FnUnary<A, T>`, and once called it returns a `Right<T>`
- * 
- * @example
- * 
- * ```ts
- * import { either, num } from 'tiinvo';
- * 
- * const fn = either.rightfromfunction(num.uadd(5));
- * 
- * fn(10) // Right<15>
- * ```
- */
-export const rightfromfunction = createderivefromfunction(right);
-
-/**
- * Wraps a function `FnUnary<A, T>` and if the given `Predicate<T>` is satisfied, returns `Right<T>`. Otherwise returns `Left<T>`.
- * 
- * @since 2.13.0
- * @example
- * 
- * ```ts
- * import { either, num } from 'tiinvo';
- * 
- * const fn = either.fromfunction(num.usubtract(1), num.iseven);
- * 
- * fn(10) // Left<9>
- * fn(11) // Right<10>
+ * expect(Either.cmp([1, null], [1, null])).toBe(0);
+ * expect(Either.cmp([1, null], [null, 1])).toBe(-1);
  * ```
  * 
- * @param fn 
- * @param predicate 
- * @returns 
+ * @param a The first `either` to compare
+ * @param b The second `either` to compare
+ * @returns `0` if `a` and `b` are equal, `-1` if `a` is less than `b`, `1` if `a` is greater than `b`
+ * @since 3.0.0
  */
-export const fromfunction = <Fn extends FnBase>(fn: Fn, predicate: Predicate<ReturnType<Fn>>) => (... args: ArgsOf<Fn>) => {
-  const value = fn(...args);
-  return predicate(value) ? right(value) : left(value);
-}
+export const cmp: f.comparableE<either<unknown, unknown>, either<unknown, unknown>> = (a, b) => {
+  const ga = guard(a);
+  const gb = guard(b);
   
+  if (ga && gb) {
+    const gla = isLeft(a);
+    const glb = isLeft(b);
+    const gra = isRight(a);
+    const grb = isRight(b);
+    
+    if (gla && glb) {
+      return a[0] === b[0] ? 0 : (a[0] as any) < (b[0] as any) ? -1 : 1;
+    } else if (gla && grb) {
+      return -1;
+    } else if (gra && glb) {
+      return 1;
+    } else {
+      return a[1] === b[1] ? 0 : (a[1] as any) < (b[1] as any) ? -1 : 1;
+    }
+  } else if (ga && !gb) {
+    return 1;
+  } else if (!ga && gb) {
+    return -1;
+  } else {
+    return 0;
+  }
+}
+
+/**
+ * Returns `true` if the value of two eithers are equal
+ * 
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * expect(Either.eq([1, null], [1, null])).toBe(true);
+ * expect(Either.eq([2, null], [1, null])).toBe(false);
+ * expect(Either.eq([1, null], [null, 1])).toBe(false);
+ * ```
+ * 
+ * @param a The first `either` to compare
+ * @param b The second `either` to compare
+ * @returns `true` if the value of two eithers are equal
+ * 
+ * @since 3.0.0
+ */
+export const eq: f.equatableE<either<unknown, unknown>> = (a, b) => cmp(a, b) === 0;
+
+/**
+ * Filters an `either<a, b>` if it's `left` by a given predicate `f`. 
+ * If the predicate returns `true` the `left<a>` is kept, otherwise it's dropped.
+ * 
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * expect(Either.filterLeft(a => a === 1)([1, null])).toEqual([1, null]);
+ * expect(Either.filterLeft(a => a === 2)([1, null])).toEqual([null, null]);
+ * ```
+ * 
+ * @param f The predicate to filter by
+ * @param a The `either<a, b>` to filter
+ * @returns `a` if `f` returns `true`, `left<a>` otherwise
+ * 
+ * @since 3.0.0
+ */
+export const filterLeft = <a>(f: f.predicateE<a>) => <b>(a: either<a, b>) => isLeft(a) && f(a[0]) ? [a[0], null] : [null, a[1]];
+
+/**
+ * Filters an `either<a, b>` if it's `right` by a given predicate `f`.
+ * If the predicate returns `true` the `right<b>` is kept, otherwise it's dropped.
+ * 
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * expect(Either.filterRight(a => a === 1)([null, 1])).toEqual([null, 1]);
+ * expect(Either.filterRight(a => a === 2)([null, 1])).toEqual([null, null]);
+ * ```
+ * 
+ * @param f The predicate to filter by
+ * @param a The `either<a, b>` to filter
+ * @returns `a` if `f` returns `true`, `right<b>` otherwise
+ * 
+ * @since 3.0.0
+ */
+export const filterRight = <a>(f: f.predicateE<a>) => <b>(a: either<b, a>) => isRight(a) && f(a[1]) ? [null, a[1]] : [a[0], null];
+
+/**
+ * Folds an `either<a, b>` into a single value `c` if it's either `left<a>` or `right<b>`, otherwise it's dropped.
+ * 
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * expect(Either.fold(a => a + 1, b => b * 2)([1, null])).toBe(2);
+ * expect(Either.fold(a => a + 1, b => b * 2)([null, 2])).toBe(4);
+ * ```
+ * 
+ * @param ml The `unary<a, c>` function to fold `left<a>` by
+ * @param mr The `unary<a, c>` function to fold `right<b>` by
+ * @param a The `either<a, b>` to fold
+ * @returns The folded value `c`
+ * 
+ * @since 3.0.0
+ */
+export const fold = <l, r, a>(ml: f.map<l, a>, mr: f.map<r, a>) => (a: either<l, r>) => {
+  if (guard(a)) {
+    return isLeft(a) ? ml(a[0]) : mr(a[1]);
+  }
+
+  throw new Error(`either.fold: either is neither left nor right`);
+}
+
+/**
+ * Maps a `left<a>` into a `left<b>` by a given mapper `f` if `left<a>`, otherwise it's dropped.
+ * 
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * expect(Either.mapLeft(a => a + 1)([1, null])).toEqual([2, null]);
+ * expect(Either.mapLeft(a => a + 1)([null, 2])).toEqual([null, null]);
+ * ```
+ * 
+ * @param f The mapper to map `left<a>` by
+ * @param a The `either<a, b>` to map `left<a>` by
+ * @returns The mapped `left<b>`
+ * 
+ * @since 3.0.0
+ */
+export const mapLeft = <a, b>(m: f.map<a, b>) => (a: either<a, unknown>): either<b, unknown> => isLeft(a) ? [m(a[0]), null] : [null, null];
+
+/**
+ * Maps a `left<a>` into a `left<b>` by a given mapper `f` if `left<a>`, otherwise returns a `left<b>` with the specified fallback value `or`.
+ * 
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * expect(Either.mapLeftOr(0, a => a + 1)([1, null])).toEqual([2, null]);
+ * expect(Either.mapLeftOr(0, a => a + 1)([null, 2])).toEqual([0, null]);
+ * ```
+ * 
+ * @param or The fallback value to map `left<a>` by
+ * @param f The mapper to map `left<a>` by
+ * @param a The `either<a, b>` to map `left<a>` by
+ * @returns The mapped `left<b>`
+ * 
+ * @since 3.0.0
+ */
+export const mapLeftOr = <a, b>(or: b, m: f.map<a, b>) => (a: either<a, unknown>) => isLeft(a) ? [m(a[0]), null] : [or, null];
+
+/**
+ * Maps a `left<a>` into a `left<b>` by a given mapper `f` if `left<a>`, otherwise calls `or` and returns a `left<b>` with the result.
+ * 
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * const or = () => 0;
+ * 
+ * expect(Either.mapLeftOrElse(or, a => a + 1)([1, null])).toEqual([2, null]);
+ * expect(Either.mapLeftOrElse(or, a => a + 1)([null, 2])).toEqual([0, null]);
+ * ```
+ * 
+ * @param or The fallback nullary function to map `left<a>` by
+ * @param f The mapper to map `left<a>` by
+ * @param a The `either<a, b>` to map `left<a>` by
+ * @returns The mapped `left<b>`
+ * 
+ * @since 3.0.0
+ */
+export const mapLeftOrElse = <a, b>(or: f.map<void, b>, m: f.map<a, b>) => (a: either<a, unknown>): either<b, unknown> => isLeft(a) ? [m(a[0]), null] : [or(), null];
+
+/**
+ * Maps a `right<a>` into a `right<b>` by a given mapper `f` if `right<a>`, otherwise it's dropped.
+ * 
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * expect(Either.mapRight(a => a + 1)([null, 2])).toEqual([null, 3]);
+ * expect(Either.mapRight(a => a + 1)([1, null])).toEqual([null, null]);
+ * ```
+ * 
+ * @param f The mapper to map `right<a>` by
+ * @param a The `either<a, b>` to map `right<a>` by
+ * @returns The mapped `right<b>`
+ * 
+ * @since 3.0.0
+ */
+export const mapRight = <a, b>(m: f.map<a, b>) => (a: either<unknown, a>): either<unknown, b> => isRight(a) ? [null, m(a[1])] : [null, null];
+
+/**
+ * Maps a `right<a>` into a `right<b>` by a given mapper `f` if `right<a>`, otherwise returns a `right<b>` with the specified fallback value `or`.
+ * 
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * expect(Either.mapRightOr(0, a => a + 1)([null, 2])).toEqual([null, 3]);
+ * expect(Either.mapRightOr(0, a => a + 1)([1, null])).toEqual([null, 0]);
+ * ```
+ * 
+ * @param or The fallback value to map `right<a>` by
+ * @param f The mapper to map `right<a>` by
+ * @param a The `either<a, b>` to map `right<a>` by
+ * @returns The mapped `right<b>`
+ * 
+ * @since 3.0.0
+ */
+export const mapRightOr = <a, b>(or: b, m: f.map<a, b>) => (a: either<unknown, a>): either<unknown, b> => isRight(a) ? [null, m(a[1])] : [null, or];
+
+/**
+ * Maps a `right<a>` into a `right<b>` by a given mapper `f` if `right<a>`, otherwise calls `or` and returns a `right<b>` with the result.
+ * 
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * const or = () => 0;
+ * 
+ * expect(Either.mapRightOrElse(or, a => a + 1)([null, 2])).toEqual([null, 3]);
+ * expect(Either.mapRightOrElse(or, a => a + 1)([1, null])).toEqual([null, 0]);
+ * ```
+ * 
+ * @param or The fallback nullary function to map `right<a>` by
+ * @param f The mapper to map `right<a>` by
+ * @param a The `either<a, b>` to map `right<a>` by
+ * @returns The mapped `right<b>`
+ * 
+ * @since 3.0.0
+ */
+export const mapRightOrElse = <a, b>(or: f.map<void, b>, m: f.map<a, b>) => (a: either<unknown, a>): either<unknown, b> => isRight(a) ? [null, m(a[1])] : [null, or()];
+
+/**
+ * Swaps the `left<a>` and `right<b>` of an `either<a, b>`.
+ * 
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * expect(Either.swap(Either.left('a'))).toEqual(Either.right('a'));
+ * expect(Either.swap(Either.right('b'))).toEqual(Either.left('b'));
+ * ```
+ * 
+ * @param a The `either<a, b>` to swap
+ * @returns The swapped `either<b, a>`
+ * 
+ * @since 3.0.0
+ */
+export const swap = <l, r>(either: either<l, r>): either<r, l> => isLeft(either) ? right(either[0]) : left(either[1]);
+
+/**
+ * Unwraps the `left<a>` of an `either<a, b>` if it's `left<a>`, otherwise throws.
+ * 
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * expect(Either.unwrapLeft(Either.left('a')).toBe('a');
+ * expect(() => Either.unwrapLeft(Either.right('b'))).toThrow();
+ * ```
+ * 
+ * @param a The `either<a, b>` to unwrap
+ * @returns The unwrapped `a`
+ * 
+ * @since 3.0.0
+ */
+export const unwrapLeft = <a>(a: either<a, unknown>): a | never => isLeft(a) ? a[0] : (() => { throw 'a is not left' })();
+
+/**
+ * Unwraps the `left<a>` of an `either<a, b>` if it's `left<a>`, otherwise returns the fallback value `or`.
+ * 
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * expect(Either.unwrapLeftOr('a', Either.right('b'))).toBe('a');
+ * expect(Either.unwrapLeftOr('a', Either.left('b'))).toBe('b');
+ * ```
+ * 
+ * @param or The fallback value to unwrap `left<a>` by
+ * @param a The `either<a, b>` to unwrap
+ * @returns The unwrapped `a` or the fallback value
+ * 
+ * @since 3.0.0
+ */
+export const unwrapLeftOr = <a>(or: a) => (a: either<a, unknown>) => isLeft(a) ? a[0] : or;
+
+/**
+ * Unwraps the `left<a>` of an `either<a, b>` if it's `left<a>`, otherwise calls `or` and returns the result.
+ * 
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * const or = () => 'a';
+ * 
+ * expect(Either.unwrapLeftOrElse(or, Either.right('b'))).toBe('a');
+ * expect(Either.unwrapLeftOrElse(or, Either.left('b'))).toBe('b');
+ * ```
+ * 
+ * @param or The fallback nullary function to unwrap `left<a>` by
+ * @param a The `either<a, b>` to unwrap
+ * @returns The unwrapped `a` or the result of `or`
+ * 
+ * @since 3.0.0
+ */
+export const unwrapLeftOrElse = <a>(or: f.map<void, a>) => (a: either<a, unknown>) => isLeft(a) ? a[0] : or();
+
+/**
+ * Unwraps the `right<b>` of an `either<a, b>` if it's `right<b>`, otherwise throws.
+ * 
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * expect(Either.unwrapRight(Either.right('b'))).toBe('b');
+ * expect(() => Either.unwrapRight(Either.left('a'))).toThrow();
+ * ```
+ * 
+ * @param a The `either<a, b>` to unwrap
+ * @returns The unwrapped `b`
+ * 
+ * @since 3.0.0
+ */
+export const unwrapRight = <a>(a: either<unknown, a>): a | never => isRight(a) ? a[1] : (() => { throw 'a is not right' })();
+
+/**
+ * Unwraps the `right<b>` of an `either<a, b>` if it's `right<b>`, otherwise returns the fallback value `or`.
+ *  
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * expect(Either.unwrapRightOr('b', Either.left('a'))).toBe('b');
+ * expect(Either.unwrapRightOr('b', Either.right('a'))).toBe('a');
+ * ```
+ * 
+ * @param or The fallback value to unwrap `right<b>` by
+ * @param a The `either<a, b>` to unwrap
+ * @returns The unwrapped `b` or the fallback value
+ * 
+ * @since 3.0.0
+ */
+export const unwrapRightOr = <a>(or: a) => (a: either<unknown, a>): a => isRight(a) ? a[1] : or;
+
+/**
+ * Unwraps the `right<b>` of an `either<a, b>` if it's `right<b>`, otherwise calls `or` and returns the result.
+ * 
+ * ```typescript
+ * import { Either } from 'tiinvo';
+ * 
+ * const or = () => 'b';
+ * 
+ * expect(Either.unwrapRightOrElse(or, Either.left('a'))).toBe('b');
+ * expect(Either.unwrapRightOrElse(or, Either.right('a'))).toBe('a');
+ * ```
+ * 
+ * @param or The fallback nullary function to unwrap `right<b>` by
+ * @param a The `either<a, b>` to unwrap
+ * @returns The unwrapped `b` or the result of `or`
+ * 
+ * @since 3.0.0
+ */
+export const unwrapRightOrElse = <a>(or: f.map<void, a>) => (a: either<unknown, a>): a => isRight(a) ? a[1] : or();

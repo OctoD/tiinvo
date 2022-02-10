@@ -5,23 +5,14 @@
 tiinvo
 =======
 
-[![Build Status](https://travis-ci.org/OctoD/tiinvo.svg?branch=master)](https://travis-ci.org/OctoD/tiinvo)
-[![Test Coverage](https://codecov.io/gh/octod/tiinvo/branch/master/graph/badge.svg)](https://codecov.io/gh/octod/tiinvo/branch/master)
-[![Bundle weight](https://badgen.net/bundlephobia/minzip/tiinvo)](https://bundlephobia.com/result?p=tiinvo)
-
-
-Lot of functions for tacit programming and functional types for TypeScript and JavaScript.
+A lib of types and utilities for your TypeScript and JavaScript projects
 
 - [tiinvo](#tiinvo)
 - [Install](#install)
 - [Usage](#usage)
   - [data types](#data-types)
-  - [predicates](#predicates)
+  - [predicate](#predicate)
   - [typeguards](#typeguards)
-  - [utilities](#utilities)
-  - [array functions](#array-functions)
-  - [primitives functions](#primitives-functions)
-- [Docs](#docs)
 - [Contributing](#contributing)
 - [Licence](#licence)
 
@@ -51,7 +42,7 @@ import { } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 tiinvo is a functional data types library. 
 
-It has several data types like `Option`, `Maybe`, `Result` and `Either`, each one is a `Tagged Type`.
+It has several data types like `option`, `maybe`, `result` and `either`.
 
 Option is used for values that can be possibly null or undefined.
 
@@ -62,42 +53,40 @@ Result is used to describe if a function return value is an error or is ok (safe
 Either is used to represents a value of one of two possible types (a disjoint union).
 
 It provides also utilities functions like `pipe` and `pipeasync` for tacit programming,
-`num`, `str`, `obj` functions, `predicates` functions and more.
+`num`, `str`, `obj` functions, `predicate` functions and more.
 
-## predicates
+## predicate
 
 tiinvo comes with a bunch of predicate utilities
 
 ```ts
-import { predicate } from 'tiinvo';
+import * as n from 'tiinvo/num';
+import * as p from 'tiinvo/predicate';
 
-const iseven = (arg: number) => arg % 2 === 0;
-const makeislessthan = (check: number) => (arg: number) => arg < check;
-const islessthan10 = makeislessthan(10);
-const isodd  =  predicate.reverse(iseven);
-const check1 =  predicate.fromvalue(1);
-const check2 =  predicate.fromvalue(2);
-const isevenandlessthan10 = predicate.and(iseven, islessthan10);
-const isevenorlessthan10 = predicate.or(iseven, islessthan10);
+// between 1 and 9
+const inrange = p.and(n.gt(0), n.lt(10))
+const outofrange = p.invert(inrange);
 
-check1(iseven)          // false
-check1(isodd)           // true
-check2(iseven)          // true
-check2(isodd)           // false
-isevenandlessthan10(6)  // true
-isevenandlessthan10(5)  // false
-isevenandlessthan10(12) // false
-isevenorlessthan10(12)  // true
-isevenorlessthan10(5)   // true
-isevenorlessthan10(13)  // false
+console.log(inrange(2)) // true
+console.log(inrange(0)) // false
+console.log(outofrange(0)) // true
+console.log(outofrange(2)) // false
 ```
 
 ## typeguards
 
 This library also makes complex typeguards building very easy.
 
+Each type module comes with a type `guard` function (or in some cases a `guardOf<a>` function).
+
+You are free to combine this functions to typecheck every value you want.
+
 ```ts
-import { isstring, isoptional, isnumber, isarrayof, implementing } from 'tiinvo';
+import * as obj from 'tiinvo/obj';
+import * as str from 'tiinvo/str';
+import * as num from 'tiinvo/num';
+import * as o from 'tiinvo/option';
+import * as array from 'tiinvo/array';
 
 export type UserArray = User[];
 
@@ -109,15 +98,15 @@ export interface User {
   nickname?: string;
 }
 
-export const isUser = implementing<User>({
-  age: isnumber,
-  email: isstring,
-  firstname: isstring,
-  lastname: isstring,
-  nickname: isoptional(isstring),
+export const isUser = obj.guardOf<User>({
+  age: num.guard,
+  email: str.guard,
+  firstname: str.guard,
+  lastname: str.guard,
+  nickname: o.guardOf(str.guard),
 });
 
-export const isUserArray = isarrayof(isUser);
+export const isUserArray = array.guardOf(isUser);
 
 const user000: User = {
   age: 22,
@@ -140,97 +129,6 @@ isUser(1000000)                 // false
 isUserArray([user000, user001]) // true
 isUserArray(['pizza', user001]) // false
 ```
-
-## utilities
-
-tiinvo also has some other utilities functions
-
-```ts
-import { fallback, fi, isnumber, option, pipe } from 'tiinvo';
-
-const numericoption = (arg: number): option.Option<number> => fi(isnumber(arg), option.option(arg), option.none());
-const multiplyby2 = (arg: number) => arg * 2;
-const unwraporelse = option.unwrapOrElse(fallback(0), fallback);
-const getmultipliedby2 = pipe(numericoption, multiplyby2, unwraporelse);
-
-getmultipliedby2('darn')      // 0
-getmultipliedby2(new Date())  // 0
-getmultipliedby2(5)           // 10
-getmultipliedby2(15)          // 30
-```
-
-## array functions
-
-tiinvo comes with some array functions, ideal for pipelines and for tacit programming.
-
-```ts
-import { array, pipe, num } from 'tiinvo';
-
-const filterevendoubles = pipe(
-  array.map(num.umultiply(2)),
-  array.filter(num.iseven),
-);
-
-filterevendoubles([ 1, 2, 3, 2.5, 3.75 ]) // [2, 4, 6]
-```
-
-## primitives functions
-
-tiinvo come with some everydays premade primitives functions. 
-
-```ts
-import { num, obj, str, pipe, predicate } from 'tiinvo';
-
-interface User {
-  firstname: string;
-  lastname: string;
-  birthdate: string;
-}
-
-const mapfirstname = obj.mapkey<User>('firstname');
-const maplastname = obj.mapkey<User>('lastname');
-const mapbirthdate = obj.mapkey<User>('birthdate');
-const maptodate = (arg: string) => new Date(arg);
-const mapdateyear = (date: Date) => date.getFullYear();
-
-export const isadult = pipe(
-  mapbirthdate,
-  maptodate,
-  mapdateyear,
-  num.usubtract(new Date().getFullYear()),
-  Math.abs,
-  num.greaterequalthan(18),
-);
-
-export const isvalidname = pipe(
-  str.trim,
-  str.length,
-  num.greaterequalthan(2),
-);
-
-export const isvalidfirstname = pipe(mapfirstname, isvalidname)
-export const isvalidlastname = pipe(maplastname, isvalidname)
-export const isvaliduser = predicate.and(isvalidfirstname, isvalidlastname, isadult);
-
-const testuser1: User = { firstname: 'John', lastname: 'Connor', birthdate: `1983-11-14` };
-const testuser2: User = { firstname: 'Lorem', lastname: 'Ipsum', birthdate: `2018-01-02` };
-const testuser3: User = { firstname: 'foo', lastname: '', birthdate: `2020-04-05` };
-
-isadult(testuser1) // true
-isadult(testuser2) // false
-isadult(testuser3) // false
-
-isvaliduser(testuser1) // true
-isvaliduser(testuser2) // false
-isvaliduser(testuser3) // false
-
-// etc...
-```
-
-
-# Docs
-
-Documentation is located [here](./docs/README.md)
 
 # Contributing
 

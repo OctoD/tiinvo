@@ -1,147 +1,134 @@
-import * as num from '../num';
+import * as n from '../num';
 
-describe(`num`, () => {
-  test('toExponential', () => {
-    expect(num.toExponential(2)(2)).toBe((2).toExponential(2));
-  })
-  test('toFixed', () => {
-    expect(num.toFixed(2)(2)).toBe((2).toFixed(2));
-  })
-  test('toPrecision', () => {
-    expect(num.toPrecision(2)(2)).toBe((2).toPrecision(2));
-  })
-  test('toString', () => {
-    expect(num.toString(2)(2)).toBe((2).toString(2));
-  })
-  test('equals', () => {
-    expect(num.equals(2)(2)).toBeTruthy();
-    expect(num.equals(2)(3)).toBeFalsy();
-  })
-  test('greaterthan', () => {
-    expect(num.greaterthan(2)(1)).toBeFalsy();
-    expect(num.greaterthan(2)(2)).toBeFalsy();
-    expect(num.greaterthan(2)(3)).toBeTruthy();
-  })
-  test('greaterequalthan', () => {
-    expect(num.greaterequalthan(2)(1)).toBeFalsy();
-    expect(num.greaterequalthan(2)(2)).toBeTruthy();
-    expect(num.greaterequalthan(2)(4)).toBeTruthy();
-  })
-  test('lessthan', () => {
-    expect(num.lessthan(2)(4)).toBeFalsy()
-    expect(num.lessthan(2)(2)).toBeFalsy()
-    expect(num.lessthan(2)(1)).toBeTruthy()
-  })
-  test('lessequalthan', () => {
-    expect(num.lessequalthan(2)(3)).toBeFalsy();
-    expect(num.lessequalthan(2)(2)).toBeTruthy();
-    expect(num.lessequalthan(2)(1)).toBeTruthy();
-  })
-  test('inrange', () => {
-    expect(num.inrange(2, 5)(1)).toBeFalsy();
-    expect(num.inrange(2, 5)(2)).toBeTruthy();
-    expect(num.inrange(2, 5)(3)).toBeTruthy();
-    expect(num.inrange(2, 5)(4)).toBeTruthy();
-    expect(num.inrange(2, 5)(5)).toBeTruthy();
-    expect(num.inrange(2, 5)(5.2)).toBeFalsy();
-  })
-  test('outofrange', () => {
-    expect(num.outofrange(2, 5)(1)).toBeTruthy();
-    expect(num.outofrange(2, 5)(2)).toBeFalsy();
-    expect(num.outofrange(2, 5)(3)).toBeFalsy();
-    expect(num.outofrange(2, 5)(4)).toBeFalsy();
-    expect(num.outofrange(2, 5)(5)).toBeFalsy();
-    expect(num.outofrange(2, 5)(5.2)).toBeTruthy();
-  })
-  test('iseven', () => {
-    expect(num.iseven(2)).toBeTruthy()
-  })
-  test('isodd', () => {
-    expect(num.isodd(2)).toBeFalsy()
-  })
-  test('uadd', () => {
-    expect(num.uadd(2)(2)).toBe(4);
-  })
-  test('udivide', () => {
-    expect(num.udivide(2)(4)).toBe(2);
-  })
-  test('umax', () => {
-    expect(num.umax(2)(1)).toBe(2);
-  })
-  test('umin', () => {
-    expect(num.umin(2)(4)).toBe(2);
-  })
-  test('umultiply', () => {
-    expect(num.umultiply(2)(2)).toBe(4);
-  })
-  test('upow', () => {
-    expect(num.upow(2)(3)).toBe(9);
-  })
-  test('uremainder', () => {
-    expect(num.uremainder(2)(2.5)).toBe(.5);
-  })
-  test('uroot', () => {
-    expect(num.uroot(2)(49)).toBe(7);
-  })
-  test('usubtract', () => {
-    expect(num.usubtract(2)(5)).toBe(3);
-  })
-  test('badd', () => {
-    expect(num.badd(2, 2)).toBe(4);
-  })
-  test('bdivide', () => {
-    expect(num.bdivide(4, 2)).toBe(2);
-  })
-  test('bmultiply', () => {
-    expect(num.bmultiply(2, 3)).toBe(6);
-  })
-  test('bmax', () => {
-    expect(num.bmax(2, 5)).toBe(5);
-  })
-  test('bmin', () => {
-    expect(num.bmin(2, 5)).toBe(2);
-  })
-  test('bpow', () => {
-    expect(num.bpow(2, 3)).toBe(8);
-  })
-  test('bremainder', () => {
-    expect(num.bremainder(2, 1.5)).toBe(.5);
-  })
-  test('broot', () => {
-    expect(num.broot(9, 2)).toBe(3);
-  })
-  test('bsubtract', () => {
-    expect(num.bsubtract(2, 2)).toBe(0);
-  })
-  test(`urandomint/brandomint/urandomfloat/brandomfloat`, () => {
-    const min = 2;
-    const max = 6;
-    const check = (value: number) => value >= min && value <= max;
-    const testfn = (value: number) => expect(check(value)).toBeTruthy();
-
-    testfn(num.urandomint(min)(max));
-    testfn(num.brandomint(min, max));
+describe('num', () => {
+  test(`guard`, () => {
+    expect(n.guard(10)).toBe(true);
+    expect(n.guard('10')).toBe(false);
   });
-  test(`brangeint/urangeint/urangeint2`, () => {
-    const expected = [0,1,2,3,4,5];
-    const first = num.brangeint(0, 5);
-    const second = num.urangeint(0)(5);
-    const third = num.urangeint2(5)(0);
-
-    const testfn = (arg: any) => expect(expect.arrayContaining(arg)).toEqual(expected);
-
-    testfn(first);
-    testfn(second);
-    testfn(third);
+  test(`cmp`, () => {
+    expect(n.cmp(10, 10)).toBe(0);
+    expect(n.cmp(10, 20)).toBe(-1);
+    expect(n.cmp(20, 10)).toBe(1);
+  });
+  test(`isEven`, () => {
+    expect(n.isEven(10)).toBe(true);
+    expect(n.isEven(20)).toBe(true);
+    expect(n.isEven(11)).toBe(false);
+  });
+  test(`isOdd`, () => {
+    expect(n.isOdd(10)).toBe(false);
+    expect(n.isOdd(20)).toBe(false);
+    expect(n.isOdd(11)).toBe(true);
   });
   test(`sortasc`, () => {
-    const test = [2, 1];
-    const expected = [1,2];
-    expect(expect.arrayContaining(test.sort(num.sortasc))).toEqual(expected);
-  })
+    const array = [10, 20, 30, 40, 50];
+    expect(expect.arrayContaining(array.sort(n.asc))).toEqual([10, 20, 30, 40, 50]);
+  });
   test(`sortdesc`, () => {
-    const test = [1,2];
-    const expected = [2, 1];
-    expect(expect.arrayContaining(test.sort(num.sortdesc))).toEqual(expected);
-  })
-});
+    const array = [10, 20, 30, 40, 50];
+    expect(expect.arrayContaining(array.sort(n.desc))).toEqual([50, 40, 30, 20, 10]);
+  });
+  test(`eq`, () => {
+    expect(n.eq(10)(10)).toBe(true);
+    expect(n.eq(10)(20)).toBe(false);
+  });
+  test(`ge`, () => {
+    expect(n.ge(10)(10)).toBe(true);
+    expect(n.ge(12)(10)).toBe(false);
+    expect(n.ge(10)(20)).toBe(true);
+  });
+  test(`gt`, () => {
+    expect(n.gt(10)(10)).toBe(false);
+    expect(n.gt(12)(10)).toBe(false);
+    expect(n.gt(10)(20)).toBe(true);
+  });
+  test(`le`, () => {
+    expect(n.le(10)(10)).toBe(true);
+    expect(n.le(12)(10)).toBe(true);
+    expect(n.le(10)(20)).toBe(false);
+  });
+  test(`lt`, () => {
+    expect(n.lt(10)(10)).toBe(false);
+    expect(n.lt(12)(10)).toBe(true);
+    expect(n.lt(10)(20)).toBe(false);
+  });
+  test(`ne`, () => {
+    expect(n.ne(10)(10)).toBe(false);
+    expect(n.ne(12)(10)).toBe(true);
+    expect(n.ne(10)(20)).toBe(true);
+  });
+  test(`toExponential`, () => {
+    expect(n.toExponential(10)).toBe('1e+1');
+  });
+  test(`toExponentialF`, () => {
+    expect(n.toExponentialF(2)(2)).toBe('2.00e+0');
+  });
+  test(`toFixed`, () => {
+    expect(n.toFixed(10)).toBe('10.00');
+  });
+  test(`toFixedF`, () => {
+    expect(n.toFixedF(3)(2)).toBe('2.000');
+  });
+  test(`toPrecision`, () => {
+    expect(n.toPrecision(10)).toBe('10');
+  });
+  test(`toPrecisionP`, () => {
+    expect(n.toPrecisionP(3)(2)).toBe('2.00');
+  });
+  test(`toString`, () => {
+    expect(n.toString(10)).toBe('10');
+  });
+  test(`toStringR`, () => {
+    expect(n.toStringR(32)(30)).toBe('u');
+  });
+  test(`uadd`, () => {
+    expect(n.uadd(10)(20)).toBe(30);
+  });
+  test(`udiv`, () => {
+    expect(n.udiv(10)(20)).toBe(2);
+  });
+  test(`umod`, () => {
+    expect(n.umod(10)(20)).toBe(0);
+  });
+  test(`umul`, () => {
+    expect(n.umul(10)(20)).toBe(200);
+  });
+  test(`upow`, () => {
+    expect(n.upow(2)(10)).toBe(100);
+  });
+  test(`urand`, () => {
+    expect(n.urand(10)(20)).toBeGreaterThanOrEqual(10);
+    expect(n.urand(10)(20)).toBeLessThan(20);
+  });
+  test(`uroot`, () => {
+    expect(n.uroot(2)(10)).toBe(3.1622776601683795);
+  });
+  test(`usub`, () => {
+    expect(n.usub(10)(20)).toBe(10);
+  });
+  test(`badd`, () => {
+    expect(n.badd(10, 20)).toBe(30);
+  });
+  test(`bdiv`, () => {
+    expect(n.bdiv(10, 20)).toBe(0.5);
+  });
+  test(`bmod`, () => {
+    expect(n.bmod(10, 20)).toBe(10);
+  });
+  test(`bmul`, () => {
+    expect(n.bmul(10, 20)).toBe(200);
+  });
+  test(`bpow`, () => {
+    expect(n.bpow(2, 10)).toBe(1024);
+  });
+  test(`brand`, () => {
+    expect(n.brand(10, 20)).toBeGreaterThanOrEqual(10);
+    expect(n.brand(10, 20)).toBeLessThan(20);
+  });
+  test(`broot`, () => {
+    expect(n.broot(2, 10)).toBe(1.0717734625362931);
+  });
+  test(`bsub`, () => {
+    expect(n.bsub(10, 20)).toBe(-10);
+  });
+})

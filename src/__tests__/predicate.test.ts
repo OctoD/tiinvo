@@ -1,61 +1,56 @@
-import * as predicate from "../predicate";
+import * as p from '../predicate';
 
-const gt = (value: number) => (arg: number) => arg > value;
-const lt = (value: number) => (arg: number) => arg < value;
+describe(`predicate`, () => {
+  test(`and`, () => {
+    const p1 = (a: string) => a.length > 4;
+    const p2 = (a: string) => a.length < 10;
+    const f = p.and(p1, p2);
 
-describe("predicate", () => {
-  it("fromvalues", () => {
-    const fm = predicate.fromvalues(1, 2, 3);
-    const test1 = gt(0);
-    const test2 = gt(2);
-
-    expect(fm(test1)).toBeTruthy();
-    expect(fm(test2)).toBeFalsy();
+    expect(f(``)).toBe(false);
+    expect(f(`hello`)).toBe(true);
+    expect(f(`hello world`)).toBe(false);
   });
 
-  it("noneof", () => {
-    const test = predicate.noneof(gt(10), lt(5));
+  test(`eq`, () => {
+    const f = p.eq(`hello`);
 
-    expect(test(6)).toBeTruthy();
-    expect(test(3)).toBeFalsy();
+    expect(f(``)).toBe(false);
+    expect(f(`hello`)).toBe(true);
+    expect(f(`hello world`)).toBe(false);
   });
 
-  it("withdifferentvalue", () => {
-    const test = predicate.withdifferentvalue(10);
+  test(`invert`, () => {
+    const f = p.invert(p.eq(`hello`));
 
-    expect(test(10)).toBeFalsy();
-    expect(test(5)).toBeTruthy();
+    expect(f(``)).toBe(true);
+    expect(f(`hello`)).toBe(false);
+    expect(f(`hello world`)).toBe(true);
   });
 
-  it(predicate.greaterthan.name, () => {
-    const fn = predicate.greaterthan(0);
+  test(`neq`, () => {
+    const f = p.neq(10);
 
-    expect(fn(10)).toBeTruthy();
-    expect(fn(0)).toBeFalsy();
-    expect(fn(-1)).toBeFalsy();
+    expect(f(5)).toBe(true);
+    expect(f(6)).toBe(true);
+    expect(f(10)).toBe(false);
+    expect(f(11)).toBe(true);
   });
 
-  it(predicate.greaterorequalthan.name, () => {
-    const fn = predicate.greaterorequalthan(0);
+  test(`noneof`, () => {
+    const f = p.noneof(p.eq(10), p.eq(11));
 
-    expect(fn(10)).toBeTruthy();
-    expect(fn(0)).toBeTruthy();
-    expect(fn(-1)).toBeFalsy();
+    expect(f(5)).toBe(true);
+    expect(f(6)).toBe(true);
+    expect(f(10)).toBe(false);
+    expect(f(11)).toBe(false);
   });
 
-  it(predicate.lessthan.name, () => {
-    const fn = predicate.lessthan(0);
+  test(`or`, () => {
+    const f = p.or(p.eq(10), p.eq(11));
 
-    expect(fn(10)).toBeFalsy();
-    expect(fn(0)).toBeFalsy();
-    expect(fn(-1)).toBeTruthy();
-  });
-
-  it(predicate.lessorequalthan.name, () => {
-    const fn = predicate.lessorequalthan(0);
-
-    expect(fn(10)).toBeFalsy();
-    expect(fn(0)).toBeTruthy();
-    expect(fn(-1)).toBeTruthy();
-  });
-});
+    expect(f(5)).toBe(false);
+    expect(f(6)).toBe(false);
+    expect(f(10)).toBe(true);
+    expect(f(11)).toBe(true);
+  })
+})

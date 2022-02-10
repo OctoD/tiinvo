@@ -7,6 +7,9 @@ benchmarks
 # docs dir
 docs
 
+# examples dir
+docs
+
 # source dir
 src
 
@@ -19,6 +22,7 @@ jest.config.js
 rollup.config.js
 tsconfig.build.json
 tsconfig.json
+scripts
 
 # social stuff
 logo.png

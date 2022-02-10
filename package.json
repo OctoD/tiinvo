@@ -1,93 +1,40 @@
 {
   "name": "tiinvo",
-  "version": "2.21.0",
+  "version": "3.0.11",
   "author": "Paolo Roth <octod>",
   "license": "MIT",
-  "description": "Lot of functions for tacit programming and functional types for TypeScript and JavaScript.",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.mjs",
-  "types": "dist/cjs/index.d.ts",
-  "esnext": "dist/esm/index.mjs",
+  "description": "A lib of types and utilities for your TypeScript and JavaScript projects",
+  "types": "./index.d.ts",
+  "main": "./index.js",
+  "module": "./index.mjs",
   "keywords": [
     "functional programming",
-    "tacit programming",
-    "functional",
-    "tacit",
-    "functional utilities",
-    "array functions",
-    "string functions",
-    "object functions",
-    "number functions",
-    "octod",
-    "option",
-    "number",
-    "string",
-    "object",
-    "tagged type",
-    "tagged types",
-    "pipe",
-    "predicate",
-    "typeguards",
-    "result",
-    "try catch",
-    "typescript"
+    "functions",
+    "utility"
   ],
   "scripts": {
-    "benchmarks": "ts-node .src/benchmarks",
-    "changelog": "standard-changelog --first-release",
-    "docs:serve": "docsify serve docs -p 12345",
-    "lint": "eslint -c ./.eslintrc.json src/**/*.ts --fix",
-    "prepublishOnly": "rimraf dist && rollup -c ./rollup.config.js",
+    "build": "tsc -p . && tsc -p ./tsconfig.commonjs.json && node scripts/rename.js && node scripts/copy.js",
+    "changelog": "npx standard-changelog --first-release",
+    "clean": "tsc --build --clean && node scripts/clean.js",
     "test": "jest",
-    "upgrade-interactive": "npm-check --update"
+    "build:docs": "npm --prefix docs run build",
+    "dev:docs": "npm --prefix docs run dev",
+    "deploy": "npm test && npm run clean && npm run build && cd dist && npm publish && cd .. && npm run clean",
+    "upgrade-interactive": "npx npm-check --update"
   },
   "homepage": "https://tiinvo.netlify.app",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/octod/tiinvo.git"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.{ts,tsx,js,jsx}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "docsify": {
-    "config": {
-      "basePath": "https://docsify.js.org/",
-      "loadSidebar": true,
-      "loadNavbar": true,
-      "coverpage": true,
-      "name": "docsify"
-    }
-  },
   "devDependencies": {
     "@types/benchmark": "^2.1.0",
-    "@types/jest": "^26.0.20",
-    "@types/node": "^14.14.28",
-    "@typescript-eslint/eslint-plugin": "^4.15.0",
-    "@typescript-eslint/parser": "^4.15.0",
-    "benchmark": "2.1.4",
-    "codecov": "^3.8.1",
-    "docsify-cli": "^4.4.3",
-    "eslint": "^7.20.0",
-    "husky": "^5.0.9",
-    "jest": "^26.6.3",
-    "lint-staged": "^10.5.4",
-    "npm-check": "^5.9.2",
-    "prettier": "^2.2.1",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.44.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.30.0",
+    "@types/jest": "^27.0.3",
+    "@types/node": "^17.0.5",
+    "jest": "^27.4.5",
     "standard-changelog": "^2.0.27",
-    "ts-jest": "^26.5.1",
-    "ts-node": "^9.1.1",
+    "ts-jest": "^27.1.2",
+    "ts-node": "^10.4.0",
     "typescript": "^4.1.5"
   }
 }

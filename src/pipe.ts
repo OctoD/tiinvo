@@ -1,36 +1,36 @@
-type AsChain<
-  F extends [FuncType, ...FuncType[]],
-  G extends FuncType[] = Tail<F>
+type asChain<
+  f extends [funcType, ...funcType[]],
+  g extends funcType[] = tail<f>
 > = {
-  [K in keyof F]: (arg: ArgType<F[K]>) => ArgType<Lookup<G, K, any>, any>;
+  [k in keyof f]: (arg: argType<f[k]>) => argType<lookup<g, k, any>, any>;
 };
 
-type ArgType<F, Else = never> = F extends (arg: infer A) => any ? A : Else;
+type argType<F, Else = never> = F extends (arg: infer A) => any ? A : Else;
 
-type FuncType = (arg: any) => any;
+type funcType = (arg: any) => any;
 
-type LastIndexOf<T extends any[]> = ((...x: T) => void) extends (
+type lastIndexOf<a extends any[]> = ((...x: a) => void) extends (
   y: any,
-  ...z: infer U
+  ...z: infer b
 ) => void
-  ? U["length"]
+  ? b["length"]
   : never;
 
-type Lookup<T, K extends keyof any, Else = never> = K extends keyof T
-  ? T[K]
-  : Else;
+type lookup<t, k extends keyof any, el = never> = k extends keyof t
+  ? t[k]
+  : el;
 
-type Tail<T extends any[]> = ((...t: T) => void) extends (
+type tail<a extends any[]> = ((...t: a) => void) extends (
   x: any,
-  ...u: infer U
+  ...u: infer b
 ) => void
-  ? U
+  ? b
   : never;
 
-type Pipe = <F extends [((arg: any) => any | (() => any)), ...Array<(arg: any) => any>]>(
-  ...f: F & AsChain<F>
+type pipe = <f extends [((arg: any) => any | (() => any)), ...Array<(arg: any) => any>]>(
+  ...f: f & asChain<f>
 ) => 
-F[0] extends () => any ? () => ReturnType<F[LastIndexOf<F>]> : F[0] extends (arg: infer U) => any ? (arg: U) => ReturnType<F[LastIndexOf<F>]> : never;
+f[0] extends () => any ? () => ReturnType<f[lastIndexOf<f>]> : f[0] extends (arg: infer U) => any ? (arg: U) => ReturnType<f[lastIndexOf<f>]> : never;
 
 // (arg: ArgType<F[0]>) => ReturnType<F[LastIndexOf<F>]>;
 
@@ -39,22 +39,25 @@ F[0] extends () => any ? () => ReturnType<F[LastIndexOf<F>]> : F[0] extends (arg
  *
  * @example
  * ```ts
- * import { pipe, num, maybe } from 'tiinvo';
+ * import { Pipe, Number, Maybe } from 'tiinvo/pipe';
  * 
  * const piped = pipe(
- *    num.uadd(10), 
- *    num.umultiply(2), 
- *    maybe.fromfunction(num.iseven), 
- *    maybe.fold(`odd`, `even`),
+ *    Number.uadd(10), 
+ *    Number.umultiply(2), 
+ *    Number.iseven, 
+ *    Maybe.mapOrElse(() => 'odd', () => 'even'),
  * );
  * 
- * piped(2); // 24
+ * piped(2); // `even`
+ * piped(1); // `even`
  * ```
  *
  * @param {Array<(... args: any[]) => any>} args
  * @returns
  */
-export const pipe: Pipe = (...args) => {
+export const pipe: pipe = (...args) => {
   const [first, ...othersFns] = args;
   return ((arg: unknown) => othersFns.reduce((retval, fn) => fn(retval), first(arg))) as any;
 };
+
+export default pipe;

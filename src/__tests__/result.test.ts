@@ -1,103 +1,79 @@
-import { fallback } from "../applicative";
-import { pipe } from "../pipe";
-import * as result from "../result";
-import { isnumber } from '../typeguards';
+import * as r from '../result';
 
-describe("result", () => {
-  it("result", () => {
-    const tobeok = result.result(10);
-    const tobeerr = result.result(new Error(""));
-
-    expect(result.isOk(tobeok)).toBeTruthy();
-    expect(result.isErr(tobeerr)).toBeTruthy();
+describe(`result`, () => {
+  test(`checks if is ok or err`, () => {
+    expect(r.isOk(10)).toBe(true);
+    expect(r.isOk(Error)).toBe(true);
+    expect(r.isOk(new Error())).toBe(false);
+    expect(r.isErr(new Error())).toBe(true);
+    expect(r.isErr(Error)).toBe(false);
   });
 
-  it(`isOkOf`, () => {
-    const isnumok = result.isOkOf(isnumber);
-    
-    expect(isnumok(result.err(`nope`))).toBe(false);
-    expect(isnumok(result.ok(`nope2`))).toBe(false);
-    expect(isnumok(result.ok(1000000))).toBe(true);
+  test(`isResultOf`, () => {
+    const g = (x: unknown): x is number => typeof x === 'number';
+    const gof = r.isResultOf(g);
+
+    expect(gof(10)).toBe(true);
+    expect(gof(Error)).toBe(false);
+    expect(gof(new Error())).toBe(true);
+    expect(gof('hello')).toBe(false);
   })
 
-  it("filter", () => {
-    const test = result.filter((arg: number) => arg >= 0);
-    const positive = result.ok(10);
-    const negative = result.ok(-1);
+  test(`comparables`, () => {
+    expect(r.cmp(10, 20)).toBe(-1);
+    expect(r.cmp(20, 10)).toBe(1);
+    expect(r.cmp(10, 10)).toBe(0);
+    expect(r.cmp(10, new Error())).toBe(0);
+    expect(r.cmp(new Error(), 10)).toBe(0);
+    expect(r.cmp(new Error(), new TypeError())).toBe(0);
 
-    expect(result.isOk(test(positive))).toBeTruthy();
-    expect(result.isErr(test(negative))).toBeTruthy();
+  })
+
+  test(`equatables`, () => {
+    expect(r.eq(20, 20)).toBe(true);
+    expect(r.eq(new Error(), new TypeError())).toBe(true);
+    expect(r.eq(new Error(), new Error())).toBe(true);
+    expect(r.eq(10, 20)).toBe(false);
+  })
+
+  test(`filter`, () => {
+    const filterfn = (arg: number) => arg > 0;
+    const filter = r.filter(filterfn);
+    const e = new TypeError('hello');
+
+    expect(filter(10)).toBe(10);
+    expect(filter(0)).toEqual(new Error(`0 is not ok`));
+    expect(filter(e)).toEqual(e);
   });
 
-  it(`filter example`, () => {
-    const iseven = (arg: number) => arg % 2 === 0;
+  test(`mappables`, () => {
+    const mapfn = (s: string) => s.length;
+    const map = r.map(mapfn);
+    const mapor = r.mapOr(0, mapfn);
+    const maporelse = r.mapOrElse(() => 0, mapfn);
+    
+    const ok = 'hello';
+    const err = new Error();
 
-    const filterfn = pipe(
-      result.result as result.InferredResultFactory<number>,
-      result.filter(iseven),
-      result.isOk
-    );
+    expect(map(ok)).toBe(5);
+    expect(map(err)).toBe(err);
+    expect(mapor(ok)).toBe(5);
+    expect(mapor(err)).toBe(0);
+    expect(maporelse(ok)).toBe(5);
+    expect(maporelse(err)).toBe(0);
+  })
 
-    expect(filterfn(4)).toBeTruthy();
-    expect(filterfn(3)).toBeFalsy();
-  });
-
-  it(`filterOr example`, () => {
-    const iseven = (arg: number) => arg % 2 === 0;
-
-    const filterfn = pipe(
-      result.result as result.InferredResultFactory<number>,
-      result.filterOr(result.ok(0), iseven),
-      result.unwrap
-    );
-
-    expect(filterfn(4)).toBe(4);
-    expect(filterfn(3)).toBe(0);
-  });
-
-  it(`map example`, () => {
-    const evenorerror = (arg: number) =>
-      arg % 2 === 0 ? arg : new Error("argument must be an even number");
-    const double = (arg: number) => arg * 2;
-
-    const handleerror = pipe(
-      result.fromfunction(evenorerror),
-      result.map(double),
-      result.unwrapOr(0)
-    );
-
-    expect(handleerror(2)).toBe(4);
-    expect(handleerror(1)).toBe(0);
-  });
-
-  it("mapOr example", () => {
-    const evenorerror = (arg: number) =>
-      arg % 2 === 0 ? arg : new Error("argument must be an even number");
-    const double = (arg: number) => arg * 2;
-
-    const handleerror = pipe(
-      result.fromfunction(evenorerror),
-      result.mapOr(result.ok(0), double),
-      result.unwrap
-    );
-
-    expect(handleerror(2)).toBe(4);
-    expect(handleerror(1)).toBe(0);
-  });
-
-  it("mapOrElse example", () => {
-    const evenorerror = (arg: number) =>
-      arg % 2 === 0 ? arg : new Error("argument must be an even number");
-    const double = (arg: number) => arg * 2;
-    const elsefn = fallback(0);
-
-    const handleerror = pipe(
-      result.fromfunction(evenorerror),
-      result.mapOrElse(elsefn, double),
-      result.unwrap
-    );
-
-    expect(handleerror(2)).toBe(4);
-    expect(handleerror(1)).toBe(0);
-  });
-});
+  test(`unwrappables`, () => {
+    const ok = 'hello' as r.result<string>;
+    const err = new Error();
+    const or = `world` as r.result<string>;
+    const orElse = () => or;
+    
+    expect(r.unwrap(ok)).toBe(ok);
+    expect(() => r.unwrap(err)).toThrow();
+    expect(r.unwrapOr(or)(ok)).toBe(ok);
+    expect(r.unwrapOr(or)(err)).toBe(or);
+    expect(r.unwrapOrElse(orElse)(ok)).toBe(ok);
+    expect(r.unwrapOrElse(orElse)(err)).toBe(or);
+  })
+})

@@ -1,352 +1,264 @@
-import { ArgsOf, check, FnUnary } from "./applicative";
-import { createExpect } from "./assertables";
-import { totaggedFn } from "./cast";
-import { createderivefromfunction } from "./derivables";
-import { createFilter, createFilterOr } from "./filterables";
-import { createMap, createMapOr, createMapOrElse } from "./mappables";
-import { isTagged, isTaggedWith, tagged, Tagged } from "./tagged-type";
-import * as typeguardsTs from "./typeguards";
-import {
-  createUnwrap,
-  createUnwrapOr,
-  createUnwrapOrElse,
-} from "./unwrappables";
+import type * as f from './functors';
 
-//#region types
-
-const NONETAG = "none";
-const SOMETAG = "some";
-
+export type some<a = unknown> = a extends null | undefined ? none : a;
 /**
- *
+ * none represents a value that is not present.
+ * Unfortunately in javascript, null and undefined are not the same thing, 
+ * but we can use them interchangeably within the option type.
+ * @since 3.0.0
  */
-export type Nonetag = typeof NONETAG;
+export type none = null | undefined;
 /**
- *
+ * The type `option<a>` represents a value that could be both `a` or `null` or `undefined`.
+ * @since 3.0.0
  */
-export type Sometag = typeof SOMETAG;
-/**
- *
- */
-export type Optiontag = Nonetag | Sometag;
+export type option<a = unknown> = some<a> | none;
 
 /**
- *
- */
-export interface None extends Tagged<any, Nonetag> {}
-
-/**
- *
- */
-export interface Some<T = unknown> extends Tagged<NonNullable<T>, Sometag> {}
-
-/**
- *
- */
-export type Option<T = unknown> = None | Some<T>;
-
-/**
- *
- */
-export type NoneFactory = () => None;
-/**
- *
- */
-export type SomeFactory = <T>(value: T) => Some;
-/**
- *
- */
-export type OptionFactory = <T>(value: T) => Option<T>;
-
-//#endregion
-
-//#region typeguards
-
-const hasnonetag = isTaggedWith(NONETAG) as typeguardsTs.Typeguard<None>;
-const hassometag = isTaggedWith(SOMETAG) as typeguardsTs.Typeguard<Some>;
-const hasoptiontag = typeguardsTs.anyof<Option>(hasnonetag, hassometag);
-
-/**
- * Checks if a value is `Option<unknown>`
+ * Returns `true` if the option is `none`, `false` otherwise.
  * 
- * @example
+ * ```typescript
+ * import { Option } from 'tiinvo';
  * 
- * ```ts
- * import { option } from 'tiinvo';
- * 
- * option.isOption(option.option(10))  // true
- * option.isOption(option.some(10))    // true
- * option.isOption(option.none())      // true
- * option.isOption(10)                 // false
- * option.isOption({ __tag: 'foo' })   // false
+ * Option.isNone(1); // false
+ * Option.isNone(null); // true
+ * Option.isNone(undefined); // true
  * ```
+ * @param value 
+ * @returns 
+ * @since 3.0.0
  */
-export const isOption = typeguardsTs.combine<Option>(isTagged, hasoptiontag);
+export const isNone = (value: unknown): value is none => value === null || value === undefined;
 /**
- * Checks if a value is `None`
+ * Returns `true` if the option is `some`, `false` otherwise.
  * 
- * @example
+ * ```typescript
+ * import { Option } from 'tiinvo';
  * 
- * ```ts
- * import { option } from 'tiinvo';
+ * const x = 1
+ * const y = null
+ * const z = undefined
  * 
- * option.isNone(option.option(10))          // false
- * option.isNone(option.option(undefined))   // true
- * option.isNone(option.some(10))            // false
- * option.isNone(option.none())              // true
- * option.isNone(10)                         // false
- * option.isNone({ __tag: 'foo' })           // false
+ * Option.isSome(1); // true
+ * Option.isSome(null); // false
+ * Option.isSome(undefined); // false
  * ```
+ * 
+ * @param value 
+ * @returns 
+ * @since 3.0.0
  */
-export const isNone = typeguardsTs.combine<None>(isTagged, hasnonetag);
+export const isSome = (value: unknown): value is some<unknown> => value !== null && value !== undefined;
 /**
- * Checks if a value is `Some<unknown>`
+ * Returns `true` if the option is `some` and the value type is satisfied by the guard, otherwise `false`.
  * 
- * @example
+ * If the option is `none`, it will always return `true`.
  * 
- * ```ts
- * import { option } from 'tiinvo';
+ * ```typescript
+ * import { Option } from 'tiinvo';
+ * import * as num from 'tiinvo/num';
  * 
- * option.isSome(option.option(10))          // true
- * option.isSome(option.option(undefined))   // false
- * option.isSome(option.some(10))            // true
- * option.isSome(option.none())              // false
- * option.isSome(10)                         // false
- * option.isSome({ __tag: 'foo' })           // false
+ * const x = 1
+ * const y = null
+ * const z = undefined
+ * const w = `a`
+ * 
+ * const isnumsome = Option.isOptionOf(num.guard);
+ * 
+ * isnumsome(x); // true
+ * isnumsome(y); // true
+ * isnumsome(z); // true
+ * isnumsome(w); // false
+ * 
  * ```
+ * @param guard 
+ * @returns 
+ * @since 3.0.0
  */
-export const isSome = typeguardsTs.combine<Some>(isTagged, hassometag);
+export const isOptionOf = <a>(guard: f.guard<a>) => (value: unknown): value is option<a> => isSome(value) ? guard(value) : true;
 /**
- * Checks if a value is `Option<T>`
+ * Compares two options for equality.
  * 
- * @example
+ * ```typescript
+ * import { Option } from 'tiinvo';
  * 
- * ```ts
- * import { option, isstring } from 'tiinvo';
+ * const x = 1
+ * const y = null
+ * const z = undefined
  * 
- * const isstringoption = option.isOptionOf(isstring);
- * 
- * isstringoption(option.option(10))           // false
- * isstringoption(option.option('foo'))        // true
- * isstringoption(option.option({ }))          // false
- * isstringoption(option.option(undefined))    // false
+ * Option.cmp(x, y); // 1
+ * Option.cmp(x, z); // 1
+ * Option.cmp(y, z); // 0
+ * Option.cmp(x, x); // 0
  * ```
+ * @param a 
+ * @param b 
+ * @returns 
+ * @since 3.0.0
  */
-export const isOptionOf = <T>(typeguard: typeguardsTs.Typeguard<T>) =>
-  typeguardsTs.combine<Option<T>>(
-    isOption,
-    typeguardsTs.haskeyoftype("value", typeguard)
-  );
-
-//#endregion
-
-//#region assertables
-
+export const cmp: f.comparable = <a, b>(a: a, b: b): -1 | 0 | 1 => {
+  if (isNone(a) && isNone(b)) {
+    return 0;
+  } else if (isNone(a)) {
+    return -1;
+  } else if (isNone(b)) {
+    return 1;
+  } else {
+    return a as any > b ? 1 : a as any < b ? -1 : 0;
+  }
+}
 /**
- * Returns `Some<T>` if `Option<T>` is `Some`, otherwise throws an error.
+ * Returns true if two options are equal.
  * 
- * @example
+ * ```typescript
+ * import { Option } from 'tiinvo';
  * 
- * ```ts
- * import { option } from 'tiinvo';
+ * const x = 1
+ * const y = null
+ * const z = undefined
  * 
- * option.expect(option.option(10))        // Option<10>
- * option.expect(option.option(undefined)) // throws
+ * Option.eq(x, y); // false
+ * Option.eq(x, z); // false
+ * Option.eq(y, z); // true
+ * Option.eq(x, x); // true
  * ```
+ * @param a 
+ * @param b 
+ * @returns 
+ * @since 3.0.0
  */
-export const expect = createExpect<Option>(isSome);
+export const eq: f.equatable = <a>(a: a, b: a): boolean => isNone(a) && isNone(b) ? true : a === b;
 /**
- * Returns `None` if `Option<T>` is `Nothing`, otherwise throws an error.
+ * Returns some if the value is some and the predicate returns true, otherwise returns none.
  * 
- * @example
+ * ```typescript
+ * import { Option, Number } from 'tiinvo';
  * 
- * ```ts
- * import { option } from 'tiinvo';
+ * const p = Number.gt(1);
+ * const f = Option.filter(p);
  * 
- * option.unexpect(option.option(10))        // throws
- * option.unexpect(option.option(undefined)) // None
+ * f(1);    // null
+ * f(2);    // 2
+ * f(null); // null
  * ```
+ * @param f 
+ * @returns 
+ * @since 3.0.0
  */
-export const unexpect = createExpect<Option>(isNone);
-
-//#endregion
-
-//#region factories
-
+export const filter = <a>(f: f.predicateE<a>) => (value: a) => (isSome(value) && f(value)) ? value : null;
 /**
- * Returns `None`
- */
-export const none = (): None => tagged(void 0, NONETAG);
-
-/**
- * Returns `Some<T>`. Throws an error if the passed value is `undefined` or `null`.
- */
-export const some = <T>(value: T): Some<NonNullable<T>> =>
-  check(
-    !typeguardsTs.isnullOrUndefined(value),
-    "some value cannot be undefined nor null"
-  )(tagged(value as any, SOMETAG));
-
-/**
- * Returns `Option<T>`. If the passed value is `undefined` or `null` returns `None`, otherwise `Some<T>`
- */
-export const option = <T>(value: T): Option<NonNullable<T>> =>
-  typeguardsTs.isnullOrUndefined(value) ? none() : some(value);
-
-/**
- * Creates a Option<K> factory from a function (arg: T) => K
- * @deprecated
- */
-export const fromfn = totaggedFn(option);
-
-//#endregion
-
-//#region filterables
-
-/**
- * Returns `Option<T>` if the `Predicate<T>` is satisfied, otherwise returns `None`.
+ * Maps an `option<a>` to another `option<b>` if is `some<a>`, otherwise returns none.
  * 
- * @example
+ * ```typescript
+ * import { Option, Number } from 'tiinvo';
  * 
- * ```ts
- * import { option, num } from 'tiinvo';
+ * const m = Option.map(Number.uadd(1));
  * 
- * const filter = option.filter(num.iseven);
- * 
- * filter(option.some(10))   // Option<10>
- * filter(option.some(0))    // None
+ * m(1);    // 2
+ * m(null); // null
  * ```
+ * @param map 
+ * @returns 
+ * @since 3.0.0
  */
-export const filter = createFilter<Option, Optiontag>(isSome, some, none);
+export const map = <a, b>(map: f.map<a, b>) => (value: option<a>) => isSome(value) ? map(value as any) : value;
 /**
- * Returns `Some<T>` if `Predicate<T>` is satisfied, otherwise returns the fallback `Option<T>`
+ * Maps an `option<a>` to another `option<b>` if is `some<a>`, otherwise returns `or`.
  * 
- * @example
+ * ```typescript
+ * import { Option, Number } from 'tiinvo';
  * 
- * ```ts
- * import { option, num } from 'tiinvo';
+ * const m = Option.mapOr(0, Number.uadd(2));
  * 
- * const filter = option.filterOr(option.some(0), num.inrange(0, 10));
- * 
- * filter(option.some(10))   // Option<10>
- * filter(option.some(10))   // Option<0>
+ * m(1);    // 3
+ * m(null); // 0
  * ```
+ * 
+ * @param or 
+ * @param map 
+ * @returns 
+ * @since 3.0.0
  */
-export const filterOr = createFilterOr<Option, Optiontag>(isSome, some);
-
-//#endregion
-
-//#region mappables
-
+export const mapOr = <a, b>(or: option<b>, map: f.map<a, b>) => (value: option<a>) => isSome(value) ? map(value as any) : or;
 /**
- * Maps an `Option<T>` to `Some<R>` if `Some`, otherwise returns `None`
+ * Maps an `option<a>` to another `option<b>` if is `some<a>`, otherwise calls `orElse`.
  * 
- * @example
+ * ```typescript
+ * import { Option, Number } from 'tiinvo';
  * 
- * ```ts
- * import { option, str } from 'tiinvo';
+ * const m = Option.mapOrElse(() => 0, Number.uadd(2));
  * 
- * const maplength = option.map(str.length);
- * 
- * maplength(option.option('hello'))   // Some<5>
- * maplength(option.none())            // Nothing
+ * m(1);    // 3
+ * m(null); // 0
  * ```
+ * 
+ * @param or 
+ * @param map 
+ * @returns 
+ * @since 3.0.0
  */
-export const map = createMap<Option, Optiontag>(isSome, option);
+export const mapOrElse = <a, b>(or: f.map<void, b>, map: f.map<a, b>) => (value: option<a>) => isSome(value) ? map(value as any) : or();
 /**
- * Maps an `Option<T>` to `Some<R>` if `Some`, otherwise returns fallback `Option<R>` and returns `Option<R>`
+ * Returns the boxed value if the option is `some`, otherwise throws an `Error`.
  * 
- * @example
+ * ```typescript
+ * import { Option } from 'tiinvo';
  * 
- * ```ts
- * import { option, str } from 'tiinvo';
+ * const x = 1
+ * const y = null
+ * const z = undefined
  * 
- * const maplength = option.mapOr(option.some(0), str.length);
- * 
- * maplength(option.option('hello'))   // Some<5>
- * maplength(option.none())            // Some<0>
+ * Option.unwrap(x); // 1
+ * Option.unwrap(y); // throws Error
+ * Option.unwrap(z); // throws Error
  * ```
+ * 
+ * @param value 
+ * @returns 
+ * @since 3.0.0
  */
-export const mapOr = createMapOr<Option, Optiontag>(isSome, option);
+export const unwrap: f.unwrappable = value => isSome(value) ? value as any : (() => { throw new Error('unwrappable: value is none'); })();
 /**
- * Maps an `Option<T>` to `Some<R>` if `Some`, otherwise calls fallback `FnNullary<R>` and returns `Some<R>`
+ * Returns the boxed value if the option is `some`, otherwise returns `or`.
  * 
- * @example
+ * ```typescript
+ * import { Option } from 'tiinvo';
  * 
- * ```ts
- * import { option, str, fallback } from 'tiinvo';
+ * const x = 1
+ * const y = null
+ * const z = undefined
  * 
- * const maplength = option.mapOrElse(fallback(0), str.length);
+ * const f = Option.unwrapOr(0);
  * 
- * maplength(option.option('hello'))   // Some<5>
- * maplength(option.none())            // Some<0>
+ * f(x);    // 1
+ * f(y);    // 0
+ * f(z);    // 0
  * ```
+ * 
+ * @param or 
+ * @returns 
+ * @since 3.0.0
  */
-export const mapOrElse = createMapOrElse<Option, Optiontag>(isSome, option);
-
-//#endregion
-
-//#region unwrappables
-
+export const unwrapOr: f.unwrappableOr = or => value => isSome(value) ? value : or;
 /**
- * Unwraps an `Option<T>` value `T` if `Some<T>`, otherwise throws
- *
- * @example
- * ```ts
- * import { option } from 'tiinvo';
- *
- * option.unwrap(option.option(10))  // 10
- * option.unwrap(option.none())      // throws error
- * ```
- */
-export const unwrap = createUnwrap<Optiontag>(
-  isSome,
-  "option.unwrap argument must be some"
-);
-
-/**
- * Unwraps an `Option<T>` value `T` if `Some<T>`, otherwise returns fallback `T` value
- *
- * @example
- * ```ts
- * import { option } from 'tiinvo';
- *
- * const unwrapfn = option.unwrapOr(0);
- *
- * unwrapfn(option.option(10))  // 10
- * unwrapfn(option.none())      // 0
- * ```
- */
-export const unwrapOr = createUnwrapOr<Optiontag>(isSome);
-
-/**
- * Unwraps an `Option<T>` value `T` if `Some<T>`, otherwise returns `Fallback<T>` value
- *
- * @example
- * ```ts
- * import { option } from 'tiinvo';
- *
- * const elsefn = () => 0;
- * const unwrapfn = option.unwrapOrElse(elsefn);
- *
- * unwrapfn(option.option(10))  // 10
- * unwrapfn(option.none())      // 0
- * ```
- */
-export const unwrapOrElse = createUnwrapOrElse<Optiontag>(isSome);
-
-//#endregion
-
-/**
- * Wraps a function `FnUnary<A, T>`, and once called it returns a `Option<T>`
+ * Returns the boxed value if the option is `some`, otherwise calls `orElse`.
  * 
- * @example
+ * ```typescript
+ * import { Option } from 'tiinvo';
  * 
- * ```ts
- * import { option, num } from 'tiinvo';
+ * const x = 1
+ * const y = null
+ * const z = undefined
  * 
- * const multiplyopt = option.fromfunction(num.uadd(10));
- * multiplyopt(10)   // Option<number>
+ * const f = Option.unwrapOrElse(() => 0);
+ * 
+ * f(x);    // 1
+ * f(y);    // 0
+ * f(z);    // 0
  * ```
+ * 
+ * @param or 
+ * @returns 
+ * @since 3.0.0
  */
-export const fromfunction = createderivefromfunction(option) as <T extends FnUnary<any, any>>(arg: T) => (... args: ArgsOf<T>) => Option<NonNullable<ReturnType<T>>>;
+export const unwrapOrElse: f.unwrappableOrElse = (or) => (value) => isSome(value) ? value : or();

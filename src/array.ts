@@ -1,675 +1,530 @@
-import { fallback, FnUnary } from './applicative';
+import type * as f from './functors';
+import type { option } from './option';
+import type { result } from './result';
+import type * as fn from './fn';
 
 /**
- * Gets an element in an array at a given index.
- * Returns undefined if nothing is found at that index.
- *
- * @example
- *
- * ```ts
- * import { array } from 'tiinvo';
+ * Compares two arrays.
  * 
- * const get2nd = array.eq(1);
- * get2nd([100, 200, 300]); // 200
- * ```
- *
- * @param {number} index
- * @returns
- */
-export const eq = (index: number): (<T>(arg: T[]) => T | undefined) => (arg) =>
-  arg[index];
-
-/**
- * Returns true if every element in the array satisfy the given predicate.
+ * ```typescript
+ * import { Array } from 'tiinvo';
  * 
- * @example
- *
- * ```ts
- * import { array, isnumber } from 'tiinvo';
- * 
- * const everynumber = array.every(isnumber);
- * everynumber([1, 2, 3, 4])      // true
- * everynumber([1, 2, 3, 'nope']) // false
- * ```
- *
- * @returns
- */
-export const every = <T>(fn: (arg: T) => boolean): ((arg: T[]) => boolean) => (
-  arg
-) => arg.every(fn);
-
-/**
- * Gets an element in an array at a given index.
- * Returns `or` if nothing is found at that index.
- *
- * @example
- *
- * ```ts
- * import { array } from 'tiinvo';
- * 
- * const get100th = array.eqOr(100)(20);
- * get100th([100, 200, 300]); // 20
- * ```
- *
- * @param {number} index
- * @returns
- */
-export const eqOr = (
-  index: number
-): (<T>(or: T) => (arg: T[]) => T | undefined) => (or) => (arg) =>
-  arg[index] ?? or;
-
-/**
- * Filters an array with the given predicate.
- *
- * @example
- *
- * ```ts
- * import { array } from 'tiinvo';
- * 
- * const onlyeven = array.filter((arg: number) => arg % 2 === 0);
- * onlyeven([1, 2, 3, 4, 5, 6]) // [2, 4, 6]
- * ```
- *
- * @template T
- * @param {(arg: T) => boolean} fn
- * @returns
- */
-export const filter = <T>(fn: (arg: T) => boolean): ((arg: T[]) => T[]) => (
-  arg
-) => arg.filter(fn);
-
-/**
- * Returns the first valid element. If nothing is found returns undefined
- *
- * @example
- *
- * ```ts
- * import { array, predicate } from 'tiinvo';
- * 
- * const findhermione = array.find(predicate.withsamevalue('Hermione'));
- * findhermione(['Harry', 'Hermione', 'Ronald']) // 'Hermione'
- * findhermione(['Severus', 'Dumbledore', 'Tomarevaca']) // undefined
- * ```
- *
- * @template T
- * @param {(arg: T) => boolean} fn
- * @returns
- */
-export const find = <T>(
-  fn: (arg: T) => boolean
-): ((arg: T[]) => T | undefined) => (arg) => arg.find(fn);
-
-/**
- * Flatterns an array
- * @since 2.11.0
- * @example
- *
- * ```ts
- * import { array } from 'tiinvo';
- * 
- * array.flat([[1, 2], [3, 4]]) // [1, 2, 3, 4];
- * ```
- *
- * @param {(arg: T) => boolean} fn
- * @returns
- */
-export const flat = <T>(arg: T[][]): T[] =>
-  arg.reduce((accumulator, nextarr) => [...accumulator, ...nextarr], []);
-
-/**
- * Flatterns an array
- * @deprecated use `flat` instead
- * @example
- *
- * ```ts
- * const flatnummatris = flattern();
- * flatnummatris([[1, 2], [3, 4]]) // [1, 2, 3, 4];
- * ```
- *
- * @param {(arg: T) => boolean} fn
- * @returns
- */
-export const flattern = fallback(flat)
-
-/**
- * Takes a list of functions, then call them passing the argument `Input` and returning an array of `Output`
- * 
- * @example
- * 
- * ```ts
- * import { array, pipe } from 'tiinvo';
- * 
- * const SHIPPING = 5;
- * const VAT = 20;
- * const keepprice = (price: number) => price;
- * const vat = (price: number) => (price / 100) * VAT;
- * const shipping = (price: number) => price > 200 ? 0 : SHIPPING;
- * 
- * const total = pipe(
- *    array.fromfunctions(keepprice, vat, shipping),
- *    array.reduce(0, (sum: number, next: number) => sum + next)
- * );
- * 
- * const price = 100;
- * 
- * total(price) // 125
- * total(price) === vat(price) + shipping(price) + price
+ * console.log(Array.cmp(['a'], ['a'])) // 0
+ * console.log(Array.cmp(['a'], ['b'])) // -1
+ * console.log(Array.cmp(['b'], ['a'])) // 1
+ * console.log(Array.cmp(['a'], ['a', 'b'])) // -1
+ * console.log(Array.cmp(['a', 'b'], ['a'])) // 1
+ * console.log(Array.cmp(['a', 'b'], ['a', 'b'])) // 0
+ * console.log(Array.cmp(['a', 'b', 'c'], ['a', 'b'])) // 1
+ * console.log(Array.cmp(['a', 'b', 'c'], ['a', 'b', 'c'])) // 0
  * ```
  * 
- * @template Input Function Input type
- * @template Output Function Output type
- * @param fns A list of functions
+ * @param a 
+ * @param b 
+ * @returns 
+ * @since 3.0.0
  */
-export const fromfunctions = <Input, Output>(... fns: FnUnary<Input, Output>[]): (arg: Input) => Output[] =>
-  arg => fns.map(fn => fn(arg));
-  
+export const cmp: f.comparableE<unknown[], unknown[]> = <a, b>(a: a, b: b): -1 | 0 | 1 => ((a === null || a === undefined) && (b === null || b === undefined)) ? 0 : a as any > b as any ? 1 : a as any < b as any ? -1 : 0
 /**
- * Gets first element of an array.
- * Returns undefined if the array is empty.
- * @since 2.11.0
- * @example
- *
- * ```ts
- * import { array } from 'tiinvo';
+ * Returns true if two arrays are identical.
  * 
- * array.first([100, 200]) // 100
- * array.first([])         // undefined
- * ```
- *
- * @returns
- */
-export const first = <T>(arg: T[]): T | undefined => arg[0];
-  
-/**
- * Gets first element of an array.
- * Returns undefined if the array is empty.
- * @deprecated use `first` instead
- * @example
- *
- * ```ts
- * getfirst()([100, 200]) // 100
- * ```
- *
- * @returns
- */
-export const getfirst = fallback(first);
-
-/**
- * Gets first element of an array.
- * Returns `or` if the array is empty.
- * @example
- *
- * ```ts
- * import { array } from 'tiinvo'
+ * ```typescript
+ * import { Array } from 'tiinvo';
  * 
- * array.getfirstOr(20)([]) // 20
+ * console.log(Array.eq(['a'], ['a'])) // true
+ * console.log(Array.eq(['a'], ['b'])) // false
+ * console.log(Array.eq(['b'], ['a'])) // false
+ * console.log(Array.eq(['a'], ['a', 'b'])) // false
+ * console.log(Array.eq(['a', 'b'], ['a'])) // false
+ * console.log(Array.eq(['a', 'b'], ['a', 'b'])) // true
  * ```
- *
- * @template T
- * @param {T} or
- * @returns
- */
-export const firstOr = <T>(or: T): ((arg: T[]) => T) => (arg) =>
-  arg[0] ?? or;
-
-/**
- * Gets first element of an array.
- * Returns `or` if the array is empty.
- * @deprecated
- * @example
- *
- * ```ts
- * getfirstOr(20)([]) // 20
- * ```
- *
- * @template T
- * @param {T} or
- * @returns
- */
-export const getfirstOr = firstOr
-
-/**
- * Gets the last element of an array.
- * Returns undefined if the array is empty.
- * @since 2.11.0
- * @example
- *
- * ```ts
- * import { array } from 'tiinvo';
  * 
- * array.last([100, 200]) // 100
- * array.last([])         // undefined
- * ```
- *
- * @returns
+ * @param a 
+ * @param b 
+ * @returns 
+ * @since 3.0.0
  */
-export const last = <T>(arg: T[]): T | undefined =>
-  arg[arg.length - 1];
-
+export const eq: f.equatableE<unknown[]> = (a, b) => a.length === b.length && cmp(a, b) === 0;
 /**
- * Gets last element of an array.
- * Returns undefined if the array is empty.
- * @deprecated use `last` instead
- * @example
- *
- * ```ts
- * getfirst()([100, 200]) // 100
- * ```
- *
- * @returns
- */
-export const getlast = fallback(last);
-
-/**
- * Returns the last element of an array or the given fallback.
- *
- * @example
- *
- * ```ts
- * import { array } from 'tiinvo';
+ * Returns true if the array `a` is empty.
  * 
- * const lastnumber = array.lastOr(0);
- * lastnumber([1, 2, 3]) // 3
- * lastnumber([]) // 0
- * ```
- *
- * @template T
- * @param {T} or
- * @returns
- */
-export const lastOr = <T>(or: T): ((arg: T[]) => T) => (arg) =>
-  arg[arg.length - 1] ?? or;
-
-/**
- * Returns the last element of an array or the given fallback.
- *
- * @deprecated
- * @example
- *
- * ```ts
- * const lastnumber = getlastOr(0);
- * lastnumber([1, 2, 3]) // 3
- * lastnumber([]) // 0
- * ```
- *
- * @template T
- * @param {T} or
- * @returns
- */
-export const getlastOr = lastOr;
-
-/**
- * Returns `true` if an array is empty, otherwise returns `false`.
- * @since 2.11.0
- * @example
- *
- * ```ts
- * import { array } from 'tiinvo';
+ * ```typescript
+ * import { Array } from 'tiinvo';
  * 
- * array.empty([]) // true
- * array.empty([1]) // false
+ * console.log(Array.empty([])) // true
+ * console.log(Array.empty(['a'])) // false
  * ```
- *
- * @returns
- */
-export const empty = <T>(arg: T[]): boolean =>
-  arg.length === 0;
-
-/**
- * Returns true if an array is empty
- * @deprecated use `empty` instead
- * @example
- *
- * ```ts
- * isempty()([]) // true
- * isempty()([1]) // false
- * ```
- *
- * @returns
- */
-export const isempty = fallback(empty)
-
-/**
- * Returns `true` if an array is not empty, otherwise returns `false`.
- * @since 2.11.0
- * @example
- *
- * ```ts
- * import { array } from 'tiinvo';
  * 
- * array.notempty([]) // false
- * array.notempty([1]) // true
- * ```
- *
- * @returns
+ * @param a 
+ * @returns 
+ * @since 3.0.0
  */
-export const notempty = <T>(arg: T[]): boolean =>
-  arg.length !== 0;
-
+export const empty: f.predicateE<unknown[]> = a => a.length === 0;
 /**
- * Returns true if an array is not empty
- * @deprecated use `notempty` instead
- * @example
- *
- * ```ts
- * isempty()([]) // false
- * isempty()([1]) // true
- * ```
- *
- * @returns
- */
-export const isnotempty = fallback(notempty)
-
-/**
- * Checks if an element is inside an array
- * @example
- *
- * ```ts
- * const includes100 = includes(100);
- *
- * includes100([10, 20, 30, 100]) // true
- * includes100([10, 20, 30, 900]) // false
- * ```
- *
- * @returns
- */
-export const includes = <T>(value: T): ((arg: T[]) => boolean) => (arg) =>
-  arg.includes(value);
-
-/**
- * Returns the array length
- * @since 2.11.0
- * @example
- *
- * ```ts
- * import { array } from 'tiinvo';
+ * Returns true if `a` is an array.
  * 
- * const test = [1, 2, 3, 4];
- * array.len(test) // 4
- * ```
- *
- * @returns
- */
-export const len = <T>(arg: T[]) => arg.length;
-
-/**
- * Returns the array length
- * @deprecated use `len` instead
- * @example
- *
- * ```ts
- * const test = [1, 2, 3, 4];
- *
- * length()(test) // 4
- * ```
- *
- * @returns
- */
-export const length = fallback(len);
-
-/**
- * Joins an array
- * @since 2.11.0
- * @example
- *
- * ```ts
- * import { array } from 'tiinvo';
+ * ```typescript
+ * import { Array } from 'tiinvo';
  * 
- * const test = [1, 2, 3, 4];
- * array.join(`-`)(test) // `1-2-3-4`
+ * console.log(Array.guard([])) // true
+ * console.log(Array.guard(null)) // false
+ * console.log(Array.guard(undefined)) // false
+ * console.log(Array.guard(0)) // false
+ * console.log(Array.guard('')) // false
  * ```
- *
- * @returns
- */
-export const join = (str: string): ((arg: unknown[]) => string) => (arg) => arg.join(str);
-
-/**
- * Maps an array of elements `T` to an array of elements `Z`
- * @example
- *
- * ```ts
- * import { array } from 'tiinvo';
  * 
- * interface Person {
- *    age: number;
- *    name: string;
- * }
- *
- * const mapname = (person: Person) => person.name;
- * const mapnames = map(mapname);
- *
- * maptostring([{ name: 'John', age: 21 }, { name: 'Julia', age: 33 }]) // ['John', 'Julia']
- * ```
- *
- * @template T
- * @template Z
- * @param {(arg: T) => Z} fn
- * @returns
+ * @since 3.0.0
  */
-export const map = <T, Z>(fn: (arg: T) => Z): ((arg: T[]) => Z[]) => (arg) =>
-  arg.map(fn);
-
+export const guard = (a => Array.isArray(a)) as f.guard<unknown[]>
 /**
- * Returns a random element `T` from an array `T[]`
- * @since 2.11.0
- * @example
- * ```ts
- * import { array } from 'tiinvo';
+ * Returns true if `b` is an array of `a`.
  * 
- * const arr = [1, 2, 3]
- * arr.includes(arr.rand(arr)) // true
- * ```
- *
- * @returns
- */
-export const rand = <T>(arr: T[]): T =>
-  arr[Math.floor(Math.random() * arr.length)];
-
-/**
- * Returns a random element `T` from an array `T[]`
- * @deprecated use `rand` instead
- * @example
- * ```ts
- * const arr = [1, 2, 3]
- * arr.includes(random()(arr)) // true
- * ```
- *
- * @returns
- */
-export const random = fallback(rand);
-
-/**
- * Aggregates all values `T[]` in a single input `Z`.
- * This aggregation starts from the first to the last element.
- * @example
- *
- * ```ts
- * import { array } from 'tiinvo';
+ * ```typescript
+ * import { Array, Str } from 'tiinvo';
  * 
- * const sum = array.reduce(0, (prev, next: number) => prev + next);
- * sum([1, 2, 3]) // 6
- * ```
- *
- * @template T
- * @template Z
- * @param {Z} accumulator
- * @param {(arg: T) => Z} fn
- * @returns
- */
-export const reduce = <T, Z>(
-  accumulator: Z,
-  fn: (total: Z, next: T) => Z
-): ((arg: T[]) => Z) => (arg) => arg.reduce(fn, accumulator);
-
-/**
- * Aggregates all values `T[]` in a single input `Z`.
- * This aggregation starts from the last to the first element.
- * @example
- *
- * ```ts
- * const sum = reduce(0, (next, prev: number) => prev - next);
- * sum([1, 2, 3]) // 0
- * ```
- *
- * @template T
- * @template Z
- * @param {Z} accumulator
- * @param {(arg: T) => Z} fn
- * @returns
- */
-export const reduceright = <T, Z>(
-  accumulator: Z,
-  fn: (total: Z, next: T) => Z
-): ((arg: T[]) => Z) => (arg) => arg.reduceRight(fn, accumulator);
-
-/**
- * Reverse an array
- * @since 2.11.0
- * @example
- *
- * ```ts
- * import { array } from 'tiinvo';
+ * const isstrarr = Array.guardOf(Str.guard);
  * 
- * array.invert([1, 2, 3]) // [3, 2, 1]
- * ```
- *
- * @returns
- */
-export const invert = <T>(arg: T[]): T[] => arg.reverse();
-
-/**
- * Reverse an array
- * @deprecated use `invert` instead
- * @example
- *
- * ```ts
- * reverse()([1, 2, 3]) // [3, 2, 1]
- * ```
- *
- * @returns
- */
-export const reverse = fallback(invert)
-
-/**
- * Shuffles an array
- * @since 2.11.0
- *
- * ```ts
- * import { array } from 'tiinvo';
+ * console.log(isstrarr([])) // true
+ * console.log(isstrarr(['a'])) // true
+ * console.log(isstrarr(['a', 'b'])) // true
+ * console.log(isstrarr(['a', 'b', 'c'])) // true
+ * console.log(isstrarr(['a', 'b', 'c', 1])) // false
+ * ````
  * 
- * array.mix([1, 2, 3]) // could be [3, 2, 1] or [2, 1, 3] or [1, 3, 2] or...
- * ```
- *
- * @returns
+ * @param a 
+ * @returns 
+ * @since 3.0.0
  */
-export const mix = <T>(arg: T[]): T[] => {
-  const array = [].slice.call(arg);
-
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+export const guardOf = <a>(a: f.guard<a>) => (b => Array.isArray(b) && b.every(a)) as f.guard<a[]>
+/**
+ * Concates `b` and `a` without modifying the original arrays.
+ * 
+ * ```typescript
+ * import { Array } from 'tiinvo';
+ * 
+ * console.log(Array.concat(['a'])(['b'])) // ['b', 'a']
+ * ```
+ * @param a 
+ * @returns 
+ * @since 3.0.0
+ */
+export const concat = <a>(a: a[]) => (b: a[]) => b.concat(a);
+/**
+ * Returns true if an array `b` contains `a`.
+ * 
+ * ```typescript
+ * import { Array } 'tiinvo';
+ * 
+ * console.log(Array.contains('a')(['a'])) // true
+ * console.log(Array.contains('a')(['b'])) // false
+ * ```
+ * 
+ * @param a 
+ * @returns 
+ * @since 3.0.0
+ */
+export const contains = <a>(a: a) => (b: a[]) => b.indexOf(a) >= 0;
+/**
+ * Determines whether all the members of an array `a` satisfy the specified predicate `p`.
+ * 
+ * ```typescript
+ * import { Array, Num } 'tiinvo';
+ * 
+ * const everyeven = Array.every(Num.iseven);
+ * 
+ * console.log(everyeven([2, 4, 6])) // true
+ * console.log(everyeven([2, 4, 5])) // false
+ * ```
+ * 
+ * @param p 
+ * @returns 
+ * @since 3.0.0
+ */
+export const every = <a>(p: f.predicateE<a>) => (a: a[]) => a.every(p);
+/**
+ * Creates an array from an array-like object.
+ * 
+ * ```typescript
+ * import { Array } 'tiinvo';
+ * 
+ * console.log(Array.from([1, 2, 3])) // [1, 2, 3]
+ * console.log(Array.from(new Set([1, 2, 3]))) // [1, 2, 3]
+ * ```
+ * 
+ * @param a
+ * @returns
+ * @since 3.0.8
+ */
+export const from = Array.from;
+/**
+ * Returns the element `result<a>` at index `i` of an array `a[]`. 
+ * 
+ * ```ts
+ * import { Array } 'tiinvo';
+ * 
+ * console.log(Array.get(1)(['a', 'b', 'c'])) // 'b'
+ * console.log(Array.get(2)(['a'])) // Error('Index 2 is out of bounds for length 1')
+ * ```
+ * 
+ * @param i 
+ * @returns 
+ * @since 3.0.0
+ */
+export const get = (i: number) => <a>(a: a[]): result<a> => {
+  if (i > 0 && i < a.length) {
+    return a[i];
   }
 
-  return array;
+  return new Error(`Index out of bounds ${i} for length ${a.length}`);
 };
-
+/**
+ * Returns the elements of an array `a` that meet the condition specified in a predicate `p`.
+ * 
+ * ```typescript
+ * import { Array, Predicate } 'tiinvo';
+ * 
+ * console.log(Array.filter(Predicate.eq('a'))(['a', 'b'])) // ['a']
+ * console.log(Array.filter(Predicate.eq('b'))(['a', 'b'])) // ['b']
+ * ```
+ * 
+ * @param p 
+ * @returns 
+ * @since 3.0.0
+ */
+export const filter = <a>(p: f.predicateE<a>) => (a: a[]) => a.filter(p);
+/**
+ * Returns the value of the first `option<a>` in the array `a` where predicate `p` is true.
+ * @param p 
+ * @returns 
+ * @since 3.0.0
+ * 
+ * ```ts
+ * import { Array, Num } 'tiinvo';
+ * 
+ * const p = Num.gt(1);
+ * 
+ * console.log(Array.find(p)([1, 2, 3])) // 2
+ * ```
+ */
+export const find = <a>(p: f.predicateE<a>) => (a: a[]) => a.find(p) as option<a>;
+/**
+ * Returns the first element of an array `a`. If the array is empty, returns `none`.
+ * 
+ * ```typescript
+ * import { Array } 'tiinvo';
+ * 
+ * console.log(Array.first(['a', 'b'])) // 'a';
+ * console.log(Array.first([])) // null;
+ * ```
+ * 
+ * @param a 
+ * @returns 
+ * @since 3.0.0
+ */
+export const first = <a>(a: a[]) => a[0] as option<a>
+/**
+ * Returns the first element of an array `b` or `a` if the array is empty.
+ * 
+ * ```typescript
+ * import { Array } 'tiinvo';
+ * 
+ * const firstor = a.firstOr(`not found`);
+ * 
+ * console.log(firstor(['a', 'b'])) // 'a'
+ * console.log(firstor([])) // `not found`
+ * ```
+ * @param a 
+ * @returns 
+ * @since 3.0.0
+ */
+export const firstOr = <a>(a: a) => (b: a[]) => b[0] ?? a;
+/**
+ * Flatterns an array
+ * 
+ * ```typescript
+ * import { Array } 'tiinvo';
+ * 
+ * console.log(Array.flat(['a', ['b', 'c']])) // ['a', 'b', 'c']
+ * console.log(Array.flat(['a', ['b', 'c'], 'd'])) // ['a', 'b', 'c', 'd']
+ * ```
+ * @param a 
+ * @returns 
+ * @since 3.0.0
+ */
+export const flat = <a>(a: a[][]) => a.reduce((ac, n) => [...ac, ...n], []);
+/**
+ * Maps a matrix `a[][]` to a `b[]` using the mapping function `f`.
+ * 
+ * ```typescript
+ * import { Array, Str } from 'tiinvo';
+ * 
+ * const map = Array.flatmap(Str.length);
+ * 
+ * console.log(map([['abc'], ['cdef']])) // [3, 4]
+ * ```
+ * 
+ * @param f 
+ * @returns 
+ * 
+ * @since 3.0.10
+ */
+export const flatmap = <a, b>(f: f.map<a, b>) => (a: a[][]): b[] => flat(a.map(e => e.map(f)));
+/**
+ * Calls all functions in the array `a` with the related index of arguments `b`.
+ * @param a 
+ * @returns 
+ * @since 3.0.0
+ * 
+ * ```ts
+ * import { Array, Num, Str } 'tiinvo';
+ * 
+ * console.log(Array.fromfunctions([Num.add(1), Str.upper])([1, 'a'])) // ['2', 'A']
+ * ```
+ */
+export const fromfunctions = <a extends ((...args: any) => any)[]>(... a: a) => (b: fn.argsOfMany<a>) => a.map((c, i) => c((b)[i])) as unknown as fn.returnTypeOfMany<a>;
+/**
+ * Returns the last element of an array `a`. If the array is empty, returns `none`.
+ * 
+ * ```typescript
+ * import { Array } 'tiinvo';
+ * 
+ * console.log(Array.last(['a', 'b'])) // 'b';
+ * console.log(Array.last([])) // null;
+ * ```
+ * 
+ * @param a 
+ * @returns 
+ * @since 3.0.0
+ */
+export const last = <a>(a: a[]) => a[a.length - 1] as option<a>;
+/**
+ * Returns the last element of an array `b` or `a` if the array is empty.
+ * 
+ * ```typescript
+ * import { Array } 'tiinvo';
+ * 
+ * const lastor = Array.lastOr(`not found`);
+ * 
+ * console.log(lastor(['a', 'b'])) // 'b'
+ * console.log(lastor([])) // `not found`
+ * ```
+ * 
+ * @param a 
+ * @returns 
+ * @since 3.0.0
+ */
+export const lastOr = <a>(a: a) => (b: a[]) => b[b.length - 1] ?? a;
+/**
+ * Gets the length of the array. This is a number one higher than the highest index in the array.
+ * 
+ * ```typescript
+ * import { Array } 'tiinvo';
+ * 
+ * console.log(Array.length(['a', 'b'])) // 2
+ * console.log(Array.length([])) // 0
+ * ```
+ * 
+ * @param a 
+ * @returns 
+ * 
+ * @since 3.0.8
+ */
+export const length = <a>(a: a[]) => a.length;
+/**
+ * Adds all the elements of an array into a string, separated by the specified separator string.
+ * 
+ * By default the `separator` is an empty string.
+ * 
+ * ```typescript
+ * import { Array } 'tiinvo';
+ * 
+ * console.log(Array.join()(['a', 'b', 'c'])) // 'abc'
+ * console.log(Array.join(' ')(['a', 'b', 'c'])) // 'a b c'
+ * console.log(Array.join('-')(['a', 'b', 'c'])) // 'a-b-c'
+ * ```
+ * 
+ * @param separator 
+ * @returns 
+ * @since 3.0.0
+ */
+export const join = (separator: string = "") => <a>(a: a[]) => a.join(separator);
+/**
+ * Maps an array of elements `a` to an array of elements `b` using the mapping function `f`.
+ * 
+ * ```typescript
+ * import { Array } 'tiinvo';
+ * 
+ * console.log(Array.map(a => a + '!')(['a', 'b', 'c'])) // ['a!', 'b!', 'c!']
+ * ```
+ * 
+ * @param f 
+ * @returns 
+ * @since 3.0.0
+ */
+export const map = <a, b>(f: f.map<a, b>) => (a: a[]) => a.map(f);
+/**
+ * Returns true if all elements of `a` do not meet the condition specified in the predicate `p`.
+ * 
+ * ```typescript
+ * import { Array, Number } 'tiinvo';
+ * 
+ * console.log(Array.none(Number.isEven)([1, 2, 3])) // false
+ * console.log(Array.none(Number.isEven)([1, 3, 5])) // true
+ * ```
+ * 
+ * @param p 
+ * @returns 
+ */
+export const none = <a>(p: f.predicateE<a>) => (a: a[]) => !a.some(p);
+/**
+ * Returns a new array from a set of elements.
+ * 
+ * ```typescript
+ * import { Array } 'tiinvo';
+ * 
+ * console.log(Array.of(1, 2, 3)) // [1, 2, 3]
+ * ```
+ * 
+ * @param a
+ * 
+ * @returns
+ * @since 3.0.8
+ */
+export const of = Array.of;
+/**
+ * Returns a random element of an array `a`.
+ * 
+ * ```typescript
+ * import { Array } 'tiinvo';
+ * 
+ * console.log(Array.random(['a', 'b', 'c'])) // 'a' or 'b' or 'c'
+ * ```
+ * 
+ * @param a 
+ * @returns 
+ * @since 3.0.0
+ */
+export const rand = <a>(a: a[]) => a[Math.floor(Math.random() * a.length)];
+/**
+ * Aggregates array of type `a[]` into a value of type `b` using a function `f`.
+ * 
+ * ```typescript
+ * import { Array, Number } 'tiinvo';
+ * 
+ * const red = Array.reduce(Number.badd);
+ * 
+ * console.log(red(0)([1, 2, 3])) // 6
+ * ```
+ * 
+ * @param f 
+ * @returns 
+ * @since 3.0.0
+ */
+export const reduce = <a, b>(f: (p: b, c: a, i: number, al: a[]) => b) => (ac: b) => (a: a[]) => a.reduce(f, ac);
+/**
+ * Aggregates array of type `a[]` into a value of type `b` using a function `f`.
+ * 
+ * ```typescript
+ * import { Array, Number } 'tiinvo';
+ * 
+ * const red = Array.reduceright(Number.bsub);
+ * 
+ * console.log(red(0)([1, 2, 3])) // -6
+ * ```
+ * 
+ * @param f 
+ * @returns 
+ * @since 3.0.0
+ */
+export const reduceright = <a, b>(f: (p: b, c: a, i: number, al: a[]) => b) => (ac: b) => (a: a[]) => a.reduceRight(f, ac);
+/**
+ * Reverses the elements in an array in place without mutating the original array.
+ * 
+ * ```typescript
+ * import { Array } 'tiinvo';
+ * 
+ * console.log(Array.reverse([1, 2, 3])) // [3, 2, 1]
+ * ```
+ * 
+ * @param a 
+ * @returns 
+ * @since 3.0.0
+ */
+export const reverse = <a>(a: a[]) => {
+  const b: a[] = [];
+  for (let i = a.length; i > 0; i--) { b[a.length - 1 - i] = a[i]; }
+  return b
+}
 /**
  * Shuffles an array
- * @deprecated use `mix` instead
- *
- * ```ts
- * shuffle()([1, 2, 3]) // could be [3, 2, 1] or [2, 1, 3] or [1, 3, 2] or...
- * ```
- *
- * @returns
- */
-export const shuffle = fallback(mix)
-
-/**
- * Returns true if some elements in the array satisfy the given predicate.
- * @example
- *
- * ```ts
- * import { isnumber, array } from 'tiinvo';
  * 
- * const somenumber = array.some(isnumber);
- * somenumber([1, 2, 3, 4]) // true
- * somenumber([null, undefined, 'nope']) // false
- * ```
- *
- * @returns
- */
-export const some = <T>(fn: (arg: T) => boolean): ((arg: T[]) => boolean) => (
-  arg
-) => arg.some(fn);
-
-/**
- * Sorts an array with the given comparing function.
- * @example
- *
- * ```ts
- * import { array, num } from 'tiinvo';
+ * ```typescript
+ * import { Array } 'tiinvo';
  * 
- * const sortdesc = sort(num.sortdesc);
- * sort([3, 5, 1, 2, 10, 21, 12, 20]) // [ 21, 20, 12, 10, 5, 3, 2, 1 ]
+ * console.log(Array.shuffle([1, 2, 3])) // [1, 3, 2]
  * ```
- *
- * @template {T}
- * @param {(arg1: T, arg2: T) => number} comparefn
- * @returns
- */
-export const sort = <T>(
-  comparefn: (arg1: T, arg2: T) => number
-): ((arg: T[]) => T[]) => (arg) => arg.sort(comparefn);
-
-/**
- * Takes only the first elements by `count`
- *
- * ```ts
- * import { array } from 'array';
  * 
- * const limit = 2;
- * const takefn = array.takefirstnth(limit)
- * const test = [1, 2, 3, 4];
- *
- * takefn(test) // [1, 2]
- *
- * ```
- *
- * @param count
- * @returns
+ * @param a 
+ * @returns 
+ * @since 3.0.0
  */
-export const takefirstnth = (count: number): (<T>(arg: T[]) => T[]) => (arg) =>
-  arg.filter((_, index) => index < count);
+export const shuffle = <a>(a: a[]) => {
+  const b: a[] = [].slice.call(a);
 
-/**
- * Takes only the last elements by `count`
- *
- * ```ts
- * import { array } from 'tiinvo';
- *
- * const limit = 2;
- * const takefn = array.takelastnth(limit)
- * const test = [1, 2, 3, 4];
- *
- * takefn(test) // [3, 4]
- * ```
- *
- * @param count
- * @returns
- */
-export const takelastnth = (count: number): (<T>(arg: T[]) => T[]) => (arg) =>
-  arg.filter((_, index, array) => array.length - 1 - count < index);
+  for (let i = b.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [b[i], b[j]] = [b[j], b[i]];
+  }
 
+  return b;
+}
 /**
- * An unsafe cast to a type. Use it if TypeScript gives you a terrible headache.
- * Note that this operation is not type safe, since no conversion occurs at runtime.
- * If you want a real type conversion, use map instead.
+ * Returns a slice of an array `a` from `start` to `end`.
  * 
- *
- * @template {T}
- * @returns
+ * ```typescript
+ * 
+ * import { Array } 'tiinvo';
+ * 
+ * console.log(Array.slice(1)([1, 2, 3, 4, 5])) // [2, 3, 4, 5]
+ * console.log(Array.slice(1, 3)([1, 2, 3, 4, 5])) // [2, 3]
+ * console.log(Array.slice(undefined, 3)([1, 2, 3, 4, 5])) // [1, 2, 3]
+ * ```
+ * 
+ * @param start 
+ * @param end 
+ * @returns 
+ * @since 3.0.0
  */
-export const unsafecast = <T>(): ((arg: unknown[]) => T[]) => (arg) =>
-  (arg as unknown) as T[];
+export const slice = (start: number | void, end: number | void) => <a>(a: a[]) => a.slice(start ?? 0, end ?? a.length);
+/**
+ * Determines whether some members of an array `a` satisfy the specified predicate `p`.
+ * 
+ * ```typescript
+ * import { Array, Number } 'tiinvo';
+ * 
+ * const someeven = Array.some(Number.isEven);
+ * 
+ * console.log(someeven([2, 4, 6])) // true
+ * console.log(someeven([2, 4, 5])) // true
+ * console.log(someeven([1, 3, 7])) // false
+ * ```
+ * 
+ * @param p 
+ * @returns 
+ * @since 3.0.0
+ */
+export const some = <a>(p: f.predicateE<a>) => (a: a[]) => a.some(p);
+/**
+ * Sorts an array of elements `a` using the specified comparator `f`.
+ * 
+ * ```typescript
+ * import { Array, Number } 'tiinvo';
+ * 
+ * console.log(Array.sort(Number.asc)([3, 2, 1])) // [1, 2, 3]
+ * console.log(Array.sort(Number.desc)([1, 2, 3])) // [3, 2, 1]
+ * ```
+ * 
+ * @param f 
+ * @returns 
+ */
+export const sort = <a>(f: f.comparableE<a, a>) => (a: a[]) => a.sort(f);

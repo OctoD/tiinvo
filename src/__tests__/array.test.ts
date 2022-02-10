@@ -1,257 +1,243 @@
-import * as predicate from "../predicate";
-import * as array from "../array";
-import * as option from "../option";
-import { pipe } from "../pipe";
-import {
-  anyof,
-  createStructOf,
-  isnullOrUndefined,
-  isnumber,
-} from "../typeguards";
-
-const testarray = [100, 200, 300, 400, 500];
+import * as a from '../array';
+import * as n from '../num';
+import * as s from '../str';
+import * as o from '../option';
 
 describe(`array`, () => {
-  it(`eq`, () => {
-    expect(array.eq(5)(testarray)).toBeUndefined();
-    expect(array.eq(3)(testarray)).toBe(400);
+  test(a.cmp.name, () => {
+    const a1 = [1, 2, 3];
+    const a2 = [1, 2, 3];
+    const a3 = [1, 2, 4];
+
+    expect(a.cmp(null as any, null as any)).toBe(0);
+    expect(a.cmp(undefined as any, undefined as any)).toBe(0);
+    expect(a.cmp(a1, a2)).toBe(0);
+    expect(a.cmp(a1, a3)).toBe(-1);
+    expect(a.cmp(a3, a1)).toBe(1);
   });
 
-  it(`every`, () => {
-    const everynumber = array.every(isnumber);
-    expect(everynumber([1, 2, 3, 4])).toBe(true);
-    expect(everynumber([1, 2, 3, "nope"])).toBe(false);
+  test(a.concat.name, () => {
+    const a1 = [1, 2, 3];
+    const a2 = [4, 5, 6];
+
+    expect(a.concat(a2)(a1)).toEqual([1, 2, 3, 4, 5, 6]);
   });
 
-  it(`eqOr`, () => {
-    expect(array.eqOr(5)(1000)(testarray)).toBe(1000);
-    expect(array.eqOr(3)(1000)(testarray)).toBe(400);
+  test(a.contains.name, () => {
+    const a1 = [1, 2, 3];
+
+    expect(a.contains(2)(a1)).toBe(true);
+    expect(a.contains(4)(a1)).toBe(false);
   });
 
-  it(`getfirst`, () => {
-    expect(array.getfirst()(testarray)).toBe(100);
+  test(a.empty.name, () => {
+    expect(a.empty([])).toBe(true)
+    expect(a.empty([1, 2, 3])).toBe(false)
   });
 
-  it(`getfirstOr`, () => {
-    expect(array.getfirstOr(1000)([])).toBe(1000);
-    expect(array.getfirstOr(1000)(testarray)).toBe(100);
+  test(a.eq.name, () => {
+    const a1 = [1, 2, 3];
+    const a2 = [1, 2, 3];
+    const a3 = [1, 2, 4];
+
+    expect(a.eq(a1, a2)).toBe(true);
+    expect(a.eq(a1, a3)).toBe(false);
   });
 
-  it(`getlast`, () => {
-    expect(array.getlast()([])).toBeUndefined();
-    expect(array.getlast()(testarray)).toBe(500);
-  });
-  it(`getlastOr`, () => {
-    expect(array.getlastOr(1000)([])).toBe(1000);
-    expect(array.getlastOr(1000)(testarray)).toBe(500);
+  test(a.every.name, () => {
+    const a1 = [1, 2, 3];
+
+    expect(a.every(n.gt(0))(a1)).toBe(true);
+    expect(a.every(n.gt(1))(a1)).toBe(false);
   });
 
-  it(`filter`, () => {
-    const filterfn = (num: number) => num % 2 === 0;
-    const arrfilterfn = array.filter(filterfn);
-    const arr = [1, 2, 3, 4, 5];
-    const expected = [2, 4];
+  test(a.filter.name, () => {
+    const a1 = [1, 2, 3];
 
-    expect(expect.arrayContaining(arrfilterfn(arr))).toEqual(expected);
+    expect(a.filter(n.gt(0))(a1)).toEqual([1, 2, 3]);
+    expect(a.filter(n.gt(1))(a1)).toEqual([2, 3]);
   });
 
-  it(`find`, () => {
-    const findfn = array.find(predicate.withsamevalue(300));
-    const wrongfindfn = array.find(predicate.withsamevalue(123));
+  test(a.find.name, () => {
+    const a1 = [1, 2, 3];
 
-    expect(findfn(testarray)).toBe(300);
-    expect(wrongfindfn(testarray)).toBeUndefined();
+    expect(a.find(n.gt(0))(a1)).toBe(1);
+    expect(a.find(n.gt(1))(a1)).toBe(2);
+    expect(a.find(n.gt(2))(a1)).toBe(3);
   });
 
-  it(`flattern`, () => {
-    const flatnummatris = array.flattern();
-    const matrix = [
-      [1, 2],
-      [3, 4],
-    ];
-    const expected = [1, 2, 3, 4];
+  test(a.first.name, () => {
+    const a1 = [1, 2, 3];
 
-    expect(expect.arrayContaining(flatnummatris(matrix))).toEqual(expected);
+    expect(a.first(a1)).toBe(1);
   });
 
-  it(`takefirstnth`, () => {
-    const limit = 2;
-    const takefn = array.takefirstnth(limit);
-    const set = [1, 2, 3, 4];
-    const subset = [1, 2];
+  test(a.firstOr.name, () => {
+    const a1 = [1, 2, 3];
 
-    expect(expect.arrayContaining(takefn(set))).toEqual(subset);
+    expect(a.firstOr(4)(a1)).toBe(1);
+    expect(a.firstOr(4)([])).toBe(4);
   });
 
-  it(`takelastnth`, () => {
-    const limit = 2;
-    const takefn = array.takelastnth(limit);
-    const set = [1, 2, 3, 4];
-    const subset = [3, 4];
+  test(a.flat.name, () => {
+    const a1 = [[1, 2, 3], [4, 5, 6]];
 
-    expect(expect.arrayContaining(takefn(set))).toEqual(subset);
+    expect(expect.arrayContaining(a.flat(a1))).toEqual([1, 2, 3, 4, 5, 6]);
   });
 
-  it(`includes`, () => {
-    const includes100 = array.includes(100);
+  test(a.fromfunctions.name, () => {
+    const fn1 = (x: number) => x + 1;
+    const fn2 = (x: string) => x.length;
 
-    expect(includes100([10, 20, 30, 100])).toBe(true);
-    expect(includes100([10, 20, 30, 900])).toBe(false);
+    expect(a.fromfunctions(fn1, fn2)([10, "hello"])).toEqual([11, 5]);
   });
 
-  it(`isempty`, () => {
-    expect(array.isempty()([])).toBeTruthy();
-    expect(array.isempty()(testarray)).toBeFalsy();
+  test(a.get.name, () => {
+    const a1 = [1, 2, 3];
+
+    expect(a.get(1)(a1)).toBe(2);
+    expect(a.get(3)(a1)).toEqual(new Error(`Index out of bounds 3 for length 3`));
   });
 
-  it(`isnotempty`, () => {
-    expect(array.isnotempty()([])).toBeFalsy();
-    expect(array.isnotempty()(testarray)).toBeTruthy();
+  test(a.guard.name, () => {
+    expect(a.guard([])).toBe(true);
+    expect(a.guard([1, 2, 3])).toBe(true);
+    expect(a.guard(`hello world`)).toBe(false);
   });
 
-  it(`length`, () => {
-    expect(array.length()([])).toBe(0);
-    expect(array.length()(testarray)).toBe(5);
+  test(a.guardOf.name, () => {
+    const numguard = a.guardOf(n.guard);
+
+    expect(numguard([])).toBe(true);
+    expect(numguard([1, 2, 3])).toBe(true);
+    expect(numguard([`hello world`])).toBe(false);
   });
 
-  it(`map`, () => {
-    expect(
-      expect.arrayContaining(array.map((num: number) => num * 2)(testarray))
-    ).toEqual([200, 400, 600, 800, 1000]);
+  test(a.join.name, () => {
+    const a1 = [1, 2, 3];
+
+    expect(a.join(`-`)(a1)).toBe(`1-2-3`);
+    expect(a.join()(a1)).toBe(`123`);
   });
 
-  it(`random`, () => {
-    const fn = array.random();
+  test(a.last.name, () => {
+    const a1 = [1, 2, 3];
 
-    expect(testarray.includes(fn(testarray))).toBeTruthy();
+    expect(a.last(a1)).toBe(3);
+    expect(o.isNone(a.last([]))).toBeTruthy();
   });
 
-  it(`reduce`, () => {
-    expect(
-      array.reduce(0, (prev: number, next: number) => prev + next)(testarray)
-    ).toBe(1500);
+  test(a.lastOr.name, () => {
+    const a1 = [1, 2, 3];
+
+    expect(a.lastOr(4)(a1)).toBe(3);
+    expect(a.lastOr(4)([])).toBe(4);
   });
 
-  it(`reduceright`, () => {
-    expect(
-      array.reduceright(
-        0,
-        (prev: number, next: number) => prev - next
-      )(testarray)
-    ).toBe(-1500);
+  test(a.map.name, () => {
+    const inc = n.uadd(1);
+
+    expect(expect.arrayContaining(a.map(inc)([1, 2, 3]))).toEqual([2, 3, 4]);
   });
 
-  it(`reverse`, () => {
-    expect(expect.arrayContaining(array.reverse()(testarray))).toEqual([
-      500,
-      400,
-      300,
-      200,
-      100,
-    ]);
+  test(a.none.name, () => {
+    const p = n.isEven;
+
+    expect(a.none(p)([1, 2, 3])).toBe(false);
+    expect(a.none(p)([2, 4, 6])).toBe(false);
+    expect(a.none(p)([3, 7, 9])).toBe(true);
   });
 
-  it(`shuffle`, () => {
-    const value1 = 1;
-    const value2 = 2;
-    const value3 = 3;
-    const test = [value1, value2, value3];
+  test(a.rand.name, () => {
+    const a1 = [1, 2, 3];
 
-    const shuffled = array.shuffle()(test);
-
-    expect(shuffled.includes(value1)).toBeTruthy();
-    expect(shuffled.includes(value2)).toBeTruthy();
-    expect(shuffled.includes(value3)).toBeTruthy();
+    expect(a1.includes(a.rand(a1))).toBeTruthy()
+    expect(a1.includes(a.rand(a1))).toBeTruthy()
+    expect(a1.includes(a.rand(a1))).toBeTruthy()
+    expect(a1.includes(a.rand(a1))).toBeTruthy()
+    expect(a1.includes(a.rand(a1))).toBeTruthy()
+    expect(a1.includes(a.rand(a1))).toBeTruthy()
+    expect(a1.includes(a.rand(a1))).toBeTruthy()
+    expect(a1.includes(a.rand(a1))).toBeTruthy()
+    expect(a1.includes(a.rand(a1))).toBeTruthy()
+    expect(a1.includes(a.rand(a1))).toBeTruthy()
   });
 
-  it(`some`, () => {
-    const somenumber = array.some(isnumber);
-    expect(somenumber([1, 2, 3, 4])).toBe(true);
-    expect(somenumber([null, undefined, "nope"])).toBe(false);
+  test(a.reduce.name, () => {
+    const a1 = [1, 2, 3];
+    const r = a.reduce(n.badd);
+
+    expect(r(0)(a1)).toBe(6);
   });
 
-  it(`sort`, () => {
-    expect(
-      expect.arrayContaining(
-        array.sort((a: number, b: number) => b - a)(testarray)
-      )
-    ).toEqual([500, 400, 300, 200, 100]);
+  test(a.reduceright.name, () => {
+    const a1 = [1, 2, 3];
+    const r = a.reduceright(n.bsub);
+
+    expect(r(0)(a1)).toBe(-6);
   });
 
-  it(`unsafecast`, () => {
-    expect(array.unsafecast<string>()(testarray)).toBeDefined();
+  test(a.reverse.name, () => {
+    const a1 = [1, 2, 3];
+
+    expect(expect.arrayContaining(a.reverse(a1))).toEqual([3, 2, 1]);
   });
 
-  it(`filters even numbers, multiply them by 2 and returns number less than 10`, () => {
-    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    const expected = [4, 8];
-    const filtereven = (arg: number) => arg % 2 === 0;
-    const multiply = (arg: number) => arg * 2;
-    const filterlessthan = (arg: number) => arg < 10;
-    const testfn = pipe(
-      array.filter(filtereven),
-      array.map(multiply),
-      array.filter(filterlessthan)
-    );
+  test(a.shuffle.name, () => {
+    const a1 = [1, 2, 3];
 
-    expect(expect.arrayContaining(testfn(numbers))).toEqual(expected);
+    expect(a.shuffle(a1).includes(1)).toBeTruthy();
+    expect(a.shuffle(a1).includes(2)).toBeTruthy();
+    expect(a.shuffle(a1).includes(3)).toBeTruthy();
   });
 
-  it(`filters an array of objects using a typeguard, maps a property and returns the greater value`, () => {
-    interface TestType {
-      value?: number | null;
-    }
+  test(a.slice.name, () => {
+    const a1 = [1, 2, 3];
 
-    const create = (value?: number | null): TestType => ({ value });
-    const test = [
-      100,
-      "banana",
-      "pizza",
-      null,
-      undefined,
-      new Date(),
-      {},
-      create(),
-      create(1),
-      create(null),
-      create(2),
-    ];
-    const expected = 2;
-    const isTestType = createStructOf<TestType>({
-      value: anyof(isnullOrUndefined, isnumber),
-    });
-    const sort = (a: number, b: number) => a - b;
-    const mapvalue = (arg: TestType) => arg.value;
-
-    const testfn = pipe(
-      array.filter(isTestType),
-      array.unsafecast<TestType>(),
-      array.map(mapvalue),
-      array.map(option.option),
-      array.map(option.unwrapOr(-1)),
-      array.sort(sort),
-      array.getlast()
-    );
-
-    expect(testfn(test)).toBe(expected);
+    expect(expect.arrayContaining(a.slice(1, 3)(a1))).toEqual([2, 3]);
+    expect(expect.arrayContaining(a.slice(undefined, 1)(a1))).toEqual([1]);
+    expect(expect.arrayContaining(a.slice(2)(a1))).toEqual([3]);
   });
 
-  it(`tests fromfunctions example`, () => {
-    const SHIPPING = 5;
-    const VAT = 20;
-    const keepprice = (price: number) => price;
-    const vat = (price: number) => (price / 100) * VAT;
-    const shipping = (price: number) => price > 200 ? 0 : SHIPPING;
-    
-    const total = pipe(
-       array.fromfunctions(keepprice, shipping, vat),
-       array.reduce(0, (sum: number, next: number) => sum + next)
-    );
-    
-    const price = 100;
-    const expected = 125;
-    
-    expect(total(price)).toBe(expected);
-    expect(total(price) === vat(price) + shipping(price) + price).toBeTruthy();
+  test(a.some.name, () => {
+    const p = n.isEven;
+
+    expect(a.some(p)([1, 2, 3])).toBe(true);
+    expect(a.some(p)([2, 4, 6])).toBe(true);
+    expect(a.some(p)([3, 7, 9])).toBe(false);
   });
-});
+
+  test(a.sort.name, () => {
+    const a1 = [1, 2, 3];
+    const a2 = [3, 2, 1];
+
+    expect(expect.arrayContaining(a.sort(n.asc)(a2))).toEqual([1, 2, 3]);
+    expect(expect.arrayContaining(a.sort(n.desc)(a1))).toEqual([3, 2, 1]);
+  });
+
+  test(a.from.name, () => {
+    const a1 = [1, 2, 3];
+    const s = new Set(a1);
+
+    expect(expect.arrayContaining(a.from(a1))).toEqual([1, 2, 3]);
+    expect(expect.arrayContaining(a.from(s))).toEqual([1, 2, 3]);
+  })
+
+  test(a.length.name, () => {
+    const a1 = [1, 2, 3];
+
+    expect(a.length(a1)).toBe(3);
+  })
+
+  test(a.of.name, () => {
+    const a1 = [1, 2, 3];
+
+    expect(expect.arrayContaining(a.of(1, 2, 3))).toEqual([1, 2, 3]);
+  })
+
+  test(a.flatmap.name, () => {
+    const map = a.flatmap(s.length);
+
+    expect(expect.arrayContaining(map([['abc'], ['cdef']]))).toEqual([3, 4]);
+  })
+})

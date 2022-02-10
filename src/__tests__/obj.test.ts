@@ -1,80 +1,126 @@
 import * as obj from '../obj';
+import * as bool from '../bool';
+import * as num from '../num';
+import * as str from '../str';
+import * as o from '../option';
 
-const testobject = { foo: 100, bar: 200, baz: 300 };
+describe('obj', () => {
+  test(obj.cmp.name, () => {
+    const a = { a: 1, b: { c: 2 } };
+    const b = { a: 1, b: { c: 3 } };
+    const c = { a: 1, b: { c: 2 } };
+    const d = { a: 1, b: { c: 2, d: 3 } };
+    const e = { a: 1, b: { c: 3, d: 3, e: 4 } };
 
-describe(`obj`, () => {
-  test(`entries`, () => {
-    expect(expect.arrayContaining(obj.entries(testobject))).toEqual(Object.entries(testobject));
+    expect(obj.cmp(a, b)).toBe(-1);
+    expect(obj.cmp(b, a)).toBe(1);
+    expect(obj.cmp(a, c)).toBe(0);
+    expect(obj.cmp(a, d)).toBe(1);
+    expect(obj.cmp(e, c)).toBe(-1);
   });
 
-  test(`flatten`, () => {
-    const myobj = { a: { b: { c: 100 } }, d: 20 };
-    const testa = obj.flattern(myobj);
-    const expectedkeys = obj.keys(testa);
+  test(obj.entries.name, () => {
+    const a = { a: 1, b: { c: 2 } };
 
-    expect(expect.arrayContaining(expectedkeys)).toEqual(['a.b.c', 'd']);
-    expect(testa['a.b.c']).toBe(100);
-    expect(testa.d).toBe(20);
+    expect(expect.arrayContaining(obj.entries(a))).toEqual([['a', 1], ['b', { c: 2 }]]);
+  });
+
+  test(obj.flat.name, () => {
+    const a = { a: 1, b: { c: 2 } };
+
+    expect(obj.flat(a)).toEqual({ a: 1, 'b.c': 2 });
+  });
+
+  test(obj.get.name, () => {
+    const a = { a: 1, b: { c: 2 } };
+
+    expect(obj.get('a')(a)).toEqual(1);
+    expect(obj.get('b')(a)).toEqual({ c: 2 });
+    expect(obj.get('c')(a)).toBeNull();
+  });
+
+  test(obj.guard.name, () => {
+    expect(obj.guard({})).toBeTruthy();
+    expect(obj.guard(null)).toBeFalsy();
+    expect(obj.guard(undefined)).toBeFalsy();
+  });
+
+  test(obj.guardOf.name, () => {
+    const isshape = obj.guardOf({
+      a: str.guard,
+      b: num.guard,
+      c: bool.guard
+    });
+    const isshapeb = obj.guardOf({
+      a: isshape,
+      b: bool.guard,
+    })
+    const isshapec = obj.guardOf({
+      b: bool.guard,
+      c: o.isOptionOf(num.guard),
+    })
+    const isshaped = obj.guardOf({
+      a: {
+        b: num.guard
+      }
+    })
+
+    expect(isshape({ a: `foo`, b: 1, c: true })).toBe(true);
+    expect(isshape({ a: `foo`, b: false, c: 1 })).toBe(false);
+    expect(isshape(0)).toBe(false);
+    expect(isshapeb({ a: { a: `foo`, b: 1, c: true }, b: true })).toBe(true);
+    expect(isshapeb({ a: { a: `foo`, b: false, c: 1 }, b: true })).toBe(false);
+    expect(isshapeb({ a: 2, b: false })).toBe(false);
+    expect(isshapec({ b: true, c: 1 })).toBe(true);
+    expect(isshapec({ b: true })).toBe(true);
+    expect(isshapec({ b: 2, c: false })).toBe(false);
+    expect(isshapec({ b: 2 })).toBe(false);
+    expect(isshaped({ a: { b: 1 } })).toBe(true);
+    expect(isshaped({ a: { b: false } })).toBe(false);
   })
 
-  test(`is`, () => {
-    expect(obj.is(testobject)(testobject)).toBeTruthy();
-    expect(obj.is(1)(1)).toBeTruthy();
-    expect(obj.is(1)(2)).toBeFalsy();
+  test(obj.haskey.name, () => {
+    expect(obj.haskey('a')({ a: 1 })).toBeTruthy();
+    expect(obj.haskey('b')({ a: 1 })).toBeFalsy();
   });
 
-  test(`isExtensible`, () => {
-    const test = { foo: 100 }
-
-    expect(obj.isExtensible(test)).toBe(true);
-
-    Object.preventExtensions(test);
-
-    expect(obj.isExtensible(test)).toBe(false);
+  test(obj.haskeyOf.name, () => {
+    expect(obj.haskeyOf('a', num.guard)({ a: 1 })).toBeTruthy();
+    expect(obj.haskeyOf('a', str.guard)({ a: 1 })).toBeFalsy();
+    expect(obj.haskeyOf('b', num.guard)({ a: 1 })).toBeFalsy();
   });
 
-  test(`isFrozen`, () => {
-    const test = { foo: 100 }
-
-    expect(obj.isFrozen(test)).toBe(false);
-
-    Object.freeze(test);
-
-    expect(obj.isFrozen(test)).toBe(true);
+  test(obj.keys.name, () => {
+    expect(expect.arrayContaining(obj.keys({ a: 1, b: { c: 2 } }))).toEqual(['a', 'b']);
   });
 
-  test(`isSealed`, () => {
-    const test = { foo: 100 }
-
-    expect(obj.isSealed(test)).toBe(false);
-
-    Object.seal(test);
-
-    expect(obj.isSealed(test)).toBe(true);
+  test(obj.omit.name, () => {
+    expect(obj.omit(['a'])({ a: 1, b: { c: 2 } })).toEqual({ b: { c: 2 } });
   });
 
-  test(`keys`, () => {
-    expect(expect.arrayContaining(obj.keys({ foo: 1, bar: 2, baz: 3 }))).toEqual(["foo", "bar", "baz"]);
+  test(obj.pick.name, () => {
+    expect(obj.pick(['a'])({ a: 1, b: { c: 2 } })).toEqual({ a: 1 });
   });
 
-  test(`mapkey`, () => {
-    const fn = obj.mapkey<typeof testobject>('baz');
-    
-    expect(fn(testobject)).toBe(testobject.baz);
+  test(obj.values.name, () => {
+    const a = { a: 1, b: { c: 2 } };
+    const v = obj.values(a);
+    expect(expect.arrayContaining(v)).toEqual([1, { c: 2 }]);
+  });
+
+  test(obj.assign.name, () => {
+    const a = { a: 1, b: 2 };
+    const b = { b: 3, c: 4 };
+    const c = { c: 5, d: 6 };
+
+    expect(obj.assign(a, b, c)).toEqual({ a: 1, b: 3, c: 5, d: 6 });
   })
 
-  test(`omit`, () => {
-    const myobject = { foo: 10, bar: 20, baz: 'qwerty' };
-    const omitfn = obj.omit(`foo`, `bar`);
+  test(obj.size.name, () => {
+    const a = { a: 1, b: { c: 2 } };
+    const b = {};
 
-    expect(omitfn(myobject)).toEqual({ baz: `qwerty` });
-  });
-
-  test(`pick`, () => {
-    expect(obj.pick(`foo`, `baz`)(testobject)).toEqual({ foo: 100, baz: 300 })
-  });
-
-  test(`values`, () => {
-    expect(expect.arrayContaining(obj.values(testobject))).toEqual([100, 200, 300])
-  });
+    expect(obj.size(a)).toBe(2);
+    expect(obj.size(b)).toBe(0);
+  })
 });

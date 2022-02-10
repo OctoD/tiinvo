@@ -1,44 +1,45 @@
-export * from "./applicative";
-export * from "./cast";
-export * from "./conditionals";
-export * from "./mediator";
-export * from "./pipe";
-export * from "./pipe-async";
-export * from "./push-sub";
-export * from "./tagged-type";
-export * from "./trycatch";
-export * from "./typeguards";
-
-import * as array from "./array";
-import * as assertables from "./assertables";
-import * as derivables from "./derivables";
-import * as either from "./either";
-import * as filterables from "./filterables";
-import * as foldables from "./foldables";
-import * as mappables from "./mappables";
-import * as maybe from "./maybe";
-import * as num from "./num";
-import * as obj from "./obj";
-import * as option from "./option";
-import * as predicate from "./predicate";
-import * as result from "./result";
-import * as str from "./str";
-import * as unwrappables from "./unwrappables";
+import * as Array from './array';
+import * as Boolean from './bool';
+import * as Date from './date';
+import * as Either from './either';
+import type * as Fn from './fn';
+import * as Function from './function';
+import type * as Functors from './functors';
+import * as Maybe from './maybe';
+import * as Number from './num';
+import * as Object from './obj';
+import * as Option from './option';
+import * as PipeAsync from './pipe.async';
+import * as Pipe from './pipe';
+import * as Predicate from './predicate';
+import * as Promise from './promise';
+import * as Result from './result';
+import * as String from './str';
+import * as Try from './try';
+import * as Tuple from './tuple';
 
 export {
-  array,
-  assertables,
-  derivables,
-  either,
-  filterables,
-  foldables,
-  mappables,
-  maybe,
-  num,
-  obj,
-  option,
-  predicate,
-  result,
-  str,
-  unwrappables,
-};
+  Array,
+  Boolean as Bool,
+  Boolean,
+  Date,
+  Either,
+  Fn,
+  Function,
+  Functors,
+  Maybe,
+  Number as Num,
+  Number,
+  Object as Obj,
+  Object,
+  Option,
+  PipeAsync,
+  Pipe,
+  Predicate,
+  Promise,
+  Result,
+  String as Str,
+  String,
+  Try,
+  Tuple,
+}

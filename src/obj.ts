@@ -1,35 +1,115 @@
+import type * as f from './functors';
+import type * as o from './option';
+
+export type flat<a extends object> = object extends a 
+  ? object 
+  : {
+    [k in keyof a]-?: (x: NonNullable<a[k]> extends infer b 
+        ? b extends object 
+          ?
+            b extends readonly any[] 
+              ? Pick<a, k> 
+              : flat<b> extends infer c 
+                ? ({
+                    [kc in keyof c as `${Extract<k, string | number>}.${Extract<kc, string | number>}`]: c[kc] 
+                  }) 
+                : never 
+              : Pick<a, k> 
+            : never
+      ) => void 
+  } extends Record<keyof a, (y: infer d) => void> 
+    ? d extends infer _U 
+      ? { [kd in keyof d]: d[kd] } 
+      : never 
+    : never
+
+export type entries<a> = {
+  [k in keyof a]: [k, a[k]];
+}[keyof a][];
+
+export type keys<a> = (keyof a)[];
+
+export type guardsFromStruct<T> = {
+  [key in keyof T]: T[key] extends o.option<infer b> ? f.guard<o.option<b>> | guardsFromStruct<T[key]> : f.guard<T[key]> | guardsFromStruct<T[key]>;
+};
+
+export type values<a> = (a[keyof a])[];
+
 /**
- * Returns an array of key/values of the enumerable properties of an object
- * @since 2.10.0
- * @example
+ * Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object.
  * 
  * ```ts
- * import { obj } from 'tiinvo';
+ * import { Object } from 'tiinvo';
  * 
- * obj.entries({ foo: 10, bar: 20 }) // [["foo", 10], ["bar", 20]]
+ * const a = { a: 1, b: 2 };
+ * const b = { b: 3, c: 4 };
+ * const c = { c: 5, d: 6 };
+ * 
+ * Obj.assign(a, b, c);
+ * // { a: 1, b: 3, c: 5, d: 6 }
  * ```
  * 
- * @param o the object
- * @returns 
+ * @param target The target object to copy to.
+ * @param sources One or more source objects from which to copy properties
+ * @returns The target object
+ * 
+ * @since 3.0.9
  */
-export const entries = <T>(o: { [s: string]: T } | ArrayLike<T>): [string, T][] => Object.entries(o);
-
-export type Flatten<T extends object> = object extends T ? object : {
-  [K in keyof T]-?: (x: NonNullable<T[K]> extends infer V ? V extends object ?
-      V extends readonly any[] ? Pick<T, K> : Flatten<V> extends infer FV ? ({
-          [P in keyof FV as `${Extract<K, string | number>}.${Extract<P, string | number>}`]:
-          FV[P] }) : never : Pick<T, K> : never
-  ) => void } extends Record<keyof T, (y: infer O) => void> ?
-  O extends infer _U ? { [K in keyof O]: O[K] } : never : never
+export const assign = Object.assign;
 
 /**
- * Returns a flat object of `T`. 
- * Ideal to use it for mongodb queries/inserts.
+ * Compares two objects deeply.
  * 
- * @since 2.19.0
+ * ```typescript
+ * import { Object } from 'tiinvo';
+ * 
+ * const a = { a: 1, b: { c: 2 } };
+ * const b = { a: 1, b: { c: 2 } };
+ * const c = { a: 1, b: { c: 3 } };
+ * 
+ * Obj.cmp(a, b); // 0
+ * Obj.cmp(a, c); // -1
+ * Obj.cmp(c, a); // 1
+ * ```
+ * 
+ * @param a 
+ * @param b 
+ * @returns 
+ * @since 3.0.0
+ */
+export const cmp: f.comparableE<Record<string, any>, Record<string, any>> = (a, b) => {
+  const aflat = flat(a) as Record<string, unknown>;
+  const bflat = flat(b) as Record<string, unknown>;
+  const allkeys = Array.from(new Set([...keys(aflat), ...keys(bflat)]));
+  const results: (-1 | 0 | 1)[] = [];
+
+  for (let i = 0; i < allkeys.length; i++) {
+    const key = allkeys[i];
+    const has = haskey(key);
+    
+    if (has(aflat) && has(bflat)) {
+      const va: any = aflat[key];
+      const vb: any = bflat[key];
+
+      results.push(va === vb ? 0 : va < vb ? -1 : 1);
+    } else if (has(aflat) && !has(bflat)) {
+      results.push(-1);
+    } else if (!has(aflat) && has(bflat)) {
+      results.push(1);
+    }
+  }
+
+  const result = results.reduce((acc, cur) => acc + cur, 0 as any);
+
+  return result === 0 ? 0 : result > 0 ? 1 : -1;
+}
+/**
+ * Returns a flat representation for `a`.
+ * 
+ * Ideal to use it for diff or for mongodb queries/inserts.
  * 
  * ```ts
- * import { obj } from 'tiinvo';
+ * import { Object } from 'tiinvo';
  * 
  * const myobject = {
  *    a: {
@@ -40,14 +120,15 @@ export type Flatten<T extends object> = object extends T ? object : {
  *    d: 20
  * }
  * 
- * obj.flattern(myobject) // { 'a.b.c': 100, d: 20 }
+ * Obj.flat(myobject) // { 'a.b.c': 100, d: 20 }
  * ```
  * 
  * @param obj 
  * @param prefix 
  * @returns 
+ * @since 3.0.0
  */
-export const flattern = <T extends object>(obj: T, prefix = ``): Flatten<T> => {
+export const flat = <a extends Record<string, any>>(obj: a, prefix = ``): flat<a> => {
   const flattened = {} as any
   const kl = keys(obj)
 
@@ -57,7 +138,7 @@ export const flattern = <T extends object>(obj: T, prefix = ``): Flatten<T> => {
     const value = (obj as any)[key]
 
     if (typeof value === 'object' && value !== null) {
-      Object.assign(flattened, flattern(value, prefixed))
+      Object.assign(flattened, flat(value, prefixed))
     } else {
       flattened[prefixed] = value
     }
@@ -65,190 +146,231 @@ export const flattern = <T extends object>(obj: T, prefix = ``): Flatten<T> => {
 
   return flattened
 }
-
 /**
- * Returns `true` if the object `T` and object `U` values are the same, `false` otherwise.
- * @since 2.10.0
- * @example
+ * Gets a property `a` from an object `b` and returns a `option<c>`
  * 
- * ```ts
- * import { obj } from 'tiinvo';
+ * ```typescript
+ * import { Object } from 'tiinvo';
  * 
- * obj.is({ lorem: "ipsum" })({ lorem: "ipsum" }) // true
- * obj.is({ foo: 100 })({ bar: 200 }) // false
+ * const get = Object.get(`foo`);
+ * 
+ * console.log(get({ foo: `bar` })); // some<`bar`>
+ * console.log(get({})); // none
  * ```
  * 
- * @param t 
+ * @param a the property to get
+ * @param b the object to get the property from
  * @returns 
+ * @since 3.0.0
  */
-export const is = <T>(t: T) => <U>(u: U) => Object.is(t, u);
-
+export const get = <a extends string>(a: a) => <b>(b: b): o.option<b extends Record<a, infer u> ? u : null> => haskey(a)(b) ? b[a] : null as o.option<any>;
 /**
- * Returns a value that indicates whether new properties can be added to an object.
- * @since 2.10.0
- * @example
+ * Returns true if a is a `object` and not null
  * 
- * ```ts
- * import { obj } from 'tiinvo';
+ * ```typescript
+ * import { Object } from 'tiinvo';
  * 
- * const test = { foo: 100 }
- * 
- * obj.isExtensible(test) // true
- * 
- * Object.preventExtensions(test);
- * 
- * obj.isExtensible(test) // false
+ * console.log(Object.isobject({})); // true
+ * console.log(Object.isobject(null)); // false
  * ```
  * 
+ * @param a
+ * @returns
+ * @since 3.0.0
+ */
+export const guard = (a => typeof a === 'object' && a !== null) as f.guard<object>
+/**
+ * Returns `true` if a value `v` implements a shape `s`
+ * 
+ * ```typescript
+ * import { Obj, String, Number, Boolean } from 'tiinvo';
+ * 
+ * const isshape = Object.guardOf({
+ *    a: String.guard,
+ *    b: Number.guard,
+ *    c: Boolean.guard
+ * });
+ * 
+ * console.log(isshape({ a: `foo`, b: 1, c: true })); // true
+ * console.log(isshape({ a: `foo`, b: false, c: 1 })); // false
+ * ```
+ * 
+ * @param s 
+ * @returns 
+ * @since 3.0.0
+ */
+export const guardOf = <a extends any>(
+  s: guardsFromStruct<a>
+) => (v: unknown): v is a => {
+  if (!guard(s) || !guard(v)) {
+    return false;
+  }
+
+  const keys = Object.keys(s);
+
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    const currentvalue = v[key as keyof typeof v];
+    const currenttg = s[key as keyof typeof s];
+    const case1 = guard(currenttg) && guardOf(currenttg as any)(currentvalue);
+    const case2 = typeof currenttg === 'function' && currenttg(currentvalue);
+
+    if (!case1 && !case2) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+/**
+ * Returns object entries
+ * 
+ * ```typescript
+ * import { Object } from 'tiinvo';
+ * 
+ * const entries = Object.entries({ a: 1, b: 2 });
+ * console.log(entries); // [ ['a', 1], ['b', 2] ]
+ * ```
  * @param o 
  * @returns 
+ * @since 3.0.0
  */
-export const isExtensible = <T>(o: T): boolean => Object.isExtensible(o);
-
+export const entries = <a>(o: a): entries<a> => Object.entries(o) as entries<a>;
 /**
- * Returns true if existing property attributes and values cannot be modified in an object, and new properties cannot be added to the object.
- * @since 2.10.0
- * @example
+ * Returns true if a is a `object` and has property `k`
  * 
- * ```ts
- * import { obj } from 'tiinvo';
+ * ```typescript
+ * import { Object } from 'tiinvo';
  * 
- * const test = { foo: 100 }
- * 
- * obj.isFrozen(test) // false
- * 
- * Object.freeze(test);
- * 
- * obj.isFrozen(test) // true
+ * const hasa = Object.haskey('a');
+ * console.log(hasa({})); // false
+ * console.log(hasa({ a: 1 })); // true
  * ```
  * 
- * @param o 
+ * @param k 
  * @returns 
+ * @since 3.0.0
  */
-export const isFrozen = <T>(o: T): boolean => Object.isFrozen(o);
-
+export const haskey = <k extends string>(k: k) => (o: unknown): o is Record<k, unknown> => guard(o) && o.hasOwnProperty(k);
 /**
- * Returns true if existing property attributes cannot be modified in an object and new properties cannot be added to the object.
- * @since 2.10.0
- * @example
+ * Returns true if a is a `object` and has property `k` of type `g`
  * 
- * ```ts
- * import { obj } from 'tiinvo';
+ * ```typescript
+ * import { Object } from 'tiinvo';
+ * import * as num from 'tiinvo/num';
  * 
- * const test = { foo: 100 }
+ * const hasa = Object.haskeyOf('a', num.guard);
  * 
- * obj.isSealed(test) // false
- * 
- * Object.seal(test);
- * 
- * obj.isSealed(test) // true
+ * console.log(hasa({})); // false
+ * console.log(hasa({ a: 1 })); // true
+ * console.log(hasa({ a: `nope` })); // false
  * ```
  * 
- * @param o 
+ * @param k 
+ * @param g 
  * @returns 
+ * @since 3.0.0
  */
-export const isSealed = <T>(o: T): boolean => Object.isSealed(o);
-
+export const haskeyOf = <a, k extends string>(k: k, g: f.guard<a>) => (o: unknown): o is Record<k, a> => guard(o) && o.hasOwnProperty(k) && g((o as any)[k]);
 /**
  * Returns the names of the enumerable string properties and methods of an object.
- * @since 2.10.0
- * @example
  * 
- * ```ts
- * import { obj } from 'tiinvo';
+ * ```typescript
+ * import { Object } from 'tiinvo';
  * 
- * obj.keys({ foo: 1, bar: 2, baz: 3 }) // ["foo", "bar", "baz"]
+ * console.log(Object.keys({ a: 1, b: 2 })); // ['a', 'b']
+ * console.log(Object.keys({})); // []
  * ```
  * 
- * @param obj 
+ * @param a 
  * @returns 
+ * @since 3.0.0
  */
-export const keys = <T>(obj: T): Array<keyof T> => Object.keys(obj) as Array<keyof T>;
-
+export const keys = <a extends { [index: string]: unknown }>(a: a): keys<a> => Object.keys(a) as keys<a>;
 /**
- * Creates a mapper function for the type T. 
- * @since 2.10.0
- * @example
+ * Omits the keys in `a` that are in `b`
  * 
- * ```ts
- * import { obj } from 'tiinvo';
+ * ```typescript
+ * import { Object } from 'tiinvo';
  * 
- * const test = { foo: 200, bar: 'baz' };
- * 
- * const map = obj.mapkey<typeof test>('foo')
- * 
- * map(test) // 200
- * 
+ * const omit = Object.omit(['a', 'b']);
+ * console.log(omit({ a: 1, b: 2, c: 3 })); // { c: 3 }
+ * console.log(omit({ a: 1, b: 2 })); // {}
  * ```
- * 
- * @param key 
+ * @param k 
  * @returns 
+ * @since 3.0.0
  */
-export const mapkey = <T>(key: keyof T): (arg: T) => T[typeof key] => (arg: T) => arg[key]
-
-/**
- * Omits from a set of keys `Keys` from an object `o`.
- * @since 2.14.0
- * 
- * @example
- * 
- * ```ts
- * import { omit } from 'tiinvo';
- * 
- * const myobject = { foo: 10, bar: 20, baz: 'qwerty' };
- * omit('foo', 'bar')(myobject) // { baz: 'qwerty' }
- * ```
- * 
- * @param omitkeys 
- * @returns 
- */
-export const omit = <Keys extends string>(...omitkeys: Keys[]) => <T extends Record<Keys, any>>(o: T): Omit<T, Keys> => {
-  const omitted = {} as Exclude<T, Keys>;
-  const ownedkeys = keys(o);
+export const omit = <a extends string>(k: a[]) => <b extends Record<string, any>>(b: b) => {
+  const omitted = {} as Exclude<b, a>;
+  const ownedkeys = keys(b);
 
   for (let index = 0; index < ownedkeys.length; index++) {
     const key = ownedkeys[index];
 
-    if (!omitkeys.includes(key as Keys)) {
-      (omitted as any)[key] = o[key];
+    if (!k.includes(key as a)) {
+      (omitted as any)[key] = b[key];
     }
   }
 
   return omitted;
 }
-
 /**
- * Given a set of properties `T` whose keys are in the object `U`, returns a new object with all picked properties
- * @since 2.10.0
- * @example
+ * Returns a new object with the keys of `a` that are in `b`
  * 
- * ```ts
- * import { obj } from 'tiinvo';
+ * ```typescript
+ * import { Object } from 'tiinvo';
  * 
- * const test = { foo: 100, bar: 200, baz: 300 };
- * obj.pick(`foo`, `baz`)(test) // { foo: 100, baz: 300 }
+ * const pick = Object.pick(['a', 'b']);
+ * console.log(pick({ a: 1, b: 2, c: 3 })); // { a: 1, b: 2 }
+ * console.log(pick({ a: 1, b: 2 })); // { a: 1, b: 2 }
  * ```
  * 
  * @param keys 
  * @returns 
+ * @since 3.0.0
  */
-export const pick = <T extends string>(...keys: T[]): (<U extends Record<T, any>>(o: U) => Pick<U, T>) => o => keys.reduce(
-  (obj, key) => ({ ...obj, [key]: o[key] }),
-  {} as Pick<any, T>
-);
+export const pick = <a extends string>(keys: a[]) => <b extends Record<string, any>>(b: b) => {
+  const o = {} as Pick<b, a>;
 
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+
+    if (haskey(key)(b)) {
+      o[key] = b[key];
+    }
+  }
+
+  return o;
+}
 /**
- * Returns an array of values of the enumerable properties of an object
- * @since 2.10.0
- * @example
+ * Returns an object size
  * 
- * ```ts
- * import { obj } from 'tiinvo';
+ * ```typescript
+ * import { Object } from 'tiinvo';
  * 
- * obj.values({ foo: 1, bar: 2, baz: 3 }) // [1, 2, 3]
+ * console.log(Object.size({ a: 1, b: 2 })); // 2
+ * console.log(Object.size({})); // 0
  * ```
  * 
- * @param obj 
+ * @param a
+ * @returns
+ * @since 3.0.10
+ **/
+export const size = <a extends Record<string, any>>(a: a): number => Object.keys(a).length;
+/**
+ * Returns an array of values of the enumerable properties of an object
+ * 
+ * ```typescript
+ * import { Object } from 'tiinvo';
+ * 
+ * console.log(Object.values({ a: 1, b: 2 })); // [1, 2]
+ * console.log(Object.values({})); // []
+ * ```
+ * 
+ * @param a 
  * @returns 
+ * @since 3.0.0
  */
-export const values = <T>(obj: { [s: string]: T }): T[] => Object.values(obj);
+export const values = <a extends Record<string, any>>(a: a): values<a> => Object.values(a) as values<a>;

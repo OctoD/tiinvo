@@ -1,24 +1,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "target": "es2015",
+    "target": "ESNext",
     "lib": [
-      "es2015",
-      "es2015.collection",
-      "es2015.core",
-      "es2015.generator",
-      "es2015.iterable",
-      "es2015.promise",
-      "es2015.proxy",
-      "es2015.reflect",
-      "es2015.symbol",
-      "es2015.symbol.wellknown",
-      "es2016",
-      "es2016.array.include",
-      "es2017",
-      "es2017.object",
-      "es2017.sharedmemory",
-      "es2017.typedarrays"
+      "ESNext"
     ],
     "strict": true,
     "allowUnreachableCode": false,
@@ -32,18 +17,15 @@
     "strictPropertyInitialization": true,
     "esModuleInterop": true,
     "declaration": true,
-    "outDir": "dist",
     "module": "ESNext",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },
+  "include": [
+    "./src"
+  ],
   "exclude": [
-    "dist",
     "node_modules"
   ],
-  "typedoc": {
-    "entryPoints": ["src/index.ts"],
-    "out": "docs"
-  },
 }
