@@ -33,6 +33,24 @@ export const guard = (value => typeof value === 'number') as f.guard<number>;
 export const cmp: f.comparableE<number, number> = (a, b): -1 | 0 | 1 => a === b ? 0 : a < b ? -1 : 1;
 
 /**
+ * Returns the integral part of the a numeric expression, `a`, removing any fractional digits. If `a` is already an integer, the result is `a`.
+ * 
+ * ```typescript
+ * import { Number } from 'tiinvo';
+ * 
+ * console.log(Number.int(10.5)) // 10
+ * console.log(Number.int(10.1)) // 10
+ * console.log(Number.int(10.9)) // 10
+ * console.log(Number.int(10)) // 10
+ * ```
+ * 
+ * @param a 
+ * @returns 
+ * @since 3.1.0
+ */
+export const int = (a: number): number => a | 0;
+
+/**
  * Returns true if is even
  * 
  * ```typescript

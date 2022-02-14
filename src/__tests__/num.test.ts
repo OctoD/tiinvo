@@ -131,4 +131,10 @@ describe('num', () => {
   test(`bsub`, () => {
     expect(n.bsub(10, 20)).toBe(-10);
   });
+  test(`int`, () => {
+    expect(n.int(10.5)).toBe(10);
+    expect(n.int(10.1)).toBe(10);
+    expect(n.int(10.9)).toBe(10);
+    expect(n.int(10)).toBe(10);
+  });
 })

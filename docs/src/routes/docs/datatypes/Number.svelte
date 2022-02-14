@@ -39,6 +39,22 @@ console.log(Number.compare(5, 5)) // 0
   />
 </article>
 <article>
+  <DocItemTitle title="int" />
+  <p>Returns the integral part of the a numeric expression, <code>a</code>, removing any fractional digits. If <code>a</code> is already an integer, the result is <code>a</code>.</p>
+  <SinceVersion>3.1.0</SinceVersion>
+  <PrismJs
+    language="ts"
+    code={`
+import { Number } from 'tiinvo';
+
+console.log(Number.int(10.5)) // 10
+console.log(Number.int(10.1)) // 10
+console.log(Number.int(10.9)) // 10
+console.log(Number.int(10)) // 10
+  `}
+  />
+</article>
+<article>
   <DocItemTitle title="isEven" />
   <p>Returns true if is even</p>
   <SinceVersion>3.0.0</SinceVersion>
