@@ -14,6 +14,8 @@ export const cmp: f.comparableE<fn.anyfn, fn.anyfn> = (a, b) => {
 
 export const eq: f.equatableE<fn.anyfn> = (a, b) => cmp(a, b) === 0;
 
+export const name = <f extends fn.anyfn>(f: f): string => f.name;
+
 export const guard = (a => typeof a === 'function') as f.guard<fn.nary<unknown[]>>;
 
 export const curry2 = <a extends fn.binary<any, any, any>>(f: a) => (a: fn.argsOf<a>[0]) => (b: fn.argsOf<a>[1]): fn.returnTypeOf<a> => f(a, b);

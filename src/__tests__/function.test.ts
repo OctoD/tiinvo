@@ -68,4 +68,8 @@ describe(``, () => {
     const fn = (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, l: number) => a + b + c + d + e + f + g + h + i + l;
     expect(fx.curry10(fn)(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)).toBe(55);
   })
+  test(`name`, () => {
+    const lorem = () => {};
+    expect(fx.name(lorem)).toBe(`lorem`);
+  })
 })
