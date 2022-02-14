@@ -12,7 +12,7 @@
 <h2>Introduction</h2>
 
 <article>
-  <h4>What is tiinvo?</h4>
+  <h4 class="font-semibold mb-1">What is tiinvo?</h4>
   <p>tiinvo a library which aims to provide a standardized Javascript API.</p>
   <p>It adds functions and new data types to the existing ones.</p>
 </article>

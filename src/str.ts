@@ -652,3 +652,51 @@ export const kebab: fn.unary<string, string> = b => b.replace(/[A-Z]/g, word => 
 export const snake: fn.unary<string, string> = b => b.replace(/[A-Z]/g, word => ' ' + word.replace(/[A-Z]/, b => b.toLowerCase())).replace(/\s/g, '_');
 
 //#endregion
+
+/**
+ * Returns an array of chars.
+ * 
+ * ```typescript
+ * import { String } from 'tiinvo';
+ * 
+ * String.chars('hello'); // ['h', 'e', 'l', 'l', 'o']
+ * ```
+ * 
+ * @param b
+ * @returns
+ * 
+ * @since 3.1.0
+ */
+export const chars = usplit('');
+/**
+ * Returns an array of lines in a string.
+ * 
+ * ```typescript
+ * import { String } from 'tiinvo';
+ * 
+ * String.split('hello\nworld'); // ['hello', 'world']
+ * ```
+ * 
+ * @param b
+ * @returns
+ * 
+ * @since 3.1.0
+ * 
+ */
+export const lines = usplit(/\r?\n/);
+
+/**
+ * Returns an array of words in a string.
+ * 
+ * ```typescript
+ * import { String } from 'tiinvo';
+ * 
+ * String.words('hello world'); // ['hello', 'world']
+ * ```
+ * 
+ * @param b
+ * @returns
+ * 
+ * @since 3.1.0
+ */
+export const words = usplit(/\s+/m);

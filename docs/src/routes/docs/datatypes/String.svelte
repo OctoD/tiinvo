@@ -689,3 +689,45 @@ String.snake('hello world'); // 'hello_world'
   `}
   />
 </article>
+
+<article>
+  <DocItemTitle title="chars" />
+  <p>Returns an array of chars in a string.</p>
+  <SinceVersion>3.1.0</SinceVersion>
+  <PrismJs
+    language="ts"
+    code={`
+import { String } from 'tiinvo';
+
+String.chars('hello'); // ['h', 'e', 'l', 'l', 'o']
+  `}
+  />
+</article>
+
+<article>
+  <DocItemTitle title="lines" />
+  <p>Returns an array of lines in a string.</p>
+  <SinceVersion>3.1.0</SinceVersion>
+  <PrismJs
+    language="ts"
+    code={`
+import { String } from 'tiinvo';
+
+String.lines('hello\nworld'); // ['hello', 'world']
+  `}
+  />
+</article>
+
+<article>
+  <DocItemTitle title="words" />
+  <p>Returns an array of words in a string.</p>
+  <SinceVersion>3.1.0</SinceVersion>
+  <PrismJs
+    language="ts"
+    code={`
+import { String } from 'tiinvo';
+
+String.words('hello world'); // ['hello', 'world']
+  `}
+  />
+</article>

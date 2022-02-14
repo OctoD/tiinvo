@@ -228,4 +228,16 @@ describe(`str`, () => {
   test(s.length.name, () => {
     expect(s.length('hello')).toBe(5);
   })
+
+  test(s.words.name, () => {
+    expect(s.words('hello world')).toEqual(['hello', 'world']);
+  })
+
+  test(s.lines.name, () => {
+    expect(s.lines('hello\nworld')).toEqual(['hello', 'world']);
+  })
+
+  test(s.chars.name, () => {
+    expect(s.chars('hello')).toEqual(['h', 'e', 'l', 'l', 'o']);
+  })
 })
