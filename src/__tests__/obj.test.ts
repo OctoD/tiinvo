@@ -123,4 +123,47 @@ describe('obj', () => {
     expect(obj.size(a)).toBe(2);
     expect(obj.size(b)).toBe(0);
   })
+
+  test(obj.defineProperty.name, () => {
+    const a = { a: 1, b: 2 };
+
+    obj.defineProperty(a, 'c', { value: 3, enumerable: true, configurable: true, writable: true });
+    expect((a as any).c).toBe(3);
+    (a as any).c = 4;
+    expect((a as any).c).toBe(4);
+  })
+
+  test(obj.freeze.name, () => {
+    const a = { a: 1, b: 2 };
+    obj.freeze(a);
+
+    expect(() => { a.a = 100 }).toThrow();
+  })
+
+  test(obj.fromEntries.name, () => {
+    const fromEntries = obj.fromEntries([
+      ['a', 1],
+      ['b', 2]
+    ]);
+
+    expect(fromEntries).toEqual({ a: 1, b: 2 });
+  })
+
+  test(obj.map.name, () => {
+    const map = obj.map(num.umul(2));
+    const map2 = obj.map((a: number | string | boolean) => {
+      switch (typeof a) {
+        case 'number': return a * 2;
+        case 'string': return a + a;
+        case 'boolean': return !a;
+      }
+    })
+    expect(map({ a: 1, b: 2 })).toEqual({ a: 2, b: 4 });
+    expect(map2({ a: 2, b: 'hello', c: true })).toEqual({ a: 4, b: 'hellohello', c: false });
+  })
+
+  test(obj.mapkeys.name, () => {
+    const map = obj.mapkeys(str.upper);
+    expect(map({ a: 1, b: 2 })).toEqual({ A: 1, B: 2 });
+  })
 });

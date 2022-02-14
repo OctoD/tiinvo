@@ -49,6 +49,21 @@ Object.cmp(c, a); // 1
   />
 </article>
 <article>
+  <DocItemTitle title="defineProperty" />
+  <p>Adds a property to an object, or modifies attributes of an existing property.</p>
+  <SinceVersion>3.1.0</SinceVersion>
+  <PrismJs
+    language="ts"
+    code={`
+import { Object } from 'tiinvo';
+
+const a = { a: 1, b: 2 };
+Obj.defineProperty(a, 'c', { value: 3, enumerable: true, configurable: true, writable: true });
+// { a: 1, b: 2, c: 3 }
+  `}
+  />
+</article>
+<article>
   <DocItemTitle title="flat" />
   <p>Returns a flat representation for <code>a</code>.</p>
   <p>Ideal to use it for diff or for mongodb queries/inserts.</p>
@@ -68,6 +83,39 @@ const myobject = {
 }
 
 Object.flat(myobject) // { 'a.b.c': 100, d: 20 }
+  `}
+  />
+</article>
+<article>
+  <DocItemTitle title="freeze" />
+  <p>Prevents the modification of existing property attributes and values, and prevents the addition of new properties.</p>
+  <SinceVersion>3.1.0</SinceVersion>
+  <PrismJs
+    language="ts"
+    code={`
+import { Object } from 'tiinvo';
+
+const a = { a: 1, b: 2 };
+Obj.freeze(a);
+a.a = 100; // throws;
+  `}
+  />
+</article>
+<article>
+  <DocItemTitle title="fromEntries" />
+  <p>Returns an object created by key-value entries for properties and methods.</p>
+  <SinceVersion>3.1.0</SinceVersion>
+  <PrismJs
+    language="ts"
+    code={`
+import { Object } from 'tiinvo';
+
+const fromEntries = Object.fromEntries([
+  ['a', 1], 
+  ['b', 2]
+]);
+
+console.log(fromEntries); // { a: 1, b: 2 }
   `}
   />
 </article>
@@ -192,6 +240,42 @@ import { Object } from 'tiinvo';
 
 console.log(Object.keys({ a: 1, b: 2 })); // ['a', 'b']
 console.log(Object.keys({})); // []
+  `}
+  />
+</article>
+<article>
+  <DocItemTitle title="map" />
+  <p>Maps a function over the entries of an object.</p>
+  <SinceVersion>3.1.0</SinceVersion>
+  <PrismJs
+    language="ts"
+    code={`
+import { Object, Number } from 'tiinvo';
+
+const map = Object.map(Number.umul(2));
+const map2 = obj.map((a: number | string | boolean) => {
+  switch (typeof a) {
+    case 'number': return a * 2;
+    case 'string': return a + a;
+    case 'boolean': return !a;
+  }
+})
+console.log(map({ a: 1, b: 2 })); // { a: 2, b: 4 }
+console.log(map2({ a: 2, b: 'hello', c: true })); // { a: 4, b: 'hellohello', c: false }
+  `}
+  />
+</article>
+<article>
+  <DocItemTitle title="mapkeys" />
+  <p>Maps a function over the keys of an object.</p>
+  <SinceVersion>3.1.0</SinceVersion>
+  <PrismJs
+    language="ts"
+    code={`
+import { Object, String } from 'tiinvo';
+
+const map = Object.mapkeys(String.upper);
+console.log(map({ a: 1, b: 2 })); // { A: 1, B: 2 }
   `}
   />
 </article>

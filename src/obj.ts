@@ -1,27 +1,27 @@
 import type * as f from './functors';
 import type * as o from './option';
 
-export type flat<a extends object> = object extends a 
-  ? object 
+export type flat<a extends object> = object extends a
+  ? object
   : {
-    [k in keyof a]-?: (x: NonNullable<a[k]> extends infer b 
-        ? b extends object 
-          ?
-            b extends readonly any[] 
-              ? Pick<a, k> 
-              : flat<b> extends infer c 
-                ? ({
-                    [kc in keyof c as `${Extract<k, string | number>}.${Extract<kc, string | number>}`]: c[kc] 
-                  }) 
-                : never 
-              : Pick<a, k> 
-            : never
-      ) => void 
-  } extends Record<keyof a, (y: infer d) => void> 
-    ? d extends infer _U 
-      ? { [kd in keyof d]: d[kd] } 
-      : never 
-    : never
+    [k in keyof a]-?: (x: NonNullable<a[k]> extends infer b
+      ? b extends object
+      ?
+      b extends readonly any[]
+      ? Pick<a, k>
+      : flat<b> extends infer c
+      ? ({
+        [kc in keyof c as `${Extract<k, string | number>}.${Extract<kc, string | number>}`]: c[kc]
+      })
+      : never
+      : Pick<a, k>
+      : never
+    ) => void
+  } extends Record<keyof a, (y: infer d) => void>
+  ? d extends infer _U
+  ? { [kd in keyof d]: d[kd] }
+  : never
+  : never
 
 export type entries<a> = {
   [k in keyof a]: [k, a[k]];
@@ -86,7 +86,7 @@ export const cmp: f.comparableE<Record<string, any>, Record<string, any>> = (a, 
   for (let i = 0; i < allkeys.length; i++) {
     const key = allkeys[i];
     const has = haskey(key);
-    
+
     if (has(aflat) && has(bflat)) {
       const va: any = aflat[key];
       const vb: any = bflat[key];
@@ -103,6 +103,20 @@ export const cmp: f.comparableE<Record<string, any>, Record<string, any>> = (a, 
 
   return result === 0 ? 0 : result > 0 ? 1 : -1;
 }
+/**
+ * Adds a property to an object, or modifies attributes of an existing property.
+ * 
+ * ```typescript
+ * import { Object } from 'tiinvo';
+ * 
+ * const a = { a: 1, b: 2 };
+ * Obj.defineProperty(a, 'c', { value: 3, enumerable: true, configurable: true, writable: true });
+ * // { a: 1, b: 2, c: 3 }
+ * ```
+ * 
+ * @since 3.1.0
+ */
+export const defineProperty = Object.defineProperty
 /**
  * Returns a flat representation for `a`.
  * 
@@ -146,6 +160,39 @@ export const flat = <a extends Record<string, any>>(obj: a, prefix = ``): flat<a
 
   return flattened
 }
+/**
+ * Prevents the modification of existing property attributes and values, and prevents the addition of new properties.
+ * 
+ * ```ts
+ * import { Object } from 'tiinvo';
+ * 
+ * const a = { a: 1, b: 2 };
+ * Obj.freeze(a);
+ * a.a = 100; // throws
+ * ```
+ * 
+ * @since 3.1.0
+ */
+export const freeze = Object.freeze;
+/**
+ * Returns an object created by key-value entries for properties and methods
+ * 
+ * ```typescript
+ * import { Object } from 'tiinvo';
+ * 
+ * const fromEntries = Object.fromEntries([
+ *  ['a', 1], 
+ *  ['b', 2]
+ * ]);
+ * 
+ * console.log(fromEntries); // { a: 1, b: 2 }
+ * ```
+ * 
+ * @param entries
+ * @returns
+ * @since 3.1.0
+ */
+export const fromEntries = Object.fromEntries;
 /**
  * Gets a property `a` from an object `b` and returns a `option<c>`
  * 
@@ -288,6 +335,65 @@ export const haskeyOf = <a, k extends string>(k: k, g: f.guard<a>) => (o: unknow
  * @since 3.0.0
  */
 export const keys = <a extends { [index: string]: unknown }>(a: a): keys<a> => Object.keys(a) as keys<a>;
+/**
+ * Maps a function over the entries of an object.
+ * 
+ * ```ts
+ * import { Object, Number } from 'tiinvo';
+ * 
+ * const map = Object.map(Number.umul(2));
+ * const map2 = obj.map((a: number | string | boolean) => {
+ *   switch (typeof a) {
+ *     case 'number': return a * 2;
+ *     case 'string': return a + a;
+ *     case 'boolean': return !a;
+ *   }
+ * })
+ * console.log(map({ a: 1, b: 2 })); // { a: 2, b: 4 }
+ * console.log(map2({ a: 2, b: 'hello', c: true })); // { a: 4, b: 'hellohello', c: false }
+ * ```
+ * 
+ * @param fn 
+ * @returns 
+ * @since 3.1.0
+ */
+export const map = <a extends string, b, c>(fn: (b: b, a: a, i: number) => c) => <d extends { [key in a]: b }>(d: d): { [key in a]: c } => {
+  const result = {} as { [key in a]: c };
+  const kl = keys(d);
+
+  for (let i = 0; i < kl.length; i++) {
+    const v = d[kl[i]];
+    result[kl[i] as keyof typeof result] = fn(v, kl[i] as a, i) as c;
+  }
+
+  return result;
+}
+/**
+ * Maps a function over the keys of an object.
+ * 
+ * ```ts
+ * import { Object, String } from 'tiinvo';
+ * 
+ * const map = Object.mapkeys(String.upper);
+ * console.log(map({ a: 1, b: 2 })); // { A: 1, B: 2 }
+ * ```
+ * 
+ * @param fn 
+ * @returns 
+ * 
+ * @since 3.1.0
+ */
+export const mapkeys = <a extends string, b extends string>(fn: (a: a, i: number) => b) => <c extends { [key in a]: d }, d>(c: c): { [key in b]: d } => {
+  const result = {} as { [key in b]: d };
+  const kl = keys(c);
+
+  for (let i = 0; i < kl.length; i++) {
+    const v = c[kl[i]];
+    result[fn(kl[i] as a, i)] = v;
+  }
+
+  return result;
+}
 /**
  * Omits the keys in `a` that are in `b`
  * 
