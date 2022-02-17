@@ -276,6 +276,24 @@ console.log(firstor([])) // 'not found'
 </article>
 
 <article>
+  <DocItemTitle title="filtermap" />
+  <p>
+    Maps an array <code>a</code> by removing all elements that do not satisfy the predicate <code>p</code>.
+  </p>
+  <SinceVersion>3.0.0</SinceVersion>
+  <PrismJs
+    code={`
+import { Array, Number } 'tiinvo';
+
+const fm = Array.filtermap(Number.umul(2), Number.gt(3));
+
+fm([1, 2, 3, 4, 5]) // [6, 8, 10]
+ `}
+    language="ts"
+  />
+</article>
+
+<article>
   <DocItemTitle title="flat" />
   <p>Flatterns an array</p>
   <SinceVersion>3.0.0</SinceVersion>
@@ -321,6 +339,23 @@ console.log(map([['abc'], ['cdef']])) // [3, 4]
 import { Array, Num, Str } 'tiinvo';
 
 console.log(Array.fromfunctions([Num.add(1), Str.upper])([1, 'a'])) // ['2', 'A']
+ `}
+    language="ts"
+  />
+</article>
+
+<article>
+  <DocItemTitle title="includes" />
+  <p>
+    Determines whether an array includes a certain element, returning true or false as appropriate.
+  </p>
+  <SinceVersion>3.2.0</SinceVersion>
+  <PrismJs
+    code={`
+import { Array, Num, Str } 'tiinvo';
+
+console.log(Array.includes('a')(['a', 'b'])) // true
+console.log(Array.includes('c')(['a', 'b'])) // false
  `}
     language="ts"
   />

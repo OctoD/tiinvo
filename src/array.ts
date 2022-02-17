@@ -239,6 +239,35 @@ export const first = <a>(a: a[]) => a[0] as option<a>
  */
 export const firstOr = <a>(a: a) => (b: a[]) => b[0] ?? a;
 /**
+ * Maps an array `a` by removing all elements that do not satisfy the predicate `p`.
+ * 
+ * ```typescript
+ * import { Array, Number } 'tiinvo';
+ * 
+ * const fm = Array.filtermap(Number.umul(2), Number.gt(3));
+ * 
+ * fm([1, 2, 3, 4, 5]) // [6, 8, 10]
+ * ```
+ * 
+ * @param f 
+ * @param p 
+ * @returns 
+ * @since 3.2.0
+ */
+export const filtermap = <a, b>(f: f.map<a, b>, p: f.predicateE<a>) => (a: a[]) => {
+  const r = [] as b[];
+
+  for (let i = 0; i < a.length; i++) {
+    const v = a[i];
+
+    if (p(v)) {
+      r.push(f(v));
+    }
+  }
+
+  return r;
+}
+/**
  * Flatterns an array
  * 
  * ```typescript
@@ -282,6 +311,22 @@ export const flatmap = <a, b>(f: f.map<a, b>) => (a: a[][]): b[] => flat(a.map(e
  * ```
  */
 export const fromfunctions = <a extends ((...args: any) => any)[]>(... a: a) => (b: fn.argsOfMany<a>) => a.map((c, i) => c((b)[i])) as unknown as fn.returnTypeOfMany<a>;
+/**
+ * Determines whether an array includes a certain element, returning true or false as appropriate.
+ * 
+ * ```typescript
+ * import { Array } 'tiinvo';
+ * 
+ * console.log(Array.includes('a')(['a', 'b'])) // true
+ * console.log(Array.includes('c')(['a', 'b'])) // false
+ * ```
+ * 
+ * @param a 
+ * @returns 
+ * 
+ * @since 3.2.0
+ */
+export const includes = <a>(a: a) => (b: a[]) => b.includes(a);
 /**
  * Returns the last element of an array `a`. If the array is empty, returns `none`.
  * 

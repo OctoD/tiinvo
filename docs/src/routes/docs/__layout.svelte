@@ -12,6 +12,7 @@
         <Doclink href="/docs/datatypes/Boolean">Boolean</Doclink>
         <Doclink href="/docs/datatypes/Date">Date</Doclink>
         <Doclink href="/docs/datatypes/Either">Either</Doclink>
+        <Doclink href="/docs/datatypes/Function">Function</Doclink>
         <Doclink href="/docs/datatypes/Maybe">Maybe</Doclink>
         <Doclink href="/docs/datatypes/Number">Number</Doclink>
         <Doclink href="/docs/datatypes/Object">Object</Doclink>

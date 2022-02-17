@@ -1,5 +1,7 @@
+import { Arr, Str } from '..';
 import * as fx from '../function';
 import * as num from '../num';
+import { pipe } from '../pipe';
 
 describe(``, () => {
   test(`bind`, () => {
@@ -27,8 +29,8 @@ describe(``, () => {
   test(`guard`, () => {
     expect(fx.guard(10)).toBeFalsy();
     expect(fx.guard(new Function())).toBeTruthy();
-    expect(fx.guard(function () {})).toBeTruthy();
-    expect(fx.guard(() => {})).toBeTruthy();
+    expect(fx.guard(function () { })).toBeTruthy();
+    expect(fx.guard(() => { })).toBeTruthy();
   })
   test(`curry2`, () => {
     const fn = num.badd;
@@ -69,7 +71,15 @@ describe(``, () => {
     expect(fx.curry10(fn)(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)).toBe(55);
   })
   test(`name`, () => {
-    const lorem = () => {};
+    const lorem = () => { };
     expect(fx.name(lorem)).toBe(`lorem`);
+  })
+
+  test(fx.map.name, () => {
+    const chars = Str.chars;
+    const upperchars = pipe(chars, Arr.map(Str.upper));
+    const m = fx.map(chars, upperchars);
+
+    expect(m('abc')).toEqual([['a', 'b', 'c'], ['A', 'B', 'C']])
   })
 })

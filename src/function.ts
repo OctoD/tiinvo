@@ -35,3 +35,22 @@ export const curry8 = <a extends fn.octonary<any, any, any, any, any, any, any, 
 export const curry9 = <a extends fn.nonary<any, any, any, any, any, any, any, any, any, any>>(f: a) => (a: fn.argsOf<a>[0]) => (b: fn.argsOf<a>[1]) => (c: fn.argsOf<a>[2]) => (d: fn.argsOf<a>[3]) => (e: fn.argsOf<a>[4]) => (g: fn.argsOf<a>[5]) => (h: fn.argsOf<a>[6]) => (i: fn.argsOf<a>[7]) => (j: fn.argsOf<a>[8]): fn.returnTypeOf<a> => f(a, b, c, d, e, g, h, i, j);
 
 export const curry10 = <a extends fn.decenary<any, any, any, any, any, any, any, any, any, any, any>>(f: a) => (a: fn.argsOf<a>[0]) => (b: fn.argsOf<a>[1]) => (c: fn.argsOf<a>[2]) => (d: fn.argsOf<a>[3]) => (e: fn.argsOf<a>[4]) => (g: fn.argsOf<a>[5]) => (h: fn.argsOf<a>[6]) => (i: fn.argsOf<a>[7]) => (j: fn.argsOf<a>[8]) => (k: fn.argsOf<a>[9]): fn.returnTypeOf<a> => f(a, b, c, d, e, g, h, i, j, k);
+
+export const pass = <a>(a: a) => a;
+
+/**
+ * Maps an array of functions `a` over an argument `b`.
+ * 
+ * ```ts
+ * import { Function, Number, String, Array } from 'tiinvo'
+ * 
+ * const m = Function.map(String.chars, pipe(String.chars, Array.map(String.upper)));
+ * 
+ * m('abc') // [['a', 'b', 'c'], ['A', 'B', 'C']]
+ * ```
+ * 
+ * @param a 
+ * @returns 
+ * @since 3.2.0
+ */
+export const map = <a, b>(... a: fn.unary<a, b>[]) => (arg: a) => a.map(f => f(arg));

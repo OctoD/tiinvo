@@ -240,4 +240,15 @@ describe(`array`, () => {
 
     expect(expect.arrayContaining(map([['abc'], ['cdef']]))).toEqual([3, 4]);
   })
+
+  test(a.includes.name, () => {
+    expect(a.includes('a')(['a', 'b'])).toBe(true);
+    expect(a.includes('c')(['a', 'b'])).toBe(false);
+  })
+
+  test(a.filtermap.name, () => {
+    const fm = a.filtermap(n.umul(2), n.gt(3));
+
+    expect(expect.arrayContaining(fm([1, 2, 3, 4, 5]))).toEqual([6, 8, 10]);
+  })
 })
