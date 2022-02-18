@@ -1,3 +1,4 @@
+import * as Assert from './assertable';
 import * as Arr from './array';
 import * as Bool from './bool';
 import * as Dt from './date';
@@ -19,6 +20,7 @@ import * as Try from './try';
 import * as Tuple from './tuple';
 
 export {
+  Assert,
   Arr,
   Arr as Array,
   Bool,

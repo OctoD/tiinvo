@@ -247,8 +247,23 @@ describe(`array`, () => {
   })
 
   test(a.filtermap.name, () => {
-    const fm = a.filtermap(n.umul(2), n.gt(3));
+    const fm1 = a.filtermap(n.umul(2), n.gt(3));
 
-    expect(expect.arrayContaining(fm([1, 2, 3, 4, 5]))).toEqual([6, 8, 10]);
+    expect(expect.arrayContaining(fm1([1, 2, 3, 4, 5]))).toEqual([6, 8, 10]);
+  })
+
+  test(a.fill.name, () => {
+    const f1 = a.fill(0, 1, 2);
+    const f2 = a.fill(0, 1);
+    const f3 = a.fill(0);
+    expect(expect.arrayContaining(f1([10, 20, 30, 40]))).toEqual([10, 0, 0, 40])
+    expect(expect.arrayContaining(f2([10, 20, 30, 40]))).toEqual([10, 0, 0, 0])
+    expect(expect.arrayContaining(f3([10, 20, 30, 40]))).toEqual([0, 0, 0, 0])
+  })
+
+  test(a.make.name, () => {
+    expect(expect.arrayContaining(a.make(4, 'hello'))).toEqual(['hello', 'hello', 'hello', 'hello'])
+    expect(expect.arrayContaining(a.make(2))).toEqual([undefined, undefined])
+    expect(expect.arrayContaining(a.make())).toEqual([])
   })
 })

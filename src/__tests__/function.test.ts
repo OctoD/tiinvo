@@ -75,6 +75,10 @@ describe(``, () => {
     expect(fx.name(lorem)).toBe(`lorem`);
   })
 
+  test(fx.pass.name, () => {
+    expect(fx.pass(10)).toBe(10);
+  })
+
   test(fx.map.name, () => {
     const chars = Str.chars;
     const upperchars = pipe(chars, Arr.map(Str.upper));

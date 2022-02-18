@@ -24,6 +24,7 @@
         <Doclink href="/docs/datatypes/Tuple">Tuple</Doclink>
       </Docnav>
       <Docnav title="utilities">
+        <Doclink href="/docs/utilities/Assert">Assert</Doclink>
         <Doclink href="/docs/utilities/Pipe">Pipe</Doclink>
         <Doclink href="/docs/utilities/Try">Try</Doclink>
       </Docnav>

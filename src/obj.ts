@@ -117,6 +117,21 @@ export const cmp: f.comparableE<Record<string, any>, Record<string, any>> = (a, 
  * @since 3.1.0
  */
 export const defineProperty = Object.defineProperty
+
+/**
+ * Returns object entries
+ * 
+ * ```typescript
+ * import { Object } from 'tiinvo';
+ * 
+ * const entries = Object.entries({ a: 1, b: 2 });
+ * console.log(entries); // [ ['a', 1], ['b', 2] ]
+ * ```
+ * @param o 
+ * @returns 
+ * @since 3.0.0
+ */
+export const entries = <a>(o: a): entries<a> => Object.entries(o) as entries<a>;
 /**
  * Returns a flat representation for `a`.
  * 
@@ -270,20 +285,6 @@ export const guardOf = <a extends any>(
   return true;
 };
 
-/**
- * Returns object entries
- * 
- * ```typescript
- * import { Object } from 'tiinvo';
- * 
- * const entries = Object.entries({ a: 1, b: 2 });
- * console.log(entries); // [ ['a', 1], ['b', 2] ]
- * ```
- * @param o 
- * @returns 
- * @since 3.0.0
- */
-export const entries = <a>(o: a): entries<a> => Object.entries(o) as entries<a>;
 /**
  * Returns true if a is a `object` and has property `k`
  * 

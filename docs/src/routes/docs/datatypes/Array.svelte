@@ -200,6 +200,24 @@ console.log(Array.get(2)(['a'])) // Error('Index 2 is out of bounds for length 1
 </article>
 
 <article>
+  <DocItemTitle title="get" />
+  <p>
+    Fills an array <code>b</code> with <code>a</code> from index <code>start</code> to <code>end</code>.
+  </p>
+  <SinceVersion>3.3.0</SinceVersion>
+  <PrismJs
+    code={`
+import { Array } 'tiinvo';
+
+const f = Array.fill(0, 1, 2);
+
+console.log(f([10, 20, 30, 40])) // [10, 0, 0, 40]
+ `}
+    language="ts"
+  />
+</article>
+
+<article>
   <DocItemTitle title="filter" />
   <p>
     Returns the elements of an array <code>a</code> that meet the condition
@@ -432,6 +450,23 @@ import { Array } 'tiinvo';
 console.log(Array.join()(['a', 'b', 'c'])) // 'abc'
 console.log(Array.join(' ')(['a', 'b', 'c'])) // 'a b c'
 console.log(Array.join('-')(['a', 'b', 'c'])) // 'a-b-c'
+ `}
+    language="ts"
+  />
+</article>
+
+<article>
+  <DocItemTitle title="join" />
+  <p>
+    Creates a new array of a given size.
+  </p>
+  <SinceVersion>3.2.0</SinceVersion>
+  <PrismJs
+    code={`
+import { Array } 'tiinvo';
+
+Array.make(4, 'hello') // ['hello', 'hello', 'hello', 'hello']
+Array.make(2)          // [undefined, undefined]
  `}
     language="ts"
   />

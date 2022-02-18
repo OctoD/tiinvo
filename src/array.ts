@@ -177,6 +177,40 @@ export const get = (i: number) => <a>(a: a[]): result<a> => {
 
   return new Error(`Index out of bounds ${i} for length ${a.length}`);
 };
+
+/**
+ * Fills an array `b` with `a` from index `start` to `end`.
+ * This do not modify the original array.
+ * 
+ * ```ts
+ * import { Array } from 'tiinvo';
+ * 
+ * const f = Array.fill(0, 1, 2);
+ * 
+ * console.log(f([10, 20, 30, 40])) // [10, 0, 0, 40]
+ * ```
+ * 
+ * @param a 
+ * @param start 
+ * @param end 
+ * @returns 
+ * @since 3.3.0
+ */
+export const fill = <a>(a: a, start?: number, end?: number) => (b: a[]) => {
+  const s = start || 0;
+  const e = end || b.length - 1;
+  const c = Array.from(b);
+
+  for (let i = 0; i < c.length; i++) {
+    if (i >= s && i <= e) {
+      c[i] = a;
+    } else {
+      c[i] = b[i];
+    }
+  }
+
+  return c;
+}
 /**
  * Returns the elements of an array `a` that meet the condition specified in a predicate `p`.
  * 
@@ -393,6 +427,31 @@ export const length = <a>(a: a[]) => a.length;
  * @since 3.0.0
  */
 export const join = (separator: string = "") => <a>(a: a[]) => a.join(separator);
+
+/**
+ * Creates a new array of a given size
+ * 
+ * ```ts
+ * import { Array } from 'tiinvo';
+ * 
+ * Array.make(4, 'hello') // ['hello', 'hello', 'hello', 'hello']
+ * Array.make(2)          // [undefined, undefined]
+ * ```
+ * 
+ * @param size the size of the array;
+ * @param dv defaults value
+ * @returns 
+ * @since 3.3.0
+ */
+export const make = <a = undefined>(size = 0, dv = undefined as unknown as a): a[] => {
+  const a = [] as a[];
+
+  while (a.length < size) {
+    a.push(dv as unknown as a);
+  }
+  
+  return a;
+}
 /**
  * Maps an array of elements `a` to an array of elements `b` using the mapping function `f`.
  * 
