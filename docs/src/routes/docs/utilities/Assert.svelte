@@ -48,7 +48,7 @@ Assert.checkr(false, 'This will throw an error');    // Error('This will throw a
     code={`
 import { Assert, Number } from 'tiinvo';
 
-const check = Assert.checkr(Number.isEven, 'number is not even');
+const check = Assert.make(Number.isEven, 'number is not even');
 
 check(2); // undefined
 check(3); // throws Error('number is not even')
@@ -65,7 +65,7 @@ check(3); // throws Error('number is not even')
     code={`
 import { Assert, Number } from 'tiinvo';
 
-const check = Assert.checkr(Number.isEven, 'number is not even');
+const check = Assert.maker(Number.isEven, 'number is not even');
 
 check(2); // undefined
 check(3); // Error('number is not even')
