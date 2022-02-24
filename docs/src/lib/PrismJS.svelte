@@ -23,11 +23,11 @@
   });
 </script>
 
-<pre class="rounded-xl p-3 text-xs">
+<pre class="rounded-xl p-3 text-xs overflow-x-auto">
   <code class="language-{language}">{code}</code>
 </pre>
 
-<style>
+<style lang="postcss">
   :global(pre) {
     background-color: theme('backgroundColor.slate.100');
     color: theme('textColor.slate.900');

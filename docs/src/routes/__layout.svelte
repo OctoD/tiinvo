@@ -22,7 +22,7 @@
     </nav>
   </header>
 
-  <main class="container mx-auto py-5 flex-1 flex flex-col px-4">
+  <main class="container mx-auto py-5 flex-1 flex flex-col px-4 w-full">
     <slot />
   </main>
 
