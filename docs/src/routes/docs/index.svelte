@@ -97,6 +97,9 @@
 
 <ul class="list-disc underline px-4">
   <li>
+    <Doclink href="/docs/utilities/Assert">Assert</Doclink>
+  </li>
+  <li>
     <Doclink href="/docs/utilities/Pipe">Pipe</Doclink>
   </li>
   <li>

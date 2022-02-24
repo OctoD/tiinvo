@@ -1,5 +1,6 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+  import DocTitle from "$lib/DocTitle.svelte";
   import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
@@ -7,7 +8,12 @@
 
 <PageTitle title="docs - Assert" description="Assert" />
 
-<h2>Assert</h2>
+<article>
+  <DocTitle version="3.3.0">Assert</DocTitle>
+  <p>
+    Exports some utility functions for strict or loose assertions.
+  </p>
+</article>
 
 <article>
   <DocItemTitle title="check" />
@@ -41,7 +47,10 @@ Assert.checkr(false, 'This will throw an error');    // Error('This will throw a
 
 <article>
   <DocItemTitle title="make" />
-  <p>Returns a function that checks if a predicate is satisfied, otherwise throws an error.</p>
+  <p>
+    Returns a function that checks if a predicate is satisfied, otherwise throws
+    an error.
+  </p>
   <SinceVersion>3.3.0</SinceVersion>
   <PrismJs
     language="ts"
@@ -58,7 +67,10 @@ check(3); // throws Error('number is not even')
 
 <article>
   <DocItemTitle title="make" />
-  <p>Returns a function that checks if a predicate is satisfied, otherwise returns a err.</p>
+  <p>
+    Returns a function that checks if a predicate is satisfied, otherwise
+    returns a err.
+  </p>
   <SinceVersion>3.3.0</SinceVersion>
   <PrismJs
     language="ts"

@@ -1,5 +1,6 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+  import DocTitle from "$lib/DocTitle.svelte";
   import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
@@ -7,7 +8,10 @@
 
 <PageTitle title="docs - Maybe" description="Maybe methods" />
 
-<h2>Maybe</h2>
+<article>
+  <DocTitle>Maybe</DocTitle>
+  <p>Represents a value that could be truthy (<code>just</code>) or falsy (<code>nothing</code>)</p>
+</article>
 
 <article>
   <DocItemTitle title="isJust" />

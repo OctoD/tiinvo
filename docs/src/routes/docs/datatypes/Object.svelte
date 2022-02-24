@@ -1,13 +1,19 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
-import PageTitle from '$lib/PageTitle.svelte';
+  import DocTitle from "$lib/DocTitle.svelte";
+  import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
 </script>
 
 <PageTitle title="docs - Object" description="Object methods" />
 
-<h2>Object</h2>
+<article>
+  <DocTitle>Object</DocTitle>
+  <p>
+    Has almost all native methods of native <code>Object</code> API, along with many new one.
+  </p>
+</article>
 
 <article>
   <DocItemTitle title="assign" />
@@ -50,7 +56,10 @@ Object.cmp(c, a); // 1
 </article>
 <article>
   <DocItemTitle title="defineProperty" />
-  <p>Adds a property to an object, or modifies attributes of an existing property.</p>
+  <p>
+    Adds a property to an object, or modifies attributes of an existing
+    property.
+  </p>
   <SinceVersion>3.1.0</SinceVersion>
   <PrismJs
     language="ts"
@@ -88,7 +97,10 @@ Object.flat(myobject) // { 'a.b.c': 100, d: 20 }
 </article>
 <article>
   <DocItemTitle title="freeze" />
-  <p>Prevents the modification of existing property attributes and values, and prevents the addition of new properties.</p>
+  <p>
+    Prevents the modification of existing property attributes and values, and
+    prevents the addition of new properties.
+  </p>
   <SinceVersion>3.1.0</SinceVersion>
   <PrismJs
     language="ts"
@@ -103,7 +115,9 @@ a.a = 100; // throws;
 </article>
 <article>
   <DocItemTitle title="fromEntries" />
-  <p>Returns an object created by key-value entries for properties and methods.</p>
+  <p>
+    Returns an object created by key-value entries for properties and methods.
+  </p>
   <SinceVersion>3.1.0</SinceVersion>
   <PrismJs
     language="ts"

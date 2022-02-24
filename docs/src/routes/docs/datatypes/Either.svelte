@@ -1,13 +1,29 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
-import PageTitle from '$lib/PageTitle.svelte';
+  import DocTitle from "$lib/DocTitle.svelte";
+import Note from '$lib/Note.svelte';
+  import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
 </script>
 
 <PageTitle title="docs - Either" description="Either methods" />
 
-<h2>Either</h2>
+<article>
+  <DocTitle>Either</DocTitle>
+
+  <p>Either monad is the representation of a disjoint union.</p>
+  <p class="my-4">
+    In this case, the underlying data type is represented from a tuple with <code
+      >left</code
+    >
+    occupying the index <code>0</code>, and <code>right</code> the index
+    <code>1</code>.
+  </p>
+  <Note>
+    Note: to be considered a valid <code>either</code>, the tuple must have the <code>left</code> or the <code>right</code> set to <code>none</code>.
+  </Note>
+</article>
 
 <article>
   <DocItemTitle title="isLeft" />

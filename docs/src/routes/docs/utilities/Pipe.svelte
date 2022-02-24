@@ -1,5 +1,6 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+  import DocTitle from "$lib/DocTitle.svelte";
   import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
@@ -7,7 +8,15 @@
 
 <PageTitle title="docs - Pipe" description="Pipe" />
 
-<h2>Pipe</h2>
+<article>
+  <DocTitle>Pipe</DocTitle>
+  <p>
+    A pipe is a function which concatenates the call of many other functions.
+  </p>
+  <p class="my-4">
+    There is a synchronous and asynchronous version for both sync and async functions.
+  </p>
+</article>
 
 <article>
   <DocItemTitle title="pipe" />

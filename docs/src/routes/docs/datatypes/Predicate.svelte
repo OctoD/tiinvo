@@ -1,5 +1,6 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+  import DocTitle from "$lib/DocTitle.svelte";
   import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
@@ -7,7 +8,15 @@
 
 <PageTitle title="docs - Predicate" description="Predicate methods" />
 
-<h2>Predicate</h2>
+<article>
+  <DocTitle>Predicate</DocTitle>
+  <p class="mb-4">
+    Predicates are functions which usually accept one argument and always return a <code>boolean</code>.
+  </p>
+  <p class="mb-4">
+    They are used as argument by other functions like <code>Option.filter</code> or <code>Array.some</code> to determine if some conditions are met.
+  </p>
+</article>
 
 <article>
   <DocItemTitle title="and" />

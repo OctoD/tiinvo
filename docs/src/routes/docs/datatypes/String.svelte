@@ -1,5 +1,6 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+  import DocTitle from "$lib/DocTitle.svelte";
   import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
@@ -7,7 +8,13 @@
 
 <PageTitle title="docs - String" description="String methods" />
 
-<h2>String</h2>
+<article>
+  <DocTitle>String</DocTitle>
+  <p>
+    Has almost all native methods of native <code>String</code> API, along with many
+    new one.
+  </p>
+</article>
 
 <article>
   <DocItemTitle title="guard" />

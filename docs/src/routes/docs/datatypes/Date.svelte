@@ -1,5 +1,6 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+import DocTitle from '$lib/DocTitle.svelte';
   import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
@@ -7,7 +8,21 @@
 
 <PageTitle title="docs - Date" description="Date methods" />
 
-<h2>Date</h2>
+<article>
+  <DocTitle status="unstable">Date</DocTitle>
+
+  <p>A different Date implementation.</p>
+  <p class="my-4">Differs from native Date data type in different ways:</p>
+  <ul class="px-4 list-disc">
+    <li>It does not take care of time</li>
+    <li>Months starts from 1 and end to 12</li>
+    <li>
+      Mutation functions do not affect original object, they return a new one
+      instead
+    </li>
+    <li>Has a an enum for months (both in short and long english notation)</li>
+  </ul>
+</article>
 
 <article>
   <DocItemTitle title="cmp" />

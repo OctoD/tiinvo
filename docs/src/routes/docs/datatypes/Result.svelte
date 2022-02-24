@@ -1,17 +1,19 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
-  import PageTitle from '$lib/PageTitle.svelte';
+  import DocTitle from "$lib/DocTitle.svelte";
+  import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
 </script>
 
 <PageTitle title="docs - Result" description="Result methods" />
-<svelte:head>
-  <title>tiinvo - docs - Result</title>
-  <meta name="description" content="Result methods" />
-</svelte:head>
 
-<h2>Result</h2>
+<article>
+  <DocTitle>Result</DocTitle>
+  <p>
+    Result represents a value that could be both <code>ok</code> or <code>err</code>.
+  </p>
+</article>
 
 <article>
   <DocItemTitle title="isErr" />

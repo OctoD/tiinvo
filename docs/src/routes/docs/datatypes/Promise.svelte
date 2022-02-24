@@ -1,5 +1,6 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+  import DocTitle from "$lib/DocTitle.svelte";
   import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
@@ -7,7 +8,9 @@
 
 <PageTitle title="docs - Promise" description="Promise methods" />
 
-<h2>Promise</h2>
+<article>
+  <DocTitle version="3.0.10">Promise</DocTitle>
+</article>
 
 <article>
   <DocItemTitle title="all" />

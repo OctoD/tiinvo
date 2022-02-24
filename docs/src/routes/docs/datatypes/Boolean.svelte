@@ -1,5 +1,6 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+  import DocTitle from '$lib/DocTitle.svelte';
   import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
@@ -7,7 +8,13 @@
 
 <PageTitle title="docs - Boolean" description="Boolean methods" />
 
-<h2>Boolean</h2>
+<article>
+  <DocTitle>
+    Boolean
+  </DocTitle>
+
+  <p>All native js Boolean methods plus some extras.</p>
+</article>
 
 <article>
   <DocItemTitle title="cmp" />

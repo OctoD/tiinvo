@@ -1,5 +1,6 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+  import DocTitle from '$lib/DocTitle.svelte';
   import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
@@ -8,7 +9,7 @@
 <PageTitle title="docs - Array" description="Array methods" keywords="" />
 
 <article>
-  <h2>Array</h2>
+  <DocTitle>Array</DocTitle>
 
   <p>Array takes care of all operations with arrays.</p>
   <p>

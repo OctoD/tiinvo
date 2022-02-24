@@ -1,5 +1,6 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+  import DocTitle from "$lib/DocTitle.svelte";
   import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
@@ -7,7 +8,12 @@
 
 <PageTitle title="docs - Number" description="Number methods" />
 
-<h2>Number</h2>
+<article>
+  <DocTitle>Number</DocTitle>
+  <p>
+    Has almost all native Number methods as many new one.
+  </p>
+</article>
 
 <article>
   <DocItemTitle title="guard" />
@@ -40,7 +46,11 @@ console.log(Number.compare(5, 5)) // 0
 </article>
 <article>
   <DocItemTitle title="int" />
-  <p>Returns the integral part of the a numeric expression, <code>a</code>, removing any fractional digits. If <code>a</code> is already an integer, the result is <code>a</code>.</p>
+  <p>
+    Returns the integral part of the a numeric expression, <code>a</code>,
+    removing any fractional digits. If <code>a</code> is already an integer, the
+    result is <code>a</code>.
+  </p>
   <SinceVersion>3.1.0</SinceVersion>
   <PrismJs
     language="ts"

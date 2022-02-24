@@ -1,5 +1,6 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+  import DocTitle from "$lib/DocTitle.svelte";
   import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
@@ -7,7 +8,15 @@
 
 <PageTitle title="docs - Try" description="Try methods" />
 
-<h2>Try</h2>
+<article>
+  <DocTitle>Try</DocTitle>
+  <p>
+    Executes functions without throwing. It returns instead <code>option</code>, <code>result</code>, <code>maybe</code> or <code>either</code>
+  </p>
+  <p class="my-4">
+    Both sync and async version are available.
+  </p>
+</article>
 
 <article>
   <DocItemTitle title="maybe" />

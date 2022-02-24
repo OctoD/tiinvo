@@ -1,5 +1,7 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
+import DocTitle from '$lib/DocTitle.svelte';
+import Note from '$lib/Note.svelte';
   import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
@@ -11,7 +13,15 @@
   keywords="option,null,undefined"
 />
 
-<h2>Option</h2>
+<article>
+  <DocTitle>Option</DocTitle>
+  <p class="mb-4">
+    Reprents a value that could be possible <code>a</code>, <code>null</code> or <code>undefined</code>.
+  </p>
+  <Note>
+    Null and undefined are treated the same way. If a function could return none, the underlying value will be null.
+  </Note>
+</article>
 
 <article>
   <DocItemTitle title="isNone" />

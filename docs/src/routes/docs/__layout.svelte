@@ -37,8 +37,10 @@
   </section>
 </div>
 
-<style>
+<style lang="postcss">
   :global(#doc-content h1) {
+    @apply flex;
+    @apply justify-between;
     @apply font-black;
     @apply mb-4;
     @apply text-4xl;
@@ -51,6 +53,8 @@
   }
 
   :global(#doc-content h2) {
+    @apply flex;
+    @apply justify-between;
     @apply font-black;
     @apply mb-4;
     @apply text-2xl;
