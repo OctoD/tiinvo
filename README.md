@@ -7,6 +7,8 @@ tiinvo
 
 A lib of types and utilities for your TypeScript and JavaScript projects
 
+[docs](https://tiinvo.vercel.app/docs)
+
 - [tiinvo](#tiinvo)
 - [Install](#install)
 - [Usage](#usage)
