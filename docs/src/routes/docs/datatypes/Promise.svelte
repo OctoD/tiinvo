@@ -32,6 +32,20 @@ Promise.all([p1, p2]).then(console.log); // => [ 'hello', 'world' ]
   />
 </article>
 <article>
+  <DocItemTitle title="make" />
+  <p>Creates a new Promise.</p>
+  <SinceVersion>3.4.0</SinceVersion>
+  <PrismJs
+    language="ts"
+    code={`
+import { Promise } from 'tiinvo';
+
+Promise.make(r => r(1)).then(console.log); // => 1
+Promise.make((_, r) => r(1)).catch(console.error); // => 1
+    `}
+  />
+</article>
+<article>
   <DocItemTitle title="map" />
   <p>Maps a promise to a new promise.</p>
   <p>

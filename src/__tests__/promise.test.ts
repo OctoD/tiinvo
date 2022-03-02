@@ -47,4 +47,17 @@ describe(`promise`, () => {
     
     expect(r1).toEqual(r2);
   })
+
+  test(p.make.name, async () => {
+    let fn1 = jest.fn();
+    let fn2 = jest.fn();
+    let p1 = p.make((resolve) => resolve('hello'));
+    let p2 = p.make((_, reject) => reject('hello'));
+
+    await p1.then(fn1);
+    await p2.catch(fn2);
+
+    expect(fn1).toHaveBeenCalledWith('hello');
+    expect(fn2).toHaveBeenCalledWith('hello');
+  })
 });

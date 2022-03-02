@@ -25,6 +25,21 @@ export type promisesOf<a extends any[]> = {
  */
 export const all = Promise.all.bind(Promise);
 /**
+ * Creates a new Promise.
+ * 
+ * ```ts
+ * import { Promise } from 'tiinvo';
+ * 
+ * Promise.make(r => r(1)).then(console.log); // => 1
+ * Promise.make((_, r) => r(1)).catch(console.error); // => 1
+ * ```
+ * 
+ * @param cb 
+ * @returns 
+ * @since 3.4.0
+ */
+export const make = <a>(cb: (resolve: fn.unary<a, void>, reject: fn.unary<string | Error, void>) => void): Promise<a> => new Promise(cb);
+/**
  * Maps a promise to a new promise.
  * If the promise catches, the new promise returns `err`, otherwise returns `ok<b>`.
  * 
