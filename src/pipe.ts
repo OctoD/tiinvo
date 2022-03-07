@@ -57,7 +57,34 @@ f[0] extends () => any ? () => ReturnType<f[lastIndexOf<f>]> : f[0] extends (arg
  */
 export const pipe: pipe = (...args) => {
   const [first, ...othersFns] = args;
-  return ((arg: unknown) => othersFns.reduce((retval, fn) => fn(retval), first(arg))) as any;
+  type arg0 = argType<typeof first>;
+
+  switch (args.length) {
+    case 0:
+      return (a: arg0) => a;
+    case 1:
+      return first;
+    case 2:
+      return (arg: arg0) => args[1](first(arg));
+    case 3:
+      return (arg: arg0) => args[2](args[1](first(arg)));
+    case 4:
+      return (arg: arg0) => args[3](args[2](args[1](first(arg))));
+    case 5:
+      return (arg: arg0) => args[4](args[3](args[2](args[1](first(arg)))));
+    case 6:
+      return (arg: arg0) => args[5](args[4](args[3](args[2](args[1](first(arg))))));
+    case 7:
+      return (arg: arg0) => args[6](args[5](args[4](args[3](args[2](args[1](first(arg)))))));
+    case 8:
+      return (arg: arg0) => args[7](args[6](args[5](args[4](args[3](args[2](args[1](first(arg))))))));
+    case 9:
+      return (arg: arg0) => args[8](args[7](args[6](args[5](args[4](args[3](args[2](args[1](first(arg)))))))));
+    case 10:
+      return (arg: arg0) => args[9](args[8](args[7](args[6](args[5](args[4](args[3](args[2](args[1](first(arg))))))))));
+    default:
+      return ((arg: arg0) => othersFns.reduce((retval, fn) => fn(retval), first(arg))) as any;
+  }
 };
 
 export default pipe;
