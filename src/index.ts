@@ -15,6 +15,7 @@ import * as Pipe from './pipe';
 import * as Predicate from './predicate';
 import * as Prms from './promise';
 import * as Result from './result';
+import * as Set from './set';
 import * as Str from './str';
 import * as Try from './try';
 import * as Tuple from './tuple';
@@ -41,6 +42,7 @@ export {
   Predicate,
   Prms as Promise,
   Result,
+  Set,
   Str,
   Str as String,
   Try,

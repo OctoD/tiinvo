@@ -86,6 +86,9 @@
     <Doclink href="/docs/datatypes/Result">Result</Doclink>
   </li>
   <li>
+    <Doclink href="/docs/datatypes/Set">Set</Doclink>
+  </li>
+  <li>
     <Doclink href="/docs/datatypes/String">String</Doclink>
   </li>
   <li>

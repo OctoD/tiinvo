@@ -51,6 +51,7 @@
           <Doclink href="/docs/datatypes/Predicate">Predicate</Doclink>
           <Doclink href="/docs/datatypes/Promise">Promise</Doclink>
           <Doclink href="/docs/datatypes/Result">Result</Doclink>
+          <Doclink href="/docs/datatypes/Set">Set</Doclink>
           <Doclink href="/docs/datatypes/String">String</Doclink>
           <Doclink href="/docs/datatypes/Tuple">Tuple</Doclink>
         </Docnav>
