@@ -17,7 +17,22 @@ import type { predicateA, predicateE } from './functors';
  * @returns 
  * @since 3.0.0 
  */
-export const and = (... predicates: predicateA[]) => <a>(value: a) => predicates.every(p => p(value));
+export const and = (...predicates: predicateA[]) => <a>(value: a) => {
+  switch (predicates.length) {
+    case 0: return true;
+    case 1: return predicates[0](value);
+    case 2: return predicates[0](value) && predicates[1](value);
+    case 3: return predicates[0](value) && predicates[1](value) && predicates[2](value);
+    case 4: return predicates[0](value) && predicates[1](value) && predicates[2](value) && predicates[3](value);
+    case 5: return predicates[0](value) && predicates[1](value) && predicates[2](value) && predicates[3](value) && predicates[4](value);
+    case 6: return predicates[0](value) && predicates[1](value) && predicates[2](value) && predicates[3](value) && predicates[4](value) && predicates[5](value);
+    case 7: return predicates[0](value) && predicates[1](value) && predicates[2](value) && predicates[3](value) && predicates[4](value) && predicates[5](value) && predicates[6](value);
+    case 8: return predicates[0](value) && predicates[1](value) && predicates[2](value) && predicates[3](value) && predicates[4](value) && predicates[5](value) && predicates[6](value) && predicates[7](value);
+    case 9: return predicates[0](value) && predicates[1](value) && predicates[2](value) && predicates[3](value) && predicates[4](value) && predicates[5](value) && predicates[6](value) && predicates[7](value) && predicates[8](value);
+    case 10: return predicates[0](value) && predicates[1](value) && predicates[2](value) && predicates[3](value) && predicates[4](value) && predicates[5](value) && predicates[6](value) && predicates[7](value) && predicates[8](value) && predicates[9](value);
+    default: return predicates.every(p => p(value));
+  }
+};
 /**
  * Returns true if `b` strictly equals to `a`
  * 
@@ -87,7 +102,22 @@ export const neq = <a>(value: a) => (value2: a) => value !== value2;
  * @returns 
  * @since 3.0.0
  */
-export const noneof = (... predicates: predicateA[]) => <a>(value: a) => predicates.every(p => !p(value));
+export const noneof = (...predicates: predicateA[]) => <a>(value: a) => {
+  switch (predicates.length) {
+    case 0: return true;
+    case 1: return !predicates[0](value);
+    case 2: return !predicates[0](value) && !predicates[1](value);
+    case 3: return !predicates[0](value) && !predicates[1](value) && !predicates[2](value);
+    case 4: return !predicates[0](value) && !predicates[1](value) && !predicates[2](value) && !predicates[3](value);
+    case 5: return !predicates[0](value) && !predicates[1](value) && !predicates[2](value) && !predicates[3](value) && !predicates[4](value);
+    case 6: return !predicates[0](value) && !predicates[1](value) && !predicates[2](value) && !predicates[3](value) && !predicates[4](value) && !predicates[5](value);
+    case 7: return !predicates[0](value) && !predicates[1](value) && !predicates[2](value) && !predicates[3](value) && !predicates[4](value) && !predicates[5](value) && !predicates[6](value);
+    case 8: return !predicates[0](value) && !predicates[1](value) && !predicates[2](value) && !predicates[3](value) && !predicates[4](value) && !predicates[5](value) && !predicates[6](value) && !predicates[7](value);
+    case 9: return !predicates[0](value) && !predicates[1](value) && !predicates[2](value) && !predicates[3](value) && !predicates[4](value) && !predicates[5](value) && !predicates[6](value) && !predicates[7](value) && !predicates[8](value);
+    case 10: return !predicates[0](value) && !predicates[1](value) && !predicates[2](value) && !predicates[3](value) && !predicates[4](value) && !predicates[5](value) && !predicates[6](value) && !predicates[7](value) && !predicates[8](value) && !predicates[9](value);
+    default: return predicates.every(p => !p(value));
+  }
+}
 /**
  * Combines two or more predicates in one.
  * Returns true if at least one predicate is satisfied, otherwise returns false
@@ -106,4 +136,19 @@ export const noneof = (... predicates: predicateA[]) => <a>(value: a) => predica
  * @returns 
  * @since 3.0.0
  */
-export const or = (... predicates: predicateA[]) => <a>(value: a) => predicates.some(p => p(value));
+export const or = (...predicates: predicateA[]) => <a>(value: a) => {
+  switch (predicates.length) {
+    case 0: return true;
+    case 1: return predicates[0](value);
+    case 2: return predicates[0](value) || predicates[1](value);
+    case 3: return predicates[0](value) || predicates[1](value) || predicates[2](value);
+    case 4: return predicates[0](value) || predicates[1](value) || predicates[2](value) || predicates[3](value);
+    case 5: return predicates[0](value) || predicates[1](value) || predicates[2](value) || predicates[3](value) || predicates[4](value);
+    case 6: return predicates[0](value) || predicates[1](value) || predicates[2](value) || predicates[3](value) || predicates[4](value) || predicates[5](value);
+    case 7: return predicates[0](value) || predicates[1](value) || predicates[2](value) || predicates[3](value) || predicates[4](value) || predicates[5](value) || predicates[6](value);
+    case 8: return predicates[0](value) || predicates[1](value) || predicates[2](value) || predicates[3](value) || predicates[4](value) || predicates[5](value) || predicates[6](value) || predicates[7](value);
+    case 9: return predicates[0](value) || predicates[1](value) || predicates[2](value) || predicates[3](value) || predicates[4](value) || predicates[5](value) || predicates[6](value) || predicates[7](value) || predicates[8](value);
+    case 10: return predicates[0](value) || predicates[1](value) || predicates[2](value) || predicates[3](value) || predicates[4](value) || predicates[5](value) || predicates[6](value) || predicates[7](value) || predicates[8](value) || predicates[9](value);
+    default: return predicates.some(p => p(value));
+  }
+}
