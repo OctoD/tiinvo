@@ -113,7 +113,7 @@ export const make = (year: number, month: Month, day: number) => new Date(year, 
  * @since 3.0.10
  */
 export const fromstr = (datestr: `${string}-${string}-${string}`) => {
-  const [year, month, day] = datestr.split('-');
+  const [year, month, day] = datestr.split('T')[0].split('-');
   return make(Number(year), Number(month), Number(day));
 }
 
