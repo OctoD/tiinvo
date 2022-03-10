@@ -168,8 +168,10 @@ describe(`date`, () => {
   test(d.toString.name, () => {
     const d1 = d.make(2018, d.Month.January, 1);
     const d2 = d.make(2018, d.Month.Nov, 20);
+    const d3 = d.make(2018, d.Month.Oct, 10);
     expect(d.toString(d1)).toBe(`2018-01-01`);
     expect(d.toString(d2)).toBe(`2018-11-20`);
+    expect(d.toString(d3)).toBe(`2018-10-10`);
   });
   test(d.fromstr.name, () => {
     const d1 = d.make(2018, d.Month.January, 1);
