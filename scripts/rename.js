@@ -10,3 +10,9 @@ filenames.forEach(filename => {
   const newfilepath = filepath.replace('.js', '.mjs').replace(`src`, `dist`);
   fs.renameSync(filepath, newfilepath)
 });
+
+const fp = path.join(basedir, '..', 'dist', 'index.mjs');
+const outindex = fs.readFileSync(fp);
+const replaced = outindex.toString().replace(/';/gm, ".mjs';");
+
+fs.writeFileSync(fp, replaced);
