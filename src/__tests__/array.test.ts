@@ -140,6 +140,12 @@ describe(`array`, () => {
     expect(expect.arrayContaining(a.map(inc)([1, 2, 3]))).toEqual([2, 3, 4]);
   });
 
+  test(a.mapfilter.name, () => {
+    const fm = a.mapfilter(n.umul(2), n.gt(3));
+
+    expect(expect.arrayContaining(fm([1, 2, 3]))).toEqual([4, 6]);
+  })
+
   test(a.none.name, () => {
     const p = n.isEven;
 

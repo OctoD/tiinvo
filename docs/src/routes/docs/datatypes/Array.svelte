@@ -1,6 +1,6 @@
 <script>
   import DocItemTitle from "$lib/DocItemTitle.svelte";
-  import DocTitle from '$lib/DocTitle.svelte';
+  import DocTitle from "$lib/DocTitle.svelte";
   import PageTitle from "$lib/PageTitle.svelte";
   import PrismJs from "$lib/PrismJS.svelte";
   import SinceVersion from "$lib/SinceVersion.svelte";
@@ -203,7 +203,9 @@ console.log(Array.get(2)(['a'])) // Error('Index 2 is out of bounds for length 1
 <article>
   <DocItemTitle title="get" />
   <p>
-    Fills an array <code>b</code> with <code>a</code> from index <code>start</code> to <code>end</code>.
+    Fills an array <code>b</code> with <code>a</code> from index
+    <code>start</code>
+    to <code>end</code>.
   </p>
   <SinceVersion>3.3.0</SinceVersion>
   <PrismJs
@@ -297,7 +299,8 @@ console.log(firstor([])) // 'not found'
 <article>
   <DocItemTitle title="filtermap" />
   <p>
-    Maps an array <code>a</code> by removing all elements that do not satisfy the predicate <code>p</code>.
+    Maps an array <code>a</code> by removing all elements that do not satisfy
+    the predicate <code>p</code>.
   </p>
   <SinceVersion>3.0.0</SinceVersion>
   <PrismJs
@@ -366,7 +369,8 @@ console.log(Array.fromfunctions([Num.add(1), Str.upper])([1, 'a'])) // ['2', 'A'
 <article>
   <DocItemTitle title="includes" />
   <p>
-    Determines whether an array includes a certain element, returning true or false as appropriate.
+    Determines whether an array includes a certain element, returning true or
+    false as appropriate.
   </p>
   <SinceVersion>3.2.0</SinceVersion>
   <PrismJs
@@ -458,9 +462,7 @@ console.log(Array.join('-')(['a', 'b', 'c'])) // 'a-b-c'
 
 <article>
   <DocItemTitle title="join" />
-  <p>
-    Creates a new array of a given size.
-  </p>
+  <p>Creates a new array of a given size.</p>
   <SinceVersion>3.2.0</SinceVersion>
   <PrismJs
     code={`
@@ -487,6 +489,21 @@ import { Array, String } 'tiinvo';
 
 console.log(Array.map(String.uconcat('!'))(['a', 'b', 'c'])) // ['a!', 'b!', 'c!']
  `}
+    language="ts"
+  />
+</article>
+
+<article>
+  <DocItemTitle title="mapfilter" />
+  <SinceVersion>3.6.0</SinceVersion>
+  <PrismJs
+    code={`
+import { Array, Number } 'tiinvo';
+
+const fm = Array.filtermap(Number.umul(2), Number.gt(3));
+
+fm([1, 2, 3]) // [4, 6]
+`}
     language="ts"
   />
 </article>

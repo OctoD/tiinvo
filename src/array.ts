@@ -274,6 +274,7 @@ export const first = <a>(a: a[]) => a[0] as option<a>
 export const firstOr = <a>(a: a) => (b: a[]) => b[0] ?? a;
 /**
  * Maps an array `a` by removing all elements that do not satisfy the predicate `p`.
+ * The filter occurs before mapping the elements.
  * 
  * ```typescript
  * import { Array, Number } 'tiinvo';
@@ -466,6 +467,37 @@ export const make = <a = undefined>(size = 0, dv = undefined as unknown as a): a
  * @since 3.0.0
  */
 export const map = <a, b>(f: f.map<a, b>) => (a: a[]) => a.map(f);
+/**
+ * Maps an array `a` by removing all elements that do not satisfy the predicate `p`.
+ * The filter occurs after mapping the elements.
+ * 
+ * ```typescript
+ * import { Array, Number } 'tiinvo';
+ * 
+ * const fm = Array.filtermap(Number.umul(2), Number.gt(3));
+ * 
+ * fm([1, 2, 3]) // [4, 6]
+ * ```
+ * 
+ * @param f 
+ * @param p 
+ * @returns 
+ * @since 3.6.0
+ */
+export const mapfilter = <a, b>(f: f.map<a, b>, p: f.predicateE<b>) => (a: a[]) => {
+  const r = [] as b[];
+
+  for (let i = 0; i < a.length; i++) {
+    const v = a[i];
+    const m = f(v);
+
+    if (p(m)) {
+      r.push(m);
+    }
+  }
+
+  return r;
+}
 /**
  * Returns true if all elements of `a` do not meet the condition specified in the predicate `p`.
  * 
