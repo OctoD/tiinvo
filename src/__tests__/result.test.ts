@@ -7,6 +7,7 @@ describe(`result`, () => {
     expect(r.isOk(new Error())).toBe(false);
     expect(r.isErr(new Error())).toBe(true);
     expect(r.isErr(Error)).toBe(false);
+    expect(r.isErr(null)).toBe(false);
   });
 
   test(`isResultOf`, () => {

@@ -20,7 +20,7 @@ export type result<a> = ok<a> | err;
  * @returns 
  * @since 3.0.0
  */
-export const isErr = <a>(value: result<a>): value is err => typeof value === 'object' && 'message' in value && 'stack' in value;
+export const isErr = <a>(value: result<a>): value is err => typeof value === 'object' && value !== null && 'message' in value && 'stack' in value;
 
 /**
  * Checks if a value is `ok`
