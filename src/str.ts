@@ -433,6 +433,20 @@ export const ureplace: fn.binary<RegExp | string, string | ((s: string, ... sa: 
  */
 export const replace: fn.ternary<string, RegExp | string, string | ((s: string, ... sa: string[]) => string), string> = (b, rx, r) => b.replace(rx, r as string);
 /**
+ * Reverses a string.
+ * 
+ * ```typescript
+ * import { String } from 'tiinvo';
+ * 
+ * String.reverse('hello'); // 'olleh'
+ * ```
+ * 
+ * @param a 
+ * @returns 
+ * @since 3.7.0
+ */
+export const reverse: fn.unary<string, string> = a => a.split('').reverse().join('');
+/**
  * Finds the first substring match in a regular expression search.
  * 
  * ```typescript

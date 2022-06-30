@@ -454,6 +454,19 @@ String.ureplace('ll', arg => arg.length)('hello'); // 'he2o'
   />
 </article>
 <article>
+  <DocItemTitle title="reverse" />
+  <p>Reverses a string.</p>
+  <SinceVersion>3.7.0</SinceVersion>
+  <PrismJs
+    language="ts"
+    code={`
+import { String } from 'tiinvo';
+
+String.reverse('hello'); // 'olleh'  
+      `}
+  />
+</article>
+<article>
   <DocItemTitle title="replace" />
   <p>Replaces text in a string, using a regular expression or search string.</p>
   <SinceVersion>3.0.0</SinceVersion>

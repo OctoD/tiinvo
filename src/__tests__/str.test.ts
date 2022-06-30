@@ -240,4 +240,8 @@ describe(`str`, () => {
   test(s.chars.name, () => {
     expect(s.chars('hello')).toEqual(['h', 'e', 'l', 'l', 'o']);
   })
+
+  test(s.reverse.name, () => {
+    expect(s.reverse('hello')).toEqual('olleh');
+  })
 })
