@@ -24,7 +24,7 @@ describe(`result`, () => {
     expect(r.err({ message: 'foo' })).toBeInstanceOf(Error);
     expect(r.err({ data: 'foo' })).toBeInstanceOf(Error);
     expect(r.err(20)).toBeInstanceOf(Error);
-    expect(r.err(20n)).toBeInstanceOf(Error);
+    // expect(r.err(20n)).toBeInstanceOf(Error);
     expect(r.err([10, 20, 30])).toBeInstanceOf(Error);
     expect(r.err(false)).toBeInstanceOf(Error);
     expect(r.err(true)).toBeInstanceOf(Error);
