@@ -11,6 +11,31 @@ describe(`result`, () => {
     expect(r.isErr({ name: 'foo', message: 'bar', cause: 'baz' })).toBe(true);
   });
 
+  test('err', () => {
+    const a: any = {};
+    const b: any = {};
+
+    a.b = b;
+    a.a = a;
+    b.a = a;
+    b.b = b;
+
+    expect(r.err('foo')).toBeInstanceOf(Error);
+    expect(r.err({ message: 'foo' })).toBeInstanceOf(Error);
+    expect(r.err({ data: 'foo' })).toBeInstanceOf(Error);
+    expect(r.err(20)).toBeInstanceOf(Error);
+    expect(r.err(20n)).toBeInstanceOf(Error);
+    expect(r.err([10, 20, 30])).toBeInstanceOf(Error);
+    expect(r.err(false)).toBeInstanceOf(Error);
+    expect(r.err(true)).toBeInstanceOf(Error);
+    expect(r.err(Infinity)).toBeInstanceOf(Error);
+    expect(r.err(new Array())).toBeInstanceOf(Error);
+    expect(r.err({})).toBeInstanceOf(Error);
+    expect(r.err(new Error('foo'))).toBeInstanceOf(Error);
+    expect(r.err(new Error(a))).toBeInstanceOf(Error);
+    expect(r.err(new Error(b))).toBeInstanceOf(Error);
+  });
+
   test(`isResultOf`, () => {
     const g = (x: unknown): x is number => typeof x === 'number';
     const gof = r.isResultOf(g);

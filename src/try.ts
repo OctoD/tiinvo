@@ -1,7 +1,7 @@
 import type * as fn from './fn';
 import type * as m from './maybe';
 import type * as o from './option';
-import type * as r from './result';
+import { err, type result as _result, type ok } from './result';
 
 /**
  * Calls a function `fn` with it's arguments and returns a `maybe<returnTypeOf<fn>>`
@@ -129,11 +129,11 @@ export const optionAsync = <fn extends (... a: any[]) => any | Promise<any> | ne
  * @returns 
  * @since 3.0.0
  */
-export const result = <fn extends (... a: any[]) => any | never>(fn: fn) => (... args: fn.argsOf<fn>): r.result<fn.returnTypeOf<fn>> => {
+export const result = <fn extends (... a: any[]) => any | never>(fn: fn) => (... args: fn.argsOf<fn>): _result<fn.returnTypeOf<fn>> => {
   try {
-    return fn(... args) as r.ok<fn.returnTypeOf<fn>>;
+    return fn(... args) as ok<fn.returnTypeOf<fn>>;
   } catch (error) {
-    return error as r.err;
+    return err(error) as err;
   }
 }
 
@@ -144,10 +144,10 @@ export const result = <fn extends (... a: any[]) => any | never>(fn: fn) => (...
  * @returns 
  * @since 3.0.0
  */
-export const resultAsync = <fn extends (... a: any[]) => any | Promise<any> | never>(fn: fn) => async (... args: fn.argsOf<fn>): Promise<r.result<fn.asyncFnReturnType<fn>>> => {
+export const resultAsync = <fn extends (... a: any[]) => any | Promise<any> | never>(fn: fn) => async (... args: fn.argsOf<fn>): Promise<_result<fn.asyncFnReturnType<fn>>> => {
   try {
-    return await fn(... args) as r.ok<fn.returnTypeOf<fn>>;
+    return await fn(... args) as ok<fn.returnTypeOf<fn>>;
   } catch (error) {
-    return error as r.err;
+    return err(error) as err;
   }
 }

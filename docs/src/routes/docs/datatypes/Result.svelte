@@ -16,6 +16,24 @@
 </article>
 
 <article>
+  <DocItemTitle title="err" />
+  <p>Returns an <code>err</code></p>
+  <SinceVersion>3.8.0</SinceVersion>
+  <PrismJs
+    language="ts"
+    code={`
+import { Result } from 'tiinvo';
+
+Result.err(10)                    instanceof Error // true
+Result.err(new TypeError('aaaa')) instanceof Error // true
+Result.err({})                    instanceof Error // true
+Result.err(10n)                   instanceof Error // true
+Result.err([10, 20, 30])          instanceof Error // true
+  `}
+  />
+</article>
+
+<article>
   <DocItemTitle title="isErr" />
   <p>Checks if a value is <code>err</code></p>
   <SinceVersion>3.0.0</SinceVersion>

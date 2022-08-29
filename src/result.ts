@@ -7,6 +7,37 @@ export type err = Error;
 export type result<a> = ok<a> | err;
 
 /**
+ * Returns an `err`
+ * @param a 
+ * @returns
+ * @since 3.8.0 
+ * @example
+ * ```ts
+ * import { Result } from 'tiinvo';
+ * 
+ * Result.err(10)                    instanceof Error // true
+ * Result.err(new TypeError('aaaa')) instanceof Error // true
+ * Result.err({})                    instanceof Error // true
+ * Result.err(10n)                   instanceof Error // true
+ * Result.err([10, 20, 30])          instanceof Error // true
+ * ```
+ * 
+ */
+export const err = (a: unknown): err => {
+  if (a instanceof Error) {
+    return a;
+  } else if (typeof a === 'object' && a) {
+    const err = new Error();
+    for (const [key, value] of Object.entries(a)) {
+      (err as any)[key] = value;
+    }
+    return err;
+  }
+
+  return new Error(String(a));
+};
+
+/**
  * Checks if a value is `err`
  * 
  * ```ts
@@ -184,7 +215,7 @@ export const mapOrElse = <a, b>(or: f.map<void, b>, map: f.map<a, b>) => (value:
  * @returns 
  * @since 3.0.0
  */
-export const unwrap: f.unwrappable = value => isErr(value) ? (() => {throw value})() : value;
+export const unwrap: f.unwrappable = value => isErr(value) ? (() => { throw value; })() : value;
 
 /**
  * Unwraps value if ok, otherwise returns or
