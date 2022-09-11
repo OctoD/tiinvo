@@ -1,7 +1,21 @@
 import type * as fn from './fn';
 import type * as m from './maybe';
 import type * as o from './option';
-import { err, type result as _result, type ok } from './result';
+import { type result as _result, type ok, type err } from './result';
+
+const _err = (a: unknown): err => {
+  if (a instanceof Error) {
+    return a;
+  } else if (typeof a === 'object' && a) {
+    const err = new Error();
+    for (const [key, value] of Object.entries(a)) {
+      (err as any)[key] = value;
+    }
+    return err;
+  }
+
+  return new Error(String(a));
+};
 
 /**
  * Calls a function `fn` with it's arguments and returns a `maybe<returnTypeOf<fn>>`
@@ -133,7 +147,7 @@ export const result = <fn extends (... a: any[]) => any | never>(fn: fn) => (...
   try {
     return fn(... args) as ok<fn.returnTypeOf<fn>>;
   } catch (error) {
-    return err(error) as err;
+    return _err(error) as err;
   }
 }
 
@@ -148,6 +162,6 @@ export const resultAsync = <fn extends (... a: any[]) => any | Promise<any> | ne
   try {
     return await fn(... args) as ok<fn.returnTypeOf<fn>>;
   } catch (error) {
-    return err(error) as err;
+    return _err(error) as err;
   }
 }
