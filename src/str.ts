@@ -714,3 +714,48 @@ export const lines = usplit(/\r?\n/);
  * @since 3.1.0
  */
 export const words = usplit(/\s+/m);
+
+/**
+ * Adds a `prefix` to a `sub`
+ * @param sub 
+ * @param prefix 
+ * @returns 
+ * @since 3.9.0
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.prefix('hello', 'world') // 'worldhello';
+ * ```
+ */
+export const prefix = (sub: string, prefix: string) => prefix + sub;
+/**
+ * Adds a `suffix` to a `sub`
+ * @param sub 
+ * @param suffix 
+ * @returns 
+ * @since 3.9.0
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.suffix('hello', 'world') // 'helloworld';
+ * ```
+ */
+export const suffix = (sub: string, suffix: string) => sub + suffix;
+/**
+ * Curried version of prefix
+ * @param prefix the prefix
+ * @returns 
+ */
+export const uprefix = (prefix: string) => (sub: string) => prefix + sub;
+/**
+ * Curried version of suffix
+ * @param suffix the suffix
+ * @returns 
+ */
+export const usuffix = (suffix: string) => (sub: string) => sub + suffix;

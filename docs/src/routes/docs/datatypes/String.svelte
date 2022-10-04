@@ -751,3 +751,31 @@ String.words('hello world'); // ['hello', 'world']
   `}
   />
 </article>
+
+<article>
+  <DocItemTitle title="prefix" />
+  <p>Adds a <code>prefix</code> to a <code>sub</code></p>
+  <SinceVersion>3.9.0</SinceVersion>
+  <PrismJs
+    language="ts"
+    code={`
+import { String } from 'tiinvo';
+
+Str.prefix('hello', 'world') // 'worldhello';
+  `}
+  />
+</article>
+
+<article>
+  <DocItemTitle title="suffix" />
+  <p>Adds a <code>suffix</code> to a <code>sub</code></p>
+  <SinceVersion>3.9.0</SinceVersion>
+  <PrismJs
+    language="ts"
+    code={`
+import { String } from 'tiinvo';
+
+Str.suffix('hello', 'world') // 'helloworld';
+  `}
+  />
+</article>

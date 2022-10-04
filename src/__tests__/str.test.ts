@@ -245,4 +245,20 @@ describe(`str`, () => {
   test(s.reverse.name, () => {
     expect(s.reverse('hello')).toEqual('olleh');
   });
+
+  test(s.prefix.name, () => {
+    expect(s.prefix('world', 'hello')).toEqual('helloworld');
+  });
+
+  test(s.uprefix.name, () => {
+    expect(s.uprefix('world')('hello')).toEqual('worldhello');
+  });
+
+  test(s.suffix.name, () => {
+    expect(s.suffix('world', 'hello')).toEqual('worldhello');
+  });
+
+  test(s.usuffix.name, () => {
+    expect(s.usuffix('world')('hello')).toEqual('helloworld');
+  });
 });
