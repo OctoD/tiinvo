@@ -6,6 +6,7 @@
       "ESNext"
     ],
     "strict": true,
+    "skipLibCheck": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "forceConsistentCasingInFileNames": true,
