@@ -1,4 +1,4 @@
-import * as a from '../array';
+import { describe, expect, test } from 'vitest';
 import * as d from '../date';
 
 describe(`date`, () => {
@@ -20,7 +20,7 @@ describe(`date`, () => {
     const d1 = d.make(2018, d.Month.Jan, 1);
     const d2 = d.make(2018, d.Month.Jan, 1);
 
-    expect(d.eq(d1, d2))
+    expect(d.eq(d1, d2));
   });
   test(d.make.name, () => {
     expect(d.make(2018, d.Month.Jan, 1)).toEqual(new Date(2018, 0, 1));
@@ -36,10 +36,10 @@ describe(`date`, () => {
     expect(d.inrange(d1, d2)(d3)).toBe(false);
   });
   test(d.invalid.name, () => {
-    expect(d.invalid(new Date())).toBe(false)
-    expect(d.invalid(new Date(2018, 0, 1))).toBe(false)
-    expect(d.invalid(new Date(2018, 0, 1, 12, 0, 0))).toBe(false)
-    expect(d.invalid(new Date(`a`))).toBe(true)
+    expect(d.invalid(new Date())).toBe(false);
+    expect(d.invalid(new Date(2018, 0, 1))).toBe(false);
+    expect(d.invalid(new Date(2018, 0, 1, 12, 0, 0))).toBe(false);
+    expect(d.invalid(new Date(`a`))).toBe(true);
   });
   test(d.isleap.name, () => {
     expect(d.isleap(new Date(2018, 0, 1))).toBe(false);
@@ -58,14 +58,14 @@ describe(`date`, () => {
     expect(d.notinrange(d1, d2)(d3)).toBe(true);
   });
   test(d.valid.name, () => {
-    expect(d.valid(new Date())).toBe(true)
-    expect(d.valid(new Date(2018, 0, 1))).toBe(true)
-    expect(d.valid(new Date(2018, 0, 1, 12, 0, 0))).toBe(true)
-    expect(d.valid(new Date(`a`))).toBe(false)
+    expect(d.valid(new Date())).toBe(true);
+    expect(d.valid(new Date(2018, 0, 1))).toBe(true);
+    expect(d.valid(new Date(2018, 0, 1, 12, 0, 0))).toBe(true);
+    expect(d.valid(new Date(`a`))).toBe(false);
   });
   test(d.add.name, () => {
     const d1 = d.make(2018, d.Month.January, 1);
-    
+
     expect(d.add()(d1)).toEqual(d1);
     expect(d.add(1)(d1)).toEqual(d.make(2019, d.Month.Jan, 1));
     expect(d.add(1, 1)(d1)).toEqual(d.make(2019, d.Month.Feb, 1));
@@ -88,7 +88,7 @@ describe(`date`, () => {
   });
   test(d.sub.name, () => {
     const d1 = d.make(2018, d.Month.January, 1);
-    
+
     expect(d.sub()(d1)).toEqual(d1);
     expect(d.sub(1)(d1)).toEqual(d.make(2017, d.Month.Jan, 1));
     expect(d.sub(1, 1)(d1)).toEqual(d.make(2016, d.Month.December, 1));
@@ -178,5 +178,5 @@ describe(`date`, () => {
     const d2 = d.make(2018, d.Month.Nov, 20);
     expect(d.fromstr(`2018-01-01`)).toEqual(d1);
     expect(d.fromstr(`2018-11-20`)).toEqual(d2);
-  })
-})
+  });
+});

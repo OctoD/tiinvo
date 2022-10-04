@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import * as o from '../option';
 
 describe(`option`, () => {
@@ -22,7 +23,7 @@ describe(`option`, () => {
     expect(gof(null)).toBe(true);
     expect(gof(undefined)).toBe(true);
     expect(gof('hello')).toBe(false);
-  })
+  });
 
   test(`mappables`, () => {
     const mapfn = (s: string) => s.length;
@@ -41,7 +42,7 @@ describe(`option`, () => {
     expect(maporelse(null)).toBe(0);
     expect(maporelse(undefined)).toBe(0);
     expect(maporelse(some)).toBe(5);
-  })
+  });
 
   test(`comparables`, () => {
     expect(o.cmp(null, null)).toBe(0);
@@ -58,16 +59,16 @@ describe(`option`, () => {
     expect(o.cmp(a, b)).toBe(-1);
     expect(o.cmp(b, a)).toBe(1);
 
-    const x = 1
-    const y = null
-    const z = undefined
+    const x = 1;
+    const y = null;
+    const z = undefined;
 
     expect(o.cmp(x, y)).toBe(1);
     expect(o.cmp(x, z)).toBe(1);
     expect(o.cmp(y, z)).toBe(0);
     expect(o.cmp(x, x)).toBe(0);
     expect(o.cmp(z, x)).toBe(-1);
-  })
+  });
 
   test(`equatables`, () => {
     expect(o.eq(null, undefined)).toBe(true);
@@ -77,16 +78,16 @@ describe(`option`, () => {
     expect(o.eq(0, 0)).toBe(true);
     expect(o.eq(0, 1)).toBe(false);
     expect(o.eq(1, 0)).toBe(false);
-  })
+  });
 
   test(`filterables`, () => {
     const p = (value: number) => value > 0;
     const f = o.filter(p);
 
-    expect(f(10)).toBe(10)
-    expect(f(-10)).toBe(null)
-    expect(f(0)).toBe(null)
-  })
+    expect(f(10)).toBe(10);
+    expect(f(-10)).toBe(null);
+    expect(f(0)).toBe(null);
+  });
 
   test(`mappable types`, () => {
     const mapfn1 = (s: string) => s.length;
@@ -103,7 +104,7 @@ describe(`option`, () => {
 
   test(`unwrappables`, () => {
     const none = null as o.none;
-    const or = 0 as o.option<number>
+    const or = 0 as o.option<number>;
 
     expect(() => o.unwrap(none)).toThrowError();
     expect(o.unwrapOr(or)(none)).toBe(0);
@@ -114,8 +115,8 @@ describe(`option`, () => {
     expect(o.unwrapOrElse(() => or)(undefined)).toBe(0);
 
     expect(() => o.unwrap(10)).not.toThrowError();
-    expect(o.unwrap(10)).toBe(10)
+    expect(o.unwrap(10)).toBe(10);
     expect(o.unwrapOr(0)(10)).toBe(10);
     expect(o.unwrapOrElse(() => 0)(10)).toBe(10);
-  })
+  });
 });

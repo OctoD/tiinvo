@@ -18,7 +18,6 @@ src
 .prettierrc
 .vscode
 coverage
-jest.config.js
 rollup.config.js
 tsconfig.build.json
 tsconfig.json

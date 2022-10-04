@@ -1,7 +1,8 @@
+import { describe, expect, test } from 'vitest';
 import * as a from '../array';
 import * as n from '../num';
-import * as s from '../str';
 import * as o from '../option';
+import * as s from '../str';
 
 describe(`array`, () => {
   test(a.cmp.name, () => {

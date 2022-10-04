@@ -14,7 +14,7 @@
 			"group": "test",
 			"problemMatcher": [],
 			"label": "npm: test",
-			"detail": "jest"
+			"detail": "test"
 		}
 	]
 }

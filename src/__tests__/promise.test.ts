@@ -1,3 +1,4 @@
+import { describe, expect, test, vitest } from 'vitest';
 import * as p from '../promise';
 
 describe(`promise`, () => {
@@ -10,7 +11,7 @@ describe(`promise`, () => {
     expect(await m(ok)).toBe(5);
     expect(await m(ko)).toBeInstanceOf(Error);
     expect(await m(ko2)).toBeInstanceOf(Error);
-  })
+  });
 
   test(p.mapOr.name, async () => {
     const m = p.mapOr(0, (a: string) => a.length);
@@ -19,7 +20,7 @@ describe(`promise`, () => {
 
     expect(await m(ok)).toBe(5);
     expect(await m(ko)).toBe(0);
-  })
+  });
 
   test(p.mapOrElse.name, async () => {
     const m = p.mapOrElse(() => 0, (a: string) => a.length);
@@ -28,7 +29,7 @@ describe(`promise`, () => {
 
     expect(await m(ok)).toBe(5);
     expect(await m(ko)).toBe(0);
-  })
+  });
 
   test(p.all.name, async () => {
     expect(await p.all([Promise.resolve('hello')])).toEqual(['hello']);
@@ -36,21 +37,21 @@ describe(`promise`, () => {
 
   test(p.resolve.name, async () => {
     expect(await p.resolve('hello')).toEqual(await Promise.resolve('hello'));
-  })
+  });
 
   test(p.reject.name, async () => {
     let r1;
     let r2;
 
-    try { await p.reject('hello') } catch (e) { r1 = e }
-    try { await Promise.reject('hello') } catch (e) { r2 = e }
-    
+    try { await p.reject('hello'); } catch (e) { r1 = e; }
+    try { await Promise.reject('hello'); } catch (e) { r2 = e; }
+
     expect(r1).toEqual(r2);
-  })
+  });
 
   test(p.make.name, async () => {
-    let fn1 = jest.fn();
-    let fn2 = jest.fn();
+    let fn1 = vitest.fn();
+    let fn2 = vitest.fn();
     let p1 = p.make((resolve) => resolve('hello'));
     let p2 = p.make((_, reject) => reject('hello'));
 
@@ -59,5 +60,5 @@ describe(`promise`, () => {
 
     expect(fn1).toHaveBeenCalledWith('hello');
     expect(fn2).toHaveBeenCalledWith('hello');
-  })
+  });
 });

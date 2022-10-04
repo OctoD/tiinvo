@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import * as r from '../result';
 
 describe(`result`, () => {

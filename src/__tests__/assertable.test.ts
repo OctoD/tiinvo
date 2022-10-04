@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import * as Assert from '../assertable';
 import * as Number from '../num';
 import * as Result from '../result';

@@ -1,3 +1,4 @@
+import { describe, expect, test, vitest } from 'vitest';
 import { Number, String } from '..';
 import * as Set from '../set';
 
@@ -55,7 +56,7 @@ describe(`set`, () => {
   });
   test(Set.forEach.name, () => {
     const s = Set.make(1, 2, 3);
-    const fn = jest.fn();
+    const fn = vitest.fn();
     const foreach = Set.forEach(fn);
 
     foreach(s);
@@ -118,7 +119,7 @@ describe(`set`, () => {
   test(Set.reduce.name, () => {
     const s1 = Set.make(1, 2, 3);
 
-    expect(Set.reduce(Number.badd, 0)(s1))
+    expect(Set.reduce(Number.badd, 0)(s1));
   });
   test(Set.reduceRight.name, () => {
     const s1 = Set.make(3, 2, 1);
@@ -131,7 +132,7 @@ describe(`set`, () => {
     expect(Set.size(s1)).toBe(3);
   });
   test(Set.some.name, () => {
-    const s1 = Set.make(1, 2, 3)
+    const s1 = Set.make(1, 2, 3);
 
     expect(Set.some(Number.gt(0))(s1)).toBe(true);
     expect(Set.some(Number.lt(2))(s1)).toBe(true);
@@ -143,10 +144,10 @@ describe(`set`, () => {
     expect(Set.toArray(s1)).toEqual([1, 2, 3]);
   });
   test(Set.union.name, () => {
-    const a = Set.make(1, 2, 3)
-    const b = Set.make(3, 4, 5)
+    const a = Set.make(1, 2, 3);
+    const b = Set.make(3, 4, 5);
 
-    expect(Set.union(a, b)).toEqual(new globalThis.Set([1, 2, 3, 4, 5]))
+    expect(Set.union(a, b)).toEqual(new globalThis.Set([1, 2, 3, 4, 5]));
   });
   test(Set.values.name, () => {
     const s = Set.make(1, 2, 3);

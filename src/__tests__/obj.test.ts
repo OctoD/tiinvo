@@ -1,8 +1,9 @@
-import * as obj from '../obj';
+import { describe, expect, test } from 'vitest';
 import * as bool from '../bool';
 import * as num from '../num';
-import * as str from '../str';
+import * as obj from '../obj';
 import * as o from '../option';
+import * as str from '../str';
 
 describe('obj', () => {
   test(obj.cmp.name, () => {
@@ -54,16 +55,16 @@ describe('obj', () => {
     const isshapeb = obj.guardOf({
       a: isshape,
       b: bool.guard,
-    })
+    });
     const isshapec = obj.guardOf({
       b: bool.guard,
       c: o.isOptionOf(num.guard),
-    })
+    });
     const isshaped = obj.guardOf({
       a: {
         b: num.guard
       }
-    })
+    });
 
     expect(isshape({ a: `foo`, b: 1, c: true })).toBe(true);
     expect(isshape({ a: `foo`, b: false, c: 1 })).toBe(false);
@@ -77,7 +78,7 @@ describe('obj', () => {
     expect(isshapec({ b: 2 })).toBe(false);
     expect(isshaped({ a: { b: 1 } })).toBe(true);
     expect(isshaped({ a: { b: false } })).toBe(false);
-  })
+  });
 
   test(obj.haskey.name, () => {
     expect(obj.haskey('a')({ a: 1 })).toBeTruthy();
@@ -114,7 +115,7 @@ describe('obj', () => {
     const c = { c: 5, d: 6 };
 
     expect(obj.assign(a, b, c)).toEqual({ a: 1, b: 3, c: 5, d: 6 });
-  })
+  });
 
   test(obj.size.name, () => {
     const a = { a: 1, b: { c: 2 } };
@@ -122,7 +123,7 @@ describe('obj', () => {
 
     expect(obj.size(a)).toBe(2);
     expect(obj.size(b)).toBe(0);
-  })
+  });
 
   test(obj.defineProperty.name, () => {
     const a = { a: 1, b: 2 };
@@ -131,14 +132,14 @@ describe('obj', () => {
     expect((a as any).c).toBe(3);
     (a as any).c = 4;
     expect((a as any).c).toBe(4);
-  })
+  });
 
   test(obj.freeze.name, () => {
     const a = { a: 1, b: 2 };
     obj.freeze(a);
 
-    expect(() => { a.a = 100 }).toThrow();
-  })
+    expect(() => { a.a = 100; }).toThrow();
+  });
 
   test(obj.fromEntries.name, () => {
     const fromEntries = obj.fromEntries([
@@ -147,7 +148,7 @@ describe('obj', () => {
     ]);
 
     expect(fromEntries).toEqual({ a: 1, b: 2 });
-  })
+  });
 
   test(obj.map.name, () => {
     const map = obj.map(num.umul(2));
@@ -157,13 +158,13 @@ describe('obj', () => {
         case 'string': return a + a;
         case 'boolean': return !a;
       }
-    })
+    });
     expect(map({ a: 1, b: 2 })).toEqual({ a: 2, b: 4 });
     expect(map2({ a: 2, b: 'hello', c: true })).toEqual({ a: 4, b: 'hellohello', c: false });
-  })
+  });
 
   test(obj.mapkeys.name, () => {
     const map = obj.mapkeys(str.upper);
     expect(map({ a: 1, b: 2 })).toEqual({ A: 1, B: 2 });
-  })
+  });
 });

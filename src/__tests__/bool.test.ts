@@ -1,4 +1,5 @@
-import * as b from '../bool'
+import { describe, expect, test } from 'vitest';
+import * as b from '../bool';
 
 describe(`bool`, () => {
   test(`cmp`, () => {

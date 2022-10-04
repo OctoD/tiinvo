@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import * as n from '../num';
 
 describe('num', () => {
@@ -137,4 +138,4 @@ describe('num', () => {
     expect(n.int(10.9)).toBe(10);
     expect(n.int(10)).toBe(10);
   });
-})
+});

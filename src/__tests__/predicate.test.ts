@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import { Number } from '..';
 import * as p from '../predicate';
 
@@ -53,7 +54,7 @@ describe(`predicate`, () => {
     expect(f(6)).toBe(false);
     expect(f(10)).toBe(true);
     expect(f(11)).toBe(true);
-  })
+  });
 
   test(`linearity (and)`, () => {
     const and0 = p.and();
@@ -93,7 +94,7 @@ describe(`predicate`, () => {
     expect(and9(8)).toBe(false);
     expect(and10(9)).toBe(false);
     expect(and11(10)).toBe(false);
-  })
+  });
 
   test(`linearity (noneof)`, () => {
     const noneof0 = p.noneof();
@@ -121,7 +122,7 @@ describe(`predicate`, () => {
     expect(noneof9(1)).toBe(true);
     expect(noneof10(1)).toBe(true);
     expect(noneof11(1)).toBe(true);
-  })
+  });
 
   test(`linearity (or)`, () => {
     const or0 = p.or();
@@ -150,5 +151,5 @@ describe(`predicate`, () => {
     expect(or10(9)).toBe(true);
     expect(or11(10)).toBe(true);
     expect(or11(11)).toBe(false);
-  })
-})
+  });
+});

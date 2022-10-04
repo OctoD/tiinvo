@@ -1,8 +1,9 @@
+import { describe, expect, test } from 'vitest';
+import * as m from '../maybe';
+import * as num from '../num';
+import * as o from '../option';
+import * as r from '../result';
 import * as tryto from '../try';
-import * as m from '../maybe'
-import * as o from '../option'
-import * as r from '../result'
-import * as num from '../num'
 
 describe(`try`, () => {
   const fn = (arg: number) => {
@@ -11,7 +12,7 @@ describe(`try`, () => {
     }
 
     throw new Error(`${arg} is not even`);
-  }
+  };
 
   const fnasync = async (arg: number) => {
     if (num.isEven(arg)) {
@@ -19,21 +20,21 @@ describe(`try`, () => {
     }
 
     return Promise.reject(new Error(`${arg} is not even`));
-  }
+  };
 
   test(tryto.maybe.name, () => {
     expect(tryto.maybe(fn)(2)).toEqual(4);
     expect(tryto.maybe(fn)(3)).toEqual(null);
     expect(m.isJust(tryto.maybe(fn)(2))).toBeTruthy();
     expect(m.isNothing(tryto.maybe(fn)(3))).toBeTruthy();
-  })
+  });
 
   test(tryto.maybeAsync.name, async () => {
     expect(await tryto.maybeAsync(fnasync)(2)).toEqual(4);
     expect(await tryto.maybeAsync(fnasync)(3)).toEqual(null);
     expect(m.isJust(await tryto.maybeAsync(fnasync)(2))).toBeTruthy();
     expect(m.isNothing(await tryto.maybeAsync(fnasync)(3))).toBeTruthy();
-  })
+  });
 
   test(tryto.option.name, () => {
     expect(tryto.option(fn)(2)).toEqual(4);

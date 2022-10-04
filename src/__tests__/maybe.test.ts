@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import * as m from '../maybe';
 
 describe(`maybe`, () => {
@@ -27,7 +28,7 @@ describe(`maybe`, () => {
     expect(gof(0)).toBe(true);
     expect(gof('')).toBe(true);
     expect(gof('hello')).toBe(false);
-  })
+  });
 
   test(`cmp`, () => {
     expect(m.cmp(null, null)).toBe(0);
@@ -63,7 +64,7 @@ describe(`maybe`, () => {
     expect(m.eq(a, a)).toBe(true);
     expect(m.eq(a, b)).toBe(false);
     expect(m.eq(b, a)).toBe(false);
-  })
+  });
 
   test(`filter`, () => {
     const p = (a: string) => a.length > 4;
@@ -74,19 +75,19 @@ describe(`maybe`, () => {
     expect(f(``)).toBe(null);
     expect(f(`hello`)).toBe(`hello`);
     expect(f(`hello world`)).toBe(`hello world`);
-  })
+  });
 
   test(`map`, () => {
     const f = (a: string) => a.length;
-    const nothing1 = null as m.nothing
-    const nothing2 = undefined as m.nothing
+    const nothing1 = null as m.nothing;
+    const nothing2 = undefined as m.nothing;
     const or = 0 as m.maybe<number>;
     const orElse = () => or;
 
     const map = m.map(f);
     const mapOr = m.mapOr(or, f);
     const mapOrElse = m.mapOrElse(orElse, f);
-    
+
     expect(map(nothing1)).toBe(null);
     expect(map(nothing2)).toBe(null);
     expect(map(``)).toBe(null);
@@ -104,7 +105,7 @@ describe(`maybe`, () => {
     expect(mapOrElse(``)).toBe(0);
     expect(mapOrElse(`hello`)).toBe(5);
     expect(mapOrElse(`hello world`)).toBe(11);
-  })
+  });
 
   test(`unwrappables`, () => {
     const nothing = null as m.nothing;
@@ -112,7 +113,7 @@ describe(`maybe`, () => {
     const or = 0 as m.maybe<number>;
     const orElse = () => or;
 
-    expect(() => m.unwrap(nothing)).toThrow()
+    expect(() => m.unwrap(nothing)).toThrow();
     expect(m.unwrap(just)).toBe(10);
 
     expect(m.unwrapOr(or)(nothing)).toBe(0);
