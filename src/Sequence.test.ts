@@ -5,10 +5,14 @@ import * as Str from './Str';
 
 describe("Sequence", () => {
   test(Sequence.make.name, () => {
-    const s = Sequence.make(10, 20, 30);
+    const s0 = Sequence.make(10, 20, 30);
+    const s1 = Sequence.make([10, 20, 30]);
 
-    expect(Sequence.guardOf(Num.guard)(s)).toEqual(true);
-    expect(Sequence.toArray(s)).toEqual([10, 20, 30]);
+    expect(Sequence.guardOf(Num.guard)(s0)).toEqual(true);
+    expect(Sequence.guardOf(Num.guard)(s1)).toEqual(true);
+    expect(Sequence.toArray(s0)).toEqual([10, 20, 30]);
+    expect(Sequence.toArray(s1)).toEqual([10, 20, 30]);
+    expect(s0).toEqual(s1);
   });
 
   test(Sequence.guard.name, () => {

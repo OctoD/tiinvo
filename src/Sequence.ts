@@ -28,12 +28,17 @@ export type t<a> = Iterable<a> & {
  * import { Sequence } from 'tiinvo'
  * 
  * Sequence.make(10, 20, 30)    // Sequence.t<number>
+ * Sequence.make([10, 20, 30])    // Sequence.t<number>
  * ```
  *
  * @since 4.0.0
  */
 export const make = <a>(...v: a[]): t<a> => {
   const values: Record<number, a> = {};
+
+  if (v.length === 1 && Array.isArray(v[0])) {
+    v = v[0];
+  }
 
   for (let i = 0; i < v.length; i++) {
     values[i] = v[i];
