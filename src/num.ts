@@ -1,211 +1,325 @@
-import type * as f from './functors';
-import type * as fn from './fn';
+import type * as Fn from './Fn.js';
+import type * as Functors from './Functors.js';
+
+export type t = number;
+
+//#region guards
 
 /**
- * Checks if the given value is a number.
+ * Checks (at compile and runtime) if a given parameter `x` is a `number`
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * @example
  * 
- * console.log(Number.guard(10)) // true
- * console.log(Number.guard('')) // false
+ * ```ts
+ * import { Num } from 'tiinvo'
+ * 
+ * const or0 = (x: unknown): t => Num.guard(x) ? x : 0;
+ * 
+ * or0(10)                  // 10
+ * or0(20)                  // 20
+ * or0(-1)                  // -1
+ * or0(4e12)                // 4e12
+ * or0('hello world')       // 0          
+ * or0(true)                // 0  
+ * or0(false)               // 0  
+ * or0({})                  // 0
  * ```
  * 
- * @since 3.0.0
+ * @since 4.0.0
  */
-export const guard = (value => typeof value === 'number') as f.guard<number>;
-
-/**
- * Compares two numbers.
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * console.log(Number.compare(10, 5)) // 1
- * console.log(Number.compare(5, 10)) // -1
- * console.log(Number.compare(5, 5)) // 0
- * ```
- * 
- * @param a 
- * @param b 
- * @returns 
- */
-export const cmp: f.comparableE<number, number> = (a, b): -1 | 0 | 1 => a === b ? 0 : a < b ? -1 : 1;
-
-/**
- * Returns the integral part of the a numeric expression, `a`, removing any fractional digits. If `a` is already an integer, the result is `a`.
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * console.log(Number.int(10.5)) // 10
- * console.log(Number.int(10.1)) // 10
- * console.log(Number.int(10.9)) // 10
- * console.log(Number.int(10)) // 10
- * ```
- * 
- * @param a 
- * @returns 
- * @since 3.1.0
- */
-export const int = (a: number): number => a | 0;
-
-/**
- * Returns true if is even
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * console.log(Number.isEven(10)) // true
- * console.log(Number.isEven(11)) // false
- * ```
- * 
- * @param n 
- * @returns 
- */
-export const isEven: f.predicateE<number> = n => n % 2 === 0;
-
-/**
- * Returns true if is odd
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * console.log(Number.isOdd(10)) // false
- * console.log(Number.isOdd(11)) // true
- * ```
- * 
- * @param n 
- * @returns 
- */
-export const isOdd: f.predicateE<number> = n => n % 2 !== 0;
-
-//#region sortables
-
-/**
- * Used to sort numbers asceding.
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * const array = [10, 5, 3, 1];
- * console.log(array.sort(n.asc)) // [1, 3, 5, 10]
- * ```
- * @param a 
- * @param b 
- * @returns 
- */
-export const asc: f.comparableE<number, number> = (a, b) => cmp(a, b);
-
-/**
- * Used to sort numbers descending.
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * const array = [1, 5, 3, 10];
- * console.log(array.sort(n.desc)) // [10, 5, 3, 1]
- * ```
- * 
- * @param a 
- * @param b 
- * @returns 
- */
-export const desc: f.comparableE<number, number> = (a, b) => cmp(b, a);
+export const guard: Functors.Guardable<t> = (x): x is t => typeof (x) === 'number';
 
 //#endregion
 
-//#region comparators
-
-export type unarypredicate = fn.unary<number, f.predicateE<number>>;
+//#region comparables
 
 /**
- * Returns true if two numbers are equal
+ * Compares two numbers `a` and `b`.
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * Returns:
  * 
- * console.log(Number.eq(10, 10)) // true
- * console.log(Number.eq(10, 11)) // false
+ *    - 1 if `a` is greater than `b`
+ *    - 0 if `a` is same of `b`
+ *    - -1 if `b` is greater than `a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.cmp(1, 1)  // 0
+ * Num.cmp(1, 0)  // 1
+ * Num.cmp(0, 1)  // -1
  * ```
- * 
- * @param a 
- * @returns 
+ *  
+ * @since 4.0.0
  */
-export const eq: unarypredicate = a => b => cmp(a, b) === 0;
+export const cmp: Functors.Comparable<t> = (a, b) => a > b ? 1 : a < b ? -1 : 0;
+
 /**
- * Returns true if b is greater or equal to a
+ * Returns `true` if two numbers are the same
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * ```ts
+ * import { Num } from 'tiinvo';
  * 
- * console.log(Number.gte(10)(10)) // true
- * console.log(Number.gte(10)(11)) // true
- * console.log(Number.gte(10)(9)) // false
+ * Num.eq(1, 1)  // true
+ * Num.eq(1, 0)  // false
+ * Num.eq(0, 1)  // false
  * ```
- * @param a 
- * @returns 
+ *  
+ * @since 4.0.0
  */
-export const ge: unarypredicate = a => b => cmp(a, b) <= 0;
+export function eq(a: t, b: t): boolean;
+export function eq(a: t): Fn.Unary<t, boolean>;
+export function eq(a: t, b?: t): any {
+  return guard(a) && guard(b) ? a === b : (c: t) => eq(a, c);
+};
+
 /**
- * Returns true if b is greater than a
+ * Returns true if `a` is greater than `b` if `b` is specified, otherwise returns a
+ * function which once called returns true if `b` is greater than `a`
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * @example
  * 
- * console.log(Number.gt(10)(10)) // false
- * console.log(Number.gt(10)(11)) // true
- * console.log(Number.gt(10)(9)) // false
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.gt(5, -2)             // true
+ * Num.gt(5, 12)             // false
+ * 
+ * const gt5 = Num.gt(5) 
+ * 
+ * gt5(10)                   // true
+ * gt5(-2)                   // false
  * ```
- * 
- * @param a 
- * @returns 
  */
-export const gt: unarypredicate = a => b => cmp(a, b) === -1;
+export function gt(a: t, b: t): boolean;
+export function gt(a: t): Fn.Unary<number, boolean>;
+export function gt(a: t, b?: any): any {
+  if (guard(b)) {
+    return a > b;
+  }
+
+  return (b: any) => b > a;
+}
+
 /**
- * Returns true if b is less or equal to a
+ * Returns true if `a` is lesser than `b` if `b` is specified, otherwise returns a
+ * function which once called returns true if `b` is lesser than `a`
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * @example
  * 
- * console.log(Number.lt(5)(10)) // false
- * console.log(Number.lt(10)(10)) // true
- * console.log(Number.lt(10)(5)) // true
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.lt(5, -2)             // false
+ * Num.lt(5, 12)             // true
+ * 
+ * const lt5 = Num.lt(5) 
+ * 
+ * lt5(10)                   // true
+ * lt5(-2)                   // false
  * ```
- * 
- * @param a 
- * @returns 
  */
-export const le: unarypredicate = a => b => cmp(a, b) >= 0;
+export function lt(a: t, b: t): boolean;
+export function lt(a: t): Fn.Unary<number, boolean>;
+export function lt(a: t, b?: any): any {
+  if (guard(b)) {
+    return a < b;
+  }
+
+  return (b: any) => b < a;
+}
+
 /**
- * Returns true if b is less than a
+ * Returns true if `a` is great or equal to `b` if `b` is specified, otherwise returns a
+ * function which once called returns true if `b` is great or equal to `a`
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * @example
  * 
- * console.log(Number.lt(5)(10)) // false
- * console.log(Number.lt(10)(10)) // false
- * console.log(Number.lt(10)(5)) // true
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.gte(5, -2)             // true
+ * Num.gte(5, 12)             // false
+ * Num.gte(10, 10)            // true
+ * 
+ * const gte5 = Num.gte(5) 
+ * 
+ * gte5(10)                   // false
+ * gte5(5)                    // false
+ * gte5(-2)                   // true
  * ```
- * 
- * @param a 
- * @returns 
  */
-export const lt: unarypredicate = a => b => cmp(a, b) === 1;
+export function gte(a: t, b: t): boolean;
+export function gte(a: t): Fn.Unary<number, boolean>;
+export function gte(a: t, b?: any): any {
+  if (guard(b)) {
+    return a >= b;
+  }
+
+  return (c: any) => c >= a;
+}
+
 /**
- * Returns true if b is not equal to a
+ * Returns true if `a` is less or equal to `b` if `b` is specified, otherwise returns a
+ * function which once called returns true if `b` is less or equal to `a`
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * @example
  * 
- * console.log(Number.ne(10)(10)) // false
- * console.log(Number.ne(10)(11)) // true
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.lte(5, -2)             // false
+ * Num.lte(5, 12)             // true
+ * Num.lte(5, 5)              // true
+ * 
+ * const lte5 = Num.lte(5) 
+ * 
+ * lte5(5)                    // true
+ * lte5(10)                   // false
+ * lte5(-2)                   // true
+ * ```
+ */
+export function lte(a: t, b: t): boolean;
+export function lte(a: t): Fn.Unary<number, boolean>;
+export function lte(a: t, b?: any): any {
+  if (guard(b)) {
+    return a <= b;
+  }
+
+  return (b: any) => b <= a;
+}
+
+/**
+ * Returns true if `a` not equal to `b` if `b` is specified, otherwise returns a
+ * function which once called returns true if `b` not equal to `a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.ne(5, -2)             // true
+ * Num.ne(5, 12)             // true
+ * Num.ne(5, 5)              // false
+ * 
+ * const ne5 = Num.ne(5) 
+ * 
+ * ne5(5)                    // false
+ * ne5(10)                   // true
+ * ne5(-2)                   // true
+ * ```
+ */
+export function ne(a: t, b: t): boolean;
+export function ne(a: t): Fn.Unary<number, boolean>;
+export function ne(a: t, b?: any): any {
+  if (guard(b)) {
+    return a !== b;
+  }
+
+  return (b: any) => b !== a;
+}
+
+//#endregion
+
+//#region mappables
+
+/**
+ * Maps a number `a` to a value `Result.t<b>` if a is `number`, otherwise returns `Err`.
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * const toHex = Num.map(x => '0x' + x.toString(16))
+ * 
+ * toHex(10)      // 0xa
+ * toHex("a")     // Error("a is not a number")
+ * ``` 
+ */
+export const map = <b>(m: Functors.Mappable<t, b>) => (a: t) => guard(a) ? m(a) : new Error("a is not a number");
+
+/**
+ * Maps a number `a` to a value `Result.t<b>` if a is `number`, otherwise returns `b`.
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * const toHex = Num.mapOr(x => '0x' + x.toString(16), "0x0")
+ * 
+ * toHex(10)      // 0xa
+ * toHex("a")     // 0x0
+ * ``` 
+ */
+export const mapOr = <b>(m: Functors.Mappable<t, b>, b: b) => (a: t) => guard(a) ? m(a) : b;
+
+//#endregion
+
+//#region predicates
+
+/**
+ * Returns true if a number `x` is even.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.isEven(10)   // true
+ * Num.isEven(91)   // false
  * ```
  * 
- * @param a 
- * @returns 
+ * @since 4.0.0
  */
-export const ne: unarypredicate = a => b => cmp(a, b) !== 0;
+export const isEven: Functors.Filterable<t> = x => x % 2 === 0;
+
+/**
+ * Returns true if a number `x` is odd.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.isOdd(10)   // false
+ * Num.isOdd(91)   // true
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export const isOdd: Functors.Filterable<t> = x => x % 2 !== 0;
+
+/**
+ * Returns true if a number `x` is positive.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.isNegative(-1)   // true
+ * Num.isNegative(10)   // false
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export const isNegative: Functors.Filterable<t> = x => x < 0;
+
+/**
+ * Returns true if a number `x` is positive.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.isPositive(-1)   // false
+ * Num.isPositive(10)   // true
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export const isPositive: Functors.Filterable<t> = x => x >= 0;
 
 //#endregion
 
@@ -213,310 +327,432 @@ export const ne: unarypredicate = a => b => cmp(a, b) !== 0;
 
 /**
  * Returns a string containing a number represented in exponential notation.
- * @param n 
- * @returns 
- */
-export const toExponential = (n: number) => n.toExponential(0);
-/**
- * Returns a string containing a number represented in exponential notation.
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * If `a` and `b` parameters are passed, `b` counts as the fraction digits for `a`.
  * 
- * console.log(Number.toExponentialF(10)(1)) // '1.0000000000e+1'
+ * If `b` parameter is not passed, returns a `Unary<number, string>` function and `a` counts as the fraction digits for `b`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.toExponential(10, 2)        // "1.00e+1"
+ * Num.toExponential(10)(2)        // "2.0000000000e+0" 
  * ```
  * 
- * @param fractionDigits 
- * @returns 
+ * @since 4.0.0
  */
-export const toExponentialF = (fractionDigits: number) => (n: number) => n.toExponential(fractionDigits);
+export function toExponential(a: t, b: t): string;
+export function toExponential(a: t): Fn.Unary<t, string>;
+export function toExponential(a: t, b?: any): any {
+  if (guard(b)) {
+    return a.toExponential(b);
+  }
+
+  return (b: t) => b.toExponential(a);
+}
 
 /**
  * Returns a string representing a number in fixed-point notation.
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * If `a` and `b` parameters are passed, `b` counts as the fraction digits for `a`.
  * 
- * console.log(Number.toFixed(1)) // '1.00'
+ * If `b` parameter is not passed, returns a `Unary<number, string>` function and `a` counts as the fraction digits for `b`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.toFixed(10.505, 2)        // "10.51"
+ * Num.toFixed(10.505)(2)        // "2.0000000000"
  * ```
  * 
- * @param n 
- * @returns 
+ * @since 4.0.0
  */
-export const toFixed = (n: number) => n.toFixed(2);
+export function toFixed(a: t, b: t): string;
+export function toFixed(a: t): Fn.Unary<t, string>;
+export function toFixed(a: t, b?: any): any {
+  if (guard(b)) {
+    return a.toFixed(b);
+  }
+
+  return (b: t) => b.toFixed(a);
+}
+
 /**
  * Returns a string representing a number in fixed-point notation.
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * If `a` and `b` parameters are passed, `b` counts as the fraction digits for `a`.
  * 
- * console.log(Number.toFixed(10)(1)) // '1.0000000000'
+ * If `b` parameter is not passed, returns a `Unary<number, string>` function and `a` counts as the fraction digits for `b`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.toPrecision(10, 2)        // "10"
+ * Num.toPrecision(10)(2)        // "2.000000000"
  * ```
- * @param fractionDigits 
- * @returns 
+ * 
+ * @since 4.0.0
  */
-export const toFixedF = (fractionDigits: number) => (n: number) => n.toFixed(fractionDigits);
-/**
- * Returns a string containing a number represented either in exponential or fixed-point notation with a specified number of digits.
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * console.log(Number.toPrecision(1)) // '1.0'
- * ```
- * @param n 
- * @returns 
- */
-export const toPrecision = (n: number) => n.toPrecision(2);
-/**
- * Returns a string containing a number represented either in exponential or fixed-point notation with a specified number of digits.
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * console.log(Number.toPrecision(10)(1)) // '1.0000000000'
- * ```
- * @param precision 
- * @returns 
- */
-export const toPrecisionP = (precision: number) => (n: number) => n.toPrecision(precision);
-/**
- * Returns a string representation of a number.
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * console.log(Number.toString()) // '1'
- * ```
- * @param n 
- * @returns 
- */
-export const toString = (n: number) => n.toString();
-/**
- * Returns a string representation of a number.
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * console.log(Number.toString(16)(4bc)) // '4bc'
- * ```
- * @param radix 
- * @returns 
- */
-export const toStringR = (radix: number) => (n: number) => n.toString(radix);
+export function toPrecision(a: t, b: t): string;
+export function toPrecision(a: t): Fn.Unary<t, string>;
+export function toPrecision(a: t, b?: any): any {
+  if (guard(b)) {
+    return a.toPrecision(b);
+  }
 
+  return (b: t) => b.toPrecision(a);
+}
 
 //#endregion
 
-//#region unary
+//#region operables
 
-export type unaryop = fn.unary<number, fn.unary<number, number>>;
 /**
- * Adds b to a
+ * Adds `a` to `b` if both specified, otherwise returns a `Unary<number, number>` 
+ * function which once called adds `b` to `a`
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * @example
  * 
- * console.log(Number.uadd(10)(5)) // 15
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.add(5, -2)             // 3
+ * Num.add(5, 12)             // 17
+ * 
+ * const add5 = Num.add(5) 
+ * 
+ * add5(10)                   // 15
  * ```
- * @param a 
- * @returns 
  */
-export const uadd: unaryop = a => b => a + b;
-/**
- * Divides b by a
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * console.log(Number.udiv(10)(5)) // 2
- * ```
- * @param a 
- * @returns 
- */
-export const udiv: unaryop = a => b => b / a;
-/**
- * Returns the modulus of b by a
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * console.log(Number.umod(10)(5)) // 5
- * ```
- * @param a 
- * @returns 
- */
-export const umod: unaryop = a => b => b % a;
-/**
- * Multiplies b by a
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * console.log(Number.umul(10)(5)) // 50
- * ```
- * @param a 
- * @returns 
- */
-export const umul: unaryop = a => b => a * b;
-/**
- * Exponentiates b by a
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * console.log(Number.upow(3)(5)) // 125
- * ```
- * @param a 
- * @returns 
- */
-export const upow: unaryop = a => b => Math.pow(b, a);
-/**
- * Returns a random number between b and a (inclusive)
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * console.log(Number.urand(10)(5)) // 5
- * ```
- * @param a 
- * @returns 
- */
-export const urand: unaryop = a => b => Math.random() * (a - b) + b;
-/**
- * Returns the root of b by a
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * console.log(Number.uroot(2)(25)) // 5
- * ```
- * @param a 
- * @returns 
- */
-export const uroot: unaryop = a => b => Math.pow(b, 1 / a);
-/**
- * Subtracts a from b
- * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * console.log(Number.usub(10)(5)) // -5
- * ```
- * @param a 
- * @returns 
- */
-export const usub: unaryop = a => b => b - a;
+export function add(a: t, b: t): t;
+export function add(a: t): Fn.Unary<t, t>;
+export function add(a: t, b?: t): any {
+  if (guard(b)) {
+    return a + b;
+  }
 
+  return (c: t) => c + a;
+}
+
+/**
+ * Divides `a` by `b` if both specified, otherwise returns a `Unary<number, number>` 
+ * function which once called divides `b` by `a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.div(4, 2)              // 2
+ * Num.div(12, 3)             // 4
+ * 
+ * const div2 = Num.div(2) 
+ * 
+ * div2(4)                    // 2
+ * ```
+ */
+export function div(a: t, b: t): t;
+export function div(a: t): Fn.Unary<t, t>;
+export function div(a: t, b?: t): any {
+  if (guard(b)) {
+    return a / b;
+  }
+
+  return (c: t) => c / a;
+}
+
+/**
+ * Returns the modulus of `a % b` if `b` parameter is passed, 
+ * otherwise returns a `Unary<number, number>` 
+ * function which once called returns the modulus of `b % a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.mod(2, 2)             // 0
+ * Num.mod(3, 2)             // 1
+ * 
+ * const mod2 = Num.mod(2) 
+ * 
+ * mod2(10)                   // 0
+ * mod2(15)                   // 1
+ * ```
+ */
+export function mod(a: t, b: t): t;
+export function mod(a: t): Fn.Unary<t, t>;
+export function mod(a: t, b?: t): any {
+  if (guard(b)) {
+    return a % b;
+  }
+
+  return (c: t) => c % a;
+}
+
+/**
+ * Multiplies `a` to `b` if both specified, otherwise returns a `Unary<number, number>` 
+ * function which once called multiplies `b` to `a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.mul(5, -2)             // -10
+ * Num.mul(5, 12)             // 60
+ * 
+ * const mul5 = Num.mul(5) 
+ * 
+ * mul5(10)                   // 50
+ * ```
+ */
+export function mul(a: t, b: t): t;
+export function mul(a: t): Fn.Unary<t, t>;
+export function mul(a: t, b?: t): any {
+  if (guard(b)) {
+    return a * b;
+  }
+
+  return (c: t) => c * a;
+}
+
+/**
+ * Elevates `a` by `b` if both specified, otherwise returns a `Unary<number, number>` 
+ * function which once called elevates `b` by `a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.pow(2, 3)             // 8
+ * Num.pow(3, 2)             // 9
+ * 
+ * const pow5 = Num.pow(5) 
+ * 
+ * pow5(10)                   // 100_000
+ * ```
+ */
+export function pow(a: t, b: t): t;
+export function pow(a: t): Fn.Unary<t, t>;
+export function pow(a: t, b?: t): any {
+  if (guard(b)) {
+    return a ** b;
+  }
+
+  return (c: t) => c ** a;
+}
+
+/**
+ * Square root of `a` under `b` if both specified, otherwise returns a `Unary<number, number>` 
+ * function which once called returns the root of `b` under `a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.root(4, 2)             // 2
+ * Num.root(9, 2)             // 3
+ * 
+ * const root2 = Num.root(2) 
+ * 
+ * root2(4)                   // 2
+ * root2(9)                   // 3
+ * ```
+ */
+export function root(a: t, b: t): t;
+export function root(a: t): Fn.Unary<t, t>;
+export function root(a: t, b?: t): any {
+  if (guard(b)) {
+    return a ** (1 / b);
+  }
+
+  return (c: t) => c ** (1 / a);
+}
+
+/**
+ * Subtracts `b` to `a` if both specified, otherwise returns a `Unary<number, number>` 
+ * function which once called subtracts `a` to `b`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.sub(5, -2)             // 7
+ * Num.sub(5, 12)             // -7
+ * 
+ * const sub5 = Num.sub(5) 
+ * 
+ * sub5(10)                   // 5
+ * sub5(-2)                   // -7
+ * ```
+ */
+export function sub(a: t, b: t): t;
+export function sub(a: t): Fn.Unary<t, t>;
+export function sub(a: t, b?: t): any {
+  if (guard(b)) {
+    return a - b;
+  }
+
+  return (c: t) => c - a;
+}
 
 //#endregion
 
-//#region binary
+//#region sortables
 
-export type binaryop = fn.binary<number, number, number>
 /**
- * Adds a and b
+ * Compares two numbers `a` and `b` if `b` is defined, otherwise returns a 
+ * `Unary<number, number>` function which once called compares `b` and `a`
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * Great to sort a numeric array in ASC direction.
  * 
- * console.log(Number.badd(10, 5)) // 15
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * const collection = [10, 5, 6, 4, 12, 22, 3];
+ * 
+ * collection.sort(Num.asc)     // [3, 4, 5, 6, 10, 12, 22]
  * ```
- * @param a 
- * @param b 
- * @returns 
+ * 
+ * @since 4.0.0
  */
-export const badd: binaryop = (a, b) => a + b;
+export function asc(a: t, b: t): Functors.ComparableResult;
+export function asc(a: t): Fn.Unary<t, Functors.ComparableResult>;
+export function asc(a: t, b?: any): any {
+  if (guard(b)) {
+    return cmp(a, b);
+  }
+
+  return (c: t) => cmp(c, a);
+}
+
 /**
- * Divides a by b
+ * Compares two numbers `b` and `a` if `b` is defined, otherwise returns a 
+ * `Unary<number, number>` function which once called compares `a` and `b`
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * Great to sort a numeric array in DESC direction.
  * 
- * console.log(Number.bdiv(10, 5)) // 2
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * const collection = [10, 5, 6, 4, 12, 22, 3];
+ * 
+ * collection.sort(Num.desc)     // [22, 12, 10, 6, 5, 4, 3]
  * ```
- * @param a 
- * @param b 
- * @returns 
+ * 
+ * @since 4.0.0
  */
-export const bdiv: binaryop = (a, b) => a / b;
+export function desc(a: t, b: t): Functors.ComparableResult;
+export function desc(a: t): Fn.Unary<t, Functors.ComparableResult>;
+export function desc(a: t, b?: any): any {
+  if (guard(b)) {
+    return cmp(b, a);
+  }
+
+  return (c: t) => cmp(a, c);
+}
+
+//#endregion
+
+//#region serializables
+
 /**
- * Returns the modulus of a by b
+ * Returns a number in binary notation.
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * If the passed argument at runtime is not a number, an Error will be returned.
  * 
- * console.log(Number.bmod(10, 5)) // 0
+ * @example 
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.toBin(10)        // "0b1010"
  * ```
- * @param a 
- * @param b 
- * @returns 
+ * 
+ * @since 4.0.0
  */
-export const bmod: binaryop = (a, b) => a % b;
+export const toBin = map(x => '0b' + x.toString(2));
+
 /**
- * Multiplies a by b
+ * Returns a number in hexadecimal notation
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * If the passed argument at runtime is not a number, an Error will be returned.
  * 
- * console.log(Number.bmul(10, 5)) // 50
+ * @example 
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.toHex(10)        // "0xa"
  * ```
- * @param a 
- * @param b 
- * @returns 
+ * 
+ * @since 4.0.0
  */
-export const bmul: binaryop = (a, b) => a * b;
+export const toHex = map(x => '0x' + x.toString(16));
+
 /**
- * Elevates a to the power of b
+ * Returns a number in octal notation
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * If the passed argument at runtime is not a number, an Error will be returned.
  * 
- * console.log(Number.bpow(3, 5)) // 125
+ * @example 
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.toOct(10)        // "0o12"
  * ```
- * @param a 
- * @param b 
- * @returns 
+ * 
+ * @since 4.0.0
  */
-export const bpow: binaryop = (a, b) => Math.pow(a, b);
+export const toOct = map(x => '0o' + x.toString(8));
+
 /**
- * Returns a random number between a and b (inclusive)
+ * Returns a number in json notation.
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * If the passed argument at runtime is not a number, an Error will be returned.
  * 
- * console.log(Number.brand(10, 5)) // 5
+ * @example 
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.toJSON(10)       // "10"
  * ```
- * @param a 
- * @param b 
- * @returns 
+ * 
+ * @since 4.0.0
  */
-export const brand: binaryop = (a, b) => Math.random() * (b - a) + a;
+export const toJSON = map(JSON.stringify);
+
 /**
- * Returns the root of a by b
+ * Returns a stringified number.
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
+ * If the passed argument at runtime is not a number, an Error will be returned.
  * 
- * console.log(Number.broot(25, 2)) // 5
+ * @example 
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.toString(10)       // "10"
  * ```
- * @param a 
- * @param b 
- * @returns 
- */
-export const broot: binaryop = (a, b) => Math.pow(a, 1 / b);
-/**
- * Subtracts b from a
  * 
- * ```typescript
- * import { Number } from 'tiinvo';
- * 
- * console.log(Number.bsub(10, 5)) // 5
- * ```
- * @param a 
- * @param b 
- * @returns 
+ * @since 4.0.0
  */
-export const bsub: binaryop = (a, b) => a - b;
+export const toString = map(String);
 
 //#endregion

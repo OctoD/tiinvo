@@ -1,3 +1,8 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.preferences.importModuleSpecifierEnding": "js",
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.test.ts,${capture}.d.ts,${capture}.js",
+    "*.js": "${capture}.config.js,${capture}.d.ts",
+  }
 }

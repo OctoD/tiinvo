@@ -1,55 +1,213 @@
-export type argsOf<a extends (... args: any) => any> = a extends (... args: infer A) => any ? A : never;
+import type * as Functors from './Functors.js';
 
-export type argsOfMany<a extends ((... args: any) => any)[]> = [
-  ... {
-    [k in keyof a]: a[k] extends ((i: infer b) => any) ? b : never
-  }
-];
+//#region types
 
-export type firstArgOf<a extends (... args: any) => any> = a extends (first: infer A, ... args: any[]) => any ? A : void;
+/**
+ * Represents any async function
+ */
+export type AnyAsyncFn = (...args: any[]) => Promise<any>;
 
-export type lastArgOf<a extends (... args: any) => any> = a extends (... args: infer A) => any ? A extends [... any, infer b] ? b : void : void;
+/**
+ * Represents any function
+ */
+export type AnyFn = (...args: any[]) => any;
 
-export type returnTypeOf<a extends (... args: any) => any> = a extends (... args: any) => infer r ? r : void;
+/**
+ * Represents any unary function
+ */
+export type Unary<a, r> = (a: a) => r;
 
-export type returnTypeOfGuard<a extends (a: unknown) => any> = a extends (a: unknown) => a is infer r ? r : void;
+/**
+ * Represents any binary function
+ */
+export type Binary<a, b, r> = (a: a, b: b) => r;
 
-export type returnTypeOfMany<a extends ((... args: any) => any)[]> = [
-  ... {
-    [k in keyof a]: a[k] extends ((i: any) => infer r) ? r : never
-  }
-];
+/**
+ * Represents any ternary function
+ */
+export type Ternary<a, b, c, r> = (a: a, b: b, c: c) => r;
 
-export type returnTypeOfManyGuards<a extends ((a: unknown) => any)[]> = [
-  ... {
-    [k in keyof a]: a[k] extends ((a: unknown) => a is infer r) ? r : never
-  }
-];
+/**
+ * Represents any quaternary function
+ */
+export type Quaternary<a, b, c, d, r> = (a: a, b: b, c: c, d: d) => r;
 
-export type anyfn<a extends any[] = any, b = any> = (... args: a) => b;
+/**
+ * Represents any quinary function
+ */
+export type Quinary<a, b, c, d, e, r> = (a: a, b: b, c: c, d: d, e: e) => r;
 
-export type nullary<a> = () => a;
+/**
+ * Represents any senary function
+ */
+export type Senary<a, b, c, d, e, f, r> = (a: a, b: b, c: c, d: d, e: e, f: f) => r;
 
-export type unary<a, b> = (a: a) => b;
+/**
+ * Represents any septenary function
+ */
+export type Septenary<a, b, c, d, e, f, g, r> = (a: a, b: b, c: c, d: d, e: e, f: f, g: g) => r;
 
-export type binary<a, b, c> = (a: a, b: b) => c;
+/**
+ * Represents any octonary function
+ */
+export type Octonary<a, b, c, d, e, f, g, h, r> = (a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h) => r;
 
-export type ternary<a, b, c, d> = (a: a, b: b, c: c) => d;
+/**
+ * Represents any nonary function
+ */
+export type Nonary<a, b, c, d, e, f, g, h, i, r> = (a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h, i: i) => r;
 
-export type quaternary<a, b, c, d, e> = (a: a, b: b, c: c, d: d) => e;
+/**
+ * Represents any decenary function
+ */
+export type Decenary<a, b, c, d, e, f, g, h, i, l, r> = (a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h, i: i, l: l) => r;
 
-export type quinary<a, b, c, d, e, f> = (a: a, b: b, c: c, d: d, e: e) => f;
+//#endregion
 
-export type senary<a, b, c, d, e, f, g> = (a: a, b: b, c: c, d: d, e: e, f: f) => g;
+/**
+ * A function which returns it's first argument.
+ * 
+ * Use it only as a placeholder
+ *
+ * @example
+ *
+ * ```ts
+ * import { Fn } from 'tiinvo'
+ * 
+ * Fn.pass(10)      // 10
+ * Fn.pass(20)      // 20
+ * ```
+ *
+ * @since 4.0.0
+ */
+export const pass = <a>(a: a) => a;
 
-export type septenary<a, b, c, d, e, f, g, h> = (a: a, b: b, c: c, d: d, e: e, f: f, g: g) => h;
+//#region comparables
 
-export type octonary<a, b, c, d, e, f, g, h, i> = (a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h) => i;
+/**
+ * Compares two function signatures and names.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Fn, Num } from 'tiinvo'
+ * 
+ * Fn.cmp(Num.add, Num.add) // 0
+ * Fn.cmp(Num.add, Num.sub) // -1
+ * Fn.cmp(Num.sub, Num.add) // 1
+ * ```
+ *
+ * @since 4.0.0
+ */
+export const cmp: Functors.Comparable<AnyFn> = (a, b) => {
+  const namea = a.name.toLowerCase();
+  const nameb = b.name.toLowerCase();
 
-export type nonary<a, b, c, d, e, f, g, h, i, j> = (a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h, i: i) => j;
+  return Math.min(
+    Math.max(
+      (a.length > b.length ? 1 : a.length < b.length ? -1 : 0) +
+      (namea > nameb ? 1 : namea < nameb ? -1 : 0),
+      -1),
+    1
+  ) as -1 | 0 | 1;
+};
 
-export type decenary<a, b, c, d, e, f, g, h, i, j, k> = (a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h, i: i, j: j) => k;
+/**
+ * Checks if two functions are the same.
+ * 
+ * If will check that both function have:
+ * 
+ *    - the same list of arguments
+ *    - the same name
+ *    - the address in memory
+ *
+ * @example
+ *
+ * ```ts
+ * import { Fn, Num } from 'tiinvo'
+ * 
+ * Fn.eq(Num.add, Num.add) // true
+ * Fn.eq(Num.add, Num.sub) // false
+ * Fn.eq(Num.sub, Num.add) // false
+ * ```
+ *
+ * @since 4.0.0
+ */
+export const eq: Functors.Equatable<AnyFn> = (a, b) => cmp(a, b) === 0 && a === b;
 
-export type nary<a extends any[]> = (... args: a extends [... infer b, any] ? b : [void]) => a extends [... any, infer c] ? c : void;
+//#endregion
 
-export type asyncFnReturnType<a extends (... arg: any[]) => Promise<any>> = a extends (... arg: any[]) => Promise<infer r> ? r : never;
+//#region mappables
+
+/**
+ * Returns a function arguments length
+ *
+ * @example
+ *
+ * ```ts
+ * import { Fn } from 'tiinvo'
+ * 
+ * Fn.length(Fn.cmp)        // 2
+ * Fn.length(Fn.length)     // 1
+ * ```
+ *
+ * @since 4.0.0
+ */
+export const length: Functors.Mappable<AnyFn, number> = x => x.length;
+
+/**
+ * Returns a function's name
+ *
+ * @example
+ *
+ * ```ts
+ * import { Fn } from 'tiinvo'
+ * 
+ * Fn.name(Fn.cmp)        // 'cmp'
+ * Fn.name(Fn.name)       // 'name'
+ * ```
+ *
+ * @since 4.0.0
+ */
+export const name: Functors.Mappable<AnyFn, string> = x => x.name;
+
+//#region guardables
+
+/**
+ * Checks if an argument `x` is `AnyFn`
+ *
+ * @example
+ *
+ * ```ts
+ * import { Fn } from 'tiinvo'
+ * 
+ * Fn.guard(10)         // false
+ * Fn.guard(() => {})   // true
+ * ```
+ *
+ * @since 4.0.0
+ */
+export const guard = (x: unknown): x is AnyFn => typeof x === 'function';
+
+//#endregion
+
+//#region mappables
+
+/**
+ * Maps a value `a` over a list of `Functors.Mappable<a, b>` and returns an array of they returning values
+ *
+ * @example
+ *
+ * ```ts
+ * import { Fn, Num } from 'tiinvo'
+ * 
+ * const m = Fn.map(Num.add(1), Num.mul(2), Num.sub(3), Num.pow(4))
+ * 
+ * m(2)   // [3, 4, -1, 16]
+ * ```
+ *
+ * @since 4.0.0
+ */
+export const map = <a, b>(...ml: Functors.Mappable<a, b>[]) => (a: a) => ml.map(f => f(a));
+
+//#endregion

@@ -1,0 +1,19 @@
+{
+  "doc": {
+    "prefix": "doc",
+    "body": [
+      "/**",
+      " * $0",
+      " *",
+      " * @example",
+      " *",
+      " * ```ts",
+      " * import { $2 } from 'tiinvo'",
+      " * ```",
+      " *",
+      " * @since $1",
+      " */",
+    ],
+    "description": "A shorthand to create jsdoc"
+  }
+}

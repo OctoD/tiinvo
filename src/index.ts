@@ -1,50 +1,35 @@
-import * as Assert from './assertable';
-import * as Arr from './array';
-import * as Bool from './bool';
-import * as Dt from './date';
-import * as Either from './either';
-import type * as Fn from './fn';
-import * as Func from './function';
-import type * as Functors from './functors';
-import * as Maybe from './maybe';
-import * as Num from './num';
-import * as Obj from './obj';
-import * as Option from './option';
-import * as PipeAsync from './pipe.async';
-import * as Pipe from './pipe';
-import * as Predicate from './predicate';
-import * as Prms from './promise';
-import * as Result from './result';
-import * as Set from './set';
-import * as Str from './str';
-import * as Try from './try';
-import * as Tuple from './tuple';
+import * as Arr from './Arr.js';
+import * as Assert from './Assert.js';
+import * as Bool from './Bool.js';
+import * as Catch from './Catch.js';
+import * as Fn from './Fn.js';
+import * as Functors from './Functors.js';
+import * as Num from './Num.js';
+import * as Obj from './Obj.js';
+import * as Option from './Option.js';
+import * as Pipe from './Pipe.js';
+import * as Predicate from './Predicate.js';
+import * as Result from './Result.js';
+import * as Sequence from './Sequence.js';
+import * as SortedSequence from './SortedSequence.js';
+import * as Str from './Str.js';
+import * as TypedSequence from './TypedSequence.js';
 
 export {
-  Assert,
   Arr,
-  Arr as Array,
+  Assert,
   Bool,
-  Bool as Boolean,
-  Dt as Date,
-  Either,
+  Catch,
   Fn,
-  Func as Function,
   Functors,
-  Maybe,
   Num,
-  Num as Number,
   Obj,
-  Obj as Object,
   Option,
-  PipeAsync,
   Pipe,
   Predicate,
-  Prms as Promise,
   Result,
-  Set,
+  Sequence,
+  SortedSequence,
   Str,
-  Str as String,
-  Try,
-  Tuple,
-}
+  TypedSequence,
+};

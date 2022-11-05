@@ -1,761 +1,772 @@
-import type * as f from './functors';
-import type * as fn from './fn';
-import type { option } from './option';
+import type * as Fn from './Fn.js';
+import type * as Functors from './Functors.js';
+import type * as Option from './Option.js';
 
-/**
- * Checks if the given value is a string.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.guard('hello'); // true
- * String.guard(10); // false
- * ```
- * 
- * @since 3.0.0
- */
-export const guard = (value => typeof value === 'string') as f.guard<string>;
+export type t = string;
 
-/**
- * Compares a to b.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.cmp('a', 'b'); // -1
- * String.cmp('b', 'a'); // 1
- * String.cmp('a', 'a'); // 0
- * ```
- * 
- * @param a 
- * @param b 
- * @returns 
- */
-export const cmp: f.comparableE<string, string> = (a, b) => a > b ? 1 : a < b ? -1 : 0;
-
-/**
- * Returns true if a equals to b.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.eq('a', 'a'); // true
- * String.eq('a', 'b'); // false
- * ```
- */
-export const eq: f.equatableE<string> = (a, b) => a === b;
-
-/**
- * Returns true if a string is empty.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.empty(''); // true
- * String.empty('a'); // false
- * ```
- * 
- * @param a 
- * @returns 
- */
-export const empty: fn.unary<string, boolean> = a => a.length === 0;
-/**
- * Used to sort strings in ascending order.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * const array = ['c', 'b', 'a'];
- * console.log(array.sort(String.asc)); // ['a', 'b', 'c']
- * ```
- * 
- * @param a 
- * @param b 
- * @returns 
- */
-export const asc: f.comparableE<string, string> = (a, b) => cmp(a.toLowerCase(), b.toLowerCase());
-/**
- * Used to sort strings in descending order.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * const array = ['b', 'A', 'c', 'D'];
- * console.log(array.sort(String.desc)); // ['D', 'c', 'b', 'A']
- * ```
- * 
- * @param a 
- * @param b 
- * @returns 
- */
-export const desc: f.comparableE<string, string> = (a, b) => cmp(b.toLowerCase(), a.toLowerCase());
-
-//#region native methods
-
-/**
- * Returns the character at the specified index.
- * 
- * If nothing is found, returns an empty string.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.ucharAt(0)('hello'); // 'h'
- * String.ucharAt(1)('hello'); // 'e'
- * String.ucharAt(2)('hello'); // 'l'
- * String.ucharAt(3)('hello'); // 'l'
- * String.ucharAt(4)('hello'); // 'o'
- * String.ucharAt(5)('hello'); // ''
- * ```
- * 
- * @param at 
- * @returns 
- */
-export const ucharAt: fn.unary<number, fn.unary<string, option<string>>> = at => str => str.charAt(at);
-
-/**
- * Returns the Unicode value of the character at the specified location.
- * 
- * If there is no character at the specified index, null is returned.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.ucharCodeAt(0)('hello'); // 72
- * String.ucharCodeAt(1)('hello'); // 101
- * String.ucharCodeAt(2)('hello'); // 108
- * String.ucharCodeAt(3)('hello'); // 108
- * String.ucharCodeAt(4)('hello'); // 111
- * String.ucharCodeAt(5)('hello'); // null
- * ```
- * 
- * @param at 
- * @returns 
- */
-export const ucharCodeAt: fn.unary<number, fn.unary<string, option<number>>> = at => str => {
-  const r = str.charCodeAt(at);
-  return isNaN(r) ? null : r;
+export type StringReplacer = t | RegExp | Fn.Unary<t, t>;
+export type StringSearcher = t | {
+  [Symbol.search](string: string): number;
+};
+export type StringSplitter = t | {
+  [Symbol.split](string: string, limit?: number | undefined): string[];
 };
 
-/**
- * Returns a string created from the specified UTF-16 code unit.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.fromCharCode(72); // 'H'
- * String.fromCharCode(0x0041); // 'A'
- * String.fromCharCode(0x0061); // 'a'
- * ```
- * 
- * @param code 
- * @returns 
- */
-export const fromCharCode: fn.unary<number, string> = code => String.fromCharCode(code);
+//#region guards
 
-/**
- * Concatenates b and a.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.uconcat('a')('b'); // 'ba'
- * ```
- * @param a 
- * @returns 
- */
-export const uconcat: fn.unary<string, fn.unary<string, string>> = a => b => b + a;
-/**
- * Concatenates a and b.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.bconcat('a', 'b'); // 'ab'
- * ```
- * @param a 
- * @param b 
- * @returns 
- */
-export const bconcat: fn.binary<string, string, string> = (a, b) => a + b;
-/**
- * Returns true if the sequence of elements of searchString converted to a String is the same as the corresponding elements of this object (converted to a String) starting at endPosition – length(this). Otherwise returns false.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.uendsWith('lo')('hello'); // true
- * String.uendsWith('ll')('hello'); // false
- * ```
- * 
- * @param a 
- * @returns 
- */
-export const uendsWith: fn.unary<string, fn.unary<string, boolean>> = a => b => b.endsWith(a);
-/**
- * Returns true if `a` appears as a substring of `b`, returs false otherwise.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.uincludes('lo')('hello'); // true
- * String.uincludes('ll')('hello'); // true
- * String.uincludes('x')('hello'); // false
- * ```
- * @param a 
- * @returns 
- */
-export const uincludes: fn.unary<string, fn.unary<string, boolean>> = a => b => b.includes(a);
-/**
- * Returns true if `a` appears as a substring of `b`, returs false otherwise.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.includes('hello', 'lo'); // true
- * String.includes('hello', 'll'); // true
- * String.includes('hello', 'x'); // false
- * ```
- * @param a 
- * @returns 
- */
-export const includes: fn.binary<string, string, boolean> = (a, b) => a.includes(b);
-/**
- * Returns the position of the first occurrence of `a` in `b`.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.indexOf('lo')('hello'); // 2
- * String.indexOf('ll')('hello'); // 2
- * String.indexOf('x')('hello'); // -1
- * ```
- * @param a 
- * @param index The index at which to begin searching the String object. If omitted, search starts at the beginning of the string. 
- * @returns 
- */
-export const uindexOf: fn.binary<string, number | void, fn.unary<string, number>> = (a, index) => b => b.indexOf(a, index ?? 0);
-/**
- * Returns the position of the first occurrence of `a` in `b`.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.indexOf('lo', 'hello'); // 2
- * String.indexOf('ll', 'hello'); // 2
- * String.indexOf('x', 'hello'); // -1
- * ```
- * @param a 
- * @param b 
- * @param index The index at which to begin searching the String object. If omitted, search starts at the beginning of the string. 
- * @returns 
- */
-export const indexOf: fn.ternary<string, string, number | void, number> = (a, b, index) => a.indexOf(b, index ?? 0);
-/**
- * Returns the last occurrence of a substring in the string.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.lastIndexOf('lo')('hello'); // 2
- * String.lastIndexOf('ll')('hello'); // 2
- * String.lastIndexOf('l', 2)('hello'); // 2
- * String.lastIndexOf('l', 3)('hello'); // 3
- * ```
- * 
- * @param a 
- * @param index The index at which to begin searching. If omitted, the search begins at the end of the string.
- * @returns 
- */
-export const ulastIndexOf: fn.binary<string, void | number, fn.unary<string, number>> = (a, index) => b => b.lastIndexOf(a, index ?? b.length);
-/**
- * Returns the last occurrence of a substring in the string.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.lastIndexOf('lo', 'hello'); // 2
- * String.lastIndexOf('ll', 'hello'); // 2
- * String.lastIndexOf('l', 'hello', 2); // 2
- * String.lastIndexOf('l', 'hello', 3); // 3
- * ```
- * 
- * @param a 
- * @param index The index at which to begin searching. If omitted, the search begins at the end of the string.
- * @returns 
- */
-export const blastIndexOf: fn.ternary<string, string, void | number, number> = (a, b, index) => a.lastIndexOf(b, index ?? undefined);
-/**
- * Matches a string or an object that supports being matched against, and returns an array containing the results of that search, or null if no matches are found.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.umatch(/ll/)('hello'); // ['ll']
- * String.umatch(/l/g)('hello'); // ['l', 'l']
- * String.umatch(/x/g)('hello'); // null
- * ```
- * 
- * @param r 
- * @returns 
- */
-export const umatch: fn.unary<RegExp | string, fn.unary<string, RegExpMatchArray | null>> = r => str => str.match(r);
-/**
- * Matches a string or an object that supports being matched against, and returns an array containing the results of that search, or null if no matches are found.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.match('hello', /ll/); // ['ll']
- * String.match('hello', /l/g); // ['l', 'l']
- * String.match('hello', /x/g); // null
- * ```
- * 
- * @param r 
- * @returns 
- */
-export const match: fn.binary<string, RegExp | string, RegExpMatchArray | null> = (b, r) => b.match(r);
-/**
- * Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length. The padding is applied from the start (left) of the current string.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.padStart(5, '0')('1'); // '00001'
- * String.padStart(6, '0')('1'); // '000001'
- * ```
- * @param ml 
- * @param fs 
- * @returns 
- */
-export const upadstart: fn.binary<number, string | void, fn.unary<string, string>> = (ml, fs) => b => b.padStart(ml, fs ?? ' ');
-/**
- * Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length. The padding is applied from the start (left) of the current string.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.padStart('1', 5); // '    1'
- * String.padStart('1', 5, '0'); // '00001'
- * String.padStart('1', 6, '0'); // '000001'
- * ```
- * @param ml 
- * @param fs 
- * @returns 
- */
-export const padstart: fn.ternary<string, number, string | void, string> = (b, ml, fs) => b.padStart(ml, fs ?? ' ');
-/**
- * Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length. The padding is applied from the end (right) of the current string.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.upadEnd(5, '0')('1'); // '10000'
- * String.upadEnd(6, '0')('1'); // '100000'
- * ```
- * @param ml 
- * @param fs 
- * @returns 
- */
-export const upadEnd: fn.binary<number, string | void, fn.unary<string, string>> = (ml, fs) => b => b.padEnd(ml, fs ?? ' ');
-/**
- * Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length. The padding is applied from the end (right) of the current string.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.padEnd('1', 5); // '1    '
- * String.padEnd('1', 5, '0'); // '10000'
- * String.padEnd('1', 6, '0'); // '100000'
- * ```
- * @param b 
- * @param ml 
- * @param fs 
- * @returns 
- */
-export const padEnd: fn.ternary<string, number, string | void, string> = (b, ml, fs) => b.padEnd(ml, fs ?? ` `);
-/**
- * Returns a String value that is made from count copies appended together. If count is 0, the empty string is returned.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.urepeat(3)('x'); // 'xxx'
- * String.urepeat(0)('x'); // ''
- * ```
- * 
- * @param n 
- * @returns 
- */
-export const urepeat: fn.unary<number, fn.unary<string, string>> = n => b => b.repeat(n);
-/**
- * Returns a String value that is made from count copies appended together. If count is 0, the empty string is returned.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.repeat('x', 3); // 'xxx'
- * String.repeat('x', 0); // ''
- * ```
- * 
- * @param b 
- * @param n 
- * @returns 
- */
-export const brepeat: fn.binary<string, number, string> = (b, n) => b.repeat(n);
-/**
- * Replaces text in a string, using a regular expression or search string.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.ureplace('ll', 'hh')('hello'); // 'hehho'
- * String.ureplace('ll', arg => arg.length)('hello'); // 'he2o'
- * ```
- * @param rx 
- * @param r 
- * @returns 
- */
-export const ureplace: fn.binary<RegExp | string, string | ((s: string, ... sa: string[]) => string), fn.unary<string, string>> = (rx, r) => b => b.replace(rx, r as string);
-/**
- * Replaces text in a string, using a regular expression or search string.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.replace('hello', 'll', 'hh'); // 'hehho'
- * String.replace('hello', 'll', arg => arg.length); // 'he2o'
- * ```
- * @param b 
- * @param rx 
- * @param r 
- * @returns 
- */
-export const replace: fn.ternary<string, RegExp | string, string | ((s: string, ... sa: string[]) => string), string> = (b, rx, r) => b.replace(rx, r as string);
-/**
- * Reverses a string.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.reverse('hello'); // 'olleh'
- * ```
- * 
- * @param a 
- * @returns 
- * @since 3.7.0
- */
-export const reverse: fn.unary<string, string> = a => a.split('').reverse().join('');
-/**
- * Finds the first substring match in a regular expression search.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.usearch('ll')('hello'); // 1
- * String.usearch(/l/g)('hello'); // 1
- * ```
- * @param rx 
- * @returns 
- */
-export const usearch: fn.unary<RegExp | string, fn.unary<string, number>> = rx => b => b.search(rx);
-/**
- * Finds the first substring match in a regular expression search.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.search('hello', 'll'); // 1
- * String.search('hello', /l/g); // 1
- * ```
- * @param b 
- * @param rx 
- * @returns 
- */
-export const search: fn.binary<string, RegExp | string, number> = (b, rx) => b.search(rx);
-/**
- * Returns a section of a string.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.uslice(1, 3)('hello'); // 'el'
- * String.uslice(1)('hello'); // 'ello'
- * ```
- * @param start 
- * @param end 
- * @returns 
- */
-export const uslice: fn.binary<number | void, number | void, fn.unary<string, string>> = (start, end) => b => b.slice(start ?? undefined, end ?? undefined);
-/**
- * Returns a section of a string.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.slice('hello', 1, 3); // 'el'
- * String.slice('hello', 1); // 'ello'
- * ```
- * @param b 
- * @param start 
- * @param end 
- * @returns 
- */
-export const slice: fn.ternary<string, number | void, number | void, string> = (b, start, end) => b.slice(start ?? undefined, end ?? undefined);
-/**
- * Split `b` into substrings using the specified separator `rx` and return them as an array.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.usplit(' ')('hello world'); // ['hello', 'world']
- * String.usplit(/\s+/)('hello world'); // ['hello', 'world']
- * ```
- * 
- * @param rx 
- * @param n 
- * @returns 
- */
-export const usplit: fn.binary<RegExp | string, number | void, fn.unary<string, string[]>> = (rx, n) => b => b.split(rx as string, n ?? undefined);
-/**
- * Split `b` into substrings using the specified separator `rx` and return them as an array.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.split('hello', ' '); // ['hello', 'world']
- * String.split('hello', /\s+/); // ['hello', 'world']
- * ```
- * @param b 
- * @param rx 
- * @param n 
- * @returns 
- */
-export const split: fn.ternary<string, RegExp | string, number | void, string[]> = (b, rx, n) => b.split(rx as string, n ?? undefined);
-/**
- * Removes the leading and trailing white space and line terminator characters from a string.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.trim('  hello world  '); // 'hello world'
- * ```
- * 
- * @param b 
- * @returns 
- */
-export const trim: fn.unary<string, string> = b => b.trim();
-/**
- * Removes the trailing white space and line terminator characters from a string.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.trimEnd('  hello world  '); // '  hello world'
- * ```
- * @param b 
- * @returns 
- */
-export const trimEnd: fn.unary<string, string> = b => b.trimEnd();
-/**
- * Removes the leading white space and line terminator characters from a string.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.trimStart('  hello world  '); // 'hello world  '
- * ```
- * 
- * @param b 
- * @returns 
- */
-export const trimStart: fn.unary<string, string> = b => b.trimStart();
-/**
- * Returns a string length
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.length('hello'); // 5
- * ```
- * 
- * @param b 
- * @returns 
- * @since 3.0.0
- */
-export const length: fn.unary<string, number> = b => b.length;
-/**
- * Converts all the alphabetic characters in a string to lowercase.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.lower('HELLO WORLD'); // 'hello world'
- * ```
- * @param b 
- * @returns 
- */
-export const lower: fn.unary<string, string> = b => b.toLowerCase();
-/**
- * Converts all the alphabetic characters in a string to uppercase.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.upper('hello world'); // 'HELLO WORLD'
- * ```
- * 
- * @param b 
- * @returns 
- */
-export const upper: fn.unary<string, string> = b => b.toUpperCase();
+export const guard: Functors.Guardable<t> = (x): x is t => typeof x === 'string';
 
 //#endregion
 
-//#region case formatting
+//#region comparables
+
+/**
+ * Compares two strings `a` and `b`.
+ * 
+ * Returns:
+ * 
+ *    - 1 if `a` is greater than `b`
+ *    - 0 if `a` is same of `b`
+ *    - -1 if `b` is greater than `a`
+ * 
+ * **Important**: strings are compared as is, no lowercasing is applied
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.cmp('a', 'a')  // 0
+ * Str.cmp('a', 'b')  // -1
+ * Str.cmp('b', 'a')  // 1
+ * ```
+ *  
+ * @since 4.0.0
+ */
+export const cmp: Functors.Comparable<t> = (a, b) => a > b ? 1 : a < b ? -1 : 0;
+
+/**
+ * Returns `true` if two strings are the same
+ * 
+ * **Important**: strings are compared as is, no lowercasing is applied
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.eq('a', 'a')  // true
+ * Str.eq('a', 'b')  // false
+ * Str.eq('b', 'a')  // false
+ * ```
+ *  
+ * @since 4.0.0
+ */
+export const eq: Functors.Equatable<t> = (a, b) => a === b;
+
+//#endregion
+
+//#region sortables
+
+/**
+ * Compares two strings `a` and `b` if `b` is defined, otherwise returns a 
+ * `Unary<string, string>` function which once called compares `b` and `a`
+ * 
+ * Great to sort a string array in ASC direction.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * const collection = ['a', 'd', 'c', 'e', 'F', 'A'];
+ * 
+ * collection.sort(Str.asc) // [ "A", "F", "a", "c", "d", "e" ]
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export function asc(a: t, b: t): Functors.ComparableResult;
+export function asc(a: t): Fn.Unary<t, Functors.ComparableResult>;
+export function asc(a: t, b?: any): any {
+  if (guard(b)) {
+    return cmp(a, b);
+  }
+
+  return (b: string) => cmp(b, a);
+}
+
+/**
+ * Compares two strings `a` and `b` if `b` is defined, otherwise returns a 
+ * `Unary<string, string>` function which once called compares `b` and `a`
+ * 
+ * Great to sort a string array in DESC direction.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * const collection = ['a', 'd', 'c', 'e', 'F', 'A'];
+ * 
+ * collection.sort(Str.desc) // [ "e", "d", "c", "a", "F", "A" ]
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export function desc(a: t, b: t): Functors.ComparableResult;
+export function desc(a: t): Fn.Unary<t, Functors.ComparableResult>;
+export function desc(a: t, b?: any): any {
+  if (guard(b)) {
+    return cmp(b, a);
+  }
+
+  return (b: string) => cmp(a, b);
+}
+
+//#endregion
+
+//#region native methods
 
 /**
  * Formats a string to camel case.
  * 
  * ```typescript
- * import { String } from 'tiinvo';
+ * import { Str } from 'tiinvo';
  * 
- * String.camelCase('hello world'); // 'helloWorld'
+ * Str.camel('hello world'); // 'helloWorld'
  * ```
  * @param b 
  * @returns 
+ * 
+ * @since 4.0.0
  */
-export const camel: fn.unary<string, string> = b => b.replace(/\s(.)/g, (_, c) => c.toUpperCase());
-/**
- * Formats a string to pascal case.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.pascal('hello world'); // 'HelloWorld'
- * ```
- * @param b 
- * @returns 
- */
-export const pascal: fn.unary<string, string> = b => b.replace(/\s(.)/g, (_, c) => c.toUpperCase()).replace(/^(.)/, (_, c) => c.toUpperCase());
-/**
- * Formats a string to kebab case.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.kebab('hello world'); // 'hello-world'
- * ```
- * 
- * @param b 
- * @returns 
- */
-export const kebab: fn.unary<string, string> = b => b.replace(/[A-Z]/g, word => ' ' + word.replace(/[A-Z]/, b => b.toLowerCase())).replace(/\s/g, '-');
-/**
- * Formats a string to snake case.
- * 
- * ```typescript
- * import { String } from 'tiinvo';
- * 
- * String.snake('hello world'); // 'hello_world'
- * ```
- * 
- * @param b 
- * @returns 
- */
-export const snake: fn.unary<string, string> = b => b.replace(/[A-Z]/g, word => ' ' + word.replace(/[A-Z]/, b => b.toLowerCase())).replace(/\s/g, '_');
-
-//#endregion
+export const camel: Fn.Unary<t, t> = b => b.replace(/\s(.)/g, (_, c) => c.toUpperCase());
 
 /**
- * Returns an array of chars.
+ * Returns the character `Option.t<string>` at the specified index.
  * 
- * ```typescript
- * import { String } from 'tiinvo';
+ * If `a` and `b` parameters are passed, `b` is the char position for string `a`.
  * 
- * String.chars('hello'); // ['h', 'e', 'l', 'l', 'o']
+ * If `b` parameter is not passed, returns a `Unary<string, string>` function and `a` is the char position for string `b`.
+ * 
+ * **Important**: if the index is out of range, then `None` is returned.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.charAt("hello", 0)         // "h"
+ * Str.charAt("hello", 10)        // null
+ * Str.charAt(0)("hello")         // "h" 
  * ```
  * 
- * @param b
- * @returns
- * 
- * @since 3.1.0
+ * @since 4.0.0
  */
-export const chars = usplit('');
+export function charAt(a: t, b: number): Option.t<t>;
+export function charAt(a: number): Fn.Unary<t, Option.t<t>>;
+export function charAt(a: any, b?: any): any {
+  if (guard(a) && typeof b === 'number') {
+    const c = a.charAt(b);
+    return c === "" ? null : c;
+  } else if (typeof a !== 'number') {
+    return (_: never) => null;
+  }
+
+  return (b: t) => {
+    const c = b.charAt(a);
+    return c === "" ? null : c;
+  };
+}
+
+/**
+ * Returns the char code `Option.t<string>` at the specified index.
+ * 
+ * If `a` and `b` parameters are passed, `b` is the char position for string `a`.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<string, string>` function and `a` is the char code position for string `b`.
+ * 
+ * **Important**: if the index is out of range, then `None` is returned.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.charCodeAt("hello", 0)         // 104
+ * Str.charCodeAt("hello", 10)        // null
+ * Str.charCodeAt(0)("hello")         // 104 
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export function charCodeAt(a: t, b: number): Option.t<t>;
+export function charCodeAt(a: number): Fn.Unary<t, Option.t<t>>;
+export function charCodeAt(a: any, b?: any): any {
+  if (guard(a) && typeof b === 'number') {
+    const c = a.charCodeAt(b);
+    return c >= 0 ? c : null
+  } else if (typeof a !== 'number') {
+    return (_: never) => null;
+  }
+
+  return (b: t) => {
+    const c = b.charCodeAt(a);
+    return c >= 0 ? c : null
+  };
+}
+
+/**
+ * Returns a string chars array
+ * 
+ * @example
+ * 
+ * ```typescript
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.chars('hello'); // ['h','e','l','l','o']
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export const chars: Fn.Unary<t, t[]> = a => a.split('');
+
+/**
+ * Returns a concatenated string.
+ * 
+ * If `a` and `b` parameters are passed, then the result is `a + b`.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<string, string>` function and the result is `b + a`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.concat("hello", "world")         // "helloworld"
+ * Str.concat("world")("hello")         // "helloworld"
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export function concat(a: t, b: t): t;
+export function concat(a: t): Fn.Unary<t, t>;
+export function concat(a: any, b?: any): any {
+  if (guard(a) && guard(b)) {
+    return a.concat(b);
+  }
+
+  return (b: t) => b.concat(a);
+}
+
+/**
+ * Returns if a string terminates with another one.
+ * 
+ * If `a` and `b` parameters are passed, then the result is `a` ends with `b`.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<string, string>` function and the result is `b`  ends with `a`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.endsWith("hello", "o")         // true
+ * Str.endsWith("o")("hello")         // true
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export function endsWith(a: t, b: t): boolean;
+export function endsWith(a: t): Fn.Unary<t, boolean>;
+export function endsWith(a: any, b?: any): any {
+  if (guard(a) && guard(b)) {
+    return a.endsWith(b);
+  }
+
+  return (b: string) => b.endsWith(a);
+}
+
+/**
+ * Returns if a string includes another one.
+ * 
+ * If `a` and `b` parameters are passed, then the result is `a` ends with `b`.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<string, string>` function and the result is `b`  ends with `a`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.includes("hello", "o")         // true
+ * Str.includes("o")("hello")         // true
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export function includes(a: t, b: t): boolean;
+export function includes(a: t): Fn.Unary<t, boolean>;
+export function includes(a: any, b?: any): any {
+  if (guard(a) && guard(b)) {
+    return a.includes(b);
+  }
+
+  return (b: string) => b.includes(a);
+}
+
+/**
+ * Returns the position of the first occurrence of `a` in `b`.
+ * 
+ * If `a` and `b` parameters are passed, then the result is the position of `b` in `a`.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<string, string>` function and the result is the position of `a` in `b`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.indexOf("hello", "l")         // 2
+ * Str.indexOf("hello", "l", 3)      // 3
+ * Str.indexOf("l")("hello")         // 2
+ * Str.indexOf("l")("hello", 3)      // 3
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export function indexOf(a: t, b: t, i?: number): Option.t<number>;
+export function indexOf(a: t): (b: t, i?: number) => Option.t<number>;
+export function indexOf(a: any, b?: any, i?: number): any {
+  if (guard(a) && guard(b)) {
+    return a.indexOf(b, i);
+  }
+
+  return (b: t, i: number) => b.indexOf(a, i);
+}
+/**
+ * Returns last string position of 'b' in 'a'.
+ * 
+ * If `a` and `b` parameters are passed, then the result is `b` last position `a`.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<string, string>` function and the result is `a` last position `b`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.lastIndexOf("hello", "l")         // 3
+ * Str.lastIndexOf("l")("hello")         // 3
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export function lastIndexOf(a: t, b: t, p?: number): Option.t<number>;
+export function lastIndexOf(a: t): (b: t, p?: number) => Option.t<number>;
+export function lastIndexOf(a: any, b?: any, p?: any): any {
+  if (guard(a) && guard(b)) {
+    return a.lastIndexOf(b, p);
+  }
+
+  return (b: t, p?: number) => b.lastIndexOf(a, p);
+}
+
+/**
+ * Returns a string length
+ * 
+ * @example
+ * 
+ * ```typescript
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.length('hello'); // 5
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export const length: Fn.Unary<t, number> = a => a.length;
+
 /**
  * Returns an array of lines in a string.
  * 
  * ```typescript
- * import { String } from 'tiinvo';
+ * import { Str } from 'tiinvo';
  * 
- * String.split('hello\nworld'); // ['hello', 'world']
+ * Str.lines('hello\nworld'); // ['hello', 'world']
  * ```
  * 
  * @param b
  * @returns
  * 
- * @since 3.1.0
+ * @since 4.0.0
  * 
  */
-export const lines = usplit(/\r?\n/);
+export const lines: Fn.Unary<t, t[]> = x => x.split(/\r?\n/);
+
+/**
+ * Returns a lowercased string 
+ * 
+ * @example
+ * 
+ * ```typescript
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.lower('HELLO'); // "hello"
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export const lower: Fn.Unary<t, t> = a => a.toLowerCase();
+
+/**
+ * Returns if a string includes another one.
+ * 
+ * If `a` and `b` parameters are passed, then the result is `a` ends with `b`.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<string, string>` function and the result is `b`  ends with `a`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.match("hello", "o")         // ['o']
+ * Str.match("o")("hello")         // ['o']
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export function match(a: t, b: t | RegExp): Option.t<RegExpMatchArray>;
+export function match(a: t | RegExp): Fn.Unary<t, Option.t<RegExpMatchArray>>;
+export function match(a: any, b?: any): any {
+  if (guard(a) && (guard(b) || b instanceof RegExp)) {
+    return a.match(b);
+  }
+
+  return (b: string) => b.match(a);
+}
+
+/**
+ * Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length. The padding is applied from the end (right) of the current string.
+ * 
+ * If `a` and `b` parameters are passed, then the result is `a` padded by `b`.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<string, string>` function and the result is `b` padded by `a`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.padEnd("a", 5)         // "a    "
+ * Str.padEnd("a", 5, "b")    // "abbbb"
+ * Str.padEnd(5)("a")         // "a    "
+ * Str.padEnd(5, "b")("a")    // "abbbb"
+ * Str.padEnd(5)("a", "b")    // "abbbb"
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export function padEnd(a: t, b: number, c?: t): t;
+export function padEnd(a: number): (b: t, d?: t) => t;
+export function padEnd(a: number, b?: t): (b: t) => t;
+export function padEnd(a: any, b?: any, c?: any): any {
+  if (guard(a) && typeof b === 'number') {
+    return a.padEnd(b, c);
+  }
+
+  return (x: string, y?: string) => x.padEnd(a, b ?? y);
+}
+
+/**
+ * Formats a string to pascal case.
+ * 
+ * ```typescript
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.pascal('hello world'); // 'HelloWorld'
+ * ```
+ * @param b 
+ * @returns 
+ */
+export const pascal: Fn.Unary<t, t> = b => b.replace(/\s(.)/g, (_, c) => c.toUpperCase()).replace(/^(.)/, (_, c) => c.toUpperCase());
+
+/**
+ * Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length. The padding is applied from the start (left) of the current string.
+ * 
+ * If `a` and `b` parameters are passed, then the result is `a` padded by `b`.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<string, string>` function and the result is `b` padded by `a`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.padStart("a", 5)         // "    a"
+ * Str.padStart("a", 5, "b")    // "bbbba"
+ * Str.padStart(5)("a")         // "    a"
+ * Str.padStart(5, "b")("a")    // "bbbba"
+ * Str.padStart(5)("a", "b")    // "bbbba"
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export function padStart(a: t, b: number, c?: t): t;
+export function padStart(a: number): (b: t, d?: t) => t;
+export function padStart(a: number, b?: t): (b: t) => t;
+export function padStart(a: any, b?: any, c?: any): any {
+  if (guard(a) && typeof b === 'number') {
+    return a.padStart(b, c);
+  }
+
+  return (x: string, y?: string) => x.padStart(a, b ?? y);
+}
+
+/**
+ * Returns a String value that is made from count copies appended together. If count is 0, the empty string is returned
+ * 
+ * If `a` and `b` parameters are passed, then the result is `a` repeated by `b` times.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<string, string>` function and the result is `b` repeated by `a` times.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.repeat("a", 5)         // "aaaaa"
+ * Str.repeat(5)("a")         // "aaaaa"
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export function repeat(a: t, b: number): t;
+export function repeat(a: number): (b: t) => t;
+export function repeat(a: any, b?: any): any {
+  if (guard(a) && typeof b === 'number') {
+    return a.repeat(b);
+  }
+
+  return (b: string) => b.repeat(a);
+}
+
+/**
+ * Returns a String value that is made from count copies appended together. If count is 0, the empty string is returned
+ * 
+ * If `a` and `b` parameters are passed, then the result is `a` repeated by `b` times.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<string, string>` function and the result is `b` repeated by `a` times.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.replace("hello", "l", "e")         // "heelo"
+ * Str.replace("l", "e")("hello")         // "heelo"
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export function replace(a: t, b: t, c: StringReplacer): t;
+export function replace(a: t, b: StringReplacer): (b: t) => t;
+export function replace(a: any, b?: any, c?: any): any {
+  if (guard(a) && guard(b) && typeof c !== 'undefined') {
+    return a.replace(b, c);
+  }
+
+  return (x: t) => x.replace(a, b);
+}
+
+/**
+ * Reverses a string.
+ * 
+ * @example
+ * 
+ * ```typescript
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.reverse('hello'); // 'olleh'
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export const reverse: Fn.Unary<t, t> = a => a.split('').reverse().join('');
+
+/**
+ * Finds the first substring match in a regular expression search.
+ * 
+ * If `a` and `b` parameters are passed, then the result is `a` is searched by `b`.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<string, string>` function and the result is `b` is searched by `a`.
+ * 
+ * **Important**: it differs from plain js String.prototype.search, since it will return `None` if the index is below `0`
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.search("hello", "l")         // 2
+ * Str.search("l")("hello")         // 2
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export function search(a: t, b: StringSearcher): Option.t<number>;
+export function search(a: StringSearcher): (b: t) => Option.t<number>;
+export function search(a: any, b?: any): any {
+  const m: Functors.Mappable<number, Option.t<number>> = x => x >= 0 ? x : null;
+
+  if (guard(a) && typeof b !== 'undefined') {
+    return m(a.search(b));
+  }
+
+  return (b: t) => m(b.search(a));
+}
+
+/**
+ * Returns a section of a string.
+ * 
+ * If `a` and `b` parameters are passed, then the result is `a` a slice to `b`.
+ * 
+ * If `a` and `b` and `c` parameters are passed, then the result is `a` a slice from `b` ending to `c` position.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<string, string>` function and the result is `b` is searched by `a`.
+ * 
+ * **Important**: it differs from plain js String.prototype.search, since it will return `None` if the index is below `0`
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.slice("hello", 1)         // "ello"
+ * Str.slice("hello", 1, 3)      // "el"
+ * Str.slice(1)("hello")         // "ello"
+ * Str.slice(1, 3)("hello")      // "el"
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export function slice(a: t, b: number, c?: number): string;
+export function slice(a: number, b?: number): (b: t) => string;
+export function slice(a: any, b?: any, c?: any): any {
+  if (guard(a) && typeof b === 'number') {
+    return a.slice(b, c);
+  }
+
+  return (x: t, y?: number) => x.slice(a, b ?? y);
+}
+
+/**
+ * Returns a section of a string.
+ * 
+ * If `a` and `b` parameters are passed, then the result is `a` a slice to `b`.
+ * 
+ * If `a` and `b` and `c` parameters are passed, then the result is `a` a slice from `b` ending to `c` position.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<string, string>` function and the result is `b` is searched by `a`.
+ * 
+ * **Important**: it differs from plain js String.prototype.search, since it will return `None` if the index is below `0`
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.split("hello world", " ")         // ["hello", "world"]
+ * Str.split(" ")("hello world")         // ["hello", "world"]
+ * Str.split(" ", 1)("hello world")      // ["hello"]
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export function split(a: t, b: StringSplitter, c?: t): t[];
+export function split(a: StringSplitter, b?: number): Fn.Unary<t, t[]>;
+export function split(a: any, b?: any, c?: any): any {
+  if (guard(a) && (guard(b) || b instanceof RegExp || (!!b && typeof b === 'object' && Symbol.split in b))) {
+    return a.split(b, c);
+  }
+
+  return (x: t, y?: number) => x.split(a, b ?? y);
+}
+
+/**
+ * Trims a string.
+ * 
+ * @example
+ * 
+ * ```typescript
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.trim('    hello world    '); // 'hello world'
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export const trim: Fn.Unary<t, t> = a => a.trim();
+
+/**
+ * Trims a string at it's end.
+ * 
+ * @example
+ * 
+ * ```typescript
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.trimEnd('    hello world    '); // '    hello world'
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export const trimEnd: Fn.Unary<t, t> = a => a.trimEnd();
+
+/**
+ * Trims a string at it's start.
+ * 
+ * @example
+ * 
+ * ```typescript
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.trimStart('    hello world    '); // 'hello world    '
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export const trimStart: Fn.Unary<t, t> = a => a.trimStart();
+
+/**
+ * Returns a uppercased string 
+ * 
+ * @example
+ * 
+ * ```typescript
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.upper('hello'); // "HELLO"
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export const upper: Fn.Unary<t, t> = a => a.toUpperCase();
 
 /**
  * Returns an array of words in a string.
  * 
  * ```typescript
- * import { String } from 'tiinvo';
+ * import { Str } from 'tiinvo';
  * 
- * String.words('hello world'); // ['hello', 'world']
+ * Str.words('hello world'); // ['hello', 'world']
  * ```
  * 
  * @param b
  * @returns
  * 
- * @since 3.1.0
+ * @since 4.0.0
  */
-export const words = usplit(/\s+/m);
+export const words: Fn.Unary<t, t[]> = x => x.split(/\s+/m);
 
-/**
- * Adds a `prefix` to a `sub`
- * @param sub 
- * @param prefix 
- * @returns 
- * @since 3.9.0
- * 
- * @example
- * 
- * ```ts
- * import { Str } from 'tiinvo';
- * 
- * Str.prefix('hello', 'world') // 'worldhello';
- * ```
- */
-export const prefix = (sub: string, prefix: string) => prefix + sub;
-/**
- * Adds a `suffix` to a `sub`
- * @param sub 
- * @param suffix 
- * @returns 
- * @since 3.9.0
- * 
- * @example
- * 
- * ```ts
- * import { Str } from 'tiinvo';
- * 
- * Str.suffix('hello', 'world') // 'helloworld';
- * ```
- */
-export const suffix = (sub: string, suffix: string) => sub + suffix;
-/**
- * Curried version of prefix
- * @param prefix the prefix
- * @returns 
- */
-export const uprefix = (prefix: string) => (sub: string) => prefix + sub;
-/**
- * Curried version of suffix
- * @param suffix the suffix
- * @returns 
- */
-export const usuffix = (suffix: string) => (sub: string) => sub + suffix;
+//#endregion
