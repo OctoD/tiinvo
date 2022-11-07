@@ -1,6 +1,7 @@
 import { cmp as arrCmp, eq as arrEq } from './Arr.js';
 import type * as Fn from './Fn.js';
 import type * as Functors from './Functors.js';
+import { defaultsymbol } from './Functors.js';
 import type * as Option from './Option.js';
 import type * as Result from './Result.js';
 import { isErr } from './Result.js';
@@ -229,6 +230,32 @@ export function map<a, b>(a: t<a> | Functors.Mappable<a, b>, m?: any): any {
   };
 }
 
+/**
+ * Reduces all elements `a` to `b` of a `Sequence.t<a>`
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence, Num } from 'tiinvo'
+ * 
+ * const s = Sequence.make(10, 20, 30)
+ * 
+ * Sequence.reduce(s, Num.add, 0)  // 60
+ * Sequence.reduce<number, number>(Num.add, 0)(s)  // 60
+ * ```
+ *
+ * @since 4.0.0
+ */
+export function reduce<a, b>(a: t<a>, mod: Functors.Reduceable<a, b>, s: b): b;
+export function reduce<a, b>(a: Functors.Reduceable<a, b>, mod: b): Fn.Unary<t<a>, b>;
+export function reduce<a, b>(a: t<a> | Functors.Reduceable<a, b>, mod?: b | Functors.Reduceable<a, b>, s?: b): any {
+  if (guard(a) && typeof mod === 'function') {
+    return Array.from(a).reduce((x, c) => (mod as Functors.Reduceable<a, b>)(x, c), s as b);
+  }
+
+  return (b: t<a>) => Array.from(b).reduce((x, c) => (a as Functors.Reduceable<a, b>)(x, c), mod as b);
+}
+
 //#endregion
 
 //#region filterables
@@ -257,6 +284,96 @@ export function filter<a>(a: t<a> | Functors.Filterable<a>, f?: Functors.Filtera
   }
 
   return (c: t<a>) => make.apply(null, Array.from(c).filter(a as Functors.Filterable<a>));
+}
+
+/**
+ * Filters and reduce a `Sequence.t<a>` to `b`
+ *
+ * @example
+ *
+ * ```ts
+ * import { Functors, Sequence, Num } from 'tiinvo'
+ * 
+ * const s = Sequence.make(1, 2, 3, 4, 5)
+ * const f: Functors.FilterReduceableModule<number, number> = {
+ *    [Functors.defaultsymbol]: 0,
+ *    filter: Num.isEven,
+ *    reduce: Num.add,
+ * }
+ * 
+ * Sequence.filterReduce(s, f)      // 6
+ * Sequence.filterReduce(f)(s)      // 6
+ * ```
+ *
+ * @since 4.0.0
+ */
+export function filterReduce<a, b>(a: t<a>, mod: Functors.FilterReduceableModule<a, b>): b;
+export function filterReduce<a, b>(mod: Functors.FilterReduceableModule<a, b>): Fn.Unary<t<a>, b>;
+export function filterReduce<a, b>(a: t<a> | Functors.FilterReduceableModule<a, b>, mod?: Functors.FilterReduceableModule<a, b>): any {
+  const impl = (x: t<a>, y: Functors.FilterReduceableModule<a, b>): b => {
+    let out: b = y[defaultsymbol];
+
+    for (const e of x) {
+      if (y.filter(e)) {
+        out = y.reduce(out, e);
+      }
+    }
+
+    return out;
+  };
+
+  if (guard(a)) {
+    return impl(a, mod!);
+  }
+
+  return (b: t<a>) => impl(b, a);
+}
+
+
+/**
+ * Filters and maps a `Sequence.t<a>` to a `Sequence.t<b>` using the `FilterMappableModule<a, b>` functor.
+ * 
+ * **Important** The filter is applied before the map.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Functors, Sequence, Num, Range } from 'tiinvo'
+ * 
+ * const f: Functors.FilterMappableModule<number, string | Error> = {
+ *   filter: Num.isOdd,
+ *   map: Num.toBin,
+ * }
+ * const s = Sequence.make(... Range.make(0, 10));
+ * const m = Sequence.filterMap(f);
+ * 
+ * Sequence.filterMap(s, f)   // ["0b1", "0b11", "0b101", "0b111", "0b1001"]
+ * m(s)                       // ["0b1", "0b11", "0b101", "0b111", "0b1001"]
+ * 
+ * ```
+ *
+ * @since 4.0.0
+ */
+export function filterMap<a, b>(a: t<a>, f: Functors.FilterMappableModule<a, b>): t<b>;
+export function filterMap<a, b>(a: Functors.FilterMappableModule<a, b>): Fn.Unary<t<a>, t<b>>;
+export function filterMap<a, b>(a: t<a> | Functors.FilterMappableModule<a, b>, f?: Functors.FilterMappableModule<a, b>): any {
+  const handle = (a: t<a>, mod: Functors.FilterMappableModule<a, b>) => {
+    const outvalues: b[] = [];
+
+    for (const v of a) {
+      if (mod.filter(v)) {
+        outvalues.push(mod.map(v));
+      }
+    }
+
+    return make.apply(null, outvalues);
+  };
+
+  if (guard(a) && typeof f === 'object') {
+    return handle(a, f);
+  }
+
+  return (b: t<a>) => handle(b, a as Functors.FilterMappableModule<a, b>);
 }
 
 //#endregion

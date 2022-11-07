@@ -1,5 +1,7 @@
 import { describe, expect, test } from 'vitest';
+import * as Functors from './Functors';
 import * as Num from './Num';
+import * as Range from './Range';
 import * as Sequence from './Sequence';
 import * as Str from './Str';
 
@@ -74,6 +76,33 @@ describe("Sequence", () => {
 
     expect(Sequence.filter(s, Num.gt(20))).toEqual(Sequence.make(30, 40));
     expect(Sequence.filter(Num.gt(20))(s)).toEqual(Sequence.make(30, 40));
+  });
+
+  test(Sequence.filterMap.name, () => {
+    const f: Functors.FilterMappableModule<number, string | Error> = {
+      filter: Num.isOdd,
+      map: Num.toBin,
+    };
+    const s = Sequence.make(...Range.make(0, 10));
+    const m = Sequence.filterMap(f);
+
+    const a = Sequence.filterMap(s, f);
+    const b = m(s);
+
+    expect(Sequence.toArray(a)).toEqual(["0b1", "0b11", "0b101", "0b111", "0b1001"]);
+    expect(Sequence.toArray(b)).toEqual(["0b1", "0b11", "0b101", "0b111", "0b1001"]);
+  });
+
+  test(Sequence.filterReduce.name, () => {
+    const s = Sequence.make(1, 2, 3, 4, 5);
+    const f: Functors.FilterReduceableModule<number, number> = {
+      [Functors.defaultsymbol]: 0,
+      filter: Num.isEven,
+      reduce: Num.add,
+    };
+
+    expect(Sequence.filterReduce(s, f)).toEqual(6);
+    expect(Sequence.filterReduce(f)(s)).toEqual(6);
   });
 
   test(Sequence.append.name, () => {
@@ -193,6 +222,13 @@ describe("Sequence", () => {
     c.set("1", 2);
 
     expect(Sequence.toMap(Sequence.make(1, 2))).toEqual(c);
+  });
+
+  test(Sequence.reduce.name, () => {
+    const s = Sequence.make(10, 20, 30);
+
+    expect(Sequence.reduce(s, Num.add, 0)).toEqual(60);
+    expect(Sequence.reduce<number, number>(Num.add, 0)(s)).toEqual(60);
   });
 
   test(Sequence.toSet.name, () => {
