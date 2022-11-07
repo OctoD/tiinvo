@@ -39,7 +39,7 @@ export type t = {
  * @since 4.0.0
  */
 export const make = (start: number, end: number, step = 1): t => {
-  step = end > start ? step : -1 * step;
+  step = end > start ? Math.abs(step) : -1 * Math.abs(step);
   
   return {
     start,
