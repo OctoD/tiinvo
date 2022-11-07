@@ -1,4 +1,5 @@
 import type * as Functors from './Functors.js';
+import type * as Fn from './Fn.js';
 
 /**
  * Represents a numeric range from a starting value `start` to an ending value `end`.
@@ -9,6 +10,8 @@ export type t = {
   readonly step: number;
   [Symbol.iterator](): Iterator<number>;
 };
+
+//#region factories
 
 /**
  * Makes a new range from a start to an end (inclusive)
@@ -62,6 +65,69 @@ export const make = (start: number, end: number, step = 1): t => {
     }
   };
 };
+
+//#endregion
+
+//#region guards
+
+/**
+ * Checks if a parameter `x` is of `Range.t` type
+ *
+ * @example
+ *
+ * ```ts
+ * import { Range } from 'tiinvo'
+ * 
+ * Range.guard(10)                                // false
+ * Range.guard([])                                // false
+ * Range.guard({})                                // false
+ * Range.guard({ start: 10, end: 20 })            // false
+ * Range.guard({ start: 10, end: 20, step: 12 })  // false
+ * Range.guard(Range.make(1, 2))                  // true
+ * ```
+ *
+ * @since 4.0.0
+ */
+export const guard = (x: unknown): x is t => typeof x === 'object' && !!x && 'start' in x && 'end' in x && 'step' in x && Symbol.iterator in x;
+
+//#endregion
+
+//#region predicates
+
+/**
+ * Checks whenever a number is in a `Range.t`
+ *
+ * @example
+ *
+ * ```ts
+ * import { Range } from 'tiinvo'
+ * 
+ * const r = Range.make(3, 8)
+ * 
+ * Range.inRange(r, 10)   // false
+ * Range.inRange(10)(r)   // false
+ * Range.inRange(r, 6)    // true
+ * Range.inRange(6)(r)    // true
+ * ```
+ *
+ * @since 4.0.0
+ */
+export function inRange(t: t, a: number): boolean
+export function inRange(t: number): Fn.Unary<t, boolean>
+export function inRange(t: t | number, a?: number): any
+{
+  if (guard(t) && typeof a === 'number') {
+    const { start, end } = t;
+    return start < end ? (end >= a && a >= start) : (end <= a && a <= start)
+  }
+
+  return (b: t) => {
+    const { start, end } = b;
+    return start < end ? (end >= t && t >= start) : (end <= t && t <= start)
+  }
+}
+
+//#endregion
 
 //#region mappables
 
