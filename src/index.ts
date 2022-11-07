@@ -9,6 +9,7 @@ import * as Obj from './Obj.js';
 import * as Option from './Option.js';
 import * as Pipe from './Pipe.js';
 import * as Predicate from './Predicate.js';
+import * as Range from './Range.js';
 import * as Result from './Result.js';
 import * as Sequence from './Sequence.js';
 import * as SortedSequence from './SortedSequence.js';
@@ -27,6 +28,7 @@ export {
   Option,
   Pipe,
   Predicate,
+  Range,
   Result,
   Sequence,
   SortedSequence,
