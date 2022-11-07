@@ -1,5 +1,6 @@
 import * as Arr from './Arr.js';
 import * as Assert from './Assert.js';
+import * as BigInt from './BigInt.js';
 import * as Bool from './Bool.js';
 import * as Catch from './Catch.js';
 import * as Fn from './Fn.js';
@@ -19,6 +20,7 @@ import * as TypedSequence from './TypedSequence.js';
 export {
   Arr,
   Assert,
+  BigInt,
   Bool,
   Catch,
   Fn,
