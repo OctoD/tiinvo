@@ -5,7 +5,9 @@ import * as Range from './Range.js';
 describe("Range", () => {
   test(Range.make.name, () => {
     const testlinear = vitest.fn();
+    const testlinearinverted = vitest.fn();
     const teststepped = vitest.fn();
+    const teststeppedinverted = vitest.fn();
 
     let i = 0;
 
@@ -13,6 +15,14 @@ describe("Range", () => {
       testlinear(r);
       expect(testlinear).toBeCalledWith(i);
       i++;
+    }
+
+    i = 10;
+
+    for (const r of Range.make(10, 0)) {
+      testlinearinverted(r);
+      expect(testlinearinverted).toBeCalledWith(i);
+      i--;
     }
 
     i = 0;
@@ -23,8 +33,18 @@ describe("Range", () => {
       i += 2;
     }
 
+    i = 10;
+
+    for (const r of Range.make(10, 0, 2)) {
+      teststeppedinverted(r);
+      expect(teststeppedinverted).toBeCalledWith(i);
+      i -= 2;
+    }
+
     expect(testlinear).toHaveBeenCalledTimes(11);
+    expect(testlinearinverted).toHaveBeenCalledTimes(11);
     expect(teststepped).toHaveBeenCalledTimes(6);
+    expect(teststeppedinverted).toHaveBeenCalledTimes(6);
   });
 
   test(Range.map.name, () => {

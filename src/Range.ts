@@ -36,6 +36,8 @@ export type t = {
  * @since 4.0.0
  */
 export const make = (start: number, end: number, step = 1): t => {
+  step = end > start ? step : -1 * step;
+  
   return {
     start,
     end,
@@ -48,7 +50,7 @@ export const make = (start: number, end: number, step = 1): t => {
         current,
         last,
         next() {
-          if (current <= last) {
+          if (step > 0 ? current <= last : current >= last) {
             const value = current;
             current += step;
             return { done: false, value };
