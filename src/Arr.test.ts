@@ -316,4 +316,14 @@ describe("Arr", () => {
     expect(Arr.sort(s)(x)).toEqual([1, 2, 3, 4, 5]);
   });
 
+  test(Arr.zip.name, () => {
+    const a0 = [1, 2];
+    const a1 = [3, 4, 5];
+    const a2 = [4, 5, 6];
+
+    console.log(`Arr.zip(a0, a1)`, Arr.zip(a0, a1))
+    expect(Arr.zip(a0, a1)).toEqual([[1, 3], [2, 4]]);
+    expect(Arr.zip(a1)(a0)).toEqual([[1, 3], [2, 4]]);
+    expect(Arr.zip(a1, a2)).toEqual([[3, 4], [4, 5], [5, 6]]);
+  });
 });

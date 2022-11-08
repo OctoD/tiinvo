@@ -1,8 +1,8 @@
 import type * as Fn from './Fn.js';
 import type * as Functors from './Functors.js';
 import { defaultsymbol } from './Functors.js';
-import type * as Predicate from './Predicate.js';
 import type * as Option from './Option.js';
+import type * as Predicate from './Predicate.js';
 import { guard as predicateguard } from './Predicate.js';
 import type * as Result from './Result.js';
 
@@ -445,7 +445,7 @@ export function firstOr<a>(t: t<a> | a, b?: any): any {
 export function filterMap<a, b>(a: t<a>, mod: Functors.FilterMappableModule<a, b>): t<a>;
 export function filterMap<a, b>(a: Functors.FilterMappableModule<a, b>): Fn.Unary<t<a>, t<a>>;
 export function filterMap<a, b>(a: t<a> | Functors.FilterMappableModule<a, b>, mod?: Functors.FilterMappableModule<a, b>): any {
-  const gmod = (x: unknown): x is Functors.FilterMappableModule<a, b> => typeof x === 'object' && x !== null && 'filter' in x && 'map' in x
+  const gmod = (x: unknown): x is Functors.FilterMappableModule<a, b> => typeof x === 'object' && x !== null && 'filter' in x && 'map' in x;
 
   if (guard(a) && gmod(mod)) {
     const r = [] as b[];
@@ -995,6 +995,46 @@ export function sort<a>(a: t<a> | Functors.Comparable<a>, cmp?: Functors.Compara
   }
 
   return (b: t<a>) => b.sort(a);
+}
+
+/**
+ * Returns an array of pairs from the two arrays with the length of the shorter one.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Arr } from 'tiinvo'
+ * 
+ * const a0 = [1, 2]
+ * const a1 = [3, 4, 5]
+ * 
+ * Arr.zip(a0, a1)    // [[1, 3], [2, 4]]
+ * Arr.zip(a1)(a0)    // [[1, 3], [2, 4]]
+ * ```
+ *
+ * @since 4.0.0
+ */
+export function zip<a extends any[]>(a: a, b: a): t<a>;
+export function zip<a extends any[]>(a: a): Fn.Unary<a, t<a>>;
+export function zip<a extends any[]>(a: a, b?: a): any {
+  const _zip = (x: a, y: a): t<a> => {
+    const _o = new Array(Math.min(x.length, y.length)) as unknown as t<a>;
+
+    for (let i = 0; i < _o.length; i++) {
+      _o[i] = [
+        x[i],
+        y[i]
+      ] as a;
+    }
+
+    return _o;
+  };
+
+  if (guard(a) && guard(b)) {
+    return _zip(a, b);
+  }
+
+  return (c: a) => _zip(c, a);
 }
 
 
