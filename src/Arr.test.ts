@@ -251,6 +251,13 @@ describe("Arr", () => {
     expect(Arr.of(1, 2, 3)).toEqual([1, 2, 3]);
   });
 
+  test(Arr.partition.name, () => {
+    const a = [1, 2, 3, 4, 5];
+
+    expect(Arr.partition(a, Num.isEven)).toEqual([[2, 4], [1, 3, 5]]);
+    expect(Arr.partition(Num.isEven)(a)).toEqual([[2, 4], [1, 3, 5]]);
+  });
+
   test(Arr.populated.name, () => {
     expect(Arr.populated([])).toEqual(false);
     expect(Arr.populated(['a'])).toEqual(true);
@@ -321,7 +328,7 @@ describe("Arr", () => {
     const a1 = [3, 4, 5];
     const a2 = [4, 5, 6];
 
-    console.log(`Arr.zip(a0, a1)`, Arr.zip(a0, a1))
+    console.log(`Arr.zip(a0, a1)`, Arr.zip(a0, a1));
     expect(Arr.zip(a0, a1)).toEqual([[1, 3], [2, 4]]);
     expect(Arr.zip(a1)(a0)).toEqual([[1, 3], [2, 4]]);
     expect(Arr.zip(a1, a2)).toEqual([[3, 4], [4, 5], [5, 6]]);

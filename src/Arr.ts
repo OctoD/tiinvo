@@ -807,6 +807,50 @@ export function none<a>(a: t<a> | Predicate.t<a>, m?: Predicate.t<a>): any {
  * @since 4.0.0
  */
 export const of = Array.of;
+
+/**
+ * Split an array `t<a>` into a tuple `[t<a>, t<a>]` based on predicate `f`; 
+ * 
+ * If the element `a` of `t<a>` satisfies the predicate `f`, then it will be pushed to 
+ * the first element of the tuple, otherwise to the second.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Arr, Num } from 'tiinvo'
+ * 
+ * const a = [1, 2, 3, 4, 5]
+ * 
+ * Arr.partition(a, Num.isEven)     // [[2, 4], [1, 3, 5]]
+ * Arr.partition(Num.isEven)(a)     // [[2, 4], [1, 3, 5]]
+ * ```
+ *
+ * @since 4.0.0
+ */
+export function partition<a>(a: t<a>, f: Functors.Filterable<a>): [t<a>, t<a>];
+export function partition<a>(a: Functors.Filterable<a>): Fn.Unary<t<a>, [t<a>, t<a>]>;
+export function partition<a>(a: t<a> | Functors.Filterable<a>, f?: Functors.Filterable<a>): any {
+  const _part = (_x: t<a>, _f: Functors.Filterable<a>): [t<a>, t<a>] => {
+    const _o: [t<a>, t<a>] = [[], []];
+
+    for (let i = 0; i < _x.length; i++) {
+      if (_f(_x[i])) {
+        _o[0].push(_x[i]);
+      } else {
+        _o[1].push(_x[i]);
+      }
+    }
+
+    return _o;
+  };
+
+  if (guard(a) && typeof f === 'function') {
+    return _part(a, f);
+  } else if (typeof a === 'function') {
+    return (c: t<a>) => _part(c, a);
+  }
+}
+
 /**
  * Returns a random element of an array `a`.
  * 
