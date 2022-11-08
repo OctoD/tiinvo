@@ -7,10 +7,25 @@ describe("DateRange", () => {
     const dr0 = DateRange.make(new Date('2020-01-01'), new Date('2020-01-03'), 'day');
     const dr1 = DateRange.make(new Date('2020-01-03'), new Date('2020-01-01'), 'day');
     const dr2 = DateRange.make(new Date('2020-01-01'), new Date('2023-01-01'), 'year');
+    const dr3 = DateRange.make(new Date('2020-01-01'), new Date('2020-12-01'), 'month');
 
     expect(Array.from(dr0)).toEqual([new Date(2020, 0, 1), new Date(2020, 0, 2), new Date(2020, 0, 3)]);
     expect(Array.from(dr1)).toEqual([new Date(2020, 0, 3), new Date(2020, 0, 2), new Date(2020, 0, 1)]);
     expect(Array.from(dr2)).toEqual([new Date(2020, 0, 1), new Date(2021, 0, 1), new Date(2022, 0, 1), new Date(2023, 0, 1)]);
+    expect(Array.from(dr3)).toEqual([
+      new Date(2020, 0, 1),
+      new Date(2020, 1, 1),
+      new Date(2020, 2, 1),
+      new Date(2020, 3, 1),
+      new Date(2020, 4, 1),
+      new Date(2020, 5, 1),
+      new Date(2020, 6, 1),
+      new Date(2020, 7, 1),
+      new Date(2020, 8, 1),
+      new Date(2020, 9, 1),
+      new Date(2020, 10, 1),
+      new Date(2020, 11, 1),
+    ]);
   });
 
   test(DateRange.guard.name, () => {
