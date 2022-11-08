@@ -3,6 +3,7 @@ import * as Assert from './Assert.js';
 import * as BigInt from './BigInt.js';
 import * as Bool from './Bool.js';
 import * as Catch from './Catch.js';
+import * as DateRange from './DateRange.js';
 import * as Fn from './Fn.js';
 import * as Functors from './Functors.js';
 import * as Num from './Num.js';
@@ -23,6 +24,7 @@ export {
   BigInt,
   Bool,
   Catch,
+  DateRange,
   Fn,
   Functors,
   Num,
