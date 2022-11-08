@@ -40,7 +40,7 @@ export type t = {
  */
 export const make = (start: number, end: number, step = 1): t => {
   step = end > start ? Math.abs(step) : -1 * Math.abs(step);
-  
+
   return {
     start,
     end,
@@ -112,19 +112,18 @@ export const guard = (x: unknown): x is t => typeof x === 'object' && !!x && 'st
  *
  * @since 4.0.0
  */
-export function inRange(t: t, a: number): boolean
-export function inRange(t: number): Fn.Unary<t, boolean>
-export function inRange(t: t | number, a?: number): any
-{
+export function inRange(t: t, a: number): boolean;
+export function inRange(t: number): Fn.Unary<t, boolean>;
+export function inRange(t: t | number, a?: number): any {
   if (guard(t) && typeof a === 'number') {
     const { start, end } = t;
-    return start < end ? (end >= a && a >= start) : (end <= a && a <= start)
+    return start < end ? (end >= a && a >= start) : (end <= a && a <= start);
   }
 
   return (b: t) => {
     const { start, end } = b;
-    return start < end ? (end >= t && t >= start) : (end <= t && t <= start)
-  }
+    return start < end ? (end >= t && t >= start) : (end <= t && t <= start);
+  };
 }
 
 //#endregion
@@ -147,14 +146,24 @@ export function inRange(t: t | number, a?: number): any
  *
  * @since 4.0.0
  */
-export const map = <a>(m: Functors.Mappable<number, a>) => (t: t) => {
-  const out: a[] = [];
+export function map<a>(t: t, m: Functors.Mappable<number, a>): a[];
+export function map<a>(t: Functors.Mappable<number, a>): Fn.Unary<t, a[]>;
+export function map<a>(t: t | Functors.Mappable<number, a>, m?: Functors.Mappable<number, a>): any {
+  const _map = (_t: t, _m: Functors.Mappable<number, a>) => {
+    const out: a[] = [];
 
-  for (const x of t) {
-    out.push(m(x));
+    for (const x of _t) {
+      out.push(_m(x));
+    }
+
+    return out;
+  };
+
+  if (guard(t) && !!m) {
+    return _map(t, m)
+  } else if (!guard(t)) {
+    return (b: t) => _map(b, t);
   }
-
-  return out;
 };
 
 //#endregion
