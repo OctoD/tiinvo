@@ -18,6 +18,8 @@
     "strictPropertyInitialization": true,
     "esModuleInterop": true,
     "declaration": true,
+    "declarationDir": ".",
+    "outDir": ".",
     "module": "ESNext",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,

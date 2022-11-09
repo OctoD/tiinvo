@@ -228,8 +228,8 @@ export function contains<a>(a: any, b?: any): any {
  */
 export function every<a>(a: t<a>, p: Predicate.t<a>): boolean;
 export function every<a>(a: Predicate.t<a>): Fn.Unary<t<a>, boolean>;
-export function every<a>(a: t<any> | Predicate.t<a>, p?: Predicate.t<a>): any {
-  if (guard(a) && !!p) {
+export function every<a>(a: any, p?: any): any {
+  if (guard(a) && typeof p === 'function') {
     return a.every(p);
   }
 
@@ -393,7 +393,7 @@ export function find<a>(a: t<a> | Predicate.t<a>, p?: Predicate.t<a>): any {
  * @returns 
  * @since 4.0.0
  */
-export const first = <a>(t: t<a>): Option.t<a> => t[0] ?? null as Option.t<a>;
+export const first = <a>(t: t<a>): Option.t<a> => (t[0] ?? null) as Option.t<a>;
 
 /**
  * Returns the first element of an array `a` or `b` if the array is empty.
@@ -627,7 +627,7 @@ export function includes<a>(a: t<a> | a, b?: a): any {
  * @returns 
  * @since 4.0.0
  */
-export const last = <a>(t: t<a>): Option.t<a> => t[t.length - 1] ?? null as Option.t<a>;
+export const last = <a>(t: t<a>): Option.t<a> => (t[t.length - 1] ?? null) as Option.t<a>;
 
 /**
  * Returns the last element of an array `a` or `b` if the array is empty.

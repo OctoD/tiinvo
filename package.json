@@ -7,7 +7,10 @@
   "types": "./index.d.ts",
   "type": "module",
   "main": "./index.js",
-  "module": "./index.mjs",
+  "exports": {
+    ".": "./index.js",
+    "./*": "./*.js"
+  },
   "keywords": [
     "functional programming",
     "functions",
