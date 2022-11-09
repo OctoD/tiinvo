@@ -88,14 +88,14 @@ export function guardOf<a>(g: Functors.Guardable<a>, x?: unknown): any {
  * 
  * const cmp = Arr.cmp(Str.cmp);
  * 
- * console.log(cmp(['a'], ['a'])) // 0
- * console.log(cmp(['a'], ['b'])) // -1
- * console.log(cmp(['b'], ['a'])) // 1
- * console.log(cmp(['a'], ['a', 'b'])) // -1
- * console.log(cmp(['a', 'b'], ['a'])) // 1
- * console.log(cmp(['a', 'b'], ['a', 'b'])) // 0
- * console.log(cmp(['a', 'b', 'c'], ['a', 'b'])) // 1
- * console.log(cmp(['a', 'b', 'c'], ['a', 'b', 'c'])) // 0
+ * cmp(['a'], ['a']) // 0
+ * cmp(['a'], ['b']) // -1
+ * cmp(['b'], ['a']) // 1
+ * cmp(['a'], ['a', 'b']) // -1
+ * cmp(['a', 'b'], ['a']) // 1
+ * cmp(['a', 'b'], ['a', 'b']) // 0
+ * cmp(['a', 'b', 'c'], ['a', 'b']) // 1
+ * cmp(['a', 'b', 'c'], ['a', 'b', 'c']) // 0
  * ```
  * 
  * @returns 
@@ -131,13 +131,13 @@ export const cmp = <a>(cmp: Functors.Comparable<a>) => (a: t<a>, b: t<a>): Funct
  * 
  * const eq = Arr.eq(Str.eq);
  * 
- * console.log(eq(['a'], ['a']))            // true
- * console.log(eq(['a'], ['b']))            // false
- * console.log(eq(['b'], ['a']))            // false
- * console.log(eq(['a'], ['a', 'b']))       // false
- * console.log(eq(['a', 'b'], ['a']))       // false
- * console.log(eq(['a', 'b'], ['b', 'a']))  // false
- * console.log(eq(['a', 'b'], ['a', 'b']))  // true
+ * eq(['a'], ['a'])            // true
+ * eq(['a'], ['b'])            // false
+ * eq(['b'], ['a'])            // false
+ * eq(['a'], ['a', 'b'])       // false
+ * eq(['a', 'b'], ['a'])       // false
+ * eq(['a', 'b'], ['b', 'a'])  // false
+ * eq(['a', 'b'], ['a', 'b'])  // true
  * ```
  * 
  * @returns 

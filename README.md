@@ -5,15 +5,14 @@
 tiinvo
 =======
 
-A lib of types and utilities for your TypeScript and JavaScript projects
+An opinionated lib of types and utilities for your TypeScript and JavaScript projects which aims to add missing functionalities to standard Js and replace other.
 
 [docs](https://tiinvo.vercel.app/docs)
 
 - [tiinvo](#tiinvo)
 - [Install](#install)
 - [Usage](#usage)
-  - [data types](#data-types)
-  - [predicate](#predicate)
+  - [data and native types](#data-and-native-types)
   - [typeguards](#typeguards)
 - [Contributing](#contributing)
 - [Licence](#licence)
@@ -40,40 +39,18 @@ import { } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 # Usage
 
-## data types
+## data and native types
 
-tiinvo is a functional data types library. 
+tiinvo is a functional data types and utilities library. 
 
-It has several data types like `option`, `maybe`, `result` and `either`.
+It has several data types like `Option`, `Result` and `Sequence`.
 
-Option is used for values that can be possibly null or undefined.
+`Option` is used for values that can be possibly null or undefined.
 
-Maybe is used for values that can possibly has a truthy or falsy logical value.
+`Result` is used to describe if a function return value is an error or is ok (safe) value.
 
-Result is used to describe if a function return value is an error or is ok (safe) value.
-
-Either is used to represents a value of one of two possible types (a disjoint union).
-
-It provides also utilities functions like `pipe` and `pipeasync` for tacit programming,
-`num`, `str`, `obj` functions, `predicate` functions and more.
-
-## predicate
-
-tiinvo comes with a bunch of predicate utilities
-
-```ts
-import * as n from 'tiinvo/num';
-import * as p from 'tiinvo/predicate';
-
-// between 1 and 9
-const inrange = p.and(n.gt(0), n.lt(10))
-const outofrange = p.invert(inrange);
-
-console.log(inrange(2)) // true
-console.log(inrange(0)) // false
-console.log(outofrange(0)) // true
-console.log(outofrange(2)) // false
-```
+It provides also utilities functions like `Pipe` for function composition (tacit programming),
+`Bool`, `Num`, `Str`, `Obj` , `Fn`, `Predicate` functions and more.
 
 ## typeguards
 
@@ -84,11 +61,11 @@ Each type module comes with a type `guard` function (or in some cases a `guardOf
 You are free to combine this functions to typecheck every value you want.
 
 ```ts
-import * as obj from 'tiinvo/obj';
-import * as str from 'tiinvo/str';
-import * as num from 'tiinvo/num';
-import * as o from 'tiinvo/option';
-import * as array from 'tiinvo/array';
+import * as Arr from 'tiinvo/Arr';
+import * as Num from 'tiinvo/Num';
+import * as Obj from 'tiinvo/Obj';
+import * as Option from 'tiinvo/Option';
+import * as Str from 'tiinvo/Str';
 
 export type UserArray = User[];
 
@@ -100,15 +77,15 @@ export interface User {
   nickname?: string;
 }
 
-export const isUser = obj.guardOf<User>({
-  age: num.guard,
-  email: str.guard,
-  firstname: str.guard,
-  lastname: str.guard,
-  nickname: o.guardOf(str.guard),
+export const isUser = Obj.guardOf<User>({
+  age: Num.guard,
+  email: Str.guard,
+  firstname: Str.guard,
+  lastname: Str.guard,
+  nickname: Option.guardOf(Str.guard),
 });
 
-export const isUserArray = array.guardOf(isUser);
+export const isUserArray = Arr.guardOf(isUser);
 
 const user000: User = {
   age: 22,
