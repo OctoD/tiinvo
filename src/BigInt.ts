@@ -1,6 +1,9 @@
 import type * as Functors from './Functors.js';
 import type * as Fn from './Fn.js';
 
+/**
+ * @hidden
+ */
 export type t = bigint;
 
 //#region guards
@@ -17,6 +20,7 @@ export type t = bigint;
  * BigInt.guard(10n)    // true
  * ```
  *
+ * @group Guards
  * @since 4.0.0
  */
 export const guard = (x: unknown): x is t => typeof x === 'bigint';
@@ -44,6 +48,7 @@ export const guard = (x: unknown): x is t => typeof x === 'bigint';
  * BigInt.cmp(0n, 1n)       // -1
  * ```
  *
+ * @group Comparables
  * @since 4.0.0
  */
 export const cmp: Functors.Comparable<t> = (a, b) => a < b ? -1 : a > b ? 1 : 0;
@@ -64,6 +69,7 @@ export const cmp: Functors.Comparable<t> = (a, b) => a < b ? -1 : a > b ? 1 : 0;
  * BigInt.eq(10n)(10 as any)        // false
  * ```
  *
+ * @group Comparables
  * @since 4.0.0
  */
 export function eq(a: t, b: t): boolean;
@@ -83,6 +89,8 @@ export function eq(a: t, b?: t): any {
 /**
  * Maps a bigint `a` to a value `Result.t<b>` if a is `bigint`, otherwise returns `Err`.
  * 
+ * @example
+ * 
  * ```ts
  * import { BigInt } from 'tiinvo';
  * 
@@ -91,11 +99,16 @@ export function eq(a: t, b?: t): any {
  * toHex(10n)       // "0xa"
  * toHex("a")       // Error("a is not a bigint")
  * ``` 
+ * 
+ * @group Mappables
+ * @since 4.0.0
  */
 export const map = <b>(m: Functors.Mappable<t, b>) => (a: t) => guard(a) ? m(a) : new Error("a is not a bigint");
 
 /**
  * Maps a bigint `a` to a value `Result.t<b>` if a is `number`, otherwise returns `b`.
+ * 
+ * @example
  * 
  * ```ts
  * import { BigInt } from 'tiinvo';
@@ -105,6 +118,9 @@ export const map = <b>(m: Functors.Mappable<t, b>) => (a: t) => guard(a) ? m(a) 
  * toHex(10n)      // "0xa"
  * toHex("a")      // "0x0"
  * ``` 
+ * 
+ * @group Mappables
+ * @since 4.0.0
  */
 export const mapOr = <b>(m: Functors.Mappable<t, b>, b: b) => (a: t) => guard(a) ? m(a) : b;
 
@@ -113,8 +129,7 @@ export const mapOr = <b>(m: Functors.Mappable<t, b>, b: b) => (a: t) => guard(a)
 //#region operables
 
 /**
- * Adds `a` to `b` if both specified, otherwise returns a `Unary<t, t>` 
- * function which once called adds `b` to `a`
+ * Adds `a` to `b` 
  * 
  * @example
  * 
@@ -128,8 +143,29 @@ export const mapOr = <b>(m: Functors.Mappable<t, b>, b: b) => (a: t) => guard(a)
  * 
  * add5(10n)                   // 15n
  * ```
+ * 
+ * @param a - the first bigint
+ * @param b - the second bigint
+ * @group Operables
+ * @since 4.0.0
  */
 export function add(a: t, b: t): t;
+/**
+ * Returns a unary function which adds `a` to `b`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { BigInt } from 'tiinvo';
+ * 
+ * const add5 = BigInt.add(5n) 
+ * 
+ * add5(10n)                   // 15n
+ * ```
+ * 
+ * @param a - the first bigint
+ * @returns {Unary.t<t, t>}
+ */
 export function add(a: t): Fn.Unary<t, t>;
 export function add(a: t, b?: t): any {
   if (guard(b)) {
@@ -155,6 +191,9 @@ export function add(a: t, b?: t): any {
  * 
  * div2(4n)                    // 2n
  * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
  */
 export function div(a: t, b: t): t;
 export function div(a: t): Fn.Unary<t, t>;
@@ -184,6 +223,9 @@ export function div(a: t, b?: t): any {
  * mod2(10n)                   // 0n
  * mod2(15n)                   // 1n
  * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
  */
 export function mod(a: t, b: t): t;
 export function mod(a: t): Fn.Unary<t, t>;
@@ -211,6 +253,9 @@ export function mod(a: t, b?: t): any {
  * 
  * mul5(10n)                   // 50n
  * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
  */
 export function mul(a: t, b: t): t;
 export function mul(a: t): Fn.Unary<t, t>;
@@ -238,6 +283,9 @@ export function mul(a: t, b?: t): any {
  * 
  * pow5(10n)                   // 100_000n
  * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
  */
 export function pow(a: t, b: t): t;
 export function pow(a: t): Fn.Unary<t, t>;
@@ -266,6 +314,9 @@ export function pow(a: t, b?: t): any {
  * root2(4n)                   // 2n
  * root2(9n)                   // 3n
  * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
  */
 export function root(a: t, b: t): t;
 export function root(a: t): Fn.Unary<t, t>;
@@ -305,6 +356,9 @@ export function root(a: t, b?: t): any {
  * sub5(10n)                   // 5n
  * sub5(-2n)                   // -7n
  * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
  */
 export function sub(a: t, b: t): t;
 export function sub(a: t): Fn.Unary<t, t>;
@@ -336,6 +390,7 @@ export function sub(a: t, b?: t): any {
  * collection.sort(BigInt.asc)     // [3n, 4n, 5n, 6n, 10n, 12n, 22n]
  * ```
  * 
+ * @group Sortables
  * @since 4.0.0
  */
 export function asc(a: t, b: t): Functors.ComparableResult;
@@ -364,6 +419,7 @@ export function asc(a: t, b?: any): any {
  * collection.sort(BigInt.desc)     // [22n, 12n, 10n, 6n, 5n, 4n, 3n]
  * ```
  * 
+ * @group Sortables
  * @since 4.0.0
  */
 export function desc(a: t, b: t): Functors.ComparableResult;
@@ -384,7 +440,7 @@ export function desc(a: t, b?: any): any {
  * Returns a bigint in binary notation.
  * 
  * If the passed argument at runtime is not a bigint, an Error will be returned.
- * 
+ *
  * @example 
  * 
  * ```ts
@@ -393,6 +449,7 @@ export function desc(a: t, b?: any): any {
  * BigInt.toBin(10n)        // "0b1010"
  * ```
  * 
+ * @group Serializables
  * @since 4.0.0
  */
 export const toBin = map(x => '0b' + x.toString(2));
@@ -401,7 +458,7 @@ export const toBin = map(x => '0b' + x.toString(2));
  * Returns a bigint in hexadecimal notation
  * 
  * If the passed argument at runtime is not a bigint, an Error will be returned.
- * 
+ *
  * @example 
  * 
  * ```ts
@@ -410,6 +467,7 @@ export const toBin = map(x => '0b' + x.toString(2));
  * BigInt.toHex(10n)        // "0xa"
  * ```
  * 
+ * @group Serializables
  * @since 4.0.0
  */
 export const toHex = map(x => '0x' + x.toString(16));
@@ -418,7 +476,7 @@ export const toHex = map(x => '0x' + x.toString(16));
  * Returns a bigint in octal notation
  * 
  * If the passed argument at runtime is not a bigint, an Error will be returned.
- * 
+ *
  * @example 
  * 
  * ```ts
@@ -427,6 +485,7 @@ export const toHex = map(x => '0x' + x.toString(16));
  * BigInt.toOct(10n)        // "0o12"
  * ```
  * 
+ * @group Serializables
  * @since 4.0.0
  */
 export const toOct = map(x => '0o' + x.toString(8));
@@ -435,7 +494,7 @@ export const toOct = map(x => '0o' + x.toString(8));
  * Returns a bigint in json notation.
  * 
  * If the passed argument at runtime is not a bigint, an Error will be returned.
- * 
+ *
  * @example 
  * 
  * ```ts
@@ -444,6 +503,7 @@ export const toOct = map(x => '0o' + x.toString(8));
  * BigInt.toJSON(10n)       // "10"
  * ```
  * 
+ * @group Serializables
  * @since 4.0.0
  */
 export const toJSON = map(x => JSON.stringify(Number(x)));
@@ -452,7 +512,7 @@ export const toJSON = map(x => JSON.stringify(Number(x)));
  * Returns a stringified number.
  * 
  * If the passed argument at runtime is not a bigint, an Error will be returned.
- * 
+ *
  * @example 
  * 
  * ```ts
@@ -461,6 +521,7 @@ export const toJSON = map(x => JSON.stringify(Number(x)));
  * BigInt.toString(10n)       // "10"
  * ```
  * 
+ * @group Serializables
  * @since 4.0.0
  */
 export const toString = map(String);

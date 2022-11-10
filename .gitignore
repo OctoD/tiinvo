@@ -66,6 +66,9 @@ dist
 # site folder
 .site
 
+# docs folder
+docs
+
 # build output
 *.js
 *.d.ts

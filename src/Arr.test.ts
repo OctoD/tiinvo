@@ -48,15 +48,31 @@ describe("Arr", () => {
   });
 
   test(Arr.eq.name, () => {
-    const eq = Arr.eq(Str.eq);
+    expect(Arr.eq(Str.eq, ['a'], ['a'])).toEqual(true);
+    expect(Arr.eq(Str.eq, ['a'], ['b'])).toEqual(false);
+    expect(Arr.eq(Str.eq, ['b'], ['a'])).toEqual(false);
+    expect(Arr.eq(Str.eq, ['a'], ['a', 'b'])).toEqual(false);
+    expect(Arr.eq(Str.eq, ['a', 'b'], ['a'])).toEqual(false);
+    expect(Arr.eq(Str.eq, ['a', 'b'], ['b', 'a'])).toEqual(false);
+    expect(Arr.eq(Str.eq, ['a', 'b'], ['a', 'b'])).toEqual(true);
 
-    expect(eq(['a'], ['a'])).toEqual(true);
-    expect(eq(['a'], ['b'])).toEqual(false);
-    expect(eq(['b'], ['a'])).toEqual(false);
-    expect(eq(['a'], ['a', 'b'])).toEqual(false);
-    expect(eq(['a', 'b'], ['a'])).toEqual(false);
-    expect(eq(['a', 'b'], ['b', 'a'])).toEqual(false);
-    expect(eq(['a', 'b'], ['a', 'b'])).toEqual(true);
+    expect(Arr.eq(Str.eq, ['a'])(['a'])).toEqual(true);
+    expect(Arr.eq(Str.eq, ['a'])(['b'])).toEqual(false);
+    expect(Arr.eq(Str.eq, ['b'])(['a'])).toEqual(false);
+    expect(Arr.eq(Str.eq, ['a'])(['a', 'b'])).toEqual(false);
+    expect(Arr.eq(Str.eq, ['a', 'b'])(['a'])).toEqual(false);
+    expect(Arr.eq(Str.eq, ['a', 'b'])(['b', 'a'])).toEqual(false);
+    expect(Arr.eq(Str.eq, ['a', 'b'])(['a', 'b'])).toEqual(true);
+
+    const eq2 = Arr.eq(Str.eq);
+
+    expect(eq2(['a'], ['a'])).toEqual(true);
+    expect(eq2(['a'], ['b'])).toEqual(false);
+    expect(eq2(['b'], ['a'])).toEqual(false);
+    expect(eq2(['a'], ['a', 'b'])).toEqual(false);
+    expect(eq2(['a', 'b'], ['a'])).toEqual(false);
+    expect(eq2(['a', 'b'], ['b', 'a'])).toEqual(false);
+    expect(eq2(['a', 'b'], ['a', 'b'])).toEqual(true);
   });
 
   test(Arr.every.name, () => {

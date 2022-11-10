@@ -20,9 +20,8 @@
     "build": "tsc -p .",
     "changelog": "npx standard-changelog --first-release",
     "clean": "tsc --build --clean",
+    "docs": "typedoc --out docs src/index.ts",
     "test": "vitest run --coverage",
-    "build:docs": "npm --prefix docs run build",
-    "dev:docs": "npm --prefix docs run dev",
     "deploy": "npm test && npm run clean && npm run build && cd dist && npm publish && cd .. && npm run clean",
     "upgrade-interactive": "npx npm-check --update"
   },
@@ -34,6 +33,8 @@
   "devDependencies": {
     "@types/node": "^17.0.5",
     "@vitest/coverage-c8": "^0.24.5",
+    "typedoc": "^0.23.20",
+    "typedoc-plugin-extras": "^2.3.1",
     "typescript": "^4.1.5",
     "vitest": "^0.23.4"
   }

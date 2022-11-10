@@ -3,17 +3,20 @@
     "prefix": "doc",
     "body": [
       "/**",
-      " * $0",
+      " * $1",
       " *",
       " * @example",
       " *",
       " * ```ts",
       " * import { $2 } from 'tiinvo'",
+      " * ",
+      " * $3",
       " * ```",
       " *",
-      " * @since $1",
+      " * @group $4",
+      " * @since $5",
       " */",
     ],
-    "description": "A shorthand to create jsdoc"
+    "description": "A shorthand to create tsdoc"
   }
 }
