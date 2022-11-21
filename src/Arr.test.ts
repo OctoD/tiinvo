@@ -6,16 +6,34 @@ import * as Str from './Str.js';
 
 describe("Arr", () => {
   test(Arr.cmp.name, () => {
-    const cmp = Arr.cmp(Num.cmp);
+    expect(Arr.cmp(Num.cmp, [], [])).toBe(0);
+    expect(Arr.cmp(Num.cmp, [1], [])).toBe(1);
+    expect(Arr.cmp(Num.cmp, [1], [1])).toBe(0);
+    expect(Arr.cmp(Num.cmp, [0], [1])).toBe(-1);
+    expect(Arr.cmp(Num.cmp, [0, 1], [1, 0])).toBe(0);
+    expect(Arr.cmp(Num.cmp, [1, 0], [0, 1])).toBe(0);
+    expect(Arr.cmp(Num.cmp, [0, 1, 1], [1, 0])).toBe(1);
+    expect(Arr.cmp(Num.cmp, [1, 0], [0, 1, 1])).toBe(-1);
 
-    expect(cmp([], [])).toBe(0);
-    expect(cmp([1], [])).toBe(1);
-    expect(cmp([1], [1])).toBe(0);
-    expect(cmp([0], [1])).toBe(-1);
-    expect(cmp([0, 1], [1, 0])).toBe(0);
-    expect(cmp([1, 0], [0, 1])).toBe(0);
-    expect(cmp([0, 1, 1], [1, 0])).toBe(1);
-    expect(cmp([1, 0], [0, 1, 1])).toBe(-1);
+    const cmp0 = Arr.cmp(Num.cmp, [1]);
+    expect(cmp0([])).toBe(1);
+    expect(cmp0([1])).toBe(0);
+    expect(cmp0([1, 0])).toBe(-1);
+    expect(cmp0([0, 1])).toBe(-1);
+    expect(cmp0([1, 0])).toBe(-1);
+    expect(cmp0([0, 1, 1])).toBe(-1);
+
+
+    const cmp1 = Arr.cmp(Num.cmp);
+
+    expect(cmp1([], [])).toBe(0);
+    expect(cmp1([1], [])).toBe(1);
+    expect(cmp1([1], [1])).toBe(0);
+    expect(cmp1([0], [1])).toBe(-1);
+    expect(cmp1([0, 1], [1, 0])).toBe(0);
+    expect(cmp1([1, 0], [0, 1])).toBe(0);
+    expect(cmp1([0, 1, 1], [1, 0])).toBe(1);
+    expect(cmp1([1, 0], [0, 1, 1])).toBe(-1);
 
     const cmp2 = Arr.cmp(Str.cmp);
 
@@ -113,7 +131,7 @@ describe("Arr", () => {
 
   test(Arr.filterReduce.name, () => {
     const mod: Functors.FilterReduceableModule<number, number> = {
-      [Functors.defaultsymbol]: 0,
+      default: 0,
       filter: Num.isPositive,
       reduce: Num.add,
     };
@@ -281,6 +299,7 @@ describe("Arr", () => {
 
   test(Arr.random.name, () => {
     expect(Arr.random(['a', 'b', 'c'])).oneOf(['a', 'b', 'c']);
+    expect(Arr.random([])).toEqual(null);
   });
 
   test(Arr.reduce.name, () => {

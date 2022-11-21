@@ -10,12 +10,15 @@ describe(`Fn`, () => {
     expect(Fn.cmp(Num.sub, Num.add)).toEqual(1);
     expect(Fn.cmp(t0, Num.add)).toEqual(1);
     expect(Fn.cmp(Num.add, t0)).toEqual(-1);
+    expect(Fn.cmp(Num.add)(t0)).toEqual(1);
   });
 
   test(Fn.eq.name, () => {
     expect(Fn.eq(Num.add, Num.add)).toEqual(true);
     expect(Fn.eq(Num.add, Num.sub)).toEqual(false);
     expect(Fn.eq(Num.sub, Num.add)).toEqual(false);
+    expect(Fn.eq(Num.sub)(Num.add)).toEqual(false);
+    expect(Fn.eq(Num.add)(Num.add)).toEqual(true);
   });
 
   test(Fn.guard.name, () => {

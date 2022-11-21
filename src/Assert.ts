@@ -43,8 +43,7 @@ export function check(a: boolean, m: string): void;
  * @since 4.0.0
  */
 export function check(a: string): Fn.Unary<boolean, void>;
-export function check(a: boolean | string, m?: any): any 
-{
+export function check(a: boolean | string, m?: any): any {
   if (typeof a === 'boolean' && !a && strGuard(m)) {
     throw new Error(m);
   }
@@ -89,7 +88,7 @@ export function checkResult(a: boolean, b: string): Result.t<boolean>;
  * ```
  *
  * @param a the error message
- * @return the unary function
+ * @returns the unary function
  * @since 4.0.0
  */
 export function checkResult(a: string): Fn.Unary<boolean, Result.t<boolean>>;
@@ -128,7 +127,7 @@ export function checkResult(a: boolean | string, b?: any): any {
  * @template a the type passed to the predicate and to the mappable functor (if any)
  * @param p the predicate
  * @param m the error message or the mappable functor
- * @return the asserting function
+ * @returns the asserting function
  * @since 4.0.0
  */
 export function make<a>(p: Predicate.t<a>, m: string | Functors.Mappable<a, string>): Fn.Unary<a, void>;
@@ -150,7 +149,7 @@ export function make<a>(p: Predicate.t<a>, m: string | Functors.Mappable<a, stri
  *
  * @template a the type passed to the predicate and to the mappable functor (if any)
  * @param p the error message or the mappable functor
- * @return the asserting function
+ * @returns the asserting function
  * @since 4.0.0
  */
 export function make<a>(p: string | Functors.Mappable<a, string>): Fn.Unary<Predicate.t<a>, Fn.Unary<a, void>>;
@@ -182,7 +181,7 @@ export function make<a>(p: string | Functors.Mappable<a, string> | Predicate.t<a
  * @template a the type passed to the predicate and to the mappable functor (if any)
  * @param p the asserting predicate
  * @param m the error message or the mappable functor
- * @return the asserting function
+ * @returns the asserting function
  * @since 4.0.0
  */
 export function makeResult<a>(p: Predicate.t<a>, m: string | Functors.Mappable<a, string>): Fn.Unary<a, Result.t<boolean>>;
@@ -204,7 +203,7 @@ export function makeResult<a>(p: Predicate.t<a>, m: string | Functors.Mappable<a
  *
  * @template a the type passed to the predicate and to the mappable functor (if any)
  * @param p the error message or the mappable functor
- * @return the asserting function
+ * @returns the asserting function
  * @since 4.0.0
  */
 export function makeResult<a>(p: string | Functors.Mappable<a, string>): Fn.Unary<Predicate.t<a>, Fn.Unary<a, Result.t<boolean>>>;

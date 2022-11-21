@@ -50,11 +50,46 @@ export const guard: Functors.Guardable<t> = (x): x is t => typeof (x) === 'numbe
  * Num.cmp(1, 1)  // 0
  * Num.cmp(1, 0)  // 1
  * Num.cmp(0, 1)  // -1
+ * Num.cmp(1)(1)  // 0
+ * Num.cmp(1)(0)  // -1
+ * Num.cmp(0)(1)  // 1
  * ```
  *  
  * @since 4.0.0
  */
-export const cmp: Functors.Comparable<t> = (a, b) => a > b ? 1 : a < b ? -1 : 0;
+export function cmp(a: t, b: t): Functors.ComparableResult;
+/**
+ * Compares two numbers `a` and `b`.
+ * 
+ * Returns:
+ * 
+ *    - 1 if `a` is greater than `b`
+ *    - 0 if `a` is same of `b`
+ *    - -1 if `b` is greater than `a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.cmp(1)(1)  // 0
+ * Num.cmp(1)(0)  // -1
+ * Num.cmp(0)(1)  // 1
+ * ```
+ *  
+ * @since 4.0.0
+ */
+export function cmp(a: t): Fn.Unary<t, Functors.ComparableResult>;
+export function cmp(a: t, b?: t): any {
+  const _cmp = (x: t, y: t) => x > y ? 1 : x < y ? -1 : 0;
+
+  if (guard(a) && guard(b)) {
+    return _cmp(a, b);
+  }
+
+  return (b: t) => _cmp(b, a);
+}
+;
 
 /**
  * Returns `true` if two numbers are the same
@@ -67,9 +102,25 @@ export const cmp: Functors.Comparable<t> = (a, b) => a > b ? 1 : a < b ? -1 : 0;
  * Num.eq(0, 1)  // false
  * ```
  *  
+ * @group Comparables
  * @since 4.0.0
  */
 export function eq(a: t, b: t): boolean;
+/**
+ * Returns `true` if two numbers are the same
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * const eq1 = Num.eq(1);
+ * 
+ * eq1(1)  // true
+ * eq1(0)  // false
+ * ```
+ *  
+ * @group Comparables
+ * @since 4.0.0
+ */
 export function eq(a: t): Fn.Unary<t, boolean>;
 export function eq(a: t, b?: t): any {
   return guard(a) && guard(b) ? a === b : (c: t) => eq(a, c);
@@ -86,14 +137,30 @@ export function eq(a: t, b?: t): any {
  * 
  * Num.gt(5, -2)             // true
  * Num.gt(5, 12)             // false
+ * ```
+ * 
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function gt(a: t, b: t): boolean;
+/**
+ * Returns true if `a` is greater than `b` if `b` is specified, otherwise returns a
+ * function which once called returns true if `b` is greater than `a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
  * 
  * const gt5 = Num.gt(5) 
  * 
  * gt5(10)                   // true
  * gt5(-2)                   // false
  * ```
+ * 
+ * @group Comparables
+ * @since 4.0.0
  */
-export function gt(a: t, b: t): boolean;
 export function gt(a: t): Fn.Unary<number, boolean>;
 export function gt(a: t, b?: any): any {
   if (guard(b)) {
@@ -114,14 +181,30 @@ export function gt(a: t, b?: any): any {
  * 
  * Num.lt(5, -2)             // false
  * Num.lt(5, 12)             // true
+ * ```
+ * 
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function lt(a: t, b: t): boolean;
+/**
+ * Returns true if `a` is lesser than `b` if `b` is specified, otherwise returns a
+ * function which once called returns true if `b` is lesser than `a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
  * 
  * const lt5 = Num.lt(5) 
  * 
  * lt5(10)                   // true
  * lt5(-2)                   // false
  * ```
+ * 
+ * @group Comparables
+ * @since 4.0.0
  */
-export function lt(a: t, b: t): boolean;
 export function lt(a: t): Fn.Unary<number, boolean>;
 export function lt(a: t, b?: any): any {
   if (guard(b)) {
@@ -143,6 +226,17 @@ export function lt(a: t, b?: any): any {
  * Num.gte(5, -2)             // true
  * Num.gte(5, 12)             // false
  * Num.gte(10, 10)            // true
+ * ```
+ */
+export function gte(a: t, b: t): boolean;
+/**
+ * Returns true if `a` is great or equal to `b` if `b` is specified, otherwise returns a
+ * function which once called returns true if `b` is great or equal to `a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
  * 
  * const gte5 = Num.gte(5) 
  * 
@@ -151,7 +245,6 @@ export function lt(a: t, b?: any): any {
  * gte5(-2)                   // true
  * ```
  */
-export function gte(a: t, b: t): boolean;
 export function gte(a: t): Fn.Unary<number, boolean>;
 export function gte(a: t, b?: any): any {
   if (guard(b)) {
@@ -173,6 +266,17 @@ export function gte(a: t, b?: any): any {
  * Num.lte(5, -2)             // false
  * Num.lte(5, 12)             // true
  * Num.lte(5, 5)              // true
+ * ```
+ */
+export function lte(a: t, b: t): boolean;
+/**
+ * Returns true if `a` is less or equal to `b` if `b` is specified, otherwise returns a
+ * function which once called returns true if `b` is less or equal to `a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
  * 
  * const lte5 = Num.lte(5) 
  * 
@@ -181,7 +285,6 @@ export function gte(a: t, b?: any): any {
  * lte5(-2)                   // true
  * ```
  */
-export function lte(a: t, b: t): boolean;
 export function lte(a: t): Fn.Unary<number, boolean>;
 export function lte(a: t, b?: any): any {
   if (guard(b)) {
@@ -203,6 +306,17 @@ export function lte(a: t, b?: any): any {
  * Num.ne(5, -2)             // true
  * Num.ne(5, 12)             // true
  * Num.ne(5, 5)              // false
+ * ```
+ */
+export function ne(a: t, b: t): boolean;
+/**
+ * Returns true if `a` not equal to `b` if `b` is specified, otherwise returns a
+ * function which once called returns true if `b` not equal to `a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
  * 
  * const ne5 = Num.ne(5) 
  * 
@@ -211,7 +325,6 @@ export function lte(a: t, b?: any): any {
  * ne5(-2)                   // true
  * ```
  */
-export function ne(a: t, b: t): boolean;
 export function ne(a: t): Fn.Unary<number, boolean>;
 export function ne(a: t, b?: any): any {
   if (guard(b)) {

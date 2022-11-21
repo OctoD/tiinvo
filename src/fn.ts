@@ -62,6 +62,11 @@ export type Nonary<a, b, c, d, e, f, g, h, i, r> = (a: a, b: b, c: c, d: d, e: e
  */
 export type Decenary<a, b, c, d, e, f, g, h, i, l, r> = (a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h, i: i, l: l) => r;
 
+/**
+ * Represents a generic function T with any arguments and any return value type.
+ */
+export type T = AnyFn;
+
 //#endregion
 
 /**
@@ -99,17 +104,27 @@ export const pass = <a>(a: a) => a;
  *
  * @since 4.0.0
  */
-export const cmp: Functors.Comparable<AnyFn> = (a, b) => {
-  const namea = a.name.toLowerCase();
-  const nameb = b.name.toLowerCase();
+export function cmp(a: T, b: T): Functors.ComparableResult;
+export function cmp(a: T): Unary<T, Functors.ComparableResult>;
+export function cmp(a: T, b?: T): any {
+  const _cmp = (x: T, y: T) => {
+    const namea = x.name.toLowerCase();
+    const nameb = y.name.toLowerCase();
 
-  return Math.min(
-    Math.max(
-      (a.length > b.length ? 1 : a.length < b.length ? -1 : 0) +
-      (namea > nameb ? 1 : namea < nameb ? -1 : 0),
-      -1),
-    1
-  ) as -1 | 0 | 1;
+    return Math.min(
+      Math.max(
+        (x.length > y.length ? 1 : x.length < y.length ? -1 : 0) +
+        (namea > nameb ? 1 : namea < nameb ? -1 : 0),
+        -1),
+      1
+    ) as Functors.ComparableResult;
+  };
+
+  if (guard(a) && guard(b)) {
+    return _cmp(a, b);
+  }
+  
+  return (b: T) => _cmp(b, a);
 };
 
 /**
@@ -133,7 +148,15 @@ export const cmp: Functors.Comparable<AnyFn> = (a, b) => {
  *
  * @since 4.0.0
  */
-export const eq: Functors.Equatable<AnyFn> = (a, b) => cmp(a, b) === 0 && a === b;
+export function eq(a: T, b: T): boolean;
+export function eq(a: T): Unary<T, boolean>;
+export function eq(a: T, b?: T): any {
+  if (guard(a) && guard(b)) {
+    return a === b && cmp(a, b) === 0;
+  }
+
+  return (b: T) => b === a && cmp(b, a) === 0;
+}
 
 //#endregion
 

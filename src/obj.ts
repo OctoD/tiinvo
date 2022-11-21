@@ -12,7 +12,7 @@ export type Entries<a> = {
 }[keyof a][];
 
 export type GuardsFromStruct<a> = {
-  [key in keyof a]: a[key] extends Option.t<infer b> ? Functors.Guardable<Option.t<b>> | GuardsFromStruct<a[key]> : Functors.Guardable<a[key]> | GuardsFromStruct<a[key]>;
+  [key in keyof a]: a[key] extends Option.T<infer b> ? Functors.Guardable<Option.T<b>> | GuardsFromStruct<a[key]> : Functors.Guardable<a[key]> | GuardsFromStruct<a[key]>;
 };
 
 /**
@@ -235,7 +235,7 @@ export const fromEntries = Object.fromEntries;
  * @returns 
  * @since 4.0.0
  */
-export const get = <a extends string>(a: a) => <b>(b: b): Option.t<b extends Record<a, infer u> ? u : null> => hasKey(a)(b) ? b[a] : null as Option.t<any>;
+export const get = <a extends string>(a: a) => <b>(b: b): Option.T<b extends Record<a, infer u> ? u : null> => hasKey(a)(b) ? b[a] : null as Option.T<any>;
 
 /**
  * Omits the keys in `a` that are in `b`
@@ -337,7 +337,7 @@ export function pick<a extends string, b extends Record<string, any>>(keys: any,
  * @returns
  * @since 4.0.0
  **/
-export const map = <a extends object, b>(m: Functors.Mappable<a, b>) => (a: a): Option.t<b> => guard(a) ? m(a) as Option.t<b> : null;
+export const map = <a extends object, b>(m: Functors.Mappable<a, b>) => (a: a): Option.T<b> => guard(a) ? m(a) as Option.T<b> : null;
 
 /**
  * Returns the names of the enumerable string properties and methods of an object.

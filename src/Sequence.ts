@@ -1,7 +1,6 @@
 import { cmp as arrCmp, eq as arrEq } from './Arr.js';
 import type * as Fn from './Fn.js';
 import type * as Functors from './Functors.js';
-import { defaultsymbol } from './Functors.js';
 import type * as Option from './Option.js';
 import type * as Result from './Result.js';
 import { isErr } from './Result.js';
@@ -296,7 +295,7 @@ export function filter<a>(a: t<a> | Functors.Filterable<a>, f?: Functors.Filtera
  * 
  * const s = Sequence.make(1, 2, 3, 4, 5)
  * const f: Functors.FilterReduceableModule<number, number> = {
- *    [Functors.defaultsymbol]: 0,
+ *    default: 0,
  *    filter: Num.isEven,
  *    reduce: Num.add,
  * }
@@ -311,7 +310,7 @@ export function filterReduce<a, b>(a: t<a>, mod: Functors.FilterReduceableModule
 export function filterReduce<a, b>(mod: Functors.FilterReduceableModule<a, b>): Fn.Unary<t<a>, b>;
 export function filterReduce<a, b>(a: t<a> | Functors.FilterReduceableModule<a, b>, mod?: Functors.FilterReduceableModule<a, b>): any {
   const impl = (x: t<a>, y: Functors.FilterReduceableModule<a, b>): b => {
-    let out: b = y[defaultsymbol];
+    let out: b = y.default;
 
     for (const e of x) {
       if (y.filter(e)) {
@@ -508,9 +507,9 @@ export function count<a>(a: t<a> | Functors.Filterable<a>, p?: Functors.Filterab
  *
  * @since 4.0.0
  */
-export const first = <a>(a: t<a>): Option.t<a> => {
+export const first = <a>(a: t<a>): Option.T<a> => {
   const f = get(a, 0);
-  return isErr(f) ? null : f as unknown as Option.t<a>;
+  return isErr(f) ? null : f as unknown as Option.T<a>;
 };
 
 /**
@@ -574,7 +573,7 @@ export function get<a>(a: any, i?: any): any {
  *
  * @since 4.0.0
  */
-export const last = <a>(a: t<a>): Option.t<a> => {
+export const last = <a>(a: t<a>): Option.T<a> => {
   const f = get(a, length(a) - 1);
   return isErr(f) ? null : f as any;
 };

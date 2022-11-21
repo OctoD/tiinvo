@@ -162,8 +162,8 @@ export const camel: Fn.Unary<t, t> = b => b.replace(/\s(.)/g, (_, c) => c.toUppe
  * 
  * @since 4.0.0
  */
-export function charAt(a: t, b: number): Option.t<t>;
-export function charAt(a: number): Fn.Unary<t, Option.t<t>>;
+export function charAt(a: t, b: number): Option.T<t>;
+export function charAt(a: number): Fn.Unary<t, Option.T<t>>;
 export function charAt(a: any, b?: any): any {
   if (guard(a) && typeof b === 'number') {
     const c = a.charAt(b);
@@ -199,19 +199,19 @@ export function charAt(a: any, b?: any): any {
  * 
  * @since 4.0.0
  */
-export function charCodeAt(a: t, b: number): Option.t<t>;
-export function charCodeAt(a: number): Fn.Unary<t, Option.t<t>>;
+export function charCodeAt(a: t, b: number): Option.T<t>;
+export function charCodeAt(a: number): Fn.Unary<t, Option.T<t>>;
 export function charCodeAt(a: any, b?: any): any {
   if (guard(a) && typeof b === 'number') {
     const c = a.charCodeAt(b);
-    return c >= 0 ? c : null
+    return c >= 0 ? c : null;
   } else if (typeof a !== 'number') {
     return (_: never) => null;
   }
 
   return (b: t) => {
     const c = b.charCodeAt(a);
-    return c >= 0 ? c : null
+    return c >= 0 ? c : null;
   };
 }
 
@@ -334,8 +334,8 @@ export function includes(a: any, b?: any): any {
  * 
  * @since 4.0.0
  */
-export function indexOf(a: t, b: t, i?: number): Option.t<number>;
-export function indexOf(a: t): (b: t, i?: number) => Option.t<number>;
+export function indexOf(a: t, b: t, i?: number): Option.T<number>;
+export function indexOf(a: t): (b: t, i?: number) => Option.T<number>;
 export function indexOf(a: any, b?: any, i?: number): any {
   if (guard(a) && guard(b)) {
     return a.indexOf(b, i);
@@ -361,8 +361,8 @@ export function indexOf(a: any, b?: any, i?: number): any {
  * 
  * @since 4.0.0
  */
-export function lastIndexOf(a: t, b: t, p?: number): Option.t<number>;
-export function lastIndexOf(a: t): (b: t, p?: number) => Option.t<number>;
+export function lastIndexOf(a: t, b: t, p?: number): Option.T<number>;
+export function lastIndexOf(a: t): (b: t, p?: number) => Option.T<number>;
 export function lastIndexOf(a: any, b?: any, p?: any): any {
   if (guard(a) && guard(b)) {
     return a.lastIndexOf(b, p);
@@ -436,8 +436,8 @@ export const lower: Fn.Unary<t, t> = a => a.toLowerCase();
  * 
  * @since 4.0.0
  */
-export function match(a: t, b: t | RegExp): Option.t<RegExpMatchArray>;
-export function match(a: t | RegExp): Fn.Unary<t, Option.t<RegExpMatchArray>>;
+export function match(a: t, b: t | RegExp): Option.T<RegExpMatchArray>;
+export function match(a: t | RegExp): Fn.Unary<t, Option.T<RegExpMatchArray>>;
 export function match(a: any, b?: any): any {
   if (guard(a) && (guard(b) || b instanceof RegExp)) {
     return a.match(b);
@@ -614,10 +614,10 @@ export const reverse: Fn.Unary<t, t> = a => a.split('').reverse().join('');
  * 
  * @since 4.0.0
  */
-export function search(a: t, b: StringSearcher): Option.t<number>;
-export function search(a: StringSearcher): (b: t) => Option.t<number>;
+export function search(a: t, b: StringSearcher): Option.T<number>;
+export function search(a: StringSearcher): (b: t) => Option.T<number>;
 export function search(a: any, b?: any): any {
-  const m: Functors.Mappable<number, Option.t<number>> = x => x >= 0 ? x : null;
+  const m: Functors.Mappable<number, Option.T<number>> = x => x >= 0 ? x : null;
 
   if (guard(a) && typeof b !== 'undefined') {
     return m(a.search(b));

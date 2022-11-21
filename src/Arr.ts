@@ -1,6 +1,5 @@
 import type * as Fn from './Fn.js';
 import type * as Functors from './Functors.js';
-import { defaultsymbol } from './Functors.js';
 import type * as Option from './Option.js';
 import type * as Predicate from './Predicate.js';
 import { guard as predicateguard } from './Predicate.js';
@@ -42,7 +41,7 @@ export type Reducer<A, B> = {
    * 
    * @param {B} p the accumulated value
    * @param {A} c the current value
-   * @return {B}
+   * @returns {B}
    */
   (p: B, c: A): B;
   /**
@@ -59,7 +58,7 @@ export type Reducer<A, B> = {
    * @param {B} p the accumulated value
    * @param {A} c the current value
    * @param {number} i the current index
-   * @return {B}
+   * @returns {B}
    */
   (p: B, c: A, i: number): B;
   /**
@@ -77,7 +76,7 @@ export type Reducer<A, B> = {
    * @param {A} c the current value
    * @param {number} i the current index
    * @param {T<A>} t the original array `t<a>`
-   * @return {B}
+   * @returns {B}
    */
   (p: B, c: A, i: number, t: T<A>): B;
 };
@@ -156,11 +155,11 @@ export function get<A>(a: T<A> | number, i?: number): any {
  * 
  * @template A array's type
  * @param {T<A>} t the array
- * @returns {Option.t<A>}
+ * @returns {Option.T<A>}
  * @group Accessors
  * @since 4.0.0
  */
-export const first = <A>(t: T<A>): Option.t<A> => (t[0] ?? null) as Option.t<A>;
+export const first = <A>(t: T<A>): Option.T<A> => (t[0] ?? null) as Option.T<A>;
 
 /**
  * Returns the first element of an array `a` or `b` if the array is empty.
@@ -227,11 +226,11 @@ export function firstOr<a>(t: T<a> | a, b?: any): any {
  * 
  * @template A array's type
  * @param {T<A>} t the array
- * @returns {Option.t<A>}
+ * @returns {Option.T<A>}
  * @group Accessors
  * @since 4.0.0
  */
-export const last = <A>(t: T<A>): Option.t<A> => (t[t.length - 1] ?? null) as Option.t<A>;
+export const last = <A>(t: T<A>): Option.T<A> => (t[t.length - 1] ?? null) as Option.T<A>;
 
 /**
  * Returns the last element of an array `a` or `b` if the array is empty.
@@ -248,7 +247,7 @@ export const last = <A>(t: T<A>): Option.t<A> => (t[t.length - 1] ?? null) as Op
  * @template A array's type
  * @param t the array
  * @param b the index
- * @return {A}
+ * @returns {A}
  * @group Accessors
  * @since 4.0.0
  */
@@ -270,7 +269,7 @@ export function lastOr<A>(t: T<A>, b: A): A;
  * 
  * @template A array's type
  * @param t the index
- * @return {Fn.Unary<T<A>, A>} 
+ * @returns {Fn.Unary<T<A>, A>} 
  * @group Accessors
  * @since 4.0.0
  */
@@ -832,7 +831,7 @@ export function filter<A>(a: T<any> | Predicate.t<A>, p?: Predicate.t<A>): any {
  * @group Native methods
  * @since 4.0.0
  */
-export function find<A>(a: T<A>, p: Predicate.t<A>): Option.t<A>;
+export function find<A>(a: T<A>, p: Predicate.t<A>): Option.T<A>;
 /**
  * Finds the first value `a` with a given predicate `p` and returns `Option.some<a>` if found, otherwise returns `Option.none`.
  * 
@@ -851,7 +850,7 @@ export function find<A>(a: T<A>, p: Predicate.t<A>): Option.t<A>;
  * @group Native methods
  * @since 4.0.0
  */
-export function find<A>(a: Predicate.t<A>): Fn.Unary<T<A>, Option.t<A>>;
+export function find<A>(a: Predicate.t<A>): Fn.Unary<T<A>, Option.T<A>>;
 export function find<A>(a: T<A> | Predicate.t<A>, p?: Predicate.t<A>): any {
   if (guard(a) && predicateguard(p)) {
     return a.find(p) ?? null;
@@ -905,7 +904,7 @@ export function filterMap<A, B>(a: T<A>, mod: Functors.FilterMappableModule<A, B
  * @template A array's type
  * @template B returning array's type
  * @param {Functors.FilterMappableModule<A, B>} a 
- * @return {Fn.Unary<T<A>, T<A>>}
+ * @returns {Fn.Unary<T<A>, T<A>>}
  * @group Compound native methods
  * @since 4.0.0
  */
@@ -953,7 +952,7 @@ export function filterMap<A, B>(a: T<A> | Functors.FilterMappableModule<A, B>, m
  * import { Arr, Functors, Num } from 'tiinvo'
  * 
  * const mod: Functors.FilterReduceableModule<number, number> = {
- *    [Functors.defaultsymbol]: 0,
+ *    default: 0,
  *    filter: Num.isPositive,
  *    reduce: Num.add,
  * }
@@ -968,7 +967,7 @@ export function filterMap<A, B>(a: T<A> | Functors.FilterMappableModule<A, B>, m
  * @template B returning reduced type
  * @param {T<A>} a the array to filter and reduce
  * @param {Functors.FilterReduceableModule<A, B>} mod the functor
- * @return {B} the filtered and reduced output
+ * @returns {B} the filtered and reduced output
  * @group Compound native methods
  * @since 4.0.0
  */
@@ -984,7 +983,7 @@ export function filterReduce<A, B>(a: T<A>, mod: Functors.FilterReduceableModule
  * import { Arr, Functors, Num } from 'tiinvo'
  * 
  * const mod: Functors.FilterReduceableModule<number, number> = {
- *    [Functors.defaultsymbol]: 0,
+ *    default: 0,
  *    filter: Num.isPositive,
  *    reduce: Num.add,
  * }
@@ -998,14 +997,14 @@ export function filterReduce<A, B>(a: T<A>, mod: Functors.FilterReduceableModule
  * @template A array's type
  * @template B returning value type
  * @param {Functors.FilterReduceableModule<A, B>} a the functor module type
- * @return {Fn.Unary<T<A>, B>}
+ * @returns {Fn.Unary<T<A>, B>}
  * @group Compound native methods
  * @since 4.0.0
  */
 export function filterReduce<A, B>(a: Functors.FilterReduceableModule<A, B>): Fn.Unary<T<A>, B>;
 export function filterReduce<a, b>(a: any, mod?: Functors.FilterReduceableModule<a, b>): any {
-  if (guard(a) && typeof mod === 'object' && mod !== null && 'filter' in mod && 'reduce' in mod && defaultsymbol in mod) {
-    let out = mod[defaultsymbol];
+  if (guard(a) && typeof mod === 'object' && mod !== null && 'filter' in mod && 'reduce' in mod && 'default' in mod) {
+    let out = mod.default;
 
     for (let i = 0; i < a.length; i++) {
       if (mod.filter(a[i] as a)) {
@@ -1014,9 +1013,9 @@ export function filterReduce<a, b>(a: any, mod?: Functors.FilterReduceableModule
     }
 
     return out;
-  } else if (typeof a === 'object' && a !== null && 'filter' in a && 'reduce' in a && defaultsymbol in a) {
+  } else if (typeof a === 'object' && a !== null && 'filter' in a && 'reduce' in a && 'default' in a) {
     return (b: T<a>) => {
-      let out = a[defaultsymbol];
+      let out = a.default;
 
       for (let i = 0; i < b.length; i++) {
         if (a.filter(b[i])) {
@@ -1049,7 +1048,7 @@ export function filterReduce<a, b>(a: any, mod?: Functors.FilterReduceableModule
  * @template D flattern depth
  * @param {A} a the array to flattern
  * @param {D | undefined} d the depth
- * @return {FlatArray<A, D>}
+ * @returns {FlatArray<A, D>}
  * @group Native methods
  * @since 4.0.0
  */
@@ -1071,7 +1070,7 @@ export function flat<A extends T<any>, D extends number = 1>(a: A, d?: D): FlatA
  * @template A array's type
  * @template D flattern depth type
  * @param {D | undefined} a the depth
- * @return {Fn.Unary<A, FlatArray<A, D>>}
+ * @returns {Fn.Unary<A, FlatArray<A, D>>}
  * @group Native methods
  * @since 4.0.0
  */
@@ -1101,7 +1100,7 @@ export function flat<a extends T<any>, d extends number = 1>(a: a | d, d?: d): a
  * @template B the flatterned mapped array type
  * @param a the matrix
  * @param m the mappable functor
- * @return {T<B>}
+ * @returns {T<B>}
  * @group Compound native methods
  * @since 4.0.0
  */
@@ -1122,7 +1121,7 @@ export function flatMap<A, B>(a: T<T<A>>, m: Functors.Mappable<A, B>): T<B>;
  * @template A the matrix elements' type
  * @template B the flatterned mapped array type
  * @param a the mappable functor
- * @return {Fn.Unary<T<T<A>>>, t<a>>}
+ * @returns {Fn.Unary<T<T<A>>>, t<a>>}
  * @group Compound native methods
  * @since 4.0.0
  */
@@ -1154,7 +1153,7 @@ export function flatMap<A, B>(a: T<T<A>> | Functors.Mappable<A, B>, m?: any): an
  * @template A array's type
  * @param a the array
  * @param b the value to look up for
- * @return {boolean} returns true if `b` has been found
+ * @returns {boolean} returns true if `b` has been found
  * @group Native methods
  * @since 4.0.0
  */
@@ -1177,7 +1176,7 @@ export function includes<A>(a: T<A>, b: A): boolean;
  * 
  * @template A array's type
  * @param a the value to look for
- * @return {Fn.Unary<T<A>, boolean>} a unary function which returns true if `a` has been found in the passed array.
+ * @returns {Fn.Unary<T<A>, boolean>} a unary function which returns true if `a` has been found in the passed array.
  * @group Native methods
  * @since 4.0.0
  */
@@ -1205,7 +1204,7 @@ export function includes<A>(a: T<A> | A, b?: A): any {
  * 
  * @template a array's type
  * @param {T<A>} t the array
- * @return {number} the length of the array
+ * @returns {number} the length of the array
  * @group Native methods
  * @since 4.0.0
  */
@@ -1231,7 +1230,7 @@ export const length = <A>(t: T<A>): number => t.length;
  * @template B the string type to use as divider
  * @param {A} a the array
  * @param {B} b the string used as divider
- * @return {string} the concatenated string
+ * @returns {string} the concatenated string
  * @group Native methods
  * @since 4.0.0
  */
@@ -1255,7 +1254,7 @@ export function join<A extends any[], B extends string>(a: A, b?: B): string;
  * @template A array's type
  * @template B the string type to use as divider
  * @param {B} a the string used as divider
- * @return {Fn.Unary<A, string>} the concatenated string
+ * @returns {Fn.Unary<A, string>} the concatenated string
  * @group Native methods
  * @since 4.0.0
  */
@@ -1289,7 +1288,7 @@ export function join<A extends any[], B extends string>(a: A | B, b?: B): any {
  * @template A the array's type
  * @param {number} size the size of the array
  * @param {A | undefined} d this is the value used to fill the array
- * @return {T<A>} the array
+ * @returns {T<A>} the array
  * @group Factories
  * @since 4.0.0
  */
@@ -1314,14 +1313,13 @@ export function make<A = undefined>(size: number, d?: A): A extends Option.None 
  * @template A the array's type
  * @param {number} size the size of the array
  * @param {Fn.Unary<number, A> | undefined} d a function used to return a value for every index of an array
- * @return {T<A>} the array
+ * @returns {T<A>} the array
  * @group Factories
  * @since 4.0.0
  */
-export function make<A = undefined>(size: number, d?: Fn.Unary<number, A>): A extends Option.None ? T<Option.None> : T<A> 
-export function make<A = undefined>(size: number, d?: A | Fn.Unary<number, A>): A extends Option.None ? T<Option.None> : T<A> 
-{
-  type b = A extends Option.None ? T<Option.t<A>> : T<A>;
+export function make<A = undefined>(size: number, d?: Fn.Unary<number, A>): A extends Option.None ? T<Option.None> : T<A>;
+export function make<A = undefined>(size: number, d?: A | Fn.Unary<number, A>): A extends Option.None ? T<Option.None> : T<A> {
+  type b = A extends Option.None ? T<Option.T<A>> : T<A>;
   const a = [] as b;
 
   for (let i = 0; i < size; i++) {
@@ -1353,7 +1351,7 @@ export function make<A = undefined>(size: number, d?: A | Fn.Unary<number, A>): 
  * @template B the return type of the mappable functor
  * @param a the array
  * @param m the functors used to map the array
- * @return {T<B>}
+ * @returns {T<B>}
  * @group Native methods
  * @since 4.0.0
  */
@@ -1375,7 +1373,7 @@ export function map<A, B>(a: T<A>, m: Functors.Mappable<A, B>): T<B>;
  * @template a the array's type 
  * @template b the return type of the mappable functor
  * @param a the functors used to map the array
- * @return {Fn.Unary<T<a>, T<b>>}
+ * @returns {Fn.Unary<T<a>, T<b>>}
  * @group Native methods
  * @since 4.0.0
  */
@@ -1406,7 +1404,7 @@ export function map<a, b>(a: T<a> | Functors.Mappable<a, b>, m?: any): any {
  * @template A array's type
  * @param a the array
  * @param m the predicate `Predicate.t<a>`
- * @return {boolean} returns true if none of the elements satisfy `m`
+ * @returns {boolean} returns true if none of the elements satisfy `m`
  * @group Native methods
  * @since 4.0.0
  */
@@ -1428,7 +1426,7 @@ export function none<A>(a: T<A>, m: Predicate.t<A>): boolean;
  * 
  * @template A array's type
  * @param a the predicate `Predicate.t<a>`
- * @return {Fn.Unary<T<A>, boolean>}
+ * @returns {Fn.Unary<T<A>, boolean>}
  * @group Native methods
  * @since 4.0.0
  */
@@ -1478,7 +1476,7 @@ export const of = Array.of;
  * @template A array's type
  * @param a the array
  * @param f the filterable functor
- * @return {[T<A>, T<A>]}
+ * @returns {[T<A>, T<A>]}
  * @group Misc
  * @since 4.0.0
  */
@@ -1501,7 +1499,7 @@ export function partition<A>(a: T<A>, f: Functors.Filterable<A>): [T<A>, T<A>];
  *
  * @template A array's type
  * @param a the filterable functor
- * @return {Fn.Unary<T<A>, [T<A>, T<A>]>}
+ * @returns {Fn.Unary<T<A>, [T<A>, T<A>]>}
  * @group Misc
  * @since 4.0.0
  */
@@ -1541,11 +1539,11 @@ export function partition<A>(a: T<A> | Functors.Filterable<A>, f?: Functors.Filt
  * 
  * @template A array's type
  * @param a the array
- * @returns {Option.t<A>} a random element of the array
+ * @returns {Option.T<A>} a random element of the array
  * @group Misc
  * @since 4.0.0
  */
-export const random = <A>(a: A[]): Option.t<A> => (a[Math.floor(Math.random() * a.length)]) as Option.t<A> ?? null;
+export const random = <A>(a: A[]): Option.T<A> => (a[Math.floor(Math.random() * a.length)]) as Option.T<A> ?? null;
 
 /**
  * Calls the specified callback function for all the elements in an array. 
@@ -1566,7 +1564,7 @@ export const random = <A>(a: A[]): Option.t<A> => (a[Math.floor(Math.random() * 
  * @template B returned value type
  * @param a the array
  * @param r the reducer
- * @return {B} the reduced value
+ * @returns {B} the reduced value
  * @group Native methods
  * @since 4.0.0
  */
@@ -1592,7 +1590,7 @@ export function reduce<A, B>(a: T<A>, r: Reducer<A, B>, b: B): B;
  * @template B returned value type
  * @param a the array
  * @param r the reducer
- * @return {Fn.Unary<T<A>, B>} the reduced value
+ * @returns {Fn.Unary<T<A>, B>} the reduced value
  * @group Native methods
  * @since 4.0.0
  */
@@ -1626,7 +1624,7 @@ export function reduce<A, B>(a: T<A> | Reducer<A, B>, r: any, b?: any): any {
  * @template B returned value type
  * @param a the array
  * @param r the reducer
- * @return {B} the reduced value
+ * @returns {B} the reduced value
  * @group Native methods
  * @since 4.0.0
  */
@@ -1652,7 +1650,7 @@ export function reduceRight<A, B>(a: T<A>, r: Reducer<A, B>, b: B): B;
  * @template B returned value type
  * @param a the array
  * @param r the reducer
- * @return {Fn.Unary<T<A>, B>} the reduced value
+ * @returns {Fn.Unary<T<A>, B>} the reduced value
  * @group Native methods
  * @since 4.0.0
  */
@@ -1678,7 +1676,7 @@ export function reduceRight<A, B>(a: T<A> | Reducer<A, B>, r: any, b?: any): any
  * 
  * @template A the array's type
  * @param a the array
- * @return the reversed array
+ * @returns the reversed array
  * @group Native methods
  * @since 4.0.0
  */
@@ -1697,7 +1695,7 @@ export const reverse = <A>(a: T<A>): T<A> => a.reverse();
  * 
  * @template A the array's type
  * @param a the array
- * @return the shuffled array
+ * @returns the shuffled array
  * @group Misc
  * @since 4.0.0
  */
@@ -1736,7 +1734,7 @@ export const shuffle = <A>(a: T<A>): T<A> => {
  * @param a the array
  * @param s the optional start index
  * @param s the optional end index
- * @return the sliced array
+ * @returns the sliced array
  * @group Native methods
  * @since 4.0.0
  */
@@ -1765,7 +1763,7 @@ export function slice<A extends T<any>>(a: A, s?: number, e?: number): A;
  * @param a the array
  * @param s the optional start index
  * @param s the optional end index
- * @return {Fn.Unary<A, A>} the unary function which slices the array
+ * @returns {Fn.Unary<A, A>} the unary function which slices the array
  * @group Native methods
  * @since 4.0.0
  */
@@ -1792,7 +1790,7 @@ export function slice<A extends T<any>>(a: A | number, s?: number, e?: number): 
  * @template A the array's type
  * @param a the array
  * @param p the predicate
- * @return {boolean} return true if some values satisfy the predicate
+ * @returns {boolean} return true if some values satisfy the predicate
  * @group Native methods
  * @since 4.0.0
  */
@@ -1810,7 +1808,7 @@ export function some<A>(a: T<A>, p: Predicate.t<A>): boolean;
  *
  * @template A the array's type
  * @param a the predicate
- * @return {Fn.Unary<T<A>, boolean>} return true if some values satisfy the predicate
+ * @returns {Fn.Unary<T<A>, boolean>} return true if some values satisfy the predicate
  * @group Native methods
  * @since 4.0.0
  */
@@ -1841,7 +1839,7 @@ export function some<A>(a: T<A> | Predicate.t<A>, p?: Predicate.t<A>): any {
  * @template A the array's type
  * @param a the array
  * @param cmp the comparable functor
- * @return {T<A>} the sorted array
+ * @returns {T<A>} the sorted array
  * @group Native methods
  * @since 4.0.0
  */
@@ -1863,7 +1861,7 @@ export function sort<A>(a: T<A>, cmp: Functors.Comparable<A>): T<A>;
  *
  * @template A the array's type
  * @param a the comparable functor
- * @return {Fn.Unary<T<A>, T<A>>} the unary function which sorts the array
+ * @returns {Fn.Unary<T<A>, T<A>>} the unary function which sorts the array
  * @group Native methods
  * @since 4.0.0
  */
@@ -1893,7 +1891,7 @@ export function sort<A>(a: T<A> | Functors.Comparable<A>, cmp?: Functors.Compara
  * @template A the array's type
  * @param a the first array
  * @param b the second array
- * @return {T<A>} the zipped array
+ * @returns {T<A>} the zipped array
  * @group Misc
  * @since 4.0.0
  */
@@ -1915,7 +1913,7 @@ export function zip<A extends any[]>(a: A, b: A): T<A>;
  *
  * @template A the array's type
  * @param a the second array
- * @return {Fn.Unary<A, T<A>>} the unary function which zips the array
+ * @returns {Fn.Unary<A, T<A>>} the unary function which zips the array
  * @group Misc
  * @since 4.0.0
  */

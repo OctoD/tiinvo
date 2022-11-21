@@ -1,7 +1,27 @@
 import type * as Fn from './Fn.js';
 import type * as Functors from './Functors.js';
 
-export type t = {
+/**
+ * Represents a DateRange.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { DateRange } from 'tiinvo'
+ * 
+ * const start = new Date("2022-01-01")
+ * const end = new Date("2022-12-31")
+ * 
+ * const dr = DateRange.make(start, end, 'month')
+ * 
+ * for (const month of dr) {
+ *    console.log(month.toJSON())
+ * }
+ * ```
+ * 
+ * @since 4.0.0
+ */
+export type T = {
   readonly start: Date;
   readonly end: Date;
   readonly step: 'year' | 'month' | 'day';
@@ -25,7 +45,7 @@ export type t = {
  *
  * @since 4.0.0
  */
-export const make = (start: Date, end: Date, step: t['step'] = 'year'): t => {
+export const make = (start: Date, end: Date, step: T['step'] = 'year'): T => {
   const direction = start > end ? -1 : 1;
 
   start = new Date(start);
@@ -90,9 +110,11 @@ export const make = (start: Date, end: Date, step: t['step'] = 'year'): t => {
  * DateRange.guard(DateRange.make(new Date(), new Date()))    // true
  * ```
  *
+ * @param x the value to check
+ * @returns returns true if x is DateRange, false otherwise
  * @since 4.0.0
  */
-export const guard = (x: unknown): x is t => typeof x === 'object' && x !== null && 'start' in x && 'end' in x && 'step' in x && typeof (x as t).step === 'string' && (x as t).start instanceof Date && (x as t).end instanceof Date;
+export const guard = (x: unknown): x is T => typeof x === 'object' && x !== null && 'start' in x && 'end' in x && 'step' in x && typeof (x as T).step === 'string' && (x as T).start instanceof Date && (x as T).end instanceof Date;
 
 //#endregion
 
@@ -111,17 +133,37 @@ export const guard = (x: unknown): x is t => typeof x === 'object' && x !== null
  * DateRange.inRange(dr, new Date('2020-01-02'))    // true
  * DateRange.inRange(dr, new Date('2020-01-03'))    // true
  * DateRange.inRange(dr, new Date('2020-01-04'))    // false
+ * ```
+ *
+ * @param a the DateRange
+ * @param b the Date 
+ * @returns true if b is in range of a
+ * @group Predicates
+ * @since 4.0.0
+ */
+export function inRange(a: T, b: Date): boolean;
+/**
+ * Returns a `Unary<T, boolean>` function which checks if a date `a` is in range of a `DateRange.t` `b`
+ *
+ * @example
+ *
+ * ```ts
+ * import { DateRange } from 'tiinvo'
+ * 
+ * const dr = DateRange.make(new Date('2020-01-01'), new Date('2020-01-03'), 'day');
  * 
  * DateRange.inRange(new Date('2020-01-02'))(dr)    // true
  * DateRange.inRange(new Date('2020-01-03'))(dr)    // true
  * DateRange.inRange(new Date('2020-01-04'))(dr)    // false
  * ```
  *
+ * @param a the DateRange
+ * @returns the unary function which accepts a `DateRange.T` and returns true if a is in `DateRage.T`
+ * @group Predicates
  * @since 4.0.0
  */
-export function inRange(a: t, b: Date): boolean;
-export function inRange(a: Date): Fn.Unary<t, boolean>;
-export function inRange(a: t | Date, b?: Date): any {
+export function inRange(a: Date): Fn.Unary<T, boolean>;
+export function inRange(a: T | Date, b?: Date): any {
   if (guard(a) && !!b) {
     const c = new Date(b);
     c.setMilliseconds(0);
@@ -130,7 +172,7 @@ export function inRange(a: t | Date, b?: Date): any {
     return c >= a.start && c <= a.end;
   }
 
-  return (b: t) => {
+  return (b: T) => {
     const c = new Date(a as Date);
     c.setMilliseconds(0);
     c.setMinutes(0);
@@ -152,19 +194,42 @@ export function inRange(a: t | Date, b?: Date): any {
  * import { DateRange } from 'tiinvo'
  * 
  * const f = (x: Date) => x.getFullYear();
+ * const dr = DateRange.make(new Date('2020-01-01'), new Date('2023-01-01'), 'year');
+ * 
+ * DateRange.map(dr, f)     // [2020, 2021, 2022, 2023]
+ * ```
+ * 
+ * @param t the DateRange
+ * @param m the mappable functor
+ * @return the mapped value
+ * @group Mappables
+ * @since 4.0.0
+ */
+export function map<a>(t: T, m: Functors.Mappable<Date, a>): a[];
+/**
+ * Returns a `Unary<T, a[]>` function which maps a `DateRange.t` 
+ * to `a[]` using a `Mappable<Date, a>`
+ *
+ * @example
+ *
+ * ```ts
+ * import { DateRange } from 'tiinvo'
+ * 
+ * const f = (x: Date) => x.getFullYear();
  * const m = DateRange.map(f)
  * const dr = DateRange.make(new Date('2020-01-01'), new Date('2023-01-01'), 'year');
  * 
  * m(dr)                    // [2020, 2021, 2022, 2023]
- * DateRange.map(dr, f)     // [2020, 2021, 2022, 2023]
  * ```
- *
+ * 
+ * @param t the DateRange
+ * @return the unary function
+ * @group Mappables
  * @since 4.0.0
  */
-export function map<a>(t: t, m: Functors.Mappable<Date, a>): a[];
-export function map<a>(t: Functors.Mappable<Date, a>): Fn.Unary<t, a[]>;
-export function map<a>(t: t | Functors.Mappable<Date, a>, m?: Functors.Mappable<Date, a>): any {
-  const _map = (y: t, f: Functors.Mappable<Date, a>) => {
+export function map<a>(t: Functors.Mappable<Date, a>): Fn.Unary<T, a[]>;
+export function map<a>(t: T | Functors.Mappable<Date, a>, m?: Functors.Mappable<Date, a>): any {
+  const _map = (y: T, f: Functors.Mappable<Date, a>) => {
     const out: a[] = [];
 
     for (const x of y) {
@@ -177,7 +242,7 @@ export function map<a>(t: t | Functors.Mappable<Date, a>, m?: Functors.Mappable<
   if (guard(t) && !!m) {
     return _map(t, m);
   } else if (!guard(t)) {
-    return (b: t) => _map(b, t);
+    return (b: T) => _map(b, t);
   }
 }
 

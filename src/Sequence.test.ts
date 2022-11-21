@@ -96,7 +96,7 @@ describe("Sequence", () => {
   test(Sequence.filterReduce.name, () => {
     const s = Sequence.make(1, 2, 3, 4, 5);
     const f: Functors.FilterReduceableModule<number, number> = {
-      [Functors.defaultsymbol]: 0,
+      default: 0,
       filter: Num.isEven,
       reduce: Num.add,
     };

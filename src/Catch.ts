@@ -3,7 +3,9 @@ import type * as Functors from './Functors.js';
 import { catchableAsync, catchableSync } from './Functors.js';
 
 /**
- * Handles a `Functors.Catchable<f>`
+ * Uses the `Functors.Catchable<f>` to return a wrapped function `f`.
+ * 
+ * If the function `f` throws internally, then the functors' catch function is called, otherwise returns `f` output
  *
  * @example
  *
@@ -32,7 +34,9 @@ import { catchableAsync, catchableSync } from './Functors.js';
  * catched(10)                    // 9
  * catched(7)                     // 7
  * ```
- *
+ * 
+ * @param catchable the CatchableModule<f>
+ * @returns a unary function 
  * @since 4.0.0
  */
 export const make = <f extends Fn.AnyFn>(catchable: Functors.CatchableModule<f>): f extends Fn.AnyAsyncFn ? ((...args: Parameters<f>) => Promise<Awaited<ReturnType<f>>>) : ((...args: Parameters<f>) => ReturnType<f>) => {
