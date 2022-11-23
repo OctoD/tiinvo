@@ -2,6 +2,9 @@
   "entryPoints": [
     "src/index.ts"
   ],
+  "githubPages": false,
+  "htmlLang": "en",
+  "footerLastModified": true,
   "sort": [
     "source-order"
   ],
