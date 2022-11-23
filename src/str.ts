@@ -2,19 +2,44 @@ import type * as Fn from './Fn.js';
 import type * as Functors from './Functors.js';
 import type * as Option from './Option.js';
 
-export type t = string;
+/**
+ * The type alias for string
+ *
+ * @since 4.0.0
+ */
+export type T = string;
 
-export type StringReplacer = t | RegExp | Fn.Unary<t, t>;
-export type StringSearcher = t | {
+/**
+ * A replacer argument. 
+ * 
+ * It could be either:
+ * - a string
+ * - a regular expression
+ * - a unary function which accepts a string and returns a string
+ *
+ * @since 4.0.0
+ */
+export type StringReplacer = T | RegExp | Fn.Unary<T, T>;
+/**
+ * A string searcher argument 
+ *
+ * @since 4.0.0
+ */
+export type StringSearcher = T | {
   [Symbol.search](string: string): number;
 };
-export type StringSplitter = t | {
+/**
+ * A string splitter argument 
+ *
+ * @since 4.0.0
+ */
+export type StringSplitter = T | {
   [Symbol.split](string: string, limit?: number | undefined): string[];
 };
 
 //#region guards
 
-export const guard: Functors.Guardable<t> = (x): x is t => typeof x === 'string';
+export const guard: Functors.Guardable<T> = (x): x is T => typeof x === 'string';
 
 //#endregion
 
@@ -43,7 +68,7 @@ export const guard: Functors.Guardable<t> = (x): x is t => typeof x === 'string'
  *  
  * @since 4.0.0
  */
-export function cmp(a: t, b: t): Functors.ComparableResult;
+export function cmp(a: T, b: T): Functors.ComparableResult;
 /**
  * Compares two strings `a` and `b`.
  * 
@@ -67,15 +92,15 @@ export function cmp(a: t, b: t): Functors.ComparableResult;
  *  
  * @since 4.0.0
  */
-export function cmp(a: t): Fn.Unary<t, Functors.ComparableResult>;
-export function cmp(a: t, b?: t): any {
-  const _cmp = (x: t, y: t) => x > y ? 1 : x < y ? -1 : 0;
+export function cmp(a: T): Fn.Unary<T, Functors.ComparableResult>;
+export function cmp(a: T, b?: T): any {
+  const _cmp = (x: T, y: T) => x > y ? 1 : x < y ? -1 : 0;
 
   if (guard(a) && guard(b)) {
     return _cmp(a, b);
   }
 
-  return (b: t) => _cmp(b, a);
+  return (b: T) => _cmp(b, a);
 };
 
 /**
@@ -93,7 +118,7 @@ export function cmp(a: t, b?: t): any {
  *  
  * @since 4.0.0
  */
-export function eq(a: t, b: t): boolean;
+export function eq(a: T, b: T): boolean;
 /**
  * Returns `true` if two strings are the same
  * 
@@ -109,13 +134,13 @@ export function eq(a: t, b: t): boolean;
  *  
  * @since 4.0.0
  */
-export function eq(a: t): Fn.Unary<t, boolean>;
-export function eq(a: t, b?: t): any {
+export function eq(a: T): Fn.Unary<T, boolean>;
+export function eq(a: T, b?: T): any {
   if (guard(a) && guard(b)) {
     return a === b;
   }
 
-  return (b: t) => b === a;
+  return (b: T) => b === a;
 }
 
 //#endregion
@@ -140,9 +165,9 @@ export function eq(a: t, b?: t): any {
  * 
  * @since 4.0.0
  */
-export function asc(a: t, b: t): Functors.ComparableResult;
-export function asc(a: t): Fn.Unary<t, Functors.ComparableResult>;
-export function asc(a: t, b?: any): any {
+export function asc(a: T, b: T): Functors.ComparableResult;
+export function asc(a: T): Fn.Unary<T, Functors.ComparableResult>;
+export function asc(a: T, b?: any): any {
   if (guard(b)) {
     return cmp(a, b);
   }
@@ -168,9 +193,9 @@ export function asc(a: t, b?: any): any {
  * 
  * @since 4.0.0
  */
-export function desc(a: t, b: t): Functors.ComparableResult;
-export function desc(a: t): Fn.Unary<t, Functors.ComparableResult>;
-export function desc(a: t, b?: any): any {
+export function desc(a: T, b: T): Functors.ComparableResult;
+export function desc(a: T): Fn.Unary<T, Functors.ComparableResult>;
+export function desc(a: T, b?: any): any {
   if (guard(b)) {
     return cmp(b, a);
   }
@@ -195,7 +220,7 @@ export function desc(a: t, b?: any): any {
  * 
  * @since 4.0.0
  */
-export const camel: Fn.Unary<t, t> = b => b.replace(/\s(.)/g, (_, c) => c.toUpperCase());
+export const camel: Fn.Unary<T, T> = b => b.replace(/\s(.)/g, (_, c) => c.toUpperCase());
 
 /**
  * Returns the character `Option.t<string>` at the specified index.
@@ -218,8 +243,8 @@ export const camel: Fn.Unary<t, t> = b => b.replace(/\s(.)/g, (_, c) => c.toUppe
  * 
  * @since 4.0.0
  */
-export function charAt(a: t, b: number): Option.T<t>;
-export function charAt(a: number): Fn.Unary<t, Option.T<t>>;
+export function charAt(a: T, b: number): Option.T<T>;
+export function charAt(a: number): Fn.Unary<T, Option.T<T>>;
 export function charAt(a: any, b?: any): any {
   if (guard(a) && typeof b === 'number') {
     const c = a.charAt(b);
@@ -228,7 +253,7 @@ export function charAt(a: any, b?: any): any {
     return (_: never) => null;
   }
 
-  return (b: t) => {
+  return (b: T) => {
     const c = b.charAt(a);
     return c === "" ? null : c;
   };
@@ -255,8 +280,8 @@ export function charAt(a: any, b?: any): any {
  * 
  * @since 4.0.0
  */
-export function charCodeAt(a: t, b: number): Option.T<number>;
-export function charCodeAt(a: number): Fn.Unary<t, Option.T<number>>;
+export function charCodeAt(a: T, b: number): Option.T<number>;
+export function charCodeAt(a: number): Fn.Unary<T, Option.T<number>>;
 export function charCodeAt(a: any, b?: any): any {
   if (guard(a) && typeof b === 'number') {
     const c = a.charCodeAt(b);
@@ -265,7 +290,7 @@ export function charCodeAt(a: any, b?: any): any {
     return (_: never) => null;
   }
 
-  return (b: t) => {
+  return (b: T) => {
     const c = b.charCodeAt(a);
     return c >= 0 ? c : null;
   };
@@ -284,7 +309,7 @@ export function charCodeAt(a: any, b?: any): any {
  * 
  * @since 4.0.0
  */
-export const chars: Fn.Unary<t, t[]> = a => a.split('');
+export const chars: Fn.Unary<T, T[]> = a => a.split('');
 
 /**
  * Returns a concatenated string.
@@ -304,14 +329,14 @@ export const chars: Fn.Unary<t, t[]> = a => a.split('');
  * 
  * @since 4.0.0
  */
-export function concat(a: t, b: t): t;
-export function concat(a: t): Fn.Unary<t, t>;
+export function concat(a: T, b: T): T;
+export function concat(a: T): Fn.Unary<T, T>;
 export function concat(a: any, b?: any): any {
   if (guard(a) && guard(b)) {
     return a.concat(b);
   }
 
-  return (b: t) => b.concat(a);
+  return (b: T) => b.concat(a);
 }
 
 /**
@@ -332,8 +357,8 @@ export function concat(a: any, b?: any): any {
  * 
  * @since 4.0.0
  */
-export function endsWith(a: t, b: t): boolean;
-export function endsWith(a: t): Fn.Unary<t, boolean>;
+export function endsWith(a: T, b: T): boolean;
+export function endsWith(a: T): Fn.Unary<T, boolean>;
 export function endsWith(a: any, b?: any): any {
   if (guard(a) && guard(b)) {
     return a.endsWith(b);
@@ -360,8 +385,8 @@ export function endsWith(a: any, b?: any): any {
  * 
  * @since 4.0.0
  */
-export function includes(a: t, b: t): boolean;
-export function includes(a: t): Fn.Unary<t, boolean>;
+export function includes(a: T, b: T): boolean;
+export function includes(a: T): Fn.Unary<T, boolean>;
 export function includes(a: any, b?: any): any {
   if (guard(a) && guard(b)) {
     return a.includes(b);
@@ -390,14 +415,14 @@ export function includes(a: any, b?: any): any {
  * 
  * @since 4.0.0
  */
-export function indexOf(a: t, b: t, i?: number): Option.T<number>;
-export function indexOf(a: t): (b: t, i?: number) => Option.T<number>;
+export function indexOf(a: T, b: T, i?: number): Option.T<number>;
+export function indexOf(a: T): (b: T, i?: number) => Option.T<number>;
 export function indexOf(a: any, b?: any, i?: number): any {
   if (guard(a) && guard(b)) {
     return a.indexOf(b, i);
   }
 
-  return (b: t, i: number) => b.indexOf(a, i);
+  return (b: T, i: number) => b.indexOf(a, i);
 }
 /**
  * Returns last string position of 'b' in 'a'.
@@ -417,14 +442,14 @@ export function indexOf(a: any, b?: any, i?: number): any {
  * 
  * @since 4.0.0
  */
-export function lastIndexOf(a: t, b: t, p?: number): Option.T<number>;
-export function lastIndexOf(a: t): (b: t, p?: number) => Option.T<number>;
+export function lastIndexOf(a: T, b: T, p?: number): Option.T<number>;
+export function lastIndexOf(a: T): (b: T, p?: number) => Option.T<number>;
 export function lastIndexOf(a: any, b?: any, p?: any): any {
   if (guard(a) && guard(b)) {
     return a.lastIndexOf(b, p);
   }
 
-  return (b: t, p?: number) => b.lastIndexOf(a, p);
+  return (b: T, p?: number) => b.lastIndexOf(a, p);
 }
 
 /**
@@ -440,7 +465,7 @@ export function lastIndexOf(a: any, b?: any, p?: any): any {
  * 
  * @since 4.0.0
  */
-export const length: Fn.Unary<t, number> = a => a.length;
+export const length: Fn.Unary<T, number> = a => a.length;
 
 /**
  * Returns an array of lines in a string.
@@ -457,7 +482,7 @@ export const length: Fn.Unary<t, number> = a => a.length;
  * @since 4.0.0
  * 
  */
-export const lines: Fn.Unary<t, t[]> = x => x.split(/\r?\n/);
+export const lines: Fn.Unary<T, T[]> = x => x.split(/\r?\n/);
 
 /**
  * Returns a lowercased string 
@@ -472,7 +497,7 @@ export const lines: Fn.Unary<t, t[]> = x => x.split(/\r?\n/);
  * 
  * @since 4.0.0
  */
-export const lower: Fn.Unary<t, t> = a => a.toLowerCase();
+export const lower: Fn.Unary<T, T> = a => a.toLowerCase();
 
 /**
  * Returns if a string includes another one.
@@ -492,8 +517,8 @@ export const lower: Fn.Unary<t, t> = a => a.toLowerCase();
  * 
  * @since 4.0.0
  */
-export function match(a: t, b: t | RegExp): Option.T<RegExpMatchArray>;
-export function match(a: t | RegExp): Fn.Unary<t, Option.T<RegExpMatchArray>>;
+export function match(a: T, b: T | RegExp): Option.T<RegExpMatchArray>;
+export function match(a: T | RegExp): Fn.Unary<T, Option.T<RegExpMatchArray>>;
 export function match(a: any, b?: any): any {
   if (guard(a) && (guard(b) || b instanceof RegExp)) {
     return a.match(b);
@@ -523,9 +548,9 @@ export function match(a: any, b?: any): any {
  * 
  * @since 4.0.0
  */
-export function padEnd(a: t, b: number, c?: t): t;
-export function padEnd(a: number): (b: t, d?: t) => t;
-export function padEnd(a: number, b?: t): (b: t) => t;
+export function padEnd(a: T, b: number, c?: T): T;
+export function padEnd(a: number): (b: T, d?: T) => T;
+export function padEnd(a: number, b?: T): (b: T) => T;
 export function padEnd(a: any, b?: any, c?: any): any {
   if (guard(a) && typeof b === 'number') {
     return a.padEnd(b, c);
@@ -545,7 +570,7 @@ export function padEnd(a: any, b?: any, c?: any): any {
  * @param b 
  * @returns 
  */
-export const pascal: Fn.Unary<t, t> = b => b.replace(/\s(.)/g, (_, c) => c.toUpperCase()).replace(/^(.)/, (_, c) => c.toUpperCase());
+export const pascal: Fn.Unary<T, T> = b => b.replace(/\s(.)/g, (_, c) => c.toUpperCase()).replace(/^(.)/, (_, c) => c.toUpperCase());
 
 /**
  * Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length. The padding is applied from the start (left) of the current string.
@@ -568,9 +593,9 @@ export const pascal: Fn.Unary<t, t> = b => b.replace(/\s(.)/g, (_, c) => c.toUpp
  * 
  * @since 4.0.0
  */
-export function padStart(a: t, b: number, c?: t): t;
-export function padStart(a: number): (b: t, d?: t) => t;
-export function padStart(a: number, b?: t): (b: t) => t;
+export function padStart(a: T, b: number, c?: T): T;
+export function padStart(a: number): (b: T, d?: T) => T;
+export function padStart(a: number, b?: T): (b: T) => T;
 export function padStart(a: any, b?: any, c?: any): any {
   if (guard(a) && typeof b === 'number') {
     return a.padStart(b, c);
@@ -597,8 +622,8 @@ export function padStart(a: any, b?: any, c?: any): any {
  * 
  * @since 4.0.0
  */
-export function repeat(a: t, b: number): t;
-export function repeat(a: number): (b: t) => t;
+export function repeat(a: T, b: number): T;
+export function repeat(a: number): (b: T) => T;
 export function repeat(a: any, b?: any): any {
   if (guard(a) && typeof b === 'number') {
     return a.repeat(b);
@@ -625,14 +650,14 @@ export function repeat(a: any, b?: any): any {
  * 
  * @since 4.0.0
  */
-export function replace(a: t, b: t, c: StringReplacer): t;
-export function replace(a: t, b: StringReplacer): (b: t) => t;
+export function replace(a: T, b: T, c: StringReplacer): T;
+export function replace(a: T, b: StringReplacer): (b: T) => T;
 export function replace(a: any, b?: any, c?: any): any {
   if (guard(a) && guard(b) && typeof c !== 'undefined') {
     return a.replace(b, c);
   }
 
-  return (x: t) => x.replace(a, b);
+  return (x: T) => x.replace(a, b);
 }
 
 /**
@@ -648,7 +673,7 @@ export function replace(a: any, b?: any, c?: any): any {
  * 
  * @since 4.0.0
  */
-export const reverse: Fn.Unary<t, t> = a => a.split('').reverse().join('');
+export const reverse: Fn.Unary<T, T> = a => a.split('').reverse().join('');
 
 /**
  * Finds the first substring match in a regular expression search.
@@ -670,8 +695,8 @@ export const reverse: Fn.Unary<t, t> = a => a.split('').reverse().join('');
  * 
  * @since 4.0.0
  */
-export function search(a: t, b: StringSearcher): Option.T<number>;
-export function search(a: StringSearcher): (b: t) => Option.T<number>;
+export function search(a: T, b: StringSearcher): Option.T<number>;
+export function search(a: StringSearcher): (b: T) => Option.T<number>;
 export function search(a: any, b?: any): any {
   const m: Functors.Mappable<number, Option.T<number>> = x => x >= 0 ? x : null;
 
@@ -679,7 +704,7 @@ export function search(a: any, b?: any): any {
     return m(a.search(b));
   }
 
-  return (b: t) => m(b.search(a));
+  return (b: T) => m(b.search(a));
 }
 
 /**
@@ -706,14 +731,14 @@ export function search(a: any, b?: any): any {
  * 
  * @since 4.0.0
  */
-export function slice(a: t, b: number, c?: number): string;
-export function slice(a: number, b?: number): (b: t) => string;
+export function slice(a: T, b: number, c?: number): string;
+export function slice(a: number, b?: number): (b: T) => string;
 export function slice(a: any, b?: any, c?: any): any {
   if (guard(a) && typeof b === 'number') {
     return a.slice(b, c);
   }
 
-  return (x: t, y?: number) => x.slice(a, b ?? y);
+  return (x: T, y?: number) => x.slice(a, b ?? y);
 }
 
 /**
@@ -739,14 +764,14 @@ export function slice(a: any, b?: any, c?: any): any {
  * 
  * @since 4.0.0
  */
-export function split(a: t, b: StringSplitter, c?: t): t[];
-export function split(a: StringSplitter, b?: number): Fn.Unary<t, t[]>;
+export function split(a: T, b: StringSplitter, c?: T): T[];
+export function split(a: StringSplitter, b?: number): Fn.Unary<T, T[]>;
 export function split(a: any, b?: any, c?: any): any {
   if (guard(a) && (guard(b) || b instanceof RegExp || (!!b && typeof b === 'object' && Symbol.split in b))) {
     return a.split(b, c);
   }
 
-  return (x: t, y?: number) => x.split(a, b ?? y);
+  return (x: T, y?: number) => x.split(a, b ?? y);
 }
 
 /**
@@ -762,7 +787,7 @@ export function split(a: any, b?: any, c?: any): any {
  * 
  * @since 4.0.0
  */
-export const trim: Fn.Unary<t, t> = a => a.trim();
+export const trim: Fn.Unary<T, T> = a => a.trim();
 
 /**
  * Trims a string at it's end.
@@ -777,7 +802,7 @@ export const trim: Fn.Unary<t, t> = a => a.trim();
  * 
  * @since 4.0.0
  */
-export const trimEnd: Fn.Unary<t, t> = a => a.trimEnd();
+export const trimEnd: Fn.Unary<T, T> = a => a.trimEnd();
 
 /**
  * Trims a string at it's start.
@@ -792,7 +817,7 @@ export const trimEnd: Fn.Unary<t, t> = a => a.trimEnd();
  * 
  * @since 4.0.0
  */
-export const trimStart: Fn.Unary<t, t> = a => a.trimStart();
+export const trimStart: Fn.Unary<T, T> = a => a.trimStart();
 
 /**
  * Returns a uppercased string 
@@ -807,7 +832,7 @@ export const trimStart: Fn.Unary<t, t> = a => a.trimStart();
  * 
  * @since 4.0.0
  */
-export const upper: Fn.Unary<t, t> = a => a.toUpperCase();
+export const upper: Fn.Unary<T, T> = a => a.toUpperCase();
 
 /**
  * Returns an array of words in a string.
@@ -823,7 +848,7 @@ export const upper: Fn.Unary<t, t> = a => a.toUpperCase();
  * 
  * @since 4.0.0
  */
-export const words: Fn.Unary<t, t[]> = x => x.split(/\s+/m);
+export const words: Fn.Unary<T, T[]> = x => x.split(/\s+/m);
 
 //#endregion
 
@@ -843,7 +868,7 @@ export const words: Fn.Unary<t, t[]> = x => x.split(/\s+/m);
  * @group Serializables
  * @since 4.0.0
  */
-export const toArray = (t: t) => t.split('');
+export const toArray = (t: T) => t.split('');
 
 /**
  * Returns an array of char codes
@@ -859,7 +884,7 @@ export const toArray = (t: t) => t.split('');
  * @group Serializables
  * @since 4.0.0
  */
-export const toCharCodeArray = (t: t) => toArray(t).map(charCodeAt(0)) as number[];
+export const toCharCodeArray = (t: T) => toArray(t).map(charCodeAt(0)) as number[];
 
 /**
  * Returns an array of hexadecimals string
@@ -875,6 +900,6 @@ export const toCharCodeArray = (t: t) => toArray(t).map(charCodeAt(0)) as number
  * @group Serializables
  * @since 4.0.0
  */
-export const toHexArray = (t: t) => toArray(t).map(x => '0x' + charCodeAt(x, 0)!.toString(16));
+export const toHexArray = (t: T) => toArray(t).map(x => '0x' + charCodeAt(x, 0)!.toString(16));
 
 //#endregion

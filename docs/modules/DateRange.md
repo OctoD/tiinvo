@@ -8,12 +8,6 @@
 
 - [T](DateRange.md#t)
 
-### Functions
-
-- [make](DateRange.md#make)
-- [guard](DateRange.md#guard)
-- [toArray](DateRange.md#toarray)
-
 ### Predicates
 
 - [inRange](DateRange.md#inrange)
@@ -60,247 +54,7 @@ for (const month of dr) {
 
 #### Defined in
 
-[src/DateRange.ts:24](https://github.com/OctoD/tiinvo/blob/000a124/src/DateRange.ts#L24)
-
-## Functions
-
-### make
-
-▸ **make**(`start`, `end`, `step?`): [`T`](DateRange.md#t)
-
-Creates a `DateRange.t` between a starting date `start` and an ending date `end` (included).
-
-**`Example`**
-
-```ts
-import { DateRange } from 'tiinvo'
-
-const dr = DateRange.make(new Date('2020-01-01'), new Date('2020-01-03'), 'day');
-
-Array.from(dr) // [new Date(2020, 0, 1), new Date(2020, 0, 2), new Date(2020, 0, 3)]
-```
-
-**`Since`**
-
-4.0.0
-
-#### Parameters
-
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `start` | `Date` | `undefined` |
-| `end` | `Date` | `undefined` |
-| `step` | ``"year"`` \| ``"month"`` \| ``"day"`` | `'year'` |
-
-#### Returns
-
-[`T`](DateRange.md#t)
-
-#### Defined in
-
-[src/DateRange.ts:48](https://github.com/OctoD/tiinvo/blob/000a124/src/DateRange.ts#L48)
-
-___
-
-### guard
-
-▸ **guard**(`x`): x is T
-
-Checks if a parameter `x` is a `DateRange.t`.
-
-Start and end are included in check.
-
-**`Example`**
-
-```ts
-import { DateRange, Range } from 'tiinvo'
-
-DateRange.guard(0)                                         // false
-DateRange.guard(Range.make(0, 2))                          // false
-DateRange.guard(DateRange.make(new Date(), new Date()))    // true
-```
-
-**`Since`**
-
-4.0.0
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `x` | `unknown` | the value to check |
-
-#### Returns
-
-x is T
-
-returns true if x is DateRange, false otherwise
-
-#### Defined in
-
-[src/DateRange.ts:117](https://github.com/OctoD/tiinvo/blob/000a124/src/DateRange.ts#L117)
-
-___
-
-### toArray
-
-▸ **toArray**<`T`\>(`arrayLike`): `T`[]
-
-Converts a `DateRange.t` to a `Date[]` array
-
-**`Example`**
-
-```ts
-import { DateRange } from 'tiinvo'
-
-const dr = DateRange.make(new Date('2020-01-01'), new Date('2020-01-03'), 'day');
-
-DateRange.toArray(dr)      // [new Date(2020, 0, 1), new Date(2020, 0, 2), new Date(2020, 0, 3)]
-```
-
-**`Since`**
-
-4.0.0
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `arrayLike` | `ArrayLike`<`T`\> |
-
-#### Returns
-
-`T`[]
-
-#### Defined in
-
-node_modules/typescript/lib/lib.es2015.core.d.ts:72
-
-▸ **toArray**<`T`, `U`\>(`arrayLike`, `mapfn`, `thisArg?`): `U`[]
-
-Converts a `DateRange.t` to a `Date[]` array
-
-**`Example`**
-
-```ts
-import { DateRange } from 'tiinvo'
-
-const dr = DateRange.make(new Date('2020-01-01'), new Date('2020-01-03'), 'day');
-
-DateRange.toArray(dr)      // [new Date(2020, 0, 1), new Date(2020, 0, 2), new Date(2020, 0, 3)]
-```
-
-**`Since`**
-
-4.0.0
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-| `U` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `arrayLike` | `ArrayLike`<`T`\> |
-| `mapfn` | (`v`: `T`, `k`: `number`) => `U` |
-| `thisArg?` | `any` |
-
-#### Returns
-
-`U`[]
-
-#### Defined in
-
-node_modules/typescript/lib/lib.es2015.core.d.ts:80
-
-▸ **toArray**<`T`\>(`iterable`): `T`[]
-
-Converts a `DateRange.t` to a `Date[]` array
-
-**`Example`**
-
-```ts
-import { DateRange } from 'tiinvo'
-
-const dr = DateRange.make(new Date('2020-01-01'), new Date('2020-01-03'), 'day');
-
-DateRange.toArray(dr)      // [new Date(2020, 0, 1), new Date(2020, 0, 2), new Date(2020, 0, 3)]
-```
-
-**`Since`**
-
-4.0.0
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `iterable` | `Iterable`<`T`\> \| `ArrayLike`<`T`\> |
-
-#### Returns
-
-`T`[]
-
-#### Defined in
-
-node_modules/typescript/lib/lib.es2015.iterable.d.ts:83
-
-▸ **toArray**<`T`, `U`\>(`iterable`, `mapfn`, `thisArg?`): `U`[]
-
-Converts a `DateRange.t` to a `Date[]` array
-
-**`Example`**
-
-```ts
-import { DateRange } from 'tiinvo'
-
-const dr = DateRange.make(new Date('2020-01-01'), new Date('2020-01-03'), 'day');
-
-DateRange.toArray(dr)      // [new Date(2020, 0, 1), new Date(2020, 0, 2), new Date(2020, 0, 3)]
-```
-
-**`Since`**
-
-4.0.0
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-| `U` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `iterable` | `Iterable`<`T`\> \| `ArrayLike`<`T`\> |
-| `mapfn` | (`v`: `T`, `k`: `number`) => `U` |
-| `thisArg?` | `any` |
-
-#### Returns
-
-`U`[]
-
-#### Defined in
-
-node_modules/typescript/lib/lib.es2015.iterable.d.ts:91
+[src/DateRange.ts:24](https://github.com/OctoD/tiinvo/blob/e907769/src/DateRange.ts#L24)
 
 ## Predicates
 
@@ -341,7 +95,7 @@ true if b is in range of a
 
 #### Defined in
 
-[src/DateRange.ts:144](https://github.com/OctoD/tiinvo/blob/000a124/src/DateRange.ts#L144)
+[src/DateRange.ts:144](https://github.com/OctoD/tiinvo/blob/e907769/src/DateRange.ts#L144)
 
 ▸ **inRange**(`a`): [`Unary`](Fn.md#unary)<[`T`](DateRange.md#t), `boolean`\>
 
@@ -377,7 +131,7 @@ the unary function which accepts a `DateRange.T` and returns true if a is in `Da
 
 #### Defined in
 
-[src/DateRange.ts:165](https://github.com/OctoD/tiinvo/blob/000a124/src/DateRange.ts#L165)
+[src/DateRange.ts:165](https://github.com/OctoD/tiinvo/blob/e907769/src/DateRange.ts#L165)
 
 ## Mappables
 
@@ -423,7 +177,7 @@ the mapped value
 
 #### Defined in
 
-[src/DateRange.ts:208](https://github.com/OctoD/tiinvo/blob/000a124/src/DateRange.ts#L208)
+[src/DateRange.ts:208](https://github.com/OctoD/tiinvo/blob/e907769/src/DateRange.ts#L208)
 
 ▸ **map**<`a`\>(`t`): [`Unary`](Fn.md#unary)<[`T`](DateRange.md#t), `a`[]\>
 
@@ -466,4 +220,4 @@ the unary function
 
 #### Defined in
 
-[src/DateRange.ts:230](https://github.com/OctoD/tiinvo/blob/000a124/src/DateRange.ts#L230)
+[src/DateRange.ts:230](https://github.com/OctoD/tiinvo/blob/e907769/src/DateRange.ts#L230)

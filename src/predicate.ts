@@ -1,7 +1,22 @@
 import type * as Fn from './Fn.js';
 import type * as Functors from './Functors.js';
 
-export type t<a> = Functors.Filterable<a>;
+/**
+ * A `Predicate<A>` is a unary function which accepts an argument `A` and returns a boolean
+ * in order to tell other functions if some conditions are met by `A`.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Predicate } from 'tiinvo'
+ * 
+ * const gt10: Predicate.T<number> = x => x > 10;
+ * ```
+ *
+ * @template A the type of the passed argument
+ * @since 4.0.0
+ */
+export type T<A> = Functors.Filterable<A>;
 
 /**
  * Combines two or more predicates in one.
@@ -16,11 +31,12 @@ export type t<a> = Functors.Filterable<a>;
  * and(2) // false
  * ```
  * 
+ * @template L the list of predicates
  * @param predicates 
  * @returns 
  * @since 4.0.0 
  */
- export const and = <pl extends t<any>[]>(...predicates: pl) => <a extends any>(value: a) => {
+export const and = <L extends T<any>[]>(...predicates: L) => <A extends any>(value: A) => {
   switch (predicates.length) {
     case 0: return true;
     case 1: return predicates[0](value);
@@ -43,23 +59,38 @@ export type t<a> = Functors.Filterable<a>;
  * ```ts
  * import { Predicate } from 'tiinvo';
  * 
- * const eq0 = Predicate.eq(0)
- * 
- * eq0(10)                  // false
- * eq0(0)                   // true
  * Predicate.eq(0, 10)      // false
  * Predicate.eq(0, 0)       // true
  * ```
  * 
- * @param value 
+ * @template A the value type
+ * @param a the first value 
+ * @param b the second value
  * @returns 
  * @since 4.0.0
  */
-export function eq<a>(a: a, b: a): boolean;
-export function eq<a>(a: a): Fn.Unary<a, boolean>;
-export function eq<a>(a: a, b?: any): any {
+export function eq<A>(a: A, b: A): boolean;
+/**
+ * Returns true if `b` strictly equals to `a`
+ * 
+ * ```ts
+ * import { Predicate } from 'tiinvo';
+ * 
+ * const eq0 = Predicate.eq(0)
+ * 
+ * eq0(10)                  // false
+ * eq0(0)                   // true
+ * ```
+ * 
+ * @template A the value type
+ * @param a the first value 
+ * @returns 
+ * @since 4.0.0
+ */
+export function eq<A>(a: A): Fn.Unary<A, boolean>;
+export function eq<A>(a: A, b?: any): any {
   if (arguments.length === 1) {
-    return (b: a) => a === b;
+    return (b: A) => a === b;
   }
 
   return a === b;
@@ -81,7 +112,7 @@ export function eq<a>(a: a, b?: any): any {
  * 
  * @since 4.0.0
  */
-export const guard: Functors.Guardable<t<unknown>> = (x: unknown): x is t<any> => typeof(x) === 'function' && x.length === 1;
+export const guard: Functors.Guardable<T<unknown>> = (x: unknown): x is T<any> => typeof (x) === 'function' && x.length === 1;
 
 /**
  * Inverts the result of a Predicate
@@ -95,12 +126,29 @@ export const guard: Functors.Guardable<t<unknown>> = (x: unknown): x is t<any> =
  * i(-1) // true
  * ```
  * 
- * @param predicate 
+ * @param p the predicate to invert 
+ * @returns the inverted predicate
+ * @since 4.0.0
+ */
+export const invert = <A>(p: T<A>): T<A> => (x: A) => !p(x);
+
+/**
+ * Returns true if `b` is not stricly equal to `a`
+ * 
+ * ```ts
+ * import { Predicate } from 'tiinvo';
+ * 
+ * Predicate.neq(0, 10)       // true
+ * Predicate.neq(0, 0)        // false
+ * ```
+ * 
+ * @template A the value type
+ * @param a the first value 
+ * @param a the second value 
  * @returns 
  * @since 4.0.0
  */
-export const invert = <a>(p: t<a>): t<a> => (x: a) => !p(x);
-
+export function neq<A>(a: A, b: A): boolean;
 /**
  * Returns true if `b` is not stricly equal to `a`
  * 
@@ -111,18 +159,18 @@ export const invert = <a>(p: t<a>): t<a> => (x: a) => !p(x);
  * 
  * neq(10)                    // true
  * neq(0)                     // false
- * Predicate.neq(0, 10)       // true
- * Predicate.neq(0, 0)        // false
  * ```
- * @param value 
+ * 
+ * @template A the value type
+ * @param a the first value 
+ * @param a the second value 
  * @returns 
  * @since 4.0.0
  */
-export function neq<a>(a: a, b: a): boolean;
-export function neq<a>(a: a): Fn.Unary<a, boolean>;
-export function neq<a>(a: a, b?: any): any {
+export function neq<A>(a: A): Fn.Unary<A, boolean>;
+export function neq<A>(a: A, b?: any): any {
   if (arguments.length === 1) {
-    return (b: a) => a !== b;
+    return (b: A) => a !== b;
   }
 
   return a !== b;
@@ -143,11 +191,12 @@ export function neq<a>(a: a, b?: any): any {
  * n(-5) // true
  * ```
  * 
+ * @template L the predicates types
  * @param predicates 
  * @returns 
  * @since 4.0.0
  */
- export const none = <pl extends t<any>[]>(...predicates: pl) => <a extends any>(value: a) => {
+export const none = <L extends T<any>[]>(...predicates: L) => <a extends any>(value: a) => {
   switch (predicates.length) {
     case 0: return true;
     case 1: return !predicates[0](value);
@@ -162,7 +211,7 @@ export function neq<a>(a: a, b?: any): any {
     case 10: return !predicates[0](value) && !predicates[1](value) && !predicates[2](value) && !predicates[3](value) && !predicates[4](value) && !predicates[5](value) && !predicates[6](value) && !predicates[7](value) && !predicates[8](value) && !predicates[9](value);
     default: return predicates.every(p => !p(value));
   }
-}
+};
 
 /**
  * Combines two or more predicates in one.
@@ -178,11 +227,12 @@ export function neq<a>(a: a, b?: any): any {
  * or(2)  // true
  * ```
  * 
+ * @template L the predicates types
  * @param predicates 
  * @returns 
  * @since 4.0.0
  */
- export const or = <pl extends t<any>[]>(...predicates: pl) => <a extends any>(value: a) => {
+export const or = <L extends T<any>[]>(...predicates: L) => <a extends any>(value: a) => {
   switch (predicates.length) {
     case 0: return true;
     case 1: return predicates[0](value);
@@ -197,4 +247,4 @@ export function neq<a>(a: a, b?: any): any {
     case 10: return predicates[0](value) || predicates[1](value) || predicates[2](value) || predicates[3](value) || predicates[4](value) || predicates[5](value) || predicates[6](value) || predicates[7](value) || predicates[8](value) || predicates[9](value);
     default: return predicates.some(p => p(value));
   }
-}
+};

@@ -48,7 +48,7 @@ void if ok, throws otherwise
 
 #### Defined in
 
-[src/Assert.ts:26](https://github.com/OctoD/tiinvo/blob/000a124/src/Assert.ts#L26)
+[src/Assert.ts:26](https://github.com/OctoD/tiinvo/blob/e907769/src/Assert.ts#L26)
 
 ▸ **check**(`a`): [`Unary`](Fn.md#unary)<`boolean`, `void`\>
 
@@ -83,7 +83,7 @@ the unary function
 
 #### Defined in
 
-[src/Assert.ts:45](https://github.com/OctoD/tiinvo/blob/000a124/src/Assert.ts#L45)
+[src/Assert.ts:45](https://github.com/OctoD/tiinvo/blob/e907769/src/Assert.ts#L45)
 
 ___
 
@@ -121,7 +121,7 @@ Assert.checkResult('yup it throws')(false)     // Error("yup it throws")
 
 #### Defined in
 
-[src/Assert.ts:76](https://github.com/OctoD/tiinvo/blob/000a124/src/Assert.ts#L76)
+[src/Assert.ts:76](https://github.com/OctoD/tiinvo/blob/e907769/src/Assert.ts#L76)
 
 ▸ **checkResult**(`a`): [`Unary`](Fn.md#unary)<`boolean`, [`t`](Result.md#t)<`boolean`\>\>
 
@@ -155,7 +155,7 @@ the unary function
 
 #### Defined in
 
-[src/Assert.ts:94](https://github.com/OctoD/tiinvo/blob/000a124/src/Assert.ts#L94)
+[src/Assert.ts:94](https://github.com/OctoD/tiinvo/blob/e907769/src/Assert.ts#L94)
 
 ___
 
@@ -192,7 +192,7 @@ check1(11)              // throws "number 11 is not even"
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `p` | [`t`](Predicate.md#t)<`a`\> | the predicate |
+| `p` | [`T`](Predicate.md#t)<`a`\> | the predicate |
 | `m` | `string` \| [`Mappable`](Functors.md#mappable)<`a`, `string`\> | the error message or the mappable functor |
 
 #### Returns
@@ -203,9 +203,9 @@ the asserting function
 
 #### Defined in
 
-[src/Assert.ts:133](https://github.com/OctoD/tiinvo/blob/000a124/src/Assert.ts#L133)
+[src/Assert.ts:133](https://github.com/OctoD/tiinvo/blob/e907769/src/Assert.ts#L133)
 
-▸ **make**<`a`\>(`p`): [`Unary`](Fn.md#unary)<[`t`](Predicate.md#t)<`a`\>, [`Unary`](Fn.md#unary)<`a`, `void`\>\>
+▸ **make**<`a`\>(`p`): [`Unary`](Fn.md#unary)<[`T`](Predicate.md#t)<`a`\>, [`Unary`](Fn.md#unary)<`a`, `void`\>\>
 
 Creates a check function starting from a `Predicate.t<a>` and a message.
 
@@ -240,13 +240,13 @@ check1(11)              // throws "number 11 is not even"
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`t`](Predicate.md#t)<`a`\>, [`Unary`](Fn.md#unary)<`a`, `void`\>\>
+[`Unary`](Fn.md#unary)<[`T`](Predicate.md#t)<`a`\>, [`Unary`](Fn.md#unary)<`a`, `void`\>\>
 
 the asserting function
 
 #### Defined in
 
-[src/Assert.ts:155](https://github.com/OctoD/tiinvo/blob/000a124/src/Assert.ts#L155)
+[src/Assert.ts:155](https://github.com/OctoD/tiinvo/blob/e907769/src/Assert.ts#L155)
 
 ___
 
@@ -284,7 +284,7 @@ check1(11)              // Error("number 11 is not even")
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `p` | [`t`](Predicate.md#t)<`a`\> | the asserting predicate |
+| `p` | [`T`](Predicate.md#t)<`a`\> | the asserting predicate |
 | `m` | `string` \| [`Mappable`](Functors.md#mappable)<`a`, `string`\> | the error message or the mappable functor |
 
 #### Returns
@@ -295,9 +295,9 @@ the asserting function
 
 #### Defined in
 
-[src/Assert.ts:187](https://github.com/OctoD/tiinvo/blob/000a124/src/Assert.ts#L187)
+[src/Assert.ts:187](https://github.com/OctoD/tiinvo/blob/e907769/src/Assert.ts#L187)
 
-▸ **makeResult**<`a`\>(`p`): [`Unary`](Fn.md#unary)<[`t`](Predicate.md#t)<`a`\>, [`Unary`](Fn.md#unary)<`a`, [`t`](Result.md#t)<`boolean`\>\>\>
+▸ **makeResult**<`a`\>(`p`): [`Unary`](Fn.md#unary)<[`T`](Predicate.md#t)<`a`\>, [`Unary`](Fn.md#unary)<`a`, [`t`](Result.md#t)<`boolean`\>\>\>
 
 Creates a check function starting from a a message or a mappable functor.
 
@@ -332,10 +332,10 @@ check1(11)              // Error("number 11 is not even")
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`t`](Predicate.md#t)<`a`\>, [`Unary`](Fn.md#unary)<`a`, [`t`](Result.md#t)<`boolean`\>\>\>
+[`Unary`](Fn.md#unary)<[`T`](Predicate.md#t)<`a`\>, [`Unary`](Fn.md#unary)<`a`, [`t`](Result.md#t)<`boolean`\>\>\>
 
 the asserting function
 
 #### Defined in
 
-[src/Assert.ts:209](https://github.com/OctoD/tiinvo/blob/000a124/src/Assert.ts#L209)
+[src/Assert.ts:209](https://github.com/OctoD/tiinvo/blob/e907769/src/Assert.ts#L209)

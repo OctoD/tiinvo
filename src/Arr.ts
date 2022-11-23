@@ -671,7 +671,7 @@ export function contains<A>(a: any, b?: any): any {
  * @group Native methods
  * @since 4.0.0
  */
-export function every<A>(a: T<A>, p: Predicate.t<A>): boolean;
+export function every<A>(a: T<A>, p: Predicate.T<A>): boolean;
 /**
  * Returns a `Fn.Unary<t<a>, boolean>` which checks if the every element of the array `t<a>` satisfy the predicate `a`
  * 
@@ -688,13 +688,13 @@ export function every<A>(a: T<A>, p: Predicate.t<A>): boolean;
  * @group Native methods
  * @since 4.0.0
  */
-export function every<A>(a: Predicate.t<A>): Fn.Unary<T<A>, boolean>;
+export function every<A>(a: Predicate.T<A>): Fn.Unary<T<A>, boolean>;
 export function every<A>(a: any, p?: any): any {
   if (guard(a) && typeof p === 'function') {
     return a.every(p);
   }
 
-  return (b: T<A>) => b.every(a as Predicate.t<A>);
+  return (b: T<A>) => b.every(a as Predicate.T<A>);
 }
 
 /**
@@ -785,7 +785,7 @@ export function fill<A>(a: T<any> | A, b?: any, start?: any, end?: any): any {
  * @group Native methods
  * @since 4.0.0
  */
-export function filter<A>(a: T<A>, p: Predicate.t<A>): T<A>;
+export function filter<A>(a: T<A>, p: Predicate.T<A>): T<A>;
 /**
  * Returns a `Unary<t<a>, t<a>>`. Calling this function will filter the array passed as argument with the predicate `a`.
  * 
@@ -804,13 +804,13 @@ export function filter<A>(a: T<A>, p: Predicate.t<A>): T<A>;
  * @group Native methods
  * @since 4.0.0
  */
-export function filter<A>(a: Predicate.t<A>): Fn.Unary<T<A>, T<A>>;
-export function filter<A>(a: T<any> | Predicate.t<A>, p?: Predicate.t<A>): any {
+export function filter<A>(a: Predicate.T<A>): Fn.Unary<T<A>, T<A>>;
+export function filter<A>(a: T<any> | Predicate.T<A>, p?: Predicate.T<A>): any {
   if (guard(a) && predicateguard(p)) {
     return a.filter(p);
   }
 
-  return (b: T<A>) => b.filter(a as Predicate.t<A>);
+  return (b: T<A>) => b.filter(a as Predicate.T<A>);
 }
 
 /**
@@ -831,7 +831,7 @@ export function filter<A>(a: T<any> | Predicate.t<A>, p?: Predicate.t<A>): any {
  * @group Native methods
  * @since 4.0.0
  */
-export function find<A>(a: T<A>, p: Predicate.t<A>): Option.T<A>;
+export function find<A>(a: T<A>, p: Predicate.T<A>): Option.T<A>;
 /**
  * Finds the first value `a` with a given predicate `p` and returns `Option.some<a>` if found, otherwise returns `Option.none`.
  * 
@@ -850,13 +850,13 @@ export function find<A>(a: T<A>, p: Predicate.t<A>): Option.T<A>;
  * @group Native methods
  * @since 4.0.0
  */
-export function find<A>(a: Predicate.t<A>): Fn.Unary<T<A>, Option.T<A>>;
-export function find<A>(a: T<A> | Predicate.t<A>, p?: Predicate.t<A>): any {
+export function find<A>(a: Predicate.T<A>): Fn.Unary<T<A>, Option.T<A>>;
+export function find<A>(a: T<A> | Predicate.T<A>, p?: Predicate.T<A>): any {
   if (guard(a) && predicateguard(p)) {
     return a.find(p) ?? null;
   }
 
-  return (b: T<A>) => b.find(a as Predicate.t<A>) ?? null;
+  return (b: T<A>) => b.find(a as Predicate.T<A>) ?? null;
 }
 
 /**
@@ -1408,7 +1408,7 @@ export function map<a, b>(a: T<a> | Functors.Mappable<a, b>, m?: any): any {
  * @group Native methods
  * @since 4.0.0
  */
-export function none<A>(a: T<A>, m: Predicate.t<A>): boolean;
+export function none<A>(a: T<A>, m: Predicate.T<A>): boolean;
 /**
  * Returns a `Unary<t<a>, boolean> which once called returns true if all elements of `b` do not meet the condition specified in the predicate `a`.
  * 
@@ -1430,13 +1430,13 @@ export function none<A>(a: T<A>, m: Predicate.t<A>): boolean;
  * @group Native methods
  * @since 4.0.0
  */
-export function none<A>(a: Predicate.t<A>): Fn.Unary<T<A>, boolean>;
-export function none<A>(a: T<A> | Predicate.t<A>, m?: Predicate.t<A>): any {
+export function none<A>(a: Predicate.T<A>): Fn.Unary<T<A>, boolean>;
+export function none<A>(a: T<A> | Predicate.T<A>, m?: Predicate.T<A>): any {
   if (guard(a) && predicateguard(m)) {
     return !a.some(m);
   }
 
-  return (b: T<A>) => !b.some(a as Predicate.t<A>);
+  return (b: T<A>) => !b.some(a as Predicate.T<A>);
 }
 
 /**
@@ -1794,7 +1794,7 @@ export function slice<A extends T<any>>(a: A | number, s?: number, e?: number): 
  * @group Native methods
  * @since 4.0.0
  */
-export function some<A>(a: T<A>, p: Predicate.t<A>): boolean;
+export function some<A>(a: T<A>, p: Predicate.T<A>): boolean;
 /**
  * Returns a `Unary<t<a>, boolean>` function which determines whether some members of an array `b` satisfy the specified predicate `a`.
  *
@@ -1812,13 +1812,13 @@ export function some<A>(a: T<A>, p: Predicate.t<A>): boolean;
  * @group Native methods
  * @since 4.0.0
  */
-export function some<A>(a: Predicate.t<A>): Fn.Unary<T<A>, boolean>;
-export function some<A>(a: T<A> | Predicate.t<A>, p?: Predicate.t<A>): any {
+export function some<A>(a: Predicate.T<A>): Fn.Unary<T<A>, boolean>;
+export function some<A>(a: T<A> | Predicate.T<A>, p?: Predicate.T<A>): any {
   if (guard(a) && predicateguard(p)) {
     return a.some(p);
   }
 
-  return (b: T<A>) => b.some(a as Predicate.t<A>);
+  return (b: T<A>) => b.some(a as Predicate.T<A>);
 }
 
 /**

@@ -6,7 +6,7 @@
 
 ### Type Aliases
 
-- [t](Str.md#t)
+- [T](Str.md#t)
 - [StringReplacer](Str.md#stringreplacer)
 - [StringSearcher](Str.md#stringsearcher)
 - [StringSplitter](Str.md#stringsplitter)
@@ -18,79 +18,90 @@
 - [eq](Str.md#eq)
 - [asc](Str.md#asc)
 - [desc](Str.md#desc)
-- [camel](Str.md#camel)
 - [charAt](Str.md#charat)
 - [charCodeAt](Str.md#charcodeat)
-- [chars](Str.md#chars)
 - [concat](Str.md#concat)
 - [endsWith](Str.md#endswith)
 - [includes](Str.md#includes)
 - [indexOf](Str.md#indexof)
 - [lastIndexOf](Str.md#lastindexof)
-- [length](Str.md#length)
-- [lines](Str.md#lines)
-- [lower](Str.md#lower)
 - [match](Str.md#match)
 - [padEnd](Str.md#padend)
-- [pascal](Str.md#pascal)
 - [padStart](Str.md#padstart)
 - [repeat](Str.md#repeat)
 - [replace](Str.md#replace)
-- [reverse](Str.md#reverse)
 - [search](Str.md#search)
 - [slice](Str.md#slice)
 - [split](Str.md#split)
-- [trim](Str.md#trim)
-- [trimEnd](Str.md#trimend)
-- [trimStart](Str.md#trimstart)
-- [upper](Str.md#upper)
-- [words](Str.md#words)
-
-### Serializables
-
-- [toArray](Str.md#toarray)
-- [toCharCodeArray](Str.md#tocharcodearray)
-- [toHexArray](Str.md#tohexarray)
 
 ## Type Aliases
 
-### t
+### T
 
-Ƭ **t**: `string`
+Ƭ **T**: `string`
+
+The type alias for string
+
+**`Since`**
+
+4.0.0
 
 #### Defined in
 
-src/Str.ts:5
+src/Str.ts:10
 
 ___
 
 ### StringReplacer
 
-Ƭ **StringReplacer**: [`t`](Str.md#t) \| `RegExp` \| [`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`t`](Str.md#t)\>
+Ƭ **StringReplacer**: [`T`](Str.md#t) \| `RegExp` \| [`Unary`](Fn.md#unary)<[`T`](Str.md#t), [`T`](Str.md#t)\>
+
+A replacer argument. 
+
+It could be either:
+- a string
+- a regular expression
+- a unary function which accepts a string and returns a string
+
+**`Since`**
+
+4.0.0
 
 #### Defined in
 
-src/Str.ts:7
+src/Str.ts:22
 
 ___
 
 ### StringSearcher
 
-Ƭ **StringSearcher**: [`t`](Str.md#t) \| { `[search]`: (`string`: `string`) => `number`  }
+Ƭ **StringSearcher**: [`T`](Str.md#t) \| { `[search]`: (`string`: `string`) => `number`  }
+
+A string searcher argument
+
+**`Since`**
+
+4.0.0
 
 #### Defined in
 
-src/Str.ts:8
+src/Str.ts:28
 
 ___
 
 ### StringSplitter
 
-Ƭ **StringSplitter**: [`t`](Str.md#t) \| { `[split]`: (`string`: `string`, `limit?`: `number`) => `string`[]  }
+Ƭ **StringSplitter**: [`T`](Str.md#t) \| { `[split]`: (`string`: `string`, `limit?`: `number`) => `string`[]  }
+
+A string splitter argument
+
+**`Since`**
+
+4.0.0
 
 #### Defined in
 
-src/Str.ts:11
+src/Str.ts:36
 
 ## Functions
 
@@ -176,9 +187,9 @@ Str.cmp('b', 'a')  // 1
 
 #### Defined in
 
-src/Str.ts:46
+src/Str.ts:71
 
-▸ **cmp**(`a`): [`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
+▸ **cmp**(`a`): [`Unary`](Fn.md#unary)<[`T`](Str.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
 Compares two strings `a` and `b`.
 
@@ -212,11 +223,11 @@ Str.cmp('b', 'a')  // 1
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
+[`Unary`](Fn.md#unary)<[`T`](Str.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
 #### Defined in
 
-src/Str.ts:70
+src/Str.ts:95
 
 ___
 
@@ -253,9 +264,9 @@ Str.eq('b', 'a')  // false
 
 #### Defined in
 
-src/Str.ts:96
+src/Str.ts:121
 
-▸ **eq**(`a`): [`Unary`](Fn.md#unary)<[`t`](Str.md#t), `boolean`\>
+▸ **eq**(`a`): [`Unary`](Fn.md#unary)<[`T`](Str.md#t), `boolean`\>
 
 Returns `true` if two strings are the same
 
@@ -281,11 +292,11 @@ Str.eq('b', 'a')  // false
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`t`](Str.md#t), `boolean`\>
+[`Unary`](Fn.md#unary)<[`T`](Str.md#t), `boolean`\>
 
 #### Defined in
 
-src/Str.ts:112
+src/Str.ts:137
 
 ___
 
@@ -325,23 +336,7 @@ collection.sort(Str.asc) // [ "A", "F", "a", "c", "d", "e" ]
 
 #### Defined in
 
-src/Str.ts:143
-
-▸ **asc**(`a`): [`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-[`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
-
-#### Defined in
-
-src/Str.ts:144
+src/Str.ts:168
 
 ___
 
@@ -381,61 +376,13 @@ collection.sort(Str.desc) // [ "e", "d", "c", "a", "F", "A" ]
 
 #### Defined in
 
-src/Str.ts:171
-
-▸ **desc**(`a`): [`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-[`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
-
-#### Defined in
-
-src/Str.ts:172
-
-___
-
-### camel
-
-▸ **camel**(`a`): `string`
-
-Formats a string to camel case.
-
-```typescript
-import { Str } from 'tiinvo';
-
-Str.camel('hello world'); // 'helloWorld'
-```
-
-**`Since`**
-
-4.0.0
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-src/Fn.ts:18
+src/Str.ts:196
 
 ___
 
 ### charAt
 
-▸ **charAt**(`a`, `b`): [`T`](Option.md#t)<[`t`](Str.md#t)\>
+▸ **charAt**(`a`, `b`): [`T`](Option.md#t)<[`T`](Str.md#t)\>
 
 Returns the character `Option.t<string>` at the specified index.
 
@@ -468,27 +415,11 @@ Str.charAt(0)("hello")         // "h"
 
 #### Returns
 
-[`T`](Option.md#t)<[`t`](Str.md#t)\>
+[`T`](Option.md#t)<[`T`](Str.md#t)\>
 
 #### Defined in
 
-src/Str.ts:221
-
-▸ **charAt**(`a`): [`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`T`](Option.md#t)<[`t`](Str.md#t)\>\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-
-#### Returns
-
-[`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`T`](Option.md#t)<[`t`](Str.md#t)\>\>
-
-#### Defined in
-
-src/Str.ts:222
+src/Str.ts:246
 
 ___
 
@@ -531,63 +462,13 @@ Str.charCodeAt(0)("hello")         // 104
 
 #### Defined in
 
-src/Str.ts:258
-
-▸ **charCodeAt**(`a`): [`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`T`](Option.md#t)<`number`\>\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-
-#### Returns
-
-[`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`T`](Option.md#t)<`number`\>\>
-
-#### Defined in
-
-src/Str.ts:259
-
-___
-
-### chars
-
-▸ **chars**(`a`): `string`[]
-
-Returns a string chars array
-
-**`Example`**
-
-```typescript
-import { Str } from 'tiinvo';
-
-Str.chars('hello'); // ['h','e','l','l','o']
-```
-
-**`Since`**
-
-4.0.0
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-`string`[]
-
-#### Defined in
-
-src/Fn.ts:18
+src/Str.ts:283
 
 ___
 
 ### concat
 
-▸ **concat**(`a`, `b`): [`t`](Str.md#t)
+▸ **concat**(`a`, `b`): [`T`](Str.md#t)
 
 Returns a concatenated string.
 
@@ -617,27 +498,11 @@ Str.concat("world")("hello")         // "helloworld"
 
 #### Returns
 
-[`t`](Str.md#t)
+[`T`](Str.md#t)
 
 #### Defined in
 
-src/Str.ts:307
-
-▸ **concat**(`a`): [`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`t`](Str.md#t)\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-[`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`t`](Str.md#t)\>
-
-#### Defined in
-
-src/Str.ts:308
+src/Str.ts:332
 
 ___
 
@@ -677,23 +542,7 @@ Str.endsWith("o")("hello")         // true
 
 #### Defined in
 
-src/Str.ts:335
-
-▸ **endsWith**(`a`): [`Unary`](Fn.md#unary)<[`t`](Str.md#t), `boolean`\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-[`Unary`](Fn.md#unary)<[`t`](Str.md#t), `boolean`\>
-
-#### Defined in
-
-src/Str.ts:336
+src/Str.ts:360
 
 ___
 
@@ -733,23 +582,7 @@ Str.includes("o")("hello")         // true
 
 #### Defined in
 
-src/Str.ts:363
-
-▸ **includes**(`a`): [`Unary`](Fn.md#unary)<[`t`](Str.md#t), `boolean`\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-[`Unary`](Fn.md#unary)<[`t`](Str.md#t), `boolean`\>
-
-#### Defined in
-
-src/Str.ts:364
+src/Str.ts:388
 
 ___
 
@@ -792,36 +625,7 @@ Str.indexOf("l")("hello", 3)      // 3
 
 #### Defined in
 
-src/Str.ts:393
-
-▸ **indexOf**(`a`): (`b`: [`t`](Str.md#t), `i?`: `number`) => [`T`](Option.md#t)<`number`\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-`fn`
-
-▸ (`b`, `i?`): [`T`](Option.md#t)<`number`\>
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `b` | [`t`](Str.md#t) |
-| `i?` | `number` |
-
-##### Returns
-
-[`T`](Option.md#t)<`number`\>
-
-#### Defined in
-
-src/Str.ts:394
+src/Str.ts:418
 
 ___
 
@@ -862,136 +666,7 @@ Str.lastIndexOf("l")("hello")         // 3
 
 #### Defined in
 
-src/Str.ts:420
-
-▸ **lastIndexOf**(`a`): (`b`: [`t`](Str.md#t), `p?`: `number`) => [`T`](Option.md#t)<`number`\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-`fn`
-
-▸ (`b`, `p?`): [`T`](Option.md#t)<`number`\>
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `b` | [`t`](Str.md#t) |
-| `p?` | `number` |
-
-##### Returns
-
-[`T`](Option.md#t)<`number`\>
-
-#### Defined in
-
-src/Str.ts:421
-
-___
-
-### length
-
-▸ **length**(`a`): `number`
-
-Returns a string length
-
-**`Example`**
-
-```typescript
-import { Str } from 'tiinvo';
-
-Str.length('hello'); // 5
-```
-
-**`Since`**
-
-4.0.0
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-`number`
-
-#### Defined in
-
-src/Fn.ts:18
-
-___
-
-### lines
-
-▸ **lines**(`a`): `string`[]
-
-Returns an array of lines in a string.
-
-```typescript
-import { Str } from 'tiinvo';
-
-Str.lines('hello\nworld'); // ['hello', 'world']
-```
-
-**`Since`**
-
-4.0.0
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-`string`[]
-
-#### Defined in
-
-src/Fn.ts:18
-
-___
-
-### lower
-
-▸ **lower**(`a`): `string`
-
-Returns a lowercased string
-
-**`Example`**
-
-```typescript
-import { Str } from 'tiinvo';
-
-Str.lower('HELLO'); // "hello"
-```
-
-**`Since`**
-
-4.0.0
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-src/Fn.ts:18
+src/Str.ts:445
 
 ___
 
@@ -1031,29 +706,13 @@ Str.match("o")("hello")         // ['o']
 
 #### Defined in
 
-src/Str.ts:495
-
-▸ **match**(`a`): [`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`T`](Option.md#t)<`RegExpMatchArray`\>\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` \| `RegExp` |
-
-#### Returns
-
-[`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`T`](Option.md#t)<`RegExpMatchArray`\>\>
-
-#### Defined in
-
-src/Str.ts:496
+src/Str.ts:520
 
 ___
 
 ### padEnd
 
-▸ **padEnd**(`a`, `b`, `c?`): [`t`](Str.md#t)
+▸ **padEnd**(`a`, `b`, `c?`): [`T`](Str.md#t)
 
 Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length. The padding is applied from the end (right) of the current string.
 
@@ -1087,103 +746,17 @@ Str.padEnd(5)("a", "b")    // "abbbb"
 
 #### Returns
 
-[`t`](Str.md#t)
+[`T`](Str.md#t)
 
 #### Defined in
 
-src/Str.ts:526
-
-▸ **padEnd**(`a`): (`b`: [`t`](Str.md#t), `d?`: [`t`](Str.md#t)) => [`t`](Str.md#t)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-
-#### Returns
-
-`fn`
-
-▸ (`b`, `d?`): [`t`](Str.md#t)
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `b` | [`t`](Str.md#t) |
-| `d?` | [`t`](Str.md#t) |
-
-##### Returns
-
-[`t`](Str.md#t)
-
-#### Defined in
-
-src/Str.ts:527
-
-▸ **padEnd**(`a`, `b?`): (`b`: [`t`](Str.md#t)) => [`t`](Str.md#t)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b?` | `string` |
-
-#### Returns
-
-`fn`
-
-▸ (`b`): [`t`](Str.md#t)
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `b` | [`t`](Str.md#t) |
-
-##### Returns
-
-[`t`](Str.md#t)
-
-#### Defined in
-
-src/Str.ts:528
-
-___
-
-### pascal
-
-▸ **pascal**(`a`): `string`
-
-Formats a string to pascal case.
-
-```typescript
-import { Str } from 'tiinvo';
-
-Str.pascal('hello world'); // 'HelloWorld'
-```
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-src/Fn.ts:18
+src/Str.ts:551
 
 ___
 
 ### padStart
 
-▸ **padStart**(`a`, `b`, `c?`): [`t`](Str.md#t)
+▸ **padStart**(`a`, `b`, `c?`): [`T`](Str.md#t)
 
 Pads the current string with a given string (possibly repeated) so that the resulting string reaches a given length. The padding is applied from the start (left) of the current string.
 
@@ -1217,75 +790,17 @@ Str.padStart(5)("a", "b")    // "bbbba"
 
 #### Returns
 
-[`t`](Str.md#t)
+[`T`](Str.md#t)
 
 #### Defined in
 
-src/Str.ts:571
-
-▸ **padStart**(`a`): (`b`: [`t`](Str.md#t), `d?`: [`t`](Str.md#t)) => [`t`](Str.md#t)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-
-#### Returns
-
-`fn`
-
-▸ (`b`, `d?`): [`t`](Str.md#t)
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `b` | [`t`](Str.md#t) |
-| `d?` | [`t`](Str.md#t) |
-
-##### Returns
-
-[`t`](Str.md#t)
-
-#### Defined in
-
-src/Str.ts:572
-
-▸ **padStart**(`a`, `b?`): (`b`: [`t`](Str.md#t)) => [`t`](Str.md#t)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b?` | `string` |
-
-#### Returns
-
-`fn`
-
-▸ (`b`): [`t`](Str.md#t)
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `b` | [`t`](Str.md#t) |
-
-##### Returns
-
-[`t`](Str.md#t)
-
-#### Defined in
-
-src/Str.ts:573
+src/Str.ts:596
 
 ___
 
 ### repeat
 
-▸ **repeat**(`a`, `b`): [`t`](Str.md#t)
+▸ **repeat**(`a`, `b`): [`T`](Str.md#t)
 
 Returns a String value that is made from count copies appended together. If count is 0, the empty string is returned
 
@@ -1315,45 +830,17 @@ Str.repeat(5)("a")         // "aaaaa"
 
 #### Returns
 
-[`t`](Str.md#t)
+[`T`](Str.md#t)
 
 #### Defined in
 
-src/Str.ts:600
-
-▸ **repeat**(`a`): (`b`: [`t`](Str.md#t)) => [`t`](Str.md#t)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-
-#### Returns
-
-`fn`
-
-▸ (`b`): [`t`](Str.md#t)
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `b` | [`t`](Str.md#t) |
-
-##### Returns
-
-[`t`](Str.md#t)
-
-#### Defined in
-
-src/Str.ts:601
+src/Str.ts:625
 
 ___
 
 ### replace
 
-▸ **replace**(`a`, `b`, `c`): [`t`](Str.md#t)
+▸ **replace**(`a`, `b`, `c`): [`T`](Str.md#t)
 
 Returns a String value that is made from count copies appended together. If count is 0, the empty string is returned
 
@@ -1384,74 +871,11 @@ Str.replace("l", "e")("hello")         // "heelo"
 
 #### Returns
 
-[`t`](Str.md#t)
+[`T`](Str.md#t)
 
 #### Defined in
 
-src/Str.ts:628
-
-▸ **replace**(`a`, `b`): (`b`: [`t`](Str.md#t)) => [`t`](Str.md#t)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-| `b` | [`StringReplacer`](Str.md#stringreplacer) |
-
-#### Returns
-
-`fn`
-
-▸ (`b`): [`t`](Str.md#t)
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `b` | [`t`](Str.md#t) |
-
-##### Returns
-
-[`t`](Str.md#t)
-
-#### Defined in
-
-src/Str.ts:629
-
-___
-
-### reverse
-
-▸ **reverse**(`a`): `string`
-
-Reverses a string.
-
-**`Example`**
-
-```typescript
-import { Str } from 'tiinvo';
-
-Str.reverse('hello'); // 'olleh'
-```
-
-**`Since`**
-
-4.0.0
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-src/Fn.ts:18
+src/Str.ts:653
 
 ___
 
@@ -1493,35 +917,7 @@ Str.search("l")("hello")         // 2
 
 #### Defined in
 
-src/Str.ts:673
-
-▸ **search**(`a`): (`b`: [`t`](Str.md#t)) => [`T`](Option.md#t)<`number`\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | [`StringSearcher`](Str.md#stringsearcher) |
-
-#### Returns
-
-`fn`
-
-▸ (`b`): [`T`](Option.md#t)<`number`\>
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `b` | [`t`](Str.md#t) |
-
-##### Returns
-
-[`T`](Option.md#t)<`number`\>
-
-#### Defined in
-
-src/Str.ts:674
+src/Str.ts:698
 
 ___
 
@@ -1568,42 +964,13 @@ Str.slice(1, 3)("hello")      // "el"
 
 #### Defined in
 
-src/Str.ts:709
-
-▸ **slice**(`a`, `b?`): (`b`: [`t`](Str.md#t)) => `string`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b?` | `number` |
-
-#### Returns
-
-`fn`
-
-▸ (`b`): `string`
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `b` | [`t`](Str.md#t) |
-
-##### Returns
-
-`string`
-
-#### Defined in
-
-src/Str.ts:710
+src/Str.ts:734
 
 ___
 
 ### split
 
-▸ **split**(`a`, `b`, `c?`): [`t`](Str.md#t)[]
+▸ **split**(`a`, `b`, `c?`): [`T`](Str.md#t)[]
 
 Returns a section of a string.
 
@@ -1639,295 +1006,8 @@ Str.split(" ", 1)("hello world")      // ["hello"]
 
 #### Returns
 
-[`t`](Str.md#t)[]
+[`T`](Str.md#t)[]
 
 #### Defined in
 
-src/Str.ts:742
-
-▸ **split**(`a`, `b?`): [`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`t`](Str.md#t)[]\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | [`StringSplitter`](Str.md#stringsplitter) |
-| `b?` | `number` |
-
-#### Returns
-
-[`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`t`](Str.md#t)[]\>
-
-#### Defined in
-
-src/Str.ts:743
-
-___
-
-### trim
-
-▸ **trim**(`a`): `string`
-
-Trims a string.
-
-**`Example`**
-
-```typescript
-import { Str } from 'tiinvo';
-
-Str.trim('    hello world    '); // 'hello world'
-```
-
-**`Since`**
-
-4.0.0
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-src/Fn.ts:18
-
-___
-
-### trimEnd
-
-▸ **trimEnd**(`a`): `string`
-
-Trims a string at it's end.
-
-**`Example`**
-
-```typescript
-import { Str } from 'tiinvo';
-
-Str.trimEnd('    hello world    '); // '    hello world'
-```
-
-**`Since`**
-
-4.0.0
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-src/Fn.ts:18
-
-___
-
-### trimStart
-
-▸ **trimStart**(`a`): `string`
-
-Trims a string at it's start.
-
-**`Example`**
-
-```typescript
-import { Str } from 'tiinvo';
-
-Str.trimStart('    hello world    '); // 'hello world    '
-```
-
-**`Since`**
-
-4.0.0
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-src/Fn.ts:18
-
-___
-
-### upper
-
-▸ **upper**(`a`): `string`
-
-Returns a uppercased string
-
-**`Example`**
-
-```typescript
-import { Str } from 'tiinvo';
-
-Str.upper('hello'); // "HELLO"
-```
-
-**`Since`**
-
-4.0.0
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-src/Fn.ts:18
-
-___
-
-### words
-
-▸ **words**(`a`): `string`[]
-
-Returns an array of words in a string.
-
-```typescript
-import { Str } from 'tiinvo';
-
-Str.words('hello world'); // ['hello', 'world']
-```
-
-**`Since`**
-
-4.0.0
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `string` |
-
-#### Returns
-
-`string`[]
-
-#### Defined in
-
-src/Fn.ts:18
-
-## Serializables
-
-### toArray
-
-▸ **toArray**(`t`): `string`[]
-
-Returns an array of chars
-
-**`Example`**
-
-```ts
-import { Str } from 'tiinvo'
-
-Str.toArray("hello")   // ["h", "e", "l", "l", "o"]
-```
-
-**`Since`**
-
-4.0.0
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `t` | `string` |
-
-#### Returns
-
-`string`[]
-
-#### Defined in
-
-src/Str.ts:846
-
-___
-
-### toCharCodeArray
-
-▸ **toCharCodeArray**(`t`): `number`[]
-
-Returns an array of char codes
-
-**`Example`**
-
-```ts
-import { Str } from 'tiinvo'
-
-Str.toCharCodeArray("hello")   // [104, 101, 108, 108, 111]
-```
-
-**`Since`**
-
-4.0.0
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `t` | `string` |
-
-#### Returns
-
-`number`[]
-
-#### Defined in
-
-src/Str.ts:862
-
-___
-
-### toHexArray
-
-▸ **toHexArray**(`t`): `string`[]
-
-Returns an array of hexadecimals string
-
-**`Example`**
-
-```ts
-import { Str } from 'tiinvo'
-
-Str.toHexArray("hello") // ["0x68", "0x65", "0x6c", "0x6c", "0x6f"]
-```
-
-**`Since`**
-
-4.0.0
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `t` | `string` |
-
-#### Returns
-
-`string`[]
-
-#### Defined in
-
-src/Str.ts:878
+src/Str.ts:767

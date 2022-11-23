@@ -3,7 +3,7 @@
   "version": "4.0.0",
   "author": "Paolo Roth <octod>",
   "license": "MIT",
-  "description": "A lib of types and utilities for your TypeScript and JavaScript projects",
+  "description": "A library of types and utilities for your TypeScript and JavaScript projects",
   "types": "./index.d.ts",
   "type": "module",
   "main": "./index.js",
