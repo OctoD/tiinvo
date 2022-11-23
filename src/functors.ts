@@ -490,7 +490,7 @@ export type MappableModule<A, B> = {
 };
 
 /**
- * 
+ * Reduce a value `A` to a value `B` aggregating the previous value `B` to the current.
  * 
  * @group Mappables
  * @since 4.0.0
@@ -498,7 +498,7 @@ export type MappableModule<A, B> = {
 export type Reduceable<a, b> = (p: b, c: a) => b;
 
 /**
- * 
+ * A module with a reduce function exposed.
  * 
  * @group Mappables
  * @since 4.0.0

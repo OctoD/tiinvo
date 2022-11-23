@@ -1086,6 +1086,8 @@ ___
 
 ▸ (`p`, `c`): `b`
 
+Reduce a value `A` to a value `B` aggregating the previous value `B` to the current.
+
 **`Since`**
 
 4.0.0
@@ -1110,6 +1112,8 @@ ___
 ### ReduceableModule
 
 Ƭ **ReduceableModule**<`a`, `b`\>: `Object`
+
+A module with a reduce function exposed.
 
 **`Since`**
 

@@ -13,6 +13,10 @@
 - [guard](Bool.md#guard)
 - [flip](Bool.md#flip)
 
+### Serializables
+
+- [toNumber](Bool.md#tonumber)
+
 ## Type Aliases
 
 ### T
@@ -110,3 +114,38 @@ Bool.flip(true)      // false
 #### Defined in
 
 src/Functors.ts:424
+
+## Serializables
+
+### toNumber
+
+▸ **toNumber**(`t`): ``1`` \| ``0``
+
+Returns 1 if true, 0 otherwise
+
+**`Example`**
+
+```ts
+import { Bool } from 'tiinvo'
+
+Bool.toNumber(true)  // 1
+Bool.toNumber(false) // 0
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `t` | `boolean` |
+
+#### Returns
+
+``1`` \| ``0``
+
+#### Defined in
+
+src/Bool.ts:75
