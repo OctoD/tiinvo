@@ -33,7 +33,7 @@ A sorted list is a `Sequence.t<a>` which all elements stored in it are sorted by
 
 #### Defined in
 
-[src/SortedSequence.ts:10](https://github.com/OctoD/tiinvo/blob/e907769/src/SortedSequence.ts#L10)
+[src/SortedSequence.ts:10](https://github.com/OctoD/tiinvo/blob/d1726d1/src/SortedSequence.ts#L10)
 
 ## Functions
 
@@ -80,7 +80,7 @@ SortedSequence.guardOf(Str.guard)(s1)    // true
 
 #### Defined in
 
-[src/SortedSequence.ts:35](https://github.com/OctoD/tiinvo/blob/e907769/src/SortedSequence.ts#L35)
+[src/SortedSequence.ts:35](https://github.com/OctoD/tiinvo/blob/d1726d1/src/SortedSequence.ts#L35)
 
 ___
 
@@ -132,7 +132,7 @@ SortedSequence.cmp(s2)(s0)      // 1
 
 #### Defined in
 
-[src/SortedSequence.ts:117](https://github.com/OctoD/tiinvo/blob/e907769/src/SortedSequence.ts#L117)
+[src/SortedSequence.ts:117](https://github.com/OctoD/tiinvo/blob/d1726d1/src/SortedSequence.ts#L117)
 
 ___
 
@@ -181,7 +181,7 @@ SortedSequence.eq(s0)(s2)      // false
 
 #### Defined in
 
-[src/SortedSequence.ts:148](https://github.com/OctoD/tiinvo/blob/e907769/src/SortedSequence.ts#L148)
+[src/SortedSequence.ts:148](https://github.com/OctoD/tiinvo/blob/d1726d1/src/SortedSequence.ts#L148)
 
 ___
 
@@ -227,7 +227,7 @@ SortedSequence.map(m)(s)        // SortedSequence.t(2, 4, 6)
 
 #### Defined in
 
-[src/SortedSequence.ts:179](https://github.com/OctoD/tiinvo/blob/e907769/src/SortedSequence.ts#L179)
+[src/SortedSequence.ts:179](https://github.com/OctoD/tiinvo/blob/d1726d1/src/SortedSequence.ts#L179)
 
 ___
 
@@ -272,7 +272,7 @@ SortedSequence.add(30)(s0)       // SortedSequence(10, 20, 30)
 
 #### Defined in
 
-[src/SortedSequence.ts:211](https://github.com/OctoD/tiinvo/blob/e907769/src/SortedSequence.ts#L211)
+[src/SortedSequence.ts:211](https://github.com/OctoD/tiinvo/blob/d1726d1/src/SortedSequence.ts#L211)
 
 ___
 
@@ -318,4 +318,4 @@ SortedSequence.concat(s1)(s0)       // SortedSequence(10, 20, 30, 40)
 
 #### Defined in
 
-[src/SortedSequence.ts:238](https://github.com/OctoD/tiinvo/blob/e907769/src/SortedSequence.ts#L238)
+[src/SortedSequence.ts:238](https://github.com/OctoD/tiinvo/blob/d1726d1/src/SortedSequence.ts#L238)

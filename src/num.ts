@@ -30,6 +30,7 @@ export type T = number;
  * or0({})                  // 0
  * ```
  * 
+ * @group Guardables
  * @since 4.0.0
  */
 export const guard: Functors.Guardable<T> = (x): x is T => typeof (x) === 'number';
@@ -60,6 +61,7 @@ export const guard: Functors.Guardable<T> = (x): x is T => typeof (x) === 'numbe
  * Num.cmp(0)(1)  // 1
  * ```
  *  
+ * @group Comparables
  * @since 4.0.0
  */
 export function cmp(a: T, b: T): Functors.ComparableResult;
@@ -82,6 +84,7 @@ export function cmp(a: T, b: T): Functors.ComparableResult;
  * Num.cmp(0)(1)  // 1
  * ```
  *  
+ * @group Comparables
  * @since 4.0.0
  */
 export function cmp(a: T): Fn.Unary<T, Functors.ComparableResult>;
@@ -232,6 +235,9 @@ export function lt(a: T, b?: any): any {
  * Num.gte(5, 12)             // false
  * Num.gte(10, 10)            // true
  * ```
+ * 
+ * @group Comparables
+ * @since 4.0.0
  */
 export function gte(a: T, b: T): boolean;
 /**
@@ -249,6 +255,9 @@ export function gte(a: T, b: T): boolean;
  * gte5(5)                    // false
  * gte5(-2)                   // true
  * ```
+ * 
+ * @group Comparables
+ * @since 4.0.0
  */
 export function gte(a: T): Fn.Unary<number, boolean>;
 export function gte(a: T, b?: any): any {
@@ -272,6 +281,9 @@ export function gte(a: T, b?: any): any {
  * Num.lte(5, 12)             // true
  * Num.lte(5, 5)              // true
  * ```
+ * 
+ * @group Comparables
+ * @since 4.0.0
  */
 export function lte(a: T, b: T): boolean;
 /**
@@ -289,6 +301,9 @@ export function lte(a: T, b: T): boolean;
  * lte5(10)                   // false
  * lte5(-2)                   // true
  * ```
+ * 
+ * @group Comparables
+ * @since 4.0.0
  */
 export function lte(a: T): Fn.Unary<number, boolean>;
 export function lte(a: T, b?: any): any {
@@ -312,6 +327,9 @@ export function lte(a: T, b?: any): any {
  * Num.ne(5, 12)             // true
  * Num.ne(5, 5)              // false
  * ```
+ * 
+ * @group Comparables
+ * @since 4.0.0
  */
 export function ne(a: T, b: T): boolean;
 /**
@@ -329,6 +347,9 @@ export function ne(a: T, b: T): boolean;
  * ne5(10)                   // true
  * ne5(-2)                   // true
  * ```
+ * 
+ * @group Comparables
+ * @since 4.0.0
  */
 export function ne(a: T): Fn.Unary<number, boolean>;
 export function ne(a: T, b?: any): any {
@@ -346,6 +367,8 @@ export function ne(a: T, b?: any): any {
 /**
  * Maps a number `a` to a value `Result.t<b>` if a is `number`, otherwise returns `Err`.
  * 
+ * @example
+ * 
  * ```ts
  * import { Num } from 'tiinvo';
  * 
@@ -354,11 +377,16 @@ export function ne(a: T, b?: any): any {
  * toHex(10)      // 0xa
  * toHex("a")     // Error("a is not a number")
  * ``` 
+ * 
+ * @group Mappables
+ * @since 4.0.0
  */
 export const map = <b>(m: Functors.Mappable<T, b>) => (a: T) => guard(a) ? m(a) : new Error("a is not a number");
 
 /**
  * Maps a number `a` to a value `Result.t<b>` if a is `number`, otherwise returns `b`.
+ * 
+ * @example
  * 
  * ```ts
  * import { Num } from 'tiinvo';
@@ -368,6 +396,9 @@ export const map = <b>(m: Functors.Mappable<T, b>) => (a: T) => guard(a) ? m(a) 
  * toHex(10)      // 0xa
  * toHex("a")     // 0x0
  * ``` 
+ * 
+ * @group Mappables
+ * @since 4.0.0
  */
 export const mapOr = <b>(m: Functors.Mappable<T, b>, b: b) => (a: T) => guard(a) ? m(a) : b;
 
@@ -387,6 +418,7 @@ export const mapOr = <b>(m: Functors.Mappable<T, b>, b: b) => (a: T) => guard(a)
  * Num.isEven(91)   // false
  * ```
  * 
+ * @group Predicates
  * @since 4.0.0
  */
 export const isEven: Functors.Filterable<T> = x => x % 2 === 0;
@@ -403,6 +435,7 @@ export const isEven: Functors.Filterable<T> = x => x % 2 === 0;
  * Num.isOdd(91)   // true
  * ```
  * 
+ * @group Predicates
  * @since 4.0.0
  */
 export const isOdd: Functors.Filterable<T> = x => x % 2 !== 0;
@@ -419,6 +452,7 @@ export const isOdd: Functors.Filterable<T> = x => x % 2 !== 0;
  * Num.isNegative(10)   // false
  * ```
  * 
+ * @group Predicates
  * @since 4.0.0
  */
 export const isNegative: Functors.Filterable<T> = x => x < 0;
@@ -435,6 +469,7 @@ export const isNegative: Functors.Filterable<T> = x => x < 0;
  * Num.isPositive(10)   // true
  * ```
  * 
+ * @group Predicates
  * @since 4.0.0
  */
 export const isPositive: Functors.Filterable<T> = x => x >= 0;
@@ -459,6 +494,7 @@ export const isPositive: Functors.Filterable<T> = x => x >= 0;
  * Num.toExponential(10)(2)        // "2.0000000000e+0" 
  * ```
  * 
+ * @group Natives
  * @since 4.0.0
  */
 export function toExponential(a: T, b: T): string;
@@ -487,6 +523,7 @@ export function toExponential(a: T, b?: any): any {
  * Num.toFixed(10.505)(2)        // "2.0000000000"
  * ```
  * 
+ * @group Natives
  * @since 4.0.0
  */
 export function toFixed(a: T, b: T): string;
@@ -515,6 +552,7 @@ export function toFixed(a: T, b?: any): any {
  * Num.toPrecision(10)(2)        // "2.000000000"
  * ```
  * 
+ * @group Natives
  * @since 4.0.0
  */
 export function toPrecision(a: T, b: T): string;
@@ -547,6 +585,9 @@ export function toPrecision(a: T, b?: any): any {
  * 
  * add5(10)                   // 15
  * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
  */
 export function add(a: T, b: T): T;
 export function add(a: T): Fn.Unary<T, T>;
@@ -574,6 +615,9 @@ export function add(a: T, b?: T): any {
  * 
  * div2(4)                    // 2
  * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
  */
 export function div(a: T, b: T): T;
 export function div(a: T): Fn.Unary<T, T>;
@@ -603,6 +647,9 @@ export function div(a: T, b?: T): any {
  * mod2(10)                   // 0
  * mod2(15)                   // 1
  * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
  */
 export function mod(a: T, b: T): T;
 export function mod(a: T): Fn.Unary<T, T>;
@@ -630,6 +677,9 @@ export function mod(a: T, b?: T): any {
  * 
  * mul5(10)                   // 50
  * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
  */
 export function mul(a: T, b: T): T;
 export function mul(a: T): Fn.Unary<T, T>;
@@ -657,6 +707,9 @@ export function mul(a: T, b?: T): any {
  * 
  * pow5(10)                   // 100_000
  * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
  */
 export function pow(a: T, b: T): T;
 export function pow(a: T): Fn.Unary<T, T>;
@@ -685,6 +738,9 @@ export function pow(a: T, b?: T): any {
  * root2(4)                   // 2
  * root2(9)                   // 3
  * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
  */
 export function root(a: T, b: T): T;
 export function root(a: T): Fn.Unary<T, T>;
@@ -713,6 +769,9 @@ export function root(a: T, b?: T): any {
  * sub5(10)                   // 5
  * sub5(-2)                   // -7
  * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
  */
 export function sub(a: T, b: T): T;
 export function sub(a: T): Fn.Unary<T, T>;
@@ -744,6 +803,7 @@ export function sub(a: T, b?: T): any {
  * collection.sort(Num.asc)     // [3, 4, 5, 6, 10, 12, 22]
  * ```
  * 
+ * @group Sortables
  * @since 4.0.0
  */
 export function asc(a: T, b: T): Functors.ComparableResult;
@@ -772,6 +832,7 @@ export function asc(a: T, b?: any): any {
  * collection.sort(Num.desc)     // [22, 12, 10, 6, 5, 4, 3]
  * ```
  * 
+ * @group Sortables
  * @since 4.0.0
  */
 export function desc(a: T, b: T): Functors.ComparableResult;
@@ -801,6 +862,7 @@ export function desc(a: T, b?: any): any {
  * Num.toBin(10)        // "0b1010"
  * ```
  * 
+ * @group Serializables
  * @since 4.0.0
  */
 export const toBin = map(x => '0b' + x.toString(2));
@@ -818,6 +880,7 @@ export const toBin = map(x => '0b' + x.toString(2));
  * Num.toHex(10)        // "0xa"
  * ```
  * 
+ * @group Serializables
  * @since 4.0.0
  */
 export const toHex = map(x => '0x' + x.toString(16));
@@ -835,6 +898,7 @@ export const toHex = map(x => '0x' + x.toString(16));
  * Num.toOct(10)        // "0o12"
  * ```
  * 
+ * @group Serializables
  * @since 4.0.0
  */
 export const toOct = map(x => '0o' + x.toString(8));
@@ -852,6 +916,7 @@ export const toOct = map(x => '0o' + x.toString(8));
  * Num.toJSON(10)       // "10"
  * ```
  * 
+ * @group Serializables
  * @since 4.0.0
  */
 export const toJSON = map(JSON.stringify);
@@ -869,6 +934,7 @@ export const toJSON = map(JSON.stringify);
  * Num.toString(10)       // "10"
  * ```
  * 
+ * @group Serializables
  * @since 4.0.0
  */
 export const toString = map(String);
