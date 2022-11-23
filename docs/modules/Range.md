@@ -35,7 +35,7 @@ Represents a numeric range from a starting value `start` to an ending value `end
 
 #### Defined in
 
-[src/Range.ts:7](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Range.ts#L7)
+[src/Range.ts:7](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Range.ts#L7)
 
 ## Functions
 
@@ -83,7 +83,7 @@ for (const n of Range.make(0, 10, 2)) {
 
 #### Defined in
 
-[src/Range.ts:41](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Range.ts#L41)
+[src/Range.ts:41](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Range.ts#L41)
 
 ___
 
@@ -122,7 +122,7 @@ x is t
 
 #### Defined in
 
-[src/Range.ts:91](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Range.ts#L91)
+[src/Range.ts:91](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Range.ts#L91)
 
 ___
 
@@ -162,7 +162,7 @@ Range.inRange(6)(r)    // true
 
 #### Defined in
 
-[src/Range.ts:115](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Range.ts#L115)
+[src/Range.ts:115](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Range.ts#L115)
 
 ▸ **inRange**(`t`): [`Unary`](Fn.md#unary)<[`t`](Range.md#t), `boolean`\>
 
@@ -178,7 +178,7 @@ Range.inRange(6)(r)    // true
 
 #### Defined in
 
-[src/Range.ts:116](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Range.ts#L116)
+[src/Range.ts:116](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Range.ts#L116)
 
 ___
 
@@ -222,7 +222,7 @@ m(r)   // ['0x14', '0x15', '0x16', '0x17', '0x18', '0x19', '0x1a', '0x1b', '0x1c
 
 #### Defined in
 
-[src/Range.ts:149](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Range.ts#L149)
+[src/Range.ts:149](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Range.ts#L149)
 
 ▸ **map**<`a`\>(`t`): [`Unary`](Fn.md#unary)<[`t`](Range.md#t), `a`[]\>
 
@@ -244,7 +244,7 @@ m(r)   // ['0x14', '0x15', '0x16', '0x17', '0x18', '0x19', '0x1a', '0x1b', '0x1c
 
 #### Defined in
 
-[src/Range.ts:150](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Range.ts#L150)
+[src/Range.ts:150](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Range.ts#L150)
 
 ___
 

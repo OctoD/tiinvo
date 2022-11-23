@@ -159,4 +159,17 @@ describe("Str", () => {
   test(Str.words.name, () => {
     expect(Str.words('hello world')).toEqual(['hello', 'world']);
   });
+
+  test(Str.toArray.name, () => {
+    expect(Str.toArray("hello")).toEqual(["h", "e", "l", "l", "o"]);
+  });
+
+  test(Str.toCharCodeArray.name, () => {
+    expect(Str.toCharCodeArray("hello")).toEqual([104, 101, 108, 108, 111]);
+  });
+
+  test(Str.toHexArray.name, () => {
+    expect(Str.toHexArray("hello")).toEqual(["0x68", "0x65", "0x6c", "0x6c", "0x6f"]);
+    expect(Str.toHexArray("")).toEqual([]);
+  });
 });

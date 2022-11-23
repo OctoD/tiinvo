@@ -46,6 +46,12 @@
 - [upper](Str.md#upper)
 - [words](Str.md#words)
 
+### Serializables
+
+- [toArray](Str.md#toarray)
+- [toCharCodeArray](Str.md#tocharcodearray)
+- [toHexArray](Str.md#tohexarray)
+
 ## Type Aliases
 
 ### t
@@ -488,7 +494,7 @@ ___
 
 ### charCodeAt
 
-▸ **charCodeAt**(`a`, `b`): [`T`](Option.md#t)<[`t`](Str.md#t)\>
+▸ **charCodeAt**(`a`, `b`): [`T`](Option.md#t)<`number`\>
 
 Returns the char code `Option.t<string>` at the specified index.
 
@@ -521,13 +527,13 @@ Str.charCodeAt(0)("hello")         // 104
 
 #### Returns
 
-[`T`](Option.md#t)<[`t`](Str.md#t)\>
+[`T`](Option.md#t)<`number`\>
 
 #### Defined in
 
 src/Str.ts:258
 
-▸ **charCodeAt**(`a`): [`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`T`](Option.md#t)<[`t`](Str.md#t)\>\>
+▸ **charCodeAt**(`a`): [`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`T`](Option.md#t)<`number`\>\>
 
 #### Parameters
 
@@ -537,7 +543,7 @@ src/Str.ts:258
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`T`](Option.md#t)<[`t`](Str.md#t)\>\>
+[`Unary`](Fn.md#unary)<[`t`](Str.md#t), [`T`](Option.md#t)<`number`\>\>
 
 #### Defined in
 
@@ -1823,3 +1829,105 @@ Str.words('hello world'); // ['hello', 'world']
 #### Defined in
 
 src/Fn.ts:18
+
+## Serializables
+
+### toArray
+
+▸ **toArray**(`t`): `string`[]
+
+Returns an array of chars
+
+**`Example`**
+
+```ts
+import { Str } from 'tiinvo'
+
+Str.toArray("hello")   // ["h", "e", "l", "l", "o"]
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `t` | `string` |
+
+#### Returns
+
+`string`[]
+
+#### Defined in
+
+src/Str.ts:846
+
+___
+
+### toCharCodeArray
+
+▸ **toCharCodeArray**(`t`): `number`[]
+
+Returns an array of char codes
+
+**`Example`**
+
+```ts
+import { Str } from 'tiinvo'
+
+Str.toCharCodeArray("hello")   // [104, 101, 108, 108, 111]
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `t` | `string` |
+
+#### Returns
+
+`number`[]
+
+#### Defined in
+
+src/Str.ts:862
+
+___
+
+### toHexArray
+
+▸ **toHexArray**(`t`): `string`[]
+
+Returns an array of hexadecimals string
+
+**`Example`**
+
+```ts
+import { Str } from 'tiinvo'
+
+Str.toHexArray("hello") // ["0x68", "0x65", "0x6c", "0x6c", "0x6f"]
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `t` | `string` |
+
+#### Returns
+
+`string`[]
+
+#### Defined in
+
+src/Str.ts:878

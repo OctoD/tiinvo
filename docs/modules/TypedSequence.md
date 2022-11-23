@@ -46,7 +46,7 @@ The typed version of a `Sequence.t<a>`.
 
 #### Defined in
 
-[src/TypedSequence.ts:10](https://github.com/OctoD/tiinvo/blob/e3728bc/src/TypedSequence.ts#L10)
+[src/TypedSequence.ts:10](https://github.com/OctoD/tiinvo/blob/d3b011b/src/TypedSequence.ts#L10)
 
 ## Functions
 
@@ -94,7 +94,7 @@ ts0 === ts1      // true
 
 #### Defined in
 
-[src/TypedSequence.ts:36](https://github.com/OctoD/tiinvo/blob/e3728bc/src/TypedSequence.ts#L36)
+[src/TypedSequence.ts:36](https://github.com/OctoD/tiinvo/blob/d3b011b/src/TypedSequence.ts#L36)
 
 ▸ **make**<`a`\>(`g`, ...`values`): [`t`](TypedSequence.md#t)<`a`\>
 
@@ -117,7 +117,7 @@ ts0 === ts1      // true
 
 #### Defined in
 
-[src/TypedSequence.ts:37](https://github.com/OctoD/tiinvo/blob/e3728bc/src/TypedSequence.ts#L37)
+[src/TypedSequence.ts:37](https://github.com/OctoD/tiinvo/blob/d3b011b/src/TypedSequence.ts#L37)
 
 ___
 
@@ -155,7 +155,7 @@ x is t<unknown\>
 
 #### Defined in
 
-[src/TypedSequence.ts:83](https://github.com/OctoD/tiinvo/blob/e3728bc/src/TypedSequence.ts#L83)
+[src/TypedSequence.ts:83](https://github.com/OctoD/tiinvo/blob/d3b011b/src/TypedSequence.ts#L83)
 
 ___
 
@@ -199,7 +199,7 @@ TypedSequence.append(30)(s0)       // TypedSequence(10, 20, 30)
 
 #### Defined in
 
-[src/TypedSequence.ts:105](https://github.com/OctoD/tiinvo/blob/e3728bc/src/TypedSequence.ts#L105)
+[src/TypedSequence.ts:105](https://github.com/OctoD/tiinvo/blob/d3b011b/src/TypedSequence.ts#L105)
 
 ▸ **append**<`a`\>(`a`): [`Unary`](Fn.md#unary)<[`t`](TypedSequence.md#t)<`a`\>, [`t`](TypedSequence.md#t)<`a`\>\>
 
@@ -221,7 +221,7 @@ TypedSequence.append(30)(s0)       // TypedSequence(10, 20, 30)
 
 #### Defined in
 
-[src/TypedSequence.ts:106](https://github.com/OctoD/tiinvo/blob/e3728bc/src/TypedSequence.ts#L106)
+[src/TypedSequence.ts:106](https://github.com/OctoD/tiinvo/blob/d3b011b/src/TypedSequence.ts#L106)
 
 ___
 
@@ -266,7 +266,7 @@ TypedSequence.concat(s1)(s0)       // TypedSequence(10, 20, 30, 40)
 
 #### Defined in
 
-[src/TypedSequence.ts:136](https://github.com/OctoD/tiinvo/blob/e3728bc/src/TypedSequence.ts#L136)
+[src/TypedSequence.ts:136](https://github.com/OctoD/tiinvo/blob/d3b011b/src/TypedSequence.ts#L136)
 
 ▸ **concat**<`a`\>(`a`): [`Unary`](Fn.md#unary)<`a`, `a`\>
 
@@ -288,7 +288,7 @@ TypedSequence.concat(s1)(s0)       // TypedSequence(10, 20, 30, 40)
 
 #### Defined in
 
-[src/TypedSequence.ts:137](https://github.com/OctoD/tiinvo/blob/e3728bc/src/TypedSequence.ts#L137)
+[src/TypedSequence.ts:137](https://github.com/OctoD/tiinvo/blob/d3b011b/src/TypedSequence.ts#L137)
 
 ___
 
@@ -332,7 +332,7 @@ TypedSequence.prepend(30)(s0)       // TypedSequence.make(Num, 30, 10, 20)
 
 #### Defined in
 
-[src/TypedSequence.ts:162](https://github.com/OctoD/tiinvo/blob/e3728bc/src/TypedSequence.ts#L162)
+[src/TypedSequence.ts:162](https://github.com/OctoD/tiinvo/blob/d3b011b/src/TypedSequence.ts#L162)
 
 ▸ **prepend**<`a`\>(`a`): [`Unary`](Fn.md#unary)<[`t`](TypedSequence.md#t)<`a`\>, [`t`](TypedSequence.md#t)<`a`\>\>
 
@@ -354,7 +354,7 @@ TypedSequence.prepend(30)(s0)       // TypedSequence.make(Num, 30, 10, 20)
 
 #### Defined in
 
-[src/TypedSequence.ts:163](https://github.com/OctoD/tiinvo/blob/e3728bc/src/TypedSequence.ts#L163)
+[src/TypedSequence.ts:163](https://github.com/OctoD/tiinvo/blob/d3b011b/src/TypedSequence.ts#L163)
 
 ___
 
@@ -398,7 +398,7 @@ b          // TypedSequence.make(Num, 1, 2, 3, 4, 5)
 
 #### Defined in
 
-[src/TypedSequence.ts:193](https://github.com/OctoD/tiinvo/blob/e3728bc/src/TypedSequence.ts#L193)
+[src/TypedSequence.ts:193](https://github.com/OctoD/tiinvo/blob/d3b011b/src/TypedSequence.ts#L193)
 
 ▸ **sort**<`a`\>(`a`): [`Unary`](Fn.md#unary)<[`t`](TypedSequence.md#t)<`a`\>, [`t`](TypedSequence.md#t)<`a`\>\>
 
@@ -420,7 +420,7 @@ b          // TypedSequence.make(Num, 1, 2, 3, 4, 5)
 
 #### Defined in
 
-[src/TypedSequence.ts:194](https://github.com/OctoD/tiinvo/blob/e3728bc/src/TypedSequence.ts#L194)
+[src/TypedSequence.ts:194](https://github.com/OctoD/tiinvo/blob/d3b011b/src/TypedSequence.ts#L194)
 
 ___
 
@@ -464,7 +464,7 @@ TypedSequence.count(Num.gt(10))(s)   // 2
 
 #### Defined in
 
-[src/Sequence.ts:481](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Sequence.ts#L481)
+[src/Sequence.ts:481](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Sequence.ts#L481)
 
 ▸ **count**<`a`\>(`a`): [`Unary`](Fn.md#unary)<[`t`](Sequence.md#t)<`a`\>, `number`\>
 
@@ -503,7 +503,7 @@ TypedSequence.count(Num.gt(10))(s)   // 2
 
 #### Defined in
 
-[src/Sequence.ts:482](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Sequence.ts#L482)
+[src/Sequence.ts:482](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Sequence.ts#L482)
 
 ___
 
@@ -545,7 +545,7 @@ TypedSequence.get(s, 9)       // throws RangeError
 
 #### Defined in
 
-[src/Sequence.ts:533](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Sequence.ts#L533)
+[src/Sequence.ts:533](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Sequence.ts#L533)
 
 ▸ **get**<`a`\>(`a`): [`Unary`](Fn.md#unary)<[`t`](Sequence.md#t)<`a`\>, [`t`](Result.md#t)<`a`\>\>
 
@@ -582,7 +582,7 @@ TypedSequence.get(s, 9)       // throws RangeError
 
 #### Defined in
 
-[src/Sequence.ts:534](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Sequence.ts#L534)
+[src/Sequence.ts:534](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Sequence.ts#L534)
 
 ___
 
@@ -624,7 +624,7 @@ TypedSequence.first(s1)       // null
 
 #### Defined in
 
-[src/Sequence.ts:510](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Sequence.ts#L510)
+[src/Sequence.ts:510](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Sequence.ts#L510)
 
 ___
 
@@ -669,7 +669,7 @@ TypedSequence.last(s1)       // null
 
 #### Defined in
 
-[src/Sequence.ts:576](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Sequence.ts#L576)
+[src/Sequence.ts:576](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Sequence.ts#L576)
 
 ___
 
@@ -711,7 +711,7 @@ TypedSequence.length(s)           // 3
 
 #### Defined in
 
-[src/Sequence.ts:596](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Sequence.ts#L596)
+[src/Sequence.ts:596](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Sequence.ts#L596)
 
 ___
 
@@ -753,7 +753,7 @@ TypedSequence.values(s)       // { 0: 'hello', 1: 'world' }
 
 #### Defined in
 
-[src/Sequence.ts:613](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Sequence.ts#L613)
+[src/Sequence.ts:613](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Sequence.ts#L613)
 
 ___
 
@@ -797,7 +797,7 @@ TypedSequence.empty(s1)               // false
 
 #### Defined in
 
-[src/Sequence.ts:636](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Sequence.ts#L636)
+[src/Sequence.ts:636](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Sequence.ts#L636)
 
 ___
 
@@ -840,7 +840,7 @@ TypedSequence.populated(TypedSequence.make(Num))   // false
 
 #### Defined in
 
-[src/Sequence.ts:654](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Sequence.ts#L654)
+[src/Sequence.ts:654](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Sequence.ts#L654)
 
 ___
 
@@ -882,7 +882,7 @@ TypedSequence.toArray(sl)       // [3, 2, 1]
 
 #### Defined in
 
-[src/Sequence.ts:733](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Sequence.ts#L733)
+[src/Sequence.ts:733](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Sequence.ts#L733)
 
 ___
 
@@ -924,7 +924,7 @@ TypedSequence.toJSON(sl)       // [3, 2, 1]
 
 #### Defined in
 
-[src/Sequence.ts:748](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Sequence.ts#L748)
+[src/Sequence.ts:748](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Sequence.ts#L748)
 
 ___
 
@@ -966,7 +966,7 @@ TypedSequence.toMap(sl)      // Map([0, 3], [1, 2], [2, 1])
 
 #### Defined in
 
-[src/Sequence.ts:763](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Sequence.ts#L763)
+[src/Sequence.ts:763](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Sequence.ts#L763)
 
 ___
 
@@ -1008,7 +1008,7 @@ TypedSequence.toSet(sl)      // Set(3, 2, 1)
 
 #### Defined in
 
-[src/Sequence.ts:780](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Sequence.ts#L780)
+[src/Sequence.ts:780](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Sequence.ts#L780)
 
 ___
 
@@ -1050,4 +1050,4 @@ TypedSequence.toString(sl)       // "3,2,1"
 
 #### Defined in
 
-[src/Sequence.ts:797](https://github.com/OctoD/tiinvo/blob/e3728bc/src/Sequence.ts#L797)
+[src/Sequence.ts:797](https://github.com/OctoD/tiinvo/blob/d3b011b/src/Sequence.ts#L797)

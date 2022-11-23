@@ -109,7 +109,7 @@ export function eq(a: t, b: t): boolean;
  *  
  * @since 4.0.0
  */
-export function eq(a: t): Fn.Unary<t, boolean>
+export function eq(a: t): Fn.Unary<t, boolean>;
 export function eq(a: t, b?: t): any {
   if (guard(a) && guard(b)) {
     return a === b;
@@ -255,8 +255,8 @@ export function charAt(a: any, b?: any): any {
  * 
  * @since 4.0.0
  */
-export function charCodeAt(a: t, b: number): Option.T<t>;
-export function charCodeAt(a: number): Fn.Unary<t, Option.T<t>>;
+export function charCodeAt(a: t, b: number): Option.T<number>;
+export function charCodeAt(a: number): Fn.Unary<t, Option.T<number>>;
 export function charCodeAt(a: any, b?: any): any {
   if (guard(a) && typeof b === 'number') {
     const c = a.charCodeAt(b);
@@ -824,5 +824,57 @@ export const upper: Fn.Unary<t, t> = a => a.toUpperCase();
  * @since 4.0.0
  */
 export const words: Fn.Unary<t, t[]> = x => x.split(/\s+/m);
+
+//#endregion
+
+//#region serializables
+
+/**
+ * Returns an array of chars
+ *
+ * @example
+ *
+ * ```ts
+ * import { Str } from 'tiinvo'
+ * 
+ * Str.toArray("hello")   // ["h", "e", "l", "l", "o"]
+ * ```
+ *
+ * @group Serializables
+ * @since 4.0.0
+ */
+export const toArray = (t: t) => t.split('');
+
+/**
+ * Returns an array of char codes
+ *
+ * @example
+ *
+ * ```ts
+ * import { Str } from 'tiinvo'
+ * 
+ * Str.toCharCodeArray("hello")   // [104, 101, 108, 108, 111]
+ * ```
+ *
+ * @group Serializables
+ * @since 4.0.0
+ */
+export const toCharCodeArray = (t: t) => toArray(t).map(charCodeAt(0)) as number[];
+
+/**
+ * Returns an array of hexadecimals string
+ *
+ * @example
+ *
+ * ```ts
+ * import { Str } from 'tiinvo'
+ * 
+ * Str.toHexArray("hello") // ["0x68", "0x65", "0x6c", "0x6c", "0x6f"]
+ * ```
+ *
+ * @group Serializables
+ * @since 4.0.0
+ */
+export const toHexArray = (t: t) => toCharCodeArray(t).map(x => '0x' + x!.toString(16));
 
 //#endregion
