@@ -875,6 +875,6 @@ export const toCharCodeArray = (t: t) => toArray(t).map(charCodeAt(0)) as number
  * @group Serializables
  * @since 4.0.0
  */
-export const toHexArray = (t: t) => toCharCodeArray(t).map(x => '0x' + x!.toString(16));
+export const toHexArray = (t: t) => toArray(t).map(x => '0x' + charCodeAt(x, 0)!.toString(16));
 
 //#endregion

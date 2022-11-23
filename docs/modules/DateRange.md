@@ -60,7 +60,7 @@ for (const month of dr) {
 
 #### Defined in
 
-[src/DateRange.ts:24](https://github.com/OctoD/tiinvo/blob/d3b011b/src/DateRange.ts#L24)
+[src/DateRange.ts:24](https://github.com/OctoD/tiinvo/blob/000a124/src/DateRange.ts#L24)
 
 ## Functions
 
@@ -98,7 +98,7 @@ Array.from(dr) // [new Date(2020, 0, 1), new Date(2020, 0, 2), new Date(2020, 0,
 
 #### Defined in
 
-[src/DateRange.ts:48](https://github.com/OctoD/tiinvo/blob/d3b011b/src/DateRange.ts#L48)
+[src/DateRange.ts:48](https://github.com/OctoD/tiinvo/blob/000a124/src/DateRange.ts#L48)
 
 ___
 
@@ -138,7 +138,7 @@ returns true if x is DateRange, false otherwise
 
 #### Defined in
 
-[src/DateRange.ts:117](https://github.com/OctoD/tiinvo/blob/d3b011b/src/DateRange.ts#L117)
+[src/DateRange.ts:117](https://github.com/OctoD/tiinvo/blob/000a124/src/DateRange.ts#L117)
 
 ___
 
@@ -341,7 +341,7 @@ true if b is in range of a
 
 #### Defined in
 
-[src/DateRange.ts:144](https://github.com/OctoD/tiinvo/blob/d3b011b/src/DateRange.ts#L144)
+[src/DateRange.ts:144](https://github.com/OctoD/tiinvo/blob/000a124/src/DateRange.ts#L144)
 
 ▸ **inRange**(`a`): [`Unary`](Fn.md#unary)<[`T`](DateRange.md#t), `boolean`\>
 
@@ -377,7 +377,7 @@ the unary function which accepts a `DateRange.T` and returns true if a is in `Da
 
 #### Defined in
 
-[src/DateRange.ts:165](https://github.com/OctoD/tiinvo/blob/d3b011b/src/DateRange.ts#L165)
+[src/DateRange.ts:165](https://github.com/OctoD/tiinvo/blob/000a124/src/DateRange.ts#L165)
 
 ## Mappables
 
@@ -423,7 +423,7 @@ the mapped value
 
 #### Defined in
 
-[src/DateRange.ts:208](https://github.com/OctoD/tiinvo/blob/d3b011b/src/DateRange.ts#L208)
+[src/DateRange.ts:208](https://github.com/OctoD/tiinvo/blob/000a124/src/DateRange.ts#L208)
 
 ▸ **map**<`a`\>(`t`): [`Unary`](Fn.md#unary)<[`T`](DateRange.md#t), `a`[]\>
 
@@ -466,4 +466,4 @@ the unary function
 
 #### Defined in
 
-[src/DateRange.ts:230](https://github.com/OctoD/tiinvo/blob/d3b011b/src/DateRange.ts#L230)
+[src/DateRange.ts:230](https://github.com/OctoD/tiinvo/blob/000a124/src/DateRange.ts#L230)
