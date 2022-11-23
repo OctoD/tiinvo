@@ -54,3 +54,24 @@ export const guard: Functors.Guardable<boolean> = (x: unknown): x is boolean => 
  * @since 4.0.0
  */
 export const flip: Functors.Mappable<T, T> = x => !x
+
+//#region serializables
+
+/**
+ * Returns 1 if true, 0 otherwise
+ *
+ * @example
+ *
+ * ```ts
+ * import { Bool } from 'tiinvo'
+ * 
+ * Bool.toNumber(true)  // 1
+ * Bool.toNumber(false) // 0
+ * ```
+ *
+ * @group Serializables
+ * @since 4.0.0
+ */
+export const toNumber = (t: T) => t ? 1 : 0;
+
+//#endregion

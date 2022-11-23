@@ -9,4 +9,8 @@ describe(`Bool`, () => {
     expect(Bool.guard(true)).toEqual(true);
     expect(Bool.guard(1000)).toEqual(false);
   });
+  test(Bool.toNumber.name, () => {
+    expect(Bool.toNumber(true)).toEqual(1);
+    expect(Bool.toNumber(false)).toEqual(0);
+  });
 });
