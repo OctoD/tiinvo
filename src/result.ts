@@ -128,20 +128,34 @@ export const isOkOf = <a>(g: Functors.Guardable<a>) => (x: t<unknown>): x is a =
  * 
  * @since 4.0.0
  */
-export const cmp = <a>(cmp: Functors.Comparable<a>): Functors.Comparable<t<a>> => (a, b) => {
-  if (isErr(a) && isErr(b)) {
-    return 0;
-  }
+export function cmp<A>(cmp: Functors.Comparable<A>, a: t<A>, b: t<A>): Functors.ComparableResult;
 
-  if (isErr(a)) {
-    return -1;
-  }
+export function cmp<A>(cmp: Functors.Comparable<A>, a: t<A>): Fn.Unary<t<A>, Functors.ComparableResult>;
 
-  if (isErr(b)) {
-    return 1;
-  }
+export function cmp<A>(cmp: Functors.Comparable<A>): Fn.Binary<t<A>, t<A>, Functors.ComparableResult>;
 
-  return cmp(a, b);
+export function cmp<A>(cmp: Functors.Comparable<A>, a?: t<A>, b?: t<A>): any {
+  const _cmp = (x: t<A>, y: t<A>) => {
+    if (isErr(x) && isErr(y)) {
+      return 0;
+    }
+
+    if (isErr(x)) {
+      return -1;
+    }
+
+    if (isErr(y)) {
+      return 1;
+    }
+
+    return cmp(x, y);
+  };
+
+  switch (arguments.length) {
+    case 3: return _cmp(a as t<A>, b as t<A>);
+    case 2: return (b: t<A>) => _cmp(b, a as t<A>);
+    case 1: return (a: t<A>, b: t<A>) => _cmp(a, b);
+  }
 };
 
 /**
@@ -163,16 +177,69 @@ export const cmp = <a>(cmp: Functors.Comparable<a>): Functors.Comparable<t<a>> =
  * @returns 
  * @since 4.0.0
  */
-export const eq = <a>(eq: Functors.Equatable<a>): Functors.Equatable<t<a>> => (a, b) => {
-  if (isErr(a) && isErr(b)) {
-    return true;
-  }
+export function eq<a>(eq: Functors.Equatable<a>, a: t<a>, b: t<a>): boolean;
+/**
+ * 
+ *
+ * @example
+ *
+ * ```ts
+ * import {  } from 'tiinvo'
+ * 
+ * 
+ * ```
+ *
+ * @group 
+ * @since 
+ */
+export function eq<a>(eq: Functors.Equatable<a>, a: t<a>): Fn.Unary<t<a>, boolean>;
+/**
+ * 
+ *
+ * @example
+ *
+ * ```ts
+ * import {  } from 'tiinvo'
+ * 
+ * 
+ * ```
+ *
+ * @group 
+ * @since 
+ */
+export function eq<a>(eq: Functors.Equatable<a>): Fn.Binary<t<a>, t<a>, boolean>;
+/**
+ * 
+ *
+ * @example
+ *
+ * ```ts
+ * import {  } from 'tiinvo'
+ * 
+ * 
+ * ```
+ *
+ * @group 
+ * @since 
+ */
+export function eq<a>(eq: Functors.Equatable<a>, a?: t<a>, b?: t<a>): any {
+  const _eq = (x: t<a>, y: t<a>) => {
+    if (isErr(x) && isErr(y)) {
+      return true;
+    }
 
-  if (isErr(a) || isErr(b)) {
-    return false;
-  }
+    if (isErr(x) || isErr(y)) {
+      return false;
+    }
 
-  return eq(a, b);
+    return eq(x, y);
+  };
+
+  switch (arguments.length) {
+    case 3: return _eq(a as t<a>, b as t<a>);
+    case 2: return (b: t<a>) => _eq(a as t<a>, b);
+    case 1: return (a: t<a>, b: t<a>) => _eq(a, b);
+  }
 };
 
 //#endregion

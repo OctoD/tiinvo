@@ -15,12 +15,12 @@ export type None = null | undefined;
  * Some<a> represents a value which could have been a possible nullable or undefined
  * @since 4.0.0
  */
-export type Some<a> = a extends None ? never : a;
+export type Some<A> = A extends None ? never : A;
 /**
  * The type `Option.T<a>` represents a value that could be both `a` or `null` or `undefined`.
  * @since 4.0.0
  */
-export type T<a> = Some<a> | None;
+export type T<A> = Some<A> | None;
 
 /**
  * Returns `true` if the option is `None`, `false` otherwise.
@@ -78,7 +78,7 @@ export const isSome: Functors.Guardable<Some<unknown>> = (x): x is Some<unknown>
  * @returns 
  * @since 4.0.0
  */
-export const guardOf = <a>(f: Functors.Guardable<a>): Functors.Guardable<T<a>> => (x): x is T<a> => isNone(x) ? true : f(x);
+export const guardOf = <A>(f: Functors.Guardable<A>): Functors.Guardable<T<A>> => (x): x is T<A> => isNone(x) ? true : f(x);
 
 //#region comparables
 
@@ -104,7 +104,7 @@ export const guardOf = <a>(f: Functors.Guardable<a>): Functors.Guardable<T<a>> =
  * 
  * @since 4.0.0
  */
-export function cmp<a>(c: Functors.Comparable<a>, a: T<a>, b: T<a>): Functors.ComparableResult;
+export function cmp<A>(c: Functors.Comparable<A>, a: T<A>, b: T<A>): Functors.ComparableResult;
 /**
  * Compares two options `T<a>` by a given `Comparable<a>`.
  * 
@@ -127,7 +127,7 @@ export function cmp<a>(c: Functors.Comparable<a>, a: T<a>, b: T<a>): Functors.Co
  * 
  * @since 4.0.0
  */
-export function cmp<a>(c: Functors.Comparable<a>, a: T<a>): Fn.Unary<T<a>, Functors.ComparableResult>;
+export function cmp<A>(c: Functors.Comparable<A>, a: T<A>): Fn.Unary<T<A>, Functors.ComparableResult>;
 /**
  * Compares two options `T<a>` by a given `Comparable<a>`.
  * 
@@ -152,9 +152,9 @@ export function cmp<a>(c: Functors.Comparable<a>, a: T<a>): Fn.Unary<T<a>, Funct
  * 
  * @since 4.0.0
  */
-export function cmp<a>(c: Functors.Comparable<a>): Fn.Binary<T<a>, T<a>, Functors.ComparableResult>;
-export function cmp<a>(c: Functors.Comparable<a>, a?: T<a>, b?: T<a>): any {
-  const _cmp = (x: T<a>, y: T<a>) => {
+export function cmp<A>(c: Functors.Comparable<A>): Fn.Binary<T<A>, T<A>, Functors.ComparableResult>;
+export function cmp<A>(c: Functors.Comparable<A>, a?: T<A>, b?: T<A>): any {
+  const _cmp = (x: T<A>, y: T<A>) => {
     if (isNone(x) && isNone(y)) {
       return 0;
     }
@@ -172,8 +172,8 @@ export function cmp<a>(c: Functors.Comparable<a>, a?: T<a>, b?: T<a>): any {
 
   switch (arguments.length) {
     case 3: return _cmp(a, b);
-    case 2: return (b: T<a>) => _cmp(b, a);
-    case 1: return (a: T<a>, b: T<a>) => _cmp(a, b);
+    case 2: return (b: T<A>) => _cmp(b, a);
+    case 1: return (a: T<A>, b: T<A>) => _cmp(a, b);
   }
 };
 
@@ -196,7 +196,7 @@ export function cmp<a>(c: Functors.Comparable<a>, a?: T<a>, b?: T<a>): any {
  * @returns 
  * @since 4.0.0
  */
-export function eq<a>(e: Functors.Equatable<a>, a: T<a>, b: T<a>): boolean;
+export function eq<A>(e: Functors.Equatable<A>, a: T<A>, b: T<A>): boolean;
 /**
  * Returns true if two options `T<a>` are equal, false otherwise.
  * 
@@ -213,7 +213,7 @@ export function eq<a>(e: Functors.Equatable<a>, a: T<a>, b: T<a>): boolean;
  * @returns 
  * @since 4.0.0
  */
-export function eq<a>(e: Functors.Equatable<a>, a: T<a>): Fn.Unary<T<a>, boolean>;
+export function eq<A>(e: Functors.Equatable<A>, a: T<A>): Fn.Unary<T<A>, boolean>;
 /**
  * Returns true if two options `T<a>` are equal, false otherwise.
  * 
@@ -233,11 +233,11 @@ export function eq<a>(e: Functors.Equatable<a>, a: T<a>): Fn.Unary<T<a>, boolean
  * @returns 
  * @since 4.0.0
  */
-export function eq<a>(e: Functors.Equatable<a>): Fn.Binary<T<a>, T<a>, boolean>;
-export function eq<a>(e: Functors.Equatable<a>, a?: T<a>, b?: T<a>): any {
-  const _eq = (x: T<a>, y: T<a>): boolean => {
+export function eq<A>(e: Functors.Equatable<A>): Fn.Binary<T<A>, T<A>, boolean>;
+export function eq<A>(e: Functors.Equatable<A>, a?: T<A>, b?: T<A>): any {
+  const _eq = (x: T<A>, y: T<A>): boolean => {
     if (isSome(x) && isSome(y)) {
-      return e(x as a, y as a);
+      return e(x as A, y as A);
     } else if (isNone(x) && isNone(y)) {
       return true;
     }
@@ -247,8 +247,8 @@ export function eq<a>(e: Functors.Equatable<a>, a?: T<a>, b?: T<a>): any {
 
   switch (arguments.length) {
     case 3: return _eq(a, b);
-    case 2: return (b: T<a>) => _eq(b, a);
-    case 1: return (a: T<a>, b: T<a>) => _eq(a, b);
+    case 2: return (b: T<A>) => _eq(b, a);
+    case 1: return (a: T<A>, b: T<A>) => _eq(a, b);
   }
 };
 
@@ -269,7 +269,7 @@ export function eq<a>(e: Functors.Equatable<a>, a?: T<a>, b?: T<a>): any {
  * 
  * @since 4.0.0
  */
-export function filter<a>(a: Functors.Mappable<a, boolean>, b: T<a>): T<a>;
+export function filter<A>(a: Functors.Mappable<A, boolean>, b: T<A>): T<A>;
 /**
  * Returns `Some<a>` if the value is `Some<a>` and the predicate returns true, otherwise returns `None`.
  * 
@@ -285,13 +285,13 @@ export function filter<a>(a: Functors.Mappable<a, boolean>, b: T<a>): T<a>;
  * 
  * @since 4.0.0
  */
-export function filter<a>(a: Functors.Mappable<a, boolean>): Fn.Unary<T<a>, T<a>>;
-export function filter<a>(a: Functors.Mappable<a, boolean>, b?: T<a>): any {
+export function filter<A>(a: Functors.Mappable<A, boolean>): Fn.Unary<T<A>, T<A>>;
+export function filter<A>(a: Functors.Mappable<A, boolean>, b?: T<A>): any {
   if (arguments.length === 2) {
     return isNone(b) ? null : a(b) ? b : null;
   }
 
-  return (c: T<a>) => isNone(c) ? null : a(c) ? c : null;
+  return (c: T<A>) => isNone(c) ? null : a(c) ? c : null;
 }
 
 //#endregion
@@ -313,7 +313,7 @@ export function filter<a>(a: Functors.Mappable<a, boolean>, b?: T<a>): any {
  * @group Mappables
  * @since 4.0.0
  */
-export function map<a, b>(m: Functors.Mappable<a, b>, a: T<a>): T<b>;
+export function map<A, B>(m: Functors.Mappable<A, B>, a: T<A>): T<B>;
 /**
  * Maps an `Option.T<a>` to another `Option.T<b>` if is `Some<a>`, otherwise returns `None`.
  * 
@@ -329,9 +329,9 @@ export function map<a, b>(m: Functors.Mappable<a, b>, a: T<a>): T<b>;
  * @group Mappables
  * @since 4.0.0
  */
-export function map<a, b>(m: Functors.Mappable<a, b>): Fn.Unary<T<a>, T<b>>;
-export function map<a, b>(m: Functors.Mappable<a, b>, a?: T<a>): any {
-  const _map = (x: T<a>) => isNone(x) ? null : m(x) as T<b>;
+export function map<A, B>(m: Functors.Mappable<A, B>): Fn.Unary<T<A>, T<B>>;
+export function map<A, B>(m: Functors.Mappable<A, B>, a?: T<A>): any {
+  const _map = (x: T<A>) => isNone(x) ? null : m(x) as T<B>;
 
   if (typeof m === 'function' && arguments.length === 2) {
     return _map(a);
@@ -353,7 +353,7 @@ export function map<a, b>(m: Functors.Mappable<a, b>, a?: T<a>): any {
  * @group Mappables
  * @since 4.0.0
  */
-export function mapOr<a, b>(m: Functors.Mappable<a, b>, a: T<a>, b: b): b;
+export function mapOr<A, B>(m: Functors.Mappable<A, B>, a: T<A>, b: B): B;
 /**
  * Maps an `Option.T<a>` to another `Option.T<b>` if is `Some<a>`, otherwise returns `b`.
  * 
@@ -369,15 +369,15 @@ export function mapOr<a, b>(m: Functors.Mappable<a, b>, a: T<a>, b: b): b;
  * @group Mappables
  * @since 4.0.0
  */
-export function mapOr<a, b>(m: Functors.Mappable<a, b>, a: b): Fn.Unary<T<a>, b>;
-export function mapOr<a, b>(m: Functors.Mappable<a, b>, a: T<a> | b, b?: b): any {
-  const _mor = (x: T<a>, or: b) => isNone(x) ? or : m(x);
+export function mapOr<A, B>(m: Functors.Mappable<A, B>, a: B): Fn.Unary<T<A>, B>;
+export function mapOr<A, B>(m: Functors.Mappable<A, B>, a: T<A> | B, b?: B): any {
+  const _mor = (x: T<A>, or: B) => isNone(x) ? or : m(x);
 
   if (arguments.length === 3) {
-    return _mor(a as T<a>, b as b);
+    return _mor(a as T<A>, b as B);
   }
 
-  return (c: T<a>) => _mor(c, a as b);
+  return (c: T<A>) => _mor(c, a as B);
 }
 
 //#endregion

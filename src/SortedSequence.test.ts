@@ -119,7 +119,7 @@ describe(`SortedSequence`, () => {
   });
 
   test(SortedSequence.values.name, () => {
-    const s = SortedSequence.make(Str, 'hello', 'world');
+    const s = SortedSequence.make<string>(Str, 'hello', 'world');
 
     expect(SortedSequence.values(s)).toEqual({ 0: 'hello', 1: 'world' });
   });

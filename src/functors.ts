@@ -189,7 +189,7 @@ export type CatchableModule<f extends Fn.AnyFn> = CatchableAsyncModule<f> | Catc
 //#region comparables
 
 /**
- * Is the result of a comparison made by a `Comparable<a>` functor
+ * Is the result of a comparison made by a `Comparable<A>` functor
  * 
  * - -1 means that a is less than b
  * - 0 means that a equals to b
@@ -202,7 +202,7 @@ export type ComparableResult = -1 | 0 | 1;
 /**
  * Is a comparable functor 
  * 
- * @template a is the type of the compared values
+ * @template A is the type of the compared values
  * @param a the first value to compare
  * @param b the second value to compare
  * @return
@@ -212,9 +212,9 @@ export type ComparableResult = -1 | 0 | 1;
  * 
  * @since 4.0.0
  */
-export type Comparable<a> = {
-  (a: a, b: a): ComparableResult;
-  (a: a): (b: a) => ComparableResult;
+export type Comparable<A> = {
+  (a: A, b: A): ComparableResult;
+  (a: A): (b: A) => ComparableResult;
 };
 
 /**
@@ -230,6 +230,66 @@ export type ComparableModule<a> = {
 /**
  * Is a comparable functor 
  * 
+ * @example
+ * 
+ * ```ts
+ * import { Functors, Str, Num } from 'tiinvo';
+ * 
+ * module LivingBeen {
+ *    export type LivingBeen<A> = {
+ *      name: string;
+ *    } & A;
+ * 
+ *    export type T<A> = LivingBeen<A>;
+ * 
+ *    export const eq = <A>(a: T<A>, b: T<A>): boolean => {
+ *      return Str.eq(a.name, b.name);
+ *    }
+ * }
+ * 
+ * module Animal {
+ *    export type Animal = LivingBeen.T<{
+ *      legs: number;
+ *    }>;
+ * 
+ *    export type T = Animal;
+ * 
+ *    export const make: Functors.Buildable<T> = (p = {}) => ({
+ *      name: p.name ?? '',
+ *      legs: p.legs ?? 0,
+ *    })
+ * 
+ *    export const eq: Functors.Equatable<T> = (a, b) => {
+ *      return LivingBeen.eq(a, b) && Num.eq(a.legs, b.legs)
+ *    }
+ * }
+ * 
+ * module Person {
+ *    export type Person = LivingBeen.T<{
+ *      surname: string;
+ *    }>
+ * 
+ *    export type T = Person;
+ * 
+ *    export const make: Functors.Buildable<T> = (p = {}) => ({
+ *      name: p.name ?? '',
+ *      surname: p.surname ?? '',
+ *    })
+ * 
+ *    export const eq = (a: T, b: T) => {
+ *      return LivingBeen.eq(a, b) && Str.eq(a.surname, b.surname)
+ *    }
+ * }
+ * 
+ * const duck = Animal.make({ legs: 2, name: 'duck' })
+ * const donaldDuck = Animal.make({ legs: 2, name: 'Donald' })
+ * const donald = Person.make({ name: 'Donald', surname: 'Duck' });
+ * 
+ * LivingBeen.eq(duck, donaldDuck)                            // false
+ * LivingBeen.eq(donald, donaldDuck as LivingBeen.T<any>)     // true
+ * ```
+ * 
+ * 
  * @template a is the type of the compared values
  * @param a the first value to compare
  * @param b the second value to compare
@@ -243,6 +303,7 @@ export type Equatable<a> = {
 
 /**
  * Is an equatable functor module
+ * 
  * @template a the value type
  * @since 4.0.0
  */
@@ -281,52 +342,45 @@ export type Guardable<a> = (x: unknown) => x is a;
  * 
  * @example
  * ```ts
- * ////// module Animal.ts
- * import { Obj, Num, Str } from 'tiinvo';
+ * import { Fn, Num, Predicate, Functors } from 'tiinvo';
  * 
- * export interface Animal {
- *    name: string;
- *    legs: number;
- * } 
- *
- * export type t = Animal;
- * 
- * export const guard = Obj.guardOf<t>({
- *    name: Str.guard,
- *    legs: Num.guard,
- * })
- * 
- * ////// module User.ts
- * import { Obj, Str } from 'tiinvo';
- * 
- * export interface User {
- *    name: string;
- *    surname: string;
+ * module Int8 {
+ *   export type T = number;
+ *   export const guard = Predicate.and(Num.guard, Num.gte(0), Num.lte(2**8 - 1)) as Functors.Guardable<T>;
  * }
  * 
- * export type t = User;
- * 
- * export const guard = Obj.guardOf<t>({
- *    name: Str.guard,
- *    surname: Str.guard,
- * });
- * 
- * ////// module Test.ts
- * import * as Animal from './Animal.ts';
- * import * as User from './User.ts';
- * import { Functors } from 'tiinvo';
- * 
- * function typechecker(mod: Functors.GuardableModule<any>, typename: string) {
- *    return (x: unknown) => (mod.guard(x) ? "is of type " : "not of type ") + typename
+ * module Int16 {
+ *   export type T = number;
+ *   export const guard = Predicate.and(Num.guard, Num.gte(0), Num.lte(2**16 - 1)) as Functors.Guardable<T>;
  * }
  * 
- * const checkAnimal = typechecker(Animal, "Animal")
- * const checkUser = typechecker(User, "User")
+ * const makeeq = <A extends number>(mod: Functors.GuardableModule<A>): Functors.Equatable<A> => {
+ *    function eq(a: A, b: A): boolean
+ *    function eq(a: A): Fn.Unary<A, boolean>
+ *    function eq(a: A, b?: A): any
+ *    {
+ *       const _eq = (x: A, y: A) => {
+ *          return mod.guard(x) && mod.guard(y) && Num.eq(x, y)
+ *       }
  * 
- * checkAnimal(10)                     // "not of type Animal"
- * checkAnimal({ name: "", legs:0 })   // "is of type Animal"
- * checkUser(10)                       // "not of type User"
- * checkUser({ name: "", surname:0 })  // "is of type User"
+ *       if (Num.guard(a) && Num.guard(b)) {
+ *          return _eq(a, b)
+ *       }
+ * 
+ *       return (b: A) => _eq(a, b)
+ *    }
+ * 
+ *    return eq;
+ * }
+ * 
+ * const eqInt8 = makeeq(Int8)
+ * const eqInt16 = makeeq(Int16)
+ * 
+ * eqInt8(255, 255) // true
+ * eqInt8(256, 256) // false
+ * 
+ * eqInt16(255, 255) // true
+ * eqInt16(256, 256) // true
  * ```
  * 
  * @since 4.0.0
@@ -360,24 +414,85 @@ export type FilterableModule<a> = {
 //#region mappables
 
 /**
+ * A map function. Maps a value `A` to a value `B`
  * 
- * 
+ * @template A the starting value
+ * @template B the mapped value
+ * @group Mappables
  * @since 4.0.0
  */
-export type Mappable<a, b> = (a: a) => b;
+export type Mappable<A, B> = (a: A) => B;
 
 /**
+ * A module with a map function `Mappable<A, B>`.
  * 
+ * @example
+ * ```ts
+ * import { Fn, Functors, Num } from 'tiinvo';
  * 
+ * function makemap<T extends number>(guard: Functors.Guardable<T>, tn: string) {
+ *    function map<A>(m: Functors.Mappable<T, A>, t: T): A
+ *    function map<A>(m: Functors.Mappable<T, A>): Fn.Unary<T, A>
+ *    function map<A>(m: Functors.Mappable<T, A>, t?: T): any
+ *    {
+ *      const _map = (x: T) => guard(x) ? m(x) : new TypeError("Value not " + tn)
+ *      
+ *      if (Num.guard(t)) {
+ *        return _map(t)
+ *      }
+ * 
+ *      return (b: T) => _map(b)
+ *    }
+ * 
+ *    return map;
+ * }
+ * 
+ * module Int8 {
+ *    export type T = number;
+ *    export const guard = Predicate.and(
+ *      Num.guard, 
+ *      Num.gte(0), 
+ *      Num.lte(2 ** 8 - 1)
+ *    ) as Functors.Guardable<T>;
+ *    export const map = makemap(guard, "Int8");
+ * }
+ * 
+ * module Int16 {
+ *   export type T = number;
+ *   export const guard = Predicate.and(
+ *     Num.guard,
+ *     Num.gte(0), 
+ *     Num.lte(2 ** 16 - 1)
+ *   ) as Functors.Guardable<T>;
+ *   export const map = makemap(guard, "Int16");
+ * }
+ * 
+ * const toHex = <A extends number>(
+ *    mod: Functors.MappableModule<A, string>, 
+ *    a: A,
+ * ) => mod.map(Num.toHex as Functors.Mappable<A, string>, a)
+ * 
+ * toHex(Int8, 255)       // "0xff"
+ * toHex(Int8, 256)       // TypeError("Value not Int8")
+ * 
+ * toHex(Int16, 256)      // "0x100"
+ * toHex(Int16, 2 ** 16)  // TypeError("Value not Int16")
+ * ```
+ * 
+ * @template A the starting value
+ * @template B the mapped value
+ * @group Mappables
  * @since 4.0.0
  */
-export type MappableModule<a, b> = {
-  map: Mappable<a, b>;
+export type MappableModule<A, B> = {
+  map(m: Mappable<A, B>, a: A): B;
+  map(m: Mappable<A, B>): (a: A) => B;
 };
 
 /**
  * 
  * 
+ * @group Mappables
  * @since 4.0.0
  */
 export type Reduceable<a, b> = (p: b, c: a) => b;
@@ -385,6 +500,7 @@ export type Reduceable<a, b> = (p: b, c: a) => b;
 /**
  * 
  * 
+ * @group Mappables
  * @since 4.0.0
  */
 export type ReduceableModule<a, b> = {
@@ -400,7 +516,7 @@ export type ReduceableModule<a, b> = {
  * 
  * @since 4.0.0
  */
-export type FilterMappableModule<a, b> = FilterableModule<a> & MappableModule<a, b>;
+export type FilterMappableModule<a, b> = FilterableModule<a> & { map: Mappable<a, b>; };
 
 /**
  * Compound module of `ModuleFilterable<a>` and `ModuleMappable<a, b>` with a default value `b`. 

@@ -43,7 +43,40 @@ export const guard: Functors.Guardable<t> = (x): x is t => typeof x === 'string'
  *  
  * @since 4.0.0
  */
-export const cmp: Functors.Comparable<t> = (a, b) => a > b ? 1 : a < b ? -1 : 0;
+export function cmp(a: t, b: t): Functors.ComparableResult;
+/**
+ * Compares two strings `a` and `b`.
+ * 
+ * Returns:
+ * 
+ *    - 1 if `a` is greater than `b`
+ *    - 0 if `a` is same of `b`
+ *    - -1 if `b` is greater than `a`
+ * 
+ * **Important**: strings are compared as is, no lowercasing is applied
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.cmp('a', 'a')  // 0
+ * Str.cmp('a', 'b')  // -1
+ * Str.cmp('b', 'a')  // 1
+ * ```
+ *  
+ * @since 4.0.0
+ */
+export function cmp(a: t): Fn.Unary<t, Functors.ComparableResult>;
+export function cmp(a: t, b?: t): any {
+  const _cmp = (x: t, y: t) => x > y ? 1 : x < y ? -1 : 0;
+
+  if (guard(a) && guard(b)) {
+    return _cmp(a, b);
+  }
+
+  return (b: t) => _cmp(b, a);
+};
 
 /**
  * Returns `true` if two strings are the same
@@ -60,7 +93,30 @@ export const cmp: Functors.Comparable<t> = (a, b) => a > b ? 1 : a < b ? -1 : 0;
  *  
  * @since 4.0.0
  */
-export const eq: Functors.Equatable<t> = (a, b) => a === b;
+export function eq(a: t, b: t): boolean;
+/**
+ * Returns `true` if two strings are the same
+ * 
+ * **Important**: strings are compared as is, no lowercasing is applied
+ * 
+ * ```ts
+ * import { Str } from 'tiinvo';
+ * 
+ * Str.eq('a', 'a')  // true
+ * Str.eq('a', 'b')  // false
+ * Str.eq('b', 'a')  // false
+ * ```
+ *  
+ * @since 4.0.0
+ */
+export function eq(a: t): Fn.Unary<t, boolean>
+export function eq(a: t, b?: t): any {
+  if (guard(a) && guard(b)) {
+    return a === b;
+  }
+
+  return (b: t) => b === a;
+}
 
 //#endregion
 

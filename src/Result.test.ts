@@ -43,9 +43,18 @@ describe("Result", () => {
   test(Result.cmp.name, () => {
     const cmp = Result.cmp(Str.cmp);
 
+    expect(Result.cmp(Str.cmp, "a", "a")).toEqual(0);
+    expect(Result.cmp(Str.cmp, "a", "b")).toEqual(-1);
+    expect(Result.cmp(Str.cmp, "b", "a")).toEqual(1);
+
+    expect(Result.cmp(Str.cmp, "a")("a")).toEqual(0);
+    expect(Result.cmp(Str.cmp, "a")("b")).toEqual(1);
+    expect(Result.cmp(Str.cmp, "b")("a")).toEqual(-1);
+
     expect(cmp("a", "a")).toEqual(0);
     expect(cmp("a", "b")).toEqual(-1);
     expect(cmp("b", "a")).toEqual(1);
+    
     expect(cmp(new Error(), new Error())).toEqual(0);
     expect(cmp(new Error(), "a")).toEqual(-1);
     expect(cmp("a", new Error())).toEqual(1);
@@ -54,7 +63,10 @@ describe("Result", () => {
   test(Result.eq.name, () => {
     const eq = Result.eq(Num.eq);
 
+    expect(Result.eq(Num.eq, 0, 0)).toEqual(true);
+    expect(Result.eq(Num.eq, 0)(0)).toEqual(true);
     expect(eq(0, 0)).toEqual(true);
+
     expect(eq(new Error(), new TypeError())).toEqual(true);
     expect(eq(new Error(), 0)).toEqual(false);
     expect(eq(0, new Error())).toEqual(false);
