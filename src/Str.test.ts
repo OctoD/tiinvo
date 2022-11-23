@@ -10,11 +10,17 @@ describe("Str", () => {
     expect(Str.cmp('a', 'a')).toEqual(0);
     expect(Str.cmp('a', 'b')).toEqual(-1);
     expect(Str.cmp('b', 'a')).toEqual(1);
+    expect(Str.cmp('a')('a')).toEqual(0);
+    expect(Str.cmp('a')('b')).toEqual(1);
+    expect(Str.cmp('b')('a')).toEqual(-1);
   });
   test(Str.eq.name, () => {
     expect(Str.eq('a', 'a')).toEqual(true);
     expect(Str.eq('a', 'b')).toEqual(false);
     expect(Str.eq('b', 'a')).toEqual(false);
+    expect(Str.eq('a')('a')).toEqual(true);
+    expect(Str.eq('a')('b')).toEqual(false);
+    expect(Str.eq('b')('a')).toEqual(false);
   });
   test(Str.asc.name, () => {
     const collection = ['a', 'd', 'c', 'e', 'F', 'A'];
