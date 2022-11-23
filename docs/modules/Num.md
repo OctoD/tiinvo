@@ -584,7 +584,6 @@ If `b` parameter is not passed, returns a `Unary<number, string>` function and `
 import { Num } from 'tiinvo';
 
 Num.toExponential(10, 2)        // "1.00e+1"
-Num.toExponential(10)(2)        // "2.0000000000e+0" 
 ```
 
 **`Since`**
@@ -604,7 +603,41 @@ Num.toExponential(10)(2)        // "2.0000000000e+0"
 
 #### Defined in
 
-src/Num.ts:500
+src/Num.ts:499
+
+▸ **toExponential**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), `string`\>
+
+Returns a unary function which returns a string containing a number represented in exponential notation.
+
+If `a` and `b` parameters are passed, `b` counts as the fraction digits for `a`.
+
+If `b` parameter is not passed, returns a `Unary<number, string>` function and `a` counts as the fraction digits for `b`.
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+Num.toExponential(10)(2)        // "2.0000000000e+0" 
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Num.md#t), `string`\>
+
+#### Defined in
+
+src/Num.ts:518
 
 ___
 
@@ -624,7 +657,6 @@ If `b` parameter is not passed, returns a `Unary<number, string>` function and `
 import { Num } from 'tiinvo';
 
 Num.toFixed(10.505, 2)        // "10.51"
-Num.toFixed(10.505)(2)        // "2.0000000000"
 ```
 
 **`Since`**
@@ -644,7 +676,41 @@ Num.toFixed(10.505)(2)        // "2.0000000000"
 
 #### Defined in
 
-src/Num.ts:529
+src/Num.ts:545
+
+▸ **toFixed**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), `string`\>
+
+Returns a unary function which returns string representing a number in fixed-point notation.
+
+If `a` and `b` parameters are passed, `b` counts as the fraction digits for `a`.
+
+If `b` parameter is not passed, returns a `Unary<number, string>` function and `a` counts as the fraction digits for `b`.
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+Num.toFixed(10.505)(2)        // "2.0000000000"
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Num.md#t), `string`\>
+
+#### Defined in
+
+src/Num.ts:564
 
 ___
 
@@ -664,7 +730,6 @@ If `b` parameter is not passed, returns a `Unary<number, string>` function and `
 import { Num } from 'tiinvo';
 
 Num.toPrecision(10, 2)        // "10"
-Num.toPrecision(10)(2)        // "2.000000000"
 ```
 
 **`Since`**
@@ -684,7 +749,41 @@ Num.toPrecision(10)(2)        // "2.000000000"
 
 #### Defined in
 
-src/Num.ts:558
+src/Num.ts:591
+
+▸ **toPrecision**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), `string`\>
+
+Returns a unary function which returns a string representing a number in fixed-point notation.
+
+If `a` and `b` parameters are passed, `b` counts as the fraction digits for `a`.
+
+If `b` parameter is not passed, returns a `Unary<number, string>` function and `a` counts as the fraction digits for `b`.
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+Num.toPrecision(10)(2)        // "2.000000000"
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Num.md#t), `string`\>
+
+#### Defined in
+
+src/Num.ts:610
 
 ## Operables
 
@@ -692,8 +791,7 @@ src/Num.ts:558
 
 ▸ **add**(`a`, `b`): [`T`](Num.md#t)
 
-Adds `a` to `b` if both specified, otherwise returns a `Unary<number, number>` 
-function which once called adds `b` to `a`
+Adds `a` to `b`
 
 **`Example`**
 
@@ -702,10 +800,6 @@ import { Num } from 'tiinvo';
 
 Num.add(5, -2)             // 3
 Num.add(5, 12)             // 17
-
-const add5 = Num.add(5) 
-
-add5(10)                   // 15
 ```
 
 **`Since`**
@@ -725,7 +819,40 @@ add5(10)                   // 15
 
 #### Defined in
 
-src/Num.ts:592
+src/Num.ts:638
+
+▸ **add**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
+
+Returns a unary function which adds `b` to `a`
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+const add5 = Num.add(5) 
+
+add5(5)                    // 10
+add5(10)                   // 15
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
+
+#### Defined in
+
+src/Num.ts:656
 
 ___
 
@@ -733,8 +860,7 @@ ___
 
 ▸ **div**(`a`, `b`): [`T`](Num.md#t)
 
-Divides `a` by `b` if both specified, otherwise returns a `Unary<number, number>` 
-function which once called divides `b` by `a`
+Divides `a` by `b`
 
 **`Example`**
 
@@ -743,6 +869,35 @@ import { Num } from 'tiinvo';
 
 Num.div(4, 2)              // 2
 Num.div(12, 3)             // 4
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+| `b` | `number` |
+
+#### Returns
+
+[`T`](Num.md#t)
+
+#### Defined in
+
+src/Num.ts:680
+
+▸ **div**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
+
+Returns a `Unary<number, number>` function which once called divides `b` by `a`
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
 
 const div2 = Num.div(2) 
 
@@ -758,15 +913,14 @@ div2(4)                    // 2
 | Name | Type |
 | :------ | :------ |
 | `a` | `number` |
-| `b` | `number` |
 
 #### Returns
 
-[`T`](Num.md#t)
+[`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
 #### Defined in
 
-src/Num.ts:622
+src/Num.ts:697
 
 ___
 
@@ -774,9 +928,7 @@ ___
 
 ▸ **mod**(`a`, `b`): [`T`](Num.md#t)
 
-Returns the modulus of `a % b` if `b` parameter is passed, 
-otherwise returns a `Unary<number, number>` 
-function which once called returns the modulus of `b % a`
+Returns the modulus of `a % b`
 
 **`Example`**
 
@@ -785,6 +937,36 @@ import { Num } from 'tiinvo';
 
 Num.mod(2, 2)             // 0
 Num.mod(3, 2)             // 1
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+| `b` | `number` |
+
+#### Returns
+
+[`T`](Num.md#t)
+
+#### Defined in
+
+src/Num.ts:721
+
+▸ **mod**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
+
+Returns a `Unary<number, number>` function which once 
+called returns the modulus of `b % a`
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
 
 const mod2 = Num.mod(2) 
 
@@ -801,15 +983,14 @@ mod2(15)                   // 1
 | Name | Type |
 | :------ | :------ |
 | `a` | `number` |
-| `b` | `number` |
 
 #### Returns
 
-[`T`](Num.md#t)
+[`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
 #### Defined in
 
-src/Num.ts:654
+src/Num.ts:740
 
 ___
 
@@ -817,8 +998,7 @@ ___
 
 ▸ **mul**(`a`, `b`): [`T`](Num.md#t)
 
-Multiplies `a` to `b` if both specified, otherwise returns a `Unary<number, number>` 
-function which once called multiplies `b` to `a`
+Multiplies `a` to `b`
 
 **`Example`**
 
@@ -827,6 +1007,35 @@ import { Num } from 'tiinvo';
 
 Num.mul(5, -2)             // -10
 Num.mul(5, 12)             // 60
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+| `b` | `number` |
+
+#### Returns
+
+[`T`](Num.md#t)
+
+#### Defined in
+
+src/Num.ts:764
+
+▸ **mul**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
+
+Returns a `Unary<number, number>` function which once called multiplies `b` to `a`
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
 
 const mul5 = Num.mul(5) 
 
@@ -842,15 +1051,14 @@ mul5(10)                   // 50
 | Name | Type |
 | :------ | :------ |
 | `a` | `number` |
-| `b` | `number` |
 
 #### Returns
 
-[`T`](Num.md#t)
+[`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
 #### Defined in
 
-src/Num.ts:684
+src/Num.ts:781
 
 ___
 
@@ -858,8 +1066,7 @@ ___
 
 ▸ **pow**(`a`, `b`): [`T`](Num.md#t)
 
-Elevates `a` by `b` if both specified, otherwise returns a `Unary<number, number>` 
-function which once called elevates `b` by `a`
+Elevates `a` by `b`
 
 **`Example`**
 
@@ -868,10 +1075,6 @@ import { Num } from 'tiinvo';
 
 Num.pow(2, 3)             // 8
 Num.pow(3, 2)             // 9
-
-const pow5 = Num.pow(5) 
-
-pow5(10)                   // 100_000
 ```
 
 **`Since`**
@@ -891,7 +1094,39 @@ pow5(10)                   // 100_000
 
 #### Defined in
 
-src/Num.ts:714
+src/Num.ts:805
+
+▸ **pow**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
+
+Returns a `Unary<number, number>` function which once called elevates `b` by `a`
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+const pow5 = Num.pow(5) 
+
+pow5(10)                   // 100_000
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
+
+#### Defined in
+
+src/Num.ts:822
 
 ___
 
@@ -899,8 +1134,39 @@ ___
 
 ▸ **root**(`a`, `b`): [`T`](Num.md#t)
 
-Square root of `a` under `b` if both specified, otherwise returns a `Unary<number, number>` 
-function which once called returns the root of `b` under `a`
+Root of `a` under `b`
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+Num.root(4, 2)             // 2
+Num.root(9, 2)             // 3
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+| `b` | `number` |
+
+#### Returns
+
+[`T`](Num.md#t)
+
+#### Defined in
+
+src/Num.ts:846
+
+▸ **root**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
+
+Returns a `Unary<number, number>` function which once called returns the root of `b` under `a`
 
 **`Example`**
 
@@ -925,15 +1191,14 @@ root2(9)                   // 3
 | Name | Type |
 | :------ | :------ |
 | `a` | `number` |
-| `b` | `number` |
 
 #### Returns
 
-[`T`](Num.md#t)
+[`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
 #### Defined in
 
-src/Num.ts:745
+src/Num.ts:867
 
 ___
 
@@ -951,11 +1216,6 @@ import { Num } from 'tiinvo';
 
 Num.sub(5, -2)             // 7
 Num.sub(5, 12)             // -7
-
-const sub5 = Num.sub(5) 
-
-sub5(10)                   // 5
-sub5(-2)                   // -7
 ```
 
 **`Since`**
@@ -975,7 +1235,40 @@ sub5(-2)                   // -7
 
 #### Defined in
 
-src/Num.ts:776
+src/Num.ts:892
+
+▸ **sub**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
+
+Returns a `Unary<number, number>` function which once called subtracts `a` to `b`
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+const sub5 = Num.sub(5) 
+
+sub5(10)                   // 5
+sub5(-2)                   // -7
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
+
+#### Defined in
+
+src/Num.ts:910
 
 ## Sortables
 
@@ -983,8 +1276,7 @@ src/Num.ts:776
 
 ▸ **asc**(`a`, `b`): [`ComparableResult`](Functors.md#comparableresult)
 
-Compares two numbers `a` and `b` if `b` is defined, otherwise returns a 
-`Unary<number, number>` function which once called compares `b` and `a`
+Compares two numbers `a` and `b`
 
 Great to sort a numeric array in ASC direction.
 
@@ -1015,7 +1307,41 @@ collection.sort(Num.asc)     // [3, 4, 5, 6, 10, 12, 22]
 
 #### Defined in
 
-src/Num.ts:809
+src/Num.ts:941
+
+▸ **asc**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
+
+Returns a `Unary<number, number>` function which once called compares `b` and `a`
+
+Great to sort a numeric array in ASC direction.
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+const collection = [10, 5, 6, 4, 12, 22, 3];
+
+collection.sort(Num.asc)     // [3, 4, 5, 6, 10, 12, 22]
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
+
+#### Defined in
+
+src/Num.ts:960
 
 ___
 
@@ -1023,8 +1349,7 @@ ___
 
 ▸ **desc**(`a`, `b`): [`ComparableResult`](Functors.md#comparableresult)
 
-Compares two numbers `b` and `a` if `b` is defined, otherwise returns a 
-`Unary<number, number>` function which once called compares `a` and `b`
+Compares two numbers `b` and `a`
 
 Great to sort a numeric array in DESC direction.
 
@@ -1055,4 +1380,38 @@ collection.sort(Num.desc)     // [22, 12, 10, 6, 5, 4, 3]
 
 #### Defined in
 
-src/Num.ts:838
+src/Num.ts:987
+
+▸ **desc**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
+
+Returns a `Unary<number, number>` function which once called compares `a` and `b`
+
+Great to sort a numeric array in DESC direction.
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+const collection = [10, 5, 6, 4, 12, 22, 3];
+
+collection.sort(Num.desc)     // [22, 12, 10, 6, 5, 4, 3]
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
+
+#### Defined in
+
+src/Num.ts:1006

@@ -32,7 +32,7 @@ The typed version of a `Sequence.t<a>`.
 
 #### Defined in
 
-[src/TypedSequence.ts:10](https://github.com/OctoD/tiinvo/blob/d1726d1/src/TypedSequence.ts#L10)
+[src/TypedSequence.ts:10](https://github.com/OctoD/tiinvo/blob/9c9a441/src/TypedSequence.ts#L10)
 
 ## Functions
 
@@ -80,7 +80,7 @@ ts0 === ts1      // true
 
 #### Defined in
 
-[src/TypedSequence.ts:36](https://github.com/OctoD/tiinvo/blob/d1726d1/src/TypedSequence.ts#L36)
+[src/TypedSequence.ts:36](https://github.com/OctoD/tiinvo/blob/9c9a441/src/TypedSequence.ts#L36)
 
 ___
 
@@ -124,7 +124,7 @@ TypedSequence.append(30)(s0)       // TypedSequence(10, 20, 30)
 
 #### Defined in
 
-[src/TypedSequence.ts:105](https://github.com/OctoD/tiinvo/blob/d1726d1/src/TypedSequence.ts#L105)
+[src/TypedSequence.ts:105](https://github.com/OctoD/tiinvo/blob/9c9a441/src/TypedSequence.ts#L105)
 
 ___
 
@@ -169,7 +169,7 @@ TypedSequence.concat(s1)(s0)       // TypedSequence(10, 20, 30, 40)
 
 #### Defined in
 
-[src/TypedSequence.ts:136](https://github.com/OctoD/tiinvo/blob/d1726d1/src/TypedSequence.ts#L136)
+[src/TypedSequence.ts:136](https://github.com/OctoD/tiinvo/blob/9c9a441/src/TypedSequence.ts#L136)
 
 ___
 
@@ -213,7 +213,7 @@ TypedSequence.prepend(30)(s0)       // TypedSequence.make(Num, 30, 10, 20)
 
 #### Defined in
 
-[src/TypedSequence.ts:162](https://github.com/OctoD/tiinvo/blob/d1726d1/src/TypedSequence.ts#L162)
+[src/TypedSequence.ts:162](https://github.com/OctoD/tiinvo/blob/9c9a441/src/TypedSequence.ts#L162)
 
 ___
 
@@ -257,4 +257,4 @@ b          // TypedSequence.make(Num, 1, 2, 3, 4, 5)
 
 #### Defined in
 
-[src/TypedSequence.ts:193](https://github.com/OctoD/tiinvo/blob/d1726d1/src/TypedSequence.ts#L193)
+[src/TypedSequence.ts:193](https://github.com/OctoD/tiinvo/blob/9c9a441/src/TypedSequence.ts#L193)

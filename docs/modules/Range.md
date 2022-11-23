@@ -32,7 +32,7 @@ Represents a numeric range from a starting value `start` to an ending value `end
 
 #### Defined in
 
-[src/Range.ts:7](https://github.com/OctoD/tiinvo/blob/d1726d1/src/Range.ts#L7)
+[src/Range.ts:7](https://github.com/OctoD/tiinvo/blob/9c9a441/src/Range.ts#L7)
 
 ## Functions
 
@@ -72,7 +72,7 @@ Range.inRange(6)(r)    // true
 
 #### Defined in
 
-[src/Range.ts:115](https://github.com/OctoD/tiinvo/blob/d1726d1/src/Range.ts#L115)
+[src/Range.ts:115](https://github.com/OctoD/tiinvo/blob/9c9a441/src/Range.ts#L115)
 
 ___
 
@@ -116,4 +116,4 @@ m(r)   // ['0x14', '0x15', '0x16', '0x17', '0x18', '0x19', '0x1a', '0x1b', '0x1c
 
 #### Defined in
 
-[src/Range.ts:149](https://github.com/OctoD/tiinvo/blob/d1726d1/src/Range.ts#L149)
+[src/Range.ts:149](https://github.com/OctoD/tiinvo/blob/9c9a441/src/Range.ts#L149)

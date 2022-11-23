@@ -491,13 +491,30 @@ export const isPositive: Functors.Filterable<T> = x => x >= 0;
  * import { Num } from 'tiinvo';
  * 
  * Num.toExponential(10, 2)        // "1.00e+1"
- * Num.toExponential(10)(2)        // "2.0000000000e+0" 
  * ```
  * 
  * @group Natives
  * @since 4.0.0
  */
 export function toExponential(a: T, b: T): string;
+/**
+ * Returns a unary function which returns a string containing a number represented in exponential notation.
+ * 
+ * If `a` and `b` parameters are passed, `b` counts as the fraction digits for `a`.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<number, string>` function and `a` counts as the fraction digits for `b`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.toExponential(10)(2)        // "2.0000000000e+0" 
+ * ```
+ * 
+ * @group Natives
+ * @since 4.0.0
+ */
 export function toExponential(a: T): Fn.Unary<T, string>;
 export function toExponential(a: T, b?: any): any {
   if (guard(b)) {
@@ -520,13 +537,30 @@ export function toExponential(a: T, b?: any): any {
  * import { Num } from 'tiinvo';
  * 
  * Num.toFixed(10.505, 2)        // "10.51"
- * Num.toFixed(10.505)(2)        // "2.0000000000"
  * ```
  * 
  * @group Natives
  * @since 4.0.0
  */
 export function toFixed(a: T, b: T): string;
+/**
+ * Returns a unary function which returns string representing a number in fixed-point notation.
+ * 
+ * If `a` and `b` parameters are passed, `b` counts as the fraction digits for `a`.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<number, string>` function and `a` counts as the fraction digits for `b`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.toFixed(10.505)(2)        // "2.0000000000"
+ * ```
+ * 
+ * @group Natives
+ * @since 4.0.0
+ */
 export function toFixed(a: T): Fn.Unary<T, string>;
 export function toFixed(a: T, b?: any): any {
   if (guard(b)) {
@@ -549,13 +583,30 @@ export function toFixed(a: T, b?: any): any {
  * import { Num } from 'tiinvo';
  * 
  * Num.toPrecision(10, 2)        // "10"
- * Num.toPrecision(10)(2)        // "2.000000000"
  * ```
  * 
  * @group Natives
  * @since 4.0.0
  */
 export function toPrecision(a: T, b: T): string;
+/**
+ * Returns a unary function which returns a string representing a number in fixed-point notation.
+ * 
+ * If `a` and `b` parameters are passed, `b` counts as the fraction digits for `a`.
+ * 
+ * If `b` parameter is not passed, returns a `Unary<number, string>` function and `a` counts as the fraction digits for `b`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.toPrecision(10)(2)        // "2.000000000"
+ * ```
+ * 
+ * @group Natives
+ * @since 4.0.0
+ */
 export function toPrecision(a: T): Fn.Unary<T, string>;
 export function toPrecision(a: T, b?: any): any {
   if (guard(b)) {
@@ -570,8 +621,7 @@ export function toPrecision(a: T, b?: any): any {
 //#region operables
 
 /**
- * Adds `a` to `b` if both specified, otherwise returns a `Unary<number, number>` 
- * function which once called adds `b` to `a`
+ * Adds `a` to `b`
  * 
  * @example
  * 
@@ -580,16 +630,29 @@ export function toPrecision(a: T, b?: any): any {
  * 
  * Num.add(5, -2)             // 3
  * Num.add(5, 12)             // 17
- * 
- * const add5 = Num.add(5) 
- * 
- * add5(10)                   // 15
  * ```
  * 
  * @group Operables
  * @since 4.0.0
  */
 export function add(a: T, b: T): T;
+/**
+ * Returns a unary function which adds `b` to `a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * const add5 = Num.add(5) 
+ * 
+ * add5(5)                    // 10
+ * add5(10)                   // 15
+ * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
+ */
 export function add(a: T): Fn.Unary<T, T>;
 export function add(a: T, b?: T): any {
   if (guard(b)) {
@@ -600,8 +663,7 @@ export function add(a: T, b?: T): any {
 }
 
 /**
- * Divides `a` by `b` if both specified, otherwise returns a `Unary<number, number>` 
- * function which once called divides `b` by `a`
+ * Divides `a` by `b`
  * 
  * @example
  * 
@@ -610,6 +672,19 @@ export function add(a: T, b?: T): any {
  * 
  * Num.div(4, 2)              // 2
  * Num.div(12, 3)             // 4
+ * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
+ */
+export function div(a: T, b: T): T;
+/**
+ * Returns a `Unary<number, number>` function which once called divides `b` by `a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
  * 
  * const div2 = Num.div(2) 
  * 
@@ -619,7 +694,6 @@ export function add(a: T, b?: T): any {
  * @group Operables
  * @since 4.0.0
  */
-export function div(a: T, b: T): T;
 export function div(a: T): Fn.Unary<T, T>;
 export function div(a: T, b?: T): any {
   if (guard(b)) {
@@ -630,9 +704,7 @@ export function div(a: T, b?: T): any {
 }
 
 /**
- * Returns the modulus of `a % b` if `b` parameter is passed, 
- * otherwise returns a `Unary<number, number>` 
- * function which once called returns the modulus of `b % a`
+ * Returns the modulus of `a % b`
  * 
  * @example
  * 
@@ -641,6 +713,20 @@ export function div(a: T, b?: T): any {
  * 
  * Num.mod(2, 2)             // 0
  * Num.mod(3, 2)             // 1
+ * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
+ */
+export function mod(a: T, b: T): T;
+/**
+ * Returns a `Unary<number, number>` function which once 
+ * called returns the modulus of `b % a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
  * 
  * const mod2 = Num.mod(2) 
  * 
@@ -651,7 +737,6 @@ export function div(a: T, b?: T): any {
  * @group Operables
  * @since 4.0.0
  */
-export function mod(a: T, b: T): T;
 export function mod(a: T): Fn.Unary<T, T>;
 export function mod(a: T, b?: T): any {
   if (guard(b)) {
@@ -662,8 +747,7 @@ export function mod(a: T, b?: T): any {
 }
 
 /**
- * Multiplies `a` to `b` if both specified, otherwise returns a `Unary<number, number>` 
- * function which once called multiplies `b` to `a`
+ * Multiplies `a` to `b`
  * 
  * @example
  * 
@@ -672,6 +756,19 @@ export function mod(a: T, b?: T): any {
  * 
  * Num.mul(5, -2)             // -10
  * Num.mul(5, 12)             // 60
+ * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
+ */
+export function mul(a: T, b: T): T;
+/**
+ * Returns a `Unary<number, number>` function which once called multiplies `b` to `a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
  * 
  * const mul5 = Num.mul(5) 
  * 
@@ -681,7 +778,6 @@ export function mod(a: T, b?: T): any {
  * @group Operables
  * @since 4.0.0
  */
-export function mul(a: T, b: T): T;
 export function mul(a: T): Fn.Unary<T, T>;
 export function mul(a: T, b?: T): any {
   if (guard(b)) {
@@ -692,8 +788,7 @@ export function mul(a: T, b?: T): any {
 }
 
 /**
- * Elevates `a` by `b` if both specified, otherwise returns a `Unary<number, number>` 
- * function which once called elevates `b` by `a`
+ * Elevates `a` by `b`
  * 
  * @example
  * 
@@ -702,6 +797,19 @@ export function mul(a: T, b?: T): any {
  * 
  * Num.pow(2, 3)             // 8
  * Num.pow(3, 2)             // 9
+ * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
+ */
+export function pow(a: T, b: T): T;
+/**
+ * Returns a `Unary<number, number>` function which once called elevates `b` by `a`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
  * 
  * const pow5 = Num.pow(5) 
  * 
@@ -711,7 +819,6 @@ export function mul(a: T, b?: T): any {
  * @group Operables
  * @since 4.0.0
  */
-export function pow(a: T, b: T): T;
 export function pow(a: T): Fn.Unary<T, T>;
 export function pow(a: T, b?: T): any {
   if (guard(b)) {
@@ -722,8 +829,23 @@ export function pow(a: T, b?: T): any {
 }
 
 /**
- * Square root of `a` under `b` if both specified, otherwise returns a `Unary<number, number>` 
- * function which once called returns the root of `b` under `a`
+ * Root of `a` under `b`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * Num.root(4, 2)             // 2
+ * Num.root(9, 2)             // 3
+ * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
+ */
+export function root(a: T, b: T): T;
+/**
+ * Returns a `Unary<number, number>` function which once called returns the root of `b` under `a`
  * 
  * @example
  * 
@@ -742,7 +864,6 @@ export function pow(a: T, b?: T): any {
  * @group Operables
  * @since 4.0.0
  */
-export function root(a: T, b: T): T;
 export function root(a: T): Fn.Unary<T, T>;
 export function root(a: T, b?: T): any {
   if (guard(b)) {
@@ -763,6 +884,19 @@ export function root(a: T, b?: T): any {
  * 
  * Num.sub(5, -2)             // 7
  * Num.sub(5, 12)             // -7
+ * ```
+ * 
+ * @group Operables
+ * @since 4.0.0
+ */
+export function sub(a: T, b: T): T;
+/**
+ * Returns a `Unary<number, number>` function which once called subtracts `a` to `b`
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
  * 
  * const sub5 = Num.sub(5) 
  * 
@@ -773,7 +907,6 @@ export function root(a: T, b?: T): any {
  * @group Operables
  * @since 4.0.0
  */
-export function sub(a: T, b: T): T;
 export function sub(a: T): Fn.Unary<T, T>;
 export function sub(a: T, b?: T): any {
   if (guard(b)) {
@@ -788,8 +921,7 @@ export function sub(a: T, b?: T): any {
 //#region sortables
 
 /**
- * Compares two numbers `a` and `b` if `b` is defined, otherwise returns a 
- * `Unary<number, number>` function which once called compares `b` and `a`
+ * Compares two numbers `a` and `b`
  * 
  * Great to sort a numeric array in ASC direction.
  * 
@@ -807,6 +939,24 @@ export function sub(a: T, b?: T): any {
  * @since 4.0.0
  */
 export function asc(a: T, b: T): Functors.ComparableResult;
+/**
+ * Returns a `Unary<number, number>` function which once called compares `b` and `a`
+ * 
+ * Great to sort a numeric array in ASC direction.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * const collection = [10, 5, 6, 4, 12, 22, 3];
+ * 
+ * collection.sort(Num.asc)     // [3, 4, 5, 6, 10, 12, 22]
+ * ```
+ * 
+ * @group Sortables
+ * @since 4.0.0
+ */
 export function asc(a: T): Fn.Unary<T, Functors.ComparableResult>;
 export function asc(a: T, b?: any): any {
   if (guard(b)) {
@@ -817,8 +967,7 @@ export function asc(a: T, b?: any): any {
 }
 
 /**
- * Compares two numbers `b` and `a` if `b` is defined, otherwise returns a 
- * `Unary<number, number>` function which once called compares `a` and `b`
+ * Compares two numbers `b` and `a`
  * 
  * Great to sort a numeric array in DESC direction.
  * 
@@ -836,6 +985,24 @@ export function asc(a: T, b?: any): any {
  * @since 4.0.0
  */
 export function desc(a: T, b: T): Functors.ComparableResult;
+/**
+ * Returns a `Unary<number, number>` function which once called compares `a` and `b`
+ * 
+ * Great to sort a numeric array in DESC direction.
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Num } from 'tiinvo';
+ * 
+ * const collection = [10, 5, 6, 4, 12, 22, 3];
+ * 
+ * collection.sort(Num.desc)     // [22, 12, 10, 6, 5, 4, 3]
+ * ```
+ * 
+ * @group Sortables
+ * @since 4.0.0
+ */
 export function desc(a: T): Fn.Unary<T, Functors.ComparableResult>;
 export function desc(a: T, b?: any): any {
   if (guard(b)) {
