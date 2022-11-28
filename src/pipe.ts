@@ -1,59 +1,59 @@
-type asChain<
-  f extends [funcType, ...funcType[]],
-  g extends funcType[] = tail<f>
+type AsChain<
+  f extends [FuncType, ...FuncType[]],
+  g extends FuncType[] = Tail<f>
   > = {
-    [k in keyof f]: (arg: argType<f[k]>) => argType<lookup<g, k, any>, any>;
+    [k in keyof f]: (arg: ArgType<f[k]>) => ArgType<Lookup<g, k, any>, any>;
   };
 
-type asAsyncChain<
-  f extends [funcType, ...funcType[]],
-  g extends funcType[] = tail<f>
+type AsAsyncChain<
+  f extends [FuncType, ...FuncType[]],
+  g extends FuncType[] = Tail<f>
 > = {
   [k in keyof f]: (
-    arg: argType<f[k]>
-  ) => Promise<argType<lookup<g, k, any>, any>>;
+    arg: ArgType<f[k]>
+  ) => Promise<ArgType<Lookup<g, k, any>, any>>;
 };
 
-type argType<F, Else = never> = F extends (arg: infer A) => any ? A : Else;
+type ArgType<F, Else = never> = F extends (arg: infer A) => any ? A : Else;
 
-type funcType = (arg: any) => any;
+type FuncType = (arg: any) => any;
 
-type lastIndexOf<a extends any[]> = ((...x: a) => void) extends (
+type LastIndexOf<a extends any[]> = ((...x: a) => void) extends (
   y: any,
   ...z: infer b
 ) => void
   ? b["length"]
   : never;
 
-type lookup<t, k extends keyof any, el = never> = k extends keyof t
+type Lookup<t, k extends keyof any, el = never> = k extends keyof t
   ? t[k]
   : el;
 
-type tail<a extends any[]> = ((...t: a) => void) extends (
+type Tail<a extends any[]> = ((...t: a) => void) extends (
   x: any,
   ...u: infer b
 ) => void
   ? b
   : never;
 
-type pipe = <f extends [((arg: any) => any | (() => any)), ...Array<(arg: any) => any>]>(
-  ...f: f & asChain<f>
+type Pipe = <f extends [((arg: any) => any | (() => any)), ...Array<(arg: any) => any>]>(
+  ...f: f & AsChain<f>
 ) =>
-  f[0] extends () => any ? () => ReturnType<f[lastIndexOf<f>]> : f[0] extends (arg: infer U) => any ? (arg: U) => ReturnType<f[lastIndexOf<f>]> : never;
+  f[0] extends () => any ? () => ReturnType<f[LastIndexOf<f>]> : f[0] extends (arg: infer U) => any ? (arg: U) => ReturnType<f[LastIndexOf<f>]> : never;
 
-type pipeasync = <
+type PipeAsync = <
   f extends [((arg: any) => Promise<any> | (() => Promise<any>)), ...Array<(arg: any) => Promise<any>>]
   >(
-  ...f: f & asAsyncChain<f>
+  ...f: f & AsAsyncChain<f>
 ) =>
-  f[0] extends () => any ? () => ReturnType<f[lastIndexOf<f>]> : f[0] extends (arg: infer U) => any ? (arg: U) => ReturnType<f[lastIndexOf<f>]> : never;
+  f[0] extends () => any ? () => ReturnType<f[LastIndexOf<f>]> : f[0] extends (arg: infer U) => any ? (arg: U) => ReturnType<f[LastIndexOf<f>]> : never;
 
 /**
  * Same as the sync version, but handles promises.
  * 
  * @since 4.0.0
  */
-export const async: pipeasync = (...args) => {
+export const async: PipeAsync = (...args) => {
   const [first, ...othersFns] = args;
   return (async (arg: any) => {
     const firstvalue = await first(arg);
@@ -84,9 +84,9 @@ export const async: pipeasync = (...args) => {
  *
  * @since 4.0.0
  */
-export const sync: pipe = (...args) => {
+export const sync: Pipe = (...args) => {
   const [first, ...othersFns] = args;
-  type arg0 = argType<typeof first>;
+  type arg0 = ArgType<typeof first>;
 
   switch (args.length) {
     case 0: return (a: arg0) => a;

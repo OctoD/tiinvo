@@ -530,8 +530,8 @@ export const first = <a>(a: t<a>): Option.T<a> => {
  *
  * @since 4.0.0
  */
-export function get<a>(a: t<a>, i: number): Result.t<a>;
-export function get<a>(a: number): Fn.Unary<t<a>, Result.t<a>>;
+export function get<a>(a: t<a>, i: number): Result.T<a>;
+export function get<a>(a: number): Fn.Unary<t<a>, Result.T<a>>;
 export function get<a>(a: any, i?: any): any {
   if (guard(a)) {
     const s = length(a);
@@ -707,7 +707,7 @@ export function sort<a>(a: t<a> | Functors.Comparable<a> | Functors.ComparableMo
  *
  * @since 4.0.0
  */
-export const fromString = <c = unknown>(x: string): Result.t<t<c>> => {
+export const fromString = <c = unknown>(x: string): Result.T<t<c>> => {
   try {
     return make.apply(null, JSON.parse(`[${x}]`)) as t<c>;
   } catch (err) {

@@ -22,8 +22,13 @@
 
 ### Functions
 
+- [pass](Fn.md#pass)
 - [cmp](Fn.md#cmp)
 - [eq](Fn.md#eq)
+- [length](Fn.md#length)
+- [name](Fn.md#name)
+- [guard](Fn.md#guard)
+- [map](Fn.md#map)
 
 ## Type Aliases
 
@@ -511,6 +516,49 @@ src/Fn.ts:68
 
 ## Functions
 
+### pass
+
+▸ **pass**<`a`\>(`a`): `a`
+
+A function which returns it's first argument.
+
+Use it only as a placeholder
+
+**`Example`**
+
+```ts
+import { Fn } from 'tiinvo'
+
+Fn.pass(10)      // 10
+Fn.pass(20)      // 20
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `a` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `a` |
+
+#### Returns
+
+`a`
+
+#### Defined in
+
+src/Fn.ts:88
+
+___
+
 ### cmp
 
 ▸ **cmp**(`a`, `b`): [`ComparableResult`](Functors.md#comparableresult)
@@ -545,6 +593,22 @@ Fn.cmp(Num.sub, Num.add) // 1
 #### Defined in
 
 src/Fn.ts:107
+
+▸ **cmp**(`a`): [`Unary`](Fn.md#unary)<[`T`](Fn.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | [`AnyFn`](Fn.md#anyfn) |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Fn.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
+
+#### Defined in
+
+src/Fn.ts:108
 
 ___
 
@@ -588,3 +652,179 @@ Fn.eq(Num.sub, Num.add) // false
 #### Defined in
 
 src/Fn.ts:151
+
+▸ **eq**(`a`): [`Unary`](Fn.md#unary)<[`T`](Fn.md#t), `boolean`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | [`AnyFn`](Fn.md#anyfn) |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Fn.md#t), `boolean`\>
+
+#### Defined in
+
+src/Fn.ts:152
+
+___
+
+### length
+
+▸ **length**(`a`): `number`
+
+Returns a function arguments length
+
+**`Example`**
+
+```ts
+import { Fn } from 'tiinvo'
+
+Fn.length(Fn.cmp)        // 2
+Fn.length(Fn.length)     // 1
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | [`AnyFn`](Fn.md#anyfn) |
+
+#### Returns
+
+`number`
+
+#### Defined in
+
+src/Functors.ts:424
+
+___
+
+### name
+
+▸ **name**(`a`): `string`
+
+Returns a function's name
+
+**`Example`**
+
+```ts
+import { Fn } from 'tiinvo'
+
+Fn.name(Fn.cmp)        // 'cmp'
+Fn.name(Fn.name)       // 'name'
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | [`AnyFn`](Fn.md#anyfn) |
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+src/Functors.ts:424
+
+___
+
+### guard
+
+▸ **guard**(`x`): x is AnyFn
+
+Checks if an argument `x` is `AnyFn`
+
+**`Example`**
+
+```ts
+import { Fn } from 'tiinvo'
+
+Fn.guard(10)         // false
+Fn.guard(() => {})   // true
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `x` | `unknown` |
+
+#### Returns
+
+x is AnyFn
+
+#### Defined in
+
+src/Fn.ts:213
+
+___
+
+### map
+
+▸ **map**<`a`, `b`\>(...`ml`): (`a`: `a`) => `b`[]
+
+Maps a value `a` over a list of `Functors.Mappable<a, b>` and returns an array of they returning values
+
+**`Example`**
+
+```ts
+import { Fn, Num } from 'tiinvo'
+
+const m = Fn.map(Num.add(1), Num.mul(2), Num.sub(3), Num.pow(4))
+
+m(2)   // [3, 4, -1, 16]
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `a` |
+| `b` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `...ml` | [`Mappable`](Functors.md#mappable)<`a`, `b`\>[] |
+
+#### Returns
+
+`fn`
+
+▸ (`a`): `b`[]
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `a` |
+
+##### Returns
+
+`b`[]
+
+#### Defined in
+
+src/Fn.ts:234

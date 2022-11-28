@@ -103,7 +103,7 @@ export type Reducer<A, B> = {
  * @group Accessors
  * @since 4.0.0
  */
-export function get<a>(a: T<a>, i: number): Result.t<a>;
+export function get<a>(a: T<a>, i: number): Result.T<a>;
 /**
  * Returns a `Fn.Unary<t<a>, Result.t<a>>` to get the element `Result.t<a>` at index `i` of an array `a[]`. 
  * 
@@ -118,15 +118,15 @@ export function get<a>(a: T<a>, i: number): Result.t<a>;
  * 
  * @template A the type of the array `a` elements
  * @param {number} a is the element index
- * @returns {Fn.Unary<T<A>, Result.t<A>>}
+ * @returns {Fn.Unary<T<A>, Result.T<A>>}
  * @group Accessors
  * @since 4.0.0
  */
-export function get<A>(a: number): Fn.Unary<T<A>, Result.t<A>>;
+export function get<A>(a: number): Fn.Unary<T<A>, Result.T<A>>;
 export function get<A>(a: T<A> | number, i?: number): any {
   if (guard(a) && typeof i === 'number') {
     if (i >= 0 && i < a.length) {
-      return a[i] as Result.t<A>;
+      return a[i] as Result.T<A>;
     }
 
     return new RangeError(`Index out of bounds ${i} for length ${a.length}`);
@@ -134,7 +134,7 @@ export function get<A>(a: T<A> | number, i?: number): any {
 
   return (b: T<A>) => {
     if (a >= 0 && a < b.length) {
-      return b[a as number] as Result.t<A>;
+      return b[a as number] as Result.T<A>;
     }
 
     return new RangeError(`Index out of bounds ${a} for length ${b.length}`);

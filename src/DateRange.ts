@@ -43,6 +43,13 @@ export type T = {
  * Array.from(dr) // [new Date(2020, 0, 1), new Date(2020, 0, 2), new Date(2020, 0, 3)]
  * ```
  *
+ * @param start the starting date
+ * @param end the ending date
+ * @step the step to increment. It can be:
+ *  - `"year"` (default), increments by year
+ *  - `"month"`, increments by month
+ *  - `"day"`, increments by day
+ * @group Factories
  * @since 4.0.0
  */
 export const make = (start: Date, end: Date, step: T['step'] = 'year'): T => {
@@ -112,6 +119,7 @@ export const make = (start: Date, end: Date, step: T['step'] = 'year'): T => {
  *
  * @param x the value to check
  * @returns returns true if x is DateRange, false otherwise
+ * @group Guardables
  * @since 4.0.0
  */
 export const guard = (x: unknown): x is T => typeof x === 'object' && x !== null && 'start' in x && 'end' in x && 'step' in x && typeof (x as T).step === 'string' && (x as T).start instanceof Date && (x as T).end instanceof Date;
@@ -263,6 +271,7 @@ export function map<a>(t: T | Functors.Mappable<Date, a>, m?: Functors.Mappable<
  * DateRange.toArray(dr)      // [new Date(2020, 0, 1), new Date(2020, 0, 2), new Date(2020, 0, 3)]
  * ```
  *
+ * @group Serializables
  * @since 4.0.0
  */
 export const toArray = Array.from;

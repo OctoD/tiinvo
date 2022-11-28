@@ -2,7 +2,7 @@ import type * as Fn from './Fn.js';
 import type * as Functors from './Functors.js';
 
 /**
- * A `Predicate<A>` is a unary function which accepts an argument `A` and returns a boolean
+ * A `Predicate.T<A>` is a unary function which accepts an argument `A` and returns a boolean
  * in order to tell other functions if some conditions are met by `A`.
  *
  * @example
@@ -110,6 +110,8 @@ export function eq<A>(a: A, b?: any): any {
  * Predicate.guard((x: number) => x > 0)                // true
  * ```
  * 
+ * @param x the value to check
+ * @returns true if a function signature is comparable to a `T<any>`, false otherwise
  * @since 4.0.0
  */
 export const guard: Functors.Guardable<T<unknown>> = (x: unknown): x is T<any> => typeof (x) === 'function' && x.length === 1;
@@ -126,6 +128,7 @@ export const guard: Functors.Guardable<T<unknown>> = (x: unknown): x is T<any> =
  * i(-1) // true
  * ```
  * 
+ * @template A the predicate's argument type
  * @param p the predicate to invert 
  * @returns the inverted predicate
  * @since 4.0.0

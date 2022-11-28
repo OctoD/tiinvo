@@ -160,7 +160,7 @@ export function eq(a: T, b?: T): any {
  * @group Mappables
  * @since 4.0.0
  */
-export function map<B>(a: T, m: Functors.Mappable<T, B>): Result.t<B>;
+export function map<B>(a: T, m: Functors.Mappable<T, B>): Result.T<B>;
 /**
  * Returns a unary function which maps a bigint `a` to 
  * a value `Result.Ok<b>` if a is `bigint`, otherwise returns `Result.Err`.
@@ -182,7 +182,7 @@ export function map<B>(a: T, m: Functors.Mappable<T, B>): Result.t<B>;
  * @group Mappables
  * @since 4.0.0
  */
-export function map<B>(a: Functors.Mappable<T, B>): Fn.Unary<T, Result.t<B>>;
+export function map<B>(a: Functors.Mappable<T, B>): Fn.Unary<T, Result.T<B>>;
 export function map<B>(a: T | Functors.Mappable<T, B>, m?: Functors.Mappable<T, B>): any {
   if (guard(a) && typeof m === 'function') {
     return m(a);

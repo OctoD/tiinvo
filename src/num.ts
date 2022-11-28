@@ -30,6 +30,7 @@ export type T = number;
  * or0({})                  // 0
  * ```
  * 
+ * @param x the value to check
  * @group Guardables
  * @since 4.0.0
  */
@@ -56,11 +57,14 @@ export const guard: Functors.Guardable<T> = (x): x is T => typeof (x) === 'numbe
  * Num.cmp(1, 1)  // 0
  * Num.cmp(1, 0)  // 1
  * Num.cmp(0, 1)  // -1
- * Num.cmp(1)(1)  // 0
- * Num.cmp(1)(0)  // -1
- * Num.cmp(0)(1)  // 1
  * ```
  *  
+ * @param a the left compared number
+ * @param b the right compared number
+ * @returns the comparison result
+ *  - 0 if a equals to b
+ *  - 1 if a is greater than b
+ *  - -1 if a is lesser than b
  * @group Comparables
  * @since 4.0.0
  */
@@ -79,11 +83,14 @@ export function cmp(a: T, b: T): Functors.ComparableResult;
  * ```ts
  * import { Num } from 'tiinvo';
  * 
- * Num.cmp(1)(1)  // 0
- * Num.cmp(1)(0)  // -1
- * Num.cmp(0)(1)  // 1
+ * const cmp0 = Num.cmp(0)
+ * 
+ * cmp0(2)   // 1
+ * cmp0(0)   // 0
+ * cmp0(-2)  // -1
  * ```
  *  
+ * @param a the right number to compare
  * @group Comparables
  * @since 4.0.0
  */
@@ -110,6 +117,9 @@ export function cmp(a: T, b?: T): any {
  * Num.eq(0, 1)  // false
  * ```
  *  
+ * @param a the first number
+ * @param b the last number
+ * @returns true if a equals to b
  * @group Comparables
  * @since 4.0.0
  */
@@ -126,6 +136,8 @@ export function eq(a: T, b: T): boolean;
  * eq1(0)  // false
  * ```
  *  
+ * @param a the first number
+ * @returns the unary function
  * @group Comparables
  * @since 4.0.0
  */
@@ -135,8 +147,7 @@ export function eq(a: T, b?: T): any {
 };
 
 /**
- * Returns true if `a` is greater than `b` if `b` is specified, otherwise returns a
- * function which once called returns true if `b` is greater than `a`
+ * Returns true if `a` is greater than `b`
  * 
  * @example
  * 
@@ -147,13 +158,15 @@ export function eq(a: T, b?: T): any {
  * Num.gt(5, 12)             // false
  * ```
  * 
+ * @param a the left number
+ * @param b the right number
+ * @returns true if `a` is greater than `b`
  * @group Comparables
  * @since 4.0.0
  */
 export function gt(a: T, b: T): boolean;
 /**
- * Returns true if `a` is greater than `b` if `b` is specified, otherwise returns a
- * function which once called returns true if `b` is greater than `a`
+ * Returns a unarty function which once called returns true if `b` is greater than `a`
  * 
  * @example
  * 
@@ -166,6 +179,8 @@ export function gt(a: T, b: T): boolean;
  * gt5(-2)                   // false
  * ```
  * 
+ * @param a the right number
+ * @returns the unary function
  * @group Comparables
  * @since 4.0.0
  */
@@ -179,8 +194,7 @@ export function gt(a: T, b?: any): any {
 }
 
 /**
- * Returns true if `a` is lesser than `b` if `b` is specified, otherwise returns a
- * function which once called returns true if `b` is lesser than `a`
+ * Returns true if `a` is lesser than `b`
  * 
  * @example
  * 
@@ -191,13 +205,15 @@ export function gt(a: T, b?: any): any {
  * Num.lt(5, 12)             // true
  * ```
  * 
+ * @param a left number
+ * @param b right number
+ * @returns true if a is less than b
  * @group Comparables
  * @since 4.0.0
  */
 export function lt(a: T, b: T): boolean;
 /**
- * Returns true if `a` is lesser than `b` if `b` is specified, otherwise returns a
- * function which once called returns true if `b` is lesser than `a`
+ * Returns a function which once called returns true if `b` is less than `a`
  * 
  * @example
  * 
@@ -223,8 +239,7 @@ export function lt(a: T, b?: any): any {
 }
 
 /**
- * Returns true if `a` is great or equal to `b` if `b` is specified, otherwise returns a
- * function which once called returns true if `b` is great or equal to `a`
+ * Returns true if `a` is great or equal to `b`.
  * 
  * @example
  * 
@@ -236,13 +251,13 @@ export function lt(a: T, b?: any): any {
  * Num.gte(10, 10)            // true
  * ```
  * 
+ * @returns true if a is greater or equal to b
  * @group Comparables
  * @since 4.0.0
  */
 export function gte(a: T, b: T): boolean;
 /**
- * Returns true if `a` is great or equal to `b` if `b` is specified, otherwise returns a
- * function which once called returns true if `b` is great or equal to `a`
+ * Returns a function which once called returns true if `b` is great or equal to `a`
  * 
  * @example
  * 
@@ -256,6 +271,8 @@ export function gte(a: T, b: T): boolean;
  * gte5(-2)                   // true
  * ```
  * 
+ * @param a the right number
+ * @returns the unary function
  * @group Comparables
  * @since 4.0.0
  */
@@ -269,8 +286,7 @@ export function gte(a: T, b?: any): any {
 }
 
 /**
- * Returns true if `a` is less or equal to `b` if `b` is specified, otherwise returns a
- * function which once called returns true if `b` is less or equal to `a`
+ * Returns true if `a` is less or equal to `b`.
  * 
  * @example
  * 
@@ -282,13 +298,15 @@ export function gte(a: T, b?: any): any {
  * Num.lte(5, 5)              // true
  * ```
  * 
+ * @param a the left number
+ * @param b the right number
+ * @returns true if a is less or equal than b
  * @group Comparables
  * @since 4.0.0
  */
 export function lte(a: T, b: T): boolean;
 /**
- * Returns true if `a` is less or equal to `b` if `b` is specified, otherwise returns a
- * function which once called returns true if `b` is less or equal to `a`
+ * Returns a function which once called returns true if `b` is less or equal to `a`
  * 
  * @example
  * 
@@ -302,6 +320,8 @@ export function lte(a: T, b: T): boolean;
  * lte5(-2)                   // true
  * ```
  * 
+ * @param a the right number
+ * @returns the unary function
  * @group Comparables
  * @since 4.0.0
  */
@@ -315,8 +335,7 @@ export function lte(a: T, b?: any): any {
 }
 
 /**
- * Returns true if `a` not equal to `b` if `b` is specified, otherwise returns a
- * function which once called returns true if `b` not equal to `a`
+ * Returns true if `a` not equal to `b`.
  * 
  * @example
  * 
@@ -328,13 +347,15 @@ export function lte(a: T, b?: any): any {
  * Num.ne(5, 5)              // false
  * ```
  * 
+ * @param a the left number
+ * @param b the right number
+ * @returns true if a is not equal to b
  * @group Comparables
  * @since 4.0.0
  */
 export function ne(a: T, b: T): boolean;
 /**
- * Returns true if `a` not equal to `b` if `b` is specified, otherwise returns a
- * function which once called returns true if `b` not equal to `a`
+ * Returns a unary function which once called returns true if `b` not equal to `a`
  * 
  * @example
  * 
@@ -348,6 +369,8 @@ export function ne(a: T, b: T): boolean;
  * ne5(-2)                   // true
  * ```
  * 
+ * @param a the right number
+ * @returns the unary function
  * @group Comparables
  * @since 4.0.0
  */
@@ -632,6 +655,9 @@ export function toPrecision(a: T, b?: any): any {
  * Num.add(5, 12)             // 17
  * ```
  * 
+ * @param a the left number
+ * @param b the right number
+ * @returns the sum
  * @group Operables
  * @since 4.0.0
  */
@@ -650,6 +676,8 @@ export function add(a: T, b: T): T;
  * add5(10)                   // 15
  * ```
  * 
+ * @param a the right number
+ * @retuns the unary function
  * @group Operables
  * @since 4.0.0
  */
@@ -674,6 +702,9 @@ export function add(a: T, b?: T): any {
  * Num.div(12, 3)             // 4
  * ```
  * 
+ * @param a the left number
+ * @param b the right number
+ * @returns the division
  * @group Operables
  * @since 4.0.0
  */
@@ -691,6 +722,8 @@ export function div(a: T, b: T): T;
  * div2(4)                    // 2
  * ```
  * 
+ * @param a the right number
+ * @returns the unary function
  * @group Operables
  * @since 4.0.0
  */
@@ -715,6 +748,9 @@ export function div(a: T, b?: T): any {
  * Num.mod(3, 2)             // 1
  * ```
  * 
+ * @param a the left number
+ * @param b the right number
+ * @returns the modulus
  * @group Operables
  * @since 4.0.0
  */
@@ -734,6 +770,8 @@ export function mod(a: T, b: T): T;
  * mod2(15)                   // 1
  * ```
  * 
+ * @param a the right number
+ * @returns the unary function
  * @group Operables
  * @since 4.0.0
  */
@@ -758,6 +796,9 @@ export function mod(a: T, b?: T): any {
  * Num.mul(5, 12)             // 60
  * ```
  * 
+ * @param a the left number
+ * @param b the right number
+ * @returns the multiplication
  * @group Operables
  * @since 4.0.0
  */
@@ -775,6 +816,7 @@ export function mul(a: T, b: T): T;
  * mul5(10)                   // 50
  * ```
  * 
+ * @param a the right number
  * @group Operables
  * @since 4.0.0
  */
@@ -799,6 +841,9 @@ export function mul(a: T, b?: T): any {
  * Num.pow(3, 2)             // 9
  * ```
  * 
+ * @param a the left number
+ * @param b the right number
+ * @returns the result
  * @group Operables
  * @since 4.0.0
  */
@@ -816,6 +861,7 @@ export function pow(a: T, b: T): T;
  * pow5(10)                   // 100_000
  * ```
  * 
+ * @param a the exponent
  * @group Operables
  * @since 4.0.0
  */
@@ -840,6 +886,9 @@ export function pow(a: T, b?: T): any {
  * Num.root(9, 2)             // 3
  * ```
  * 
+ * @param a the left number
+ * @param b the right number
+ * @returns the result
  * @group Operables
  * @since 4.0.0
  */
@@ -861,6 +910,7 @@ export function root(a: T, b: T): T;
  * root2(9)                   // 3
  * ```
  * 
+ * @param a the root
  * @group Operables
  * @since 4.0.0
  */
@@ -874,8 +924,7 @@ export function root(a: T, b?: T): any {
 }
 
 /**
- * Subtracts `b` to `a` if both specified, otherwise returns a `Unary<number, number>` 
- * function which once called subtracts `a` to `b`
+ * Subtracts `b` to `a`
  * 
  * @example
  * 
@@ -886,6 +935,9 @@ export function root(a: T, b?: T): any {
  * Num.sub(5, 12)             // -7
  * ```
  * 
+ * @param a the left number
+ * @param b the right number
+ * @returns the result
  * @group Operables
  * @since 4.0.0
  */
@@ -904,6 +956,8 @@ export function sub(a: T, b: T): T;
  * sub5(-2)                   // -7
  * ```
  * 
+ * @param a the right number
+ * @returns the unary function
  * @group Operables
  * @since 4.0.0
  */
@@ -935,6 +989,9 @@ export function sub(a: T, b?: T): any {
  * collection.sort(Num.asc)     // [3, 4, 5, 6, 10, 12, 22]
  * ```
  * 
+ * @param a the left number
+ * @param b the right number
+ * @returns the comparison result
  * @group Sortables
  * @since 4.0.0
  */
@@ -954,6 +1011,8 @@ export function asc(a: T, b: T): Functors.ComparableResult;
  * collection.sort(Num.asc)     // [3, 4, 5, 6, 10, 12, 22]
  * ```
  * 
+ * @param a the right number
+ * @returns the unary function
  * @group Sortables
  * @since 4.0.0
  */
@@ -981,6 +1040,9 @@ export function asc(a: T, b?: any): any {
  * collection.sort(Num.desc)     // [22, 12, 10, 6, 5, 4, 3]
  * ```
  * 
+ * @param a the left number
+ * @param b the right number
+ * @returns the comparison result
  * @group Sortables
  * @since 4.0.0
  */
@@ -1000,6 +1062,8 @@ export function desc(a: T, b: T): Functors.ComparableResult;
  * collection.sort(Num.desc)     // [22, 12, 10, 6, 5, 4, 3]
  * ```
  * 
+ * @param a the right number
+ * @returns the unary function
  * @group Sortables
  * @since 4.0.0
  */
@@ -1029,6 +1093,8 @@ export function desc(a: T, b?: any): any {
  * Num.toBin(10)        // "0b1010"
  * ```
  * 
+ * @param a the number to convert to binary
+ * @returns the binary string
  * @group Serializables
  * @since 4.0.0
  */
@@ -1047,6 +1113,8 @@ export const toBin = map(x => '0b' + x.toString(2));
  * Num.toHex(10)        // "0xa"
  * ```
  * 
+ * @param a the number to convert to hexadecimal
+ * @returns the hexadecimal string
  * @group Serializables
  * @since 4.0.0
  */
@@ -1065,6 +1133,8 @@ export const toHex = map(x => '0x' + x.toString(16));
  * Num.toOct(10)        // "0o12"
  * ```
  * 
+ * @param a the number to convert to octal
+ * @returns the octal string
  * @group Serializables
  * @since 4.0.0
  */
@@ -1083,6 +1153,8 @@ export const toOct = map(x => '0o' + x.toString(8));
  * Num.toJSON(10)       // "10"
  * ```
  * 
+ * @param a the number to convert to json value
+ * @returns the string
  * @group Serializables
  * @since 4.0.0
  */
@@ -1101,6 +1173,8 @@ export const toJSON = map(JSON.stringify);
  * Num.toString(10)       // "10"
  * ```
  * 
+ * @param a the number to convert to string
+ * @returns the string
  * @group Serializables
  * @since 4.0.0
  */

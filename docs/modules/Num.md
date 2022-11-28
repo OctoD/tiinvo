@@ -8,6 +8,10 @@
 
 - [T](Num.md#t)
 
+### Guardables
+
+- [guard](Num.md#guard)
+
 ### Comparables
 
 - [cmp](Num.md#cmp)
@@ -17,6 +21,18 @@
 - [gte](Num.md#gte)
 - [lte](Num.md#lte)
 - [ne](Num.md#ne)
+
+### Mappables
+
+- [map](Num.md#map)
+- [mapOr](Num.md#mapor)
+
+### Predicates
+
+- [isEven](Num.md#iseven)
+- [isOdd](Num.md#isodd)
+- [isNegative](Num.md#isnegative)
+- [isPositive](Num.md#ispositive)
 
 ### Natives
 
@@ -39,6 +55,14 @@
 - [asc](Num.md#asc)
 - [desc](Num.md#desc)
 
+### Serializables
+
+- [toBin](Num.md#tobin)
+- [toHex](Num.md#tohex)
+- [toOct](Num.md#tooct)
+- [toJSON](Num.md#tojson)
+- [toString](Num.md#tostring)
+
 ## Type Aliases
 
 ### T
@@ -54,6 +78,49 @@ A number type alias
 #### Defined in
 
 src/Num.ts:9
+
+## Guardables
+
+### guard
+
+▸ **guard**(`x`): x is number
+
+Checks (at compile and runtime) if a given parameter `x` is a `number`
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo'
+
+const or0 = (x: unknown): t => Num.guard(x) ? x : 0;
+
+or0(10)                  // 10
+or0(20)                  // 20
+or0(-1)                  // -1
+or0(4e12)                // 4e12
+or0('hello world')       // 0          
+or0(true)                // 0  
+or0(false)               // 0  
+or0({})                  // 0
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `x` | `unknown` | the value to check |
+
+#### Returns
+
+x is number
+
+#### Defined in
+
+src/Functors.ts:338
 
 ## Comparables
 
@@ -77,9 +144,6 @@ import { Num } from 'tiinvo';
 Num.cmp(1, 1)  // 0
 Num.cmp(1, 0)  // 1
 Num.cmp(0, 1)  // -1
-Num.cmp(1)(1)  // 0
-Num.cmp(1)(0)  // -1
-Num.cmp(0)(1)  // 1
 ```
 
 **`Since`**
@@ -88,18 +152,23 @@ Num.cmp(0)(1)  // 1
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the left compared number |
+| `b` | `number` | the right compared number |
 
 #### Returns
 
 [`ComparableResult`](Functors.md#comparableresult)
 
+the comparison result
+ - 0 if a equals to b
+ - 1 if a is greater than b
+ - -1 if a is lesser than b
+
 #### Defined in
 
-src/Num.ts:67
+src/Num.ts:71
 
 ▸ **cmp**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -116,9 +185,11 @@ Returns:
 ```ts
 import { Num } from 'tiinvo';
 
-Num.cmp(1)(1)  // 0
-Num.cmp(1)(0)  // -1
-Num.cmp(0)(1)  // 1
+const cmp0 = Num.cmp(0)
+
+cmp0(2)   // 1
+cmp0(0)   // 0
+cmp0(-2)  // -1
 ```
 
 **`Since`**
@@ -127,9 +198,9 @@ Num.cmp(0)(1)  // 1
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the right number to compare |
 
 #### Returns
 
@@ -137,7 +208,7 @@ Num.cmp(0)(1)  // 1
 
 #### Defined in
 
-src/Num.ts:90
+src/Num.ts:97
 
 ___
 
@@ -161,18 +232,20 @@ Num.eq(0, 1)  // false
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the first number |
+| `b` | `number` | the last number |
 
 #### Returns
 
 `boolean`
 
+true if a equals to b
+
 #### Defined in
 
-src/Num.ts:116
+src/Num.ts:126
 
 ▸ **eq**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), `boolean`\>
 
@@ -193,17 +266,19 @@ eq1(0)  // false
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the first number |
 
 #### Returns
 
 [`Unary`](Fn.md#unary)<[`T`](Num.md#t), `boolean`\>
 
+the unary function
+
 #### Defined in
 
-src/Num.ts:132
+src/Num.ts:144
 
 ___
 
@@ -211,8 +286,7 @@ ___
 
 ▸ **gt**(`a`, `b`): `boolean`
 
-Returns true if `a` is greater than `b` if `b` is specified, otherwise returns a
-function which once called returns true if `b` is greater than `a`
+Returns true if `a` is greater than `b`
 
 **`Example`**
 
@@ -229,23 +303,24 @@ Num.gt(5, 12)             // false
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the left number |
+| `b` | `number` | the right number |
 
 #### Returns
 
 `boolean`
 
+true if `a` is greater than `b`
+
 #### Defined in
 
-src/Num.ts:153
+src/Num.ts:167
 
 ▸ **gt**(`a`): [`Unary`](Fn.md#unary)<`number`, `boolean`\>
 
-Returns true if `a` is greater than `b` if `b` is specified, otherwise returns a
-function which once called returns true if `b` is greater than `a`
+Returns a unarty function which once called returns true if `b` is greater than `a`
 
 **`Example`**
 
@@ -264,17 +339,19 @@ gt5(-2)                   // false
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the right number |
 
 #### Returns
 
 [`Unary`](Fn.md#unary)<`number`, `boolean`\>
 
+the unary function
+
 #### Defined in
 
-src/Num.ts:172
+src/Num.ts:187
 
 ___
 
@@ -282,8 +359,7 @@ ___
 
 ▸ **lt**(`a`, `b`): `boolean`
 
-Returns true if `a` is lesser than `b` if `b` is specified, otherwise returns a
-function which once called returns true if `b` is lesser than `a`
+Returns true if `a` is lesser than `b`
 
 **`Example`**
 
@@ -300,23 +376,24 @@ Num.lt(5, 12)             // true
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | left number |
+| `b` | `number` | right number |
 
 #### Returns
 
 `boolean`
 
+true if a is less than b
+
 #### Defined in
 
-src/Num.ts:197
+src/Num.ts:214
 
 ▸ **lt**(`a`): [`Unary`](Fn.md#unary)<`number`, `boolean`\>
 
-Returns true if `a` is lesser than `b` if `b` is specified, otherwise returns a
-function which once called returns true if `b` is lesser than `a`
+Returns a function which once called returns true if `b` is less than `a`
 
 **`Example`**
 
@@ -345,7 +422,7 @@ lt5(-2)                   // false
 
 #### Defined in
 
-src/Num.ts:216
+src/Num.ts:232
 
 ___
 
@@ -353,8 +430,7 @@ ___
 
 ▸ **gte**(`a`, `b`): `boolean`
 
-Returns true if `a` is great or equal to `b` if `b` is specified, otherwise returns a
-function which once called returns true if `b` is great or equal to `a`
+Returns true if `a` is great or equal to `b`.
 
 **`Example`**
 
@@ -381,14 +457,15 @@ Num.gte(10, 10)            // true
 
 `boolean`
 
+true if a is greater or equal to b
+
 #### Defined in
 
-src/Num.ts:242
+src/Num.ts:258
 
 ▸ **gte**(`a`): [`Unary`](Fn.md#unary)<`number`, `boolean`\>
 
-Returns true if `a` is great or equal to `b` if `b` is specified, otherwise returns a
-function which once called returns true if `b` is great or equal to `a`
+Returns a function which once called returns true if `b` is great or equal to `a`
 
 **`Example`**
 
@@ -408,17 +485,19 @@ gte5(-2)                   // true
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the right number |
 
 #### Returns
 
 [`Unary`](Fn.md#unary)<`number`, `boolean`\>
 
+the unary function
+
 #### Defined in
 
-src/Num.ts:262
+src/Num.ts:279
 
 ___
 
@@ -426,8 +505,7 @@ ___
 
 ▸ **lte**(`a`, `b`): `boolean`
 
-Returns true if `a` is less or equal to `b` if `b` is specified, otherwise returns a
-function which once called returns true if `b` is less or equal to `a`
+Returns true if `a` is less or equal to `b`.
 
 **`Example`**
 
@@ -445,23 +523,24 @@ Num.lte(5, 5)              // true
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the left number |
+| `b` | `number` | the right number |
 
 #### Returns
 
 `boolean`
 
+true if a is less or equal than b
+
 #### Defined in
 
-src/Num.ts:288
+src/Num.ts:307
 
 ▸ **lte**(`a`): [`Unary`](Fn.md#unary)<`number`, `boolean`\>
 
-Returns true if `a` is less or equal to `b` if `b` is specified, otherwise returns a
-function which once called returns true if `b` is less or equal to `a`
+Returns a function which once called returns true if `b` is less or equal to `a`
 
 **`Example`**
 
@@ -481,17 +560,19 @@ lte5(-2)                   // true
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the right number |
 
 #### Returns
 
 [`Unary`](Fn.md#unary)<`number`, `boolean`\>
 
+the unary function
+
 #### Defined in
 
-src/Num.ts:308
+src/Num.ts:328
 
 ___
 
@@ -499,8 +580,7 @@ ___
 
 ▸ **ne**(`a`, `b`): `boolean`
 
-Returns true if `a` not equal to `b` if `b` is specified, otherwise returns a
-function which once called returns true if `b` not equal to `a`
+Returns true if `a` not equal to `b`.
 
 **`Example`**
 
@@ -518,23 +598,24 @@ Num.ne(5, 5)              // false
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the left number |
+| `b` | `number` | the right number |
 
 #### Returns
 
 `boolean`
 
+true if a is not equal to b
+
 #### Defined in
 
-src/Num.ts:334
+src/Num.ts:356
 
 ▸ **ne**(`a`): [`Unary`](Fn.md#unary)<`number`, `boolean`\>
 
-Returns true if `a` not equal to `b` if `b` is specified, otherwise returns a
-function which once called returns true if `b` not equal to `a`
+Returns a unary function which once called returns true if `b` not equal to `a`
 
 **`Example`**
 
@@ -554,17 +635,270 @@ ne5(-2)                   // true
 
 #### Parameters
 
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the right number |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<`number`, `boolean`\>
+
+the unary function
+
+#### Defined in
+
+src/Num.ts:377
+
+## Mappables
+
+### map
+
+▸ **map**<`b`\>(`m`): (`a`: `number`) => `Error` \| `b`
+
+Maps a number `a` to a value `Result.t<b>` if a is `number`, otherwise returns `Err`.
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+const toHex = Num.map(x => '0x' + x.toString(16))
+
+toHex(10)      // 0xa
+toHex("a")     // Error("a is not a number")
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `b` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `m` | [`Mappable`](Functors.md#mappable)<`number`, `b`\> |
+
+#### Returns
+
+`fn`
+
+▸ (`a`): `Error` \| `b`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+
+##### Returns
+
+`Error` \| `b`
+
+#### Defined in
+
+src/Num.ts:407
+
+___
+
+### mapOr
+
+▸ **mapOr**<`b`\>(`m`, `b`): (`a`: `number`) => `b`
+
+Maps a number `a` to a value `Result.t<b>` if a is `number`, otherwise returns `b`.
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+const toHex = Num.mapOr(x => '0x' + x.toString(16), "0x0")
+
+toHex(10)      // 0xa
+toHex("a")     // 0x0
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `b` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `m` | [`Mappable`](Functors.md#mappable)<`number`, `b`\> |
+| `b` | `b` |
+
+#### Returns
+
+`fn`
+
+▸ (`a`): `b`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+
+##### Returns
+
+`b`
+
+#### Defined in
+
+src/Num.ts:426
+
+## Predicates
+
+### isEven
+
+▸ **isEven**(`a`): `boolean`
+
+Returns true if a number `x` is even.
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+Num.isEven(10)   // true
+Num.isEven(91)   // false
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
 | Name | Type |
 | :------ | :------ |
 | `a` | `number` |
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<`number`, `boolean`\>
+`boolean`
 
 #### Defined in
 
-src/Num.ts:354
+src/Functors.ts:401
+
+___
+
+### isOdd
+
+▸ **isOdd**(`a`): `boolean`
+
+Returns true if a number `x` is odd.
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+Num.isOdd(10)   // false
+Num.isOdd(91)   // true
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+
+#### Returns
+
+`boolean`
+
+#### Defined in
+
+src/Functors.ts:401
+
+___
+
+### isNegative
+
+▸ **isNegative**(`a`): `boolean`
+
+Returns true if a number `x` is positive.
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+Num.isNegative(-1)   // true
+Num.isNegative(10)   // false
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+
+#### Returns
+
+`boolean`
+
+#### Defined in
+
+src/Functors.ts:401
+
+___
+
+### isPositive
+
+▸ **isPositive**(`a`): `boolean`
+
+Returns true if a number `x` is positive.
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+Num.isPositive(-1)   // false
+Num.isPositive(10)   // true
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `number` |
+
+#### Returns
+
+`boolean`
+
+#### Defined in
+
+src/Functors.ts:401
 
 ## Natives
 
@@ -603,7 +937,7 @@ Num.toExponential(10, 2)        // "1.00e+1"
 
 #### Defined in
 
-src/Num.ts:499
+src/Num.ts:522
 
 ▸ **toExponential**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), `string`\>
 
@@ -637,7 +971,7 @@ Num.toExponential(10)(2)        // "2.0000000000e+0"
 
 #### Defined in
 
-src/Num.ts:518
+src/Num.ts:541
 
 ___
 
@@ -676,7 +1010,7 @@ Num.toFixed(10.505, 2)        // "10.51"
 
 #### Defined in
 
-src/Num.ts:545
+src/Num.ts:568
 
 ▸ **toFixed**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), `string`\>
 
@@ -710,7 +1044,7 @@ Num.toFixed(10.505)(2)        // "2.0000000000"
 
 #### Defined in
 
-src/Num.ts:564
+src/Num.ts:587
 
 ___
 
@@ -749,7 +1083,7 @@ Num.toPrecision(10, 2)        // "10"
 
 #### Defined in
 
-src/Num.ts:591
+src/Num.ts:614
 
 ▸ **toPrecision**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), `string`\>
 
@@ -783,7 +1117,7 @@ Num.toPrecision(10)(2)        // "2.000000000"
 
 #### Defined in
 
-src/Num.ts:610
+src/Num.ts:633
 
 ## Operables
 
@@ -808,18 +1142,20 @@ Num.add(5, 12)             // 17
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the left number |
+| `b` | `number` | the right number |
 
 #### Returns
 
 [`T`](Num.md#t)
 
+the sum
+
 #### Defined in
 
-src/Num.ts:638
+src/Num.ts:664
 
 ▸ **add**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
@@ -836,15 +1172,19 @@ add5(5)                    // 10
 add5(10)                   // 15
 ```
 
+**`Retuns`**
+
+the unary function
+
 **`Since`**
 
 4.0.0
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the right number |
 
 #### Returns
 
@@ -852,7 +1192,7 @@ add5(10)                   // 15
 
 #### Defined in
 
-src/Num.ts:656
+src/Num.ts:684
 
 ___
 
@@ -877,18 +1217,20 @@ Num.div(12, 3)             // 4
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the left number |
+| `b` | `number` | the right number |
 
 #### Returns
 
 [`T`](Num.md#t)
 
+the division
+
 #### Defined in
 
-src/Num.ts:680
+src/Num.ts:711
 
 ▸ **div**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
@@ -910,17 +1252,19 @@ div2(4)                    // 2
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the right number |
 
 #### Returns
 
 [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
+the unary function
+
 #### Defined in
 
-src/Num.ts:697
+src/Num.ts:730
 
 ___
 
@@ -945,18 +1289,20 @@ Num.mod(3, 2)             // 1
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the left number |
+| `b` | `number` | the right number |
 
 #### Returns
 
 [`T`](Num.md#t)
 
+the modulus
+
 #### Defined in
 
-src/Num.ts:721
+src/Num.ts:757
 
 ▸ **mod**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
@@ -980,17 +1326,19 @@ mod2(15)                   // 1
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the right number |
 
 #### Returns
 
 [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
+the unary function
+
 #### Defined in
 
-src/Num.ts:740
+src/Num.ts:778
 
 ___
 
@@ -1015,18 +1363,20 @@ Num.mul(5, 12)             // 60
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the left number |
+| `b` | `number` | the right number |
 
 #### Returns
 
 [`T`](Num.md#t)
 
+the multiplication
+
 #### Defined in
 
-src/Num.ts:764
+src/Num.ts:805
 
 ▸ **mul**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
@@ -1048,9 +1398,9 @@ mul5(10)                   // 50
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the right number |
 
 #### Returns
 
@@ -1058,7 +1408,7 @@ mul5(10)                   // 50
 
 #### Defined in
 
-src/Num.ts:781
+src/Num.ts:823
 
 ___
 
@@ -1083,18 +1433,20 @@ Num.pow(3, 2)             // 9
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the left number |
+| `b` | `number` | the right number |
 
 #### Returns
 
 [`T`](Num.md#t)
 
+the result
+
 #### Defined in
 
-src/Num.ts:805
+src/Num.ts:850
 
 ▸ **pow**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
@@ -1116,9 +1468,9 @@ pow5(10)                   // 100_000
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the exponent |
 
 #### Returns
 
@@ -1126,7 +1478,7 @@ pow5(10)                   // 100_000
 
 #### Defined in
 
-src/Num.ts:822
+src/Num.ts:868
 
 ___
 
@@ -1151,18 +1503,20 @@ Num.root(9, 2)             // 3
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the left number |
+| `b` | `number` | the right number |
 
 #### Returns
 
 [`T`](Num.md#t)
 
+the result
+
 #### Defined in
 
-src/Num.ts:846
+src/Num.ts:895
 
 ▸ **root**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
@@ -1188,9 +1542,9 @@ root2(9)                   // 3
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the root |
 
 #### Returns
 
@@ -1198,7 +1552,7 @@ root2(9)                   // 3
 
 #### Defined in
 
-src/Num.ts:867
+src/Num.ts:917
 
 ___
 
@@ -1206,8 +1560,7 @@ ___
 
 ▸ **sub**(`a`, `b`): [`T`](Num.md#t)
 
-Subtracts `b` to `a` if both specified, otherwise returns a `Unary<number, number>` 
-function which once called subtracts `a` to `b`
+Subtracts `b` to `a`
 
 **`Example`**
 
@@ -1224,18 +1577,20 @@ Num.sub(5, 12)             // -7
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the left number |
+| `b` | `number` | the right number |
 
 #### Returns
 
 [`T`](Num.md#t)
 
+the result
+
 #### Defined in
 
-src/Num.ts:892
+src/Num.ts:944
 
 ▸ **sub**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
@@ -1258,17 +1613,19 @@ sub5(-2)                   // -7
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the right number |
 
 #### Returns
 
 [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
+the unary function
+
 #### Defined in
 
-src/Num.ts:910
+src/Num.ts:964
 
 ## Sortables
 
@@ -1296,18 +1653,20 @@ collection.sort(Num.asc)     // [3, 4, 5, 6, 10, 12, 22]
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the left number |
+| `b` | `number` | the right number |
 
 #### Returns
 
 [`ComparableResult`](Functors.md#comparableresult)
 
+the comparison result
+
 #### Defined in
 
-src/Num.ts:941
+src/Num.ts:998
 
 ▸ **asc**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -1331,17 +1690,19 @@ collection.sort(Num.asc)     // [3, 4, 5, 6, 10, 12, 22]
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the right number |
 
 #### Returns
 
 [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
+the unary function
+
 #### Defined in
 
-src/Num.ts:960
+src/Num.ts:1019
 
 ___
 
@@ -1369,18 +1730,20 @@ collection.sort(Num.desc)     // [22, 12, 10, 6, 5, 4, 3]
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the left number |
+| `b` | `number` | the right number |
 
 #### Returns
 
 [`ComparableResult`](Functors.md#comparableresult)
 
+the comparison result
+
 #### Defined in
 
-src/Num.ts:987
+src/Num.ts:1049
 
 ▸ **desc**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -1404,14 +1767,206 @@ collection.sort(Num.desc)     // [22, 12, 10, 6, 5, 4, 3]
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the right number |
 
 #### Returns
 
 [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
+the unary function
+
 #### Defined in
 
-src/Num.ts:1006
+src/Num.ts:1070
+
+## Serializables
+
+### toBin
+
+▸ **toBin**(`a`): `string` \| `Error`
+
+Returns a number in binary notation.
+
+If the passed argument at runtime is not a number, an Error will be returned.
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+Num.toBin(10)        // "0b1010"
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the number to convert to binary |
+
+#### Returns
+
+`string` \| `Error`
+
+the binary string
+
+#### Defined in
+
+src/Num.ts:407
+
+___
+
+### toHex
+
+▸ **toHex**(`a`): `string` \| `Error`
+
+Returns a number in hexadecimal notation
+
+If the passed argument at runtime is not a number, an Error will be returned.
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+Num.toHex(10)        // "0xa"
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the number to convert to hexadecimal |
+
+#### Returns
+
+`string` \| `Error`
+
+the hexadecimal string
+
+#### Defined in
+
+src/Num.ts:407
+
+___
+
+### toOct
+
+▸ **toOct**(`a`): `string` \| `Error`
+
+Returns a number in octal notation
+
+If the passed argument at runtime is not a number, an Error will be returned.
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+Num.toOct(10)        // "0o12"
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the number to convert to octal |
+
+#### Returns
+
+`string` \| `Error`
+
+the octal string
+
+#### Defined in
+
+src/Num.ts:407
+
+___
+
+### toJSON
+
+▸ **toJSON**(`a`): `string` \| `Error`
+
+Returns a number in json notation.
+
+If the passed argument at runtime is not a number, an Error will be returned.
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+Num.toJSON(10)       // "10"
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the number to convert to json value |
+
+#### Returns
+
+`string` \| `Error`
+
+the string
+
+#### Defined in
+
+src/Num.ts:407
+
+___
+
+### toString
+
+▸ **toString**(`a`): `string` \| `Error`
+
+Returns a stringified number.
+
+If the passed argument at runtime is not a number, an Error will be returned.
+
+**`Example`**
+
+```ts
+import { Num } from 'tiinvo';
+
+Num.toString(10)       // "10"
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `number` | the number to convert to string |
+
+#### Returns
+
+`string` \| `Error`
+
+the string
+
+#### Defined in
+
+src/Num.ts:407

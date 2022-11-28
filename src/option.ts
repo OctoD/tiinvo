@@ -12,12 +12,12 @@ import { make as makecatch } from './Catch.js';
 export type None = null | undefined;
 
 /**
- * Some<a> represents a value which could have been a possible nullable or undefined
+ * Some<A> represents a value which could have been a possible nullable or undefined
  * @since 4.0.0
  */
 export type Some<A> = A extends None ? never : A;
 /**
- * The type `Option.T<a>` represents a value that could be both `a` or `null` or `undefined`.
+ * The type `Option.T<A>` represents a value that could be both `a` or `null` or `undefined`.
  * @since 4.0.0
  */
 export type T<A> = Some<A> | None;
@@ -32,7 +32,7 @@ export type T<A> = Some<A> | None;
  * Option.isNone(null);       // true
  * Option.isNone(undefined);  // true
  * ```
- * @param value 
+ * @param x 
  * @returns 
  * @since 4.0.0
  */
@@ -48,13 +48,13 @@ export const isNone: Functors.Guardable<None> = (x): x is None => x === undefine
  * Option.isSome(undefined) // false
  * ```
  * 
- * @param value 
+ * @param x 
  * @returns 
  * @since 4.0.0
  */
 export const isSome: Functors.Guardable<Some<unknown>> = (x): x is Some<unknown> => x !== undefined && x !== null;
 /**
- * Returns `true` if the option is `Some<a>` and the value type is satisfied by the guard, otherwise `false`.
+ * Returns `true` if the option is `Some<A>` and the value type is satisfied by the guard, otherwise `false`.
  * 
  * If the option is `None`, it will always return `true`.
  * 
@@ -83,7 +83,7 @@ export const guardOf = <A>(f: Functors.Guardable<A>): Functors.Guardable<T<A>> =
 //#region comparables
 
 /**
- * Compares two options `T<a>` by a given `Comparable<a>`.
+ * Compares two options `T<A>` by a given `Comparable<A>`.
  * 
  * Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
  * 
@@ -106,7 +106,7 @@ export const guardOf = <A>(f: Functors.Guardable<A>): Functors.Guardable<T<A>> =
  */
 export function cmp<A>(c: Functors.Comparable<A>, a: T<A>, b: T<A>): Functors.ComparableResult;
 /**
- * Compares two options `T<a>` by a given `Comparable<a>`.
+ * Compares two options `T<A>` by a given `Comparable<A>`.
  * 
  * Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
  * 
@@ -129,7 +129,7 @@ export function cmp<A>(c: Functors.Comparable<A>, a: T<A>, b: T<A>): Functors.Co
  */
 export function cmp<A>(c: Functors.Comparable<A>, a: T<A>): Fn.Unary<T<A>, Functors.ComparableResult>;
 /**
- * Compares two options `T<a>` by a given `Comparable<a>`.
+ * Compares two options `T<A>` by a given `Comparable<A>`.
  * 
  * Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
  * 
@@ -178,7 +178,7 @@ export function cmp<A>(c: Functors.Comparable<A>, a?: T<A>, b?: T<A>): any {
 };
 
 /**
- * Returns true if two options `T<a>` are equal, false otherwise.
+ * Returns true if two options `T<A>` are equal, false otherwise.
  * 
  * ```ts
  * import { Num, Option } from 'tiinvo';
@@ -198,7 +198,7 @@ export function cmp<A>(c: Functors.Comparable<A>, a?: T<A>, b?: T<A>): any {
  */
 export function eq<A>(e: Functors.Equatable<A>, a: T<A>, b: T<A>): boolean;
 /**
- * Returns true if two options `T<a>` are equal, false otherwise.
+ * Returns true if two options `T<A>` are equal, false otherwise.
  * 
  * ```ts
  * import { Num, Option } from 'tiinvo';
@@ -215,7 +215,7 @@ export function eq<A>(e: Functors.Equatable<A>, a: T<A>, b: T<A>): boolean;
  */
 export function eq<A>(e: Functors.Equatable<A>, a: T<A>): Fn.Unary<T<A>, boolean>;
 /**
- * Returns true if two options `T<a>` are equal, false otherwise.
+ * Returns true if two options `T<A>` are equal, false otherwise.
  * 
  * ```ts
  * import { Num, Option } from 'tiinvo';
@@ -257,7 +257,7 @@ export function eq<A>(e: Functors.Equatable<A>, a?: T<A>, b?: T<A>): any {
 //#region filterables
 
 /**
- * Returns `Some<a>` if the value is `Some<a>` and the predicate returns true, otherwise returns `None`.
+ * Returns `Some<A>` if the value is `Some<A>` and the predicate returns true, otherwise returns `None`.
  * 
  * ```typescript
  * import { Option, Num } from 'tiinvo';
@@ -267,11 +267,18 @@ export function eq<A>(e: Functors.Equatable<A>, a?: T<A>, b?: T<A>): any {
  * Option.filter(Num.gt(1), null) // null
  * ```
  * 
+ * @template A the type to filter
+ * @param a the predicate
+ * @param b the value to filter
+ * @returns 
+ *  - `T<A>` if the predicate is satisfied
+ *  - `None` if the predicate is not satisfied
+ * @group Filterables
  * @since 4.0.0
  */
 export function filter<A>(a: Functors.Mappable<A, boolean>, b: T<A>): T<A>;
 /**
- * Returns `Some<a>` if the value is `Some<a>` and the predicate returns true, otherwise returns `None`.
+ * Returns `Some<A>` if the value is `Some<A>` and the predicate returns true, otherwise returns `None`.
  * 
  * ```typescript
  * import { Option, Num } from 'tiinvo';
@@ -283,6 +290,9 @@ export function filter<A>(a: Functors.Mappable<A, boolean>, b: T<A>): T<A>;
  * f(null) // null
  * ```
  * 
+ * @template A the type to filter
+ * @param a the predicate
+ * @group Filterables
  * @since 4.0.0
  */
 export function filter<A>(a: Functors.Mappable<A, boolean>): Fn.Unary<T<A>, T<A>>;
@@ -299,7 +309,7 @@ export function filter<A>(a: Functors.Mappable<A, boolean>, b?: T<A>): any {
 //#region mappables
 
 /**
- * Maps an `Option.T<a>` to another `Option.T<b>` if is `Some<a>`, otherwise returns `None`.
+ * Maps an `Option.T<A>` to another `Option.T<b>` if is `Some<A>`, otherwise returns `None`.
  * 
  * ```typescript
  * import { Option, Num } from 'tiinvo';
@@ -310,12 +320,16 @@ export function filter<A>(a: Functors.Mappable<A, boolean>, b?: T<A>): any {
  * Option.map(Num.add(1), null) // null
  * ```
  * 
+ * @template A the starting type
+ * @template B the mapped type
+ * @param m the mappable
+ * @param a the value to map
  * @group Mappables
  * @since 4.0.0
  */
 export function map<A, B>(m: Functors.Mappable<A, B>, a: T<A>): T<B>;
 /**
- * Maps an `Option.T<a>` to another `Option.T<b>` if is `Some<a>`, otherwise returns `None`.
+ * Maps an `Option.T<A>` to another `Option.T<b>` if is `Some<A>`, otherwise returns `None`.
  * 
  * ```typescript
  * import { Option, Num } from 'tiinvo';
@@ -326,6 +340,9 @@ export function map<A, B>(m: Functors.Mappable<A, B>, a: T<A>): T<B>;
  * m(null) // null
  * ```
  * 
+ * @template A the starting type
+ * @template B the mapped type
+ * @param m the mappable
  * @group Mappables
  * @since 4.0.0
  */
@@ -341,7 +358,7 @@ export function map<A, B>(m: Functors.Mappable<A, B>, a?: T<A>): any {
 };
 
 /**
- * Maps an `Option.T<a>` to another `Option.T<b>` if is `Some<a>`, otherwise returns `b`.
+ * Maps an `Option.T<A>` to another `Option.T<b>` if is `Some<A>`, otherwise returns `b`.
  * 
  * ```typescript
  * import { Option, Num } from 'tiinvo';
@@ -350,12 +367,17 @@ export function map<A, B>(m: Functors.Mappable<A, B>, a?: T<A>): any {
  * Option.mapOr(Num.add(2), null, 0) // 0
  * ```
  * 
+ * @template A the starting type
+ * @template B the mapped type
+ * @param m the mappable
+ * @param a the value to map
+ * @param b the fallback value
  * @group Mappables
  * @since 4.0.0
  */
 export function mapOr<A, B>(m: Functors.Mappable<A, B>, a: T<A>, b: B): B;
 /**
- * Maps an `Option.T<a>` to another `Option.T<b>` if is `Some<a>`, otherwise returns `b`.
+ * Maps an `Option.T<A>` to another `Option.T<b>` if is `Some<A>`, otherwise returns `b`.
  * 
  * ```typescript
  * import { Option, Num } from 'tiinvo';
@@ -366,6 +388,10 @@ export function mapOr<A, B>(m: Functors.Mappable<A, B>, a: T<A>, b: B): B;
  * m(null) // 0
  * ```
  * 
+ * @template A the starting type
+ * @template B the mapped type
+ * @param m the mappable
+ * @param a the fallback value
  * @group Mappables
  * @since 4.0.0
  */
@@ -385,7 +411,7 @@ export function mapOr<A, B>(m: Functors.Mappable<A, B>, a: T<A> | B, b?: B): any
 //#region catchable
 
 /**
- * Calls a function `f` with it's arguments and returns a `Promise<Option.T<ReturnType<f>>>`
+ * Calls a function `F` with it's arguments and returns a `Promise<Option.T<ReturnType<f>>>`
  * 
  * ```typescript
  * import { Option, Num } from 'tiinvo';
@@ -398,7 +424,7 @@ export function mapOr<A, B>(m: Functors.Mappable<A, B>, a: T<A> | B, b?: B): any
  *   throw new Error(`${arg} is not even`);
  * }
  * 
- * const safe = Option.TryAsync(fn);
+ * const safe = Option.tryAsync(fn);
  * 
  * await safe(2) // 4
  * await safe(3) // null
@@ -407,12 +433,13 @@ export function mapOr<A, B>(m: Functors.Mappable<A, B>, a: T<A> | B, b?: B): any
  * Option.isNone(await safe(3)) // true
  * ```
  * 
- * @param fn 
- * @returns 
+ * @template F the function type
+ * @param f the function to wrap
+ * @returns the wrapped function
  * @since 4.0.0
  */
-export const tryAsync = <f extends Fn.AnyAsyncFn>(f: f) => {
-  return makecatch<(...args: Parameters<f>) => Promise<T<ReturnType<f>>>>({
+export const tryAsync = <F extends Fn.AnyAsyncFn>(f: F) => {
+  return makecatch<(...args: Parameters<F>) => Promise<T<ReturnType<F>>>>({
     [catchableAsync]() {
       return {
         catch: async (_err, _args) => null as any,
@@ -423,7 +450,7 @@ export const tryAsync = <f extends Fn.AnyAsyncFn>(f: f) => {
 };
 
 /**
- * Calls a function `f` with it's arguments and returns a `Option.T<ReturnType<f>>`
+ * Calls a function `F` with it's arguments and returns a `Option.T<ReturnType<f>>`
  * 
  * ```typescript
  * import { Option, Num } from 'tiinvo';
@@ -436,7 +463,7 @@ export const tryAsync = <f extends Fn.AnyAsyncFn>(f: f) => {
  *   throw new Error(`${arg} is not even`);
  * }
  * 
- * const safe = Option.TrySync(fn);
+ * const safe = Option.trySync(fn);
  * 
  * safe(2) // 4
  * safe(3) // null
@@ -445,12 +472,13 @@ export const tryAsync = <f extends Fn.AnyAsyncFn>(f: f) => {
  * Option.isNone(safe(3)) // true
  * ```
  * 
- * @param fn 
- * @returns 
+ * @template F the function type
+ * @param f the function to wrap
+ * @returns the wrapped function
  * @since 4.0.0
  */
-export const trySync = <f extends Fn.AnyFn>(f: f) => {
-  return makecatch<(...args: Parameters<f>) => T<ReturnType<f>>>({
+export const trySync = <F extends Fn.AnyFn>(f: F) => {
+  return makecatch<(...args: Parameters<F>) => T<ReturnType<F>>>({
     [catchableSync]() {
       return {
         catch: () => null,

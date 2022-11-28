@@ -12,8 +12,16 @@
 
 ### Functions
 
+- [isNone](Option.md#isnone)
+- [isSome](Option.md#issome)
+- [guardOf](Option.md#guardof)
 - [cmp](Option.md#cmp)
 - [eq](Option.md#eq)
+- [tryAsync](Option.md#tryasync)
+- [trySync](Option.md#trysync)
+
+### Filterables
+
 - [filter](Option.md#filter)
 
 ### Mappables
@@ -45,7 +53,7 @@ ___
 
 Ƭ **Some**<`A`\>: `A` extends [`None`](Option.md#none) ? `never` : `A`
 
-Some<a> represents a value which could have been a possible nullable or undefined
+Some<A> represents a value which could have been a possible nullable or undefined
 
 **`Since`**
 
@@ -67,7 +75,7 @@ ___
 
 Ƭ **T**<`A`\>: [`Some`](Option.md#some)<`A`\> \| [`None`](Option.md#none)
 
-The type `Option.T<a>` represents a value that could be both `a` or `null` or `undefined`.
+The type `Option.T<A>` represents a value that could be both `a` or `null` or `undefined`.
 
 **`Since`**
 
@@ -85,11 +93,130 @@ src/Option.ts:23
 
 ## Functions
 
+### isNone
+
+▸ **isNone**(`x`): x is None
+
+Returns `true` if the option is `None`, `false` otherwise.
+
+```typescript
+import { Option } from 'tiinvo';
+
+Option.isNone(1);          // false
+Option.isNone(null);       // true
+Option.isNone(undefined);  // true
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `x` | `unknown` |
+
+#### Returns
+
+x is None
+
+#### Defined in
+
+src/Functors.ts:338
+
+___
+
+### isSome
+
+▸ **isSome**(`x`): x is unknown
+
+Returns `true` if the option is `Some<unknown>`, `false` otherwise.
+
+```typescript
+import { Option } from 'tiinvo';
+
+Option.isSome(1)         // true
+Option.isSome(null)      // false
+Option.isSome(undefined) // false
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `x` | `unknown` |
+
+#### Returns
+
+x is unknown
+
+#### Defined in
+
+src/Functors.ts:338
+
+___
+
+### guardOf
+
+▸ **guardOf**<`A`\>(`f`): [`Guardable`](Functors.md#guardable)<[`T`](Option.md#t)<`A`\>\>
+
+Returns `true` if the option is `Some<A>` and the value type is satisfied by the guard, otherwise `false`.
+
+If the option is `None`, it will always return `true`.
+
+```typescript
+import { Num, Option } from 'tiinvo';
+
+const x = 1
+const y = null
+const z = undefined
+const w = `a`
+
+const isnumsome = Option.guardOf(Num.guard);
+
+isnumsome(x) // true
+isnumsome(y) // true
+isnumsome(z) // true
+isnumsome(w) // false
+
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `f` | [`Guardable`](Functors.md#guardable)<`A`\> |
+
+#### Returns
+
+[`Guardable`](Functors.md#guardable)<[`T`](Option.md#t)<`A`\>\>
+
+#### Defined in
+
+src/Option.ts:81
+
+___
+
 ### cmp
 
 ▸ **cmp**<`A`\>(`c`, `a`, `b`): [`ComparableResult`](Functors.md#comparableresult)
 
-Compares two options `T<a>` by a given `Comparable<a>`.
+Compares two options `T<A>` by a given `Comparable<A>`.
 
 Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
 
@@ -136,7 +263,7 @@ src/Option.ts:107
 
 ▸ **cmp**<`A`\>(`c`, `a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
-Compares two options `T<a>` by a given `Comparable<a>`.
+Compares two options `T<A>` by a given `Comparable<A>`.
 
 Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
 
@@ -182,7 +309,7 @@ src/Option.ts:130
 
 ▸ **cmp**<`A`\>(`c`): [`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
-Compares two options `T<a>` by a given `Comparable<a>`.
+Compares two options `T<A>` by a given `Comparable<A>`.
 
 Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
 
@@ -233,7 +360,7 @@ ___
 
 ▸ **eq**<`A`\>(`e`, `a`, `b`): `boolean`
 
-Returns true if two options `T<a>` are equal, false otherwise.
+Returns true if two options `T<A>` are equal, false otherwise.
 
 ```ts
 import { Num, Option } from 'tiinvo';
@@ -275,7 +402,7 @@ src/Option.ts:199
 
 ▸ **eq**<`A`\>(`e`, `a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, `boolean`\>
 
-Returns true if two options `T<a>` are equal, false otherwise.
+Returns true if two options `T<A>` are equal, false otherwise.
 
 ```ts
 import { Num, Option } from 'tiinvo';
@@ -313,7 +440,7 @@ src/Option.ts:216
 
 ▸ **eq**<`A`\>(`e`): [`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, `boolean`\>
 
-Returns true if two options `T<a>` are equal, false otherwise.
+Returns true if two options `T<A>` are equal, false otherwise.
 
 ```ts
 import { Num, Option } from 'tiinvo';
@@ -353,11 +480,119 @@ src/Option.ts:236
 
 ___
 
+### tryAsync
+
+▸ **tryAsync**<`F`\>(`f`): (...`args`: `Parameters`<`F`\>) => `Promise`<[`T`](Option.md#t)<`ReturnType`<`F`\>\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`F`\>) => `Promise`<[`None`](Option.md#none) \| `Awaited`<[`Some`](Option.md#some)<`ReturnType`<`F`\>\>\>\> : (...`args`: `Parameters`<`F`\>) => `Promise`<[`T`](Option.md#t)<`ReturnType`<`F`\>\>\>
+
+Calls a function `F` with it's arguments and returns a `Promise<Option.T<ReturnType<f>>>`
+
+```typescript
+import { Option, Num } from 'tiinvo';
+
+const fn = async (arg: number) => {
+  if (Num.isEven(arg)) {  
+    return arg * 2;  
+  }
+ 
+  throw new Error(`${arg} is not even`);
+}
+
+const safe = Option.tryAsync(fn);
+
+await safe(2) // 4
+await safe(3) // null
+
+Option.isSome(await safe(2)) // true
+Option.isNone(await safe(3)) // true
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `F` | extends [`AnyAsyncFn`](Fn.md#anyasyncfn) | the function type |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `f` | `F` | the function to wrap |
+
+#### Returns
+
+(...`args`: `Parameters`<`F`\>) => `Promise`<[`T`](Option.md#t)<`ReturnType`<`F`\>\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`F`\>) => `Promise`<[`None`](Option.md#none) \| `Awaited`<[`Some`](Option.md#some)<`ReturnType`<`F`\>\>\>\> : (...`args`: `Parameters`<`F`\>) => `Promise`<[`T`](Option.md#t)<`ReturnType`<`F`\>\>\>
+
+the wrapped function
+
+#### Defined in
+
+src/Option.ts:441
+
+___
+
+### trySync
+
+▸ **trySync**<`F`\>(`f`): (...`args`: `Parameters`<`F`\>) => [`T`](Option.md#t)<`ReturnType`<`F`\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`F`\>) => `Promise`<[`None`](Option.md#none) \| `Awaited`<[`Some`](Option.md#some)<`ReturnType`<`F`\>\>\>\> : (...`args`: `Parameters`<`F`\>) => [`T`](Option.md#t)<`ReturnType`<`F`\>\>
+
+Calls a function `F` with it's arguments and returns a `Option.T<ReturnType<f>>`
+
+```typescript
+import { Option, Num } from 'tiinvo';
+
+const fn = (arg: number) => {
+  if (Num.isEven(arg)) {  
+    return arg * 2;  
+  }
+ 
+  throw new Error(`${arg} is not even`);
+}
+
+const safe = Option.trySync(fn);
+
+safe(2) // 4
+safe(3) // null
+
+Option.isSome(safe(2)) // true
+Option.isNone(safe(3)) // true
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `F` | extends [`AnyFn`](Fn.md#anyfn) | the function type |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `f` | `F` | the function to wrap |
+
+#### Returns
+
+(...`args`: `Parameters`<`F`\>) => [`T`](Option.md#t)<`ReturnType`<`F`\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`F`\>) => `Promise`<[`None`](Option.md#none) \| `Awaited`<[`Some`](Option.md#some)<`ReturnType`<`F`\>\>\>\> : (...`args`: `Parameters`<`F`\>) => [`T`](Option.md#t)<`ReturnType`<`F`\>\>
+
+the wrapped function
+
+#### Defined in
+
+src/Option.ts:480
+
+## Filterables
+
 ### filter
 
 ▸ **filter**<`A`\>(`a`, `b`): [`T`](Option.md#t)<`A`\>
 
-Returns `Some<a>` if the value is `Some<a>` and the predicate returns true, otherwise returns `None`.
+Returns `Some<A>` if the value is `Some<A>` and the predicate returns true, otherwise returns `None`.
 
 ```typescript
 import { Option, Num } from 'tiinvo';
@@ -373,28 +608,31 @@ Option.filter(Num.gt(1), null) // null
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `A` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the type to filter |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | [`Mappable`](Functors.md#mappable)<`A`, `boolean`\> |
-| `b` | [`T`](Option.md#t)<`A`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | [`Mappable`](Functors.md#mappable)<`A`, `boolean`\> | the predicate |
+| `b` | [`T`](Option.md#t)<`A`\> | the value to filter |
 
 #### Returns
 
 [`T`](Option.md#t)<`A`\>
 
+- `T<A>` if the predicate is satisfied
+ - `None` if the predicate is not satisfied
+
 #### Defined in
 
-src/Option.ts:272
+src/Option.ts:279
 
 ▸ **filter**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>\>
 
-Returns `Some<a>` if the value is `Some<a>` and the predicate returns true, otherwise returns `None`.
+Returns `Some<A>` if the value is `Some<A>` and the predicate returns true, otherwise returns `None`.
 
 ```typescript
 import { Option, Num } from 'tiinvo';
@@ -412,15 +650,15 @@ f(null) // null
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `A` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the type to filter |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | [`Mappable`](Functors.md#mappable)<`A`, `boolean`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | [`Mappable`](Functors.md#mappable)<`A`, `boolean`\> | the predicate |
 
 #### Returns
 
@@ -428,7 +666,7 @@ f(null) // null
 
 #### Defined in
 
-src/Option.ts:288
+src/Option.ts:298
 
 ## Mappables
 
@@ -436,7 +674,7 @@ src/Option.ts:288
 
 ▸ **map**<`A`, `B`\>(`m`, `a`): [`T`](Option.md#t)<`B`\>
 
-Maps an `Option.T<a>` to another `Option.T<b>` if is `Some<a>`, otherwise returns `None`.
+Maps an `Option.T<A>` to another `Option.T<b>` if is `Some<A>`, otherwise returns `None`.
 
 ```typescript
 import { Option, Num } from 'tiinvo';
@@ -453,17 +691,17 @@ Option.map(Num.add(1), null) // null
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `A` |
-| `B` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the starting type |
+| `B` | the mapped type |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `m` | [`Mappable`](Functors.md#mappable)<`A`, `B`\> |
-| `a` | [`T`](Option.md#t)<`A`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `m` | [`Mappable`](Functors.md#mappable)<`A`, `B`\> | the mappable |
+| `a` | [`T`](Option.md#t)<`A`\> | the value to map |
 
 #### Returns
 
@@ -471,11 +709,11 @@ Option.map(Num.add(1), null) // null
 
 #### Defined in
 
-src/Option.ts:316
+src/Option.ts:330
 
 ▸ **map**<`A`, `B`\>(`m`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`B`\>\>
 
-Maps an `Option.T<a>` to another `Option.T<b>` if is `Some<a>`, otherwise returns `None`.
+Maps an `Option.T<A>` to another `Option.T<b>` if is `Some<A>`, otherwise returns `None`.
 
 ```typescript
 import { Option, Num } from 'tiinvo';
@@ -492,16 +730,16 @@ m(null) // null
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `A` |
-| `B` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the starting type |
+| `B` | the mapped type |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `m` | [`Mappable`](Functors.md#mappable)<`A`, `B`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `m` | [`Mappable`](Functors.md#mappable)<`A`, `B`\> | the mappable |
 
 #### Returns
 
@@ -509,7 +747,7 @@ m(null) // null
 
 #### Defined in
 
-src/Option.ts:332
+src/Option.ts:349
 
 ___
 
@@ -517,7 +755,7 @@ ___
 
 ▸ **mapOr**<`A`, `B`\>(`m`, `a`, `b`): `B`
 
-Maps an `Option.T<a>` to another `Option.T<b>` if is `Some<a>`, otherwise returns `b`.
+Maps an `Option.T<A>` to another `Option.T<b>` if is `Some<A>`, otherwise returns `b`.
 
 ```typescript
 import { Option, Num } from 'tiinvo';
@@ -532,18 +770,18 @@ Option.mapOr(Num.add(2), null, 0) // 0
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `A` |
-| `B` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the starting type |
+| `B` | the mapped type |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `m` | [`Mappable`](Functors.md#mappable)<`A`, `B`\> |
-| `a` | [`T`](Option.md#t)<`A`\> |
-| `b` | `B` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `m` | [`Mappable`](Functors.md#mappable)<`A`, `B`\> | the mappable |
+| `a` | [`T`](Option.md#t)<`A`\> | the value to map |
+| `b` | `B` | the fallback value |
 
 #### Returns
 
@@ -551,11 +789,11 @@ Option.mapOr(Num.add(2), null, 0) // 0
 
 #### Defined in
 
-src/Option.ts:356
+src/Option.ts:378
 
 ▸ **mapOr**<`A`, `B`\>(`m`, `a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, `B`\>
 
-Maps an `Option.T<a>` to another `Option.T<b>` if is `Some<a>`, otherwise returns `b`.
+Maps an `Option.T<A>` to another `Option.T<b>` if is `Some<A>`, otherwise returns `b`.
 
 ```typescript
 import { Option, Num } from 'tiinvo';
@@ -572,17 +810,17 @@ m(null) // 0
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `A` |
-| `B` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the starting type |
+| `B` | the mapped type |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `m` | [`Mappable`](Functors.md#mappable)<`A`, `B`\> |
-| `a` | `B` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `m` | [`Mappable`](Functors.md#mappable)<`A`, `B`\> | the mappable |
+| `a` | `B` | the fallback value |
 
 #### Returns
 
@@ -590,4 +828,4 @@ m(null) // 0
 
 #### Defined in
 
-src/Option.ts:372
+src/Option.ts:398

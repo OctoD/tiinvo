@@ -73,7 +73,7 @@ export function check(a: boolean | string, m?: any): any {
  *
  * @since 4.0.0
  */
-export function checkResult(a: boolean, b: string): Result.t<boolean>;
+export function checkResult(a: boolean, b: string): Result.T<boolean>;
 /**
  * Returns a unary function which asserts that a specified condition is true 
  * returning it, otherwise returns `Result.Err` with the given error message `a`
@@ -91,7 +91,7 @@ export function checkResult(a: boolean, b: string): Result.t<boolean>;
  * @returns the unary function
  * @since 4.0.0
  */
-export function checkResult(a: string): Fn.Unary<boolean, Result.t<boolean>>;
+export function checkResult(a: string): Fn.Unary<boolean, Result.T<boolean>>;
 export function checkResult(a: boolean | string, b?: any): any {
   if (typeof a === 'boolean' && strGuard(b)) {
     return !a ? new Error(b) : true;
@@ -184,7 +184,7 @@ export function make<a>(p: string | Functors.Mappable<a, string> | Predicate.T<a
  * @returns the asserting function
  * @since 4.0.0
  */
-export function makeResult<a>(p: Predicate.T<a>, m: string | Functors.Mappable<a, string>): Fn.Unary<a, Result.t<boolean>>;
+export function makeResult<a>(p: Predicate.T<a>, m: string | Functors.Mappable<a, string>): Fn.Unary<a, Result.T<boolean>>;
 /**
  * Creates a check function starting from a a message or a mappable functor.
  *
@@ -206,7 +206,7 @@ export function makeResult<a>(p: Predicate.T<a>, m: string | Functors.Mappable<a
  * @returns the asserting function
  * @since 4.0.0
  */
-export function makeResult<a>(p: string | Functors.Mappable<a, string>): Fn.Unary<Predicate.T<a>, Fn.Unary<a, Result.t<boolean>>>;
+export function makeResult<a>(p: string | Functors.Mappable<a, string>): Fn.Unary<Predicate.T<a>, Fn.Unary<a, Result.T<boolean>>>;
 export function makeResult<a>(p: any, m?: any): any {
   if (pGuard(p) && m) {
     return (a: a) => checkResult(p(a), typeof m === 'function' ? m(a) : m);

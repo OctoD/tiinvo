@@ -4,7 +4,6 @@
   ],
   "githubPages": false,
   "htmlLang": "en",
-  "excludeNotDocumented": true,
   "footerLastModified": true,
   "sort": [
     "source-order"

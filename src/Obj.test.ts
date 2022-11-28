@@ -37,6 +37,9 @@ describe("Obj", () => {
 
     expect(hasa({})).toEqual(false);
     expect(hasa({ a: 1 })).toEqual(true);
+
+    expect(Obj.hasKey('a', {})).toEqual(false);
+    expect(Obj.hasKey('a', { a: 1 })).toEqual(true);
   });
 
   test(Obj.hasKeyOf.name, () => {

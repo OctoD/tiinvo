@@ -8,13 +8,33 @@
 
 - [Err](Result.md#err)
 - [Ok](Result.md#ok)
-- [t](Result.md#t)
+- [T](Result.md#t)
 
-### Functions
+### Factories
+
+- [err](Result.md#err-1)
+
+### Guardables
+
+- [isErr](Result.md#iserr)
+- [isOk](Result.md#isok)
+- [isOkOf](Result.md#isokof)
+
+### Comparables
 
 - [cmp](Result.md#cmp)
 - [eq](Result.md#eq)
+
+### Filterables
+
 - [filter](Result.md#filter)
+
+### Functions
+
+- [map](Result.md#map)
+- [mapOr](Result.md#mapor)
+- [tryAsync](Result.md#tryasync)
+- [trySync](Result.md#trysync)
 
 ## Type Aliases
 
@@ -32,15 +52,15 @@ ___
 
 ### Ok
 
-Ƭ **Ok**<`a`\>: `a` extends `Error` ? `never` : `a`
+Ƭ **Ok**<`A`\>: `A` extends `Error` ? `never` : `A`
 
-Represents a successful result of an operation
+Represents the successful result of an operation
 
 #### Type parameters
 
 | Name |
 | :------ |
-| `a` |
+| `A` |
 
 #### Defined in
 
@@ -48,9 +68,9 @@ src/Result.ts:13
 
 ___
 
-### t
+### T
 
-Ƭ **t**<`a`\>: [`Ok`](Result.md#ok)<`a`\> \| [`Err`](Result.md#err)
+Ƭ **T**<`A`\>: [`Ok`](Result.md#ok)<`A`\> \| [`Err`](Result.md#err)
 
 Could represent both an Error `Err` or a successful result of an operation `Ok<a>`
 
@@ -58,19 +78,193 @@ Could represent both an Error `Err` or a successful result of an operation `Ok<a
 
 | Name |
 | :------ |
-| `a` |
+| `A` |
 
 #### Defined in
 
 src/Result.ts:17
 
-## Functions
+## Factories
+
+### err
+
+▸ **err**(`a`): `Error`
+
+Returns an `Err`
+
+**`Example`**
+
+```ts
+import { Result } from 'tiinvo';
+
+Result.err(10)                    instanceof Error // true
+Result.err(new TypeError('aaaa')) instanceof Error // true
+Result.err({})                    instanceof Error // true
+Result.err(10n)                   instanceof Error // true
+Result.err([10, 20, 30])          instanceof Error // true
+```
+
+**`Since`**
+
+3.8.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | `unknown` |
+
+#### Returns
+
+`Error`
+
+#### Defined in
+
+src/Result.ts:39
+
+## Guardables
+
+### isErr
+
+▸ **isErr**(`x`): x is Error
+
+Checks if a value is `Err`
+
+**`Example`**
+
+```ts
+import { Result } from 'tiinvo';
+
+Result.isErr(10)                    // false
+Result.isErr(new TypeError('aaaa')) // true
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `x` | `unknown` | the value to check |
+
+#### Returns
+
+x is Error
+
+true if `x` is `Err`, false otherwise
+
+#### Defined in
+
+src/Result.ts:72
+
+___
+
+### isOk
+
+▸ **isOk**<`A`\>(`x`): x is Ok<A\>
+
+Checks if a value is `Ok`
+
+**`Example`**
+
+```ts
+import { Result } from 'tiinvo';
+
+Result.isOk(10)                    // true
+Result.isOk(new TypeError('aaaa')) // false
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `x` | [`T`](Result.md#t)<`A`\> |
+
+#### Returns
+
+x is Ok<A\>
+
+true if `x` is `Ok<A>`, false otherwise
+
+#### Defined in
+
+src/Result.ts:91
+
+___
+
+### isOkOf
+
+▸ **isOkOf**<`A`\>(`g`): (`x`: `unknown`) => x is A
+
+Checks if a value is `Ok<A>`
+
+```ts
+import { Num, Result } from 'tiinvo';
+
+const guard = Result.isOkOf(Num.guard);
+
+guard(10)                    // true
+guard("hello")               // false
+guard(new TypeError('aaaa')) // false
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Description |
+| :------ | :------ |
+| `A` | the type |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `g` | [`Guardable`](Functors.md#guardable)<`A`\> | the type guard |
+
+#### Returns
+
+`fn`
+
+the Guard
+
+▸ (`x`): x is A
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `x` | `unknown` |
+
+##### Returns
+
+x is A
+
+#### Defined in
+
+src/Result.ts:112
+
+## Comparables
 
 ### cmp
 
 ▸ **cmp**<`A`\>(`cmp`, `a`, `b`): [`ComparableResult`](Functors.md#comparableresult)
 
-Compares two results `t<a>` by a given `Comparable<a>`.
+Compares two results `T<A>` by a given `Comparable<A>`.
 
 Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
 
@@ -80,6 +274,13 @@ Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is grea
 
 ```ts
 import { Str, Result } from 'tiinvo';
+
+Result.cmp(Str.cmp, "a", "a")                    // 0
+Result.cmp(Str.cmp, "a", "b")                    // -1
+Result.cmp(Str.cmp, "b", "a")                    // 1
+Result.cmp(Str.cmp, new Error(), new Error())    // 0
+Result.cmp(Str.cmp, new Error(), "a")            // -1
+Result.cmp(Str.cmp, "a", new Error())            // 1
 
 const cmp = Result.cmp(Str.cmp);
 
@@ -97,17 +298,17 @@ cmp("a", new Error())            // 1
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `A` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the type |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `cmp` | [`Comparable`](Functors.md#comparable)<`A`\> |
-| `a` | [`t`](Result.md#t)<`A`\> |
-| `b` | [`t`](Result.md#t)<`A`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `cmp` | [`Comparable`](Functors.md#comparable)<`A`\> | the comparer function |
+| `a` | [`T`](Result.md#t)<`A`\> | first value |
+| `b` | [`T`](Result.md#t)<`A`\> | last value |
 
 #### Returns
 
@@ -115,26 +316,206 @@ cmp("a", new Error())            // 1
 
 #### Defined in
 
-src/Result.ts:131
+src/Result.ts:153
+
+▸ **cmp**<`A`\>(`cmp`, `a`): [`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+
+Returns a unary function which compares two results `T<A>` by a given `Comparable<A>`.
+
+Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
+
+If `a` is `Err` and `b` is `Ok` returns -1, else if both are `Err` returns 0, else returns 1
+
+**`Example`**
+
+```ts
+import { Str, Result } from 'tiinvo';
+
+const cmp = Result.cmp(Str.cmp, "a");
+
+cmp("a")                    // 0
+cmp("b")                    // -1
+cmp("a")                    // 1
+cmp(new Error())            // 1
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Description |
+| :------ | :------ |
+| `A` | the type |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `cmp` | [`Comparable`](Functors.md#comparable)<`A`\> | the comparer function |
+| `a` | [`T`](Result.md#t)<`A`\> | first value |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+
+the unary function
+
+#### Defined in
+
+src/Result.ts:181
+
+▸ **cmp**<`A`\>(`cmp`): [`Binary`](Fn.md#binary)<[`T`](Result.md#t)<`A`\>, [`T`](Result.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+
+Returns a binary function which compares two results `T<A>` by a given `Comparable<A>`.
+
+Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
+
+If `a` is `Err` and `b` is `Ok` returns -1, else if both are `Err` returns 0, else returns 1
+
+**`Example`**
+
+```ts
+import { Str, Result } from 'tiinvo';
+
+const cmp = Result.cmp(Str.cmp);
+
+cmp("a", "a")                    // 0
+cmp("a", "b")                    // -1
+cmp("b", "a")                    // 1
+cmp("a", new Error())            // 1
+cmp(new Error(), "a")            // -1
+cmp(new Error(), new Error())    // 0
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Description |
+| :------ | :------ |
+| `A` | the type |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `cmp` | [`Comparable`](Functors.md#comparable)<`A`\> | the comparer function |
+
+#### Returns
+
+[`Binary`](Fn.md#binary)<[`T`](Result.md#t)<`A`\>, [`T`](Result.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+
+the binary function
+
+#### Defined in
+
+src/Result.ts:210
 
 ___
 
 ### eq
 
-▸ **eq**<`a`\>(`eq`, `a`, `b`): `boolean`
+▸ **eq**<`A`\>(`eq`, `a`, `b`): `boolean`
 
 Returns true if two results are equal, false otherwise.
 
 ```ts
 import { Num, Result } from 'tiinvo';
 
-const eq = Result.eq(Num.eq);
+Result.eq(Num.eq, 0, 0)                         // true
+Result.eq(Num.eq, new Error(), new TypeError()) // true
+Result.eq(Num.eq, new Error(), 0)               // false
+Result.eq(Num.eq, 0, new Error())               // false
+Result.eq(Num.eq, 1_000_000, 0)                 // false
+```
 
-eq(0, 0)                         // true
-eq(new Error(), new TypeError()) // true
-eq(new Error(), 0)               // false
-eq(0, new Error())               // false
-eq(1_000_000, 0)                 // false
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Description |
+| :------ | :------ |
+| `A` | the value type |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `eq` | [`Equatable`](Functors.md#equatable)<`A`\> | the Equatable functor |
+| `a` | [`T`](Result.md#t)<`A`\> | the left compared value |
+| `b` | [`T`](Result.md#t)<`A`\> | the right compared value |
+
+#### Returns
+
+`boolean`
+
+true if `a` equals to `b`
+
+#### Defined in
+
+src/Result.ts:256
+
+▸ **eq**<`A`\>(`eq`, `a`): [`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, `boolean`\>
+
+Returns a unary function which returns true if two results are equal, false otherwise.
+
+```ts
+import { Num, Result } from 'tiinvo';
+
+const is0 = Result.eq(Num.eq, 0)
+
+Result.eq(0)                         // true
+Result.eq(new TypeError())           // false
+Result.eq(new Error())               // false
+Result.eq(1_000_000)                 // false
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Description |
+| :------ | :------ |
+| `A` | the value type |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `eq` | [`Equatable`](Functors.md#equatable)<`A`\> | the Equatable functor |
+| `a` | [`T`](Result.md#t)<`A`\> | the left compared value |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, `boolean`\>
+
+the unary function
+
+#### Defined in
+
+src/Result.ts:278
+
+▸ **eq**<`a`\>(`eq`): [`Binary`](Fn.md#binary)<[`T`](Result.md#t)<`a`\>, [`T`](Result.md#t)<`a`\>, `boolean`\>
+
+Returns a binary function which returns true if two results are equal, false otherwise.
+
+```ts
+import { Num, Result } from 'tiinvo';
+
+const is0 = Result.eq(Num.eq)
+
+Result.eq(0, 0)                         // true
+Result.eq(new TypeError(), new Error()) // true
+Result.eq(0, new Error())               // false
+Result.eq(1_000, 1_000)                 // true
 ```
 
 **`Since`**
@@ -149,90 +530,66 @@ eq(1_000_000, 0)                 // false
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `eq` | [`Equatable`](Functors.md#equatable)<`a`\> |
-| `a` | [`t`](Result.md#t)<`a`\> |
-| `b` | [`t`](Result.md#t)<`a`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `eq` | [`Equatable`](Functors.md#equatable)<`a`\> | the Equatable functor |
 
 #### Returns
 
-`boolean`
+[`Binary`](Fn.md#binary)<[`T`](Result.md#t)<`a`\>, [`T`](Result.md#t)<`a`\>, `boolean`\>
+
+the binary function
 
 #### Defined in
 
-src/Result.ts:180
+src/Result.ts:299
 
-▸ **eq**<`a`\>(`eq`, `a`): [`Unary`](Fn.md#unary)<[`t`](Result.md#t)<`a`\>, `boolean`\>
-
-**`Example`**
-
-```ts
-import {  } from 'tiinvo'
-
-```
-
-**`Since`**
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `a` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `eq` | [`Equatable`](Functors.md#equatable)<`a`\> |
-| `a` | [`t`](Result.md#t)<`a`\> |
-
-#### Returns
-
-[`Unary`](Fn.md#unary)<[`t`](Result.md#t)<`a`\>, `boolean`\>
-
-#### Defined in
-
-src/Result.ts:195
-
-▸ **eq**<`a`\>(`eq`): [`Binary`](Fn.md#binary)<[`t`](Result.md#t)<`a`\>, [`t`](Result.md#t)<`a`\>, `boolean`\>
-
-**`Example`**
-
-```ts
-import {  } from 'tiinvo'
-
-```
-
-**`Since`**
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `a` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `eq` | [`Equatable`](Functors.md#equatable)<`a`\> |
-
-#### Returns
-
-[`Binary`](Fn.md#binary)<[`t`](Result.md#t)<`a`\>, [`t`](Result.md#t)<`a`\>, `boolean`\>
-
-#### Defined in
-
-src/Result.ts:210
-
-___
+## Filterables
 
 ### filter
 
-▸ **filter**<`a`\>(`f`, `a`): [`t`](Result.md#t)<`a`\>
+▸ **filter**<`A`\>(`f`, `a`): [`T`](Result.md#t)<`A`\>
 
-Returns `Some<a>` if the value is `Some<a>` and the predicate returns true, otherwise returns `None`.
+Returns `Ok<A>` if the value `a` is `Ok<A>` and the predicate is satisfied, otherwise returns `Err`.
+
+```typescript
+import { Result, Num } from 'tiinvo';
+
+Result.filter(Num.gt(1), 1)               // Error("Value did not pass filter")
+Result.filter(Num.gt(1), 2)               // 2
+Result.filter(Num.gt(1), new TypeError()) // Error("Value did not pass filter")
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Description |
+| :------ | :------ |
+| `A` | the value type |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `f` | [`Filterable`](Functors.md#filterable)<`A`\> | the Filterable functor |
+| `a` | [`T`](Result.md#t)<`A`\> | the value to filter |
+
+#### Returns
+
+[`T`](Result.md#t)<`A`\>
+
+`T<A>` if the Filterable has been satisfied
+
+#### Defined in
+
+src/Result.ts:342
+
+▸ **filter**<`A`\>(`f`): [`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, [`T`](Result.md#t)<`A`\>\>
+
+Returns a unary function which checks if `Result.T<A>` is `Ok<A>` and the predicate is satisfied, otherwise returns `Err`.
 
 ```typescript
 import { Result, Num } from 'tiinvo';
@@ -250,21 +607,235 @@ f(new TypeError()) // Error("Value did not pass filter")
 
 #### Type parameters
 
+| Name | Description |
+| :------ | :------ |
+| `A` | the value type |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `f` | [`Filterable`](Functors.md#filterable)<`A`\> | the Filterable functor |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, [`T`](Result.md#t)<`A`\>\>
+
+the unary function
+
+#### Defined in
+
+src/Result.ts:362
+
+## Functions
+
+### map
+
+▸ **map**<`A`, `B`\>(`m`): (`a`: [`T`](Result.md#t)<`A`\>) => [`T`](Result.md#t)<`B`\>
+
+Maps `Result.t<a>` to `Result.t<b>` if ok, otherwise returns `err`
+
+```ts
+import { Num, Result } from 'tiinvo';
+
+const m = Result.map(Num.add(10))
+
+m(10)                   // 20
+m(new Error('foobar!')) // Error('foobar!')
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+| `B` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `m` | [`Mappable`](Functors.md#mappable)<`A`, `B`\> | the Mappable functor |
+
+#### Returns
+
+`fn`
+
+▸ (`a`): [`T`](Result.md#t)<`B`\>
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | [`T`](Result.md#t)<`A`\> |
+
+##### Returns
+
+[`T`](Result.md#t)<`B`\>
+
+#### Defined in
+
+src/Result.ts:392
+
+___
+
+### mapOr
+
+▸ **mapOr**<`a`, `b`\>(`m`, `b`): (`a`: [`T`](Result.md#t)<`a`\>) => `b`
+
+Maps `Result.t<a>` to `Result.t<b>` if ok, otherwise returns `b`
+
+```ts
+import { Str, Result } from 'tiinvo';
+
+const map = Result.mapOr(Str.length, 0);
+
+map('hello')        // 5
+map(new Error())    // 0
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
 | Name |
 | :------ |
 | `a` |
+| `b` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `f` | [`Filterable`](Functors.md#filterable)<`a`\> |
-| `a` | [`t`](Result.md#t)<`a`\> |
+| `m` | [`Mappable`](Functors.md#mappable)<`a`, `b`\> |
+| `b` | `b` |
 
 #### Returns
 
-[`t`](Result.md#t)<`a`\>
+`fn`
+
+▸ (`a`): `b`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `a` | [`T`](Result.md#t)<`a`\> |
+
+##### Returns
+
+`b`
 
 #### Defined in
 
-src/Result.ts:265
+src/Result.ts:409
+
+___
+
+### tryAsync
+
+▸ **tryAsync**<`f`\>(`f`): (...`args`: `Parameters`<`f`\>) => `Promise`<[`T`](Result.md#t)<`ReturnType`<`f`\>\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`f`\>) => `Promise`<`Error` \| `Awaited`<[`Ok`](Result.md#ok)<`ReturnType`<`f`\>\>\>\> : (...`args`: `Parameters`<`f`\>) => `Promise`<[`T`](Result.md#t)<`ReturnType`<`f`\>\>\>
+
+Calls a function `f` with it's arguments and returns a `Promise<Result.t<ReturnType<f>>>`
+
+```typescript
+import { Result, Num } from 'tiinvo';
+
+const fn = async (arg: number) => {
+  if (Num.isEven(arg)) {  
+    return arg * 2;  
+  }
+ 
+  throw new Error(`${arg} is not even`);
+}
+
+const safe = Result.tryAsync(fn);
+
+await safe(2) // 4
+await safe(3) // Error("3 is not even")
+
+Result.isOk(await safe(2))  // true
+Result.isErr(await safe(3)) // true
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `f` | extends [`AnyAsyncFn`](Fn.md#anyasyncfn) |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `f` | `f` |
+
+#### Returns
+
+(...`args`: `Parameters`<`f`\>) => `Promise`<[`T`](Result.md#t)<`ReturnType`<`f`\>\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`f`\>) => `Promise`<`Error` \| `Awaited`<[`Ok`](Result.md#ok)<`ReturnType`<`f`\>\>\>\> : (...`args`: `Parameters`<`f`\>) => `Promise`<[`T`](Result.md#t)<`ReturnType`<`f`\>\>\>
+
+#### Defined in
+
+src/Result.ts:442
+
+___
+
+### trySync
+
+▸ **trySync**<`f`\>(`f`): (...`args`: `Parameters`<`f`\>) => [`T`](Result.md#t)<`ReturnType`<`f`\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`f`\>) => `Promise`<`Error` \| `Awaited`<[`Ok`](Result.md#ok)<`ReturnType`<`f`\>\>\>\> : (...`args`: `Parameters`<`f`\>) => [`T`](Result.md#t)<`ReturnType`<`f`\>\>
+
+Calls a function `f` with it's arguments and returns a `Promise<Result.t<ReturnType<f>>>`
+
+```typescript
+import { Result, Num } from 'tiinvo';
+
+const fn = (arg: number) => {
+  if (Num.isEven(arg)) {  
+    return arg * 2;  
+  }
+ 
+  throw new Error(`${arg} is not even`);
+}
+
+const safe = Result.trySync(fn);
+
+safe(2) // 4
+safe(3) // Error("3 is not even")
+
+Result.isOk(safe(2))  // true
+Result.isErr(safe(3)) // true
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `f` | extends [`AnyFn`](Fn.md#anyfn) |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `f` | `f` |
+
+#### Returns
+
+(...`args`: `Parameters`<`f`\>) => [`T`](Result.md#t)<`ReturnType`<`f`\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`f`\>) => `Promise`<`Error` \| `Awaited`<[`Ok`](Result.md#ok)<`ReturnType`<`f`\>\>\>\> : (...`args`: `Parameters`<`f`\>) => [`T`](Result.md#t)<`ReturnType`<`f`\>\>
+
+#### Defined in
+
+src/Result.ts:480
