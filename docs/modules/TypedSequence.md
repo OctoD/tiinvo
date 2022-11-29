@@ -6,12 +6,11 @@
 
 ### Type Aliases
 
-- [t](TypedSequence.md#t)
+- [T](TypedSequence.md#t)
 
 ### Functions
 
 - [make](TypedSequence.md#make)
-- [guard](TypedSequence.md#guard)
 - [append](TypedSequence.md#append)
 - [concat](TypedSequence.md#concat)
 - [prepend](TypedSequence.md#prepend)
@@ -24,6 +23,13 @@
 - [values](TypedSequence.md#values)
 - [empty](TypedSequence.md#empty)
 - [populated](TypedSequence.md#populated)
+
+### Guardables
+
+- [guard](TypedSequence.md#guard)
+
+### Serializables
+
 - [toArray](TypedSequence.md#toarray)
 - [toJSON](TypedSequence.md#tojson)
 - [toMap](TypedSequence.md#tomap)
@@ -32,29 +38,29 @@
 
 ## Type Aliases
 
-### t
+### T
 
-Ƭ **t**<`a`\>: [`t`](Sequence.md#t)<`a`\> & { `[guardsymbol]`: [`Guardable`](Functors.md#guardable)<`a`\>  }
+Ƭ **T**<`A`\>: [`t`](Sequence.md#t)<`A`\> & { `[guardsymbol]`: [`Guardable`](Functors.md#guardable)<`A`\>  }
 
-The typed version of a `Sequence.t<a>`.
+The typed version of a `Sequence.t<A>`.
 
 #### Type parameters
 
 | Name |
 | :------ |
-| `a` |
+| `A` |
 
 #### Defined in
 
-[src/TypedSequence.ts:10](https://github.com/OctoD/tiinvo/blob/1be66d3/src/TypedSequence.ts#L10)
+[src/TypedSequence.ts:10](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/TypedSequence.ts#L10)
 
 ## Functions
 
 ### make
 
-▸ **make**<`a`\>(`g`, ...`values`): [`t`](TypedSequence.md#t)<`a`\>
+▸ **make**<`A`\>(`g`, ...`values`): [`T`](TypedSequence.md#t)<`A`\>
 
-Creates a `TypedSequence.t<a>` starting from a `Guardable<a>` or a `GuardableModule<a>`
+Creates a `TypedSequence.t<A>` starting from a `Guardable<A>` functor
 
 You can add initial values as arguments.
 
@@ -65,10 +71,12 @@ If an argument does pass the guard check, the function will throw a TypeError
 ```ts
 import { TypedSequence, Num } from 'tiinvo'
 
-const ts0 = TypedSequence.make(Num, 1, 2, 3)
-const ts1 = TypedSequence.make(Num.guard, 1, 2, 3)
-
-ts0 === ts1      // true
+for (const x of TypedSequence.make(Num.guard, 10, 20, 30)) {
+   console.log(x)
+}
+// 10
+// 20
+// 30
 ```
 
 **`Since`**
@@ -79,91 +87,76 @@ ts0 === ts1      // true
 
 | Name |
 | :------ |
-| `a` |
+| `A` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `g` | [`Guardable`](Functors.md#guardable)<`a`\> |
-| `...values` | `a`[] |
+| `g` | [`Guardable`](Functors.md#guardable)<`A`\> |
+| `...values` | `A`[] |
 
 #### Returns
 
-[`t`](TypedSequence.md#t)<`a`\>
+[`T`](TypedSequence.md#t)<`A`\>
 
 #### Defined in
 
-[src/TypedSequence.ts:36](https://github.com/OctoD/tiinvo/blob/1be66d3/src/TypedSequence.ts#L36)
+[src/TypedSequence.ts:38](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/TypedSequence.ts#L38)
 
-▸ **make**<`a`\>(`g`, ...`values`): [`t`](TypedSequence.md#t)<`a`\>
+▸ **make**<`A`\>(`g`, ...`values`): [`T`](TypedSequence.md#t)<`A`\>
 
-#### Type parameters
+Creates a `TypedSequence.t<A>` starting from a `GuardableModule<A>`
 
-| Name |
-| :------ |
-| `a` |
+You can add initial values as arguments.
 
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `g` | [`GuardableModule`](Functors.md#guardablemodule)<`a`\> |
-| `...values` | `a`[] |
-
-#### Returns
-
-[`t`](TypedSequence.md#t)<`a`\>
-
-#### Defined in
-
-[src/TypedSequence.ts:37](https://github.com/OctoD/tiinvo/blob/1be66d3/src/TypedSequence.ts#L37)
-
-___
-
-### guard
-
-▸ **guard**(`x`): x is t<unknown\>
-
-Checks if the parameter `x` is a `TypedSequence.t<unknown>`
+If an argument does pass the guard check, the function will throw a TypeError
 
 **`Example`**
 
 ```ts
-import { TypedSequence, Sequence, Num } from 'tiinvo'
+import { TypedSequence, Num } from 'tiinvo'
 
-const a = TypedSequence.make(Num)
-const b = Sequence.make()
-
-TypedSequence.guard(a)     // true
-TypedSequence.guard(b)     // false
+for (const x of TypedSequence.make(Num, 10, 20, 30)) {
+   console.log(x)
+}
+// 10
+// 20
+// 30
 ```
 
 **`Since`**
 
 4.0.0
 
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `x` | `unknown` |
+| `g` | [`GuardableModule`](Functors.md#guardablemodule)<`A`\> |
+| `...values` | `A`[] |
 
 #### Returns
 
-x is t<unknown\>
+[`T`](TypedSequence.md#t)<`A`\>
 
 #### Defined in
 
-[src/TypedSequence.ts:83](https://github.com/OctoD/tiinvo/blob/1be66d3/src/TypedSequence.ts#L83)
+[src/TypedSequence.ts:61](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/TypedSequence.ts#L61)
 
 ___
 
 ### append
 
-▸ **append**<`a`\>(`a`, `b`): [`t`](TypedSequence.md#t)<`a`\>
+▸ **append**<`A`\>(`a`, `b`): [`T`](TypedSequence.md#t)<`A`\>
 
-Adds an element to the end of the `Sequence.t<a>` without mutating the original one.
+Adds an element to the end of the `Sequence.t<A>` without mutating the original one.
 
 **`Example`**
 
@@ -184,44 +177,44 @@ TypedSequence.append(30)(s0)       // TypedSequence(10, 20, 30)
 
 | Name |
 | :------ |
-| `a` |
+| `A` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `a` | [`t`](TypedSequence.md#t)<`a`\> |
-| `b` | `a` |
+| `a` | [`T`](TypedSequence.md#t)<`A`\> |
+| `b` | `A` |
 
 #### Returns
 
-[`t`](TypedSequence.md#t)<`a`\>
+[`T`](TypedSequence.md#t)<`A`\>
 
 #### Defined in
 
-[src/TypedSequence.ts:105](https://github.com/OctoD/tiinvo/blob/1be66d3/src/TypedSequence.ts#L105)
+[src/TypedSequence.ts:130](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/TypedSequence.ts#L130)
 
-▸ **append**<`a`\>(`a`): [`Unary`](Fn.md#unary)<[`t`](TypedSequence.md#t)<`a`\>, [`t`](TypedSequence.md#t)<`a`\>\>
+▸ **append**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](TypedSequence.md#t)<`A`\>, [`T`](TypedSequence.md#t)<`A`\>\>
 
 #### Type parameters
 
 | Name |
 | :------ |
-| `a` |
+| `A` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `a` | `a` |
+| `a` | `A` |
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`t`](TypedSequence.md#t)<`a`\>, [`t`](TypedSequence.md#t)<`a`\>\>
+[`Unary`](Fn.md#unary)<[`T`](TypedSequence.md#t)<`A`\>, [`T`](TypedSequence.md#t)<`A`\>\>
 
 #### Defined in
 
-[src/TypedSequence.ts:106](https://github.com/OctoD/tiinvo/blob/1be66d3/src/TypedSequence.ts#L106)
+[src/TypedSequence.ts:131](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/TypedSequence.ts#L131)
 
 ___
 
@@ -229,7 +222,7 @@ ___
 
 ▸ **concat**<`a`\>(`a`, `b`): `a`
 
-Concatenates two `TypedSequence.t<a>` and `TypedSequence.t<b>` and return a new `TypedSequence.t<a>`.
+Concatenates two `TypedSequence.t<A>` and `TypedSequence.t<b>` and return a new `TypedSequence.t<A>`.
 
 **`Example`**
 
@@ -266,7 +259,7 @@ TypedSequence.concat(s1)(s0)       // TypedSequence(10, 20, 30, 40)
 
 #### Defined in
 
-[src/TypedSequence.ts:136](https://github.com/OctoD/tiinvo/blob/1be66d3/src/TypedSequence.ts#L136)
+[src/TypedSequence.ts:161](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/TypedSequence.ts#L161)
 
 ▸ **concat**<`a`\>(`a`): [`Unary`](Fn.md#unary)<`a`, `a`\>
 
@@ -288,15 +281,15 @@ TypedSequence.concat(s1)(s0)       // TypedSequence(10, 20, 30, 40)
 
 #### Defined in
 
-[src/TypedSequence.ts:137](https://github.com/OctoD/tiinvo/blob/1be66d3/src/TypedSequence.ts#L137)
+[src/TypedSequence.ts:162](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/TypedSequence.ts#L162)
 
 ___
 
 ### prepend
 
-▸ **prepend**<`a`\>(`a`, `b`): [`t`](TypedSequence.md#t)<`a`\>
+▸ **prepend**<`A`\>(`a`, `b`): [`T`](TypedSequence.md#t)<`A`\>
 
-Adds an element to the start of the `TypedSequence.t<a>` without mutating the original one.
+Adds an element to the start of the `TypedSequence.t<A>` without mutating the original one.
 
 **`Example`**
 
@@ -317,52 +310,52 @@ TypedSequence.prepend(30)(s0)       // TypedSequence.make(Num, 30, 10, 20)
 
 | Name |
 | :------ |
-| `a` |
+| `A` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `a` | [`t`](TypedSequence.md#t)<`a`\> |
-| `b` | `a` |
+| `a` | [`T`](TypedSequence.md#t)<`A`\> |
+| `b` | `A` |
 
 #### Returns
 
-[`t`](TypedSequence.md#t)<`a`\>
+[`T`](TypedSequence.md#t)<`A`\>
 
 #### Defined in
 
-[src/TypedSequence.ts:162](https://github.com/OctoD/tiinvo/blob/1be66d3/src/TypedSequence.ts#L162)
+[src/TypedSequence.ts:187](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/TypedSequence.ts#L187)
 
-▸ **prepend**<`a`\>(`a`): [`Unary`](Fn.md#unary)<[`t`](TypedSequence.md#t)<`a`\>, [`t`](TypedSequence.md#t)<`a`\>\>
+▸ **prepend**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](TypedSequence.md#t)<`A`\>, [`T`](TypedSequence.md#t)<`A`\>\>
 
 #### Type parameters
 
 | Name |
 | :------ |
-| `a` |
+| `A` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `a` | `a` |
+| `a` | `A` |
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`t`](TypedSequence.md#t)<`a`\>, [`t`](TypedSequence.md#t)<`a`\>\>
+[`Unary`](Fn.md#unary)<[`T`](TypedSequence.md#t)<`A`\>, [`T`](TypedSequence.md#t)<`A`\>\>
 
 #### Defined in
 
-[src/TypedSequence.ts:163](https://github.com/OctoD/tiinvo/blob/1be66d3/src/TypedSequence.ts#L163)
+[src/TypedSequence.ts:188](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/TypedSequence.ts#L188)
 
 ___
 
 ### sort
 
-▸ **sort**<`a`\>(`a`, `mod`): [`t`](TypedSequence.md#t)<`a`\>
+▸ **sort**<`A`\>(`a`, `mod`): [`T`](TypedSequence.md#t)<`A`\>
 
-Sorts and returns a new `TypedSequence.t<a>` values with a `Comparable<a>` or `ComparableModule<a>` functor.
+Sorts and returns a new `TypedSequence.t<A>` values with a `Comparable<A>` or `ComparableModule<A>` functor.
 
 **`Example`**
 
@@ -381,46 +374,70 @@ b          // TypedSequence.make(Num, 1, 2, 3, 4, 5)
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `a` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the sequence type |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | [`t`](TypedSequence.md#t)<`a`\> |
-| `mod` | [`Comparable`](Functors.md#comparable)<`a`\> \| [`ComparableModule`](Functors.md#comparablemodule)<`a`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | [`T`](TypedSequence.md#t)<`A`\> | the sequence |
+| `mod` | [`Comparable`](Functors.md#comparable)<`A`\> \| [`ComparableModule`](Functors.md#comparablemodule)<`A`\> | the Comparable used to sort the sequence |
 
 #### Returns
 
-[`t`](TypedSequence.md#t)<`a`\>
+[`T`](TypedSequence.md#t)<`A`\>
+
+the sorted sequence
 
 #### Defined in
 
-[src/TypedSequence.ts:193](https://github.com/OctoD/tiinvo/blob/1be66d3/src/TypedSequence.ts#L193)
+[src/TypedSequence.ts:222](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/TypedSequence.ts#L222)
 
-▸ **sort**<`a`\>(`a`): [`Unary`](Fn.md#unary)<[`t`](TypedSequence.md#t)<`a`\>, [`t`](TypedSequence.md#t)<`a`\>\>
+▸ **sort**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](TypedSequence.md#t)<`A`\>, [`T`](TypedSequence.md#t)<`A`\>\>
+
+Returns a unary function which sorts and returns a new 
+`TypedSequence.t<A>` values with a `Comparable<A>` or `ComparableModule<A>` functor.
+
+**`Example`**
+
+```ts
+import { TypedSequence, Num } from 'tiinvo'
+
+const sort = TypedSequence.sort(Num)
+
+const a = TypedSequence.make(Num, 5, 3, 1, 4, 2)
+const b = sort(a)
+
+b          // TypedSequence.make(Num, 1, 2, 3, 4, 5)
+```
+
+**`Since`**
+
+4.0.0
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `a` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the sequence type |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | [`Comparable`](Functors.md#comparable)<`a`\> \| [`ComparableModule`](Functors.md#comparablemodule)<`a`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | [`Comparable`](Functors.md#comparable)<`A`\> \| [`ComparableModule`](Functors.md#comparablemodule)<`A`\> | the sequence |
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`t`](TypedSequence.md#t)<`a`\>, [`t`](TypedSequence.md#t)<`a`\>\>
+[`Unary`](Fn.md#unary)<[`T`](TypedSequence.md#t)<`A`\>, [`T`](TypedSequence.md#t)<`A`\>\>
+
+the sorting unary function
 
 #### Defined in
 
-[src/TypedSequence.ts:194](https://github.com/OctoD/tiinvo/blob/1be66d3/src/TypedSequence.ts#L194)
+[src/TypedSequence.ts:245](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/TypedSequence.ts#L245)
 
 ___
 
@@ -464,7 +481,7 @@ TypedSequence.count(Num.gt(10))(s)   // 2
 
 #### Defined in
 
-[src/Sequence.ts:481](https://github.com/OctoD/tiinvo/blob/1be66d3/src/Sequence.ts#L481)
+[src/Sequence.ts:481](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/Sequence.ts#L481)
 
 ▸ **count**<`a`\>(`a`): [`Unary`](Fn.md#unary)<[`t`](Sequence.md#t)<`a`\>, `number`\>
 
@@ -503,7 +520,7 @@ TypedSequence.count(Num.gt(10))(s)   // 2
 
 #### Defined in
 
-[src/Sequence.ts:482](https://github.com/OctoD/tiinvo/blob/1be66d3/src/Sequence.ts#L482)
+[src/Sequence.ts:482](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/Sequence.ts#L482)
 
 ___
 
@@ -545,7 +562,7 @@ TypedSequence.get(s, 9)       // throws RangeError
 
 #### Defined in
 
-[src/Sequence.ts:533](https://github.com/OctoD/tiinvo/blob/1be66d3/src/Sequence.ts#L533)
+[src/Sequence.ts:533](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/Sequence.ts#L533)
 
 ▸ **get**<`a`\>(`a`): [`Unary`](Fn.md#unary)<[`t`](Sequence.md#t)<`a`\>, [`T`](Result.md#t)<`a`\>\>
 
@@ -582,7 +599,7 @@ TypedSequence.get(s, 9)       // throws RangeError
 
 #### Defined in
 
-[src/Sequence.ts:534](https://github.com/OctoD/tiinvo/blob/1be66d3/src/Sequence.ts#L534)
+[src/Sequence.ts:534](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/Sequence.ts#L534)
 
 ___
 
@@ -624,7 +641,7 @@ TypedSequence.first(s1)       // null
 
 #### Defined in
 
-[src/Sequence.ts:510](https://github.com/OctoD/tiinvo/blob/1be66d3/src/Sequence.ts#L510)
+[src/Sequence.ts:510](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/Sequence.ts#L510)
 
 ___
 
@@ -632,7 +649,7 @@ ___
 
 ▸ **last**<`a`\>(`a`): [`T`](Option.md#t)<`a`\>
 
-Gets a Sequence.t<a>'s last element.
+Gets a Sequence.t<A>'s last element.
 
 Returns Option.None if none is found.
 
@@ -669,7 +686,7 @@ TypedSequence.last(s1)       // null
 
 #### Defined in
 
-[src/Sequence.ts:576](https://github.com/OctoD/tiinvo/blob/1be66d3/src/Sequence.ts#L576)
+[src/Sequence.ts:576](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/Sequence.ts#L576)
 
 ___
 
@@ -677,7 +694,7 @@ ___
 
 ▸ **length**<`a`\>(`t`): `number`
 
-Gets the length of a `TypedSequence.t<a>`
+Gets the length of a `TypedSequence.t<A>`
 
 **`Example`**
 
@@ -711,7 +728,7 @@ TypedSequence.length(s)           // 3
 
 #### Defined in
 
-[src/Sequence.ts:596](https://github.com/OctoD/tiinvo/blob/1be66d3/src/Sequence.ts#L596)
+[src/Sequence.ts:596](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/Sequence.ts#L596)
 
 ___
 
@@ -719,7 +736,7 @@ ___
 
 ▸ **values**<`a`\>(`t`): `Readonly`<`Record`<`number`, `a`\>\>
 
-Gets values of a `TypedSequence.t<a>` as an immutable indexed object.
+Gets values of a `TypedSequence.t<A>` as an immutable indexed object.
 
 **`Example`**
 
@@ -753,7 +770,7 @@ TypedSequence.values(s)       // { 0: 'hello', 1: 'world' }
 
 #### Defined in
 
-[src/Sequence.ts:613](https://github.com/OctoD/tiinvo/blob/1be66d3/src/Sequence.ts#L613)
+[src/Sequence.ts:613](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/Sequence.ts#L613)
 
 ___
 
@@ -797,7 +814,7 @@ TypedSequence.empty(s1)               // false
 
 #### Defined in
 
-[src/Sequence.ts:636](https://github.com/OctoD/tiinvo/blob/1be66d3/src/Sequence.ts#L636)
+[src/Sequence.ts:636](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/Sequence.ts#L636)
 
 ___
 
@@ -840,15 +857,53 @@ TypedSequence.populated(TypedSequence.make(Num))   // false
 
 #### Defined in
 
-[src/Sequence.ts:654](https://github.com/OctoD/tiinvo/blob/1be66d3/src/Sequence.ts#L654)
+[src/Sequence.ts:654](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/Sequence.ts#L654)
 
-___
+## Guardables
+
+### guard
+
+▸ **guard**(`x`): x is T<unknown\>
+
+Checks if the parameter `x` is a `TypedSequence.t<unknown>`
+
+**`Example`**
+
+```ts
+import { TypedSequence, Sequence, Num } from 'tiinvo'
+
+const a = TypedSequence.make(Num)
+const b = Sequence.make()
+
+TypedSequence.guard(a)     // true
+TypedSequence.guard(b)     // false
+```
+
+**`Since`**
+
+4.0.0
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `x` | `unknown` |
+
+#### Returns
+
+x is T<unknown\>
+
+#### Defined in
+
+[src/TypedSequence.ts:108](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/TypedSequence.ts#L108)
+
+## Serializables
 
 ### toArray
 
 ▸ **toArray**<`a`\>(`a`): `a`[]
 
-Converts a `TypedSequence.t<a>` to an array of `a[]`
+Converts a `TypedSequence.t<A>` to an array of `a[]`
 
 **`Example`**
 
@@ -872,17 +927,19 @@ TypedSequence.toArray(sl)       // [3, 2, 1]
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | [`t`](Sequence.md#t)<`a`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | [`t`](Sequence.md#t)<`a`\> | the TypedSequence |
 
 #### Returns
 
 `a`[]
 
+the array
+
 #### Defined in
 
-[src/Sequence.ts:733](https://github.com/OctoD/tiinvo/blob/1be66d3/src/Sequence.ts#L733)
+[src/Sequence.ts:733](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/Sequence.ts#L733)
 
 ___
 
@@ -890,7 +947,7 @@ ___
 
 ▸ **toJSON**<`a`\>(`a`): `a`[]
 
-Converts a `TypedSequence.t<a>` to a jsonizable value
+Converts a `TypedSequence.t<A>` to a jsonizable value
 
 **`Example`**
 
@@ -914,17 +971,19 @@ TypedSequence.toJSON(sl)       // [3, 2, 1]
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | [`t`](Sequence.md#t)<`a`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | [`t`](Sequence.md#t)<`a`\> | the TypedSequence |
 
 #### Returns
 
 `a`[]
 
+the JSON
+
 #### Defined in
 
-[src/Sequence.ts:748](https://github.com/OctoD/tiinvo/blob/1be66d3/src/Sequence.ts#L748)
+[src/Sequence.ts:748](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/Sequence.ts#L748)
 
 ___
 
@@ -932,7 +991,7 @@ ___
 
 ▸ **toMap**<`a`\>(`a`): `Map`<`string`, `a`\>
 
-Converts a `TypedSequence.t<a>` to a set of `Set<a>`
+Converts a `TypedSequence.t<A>` to a set of `Set<A>`
 
 **`Example`**
 
@@ -956,17 +1015,19 @@ TypedSequence.toMap(sl)      // Map([0, 3], [1, 2], [2, 1])
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | [`t`](Sequence.md#t)<`a`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | [`t`](Sequence.md#t)<`a`\> | the TypedSequence |
 
 #### Returns
 
 `Map`<`string`, `a`\>
 
+the Map
+
 #### Defined in
 
-[src/Sequence.ts:763](https://github.com/OctoD/tiinvo/blob/1be66d3/src/Sequence.ts#L763)
+[src/Sequence.ts:763](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/Sequence.ts#L763)
 
 ___
 
@@ -974,7 +1035,7 @@ ___
 
 ▸ **toSet**<`a`\>(`a`): `Set`<`a`\>
 
-Converts a `TypedSequence.t<a>` to a set of `Set<a>`
+Converts a `TypedSequence.t<A>` to a set of `Set<A>`
 
 **`Example`**
 
@@ -998,17 +1059,19 @@ TypedSequence.toSet(sl)      // Set(3, 2, 1)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | [`t`](Sequence.md#t)<`a`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | [`t`](Sequence.md#t)<`a`\> | the TypedSequence |
 
 #### Returns
 
 `Set`<`a`\>
 
+the Set
+
 #### Defined in
 
-[src/Sequence.ts:780](https://github.com/OctoD/tiinvo/blob/1be66d3/src/Sequence.ts#L780)
+[src/Sequence.ts:780](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/Sequence.ts#L780)
 
 ___
 
@@ -1016,7 +1079,7 @@ ___
 
 ▸ **toString**<`a`\>(`a`): `string`
 
-Converts a `TypedSequence.t<a>` to a string
+Converts a `TypedSequence.t<A>` to a string
 
 **`Example`**
 
@@ -1040,9 +1103,9 @@ TypedSequence.toString(sl)       // "3,2,1"
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | [`t`](Sequence.md#t)<`a`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | [`t`](Sequence.md#t)<`a`\> | the TypedSequence |
 
 #### Returns
 
@@ -1050,4 +1113,4 @@ TypedSequence.toString(sl)       // "3,2,1"
 
 #### Defined in
 
-[src/Sequence.ts:797](https://github.com/OctoD/tiinvo/blob/1be66d3/src/Sequence.ts#L797)
+[src/Sequence.ts:797](https://github.com/OctoD/tiinvo/blob/e88f1b4/src/Sequence.ts#L797)

@@ -1,12 +1,18 @@
 {
   "name": "tiinvo",
-  "version": "4.0.0",
+  "version": "4.0.0-rc1",
   "author": "Paolo Roth <octod>",
   "license": "MIT",
   "description": "A library of types and utilities for your TypeScript and JavaScript projects",
   "types": "./index.d.ts",
+  "engineStrict": true,
+  "engines": {
+    "node": "16"
+  },
+  "readme": "./README.md",
   "type": "module",
   "main": "./index.js",
+  "module": "./index.js",
   "exports": {
     ".": "./index.js",
     "./*": "./*.js"
@@ -14,6 +20,12 @@
   "keywords": [
     "functional programming",
     "functions",
+    "functors",
+    "monads",
+    "option",
+    "pipe",
+    "predicate",
+    "types",
     "utility"
   ],
   "scripts": {

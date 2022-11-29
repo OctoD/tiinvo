@@ -130,7 +130,7 @@ export function cmp(a: T, b?: T): any {
 /**
  * Checks if two functions are the same.
  * 
- * If will check that both function have:
+ * It will check that both function have:
  * 
  *    - the same list of arguments
  *    - the same name
@@ -149,6 +149,29 @@ export function cmp(a: T, b?: T): any {
  * @since 4.0.0
  */
 export function eq(a: T, b: T): boolean;
+/**
+ * Returns a unary function which checks if two functions are the same.
+ * 
+ * It will check that both function have:
+ * 
+ *    - the same list of arguments
+ *    - the same name
+ *    - the address in memory
+ *
+ * @example
+ *
+ * ```ts
+ * import { Fn, Num } from 'tiinvo'
+ * 
+ * const isadd = Fn.eq(Num.add)
+ * 
+ * isadd(Num.add) // true
+ * isadd(Num.sub) // false
+ * isadd(Num.add) // false
+ * ```
+ *
+ * @since 4.0.0
+ */
 export function eq(a: T): Unary<T, boolean>;
 export function eq(a: T, b?: T): any {
   if (guard(a) && guard(b)) {
@@ -160,7 +183,7 @@ export function eq(a: T, b?: T): any {
 
 //#endregion
 
-//#region mappables
+//#region accessors
 
 /**
  * Returns a function arguments length
@@ -217,14 +240,19 @@ export const guard = (x: unknown): x is AnyFn => typeof x === 'function';
 //#region mappables
 
 /**
- * Maps a value `a` over a list of `Functors.Mappable<a, b>` and returns an array of they returning values
+ * Maps a value `a` over a list of `Functors.Mappable<a, b>` and returns an array of the returning values
  *
  * @example
  *
  * ```ts
  * import { Fn, Num } from 'tiinvo'
  * 
- * const m = Fn.map(Num.add(1), Num.mul(2), Num.sub(3), Num.pow(4))
+ * const m = Fn.map(
+ *    Num.add(1), 
+ *    Num.mul(2), 
+ *    Num.sub(3), 
+ *    Num.pow(4),
+ * )
  * 
  * m(2)   // [3, 4, -1, 16]
  * ```

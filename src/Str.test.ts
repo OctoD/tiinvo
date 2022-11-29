@@ -10,9 +10,12 @@ describe("Str", () => {
     expect(Str.cmp('a', 'a')).toEqual(0);
     expect(Str.cmp('a', 'b')).toEqual(-1);
     expect(Str.cmp('b', 'a')).toEqual(1);
-    expect(Str.cmp('a')('a')).toEqual(0);
-    expect(Str.cmp('a')('b')).toEqual(1);
-    expect(Str.cmp('b')('a')).toEqual(-1);
+
+    const cmpB = Str.cmp('b');
+
+    expect(cmpB('a')).toEqual(-1);
+    expect(cmpB('b')).toEqual(0);
+    expect(cmpB('c')).toEqual(1);
   });
   test(Str.eq.name, () => {
     expect(Str.eq('a', 'a')).toEqual(true);
@@ -171,5 +174,17 @@ describe("Str", () => {
   test(Str.toHexArray.name, () => {
     expect(Str.toHexArray("hello")).toEqual(["0x68", "0x65", "0x6c", "0x6c", "0x6f"]);
     expect(Str.toHexArray("")).toEqual([]);
+  });
+
+  test(Str.toBinArray.name, () => {
+    expect(Str.toBinArray("hello")).toEqual(["0b1101000", "0b1100101", "0b1101100", "0b1101100", "0b1101111"]);
+  });
+
+  test(Str.toOctArray.name, () => {
+    expect(Str.toOctArray("hello")).toEqual(["0o150", "0o145", "0o154", "0o154", "0o157"]);
+  });
+
+  test(Str.toInt32Array.name, () => {
+    expect(Str.toInt32Array('hello')).toEqual(new Int32Array([104, 101, 108, 108, 111]));
   });
 });

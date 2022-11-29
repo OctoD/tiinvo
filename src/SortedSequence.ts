@@ -7,7 +7,7 @@ const sortsymbol = Symbol('Sequence.sorted');
 /**
  * A sorted list is a `Sequence.t<a>` which all elements stored in it are sorted by a `Comparable<a>` functor.
  */
-export type t<a> = Sequence.t<a> & {
+export type T<a> = Sequence.t<a> & {
   [sortsymbol]: Functors.Comparable<a>;
 };
 
@@ -32,12 +32,12 @@ export type t<a> = Sequence.t<a> & {
  *
  * @since 4.0.0
  */
-export function make<a>(mod: Functors.Comparable<a>, ...args: a[]): t<a>
-export function make<a>(mod: Functors.ComparableModule<a>, ...args: a[]): t<a>
-export function make<a>(mod: Functors.Comparable<a> | Functors.ComparableModule<a>, ...args: a[]): t<a>
+export function make<a>(mod: Functors.Comparable<a>, ...args: a[]): T<a>
+export function make<a>(mod: Functors.ComparableModule<a>, ...args: a[]): T<a>
+export function make<a>(mod: Functors.Comparable<a> | Functors.ComparableModule<a>, ...args: a[]): T<a>
 {
   const cmp = typeof mod === 'function' ? mod : mod.cmp;
-  const seq = Sequence.make.apply(null, args.sort(cmp)) as t<a>;
+  const seq = Sequence.make.apply(null, args.sort(cmp)) as T<a>;
 
   seq[sortsymbol] = cmp;
   
@@ -64,7 +64,7 @@ export function make<a>(mod: Functors.Comparable<a> | Functors.ComparableModule<
  *
  * @since 4.0.0
  */
-export const guard = (x: unknown): x is t<unknown> => Sequence.guard(x) && sortsymbol in x;
+export const guard = (x: unknown): x is T<unknown> => Sequence.guard(x) && sortsymbol in x;
 
 /**
  * Checks if the parameter `x` is a `SortedSequence.t<a>`
@@ -84,7 +84,7 @@ export const guard = (x: unknown): x is t<unknown> => Sequence.guard(x) && sorts
  *
  * @since 4.0.0
  */
-export const guardOf = <a>(g: Functors.Guardable<a>) => (x: unknown): x is t<a> => guard(x) && toArray(x).every(g);
+export const guardOf = <a>(g: Functors.Guardable<a>) => (x: unknown): x is T<a> => guard(x) && toArray(x).every(g);
 
 //#endregion
 
@@ -114,9 +114,9 @@ export const guardOf = <a>(g: Functors.Guardable<a>) => (x: unknown): x is t<a> 
  *
  * @since 4.0.0
  */
-export function cmp<a extends t<any>>(a: a, b: a): Functors.ComparableResult;
-export function cmp<a extends t<any>>(a: a): Fn.Unary<a, Functors.ComparableResult>;
-export function cmp<a extends t<any>>(a: a, b?: a): any {
+export function cmp<a extends T<any>>(a: a, b: a): Functors.ComparableResult;
+export function cmp<a extends T<any>>(a: a): Fn.Unary<a, Functors.ComparableResult>;
+export function cmp<a extends T<any>>(a: a, b?: a): any {
   if (guard(a) && guard(b)) {
     return Sequence.cmp({ cmp: a[sortsymbol] }, a, b);
   }
@@ -145,9 +145,9 @@ export function cmp<a extends t<any>>(a: a, b?: a): any {
  *
  * @since 4.0.0
  */
-export function eq<a extends t<any>>(a: a, b: a): boolean;
-export function eq<a extends t<any>>(a: a): Fn.Unary<a, boolean>;
-export function eq<a extends t<any>>(a: a, b?: a): any {
+export function eq<a extends T<any>>(a: a, b: a): boolean;
+export function eq<a extends T<any>>(a: a): Fn.Unary<a, boolean>;
+export function eq<a extends T<any>>(a: a, b?: a): any {
   if (guard(a) && guard(b)) {
     return Sequence.cmp({ cmp: a[sortsymbol] }, a, b) === 0;
   }
@@ -176,14 +176,14 @@ export function eq<a extends t<any>>(a: a, b?: a): any {
  *
  * @since 4.0.0
  */
-export function map<a, b>(a: t<a>, m: Functors.Mappable<a, b>): t<b>;
-export function map<a, b>(a: Functors.Mappable<a, b>): Fn.Unary<t<a>, t<b>>;
-export function map<a, b>(a: t<a> | Functors.Mappable<a, b>, m?: any): any {
+export function map<a, b>(a: T<a>, m: Functors.Mappable<a, b>): T<b>;
+export function map<a, b>(a: Functors.Mappable<a, b>): Fn.Unary<T<a>, T<b>>;
+export function map<a, b>(a: T<a> | Functors.Mappable<a, b>, m?: any): any {
   if (guard(a) && typeof m === 'function') {
     return make.apply(null, [{ cmp: a[sortsymbol] }, ... [... a].map(m)]);
   }
 
-  return (c: t<a>) => {
+  return (c: T<a>) => {
     return make.apply(null, [{ cmp: c[sortsymbol] as any }, ... [... c].map(a as Functors.Mappable<a, b>)]);
   };
 }
@@ -208,9 +208,9 @@ export function map<a, b>(a: t<a> | Functors.Mappable<a, b>, m?: any): any {
  *
  * @since 4.0.0
  */
-export function add<a extends t<any>, b>(a: a, b: b): t<b>;
-export function add<a extends t<any>, b>(a: b): Fn.Unary<a, t<b>>;
-export function add<a extends t<any>, b>(a: a | b, b?: b): any {
+export function add<a extends T<any>, b>(a: a, b: b): T<b>;
+export function add<a extends T<any>, b>(a: b): Fn.Unary<a, T<b>>;
+export function add<a extends T<any>, b>(a: a | b, b?: b): any {
   if (guard(a) && arguments.length === 2) {
     return make.apply(null, [{ cmp: a[sortsymbol] }, ...a, b]);
   }
@@ -235,14 +235,14 @@ export function add<a extends t<any>, b>(a: a | b, b?: b): any {
  *
  * @since 4.0.0
  */
-export function concat<a, b>(a: t<a>, b: t<b>): t<a & b>;
-export function concat<a, b>(a: t<b>): <a>(x: t<a>) => t<a & b>;
-export function concat<a, b>(a: t<a> | t<b>, b?: t<b>): any {
+export function concat<a, b>(a: T<a>, b: T<b>): T<a & b>;
+export function concat<a, b>(a: T<b>): <a>(x: T<a>) => T<a & b>;
+export function concat<a, b>(a: T<a> | T<b>, b?: T<b>): any {
   if (guard(a) && guard(b)) {
     return make.apply(null, [{ cmp: a[sortsymbol] }, ...a, ...b!]);
   }
 
-  return (x: t<b>) => make.apply(null, [{ cmp: x[sortsymbol] as any }, ...a, ...x]);
+  return (x: T<b>) => make.apply(null, [{ cmp: x[sortsymbol] as any }, ...a, ...x]);
 }
 
 //#endregion

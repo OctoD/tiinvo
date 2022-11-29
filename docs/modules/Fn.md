@@ -618,7 +618,7 @@ ___
 
 Checks if two functions are the same.
 
-If will check that both function have:
+It will check that both function have:
 
    - the same list of arguments
    - the same name
@@ -655,6 +655,30 @@ src/Fn.ts:151
 
 ▸ **eq**(`a`): [`Unary`](Fn.md#unary)<[`T`](Fn.md#t), `boolean`\>
 
+Returns a unary function which checks if two functions are the same.
+
+It will check that both function have:
+
+   - the same list of arguments
+   - the same name
+   - the address in memory
+
+**`Example`**
+
+```ts
+import { Fn, Num } from 'tiinvo'
+
+const isadd = Fn.eq(Num.add)
+
+isadd(Num.add) // true
+isadd(Num.sub) // false
+isadd(Num.add) // false
+```
+
+**`Since`**
+
+4.0.0
+
 #### Parameters
 
 | Name | Type |
@@ -667,7 +691,7 @@ src/Fn.ts:151
 
 #### Defined in
 
-src/Fn.ts:152
+src/Fn.ts:175
 
 ___
 
@@ -772,7 +796,7 @@ x is AnyFn
 
 #### Defined in
 
-src/Fn.ts:213
+src/Fn.ts:236
 
 ___
 
@@ -780,14 +804,19 @@ ___
 
 ▸ **map**<`a`, `b`\>(...`ml`): (`a`: `a`) => `b`[]
 
-Maps a value `a` over a list of `Functors.Mappable<a, b>` and returns an array of they returning values
+Maps a value `a` over a list of `Functors.Mappable<a, b>` and returns an array of the returning values
 
 **`Example`**
 
 ```ts
 import { Fn, Num } from 'tiinvo'
 
-const m = Fn.map(Num.add(1), Num.mul(2), Num.sub(3), Num.pow(4))
+const m = Fn.map(
+   Num.add(1), 
+   Num.mul(2), 
+   Num.sub(3), 
+   Num.pow(4),
+)
 
 m(2)   // [3, 4, -1, 16]
 ```
@@ -827,4 +856,4 @@ m(2)   // [3, 4, -1, 16]
 
 #### Defined in
 
-src/Fn.ts:234
+src/Fn.ts:262
