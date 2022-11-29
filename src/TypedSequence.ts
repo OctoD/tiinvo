@@ -102,6 +102,10 @@ export function make<A>(g: Functors.Guardable<A> | Functors.GuardableModule<A>, 
  * TypedSequence.guard(b)     // false
  * ```
  *
+ * @param x the guarded value
+ * @returns 
+ *  - true if x is a TypedSequence
+ *  - false otherwise
  * @group Guardables
  * @since 4.0.0
  */
@@ -122,12 +126,31 @@ export const guard = (x: unknown): x is T<unknown> => Sequence.guard(x) && guard
  * const s0 = TypedSequence.make(Num, 10, 20)
  * 
  * TypedSequence.append(s0, 30)       // TypedSequence(10, 20, 30)
- * TypedSequence.append(30)(s0)       // TypedSequence(10, 20, 30)
  * ```
  *
+ * @param a the TypedSequence
+ * @param b the value to append
  * @since 4.0.0
  */
 export function append<A>(a: T<A>, b: A): T<A>;
+/**
+ * Returns a unary function which adds an element `a` to the end of the 
+ * `Sequence.t<A>` without mutating the original one.
+ *
+ * @example
+ *
+ * ```ts
+ * import { TypedSequence, Num } from 'tiinvo'
+ * 
+ * const s0 = TypedSequence.make(Num, 10, 20)
+ * 
+ * TypedSequence.append(30)(s0)       // TypedSequence(10, 20, 30)
+ * ```
+ *
+ * @param a the value to append
+ * @returns the unary function
+ * @since 4.0.0
+ */
 export function append<A>(a: A): Fn.Unary<T<A>, T<A>>;
 export function append<A>(a: T<A> | A, b?: any): any {
   if (guard(a) && arguments.length === 2) {
@@ -153,12 +176,34 @@ export function append<A>(a: T<A> | A, b?: any): any {
  * const s1 = TypedSequence.make(Num, 30, 40)
  * 
  * TypedSequence.concat(s0, s1)       // TypedSequence(10, 20, 30, 40)
- * TypedSequence.concat(s1)(s0)       // TypedSequence(10, 20, 30, 40)
  * ```
  *
+ * @param a the first TypedSequence
+ * @param a the last TypedSequence
+ * @returns the concatenated TypedSequence
  * @since 4.0.0
  */
 export function concat<a extends T<any>>(a: a, b: a): a;
+/**
+ * Returns a unary function which concatenates two `TypedSequence.t<A>` 
+ * and `TypedSequence.t<b>` and return a new `TypedSequence.t<A>`.
+ *
+ * @example
+ *
+ * ```ts
+ * import { TypedSequence, Num } from 'tiinvo'
+ * 
+ * const s0 = TypedSequence.make(Num, 10, 20)
+ * const s1 = TypedSequence.make(Num, 30, 40)
+ * 
+ * TypedSequence.concat(s1)(s0)       // TypedSequence(10, 20, 30, 40)
+ * ```
+ *
+ * @param a the first TypedSequence
+ * @param a the last TypedSequence
+ * @returns the concatenated TypedSequence
+ * @since 4.0.0
+ */
 export function concat<a extends T<any>>(a: a): Fn.Unary<a, a>;
 export function concat<a extends T<any>>(a: a, b?: a): any {
   if (guard(a) && guard(b)) {
@@ -182,9 +227,30 @@ export function concat<a extends T<any>>(a: a, b?: a): any {
  * TypedSequence.prepend(30)(s0)       // TypedSequence.make(Num, 30, 10, 20)
  * ```
  *
+ * @param a the TypedSequence
+ * @param b the value to prepend
+ * @returns the new TypedSequence
  * @since 4.0.0
  */
 export function prepend<A>(a: T<A>, b: A): T<A>;
+/**
+ * Returns a unary function which adds an element to the start of 
+ * the `TypedSequence.t<A>` without mutating the original one.
+ *
+ * @example
+ *
+ * ```ts
+ * import { TypedSequence, Num } from 'tiinvo'
+ * 
+ * const s0 = TypedSequence.make(Num, 10, 20)
+ * 
+ * TypedSequence.prepend(30)(s0)       // TypedSequence.make(Num, 30, 10, 20)
+ * ```
+ *
+ * @param a the value
+ * @returns the unary function
+ * @since 4.0.0
+ */
 export function prepend<A>(a: A): Fn.Unary<T<A>, T<A>>;
 export function prepend<A>(a: any, b?: any): any {
   if (guard(a)) {
@@ -217,6 +283,7 @@ export function prepend<A>(a: any, b?: any): any {
  * @param a the sequence
  * @param mod the Comparable used to sort the sequence
  * @returns the sorted sequence
+ * @group Sortables
  * @since 4.0.0
  */
 export function sort<A>(a: T<A>, mod: Functors.Comparable<A> | Functors.ComparableModule<A>): T<A>;
@@ -240,6 +307,7 @@ export function sort<A>(a: T<A>, mod: Functors.Comparable<A> | Functors.Comparab
  * @template A the sequence type
  * @param a the sequence
  * @returns the sorting unary function
+ * @group Sortables
  * @since 4.0.0
  */
 export function sort<A>(a: Functors.Comparable<A> | Functors.ComparableModule<A>): Fn.Unary<T<A>, T<A>>;
@@ -259,7 +327,7 @@ export function sort<A>(a: T<A> | Functors.Comparable<A> | Functors.ComparableMo
 
 //#endregion
 
-//#region getters
+//#region accessors
 
 /**
  * Counts the number of elements that satisfy a given predicate 
@@ -275,6 +343,8 @@ export function sort<A>(a: T<A> | Functors.Comparable<A> | Functors.ComparableMo
  * TypedSequence.count(Num.gt(10))(s)   // 2
  * ```
  *
+ * @param a the sequence
+ * @returns the counted elements
  * @since 4.0.0
  */
 export const count = Sequence.count;
@@ -298,7 +368,9 @@ export const count = Sequence.count;
 export const get = Sequence.get;
 
 /**
+ * Gets the first element of a TypedSequence.
  * 
+ * Returns `Option.None` if none is found.
  *
  * @example
  *
@@ -319,7 +391,7 @@ export const first = Sequence.first;
 /**
  * Gets a Sequence.t<A>'s last element.
  *
- * Returns Option.None if none is found.
+ * Returns `Option.None` if none is found.
  *
  * @example
  *
