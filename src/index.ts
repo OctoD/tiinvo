@@ -30,6 +30,7 @@ export {
   Num,
   Obj,
   Option,
+  Option as Opt,
   Pipe,
   Predicate,
   Range,
