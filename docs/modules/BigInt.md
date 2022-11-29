@@ -59,7 +59,7 @@ Represents a very large integer.
 
 #### Defined in
 
-[src/BigInt.ts:10](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L10)
+[src/BigInt.ts:10](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L10)
 
 ## Guards
 
@@ -96,7 +96,7 @@ returns true if is a bigint, false otherwise
 
 #### Defined in
 
-[src/BigInt.ts:31](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L31)
+[src/BigInt.ts:31](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L31)
 
 ## Comparables
 
@@ -137,7 +137,7 @@ BigInt.cmp(0n, 1n)       // -1
 
 #### Defined in
 
-[src/BigInt.ts:59](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L59)
+[src/BigInt.ts:59](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L59)
 
 ▸ **cmp**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -173,7 +173,7 @@ the unary function
 
 #### Defined in
 
-[src/BigInt.ts:81](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L81)
+[src/BigInt.ts:81](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L81)
 
 ___
 
@@ -212,7 +212,7 @@ true if two bigints are equal
 
 #### Defined in
 
-[src/BigInt.ts:109](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L109)
+[src/BigInt.ts:109](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L109)
 
 ▸ **eq**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), `boolean`\>
 
@@ -223,9 +223,11 @@ Returns a unary function which checks if `b` and `a` are equal
 ```ts
 import { BigInt } from 'tiinvo'
 
-BigInt.eq(10n)(10n)              // true
-BigInt.eq(10n)(5n)               // false
-BigInt.eq(10n)(10 as any)        // false
+const is10n = BigInt.eq(10n)
+
+is10n(10n)              // true
+is10n(5n)               // false
+is10n(10 as any)        // false
 ```
 
 **`Since`**
@@ -246,13 +248,13 @@ the unary function
 
 #### Defined in
 
-[src/BigInt.ts:128](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L128)
+[src/BigInt.ts:130](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L130)
 
 ## Mappables
 
 ### map
 
-▸ **map**<`B`\>(`a`, `m`): [`T`](Result.md#t)<`B`\>
+▸ **map**<`A`\>(`a`, `m`): [`T`](Result.md#t)<`A`\>
 
 Maps a bigint `a` to a value `Result.Ok<b>` if a is `bigint`, 
 otherwise returns `Result.Err`.
@@ -276,26 +278,26 @@ BigInt.map("a", x => '0x' + x.toString(16))       // TypeError("a is not a bigin
 
 | Name | Description |
 | :------ | :------ |
-| `B` | the mapped value |
+| `A` | the mapped value |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `a` | `bigint` | the bigint |
-| `m` | [`Mappable`](Functors.md#mappable)<`bigint`, `B`\> | the mappable functor |
+| `m` | [`Mappable`](Functors.md#mappable)<`bigint`, `A`\> | the mappable functor |
 
 #### Returns
 
-[`T`](Result.md#t)<`B`\>
+[`T`](Result.md#t)<`A`\>
 
-the mapped value or TypeError if a is not a bigint
+the mapped value or TypeError if `a` is not a `bigint`
 
 #### Defined in
 
-[src/BigInt.ts:163](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L163)
+[src/BigInt.ts:165](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L165)
 
-▸ **map**<`B`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](Result.md#t)<`B`\>\>
+▸ **map**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](Result.md#t)<`A`\>\>
 
 Returns a unary function which maps a bigint `a` to 
 a value `Result.Ok<b>` if a is `bigint`, otherwise returns `Result.Err`.
@@ -319,29 +321,29 @@ toHex("a")       // TypeError("a is not a bigint")
 
 | Name | Description |
 | :------ | :------ |
-| `B` | the mapped value |
+| `A` | the mapped value |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `a` | [`Mappable`](Functors.md#mappable)<`bigint`, `B`\> | the mappable functor |
+| `a` | [`Mappable`](Functors.md#mappable)<`bigint`, `A`\> | the mappable functor |
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](Result.md#t)<`B`\>\>
+[`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](Result.md#t)<`A`\>\>
 
 the unary function
 
 #### Defined in
 
-[src/BigInt.ts:185](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L185)
+[src/BigInt.ts:187](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L187)
 
 ___
 
 ### mapOr
 
-▸ **mapOr**<`B`\>(`a`, `m`, `b`): `B`
+▸ **mapOr**<`A`\>(`a`, `m`, `b`): `A`
 
 Maps a bigint `a` to a value of type `B` if a is `bigint`, otherwise returns `b`.
 
@@ -364,25 +366,25 @@ toHex("a")      // "0x0"
 
 | Name | Description |
 | :------ | :------ |
-| `B` | the mapped value type |
+| `A` | the mapped value type |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `a` | `bigint` | the bigint |
-| `m` | [`Mappable`](Functors.md#mappable)<`bigint`, `B`\> | the mappable functor |
-| `b` | `B` | the fallback value |
+| `m` | [`Mappable`](Functors.md#mappable)<`bigint`, `A`\> | the mappable functor |
+| `b` | `A` | the fallback value |
 
 #### Returns
 
-`B`
+`A`
 
 #### Defined in
 
-[src/BigInt.ts:217](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L217)
+[src/BigInt.ts:219](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L219)
 
-▸ **mapOr**<`B`\>(`a`, `m`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), `B`\>
+▸ **mapOr**<`A`\>(`a`, `m`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), `A`\>
 
 Returns a unary function which maps a bigint `b` to a value of type `B` if a is `bigint`, otherwise returns `m`.
 
@@ -405,24 +407,24 @@ toHex("a")      // "0x0"
 
 | Name | Description |
 | :------ | :------ |
-| `B` | the mapped value type |
+| `A` | the mapped value type |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `a` | [`Mappable`](Functors.md#mappable)<`bigint`, `B`\> | the bigint |
-| `m` | `B` | the mappable functor |
+| `a` | [`Mappable`](Functors.md#mappable)<`bigint`, `A`\> | the bigint |
+| `m` | `A` | the mappable functor |
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), `B`\>
+[`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), `A`\>
 
 the unary function
 
 #### Defined in
 
-[src/BigInt.ts:239](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L239)
+[src/BigInt.ts:241](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L241)
 
 ## Operables
 
@@ -464,7 +466,7 @@ the result
 
 #### Defined in
 
-[src/BigInt.ts:276](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L276)
+[src/BigInt.ts:278](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L278)
 
 ▸ **add**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](BigInt.md#t)\>
 
@@ -496,7 +498,7 @@ add5(10n)                   // 15n
 
 #### Defined in
 
-[src/BigInt.ts:295](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L295)
+[src/BigInt.ts:297](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L297)
 
 ___
 
@@ -534,7 +536,7 @@ the result
 
 #### Defined in
 
-[src/BigInt.ts:322](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L322)
+[src/BigInt.ts:324](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L324)
 
 ▸ **div**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](BigInt.md#t)\>
 
@@ -567,7 +569,7 @@ the unary function
 
 #### Defined in
 
-[src/BigInt.ts:340](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L340)
+[src/BigInt.ts:342](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L342)
 
 ___
 
@@ -605,7 +607,7 @@ the remainder
 
 #### Defined in
 
-[src/BigInt.ts:367](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L367)
+[src/BigInt.ts:369](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L369)
 
 ▸ **mod**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](BigInt.md#t)\>
 
@@ -640,7 +642,7 @@ the unary function
 
 #### Defined in
 
-[src/BigInt.ts:387](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L387)
+[src/BigInt.ts:389](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L389)
 
 ___
 
@@ -678,7 +680,7 @@ the result
 
 #### Defined in
 
-[src/BigInt.ts:414](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L414)
+[src/BigInt.ts:416](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L416)
 
 ▸ **mul**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](BigInt.md#t)\>
 
@@ -712,7 +714,7 @@ the unary function
 
 #### Defined in
 
-[src/BigInt.ts:433](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L433)
+[src/BigInt.ts:435](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L435)
 
 ___
 
@@ -750,7 +752,7 @@ the result
 
 #### Defined in
 
-[src/BigInt.ts:460](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L460)
+[src/BigInt.ts:462](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L462)
 
 ▸ **pow**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](BigInt.md#t)\>
 
@@ -782,7 +784,7 @@ pow5(10n)                   // 100_000n
 
 #### Defined in
 
-[src/BigInt.ts:477](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L477)
+[src/BigInt.ts:479](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L479)
 
 ___
 
@@ -819,7 +821,7 @@ BigInt.root(9n, 2n)             // 3n
 
 #### Defined in
 
-[src/BigInt.ts:504](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L504)
+[src/BigInt.ts:506](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L506)
 
 ▸ **root**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](BigInt.md#t)\>
 
@@ -854,7 +856,7 @@ the unary function
 
 #### Defined in
 
-[src/BigInt.ts:524](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L524)
+[src/BigInt.ts:526](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L526)
 
 ___
 
@@ -892,7 +894,7 @@ a - b
 
 #### Defined in
 
-[src/BigInt.ts:562](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L562)
+[src/BigInt.ts:564](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L564)
 
 ▸ **sub**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](BigInt.md#t)\>
 
@@ -927,7 +929,7 @@ the unary function (b - a)
 
 #### Defined in
 
-[src/BigInt.ts:582](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L582)
+[src/BigInt.ts:584](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L584)
 
 ## Sortables
 
@@ -971,7 +973,7 @@ the result:
 
 #### Defined in
 
-[src/BigInt.ts:619](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L619)
+[src/BigInt.ts:621](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L621)
 
 ▸ **asc**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -1005,7 +1007,7 @@ the comparator unary function
 
 #### Defined in
 
-[src/BigInt.ts:638](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L638)
+[src/BigInt.ts:640](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L640)
 
 ___
 
@@ -1050,7 +1052,7 @@ the result:
 
 #### Defined in
 
-[src/BigInt.ts:672](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L672)
+[src/BigInt.ts:674](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L674)
 
 ▸ **desc**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -1066,7 +1068,7 @@ the result:
 
 #### Defined in
 
-[src/BigInt.ts:673](https://github.com/OctoD/tiinvo/blob/c3dee92/src/BigInt.ts#L673)
+[src/BigInt.ts:675](https://github.com/OctoD/tiinvo/blob/b09ac39/src/BigInt.ts#L675)
 
 ## Serializables
 
@@ -1092,13 +1094,15 @@ BigInt.toBin(10n)        // "0b1010"
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `bigint` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `bigint` | the bigint |
 
 #### Returns
 
 [`T`](Result.md#t)<`string`\>
+
+the binary bigint value
 
 #### Defined in
 
@@ -1128,13 +1132,15 @@ BigInt.toHex(10n)        // "0xa"
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `bigint` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `bigint` | the bigint |
 
 #### Returns
 
 [`T`](Result.md#t)<`string`\>
+
+the hexadecimal bigint value
 
 #### Defined in
 
@@ -1164,13 +1170,15 @@ BigInt.toOct(10n)        // "0o12"
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `bigint` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `bigint` | the bigint |
 
 #### Returns
 
 [`T`](Result.md#t)<`string`\>
+
+the octal bigint value
 
 #### Defined in
 
@@ -1200,13 +1208,15 @@ BigInt.toJSON(10n)       // "10"
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `bigint` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `bigint` | the bigint |
 
 #### Returns
 
 [`T`](Result.md#t)<`string`\>
+
+the json bigint value
 
 #### Defined in
 
@@ -1236,13 +1246,15 @@ BigInt.toString(10n)       // "10"
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `bigint` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `bigint` | the bigint |
 
 #### Returns
 
 [`T`](Result.md#t)<`string`\>
+
+the string
 
 #### Defined in
 

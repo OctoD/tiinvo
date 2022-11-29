@@ -115,9 +115,11 @@ export function eq(a: T, b: T): boolean;
  * ```ts
  * import { BigInt } from 'tiinvo'
  * 
- * BigInt.eq(10n)(10n)              // true
- * BigInt.eq(10n)(5n)               // false
- * BigInt.eq(10n)(10 as any)        // false
+ * const is10n = BigInt.eq(10n)
+ * 
+ * is10n(10n)              // true
+ * is10n(5n)               // false
+ * is10n(10 as any)        // false
  * ```
  *
  * @param a the first bigint
@@ -153,14 +155,14 @@ export function eq(a: T, b?: T): any {
  * BigInt.map("a", x => '0x' + x.toString(16))       // TypeError("a is not a bigint")
  * ``` 
  * 
- * @template B the mapped value
+ * @template A the mapped value
  * @param a the bigint
  * @param m the mappable functor
- * @returns the mapped value or TypeError if a is not a bigint
+ * @returns the mapped value or TypeError if `a` is not a `bigint`
  * @group Mappables
  * @since 4.0.0
  */
-export function map<B>(a: T, m: Functors.Mappable<T, B>): Result.T<B>;
+export function map<A>(a: T, m: Functors.Mappable<T, A>): Result.T<A>;
 /**
  * Returns a unary function which maps a bigint `a` to 
  * a value `Result.Ok<b>` if a is `bigint`, otherwise returns `Result.Err`.
@@ -176,14 +178,14 @@ export function map<B>(a: T, m: Functors.Mappable<T, B>): Result.T<B>;
  * toHex("a")       // TypeError("a is not a bigint")
  * ``` 
  * 
- * @template B the mapped value
+ * @template A the mapped value
  * @param a the mappable functor
  * @returns the unary function
  * @group Mappables
  * @since 4.0.0
  */
-export function map<B>(a: Functors.Mappable<T, B>): Fn.Unary<T, Result.T<B>>;
-export function map<B>(a: T | Functors.Mappable<T, B>, m?: Functors.Mappable<T, B>): any {
+export function map<A>(a: Functors.Mappable<T, A>): Fn.Unary<T, Result.T<A>>;
+export function map<A>(a: T | Functors.Mappable<T, A>, m?: Functors.Mappable<T, A>): any {
   if (guard(a) && typeof m === 'function') {
     return m(a);
   } else if (typeof a === 'function') {
@@ -207,14 +209,14 @@ export function map<B>(a: T | Functors.Mappable<T, B>, m?: Functors.Mappable<T, 
  * toHex("a")      // "0x0"
  * ``` 
  * 
- * @template B the mapped value type
+ * @template A the mapped value type
  * @param a the bigint
  * @param m the mappable functor
  * @param b the fallback value
  * @group Mappables
  * @since 4.0.0
  */
-export function mapOr<B>(a: T, m: Functors.Mappable<T, B>, b: B): B;
+export function mapOr<A>(a: T, m: Functors.Mappable<T, A>, b: A): A;
 /**
  * Returns a unary function which maps a bigint `b` to a value of type `B` if a is `bigint`, otherwise returns `m`.
  * 
@@ -229,15 +231,15 @@ export function mapOr<B>(a: T, m: Functors.Mappable<T, B>, b: B): B;
  * toHex("a")      // "0x0"
  * ``` 
  * 
- * @template B the mapped value type
+ * @template A the mapped value type
  * @param a the bigint
  * @param m the mappable functor
  * @returns the unary function
  * @group Mappables
  * @since 4.0.0
  */
-export function mapOr<B>(a: Functors.Mappable<T, B>, m: B): Fn.Unary<T, B>;
-export function mapOr<B>(a: T | Functors.Mappable<T, B>, m: any, b?: B): any {
+export function mapOr<A>(a: Functors.Mappable<T, A>, m: A): Fn.Unary<T, A>;
+export function mapOr<A>(a: T | Functors.Mappable<T, A>, m: any, b?: A): any {
   if (typeof m === 'function') {
     return guard(a) ? m(a) : b;
   } else if (typeof a === 'function') {
@@ -696,6 +698,8 @@ export function desc(a: T, b?: any): any {
  * BigInt.toBin(10n)        // "0b1010"
  * ```
  * 
+ * @param a the bigint
+ * @returns the binary bigint value
  * @group Serializables
  * @since 4.0.0
  */
@@ -714,6 +718,8 @@ export const toBin = map(x => '0b' + x.toString(2));
  * BigInt.toHex(10n)        // "0xa"
  * ```
  * 
+ * @param a the bigint
+ * @returns the hexadecimal bigint value
  * @group Serializables
  * @since 4.0.0
  */
@@ -732,6 +738,8 @@ export const toHex = map(x => '0x' + x.toString(16));
  * BigInt.toOct(10n)        // "0o12"
  * ```
  * 
+ * @param a the bigint
+ * @returns the octal bigint value
  * @group Serializables
  * @since 4.0.0
  */
@@ -750,10 +758,12 @@ export const toOct = map(x => '0o' + x.toString(8));
  * BigInt.toJSON(10n)       // "10"
  * ```
  * 
+ * @param a the bigint
+ * @returns the json bigint value
  * @group Serializables
  * @since 4.0.0
  */
-export const toJSON = map(x => JSON.stringify(Number(x)));
+export const toJSON = map(x => JSON.stringify(String(x)));
 
 /**
  * Returns a stringified number.
@@ -768,6 +778,8 @@ export const toJSON = map(x => JSON.stringify(Number(x)));
  * BigInt.toString(10n)       // "10"
  * ```
  * 
+ * @param a the bigint
+ * @returns the string
  * @group Serializables
  * @since 4.0.0
  */
