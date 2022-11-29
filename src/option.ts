@@ -12,12 +12,14 @@ import { make as makecatch } from './Catch.js';
 export type None = null | undefined;
 
 /**
- * Some<A> represents a value which could have been a possible nullable or undefined
+ * `Some<A>` represents a value which cannot be `null` or `undefined`
+ * @template A the some type
  * @since 4.0.0
  */
 export type Some<A> = A extends None ? never : A;
 /**
- * The type `Option.T<A>` represents a value that could be both `a` or `null` or `undefined`.
+ * The type `Option.T<A>` represents a value that could be both `A` or `null` or `undefined`.
+ * @template A the option type
  * @since 4.0.0
  */
 export type T<A> = Some<A> | None;
@@ -32,8 +34,11 @@ export type T<A> = Some<A> | None;
  * Option.isNone(null);       // true
  * Option.isNone(undefined);  // true
  * ```
- * @param x 
+ * 
+ * @param x  the argument to check if none
  * @returns 
+ *  - `true` if `x` is `None`
+ *  - `false` otherwise
  * @since 4.0.0
  */
 export const isNone: Functors.Guardable<None> = (x): x is None => x === undefined || x === null;
@@ -50,6 +55,8 @@ export const isNone: Functors.Guardable<None> = (x): x is None => x === undefine
  * 
  * @param x 
  * @returns 
+ *  - `true` if `x` is `Some<unknown>`
+ *  - `false` otherwise
  * @since 4.0.0
  */
 export const isSome: Functors.Guardable<Some<unknown>> = (x): x is Some<unknown> => x !== undefined && x !== null;
@@ -74,8 +81,12 @@ export const isSome: Functors.Guardable<Some<unknown>> = (x): x is Some<unknown>
  * isnumsome(w) // false
  * 
  * ```
- * @param guard 
- * @returns 
+ * 
+ * @template A the type
+ * @param f the guard 
+ * @returns the new `Guardable<T<A>>` which returns
+ *  - `true` if `x` is `None` or is `Some<A>`
+ *  - `false` otherwise
  * @since 4.0.0
  */
 export const guardOf = <A>(f: Functors.Guardable<A>): Functors.Guardable<T<A>> => (x): x is T<A> => isNone(x) ? true : f(x);
@@ -84,10 +95,6 @@ export const guardOf = <A>(f: Functors.Guardable<A>): Functors.Guardable<T<A>> =
 
 /**
  * Compares two options `T<A>` by a given `Comparable<A>`.
- * 
- * Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
- * 
- * If `a` is `None` and `b` is `Some` returns -1, else if both are `None` returns 0, else returns 1
  * 
  * @example
  * 
@@ -102,15 +109,20 @@ export const guardOf = <A>(f: Functors.Guardable<A>): Functors.Guardable<T<A>> =
  * Option.cmp(Str.cmp, "a", undefined)              // 1
  * ```
  * 
+ * @template A the type
+ * @param c the `Comparable<A>`
+ * @param a the left-hand compared `Option.T<A>`
+ * @param b the right-hand compared  `Option.T<A>`
+ * @returns 
+ *  - `0` if `a` equals to `b` or both `a` and `b` are `None`
+ *  - `1` if `a` is greater than `b` or `a` is `Some<A>` and `b` is `None`
+ *  - `-1` if `a` is less than `b` or `a` is `None` and `b` is `Some<A>`
+ * @group Comparables
  * @since 4.0.0
  */
 export function cmp<A>(c: Functors.Comparable<A>, a: T<A>, b: T<A>): Functors.ComparableResult;
 /**
  * Compares two options `T<A>` by a given `Comparable<A>`.
- * 
- * Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
- * 
- * If `a` is `None` and `b` is `Some` returns -1, else if both are `None` returns 0, else returns 1
  * 
  * @example
  * 
@@ -125,15 +137,18 @@ export function cmp<A>(c: Functors.Comparable<A>, a: T<A>, b: T<A>): Functors.Co
  * Option.cmp(Str.cmp, "a")(undefined)              // -1
  * ```
  * 
+ * @param c the `Comparable<A>` functor
+ * @param a the right-hand compared value
+ * @returns the unary comparer functor which takes the left-hand compared value and returns 
+ *  - `0` if `a` equals to `b` or both `a` and `b` are `None`
+ *  - `1` if `a` is greater than `b` or `a` is `Some<A>` and `b` is `None`
+ *  - `-1` if `a` is less than `b` or `a` is `None` and `b` is `Some<A>`
+ * @group Comparables
  * @since 4.0.0
  */
 export function cmp<A>(c: Functors.Comparable<A>, a: T<A>): Fn.Unary<T<A>, Functors.ComparableResult>;
 /**
  * Compares two options `T<A>` by a given `Comparable<A>`.
- * 
- * Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
- * 
- * If `a` is `None` and `b` is `Some` returns -1, else if both are `None` returns 0, else returns 1
  * 
  * @example
  * 
@@ -150,6 +165,12 @@ export function cmp<A>(c: Functors.Comparable<A>, a: T<A>): Fn.Unary<T<A>, Funct
  * cmp("a", undefined)              // 1
  * ```
  * 
+ * @param c the `Comparable<A>` functor
+ * @returns the binary comparer functor which takes two values `a` and `b` and returns 
+ *  - `0` if `a` equals to `b` or both `a` and `b` are `None`
+ *  - `1` if `a` is greater than `b` or `a` is `Some<A>` and `b` is `None`
+ *  - `-1` if `a` is less than `b` or `a` is `None` and `b` is `Some<A>`
+ * @group Comparables
  * @since 4.0.0
  */
 export function cmp<A>(c: Functors.Comparable<A>): Fn.Binary<T<A>, T<A>, Functors.ComparableResult>;
@@ -192,8 +213,13 @@ export function cmp<A>(c: Functors.Comparable<A>, a?: T<A>, b?: T<A>): any {
  * Option.eq(Num.eq, null, undefined)   // true
  * ```
  * 
- * @param e 
+ * @param e the equatable functor
+ * @param a the left-hand compared value
+ * @param b the right-hand compared value
  * @returns 
+ *  - `true` if `a` equals to `b`
+ *  - `false` otherwise
+ * @group Comparables 
  * @since 4.0.0
  */
 export function eq<A>(e: Functors.Equatable<A>, a: T<A>, b: T<A>): boolean;
@@ -209,8 +235,12 @@ export function eq<A>(e: Functors.Equatable<A>, a: T<A>, b: T<A>): boolean;
  * Option.eq(Num.eq, null)(100000000)           // false
  * ```
  * 
- * @param e 
- * @returns 
+ * @param e the equatable functor
+ * @param a the right-hand compared value
+ * @returns the unary function which returns
+ *  - `true` if `a` equals to `b`
+ *  - `false` otherwise
+ * @group Comparables 
  * @since 4.0.0
  */
 export function eq<A>(e: Functors.Equatable<A>, a: T<A>): Fn.Unary<T<A>, boolean>;
@@ -229,8 +259,11 @@ export function eq<A>(e: Functors.Equatable<A>, a: T<A>): Fn.Unary<T<A>, boolean
  * eq(1_000_000, 0)                 // false
  * ```
  * 
- * @param e 
- * @returns 
+ * @param e the equatable functor
+ * @returns the binary function which returns
+ *  - `true` if `a` equals to `b`
+ *  - `false` otherwise
+ * @group Comparables 
  * @since 4.0.0
  */
 export function eq<A>(e: Functors.Equatable<A>): Fn.Binary<T<A>, T<A>, boolean>;
@@ -292,6 +325,7 @@ export function filter<A>(a: Functors.Mappable<A, boolean>, b: T<A>): T<A>;
  * 
  * @template A the type to filter
  * @param a the predicate
+ * @returns the unary function which filters the value `b`
  * @group Filterables
  * @since 4.0.0
  */
@@ -324,6 +358,7 @@ export function filter<A>(a: Functors.Mappable<A, boolean>, b?: T<A>): any {
  * @template B the mapped type
  * @param m the mappable
  * @param a the value to map
+ * @returns the mapped option `T<B>`
  * @group Mappables
  * @since 4.0.0
  */
@@ -343,10 +378,11 @@ export function map<A, B>(m: Functors.Mappable<A, B>, a: T<A>): T<B>;
  * @template A the starting type
  * @template B the mapped type
  * @param m the mappable
+ * @returns the mappable functor which maps `T<A>` to `T<B>`
  * @group Mappables
  * @since 4.0.0
  */
-export function map<A, B>(m: Functors.Mappable<A, B>): Fn.Unary<T<A>, T<B>>;
+export function map<A, B>(m: Functors.Mappable<A, B>): Functors.Mappable<T<A>, T<B>>;
 export function map<A, B>(m: Functors.Mappable<A, B>, a?: T<A>): any {
   const _map = (x: T<A>) => isNone(x) ? null : m(x) as T<B>;
 
@@ -372,6 +408,7 @@ export function map<A, B>(m: Functors.Mappable<A, B>, a?: T<A>): any {
  * @param m the mappable
  * @param a the value to map
  * @param b the fallback value
+ * @returns the mapped value `B` or the fallback value `b` if `a` is `None`
  * @group Mappables
  * @since 4.0.0
  */
@@ -392,6 +429,7 @@ export function mapOr<A, B>(m: Functors.Mappable<A, B>, a: T<A>, b: B): B;
  * @template B the mapped type
  * @param m the mappable
  * @param a the fallback value
+ * @returns the mappable functor which maps `A` to `B` or returns the fallback value `a` if `b` is `None`
  * @group Mappables
  * @since 4.0.0
  */
@@ -436,6 +474,8 @@ export function mapOr<A, B>(m: Functors.Mappable<A, B>, a: T<A> | B, b?: B): any
  * @template F the function type
  * @param f the function to wrap
  * @returns the wrapped function
+ *  - returns `Promise<None>` if the function catched
+ *  - otherwise the function returns `Promise<ReturnValue<F>>`
  * @since 4.0.0
  */
 export const tryAsync = <F extends Fn.AnyAsyncFn>(f: F) => {
@@ -475,6 +515,8 @@ export const tryAsync = <F extends Fn.AnyAsyncFn>(f: F) => {
  * @template F the function type
  * @param f the function to wrap
  * @returns the wrapped function
+ *  - returns `None` if the function catched
+ *  - otherwise the function returns `ReturnValue<F>`
  * @since 4.0.0
  */
 export const trySync = <F extends Fn.AnyFn>(f: F) => {

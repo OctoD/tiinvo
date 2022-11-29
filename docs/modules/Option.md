@@ -15,10 +15,13 @@
 - [isNone](Option.md#isnone)
 - [isSome](Option.md#issome)
 - [guardOf](Option.md#guardof)
-- [cmp](Option.md#cmp)
-- [eq](Option.md#eq)
 - [tryAsync](Option.md#tryasync)
 - [trySync](Option.md#trysync)
+
+### Comparables
+
+- [cmp](Option.md#cmp)
+- [eq](Option.md#eq)
 
 ### Filterables
 
@@ -53,7 +56,7 @@ ___
 
 Ƭ **Some**<`A`\>: `A` extends [`None`](Option.md#none) ? `never` : `A`
 
-Some<A> represents a value which could have been a possible nullable or undefined
+`Some<A>` represents a value which cannot be `null` or `undefined`
 
 **`Since`**
 
@@ -61,13 +64,13 @@ Some<A> represents a value which could have been a possible nullable or undefine
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `A` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the some type |
 
 #### Defined in
 
-src/Option.ts:18
+src/Option.ts:19
 
 ___
 
@@ -75,7 +78,7 @@ ___
 
 Ƭ **T**<`A`\>: [`Some`](Option.md#some)<`A`\> \| [`None`](Option.md#none)
 
-The type `Option.T<A>` represents a value that could be both `a` or `null` or `undefined`.
+The type `Option.T<A>` represents a value that could be both `A` or `null` or `undefined`.
 
 **`Since`**
 
@@ -83,13 +86,13 @@ The type `Option.T<A>` represents a value that could be both `a` or `null` or `u
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `A` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the option type |
 
 #### Defined in
 
-src/Option.ts:23
+src/Option.ts:25
 
 ## Functions
 
@@ -113,13 +116,16 @@ Option.isNone(undefined);  // true
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `x` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `x` | `unknown` | the argument to check if none |
 
 #### Returns
 
 x is None
+
+- `true` if `x` is `None`
+ - `false` otherwise
 
 #### Defined in
 
@@ -154,6 +160,9 @@ Option.isSome(undefined) // false
 #### Returns
 
 x is unknown
+
+- `true` if `x` is `Some<unknown>`
+ - `false` otherwise
 
 #### Defined in
 
@@ -192,291 +201,27 @@ isnumsome(w) // false
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `A` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the type |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `f` | [`Guardable`](Functors.md#guardable)<`A`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `f` | [`Guardable`](Functors.md#guardable)<`A`\> | the guard |
 
 #### Returns
 
 [`Guardable`](Functors.md#guardable)<[`T`](Option.md#t)<`A`\>\>
 
-#### Defined in
-
-src/Option.ts:81
-
-___
-
-### cmp
-
-▸ **cmp**<`A`\>(`c`, `a`, `b`): [`ComparableResult`](Functors.md#comparableresult)
-
-Compares two options `T<A>` by a given `Comparable<A>`.
-
-Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
-
-If `a` is `None` and `b` is `Some` returns -1, else if both are `None` returns 0, else returns 1
-
-**`Example`**
-
-```ts
-import { Str, Option } from 'tiinvo';
-
-Option.cmp(Str.cmp, "a", "a")                    // 0
-Option.cmp(Str.cmp, "a", "b")                    // -1
-Option.cmp(Str.cmp, "b", "a")                    // 1
-Option.cmp(Str.cmp, null, undefined)             // 0
-Option.cmp(Str.cmp, null, "a")                   // -1
-Option.cmp(Str.cmp, "a", undefined)              // 1
-```
-
-**`Since`**
-
-4.0.0
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `A` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `c` | [`Comparable`](Functors.md#comparable)<`A`\> |
-| `a` | [`T`](Option.md#t)<`A`\> |
-| `b` | [`T`](Option.md#t)<`A`\> |
-
-#### Returns
-
-[`ComparableResult`](Functors.md#comparableresult)
+the new `Guardable<T<A>>` which returns
+ - `true` if `x` is `None` or is `Some<A>`
+ - `false` otherwise
 
 #### Defined in
 
-src/Option.ts:107
-
-▸ **cmp**<`A`\>(`c`, `a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
-
-Compares two options `T<A>` by a given `Comparable<A>`.
-
-Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
-
-If `a` is `None` and `b` is `Some` returns -1, else if both are `None` returns 0, else returns 1
-
-**`Example`**
-
-```ts
-import { Str, Option } from 'tiinvo';
-
-Option.cmp(Str.cmp, "a")("a")                    // 0
-Option.cmp(Str.cmp, "a")("b")                    // 1
-Option.cmp(Str.cmp, "b")("a")                    // -1
-Option.cmp(Str.cmp, null)(undefined)             // 0
-Option.cmp(Str.cmp, null)("a")                   // 1
-Option.cmp(Str.cmp, "a")(undefined)              // -1
-```
-
-**`Since`**
-
-4.0.0
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `A` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `c` | [`Comparable`](Functors.md#comparable)<`A`\> |
-| `a` | [`T`](Option.md#t)<`A`\> |
-
-#### Returns
-
-[`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
-
-#### Defined in
-
-src/Option.ts:130
-
-▸ **cmp**<`A`\>(`c`): [`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
-
-Compares two options `T<A>` by a given `Comparable<A>`.
-
-Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
-
-If `a` is `None` and `b` is `Some` returns -1, else if both are `None` returns 0, else returns 1
-
-**`Example`**
-
-```ts
-import { Str, Option } from 'tiinvo';
-
-const cmp = Option.cmp(Str.cmp)
-
-cmp("a", "a")                    // 0
-cmp("a", "b")                    // -1
-cmp("b", "a")                    // 1
-cmp(null,  undefined)            // 0
-cmp(null,  "a")                  // -1
-cmp("a", undefined)              // 1
-```
-
-**`Since`**
-
-4.0.0
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `A` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `c` | [`Comparable`](Functors.md#comparable)<`A`\> |
-
-#### Returns
-
-[`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
-
-#### Defined in
-
-src/Option.ts:155
-
-___
-
-### eq
-
-▸ **eq**<`A`\>(`e`, `a`, `b`): `boolean`
-
-Returns true if two options `T<A>` are equal, false otherwise.
-
-```ts
-import { Num, Option } from 'tiinvo';
-
-const eq = Option.eq(Num.eq);
-
-Option.eq(Num.eq, 0, 0)              // true
-Option.eq(Num.eq, 1, 0)              // false
-Option.eq(Num.eq, 0, 1)              // false
-Option.eq(Num.eq, null, 1)           // false
-Option.eq(Num.eq, null, undefined)   // true
-```
-
-**`Since`**
-
-4.0.0
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `A` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `e` | [`Equatable`](Functors.md#equatable)<`A`\> |
-| `a` | [`T`](Option.md#t)<`A`\> |
-| `b` | [`T`](Option.md#t)<`A`\> |
-
-#### Returns
-
-`boolean`
-
-#### Defined in
-
-src/Option.ts:199
-
-▸ **eq**<`A`\>(`e`, `a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, `boolean`\>
-
-Returns true if two options `T<A>` are equal, false otherwise.
-
-```ts
-import { Num, Option } from 'tiinvo';
-
-Option.eq(Num.eq, 0)(0)                      // true
-Option.eq(Num.eq, 0)(1)                      // false
-Option.eq(Num.eq, null)(undefined)           // true
-Option.eq(Num.eq, null)(100000000)           // false
-```
-
-**`Since`**
-
-4.0.0
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `A` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `e` | [`Equatable`](Functors.md#equatable)<`A`\> |
-| `a` | [`T`](Option.md#t)<`A`\> |
-
-#### Returns
-
-[`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, `boolean`\>
-
-#### Defined in
-
-src/Option.ts:216
-
-▸ **eq**<`A`\>(`e`): [`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, `boolean`\>
-
-Returns true if two options `T<A>` are equal, false otherwise.
-
-```ts
-import { Num, Option } from 'tiinvo';
-
-const eq = Option.eq(Num.eq);
-
-eq(0, 0)                         // true
-eq(null, undefined)              // true
-eq(null, 0)                      // false
-eq(0, null)                      // false
-eq(1_000_000, 0)                 // false
-```
-
-**`Since`**
-
-4.0.0
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `A` |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `e` | [`Equatable`](Functors.md#equatable)<`A`\> |
-
-#### Returns
-
-[`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, `boolean`\>
-
-#### Defined in
-
-src/Option.ts:236
+src/Option.ts:92
 
 ___
 
@@ -527,10 +272,12 @@ Option.isNone(await safe(3)) // true
 (...`args`: `Parameters`<`F`\>) => `Promise`<[`T`](Option.md#t)<`ReturnType`<`F`\>\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`F`\>) => `Promise`<[`None`](Option.md#none) \| `Awaited`<[`Some`](Option.md#some)<`ReturnType`<`F`\>\>\>\> : (...`args`: `Parameters`<`F`\>) => `Promise`<[`T`](Option.md#t)<`ReturnType`<`F`\>\>\>
 
 the wrapped function
+ - returns `Promise<None>` if the function catched
+ - otherwise the function returns `Promise<ReturnValue<F>>`
 
 #### Defined in
 
-src/Option.ts:441
+src/Option.ts:481
 
 ___
 
@@ -581,10 +328,293 @@ Option.isNone(safe(3)) // true
 (...`args`: `Parameters`<`F`\>) => [`T`](Option.md#t)<`ReturnType`<`F`\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`F`\>) => `Promise`<[`None`](Option.md#none) \| `Awaited`<[`Some`](Option.md#some)<`ReturnType`<`F`\>\>\>\> : (...`args`: `Parameters`<`F`\>) => [`T`](Option.md#t)<`ReturnType`<`F`\>\>
 
 the wrapped function
+ - returns `None` if the function catched
+ - otherwise the function returns `ReturnValue<F>`
 
 #### Defined in
 
-src/Option.ts:480
+src/Option.ts:522
+
+## Comparables
+
+### cmp
+
+▸ **cmp**<`A`\>(`c`, `a`, `b`): [`ComparableResult`](Functors.md#comparableresult)
+
+Compares two options `T<A>` by a given `Comparable<A>`.
+
+**`Example`**
+
+```ts
+import { Str, Option } from 'tiinvo';
+
+Option.cmp(Str.cmp, "a", "a")                    // 0
+Option.cmp(Str.cmp, "a", "b")                    // -1
+Option.cmp(Str.cmp, "b", "a")                    // 1
+Option.cmp(Str.cmp, null, undefined)             // 0
+Option.cmp(Str.cmp, null, "a")                   // -1
+Option.cmp(Str.cmp, "a", undefined)              // 1
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Description |
+| :------ | :------ |
+| `A` | the type |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `c` | [`Comparable`](Functors.md#comparable)<`A`\> | the `Comparable<A>` |
+| `a` | [`T`](Option.md#t)<`A`\> | the left-hand compared `Option.T<A>` |
+| `b` | [`T`](Option.md#t)<`A`\> | the right-hand compared  `Option.T<A>` |
+
+#### Returns
+
+[`ComparableResult`](Functors.md#comparableresult)
+
+- `0` if `a` equals to `b` or both `a` and `b` are `None`
+ - `1` if `a` is greater than `b` or `a` is `Some<A>` and `b` is `None`
+ - `-1` if `a` is less than `b` or `a` is `None` and `b` is `Some<A>`
+
+#### Defined in
+
+src/Option.ts:123
+
+▸ **cmp**<`A`\>(`c`, `a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+
+Compares two options `T<A>` by a given `Comparable<A>`.
+
+**`Example`**
+
+```ts
+import { Str, Option } from 'tiinvo';
+
+Option.cmp(Str.cmp, "a")("a")                    // 0
+Option.cmp(Str.cmp, "a")("b")                    // 1
+Option.cmp(Str.cmp, "b")("a")                    // -1
+Option.cmp(Str.cmp, null)(undefined)             // 0
+Option.cmp(Str.cmp, null)("a")                   // 1
+Option.cmp(Str.cmp, "a")(undefined)              // -1
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `c` | [`Comparable`](Functors.md#comparable)<`A`\> | the `Comparable<A>` functor |
+| `a` | [`T`](Option.md#t)<`A`\> | the right-hand compared value |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+
+the unary comparer functor which takes the left-hand compared value and returns 
+ - `0` if `a` equals to `b` or both `a` and `b` are `None`
+ - `1` if `a` is greater than `b` or `a` is `Some<A>` and `b` is `None`
+ - `-1` if `a` is less than `b` or `a` is `None` and `b` is `Some<A>`
+
+#### Defined in
+
+src/Option.ts:149
+
+▸ **cmp**<`A`\>(`c`): [`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+
+Compares two options `T<A>` by a given `Comparable<A>`.
+
+**`Example`**
+
+```ts
+import { Str, Option } from 'tiinvo';
+
+const cmp = Option.cmp(Str.cmp)
+
+cmp("a", "a")                    // 0
+cmp("a", "b")                    // -1
+cmp("b", "a")                    // 1
+cmp(null,  undefined)            // 0
+cmp(null,  "a")                  // -1
+cmp("a", undefined)              // 1
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `c` | [`Comparable`](Functors.md#comparable)<`A`\> | the `Comparable<A>` functor |
+
+#### Returns
+
+[`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+
+the binary comparer functor which takes two values `a` and `b` and returns 
+ - `0` if `a` equals to `b` or both `a` and `b` are `None`
+ - `1` if `a` is greater than `b` or `a` is `Some<A>` and `b` is `None`
+ - `-1` if `a` is less than `b` or `a` is `None` and `b` is `Some<A>`
+
+#### Defined in
+
+src/Option.ts:176
+
+___
+
+### eq
+
+▸ **eq**<`A`\>(`e`, `a`, `b`): `boolean`
+
+Returns true if two options `T<A>` are equal, false otherwise.
+
+```ts
+import { Num, Option } from 'tiinvo';
+
+const eq = Option.eq(Num.eq);
+
+Option.eq(Num.eq, 0, 0)              // true
+Option.eq(Num.eq, 1, 0)              // false
+Option.eq(Num.eq, 0, 1)              // false
+Option.eq(Num.eq, null, 1)           // false
+Option.eq(Num.eq, null, undefined)   // true
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `e` | [`Equatable`](Functors.md#equatable)<`A`\> | the equatable functor |
+| `a` | [`T`](Option.md#t)<`A`\> | the left-hand compared value |
+| `b` | [`T`](Option.md#t)<`A`\> | the right-hand compared value |
+
+#### Returns
+
+`boolean`
+
+- `true` if `a` equals to `b`
+ - `false` otherwise
+
+#### Defined in
+
+src/Option.ts:225
+
+▸ **eq**<`A`\>(`e`, `a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, `boolean`\>
+
+Returns true if two options `T<A>` are equal, false otherwise.
+
+```ts
+import { Num, Option } from 'tiinvo';
+
+Option.eq(Num.eq, 0)(0)                      // true
+Option.eq(Num.eq, 0)(1)                      // false
+Option.eq(Num.eq, null)(undefined)           // true
+Option.eq(Num.eq, null)(100000000)           // false
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `e` | [`Equatable`](Functors.md#equatable)<`A`\> | the equatable functor |
+| `a` | [`T`](Option.md#t)<`A`\> | the right-hand compared value |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, `boolean`\>
+
+the unary function which returns
+ - `true` if `a` equals to `b`
+ - `false` otherwise
+
+#### Defined in
+
+src/Option.ts:246
+
+▸ **eq**<`A`\>(`e`): [`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, `boolean`\>
+
+Returns true if two options `T<A>` are equal, false otherwise.
+
+```ts
+import { Num, Option } from 'tiinvo';
+
+const eq = Option.eq(Num.eq);
+
+eq(0, 0)                         // true
+eq(null, undefined)              // true
+eq(null, 0)                      // false
+eq(0, null)                      // false
+eq(1_000_000, 0)                 // false
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `e` | [`Equatable`](Functors.md#equatable)<`A`\> | the equatable functor |
+
+#### Returns
+
+[`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, `boolean`\>
+
+the binary function which returns
+ - `true` if `a` equals to `b`
+ - `false` otherwise
+
+#### Defined in
+
+src/Option.ts:269
 
 ## Filterables
 
@@ -628,7 +658,7 @@ Option.filter(Num.gt(1), null) // null
 
 #### Defined in
 
-src/Option.ts:279
+src/Option.ts:312
 
 ▸ **filter**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>\>
 
@@ -664,9 +694,11 @@ f(null) // null
 
 [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>\>
 
+the unary function which filters the value `b`
+
 #### Defined in
 
-src/Option.ts:298
+src/Option.ts:332
 
 ## Mappables
 
@@ -707,11 +739,13 @@ Option.map(Num.add(1), null) // null
 
 [`T`](Option.md#t)<`B`\>
 
+the mapped option `T<B>`
+
 #### Defined in
 
-src/Option.ts:330
+src/Option.ts:365
 
-▸ **map**<`A`, `B`\>(`m`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`B`\>\>
+▸ **map**<`A`, `B`\>(`m`): [`Mappable`](Functors.md#mappable)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`B`\>\>
 
 Maps an `Option.T<A>` to another `Option.T<b>` if is `Some<A>`, otherwise returns `None`.
 
@@ -743,11 +777,13 @@ m(null) // null
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`B`\>\>
+[`Mappable`](Functors.md#mappable)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`B`\>\>
+
+the mappable functor which maps `T<A>` to `T<B>`
 
 #### Defined in
 
-src/Option.ts:349
+src/Option.ts:385
 
 ___
 
@@ -787,9 +823,11 @@ Option.mapOr(Num.add(2), null, 0) // 0
 
 `B`
 
+the mapped value `B` or the fallback value `b` if `a` is `None`
+
 #### Defined in
 
-src/Option.ts:378
+src/Option.ts:415
 
 ▸ **mapOr**<`A`, `B`\>(`m`, `a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, `B`\>
 
@@ -826,6 +864,8 @@ m(null) // 0
 
 [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, `B`\>
 
+the mappable functor which maps `A` to `B` or returns the fallback value `a` if `b` is `None`
+
 #### Defined in
 
-src/Option.ts:398
+src/Option.ts:436
