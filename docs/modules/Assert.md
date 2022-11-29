@@ -44,11 +44,12 @@ Assert.check(false, 'yup it throws')     // throws
 
 `void`
 
-void if ok, throws otherwise
+- void if ok
+ - throws otherwise
 
 #### Defined in
 
-[src/Assert.ts:26](https://github.com/OctoD/tiinvo/blob/830a5b3/src/Assert.ts#L26)
+[src/Assert.ts:28](https://github.com/OctoD/tiinvo/blob/c3dee92/src/Assert.ts#L28)
 
 ▸ **check**(`a`): [`Unary`](Fn.md#unary)<`boolean`, `void`\>
 
@@ -61,8 +62,10 @@ an error with the given message
 ```ts
 import { Assert } from 'tiinvo'
 
-Assert.check('will not throw')(true)     // does not throw
-Assert.check('yup it throws')(false)     // throws
+const somecheck = Assert.check(`It's not true!`);
+
+somecheck(true)      // undefined
+somecheck(false)     // throws new Error(`It's not true!`)
 ```
 
 **`Since`**
@@ -79,11 +82,13 @@ Assert.check('yup it throws')(false)     // throws
 
 [`Unary`](Fn.md#unary)<`boolean`, `void`\>
 
-the unary function
+the unary function which returns
+ - void if passed
+ - throws otherwise
 
 #### Defined in
 
-[src/Assert.ts:45](https://github.com/OctoD/tiinvo/blob/830a5b3/src/Assert.ts#L45)
+[src/Assert.ts:51](https://github.com/OctoD/tiinvo/blob/c3dee92/src/Assert.ts#L51)
 
 ___
 
@@ -110,18 +115,21 @@ Assert.checkResult('yup it throws')(false)     // Error("yup it throws")
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `boolean` |
-| `b` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `boolean` | the condition |
+| `b` | `string` | the error message |
 
 #### Returns
 
 [`T`](Result.md#t)<`boolean`\>
 
+- `Result.Ok<true>` if `a` is `true`
+ - `Result.Err` otherwise
+
 #### Defined in
 
-[src/Assert.ts:76](https://github.com/OctoD/tiinvo/blob/830a5b3/src/Assert.ts#L76)
+[src/Assert.ts:87](https://github.com/OctoD/tiinvo/blob/c3dee92/src/Assert.ts#L87)
 
 ▸ **checkResult**(`a`): [`Unary`](Fn.md#unary)<`boolean`, [`T`](Result.md#t)<`boolean`\>\>
 
@@ -151,11 +159,13 @@ Assert.checkResult('yup it throws')(false)     // Error("yup it throws")
 
 [`Unary`](Fn.md#unary)<`boolean`, [`T`](Result.md#t)<`boolean`\>\>
 
-the unary function
+the unary function which returns
+ - `Result.Ok<true>` if `a` is `true`
+ - `Result.Err` otherwise
 
 #### Defined in
 
-[src/Assert.ts:94](https://github.com/OctoD/tiinvo/blob/830a5b3/src/Assert.ts#L94)
+[src/Assert.ts:107](https://github.com/OctoD/tiinvo/blob/c3dee92/src/Assert.ts#L107)
 
 ___
 
@@ -199,11 +209,13 @@ check1(11)              // throws "number 11 is not even"
 
 [`Unary`](Fn.md#unary)<`a`, `void`\>
 
-the asserting function
+the asserting unary function which returns
+ - `void` if it's ok
+ - throws otherwise
 
 #### Defined in
 
-[src/Assert.ts:133](https://github.com/OctoD/tiinvo/blob/830a5b3/src/Assert.ts#L133)
+[src/Assert.ts:148](https://github.com/OctoD/tiinvo/blob/c3dee92/src/Assert.ts#L148)
 
 ▸ **make**<`a`\>(`p`): [`Unary`](Fn.md#unary)<[`T`](Predicate.md#t)<`a`\>, [`Unary`](Fn.md#unary)<`a`, `void`\>\>
 
@@ -242,17 +254,19 @@ check1(11)              // throws "number 11 is not even"
 
 [`Unary`](Fn.md#unary)<[`T`](Predicate.md#t)<`a`\>, [`Unary`](Fn.md#unary)<`a`, `void`\>\>
 
-the asserting function
+the asserting unary function which returns 
+ - `Result.Ok<true>` if `a` is `true`
+ - `Result.Err` otherwise
 
 #### Defined in
 
-[src/Assert.ts:155](https://github.com/OctoD/tiinvo/blob/830a5b3/src/Assert.ts#L155)
+[src/Assert.ts:172](https://github.com/OctoD/tiinvo/blob/c3dee92/src/Assert.ts#L172)
 
 ___
 
 ### makeResult
 
-▸ **makeResult**<`a`\>(`p`, `m`): [`Unary`](Fn.md#unary)<`a`, [`T`](Result.md#t)<`boolean`\>\>
+▸ **makeResult**<`A`\>(`p`, `m`): [`Unary`](Fn.md#unary)<`A`, [`T`](Result.md#t)<`boolean`\>\>
 
 Creates a check function starting from a `Predicate.t<a>` and a message.
 
@@ -278,26 +292,28 @@ check1(11)              // Error("number 11 is not even")
 
 | Name | Description |
 | :------ | :------ |
-| `a` | the type passed to the predicate and to the mappable functor (if any) |
+| `A` | the type passed to the predicate and to the mappable functor (if any) |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `p` | [`T`](Predicate.md#t)<`a`\> | the asserting predicate |
-| `m` | `string` \| [`Mappable`](Functors.md#mappable)<`a`, `string`\> | the error message or the mappable functor |
+| `p` | [`T`](Predicate.md#t)<`A`\> | the asserting predicate |
+| `m` | `string` \| [`Mappable`](Functors.md#mappable)<`A`, `string`\> | the error message or the mappable functor |
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<`a`, [`T`](Result.md#t)<`boolean`\>\>
+[`Unary`](Fn.md#unary)<`A`, [`T`](Result.md#t)<`boolean`\>\>
 
-the asserting function
+the asserting function which returns
+ - `Result.Ok<A>` if `a` is `true`
+ - `Result.Err` otherwise
 
 #### Defined in
 
-[src/Assert.ts:187](https://github.com/OctoD/tiinvo/blob/830a5b3/src/Assert.ts#L187)
+[src/Assert.ts:206](https://github.com/OctoD/tiinvo/blob/c3dee92/src/Assert.ts#L206)
 
-▸ **makeResult**<`a`\>(`p`): [`Unary`](Fn.md#unary)<[`T`](Predicate.md#t)<`a`\>, [`Unary`](Fn.md#unary)<`a`, [`T`](Result.md#t)<`boolean`\>\>\>
+▸ **makeResult**<`A`\>(`p`): [`Unary`](Fn.md#unary)<[`T`](Predicate.md#t)<`A`\>, [`Unary`](Fn.md#unary)<`A`, [`T`](Result.md#t)<`boolean`\>\>\>
 
 Creates a check function starting from a a message or a mappable functor.
 
@@ -322,20 +338,22 @@ check1(11)              // Error("number 11 is not even")
 
 | Name | Description |
 | :------ | :------ |
-| `a` | the type passed to the predicate and to the mappable functor (if any) |
+| `A` | the type passed to the predicate and to the mappable functor (if any) |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `p` | `string` \| [`Mappable`](Functors.md#mappable)<`a`, `string`\> | the error message or the mappable functor |
+| `p` | `string` \| [`Mappable`](Functors.md#mappable)<`A`, `string`\> | the error message or the mappable functor |
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`T`](Predicate.md#t)<`a`\>, [`Unary`](Fn.md#unary)<`a`, [`T`](Result.md#t)<`boolean`\>\>\>
+[`Unary`](Fn.md#unary)<[`T`](Predicate.md#t)<`A`\>, [`Unary`](Fn.md#unary)<`A`, [`T`](Result.md#t)<`boolean`\>\>\>
 
-the asserting function
+the asserting unary function which returns 
+ - `Result.Ok<true>` if `a` is `true`
+ - `Result.Err` otherwise
 
 #### Defined in
 
-[src/Assert.ts:209](https://github.com/OctoD/tiinvo/blob/830a5b3/src/Assert.ts#L209)
+[src/Assert.ts:230](https://github.com/OctoD/tiinvo/blob/c3dee92/src/Assert.ts#L230)
