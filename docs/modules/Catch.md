@@ -12,7 +12,7 @@
 
 ### make
 
-▸ **make**<`f`\>(`catchable`): `f` extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`f`\>) => `Promise`<`Awaited`<`ReturnType`<`f`\>\>\> : (...`args`: `Parameters`<`f`\>) => `ReturnType`<`f`\>
+▸ **make**<`F`\>(`catchable`): `F` extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`F`\>) => `Promise`<`Awaited`<`ReturnType`<`F`\>\>\> : (...`args`: `Parameters`<`F`\>) => `ReturnType`<`F`\>
 
 Uses the `Functors.Catchable<f>` to return a wrapped function `f`.
 
@@ -52,22 +52,22 @@ catched(7)                     // 7
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `f` | extends [`AnyFn`](Fn.md#anyfn) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `F` | extends [`AnyFn`](Fn.md#anyfn) | the function to catch |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `catchable` | [`CatchableModule`](Functors.md#catchablemodule)<`f`\> | the CatchableModule<f> |
+| `catchable` | [`CatchableModule`](Functors.md#catchablemodule)<`F`\> | the CatchableModule<F> |
 
 #### Returns
 
-`f` extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`f`\>) => `Promise`<`Awaited`<`ReturnType`<`f`\>\>\> : (...`args`: `Parameters`<`f`\>) => `ReturnType`<`f`\>
+`F` extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`F`\>) => `Promise`<`Awaited`<`ReturnType`<`F`\>\>\> : (...`args`: `Parameters`<`F`\>) => `ReturnType`<`F`\>
 
 a unary function
 
 #### Defined in
 
-[src/Catch.ts:42](https://github.com/OctoD/tiinvo/blob/9c4355b/src/Catch.ts#L42)
+[src/Catch.ts:43](https://github.com/OctoD/tiinvo/blob/f823b86/src/Catch.ts#L43)
