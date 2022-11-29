@@ -75,7 +75,7 @@ export type Reducer<A, B> = {
    * @param {B} p the accumulated value
    * @param {A} c the current value
    * @param {number} i the current index
-   * @param {T<A>} t the original array `t<a>`
+   * @param {T<A>} t the original array `T<A>`
    * @returns {B}
    */
   (p: B, c: A, i: number, t: T<A>): B;
@@ -85,7 +85,7 @@ export type Reducer<A, B> = {
 
 
 /**
- * Returns the element `Result.t<a>` at index `i` of an array `a[]`. 
+ * Returns the element `Result.t<a>` at index `i` of an array `T<A>`. 
  * 
  * If the index `i` is out of range, a `Err` will be returned.
  * 
@@ -96,16 +96,16 @@ export type Reducer<A, B> = {
  * Arr.get([10, 20], 3)   // Error("Index out of bounds 3 for length 2")
  * ```
  * 
- * @template a the type of the array `a` elements
- * @param {a} a is the array to search 
- * @param {number} i is the element index
+ * @template A the type of the array `a` elements
+ * @param a is the array to search 
+ * @param i is the element index
  * @returns 
  * @group Accessors
  * @since 4.0.0
  */
-export function get<a>(a: T<a>, i: number): Result.T<a>;
+export function get<A>(a: T<A>, i: number): Result.T<A>;
 /**
- * Returns a `Fn.Unary<t<a>, Result.t<a>>` to get the element `Result.t<a>` at index `i` of an array `a[]`. 
+ * Returns a `Fn.Unary<t<a>, Result.t<a>>` to get the element `Result.t<a>` at index `i` of an array `T<A>`. 
  * 
  * If the index `i` is out of range, a `Err` will be returned.
  * 
@@ -117,8 +117,8 @@ export function get<a>(a: T<a>, i: number): Result.T<a>;
  * ```
  * 
  * @template A the type of the array `a` elements
- * @param {number} a is the element index
- * @returns {Fn.Unary<T<A>, Result.T<A>>}
+ * @param a is the element index
+ * @returns the unary function
  * @group Accessors
  * @since 4.0.0
  */
@@ -154,8 +154,10 @@ export function get<A>(a: T<A> | number, i?: number): any {
  * ```
  * 
  * @template A array's type
- * @param {T<A>} t the array
- * @returns {Option.T<A>}
+ * @param t the array
+ * @returns 
+ *  - `Option.Some<A>` if some
+ *  - `Option.None` otherwise
  * @group Accessors
  * @since 4.0.0
  */
@@ -176,7 +178,7 @@ export const first = <A>(t: T<A>): Option.T<A> => (t[0] ?? null) as Option.T<A>;
  * @template A the inferred type from argument `t`
  * @param t the array
  * @param b the fallback value
- * @returns {A}
+ * @returns the first element of the array or `b` as fallback
  * @group Accessors
  * @since 4.0.0
  */
@@ -199,17 +201,17 @@ export function firstOr<A>(t: T<A>, b: A): A;
  * 
  * @template A array's type
  * @param t the fallback value
- * @returns {Fn.Unary<T<A>, A>}
+ * @returns the unary function
  * @group Accessors
  * @since 4.0.0
  */
 export function firstOr<A>(t: A): Fn.Unary<T<A>, A>;
-export function firstOr<a>(t: T<a> | a, b?: any): any {
+export function firstOr<A>(t: T<A> | A, b?: any): any {
   if (guard(t)) {
     return t.length > 0 ? t[0] : b;
   }
 
-  return (b: T<a>) => b.length > 0 ? b[0] : t;
+  return (b: T<A>) => b.length > 0 ? b[0] : t;
 }
 
 /**
@@ -225,8 +227,10 @@ export function firstOr<a>(t: T<a> | a, b?: any): any {
  * ```
  * 
  * @template A array's type
- * @param {T<A>} t the array
- * @returns {Option.T<A>}
+ * @param t the array
+ * @returns 
+ *  - `Option.Some<A>` if has a last element
+ *  - `Option.None` otherwise
  * @group Accessors
  * @since 4.0.0
  */
@@ -247,7 +251,7 @@ export const last = <A>(t: T<A>): Option.T<A> => (t[t.length - 1] ?? null) as Op
  * @template A array's type
  * @param t the array
  * @param b the index
- * @returns {A}
+ * @returns The last element of the array `t` or `b` if `t` is empty.
  * @group Accessors
  * @since 4.0.0
  */
@@ -269,7 +273,7 @@ export function lastOr<A>(t: T<A>, b: A): A;
  * 
  * @template A array's type
  * @param t the index
- * @returns {Fn.Unary<T<A>, A>} 
+ * @returns the unary function
  * @group Accessors
  * @since 4.0.0
  */
@@ -300,6 +304,9 @@ export function lastOr<a>(t: T<a> | a, b?: a): any {
  * ```
  * 
  * @param x the value to check
+ * @returns
+ *  - true if x is an array
+ *  - false otherwise
  * @group Guardables
  * @since 4.0.0
  */
@@ -323,13 +330,15 @@ export const guard = (x: unknown): x is T<unknown> => Array.isArray(x);
  * @template A array's type
  * @param g the Guard to match
  * @param x the value to match
- * @returns {boolean}
+ * @returns 
+ *  - true if x is an array of `A`
+ *  - false otherwise
  * @group Guardables
  * @since 4.0.0
  */
 export function guardOf<A>(g: Functors.Guardable<A>, x: unknown): x is T<A>;
 /**
- * Returns a `Functors.Guardable<t<a>>` which returns true if `x` is of type `t<a>`
+ * Returns a `Functors.Guardable<t<a>>` which returns true if `x` is of type `T<A>`
  * 
  * ```ts
  * import { Arr, Str } from 'tiinvo';
@@ -344,7 +353,7 @@ export function guardOf<A>(g: Functors.Guardable<A>, x: unknown): x is T<A>;
  * ```
  * 
  * @param g The functor
- * @returns {Functors.Guardable<T<A>>} the new guard to check if x is `t<a>`
+ * @returns the new guard to check if `x` is an array of `A`
  * @group Guardables
  * @since 4.0.0
  */
@@ -376,7 +385,7 @@ export function guardOf<A>(g: Functors.Guardable<A>, x?: unknown): any {
 //#region comparables
 
 /**
- * Compares two arrays `a[]` with a given `Comparable<a>`.
+ * Compares two arrays `T<A>` with a given `Comparable<a>`.
  * 
  * @example 
  * 
@@ -397,13 +406,16 @@ export function guardOf<A>(g: Functors.Guardable<A>, x?: unknown): any {
  * @param cmp the comparator
  * @param a the first array to compare
  * @param b the second array to compare
- * @returns {Functors.ComparableResult} returns 1 if `a` is greater then `b`, -1 if `a` is less than `b`, 0 if `a` and `b` are equal
+ * @returns 
+ *  - 1 if `a` is greater then `b`
+ *  - -1 if `a` is less than `b`
+ *  - 0 if `a` and `b` are equal
  * @group Comparables
  * @since 4.0.0
  */
 export function cmp<A>(cmp: Functors.Comparable<A>, a: T<A>, b: T<A>): Functors.ComparableResult;
 /**
- * Compares two arrays `a[]` with a given `Comparable<a>`.
+ * Compares two arrays `T<A>` with a given `Comparable<a>`.
  * 
  * @example 
  * 
@@ -422,13 +434,13 @@ export function cmp<A>(cmp: Functors.Comparable<A>, a: T<A>, b: T<A>): Functors.
  * 
  * @param cmp the comparator
  * @param a the first array to compare
- * @returns {Fn.Unary<T<A>, Functors.ComparableResult>}
+ * @returns the unary function
  * @group Comparables
  * @since 4.0.0
  */
 export function cmp<A>(cmp: Functors.Comparable<A>, a: T<A>): (b: T<A>) => Functors.ComparableResult;
 /**
- * Compares two arrays `a[]` with a given `Comparable<a>`.
+ * Compares two arrays `T<A>` with a given `Comparable<a>`.
  * 
  * @example 
  * 
@@ -446,7 +458,7 @@ export function cmp<A>(cmp: Functors.Comparable<A>, a: T<A>): (b: T<A>) => Funct
  * ```
  * 
  * @param cmp the comparator
- * @returns {Fn.Binary<T<A>, T<A>, Functors.ComparableResult>}
+ * @returns the binary function
  * @group Comparables
  * @since 4.0.0
  */
@@ -484,7 +496,7 @@ export function cmp<a>(cmp: Functors.Comparable<a>, a?: T<a>, b?: T<a>): any {
 };
 
 /**
- * Compares two arrays `a[]` with a given `Equatable<a>` and returns true if are identical.
+ * Compares two arrays `T<A>` with a given `Equatable<a>` and returns true if are identical.
  * 
  * ```ts
  * import { Arr, Str } from 'tiinvo';
@@ -500,12 +512,14 @@ export function cmp<a>(cmp: Functors.Comparable<a>, a?: T<a>, b?: T<a>): any {
  * 
  * @template A the array's type
  * @group Comparables
- * @returns {boolean} if `a` and `b` are the equal
+ * @returns 
+ *  -  true if `a` and `b` are the equal
+ *  -  false otherwise
  * @since 4.0.0
  */
 export function eq<A>(e: Functors.Equatable<A>, a: T<A>, b: T<A>): boolean;
 /**
- * Given an `Equatable<a>` and an array `t<a>`, returns a `Fn.Unary<t<a>, boolean>` function to compare `a` and `b`.
+ * Given an `Equatable<A>` and an array `T<A>`, returns a `Fn.Unary<T<A>, boolean>` function to compare `a` and `b`.
  * 
  * ```ts
  * import { Arr, Str } from 'tiinvo';
@@ -522,7 +536,9 @@ export function eq<A>(e: Functors.Equatable<A>, a: T<A>, b: T<A>): boolean;
  * ```
  * 
  * @group Comparables
- * @returns {Fn.Unary<T<A>, boolean>}
+ * @param e the equatable functor
+ * @param a the array
+ * @returns the unary function
  * @since 4.0.0
  */
 export function eq<A>(e: Functors.Equatable<A>, a: T<A>): Fn.Unary<T<A>, boolean>;
@@ -543,8 +559,9 @@ export function eq<A>(e: Functors.Equatable<A>, a: T<A>): Fn.Unary<T<A>, boolean
  * eq(['a', 'b'], ['a', 'b'])  // true
  * ```
  * 
+ * @param e the equatable functor
+ * @returns the binary function
  * @group Comparables
- * @returns {Fn.Binary<T<A>, T<A>, boolean>}
  * @since 4.0.0
  */
 export function eq<A>(e: Functors.Equatable<A>): Fn.Binary<T<A>, T<A>, boolean>;
@@ -586,7 +603,7 @@ export function eq<A>(e: Functors.Equatable<A>, a?: T<A>, b?: T<A>): any {
  * ```
  * @param a the first array 
  * @param b the second array
- * @returns 
+ * @returns the concatenated array
  * @group Native methods
  * @since 4.0.0
  */
@@ -600,7 +617,7 @@ export function concat<A extends T<any>>(a: A, b: A): A;
  * Arr.concat([10])([20])           // [20, 10]
  * ```
  * @param a the second array
- * @returns {Fn.Unary<A, A>}
+ * @returns the unary function
  * @group Native methods
  * @since 4.0.0
  */
@@ -626,6 +643,8 @@ export function concat<A extends T<any>>(a: any, b?: any): any {
  * @template A the array's type
  * @param a 
  * @returns 
+ *  - true if `b` is into `a`
+ *  - false otherwise
  * @group Native methods
  * @since 4.0.0
  */
@@ -642,7 +661,7 @@ export function contains<A>(a: T<A>, b: A): boolean;
  * 
  * @template A the array's type
  * @param a the value which should be checked
- * @returns {Fn.Unary<T<A>, boolean>}
+ * @returns the unary function
  * @group Native methods
  * @since 4.0.0
  */
@@ -668,12 +687,14 @@ export function contains<A>(a: any, b?: any): any {
  * @template A the array's type
  * @param p 
  * @returns 
+ *  - true if every element of `a` satisfies `p`
+ *  - false otherwise
  * @group Native methods
  * @since 4.0.0
  */
 export function every<A>(a: T<A>, p: Predicate.T<A>): boolean;
 /**
- * Returns a `Fn.Unary<t<a>, boolean>` which checks if the every element of the array `t<a>` satisfy the predicate `a`
+ * Returns a `Fn.Unary<t<a>, boolean>` which checks if the every element of the array `T<A>` satisfy the predicate `a`
  * 
  * ```ts
  * import { Arr, Num } 'tiinvo';
@@ -684,7 +705,7 @@ export function every<A>(a: T<A>, p: Predicate.T<A>): boolean;
  * 
  * @template A the array's type
  * @param a the predicate 
- * @returns {Fn.Unary<T<A>, boolean>}
+ * @returns the unary function
  * @group Native methods
  * @since 4.0.0
  */
@@ -707,15 +728,15 @@ export function every<A>(a: any, p?: any): any {
  * Arr.from(new Set([1, 2, 3])) // [1, 2, 3]
  * ```
  * 
- * @param a
- * @returns
+ * @param a an array-like object to convert to an array.
+ * @returns the array
  * @group Native methods
  * @since 4.0.0
  */
 export const from = Array.from;
 
 /**
- * Fills an array `a[]` with `a` from index `start` to `end`.
+ * Fills an array `T<A>` with `a` from index `start` to `end`.
  * This does not modify the original array.
  * 
  * ```ts
@@ -737,7 +758,7 @@ export const from = Array.from;
  */
 export function fill<A>(a: T<any>, b: A, start?: number, end?: number): T<A>;
 /**
- * Fills an array `a[]` with `a` from index `start` to `end`.
+ * Fills an array `T<A>` with `a` from index `start` to `end`.
  * This does not modify the original array.
  * 
  * ```ts
@@ -860,7 +881,7 @@ export function find<A>(a: T<A> | Predicate.T<A>, p?: Predicate.T<A>): any {
 }
 
 /**
- * Maps with the `mod.map` function an array `a[]` by removing all elements that do not satisfy the predicate `mod.filter`.
+ * Maps with the `mod.map` function an array `T<A>` by removing all elements that do not satisfy the predicate `mod.filter`.
  * The filter occurs before mapping the elements.
  * 
  * @example
@@ -884,7 +905,7 @@ export function find<A>(a: T<A> | Predicate.T<A>, p?: Predicate.T<A>): any {
  */
 export function filterMap<A, B>(a: T<A>, mod: Functors.FilterMappableModule<A, B>): T<B>;
 /**
- * Maps with the `mod.map` function an array `a[]` by removing all elements that do not satisfy the predicate `mod.filter`.
+ * Maps with the `mod.map` function an array `T<A>` by removing all elements that do not satisfy the predicate `mod.filter`.
  * The filter occurs before mapping the elements.
  * 
  * @example
@@ -903,8 +924,8 @@ export function filterMap<A, B>(a: T<A>, mod: Functors.FilterMappableModule<A, B
  * 
  * @template A array's type
  * @template B returning array's type
- * @param {Functors.FilterMappableModule<A, B>} a 
- * @returns {Fn.Unary<T<A>, T<A>>}
+ * @param a the filter mappable functor
+ * @returns the unary function
  * @group Compound native methods
  * @since 4.0.0
  */
@@ -965,9 +986,9 @@ export function filterMap<A, B>(a: T<A> | Functors.FilterMappableModule<A, B>, m
  *
  * @template A array's type
  * @template B returning reduced type
- * @param {T<A>} a the array to filter and reduce
- * @param {Functors.FilterReduceableModule<A, B>} mod the functor
- * @returns {B} the filtered and reduced output
+ * @param a the array to filter and reduce
+ * @param mod the functor
+ * @returns the filtered and reduced output
  * @group Compound native methods
  * @since 4.0.0
  */
@@ -996,8 +1017,8 @@ export function filterReduce<A, B>(a: T<A>, mod: Functors.FilterReduceableModule
  *
  * @template A array's type
  * @template B returning value type
- * @param {Functors.FilterReduceableModule<A, B>} a the functor module type
- * @returns {Fn.Unary<T<A>, B>}
+ * @param a the functor module type
+ * @returns the unary function
  * @group Compound native methods
  * @since 4.0.0
  */
@@ -1046,9 +1067,9 @@ export function filterReduce<a, b>(a: any, mod?: Functors.FilterReduceableModule
  * 
  * @template A array's type
  * @template D flattern depth
- * @param {A} a the array to flattern
- * @param {D | undefined} d the depth
- * @returns {FlatArray<A, D>}
+ * @param a the array to flattern
+ * @param d the depth (optional)
+ * @returns the flattened array
  * @group Native methods
  * @since 4.0.0
  */
@@ -1069,8 +1090,8 @@ export function flat<A extends T<any>, D extends number = 1>(a: A, d?: D): FlatA
  * 
  * @template A array's type
  * @template D flattern depth type
- * @param {D | undefined} a the depth
- * @returns {Fn.Unary<A, FlatArray<A, D>>}
+ * @param a the depth (optional)
+ * @returns the unary function
  * @group Native methods
  * @since 4.0.0
  */
@@ -1100,13 +1121,13 @@ export function flat<a extends T<any>, d extends number = 1>(a: a | d, d?: d): a
  * @template B the flatterned mapped array type
  * @param a the matrix
  * @param m the mappable functor
- * @returns {T<B>}
+ * @returns the flatmapped array
  * @group Compound native methods
  * @since 4.0.0
  */
 export function flatMap<A, B>(a: T<T<A>>, m: Functors.Mappable<A, B>): T<B>;
 /**
- * Returns a `Fn.Unary<a[][]>, b[]>` which aps a matrix `a[][]` to a `b[]` using the mapping function `a`.
+ * Returns a `Fn.Unary<a[][]>, b[]>` which aps a matrix `T<A>[]` to a `b[]` using the mapping function `a`.
  * 
  * @example
  * 
@@ -1121,7 +1142,7 @@ export function flatMap<A, B>(a: T<T<A>>, m: Functors.Mappable<A, B>): T<B>;
  * @template A the matrix elements' type
  * @template B the flatterned mapped array type
  * @param a the mappable functor
- * @returns {Fn.Unary<T<T<A>>>, t<a>>}
+ * @returns the unary function
  * @group Compound native methods
  * @since 4.0.0
  */
@@ -1153,7 +1174,9 @@ export function flatMap<A, B>(a: T<T<A>> | Functors.Mappable<A, B>, m?: any): an
  * @template A array's type
  * @param a the array
  * @param b the value to look up for
- * @returns {boolean} returns true if `b` has been found
+ * @returns 
+ *  - true if `b` has been found
+ *  - false otherwise
  * @group Native methods
  * @since 4.0.0
  */
@@ -1176,7 +1199,9 @@ export function includes<A>(a: T<A>, b: A): boolean;
  * 
  * @template A array's type
  * @param a the value to look for
- * @returns {Fn.Unary<T<A>, boolean>} a unary function which returns true if `a` has been found in the passed array.
+ * @returns the unary function which returns 
+ *  - `true` if `a` has been found in the passed array
+ *  - `false` otherwise
  * @group Native methods
  * @since 4.0.0
  */
@@ -1203,8 +1228,8 @@ export function includes<A>(a: T<A> | A, b?: A): any {
  * ```
  * 
  * @template a array's type
- * @param {T<A>} t the array
- * @returns {number} the length of the array
+ * @param t the array
+ * @returns the length of the array
  * @group Native methods
  * @since 4.0.0
  */
@@ -1228,9 +1253,9 @@ export const length = <A>(t: T<A>): number => t.length;
  * 
  * @template A array's type
  * @template B the string type to use as divider
- * @param {A} a the array
- * @param {B} b the string used as divider
- * @returns {string} the concatenated string
+ * @param a the array
+ * @param b the string used as divider
+ * @returns the concatenated string
  * @group Native methods
  * @since 4.0.0
  */
@@ -1253,8 +1278,8 @@ export function join<A extends any[], B extends string>(a: A, b?: B): string;
  * 
  * @template A array's type
  * @template B the string type to use as divider
- * @param {B} a the string used as divider
- * @returns {Fn.Unary<A, string>} the concatenated string
+ * @param a the string used as divider
+ * @returns the concatenated string
  * @group Native methods
  * @since 4.0.0
  */
@@ -1286,9 +1311,9 @@ export function join<A extends any[], B extends string>(a: A | B, b?: B): any {
  * ```
  * 
  * @template A the array's type
- * @param {number} size the size of the array
- * @param {A | undefined} d this is the value used to fill the array
- * @returns {T<A>} the array
+ * @param size the size of the array
+ * @param d this is the value used to fill the array
+ * @returns the array
  * @group Factories
  * @since 4.0.0
  */
@@ -1311,9 +1336,9 @@ export function make<A = undefined>(size: number, d?: A): A extends Option.None 
  * ```
  * 
  * @template A the array's type
- * @param {number} size the size of the array
- * @param {Fn.Unary<number, A> | undefined} d a function used to return a value for every index of an array
- * @returns {T<A>} the array
+ * @param size the size of the array
+ * @param d a function used to return a value for every index of an array
+ * @returns the array
  * @group Factories
  * @since 4.0.0
  */
@@ -1351,7 +1376,7 @@ export function make<A = undefined>(size: number, d?: A | Fn.Unary<number, A>): 
  * @template B the return type of the mappable functor
  * @param a the array
  * @param m the functors used to map the array
- * @returns {T<B>}
+ * @returns the mapped array
  * @group Native methods
  * @since 4.0.0
  */
@@ -1370,20 +1395,20 @@ export function map<A, B>(a: T<A>, m: Functors.Mappable<A, B>): T<B>;
  * Arr.map(m)(x)      // [2, 4, 6]
  * ```
  * 
- * @template a the array's type 
- * @template b the return type of the mappable functor
+ * @template A the array's type 
+ * @template B the return type of the mappable functor
  * @param a the functors used to map the array
- * @returns {Fn.Unary<T<a>, T<b>>}
+ * @returns the unary function which takes an array `b` and returns an array `c` with type `T<B>`
  * @group Native methods
  * @since 4.0.0
  */
-export function map<a, b>(a: Functors.Mappable<a, b>): Fn.Unary<T<a>, T<b>>;
-export function map<a, b>(a: T<a> | Functors.Mappable<a, b>, m?: any): any {
+export function map<A, B>(a: Functors.Mappable<A, B>): Fn.Unary<T<A>, T<B>>;
+export function map<A, B>(a: T<A> | Functors.Mappable<A, B>, m?: any): any {
   if (guard(a)) {
     return a.map(m);
   }
 
-  return (b: T<a>) => b.map(a);
+  return (b: T<A>) => b.map(a);
 }
 
 /**
@@ -1404,7 +1429,9 @@ export function map<a, b>(a: T<a> | Functors.Mappable<a, b>, m?: any): any {
  * @template A array's type
  * @param a the array
  * @param m the predicate `Predicate.t<a>`
- * @returns {boolean} returns true if none of the elements satisfy `m`
+ * @returns 
+ *  - true if none of the elements satisfy `m`
+ *  - false otherwise
  * @group Native methods
  * @since 4.0.0
  */
@@ -1426,7 +1453,9 @@ export function none<A>(a: T<A>, m: Predicate.T<A>): boolean;
  * 
  * @template A array's type
  * @param a the predicate `Predicate.t<a>`
- * @returns {Fn.Unary<T<A>, boolean>}
+ * @returns the unary function which takes an array `T<A>` and returns
+ *  - `true` if every element does not satisfy the predicate `a`
+ *  - `false` otherwise
  * @group Native methods
  * @since 4.0.0
  */
@@ -1451,16 +1480,17 @@ export function none<A>(a: T<A> | Predicate.T<A>, m?: Predicate.T<A>): any {
  * @param a
  * 
  * @template T
- * @returns
+ * @param items A set of elements to include in the new array object.
+ * @returns the new array
  * @group Native methods
  * @since 4.0.0
  */
 export const of = Array.of;
 
 /**
- * Split an array `t<a>` into a tuple `[t<a>, t<a>]` based on predicate `f`; 
+ * Split an array `T<A>` into a tuple `[T<A>, T<A>]` based on predicate `f`; 
  * 
- * If the element `a` of `t<a>` satisfies the predicate `f`, then it will be pushed to 
+ * If the element `a` of `T<A>` satisfies the predicate `f`, then it will be pushed to 
  * the first element of the tuple, otherwise to the second.
  *
  * @example
@@ -1476,15 +1506,15 @@ export const of = Array.of;
  * @template A array's type
  * @param a the array
  * @param f the filterable functor
- * @returns {[T<A>, T<A>]}
+ * @returns the partitioned array
  * @group Misc
  * @since 4.0.0
  */
 export function partition<A>(a: T<A>, f: Functors.Filterable<A>): [T<A>, T<A>];
 /**
- * Returns a `Fn.Unary<t<a>, [t<a>, t<a>]>` which splits an array `t<a>` into a tuple `[t<a>, t<a>]` based on predicate `f`; 
+ * Returns a `Fn.Unary<T<A>, [T<A>, T<A>]>` which splits an array `T<A>` into a tuple `[T<A>, T<A>]` based on predicate `f`; 
  * 
- * If the element `a` of `t<a>` satisfies the predicate `f`, then it will be pushed to 
+ * If the element `a` of `T<A>` satisfies the predicate `f`, then it will be pushed to 
  * the first element of the tuple, otherwise to the second.
  *
  * @example
@@ -1499,7 +1529,8 @@ export function partition<A>(a: T<A>, f: Functors.Filterable<A>): [T<A>, T<A>];
  *
  * @template A array's type
  * @param a the filterable functor
- * @returns {Fn.Unary<T<A>, [T<A>, T<A>]>}
+ * @returns the unary function which takes an array `T<A>` as an argument and returns
+ *    a tuple `[T<A>, T<A>]`
  * @group Misc
  * @since 4.0.0
  */
@@ -1539,7 +1570,9 @@ export function partition<A>(a: T<A> | Functors.Filterable<A>, f?: Functors.Filt
  * 
  * @template A array's type
  * @param a the array
- * @returns {Option.T<A>} a random element of the array
+ * @returns a random element of the array
+ *  - `Option.Some<A>` if the array is not empty
+ *  - `Option.None` if the array is empty
  * @group Misc
  * @since 4.0.0
  */
@@ -1564,7 +1597,7 @@ export const random = <A>(a: A[]): Option.T<A> => (a[Math.floor(Math.random() * 
  * @template B returned value type
  * @param a the array
  * @param r the reducer
- * @returns {B} the reduced value
+ * @returns the reduced value
  * @group Native methods
  * @since 4.0.0
  */
@@ -1590,7 +1623,7 @@ export function reduce<A, B>(a: T<A>, r: Reducer<A, B>, b: B): B;
  * @template B returned value type
  * @param a the array
  * @param r the reducer
- * @returns {Fn.Unary<T<A>, B>} the reduced value
+ * @returns the reduced value
  * @group Native methods
  * @since 4.0.0
  */
@@ -1624,7 +1657,7 @@ export function reduce<A, B>(a: T<A> | Reducer<A, B>, r: any, b?: any): any {
  * @template B returned value type
  * @param a the array
  * @param r the reducer
- * @returns {B} the reduced value
+ * @returns the reduced value
  * @group Native methods
  * @since 4.0.0
  */
@@ -1650,7 +1683,7 @@ export function reduceRight<A, B>(a: T<A>, r: Reducer<A, B>, b: B): B;
  * @template B returned value type
  * @param a the array
  * @param r the reducer
- * @returns {Fn.Unary<T<A>, B>} the reduced value
+ * @returns the reducer unary function
  * @group Native methods
  * @since 4.0.0
  */
@@ -1763,7 +1796,7 @@ export function slice<A extends T<any>>(a: A, s?: number, e?: number): A;
  * @param a the array
  * @param s the optional start index
  * @param s the optional end index
- * @returns {Fn.Unary<A, A>} the unary function which slices the array
+ * @returns the unary function which slices the array
  * @group Native methods
  * @since 4.0.0
  */
@@ -1790,7 +1823,7 @@ export function slice<A extends T<any>>(a: A | number, s?: number, e?: number): 
  * @template A the array's type
  * @param a the array
  * @param p the predicate
- * @returns {boolean} return true if some values satisfy the predicate
+ * @returns return true if some values satisfy the predicate
  * @group Native methods
  * @since 4.0.0
  */
@@ -1808,7 +1841,9 @@ export function some<A>(a: T<A>, p: Predicate.T<A>): boolean;
  *
  * @template A the array's type
  * @param a the predicate
- * @returns {Fn.Unary<T<A>, boolean>} return true if some values satisfy the predicate
+ * @returns the unary function which returns 
+ *  - `true` if some values satisfy the predicate
+ *  - `false` otherwise
  * @group Native methods
  * @since 4.0.0
  */
@@ -1833,13 +1868,12 @@ export function some<A>(a: T<A> | Predicate.T<A>, p?: Predicate.T<A>): any {
  * const s = Num.asc;
  * 
  * Arr.sort(x, s)     // [1, 2, 3, 4, 5]
- * Arr.sort(s)(x)     // [1, 2, 3, 4, 5]
  * ```
  *
  * @template A the array's type
  * @param a the array
  * @param cmp the comparable functor
- * @returns {T<A>} the sorted array
+ * @returns the sorted array
  * @group Native methods
  * @since 4.0.0
  */
@@ -1852,16 +1886,14 @@ export function sort<A>(a: T<A>, cmp: Functors.Comparable<A>): T<A>;
  * ```ts
  * import { Arr, Num } from 'tiinvo'
  * 
- * const x = [3, 1, 2, 5, 4]
- * const s = Num.asc;
+ * const s = Arr.sort(Num.asc);
  * 
- * Arr.sort(x, s)     // [1, 2, 3, 4, 5]
- * Arr.sort(s)(x)     // [1, 2, 3, 4, 5]
+ * s([3, 1, 2, 5, 4])     // [1, 2, 3, 4, 5]
  * ```
  *
  * @template A the array's type
  * @param a the comparable functor
- * @returns {Fn.Unary<T<A>, T<A>>} the unary function which sorts the array
+ * @returns the unary function which sorts the array
  * @group Native methods
  * @since 4.0.0
  */
@@ -1891,7 +1923,7 @@ export function sort<A>(a: T<A> | Functors.Comparable<A>, cmp?: Functors.Compara
  * @template A the array's type
  * @param a the first array
  * @param b the second array
- * @returns {T<A>} the zipped array
+ * @returns the zipped array
  * @group Misc
  * @since 4.0.0
  */
@@ -1913,7 +1945,7 @@ export function zip<A extends any[]>(a: A, b: A): T<A>;
  *
  * @template A the array's type
  * @param a the second array
- * @returns {Fn.Unary<A, T<A>>} the unary function which zips the array
+ * @returns the unary function which zips the array
  * @group Misc
  * @since 4.0.0
  */
@@ -1955,7 +1987,9 @@ export function zip<A extends any[]>(a: A, b?: A): any {
  * ```
  * 
  * @param t the array
- * @returns {boolean} `true` if is empty, `false` otherwise 
+ * @returns
+ *  - `true` if is empty
+ *  - `false` otherwise 
  * @group Predicates
  * @since 4.0.0
  */
@@ -1973,6 +2007,8 @@ export const empty = (t: T<any>): boolean => t.length === 0;
  * 
  * @param t the array 
  * @returns 
+ *  - `true` if the array is populated
+ *  - `false` otherwise
  * @group Predicates
  * @since 4.0.0
  */
