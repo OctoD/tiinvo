@@ -59,7 +59,7 @@ Represents a very large integer.
 
 #### Defined in
 
-[src/BigInt.ts:10](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L10)
+[src/BigInt.ts:10](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L10)
 
 ## Guards
 
@@ -96,7 +96,7 @@ returns true if is a bigint, false otherwise
 
 #### Defined in
 
-[src/BigInt.ts:31](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L31)
+[src/BigInt.ts:31](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L31)
 
 ## Comparables
 
@@ -137,7 +137,7 @@ BigInt.cmp(0n, 1n)       // -1
 
 #### Defined in
 
-[src/BigInt.ts:59](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L59)
+[src/BigInt.ts:59](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L59)
 
 ▸ **cmp**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -173,7 +173,7 @@ the unary function
 
 #### Defined in
 
-[src/BigInt.ts:81](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L81)
+[src/BigInt.ts:81](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L81)
 
 ___
 
@@ -212,7 +212,7 @@ true if two bigints are equal
 
 #### Defined in
 
-[src/BigInt.ts:109](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L109)
+[src/BigInt.ts:109](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L109)
 
 ▸ **eq**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), `boolean`\>
 
@@ -248,7 +248,7 @@ the unary function
 
 #### Defined in
 
-[src/BigInt.ts:130](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L130)
+[src/BigInt.ts:130](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L130)
 
 ## Mappables
 
@@ -295,7 +295,7 @@ the mapped value or TypeError if `a` is not a `bigint`
 
 #### Defined in
 
-[src/BigInt.ts:165](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L165)
+[src/BigInt.ts:165](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L165)
 
 ▸ **map**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](Result.md#t)<`A`\>\>
 
@@ -337,7 +337,7 @@ the unary function
 
 #### Defined in
 
-[src/BigInt.ts:187](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L187)
+[src/BigInt.ts:187](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L187)
 
 ___
 
@@ -382,7 +382,7 @@ toHex("a")      // "0x0"
 
 #### Defined in
 
-[src/BigInt.ts:219](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L219)
+[src/BigInt.ts:219](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L219)
 
 ▸ **mapOr**<`A`\>(`a`, `m`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), `A`\>
 
@@ -424,7 +424,7 @@ the unary function
 
 #### Defined in
 
-[src/BigInt.ts:241](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L241)
+[src/BigInt.ts:241](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L241)
 
 ## Operables
 
@@ -466,7 +466,7 @@ the result
 
 #### Defined in
 
-[src/BigInt.ts:278](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L278)
+[src/BigInt.ts:278](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L278)
 
 ▸ **add**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](BigInt.md#t)\>
 
@@ -498,7 +498,7 @@ add5(10n)                   // 15n
 
 #### Defined in
 
-[src/BigInt.ts:297](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L297)
+[src/BigInt.ts:297](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L297)
 
 ___
 
@@ -536,7 +536,7 @@ the result
 
 #### Defined in
 
-[src/BigInt.ts:324](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L324)
+[src/BigInt.ts:324](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L324)
 
 ▸ **div**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](BigInt.md#t)\>
 
@@ -569,7 +569,7 @@ the unary function
 
 #### Defined in
 
-[src/BigInt.ts:342](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L342)
+[src/BigInt.ts:342](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L342)
 
 ___
 
@@ -607,7 +607,7 @@ the remainder
 
 #### Defined in
 
-[src/BigInt.ts:369](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L369)
+[src/BigInt.ts:369](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L369)
 
 ▸ **mod**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](BigInt.md#t)\>
 
@@ -642,7 +642,7 @@ the unary function
 
 #### Defined in
 
-[src/BigInt.ts:389](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L389)
+[src/BigInt.ts:389](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L389)
 
 ___
 
@@ -680,7 +680,7 @@ the result
 
 #### Defined in
 
-[src/BigInt.ts:416](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L416)
+[src/BigInt.ts:416](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L416)
 
 ▸ **mul**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](BigInt.md#t)\>
 
@@ -714,7 +714,7 @@ the unary function
 
 #### Defined in
 
-[src/BigInt.ts:435](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L435)
+[src/BigInt.ts:435](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L435)
 
 ___
 
@@ -752,7 +752,7 @@ the result
 
 #### Defined in
 
-[src/BigInt.ts:462](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L462)
+[src/BigInt.ts:462](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L462)
 
 ▸ **pow**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](BigInt.md#t)\>
 
@@ -784,7 +784,7 @@ pow5(10n)                   // 100_000n
 
 #### Defined in
 
-[src/BigInt.ts:479](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L479)
+[src/BigInt.ts:479](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L479)
 
 ___
 
@@ -821,7 +821,7 @@ BigInt.root(9n, 2n)             // 3n
 
 #### Defined in
 
-[src/BigInt.ts:506](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L506)
+[src/BigInt.ts:506](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L506)
 
 ▸ **root**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](BigInt.md#t)\>
 
@@ -856,7 +856,7 @@ the unary function
 
 #### Defined in
 
-[src/BigInt.ts:526](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L526)
+[src/BigInt.ts:526](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L526)
 
 ___
 
@@ -894,7 +894,7 @@ a - b
 
 #### Defined in
 
-[src/BigInt.ts:564](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L564)
+[src/BigInt.ts:564](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L564)
 
 ▸ **sub**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`T`](BigInt.md#t)\>
 
@@ -929,7 +929,7 @@ the unary function (b - a)
 
 #### Defined in
 
-[src/BigInt.ts:584](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L584)
+[src/BigInt.ts:584](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L584)
 
 ## Sortables
 
@@ -973,7 +973,7 @@ the result:
 
 #### Defined in
 
-[src/BigInt.ts:621](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L621)
+[src/BigInt.ts:621](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L621)
 
 ▸ **asc**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -1007,7 +1007,7 @@ the comparator unary function
 
 #### Defined in
 
-[src/BigInt.ts:640](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L640)
+[src/BigInt.ts:640](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L640)
 
 ___
 
@@ -1052,7 +1052,7 @@ the result:
 
 #### Defined in
 
-[src/BigInt.ts:674](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L674)
+[src/BigInt.ts:674](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L674)
 
 ▸ **desc**(`a`): [`Unary`](Fn.md#unary)<[`T`](BigInt.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -1068,7 +1068,7 @@ the result:
 
 #### Defined in
 
-[src/BigInt.ts:675](https://github.com/OctoD/tiinvo/blob/f823b86/src/BigInt.ts#L675)
+[src/BigInt.ts:675](https://github.com/OctoD/tiinvo/blob/168ba6f/src/BigInt.ts#L675)
 
 ## Serializables
 

@@ -640,18 +640,21 @@ Fn.eq(Num.sub, Num.add) // false
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | [`AnyFn`](Fn.md#anyfn) |
-| `b` | [`AnyFn`](Fn.md#anyfn) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | [`AnyFn`](Fn.md#anyfn) | the first function |
+| `b` | [`AnyFn`](Fn.md#anyfn) | the second function |
 
 #### Returns
 
 `boolean`
 
+- `true` if a equals to `b`
+ - `false` otherwise
+
 #### Defined in
 
-src/Fn.ts:151
+src/Fn.ts:156
 
 ▸ **eq**(`a`): [`Unary`](Fn.md#unary)<[`T`](Fn.md#t), `boolean`\>
 
@@ -681,17 +684,21 @@ isadd(Num.add) // false
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | [`AnyFn`](Fn.md#anyfn) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | [`AnyFn`](Fn.md#anyfn) | the first function |
 
 #### Returns
 
 [`Unary`](Fn.md#unary)<[`T`](Fn.md#t), `boolean`\>
 
+the unary function which accepts a second function and returns
+ - `true` if `a` equals to `b`
+ - `false` otherwise
+
 #### Defined in
 
-src/Fn.ts:175
+src/Fn.ts:184
 
 ___
 
@@ -723,6 +730,8 @@ Fn.length(Fn.length)     // 1
 #### Returns
 
 `number`
+
+arguments count
 
 #### Defined in
 
@@ -759,6 +768,8 @@ Fn.name(Fn.name)       // 'name'
 
 `string`
 
+the name
+
 #### Defined in
 
 src/Functors.ts:424
@@ -786,17 +797,20 @@ Fn.guard(() => {})   // true
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `x` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `x` | `unknown` | the value to guard |
 
 #### Returns
 
 x is AnyFn
 
+- `true` if `x` is a function
+ - `false` otherwise
+
 #### Defined in
 
-src/Fn.ts:236
+src/Fn.ts:253
 
 ___
 
@@ -834,13 +848,15 @@ m(2)   // [3, 4, -1, 16]
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `...ml` | [`Mappable`](Functors.md#mappable)<`a`, `b`\>[] |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `...ml` | [`Mappable`](Functors.md#mappable)<`a`, `b`\>[] | a list of unary functions which accept the same argument |
 
 #### Returns
 
 `fn`
+
+an array of the returning values of `ml`
 
 ▸ (`a`): `b`[]
 
@@ -856,4 +872,4 @@ m(2)   // [3, 4, -1, 16]
 
 #### Defined in
 
-src/Fn.ts:262
+src/Fn.ts:281

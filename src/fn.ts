@@ -146,6 +146,11 @@ export function cmp(a: T, b?: T): any {
  * Fn.eq(Num.sub, Num.add) // false
  * ```
  *
+ * @param a the first function
+ * @param b the second function
+ * @returns 
+ *  - `true` if a equals to `b`
+ *  - `false` otherwise
  * @since 4.0.0
  */
 export function eq(a: T, b: T): boolean;
@@ -170,6 +175,10 @@ export function eq(a: T, b: T): boolean;
  * isadd(Num.add) // false
  * ```
  *
+ * @param a the first function
+ * @returns the unary function which accepts a second function and returns
+ *  - `true` if `a` equals to `b`
+ *  - `false` otherwise
  * @since 4.0.0
  */
 export function eq(a: T): Unary<T, boolean>;
@@ -196,7 +205,9 @@ export function eq(a: T, b?: T): any {
  * Fn.length(Fn.cmp)        // 2
  * Fn.length(Fn.length)     // 1
  * ```
- *
+ * 
+ * @param x the function
+ * @returns arguments count
  * @since 4.0.0
  */
 export const length: Functors.Mappable<AnyFn, number> = x => x.length;
@@ -213,6 +224,8 @@ export const length: Functors.Mappable<AnyFn, number> = x => x.length;
  * Fn.name(Fn.name)       // 'name'
  * ```
  *
+ * @param x the function
+ * @returns the name
  * @since 4.0.0
  */
 export const name: Functors.Mappable<AnyFn, string> = x => x.name;
@@ -231,6 +244,10 @@ export const name: Functors.Mappable<AnyFn, string> = x => x.name;
  * Fn.guard(() => {})   // true
  * ```
  *
+ * @param x the value to guard
+ * @returns
+ *  - `true` if `x` is a function
+ *  - `false` otherwise
  * @since 4.0.0
  */
 export const guard = (x: unknown): x is AnyFn => typeof x === 'function';
@@ -257,6 +274,8 @@ export const guard = (x: unknown): x is AnyFn => typeof x === 'function';
  * m(2)   // [3, 4, -1, 16]
  * ```
  *
+ * @param ml a list of unary functions which accept the same argument
+ * @return an array of the returning values of `ml`
  * @since 4.0.0
  */
 export const map = <a, b>(...ml: Functors.Mappable<a, b>[]) => (a: a) => ml.map(f => f(a));
