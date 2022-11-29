@@ -73,7 +73,8 @@ Bool.guard(1000)     // false
 
 x is boolean
 
-returns true if x is a boolean, false otherwise
+- `true` if `x` is a `boolean`
+ - `false` otherwise
 
 #### Defined in
 
@@ -109,7 +110,8 @@ Bool.flip(true)      // false
 
 `boolean`
 
-`false` if x is `true`, `true` otherwise
+- `false` if `x` is `true`
+ - `true` if `x` is `false`
 
 #### Defined in
 
@@ -138,14 +140,17 @@ Bool.toNumber(false) // 0
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `boolean` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `t` | `boolean` | the bool |
 
 #### Returns
 
 ``1`` \| ``0``
 
+- `1` if `t` is `false`
+ - `0` if `t` is `true`
+
 #### Defined in
 
-src/Bool.ts:75
+src/Bool.ts:83

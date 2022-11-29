@@ -31,7 +31,9 @@ export type T = boolean;
  * ```
  * 
  * @param x the value to check if is a boolean
- * @returns returns true if x is a boolean, false otherwise
+ * @returns 
+ *  - `true` if `x` is a `boolean`
+ *  - `false` otherwise
  * @since 4.0.0
  */
 export const guard: Functors.Guardable<boolean> = (x: unknown): x is boolean => typeof x === 'boolean';;
@@ -50,7 +52,9 @@ export const guard: Functors.Guardable<boolean> = (x: unknown): x is boolean => 
  * ```
  *
  * @param x the bool to flip
- * @returns `false` if x is `true`, `true` otherwise
+ * @returns 
+ *  - `false` if `x` is `true`
+ *  - `true` if `x` is `false`
  * @since 4.0.0
  */
 export const flip: Functors.Mappable<T, T> = x => !x
@@ -69,6 +73,10 @@ export const flip: Functors.Mappable<T, T> = x => !x
  * Bool.toNumber(false) // 0
  * ```
  *
+ * @param t the bool
+ * @returns 
+ *  - `1` if `t` is `false`
+ *  - `0` if `t` is `true`
  * @group Serializables
  * @since 4.0.0
  */
