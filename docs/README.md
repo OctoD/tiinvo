@@ -13,6 +13,7 @@ An opinionated lib of types and utilities for your TypeScript and JavaScript pro
 
 - [tiinvo](#tiinvo)
 - [Install](#install)
+- [Features](#features)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [Licence](#licence)
@@ -34,8 +35,29 @@ yarn add tiinvo
 or if you are using Deno, you have to simply import it
 
 ```ts
-import { } from 'https://cdn.skypack.dev/tiinvo?dts';
+import { Arr, Option, Result } from 'https://cdn.skypack.dev/tiinvo?dts';
 ```
+
+# Features
+
+This library is 
+
+- Intuitive
+- Lightweight
+- Pragmatic
+- Safe
+- Side-effect free
+- Versatile
+- Battle-tested (used in dozens of production projects)
+- Well-documented (every type, function and function overload is documented properly)
+- Well-maintained
+- Well-tested
+- Simple
+
+This library is ideal for both an imperative and declarative approach, since every function
+is overloaded and can be used without the need to use curry (I love it for cooking, not for coding).
+
+It normalizes several native javascript methods (like string, number and array).
 
 # Usage
 

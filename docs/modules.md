@@ -25,3 +25,13 @@
 - [SortedSequence](modules/SortedSequence.md)
 - [Str](modules/Str.md)
 - [TypedSequence](modules/TypedSequence.md)
+
+### References
+
+- [Opt](modules.md#opt)
+
+## References
+
+### Opt
+
+Renames and re-exports [Option](modules/Option.md)

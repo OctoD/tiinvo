@@ -48,7 +48,7 @@ but we can use them interchangeably within the option type.
 
 #### Defined in
 
-src/Option.ts:12
+[src/Option.ts:12](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L12)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-src/Option.ts:19
+[src/Option.ts:19](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L19)
 
 ___
 
@@ -92,7 +92,7 @@ The type `Option.T<A>` represents a value that could be both `A` or `null` or `u
 
 #### Defined in
 
-src/Option.ts:25
+[src/Option.ts:25](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L25)
 
 ## Functions
 
@@ -129,7 +129,7 @@ x is None
 
 #### Defined in
 
-src/Functors.ts:338
+[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Functors.ts#L338)
 
 ___
 
@@ -166,7 +166,7 @@ x is unknown
 
 #### Defined in
 
-src/Functors.ts:338
+[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Functors.ts#L338)
 
 ___
 
@@ -221,7 +221,7 @@ the new `Guardable<T<A>>` which returns
 
 #### Defined in
 
-src/Option.ts:92
+[src/Option.ts:92](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L92)
 
 ___
 
@@ -277,7 +277,7 @@ the wrapped function
 
 #### Defined in
 
-src/Option.ts:481
+[src/Option.ts:481](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L481)
 
 ___
 
@@ -333,7 +333,7 @@ the wrapped function
 
 #### Defined in
 
-src/Option.ts:522
+[src/Option.ts:522](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L522)
 
 ## Comparables
 
@@ -384,7 +384,7 @@ Option.cmp(Str.cmp, "a", undefined)              // 1
 
 #### Defined in
 
-src/Option.ts:123
+[src/Option.ts:123](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L123)
 
 ▸ **cmp**<`A`\>(`c`, `a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -431,7 +431,7 @@ the unary comparer functor which takes the left-hand compared value and returns
 
 #### Defined in
 
-src/Option.ts:149
+[src/Option.ts:149](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L149)
 
 ▸ **cmp**<`A`\>(`c`): [`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -479,7 +479,7 @@ the binary comparer functor which takes two values `a` and `b` and returns
 
 #### Defined in
 
-src/Option.ts:176
+[src/Option.ts:176](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L176)
 
 ___
 
@@ -528,7 +528,7 @@ Option.eq(Num.eq, null, undefined)   // true
 
 #### Defined in
 
-src/Option.ts:225
+[src/Option.ts:225](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L225)
 
 ▸ **eq**<`A`\>(`e`, `a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, `boolean`\>
 
@@ -570,7 +570,7 @@ the unary function which returns
 
 #### Defined in
 
-src/Option.ts:246
+[src/Option.ts:246](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L246)
 
 ▸ **eq**<`A`\>(`e`): [`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, `boolean`\>
 
@@ -614,7 +614,7 @@ the binary function which returns
 
 #### Defined in
 
-src/Option.ts:269
+[src/Option.ts:269](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L269)
 
 ## Filterables
 
@@ -658,7 +658,7 @@ Option.filter(Num.gt(1), null) // null
 
 #### Defined in
 
-src/Option.ts:312
+[src/Option.ts:312](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L312)
 
 ▸ **filter**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>\>
 
@@ -698,7 +698,7 @@ the unary function which filters the value `b`
 
 #### Defined in
 
-src/Option.ts:332
+[src/Option.ts:332](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L332)
 
 ## Mappables
 
@@ -743,7 +743,7 @@ the mapped option `T<B>`
 
 #### Defined in
 
-src/Option.ts:365
+[src/Option.ts:365](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L365)
 
 ▸ **map**<`A`, `B`\>(`m`): [`Mappable`](Functors.md#mappable)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`B`\>\>
 
@@ -783,7 +783,7 @@ the mappable functor which maps `T<A>` to `T<B>`
 
 #### Defined in
 
-src/Option.ts:385
+[src/Option.ts:385](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L385)
 
 ___
 
@@ -827,7 +827,7 @@ the mapped value `B` or the fallback value `b` if `a` is `None`
 
 #### Defined in
 
-src/Option.ts:415
+[src/Option.ts:415](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L415)
 
 ▸ **mapOr**<`A`, `B`\>(`m`, `a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, `B`\>
 
@@ -868,4 +868,4 @@ the mappable functor which maps `A` to `B` or returns the fallback value `a` if 
 
 #### Defined in
 
-src/Option.ts:436
+[src/Option.ts:436](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Option.ts#L436)

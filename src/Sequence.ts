@@ -8,36 +8,91 @@ import { isErr } from './Result.js';
 const indexer = Symbol("indexer");
 
 /**
- * A `Sequence.t<a>` is an iterable list of elements `a` in a particular order.
+ * A `Sequence.T<A>` is an iterable list of elements `a` in a particular order.
  * 
  * It's immutable by design.
  */
-export type t<a> = Iterable<a> & {
-  [indexer](): Readonly<Record<number, a>>;
-  [Symbol.iterator](): Iterator<a>;
+export type T<A> = Iterable<A> & {
+  [indexer](): Readonly<Record<number, A>>;
+  [Symbol.iterator](): Iterator<A>;
 };
 
 //#region factories
 
 /**
- * Makes a new `Sequence.t<a>` from a list of arguments `a`.
+ * Try to deserialize a `string` to a `Sequence.T<A>`
  *
  * @example
  *
  * ```ts
  * import { Sequence } from 'tiinvo'
  * 
- * Sequence.make(10, 20, 30)    // Sequence.t<number>
- * Sequence.make([10, 20, 30])    // Sequence.t<number>
+ * const x  = Sequence.fromString<number>(`10,20,30`) as Sequence.T<number>;
+ * const t1 = Sequence.make(10, 20, 30)
+ * const t2 = Sequence.make(10, 30, 20)
+ * 
+ * Sequence.eq(x, t1)        // true
+ * Sequence.eq(x, t2)        // false
  * ```
  *
+ * @template A the Sequence's expected element type
+ * @param x the string
+ * @returns 
+ *  - `Result.Ok<Sequence.T<A>>` if the deserialization is successful
+ *  - `Result.Err` otherwise
+ * @group Factories
  * @since 4.0.0
  */
-export const make = <a>(...v: a[]): t<a> => {
-  const values: Record<number, a> = {};
+export const fromString = <A = unknown>(x: string): Result.T<T<A>> => {
+  try {
+    return make(JSON.parse(`[${x}]`)) as T<A>;
+  } catch (err) {
+    return err as Error;
+  }
+};
 
-  if (v.length === 1 && Array.isArray(v[0])) {
-    v = v[0];
+/**
+ * Makes a new `Sequence.T<A>` from an array of `A`.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence } from 'tiinvo'
+ * 
+ * Sequence.make([10, 20, 30])      // Sequence.T<number>
+ * Sequence.make([1, 2], [3, 4])    // Sequence.T<number[]>
+ * ```
+ *
+ * @template A the type
+ * @param v the array of initial values
+ * @returns the `Sequence.T<A>`
+ * @group Factories
+ * @since 4.0.0
+ */
+export function make<A>(v: A[]): T<A>;
+/**
+ * Makes a new `Sequence.T<A>` from a list of arguments `a`.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence } from 'tiinvo'
+ * 
+ * Sequence.make(10, 20, 30)        // Sequence.T<number>
+ * ```
+ *
+ * @template A the type
+ * @param v the list of initial values
+ * @returns the `Sequence.T<A>`
+ * @group Factories
+ * @since 4.0.0
+ */
+export function make<A>(...v: A[]): T<A>;
+export function make<A>(...v: A[]): T<A> {
+  const values: Record<number, A> = {};
+
+  if (arguments.length === 1 && Array.isArray(arguments[0])) {
+    v = arguments[0];
   }
 
   for (let i = 0; i < v.length; i++) {
@@ -48,7 +103,7 @@ export const make = <a>(...v: a[]): t<a> => {
     [indexer]() {
       return Object.freeze({ ...values });
     },
-  } as t<a>;
+  } as T<A>;
 
   Object.defineProperty(_t, Symbol.iterator, {
     enumerable: false,
@@ -77,7 +132,7 @@ export const make = <a>(...v: a[]): t<a> => {
 //#region guardables
 
 /**
- * Checks if a value `x` is a `Sequence.t<unknown>`.
+ * Checks if a value `x` is a `Sequence.T<unknown>`.
  *
  * @example
  *
@@ -89,12 +144,17 @@ export const make = <a>(...v: a[]): t<a> => {
  * Sequence.guard(Sequence.make())    // true
  * ```
  *
+ * @param x the value to guard
+ * @returns
+ *  - `true` if `x` is `Sequence.T<unknown>`
+ *  - `false` otherwise
+ * @group Guardables
  * @since 4.0.0
  */
-export const guard = (x: unknown): x is t<unknown> => typeof x === 'object' && x !== null && indexer in x;
+export const guard = (x: unknown): x is T<unknown> => typeof x === 'object' && x !== null && indexer in x;
 
 /**
- * Checks if the parameter `x` is a `Sequence.t<a>`
+ * Checks if the parameter `x` is a `Sequence.T<A>`
  *
  * @example
  *
@@ -109,16 +169,22 @@ export const guard = (x: unknown): x is t<unknown> => typeof x === 'object' && x
  * isStrSequence(s1)      // true
  * ```
  *
+ * @template a the type
+ * @param g the guard
+ * @returns the new guard which returns
+ *  - `true` if `x` is a `Sequence.T<A>`
+ *  - `false` otherwise 
+ * @group Guardables
  * @since 4.0.0
  */
-export const guardOf = <a>(g: Functors.Guardable<a>) => (x: unknown): x is t<a> => guard(x) && toArray(x).every(g);
+export const guardOf = <A>(g: Functors.Guardable<A>) => (x: unknown): x is T<A> => guard(x) && toArray(x).every(g);
 
 //#endregion
 
 //#region comparables
 
 /**
- * Returns 0 if two sequences are the same, -1 if a is less than b or 1 if a is more than b
+ * Compares two sequences.
  *
  * @example
  *
@@ -142,25 +208,161 @@ export const guardOf = <a>(g: Functors.Guardable<a>) => (x: unknown): x is t<a> 
  * Sequence.cmp(Num)(s2, s0)      // 1
  * ```
  *
+ * @template A the Sequence's element type 
+ * @param mod the comparable functor module
+ * @param a the first sequence
+ * @param b the last sequence
+ * @returns the comparison result `Functors.ComparableResult`
+ * @group Comparables
  * @since 4.0.0
  */
-export function cmp<a>(mod: Functors.ComparableModule<a>, a: t<a>, b: t<a>): Functors.ComparableResult;
-export function cmp<a>(mod: Functors.ComparableModule<a>, a: t<a>): Fn.Unary<t<a>, Functors.ComparableResult>;
-export function cmp<a>(mod: Functors.ComparableModule<a>): Fn.Binary<t<a>, t<a>, Functors.ComparableResult>;
-export function cmp<a>(mod: Functors.ComparableModule<a>, a?: t<a>, b?: t<a>): any {
-  const c = arrCmp(mod.cmp);
+export function cmp<A>(mod: Functors.ComparableModule<A>, a: T<A>, b: T<A>): Functors.ComparableResult;
+/**
+ * Compares two sequences.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence, Num } from 'tiinvo'
+ * 
+ * const s0 = Sequence.make(0, 1, 2)
+ * const s1 = Sequence.make(0, 1, 2)
+ * const s2 = Sequence.make(0, 1, 2, 3)
+ * 
+ * Sequence.cmp(Num.cmp, s0, s1)      // 0
+ * Sequence.cmp(Num.cmp, s0)(s1)      // 0
+ * Sequence.cmp(Num.cmp)(s0, s1)      // 0
+ * 
+ * Sequence.cmp(Num.cmp, s0, s2)      // -1
+ * Sequence.cmp(Num.cmp, s0)(s2)      // -1
+ * Sequence.cmp(Num.cmp)(s0, s2)      // -1
+ * 
+ * Sequence.cmp(Num.cmp, s2, s0)      // 1
+ * Sequence.cmp(Num.cmp, s2)(s0)      // 1
+ * Sequence.cmp(Num.cmp)(s2, s0)      // 1
+ * ```
+ *
+ * @template A the Sequence's element type 
+ * @param mod the comparable functor
+ * @param a the first sequence
+ * @param b the last sequence
+ * @returns the comparison result `Functors.ComparableResult`
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function cmp<A>(mod: Functors.Comparable<A>, a: T<A>, b: T<A>): Functors.ComparableResult;
+/**
+ * Returns a unary function which compares two Sequence
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence, Num } from 'tiinvo'
+ * 
+ * const s0 = Sequence.make(0, 1, 2)
+ * const s1 = Sequence.make(0, 1, 2)
+ * const s2 = Sequence.make(0, 1, 2, 3)
+ * 
+ * Sequence.cmp(Num, s0)(s1)      // 0
+ * Sequence.cmp(Num, s0)(s2)      // -1
+ * Sequence.cmp(Num, s2)(s0)      // 1
+ * ```
+ *
+ * @template A the Sequence's element type 
+ * @param mod the comparable functor module
+ * @param a the first sequence
+ * @returns the unary function
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function cmp<A>(mod: Functors.ComparableModule<A>, a: T<A>): Fn.Unary<T<A>, Functors.ComparableResult>;
+/**
+ * Returns a unary function which compares two Sequence
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence, Num } from 'tiinvo'
+ * 
+ * const s0 = Sequence.make(0, 1, 2)
+ * const s1 = Sequence.make(0, 1, 2)
+ * const s2 = Sequence.make(0, 1, 2, 3)
+ * 
+ * Sequence.cmp(Num.cmp, s0)(s1)      // 0
+ * Sequence.cmp(Num.cmp, s0)(s2)      // 1
+ * Sequence.cmp(Num.cmp, s2)(s0)      // -1
+ * ```
+ *
+ * @template A the Sequence's element type 
+ * @param mod the comparable functor
+ * @param a the first sequence
+ * @returns the unary function
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function cmp<A>(mod: Functors.Comparable<A>, a: T<A>): Fn.Unary<T<A>, Functors.ComparableResult>;
+/**
+ * Returns a binary function which compares two Sequence
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence, Num } from 'tiinvo'
+ * 
+ * const s0 = Sequence.make(0, 1, 2)
+ * const s1 = Sequence.make(0, 1, 2)
+ * const s2 = Sequence.make(0, 1, 2, 3)
+ * 
+ * Sequence.cmp(Num)(s0, s1)      // 0
+ * Sequence.cmp(Num)(s0, s2)      // -1
+ * Sequence.cmp(Num)(s2, s0)      // 1
+ * ```
+ *
+ * @template A the Sequence's element type 
+ * @param mod the comparable functor module
+ * @returns the binary function
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function cmp<A>(mod: Functors.ComparableModule<A>): Fn.Binary<T<A>, T<A>, Functors.ComparableResult>;
+/**
+ * Returns a binary function which compares two Sequence
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence, Num } from 'tiinvo'
+ * 
+ * const s0 = Sequence.make(0, 1, 2)
+ * const s1 = Sequence.make(0, 1, 2)
+ * const s2 = Sequence.make(0, 1, 2, 3)
+ * 
+ * Sequence.cmp(Num.cmp)(s0, s1)      // 0
+ * Sequence.cmp(Num.cmp)(s0, s2)      // -1
+ * Sequence.cmp(Num.cmp)(s2, s0)      // 1
+ * ```
+ *
+ * @template A the Sequence's element type 
+ * @param mod the comparable functor
+ * @returns the binary function
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function cmp<A>(mod: Functors.Comparable<A>): Fn.Binary<T<A>, T<A>, Functors.ComparableResult>;
+export function cmp<A>(mod: Functors.ComparableModule<A> | Functors.Comparable<A>, a?: T<A>, b?: T<A>): any {
+  const c = arrCmp(typeof mod === 'function' ? mod : mod.cmp);
 
   if (guard(a) && guard(b)) {
     return c(toArray(a), toArray(b));
   } else if (guard(a) && !guard(b)) {
-    return (d: t<a>) => c(toArray(a), toArray(d));
+    return (d: T<A>) => c(toArray(d), toArray(a));
   } else {
-    return (d: t<a>, e: t<a>) => c(toArray(d), toArray(e));
+    return (d: T<A>, e: T<A>) => c(toArray(d), toArray(e));
   }
 }
 
 /**
- * Returns true if two sequences are the same
+ * Checks if two sequences are equal
  *
  * @example
  *
@@ -172,28 +374,166 @@ export function cmp<a>(mod: Functors.ComparableModule<a>, a?: t<a>, b?: t<a>): a
  * const s2 = Sequence.make(0, 1, 2, 3)
  * 
  * Sequence.eq(Num, s0, s1)      // true
- * Sequence.eq(Num, s0)(s1)      // true
- * Sequence.eq(Num)(s0, s1)      // true
- * 
  * Sequence.eq(Num, s0, s2)      // false
- * Sequence.eq(Num, s0)(s2)      // false
- * Sequence.eq(Num)(s0, s2)      // false
  * ```
- *
+ * 
+ * @template A the Sequence's element type
+ * @param mod the equatable module functor
+ * @param a the first Sequence
+ * @param b the last Sequence
+ * @returns 
+ *  - `true` if `a` and `b` are equal
+ *  - `false` otherwise
+ * @group Comparables
  * @since 4.0.0
  */
-export function eq<a>(mod: Functors.EquatableModule<a>, a: t<a>, b: t<a>): boolean;
-export function eq<a>(mod: Functors.EquatableModule<a>, a: t<a>): Fn.Unary<t<a>, boolean>;
-export function eq<a>(mod: Functors.EquatableModule<a>): Fn.Binary<t<a>, t<a>, boolean>;
-export function eq<a>(mod: Functors.EquatableModule<a>, a?: t<a>, b?: t<a>): any {
-  const eqfn = arrEq(mod.eq);
+export function eq<A>(mod: Functors.EquatableModule<A>, a: T<A>, b: T<A>): boolean;
+/**
+ * Checks if two sequences are equal
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence, Num } from 'tiinvo'
+ * 
+ * const s0 = Sequence.make(0, 1, 2)
+ * const s1 = Sequence.make(0, 1, 2)
+ * const s2 = Sequence.make(0, 1, 2, 3)
+ * 
+ * Sequence.eq(Num.cmp, s0, s1)      // true
+ * Sequence.eq(Num.cmp, s0, s2)      // false
+ * ```
+ * 
+ * @template A the Sequence's element type
+ * @param mod the equatable functor
+ * @param a the first Sequence
+ * @param b the last Sequence
+ * @returns 
+ *  - `true` if `a` and `b` are equal
+ *  - `false` otherwise
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function eq<A>(mod: Functors.Equatable<A>, a: T<A>, b: T<A>): boolean;
+/**
+ * Returns a unary function which checks if two sequences are equal
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence, Num } from 'tiinvo'
+ * 
+ * const s0 = Sequence.make(0, 1, 2)
+ * const s1 = Sequence.make(0, 1, 2)
+ * const s2 = Sequence.make(0, 1, 2, 3)
+ * 
+ * const eqs0 = Sequence.eq(Num, s0)
+ * 
+ * eqs0(s1)      // true
+ * eqs0(s2)      // false
+ * ```
+ * 
+ * @template A the Sequence's element type
+ * @param mod the equatable module functor
+ * @param a the first Sequence
+ * @returns the unary function which checks and returns
+ *  - `true` if `a` and `b` are equal
+ *  - `false` otherwise
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function eq<A>(mod: Functors.EquatableModule<A>, a: T<A>): Fn.Unary<T<A>, boolean>;
+/**
+ * Returns a unary function which checks if two sequences are equal
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence, Num } from 'tiinvo'
+ * 
+ * const s0 = Sequence.make(0, 1, 2)
+ * const s1 = Sequence.make(0, 1, 2)
+ * const s2 = Sequence.make(0, 1, 2, 3)
+ * 
+ * const eqs0 = Sequence.eq(Num.cmp, s0)
+ * 
+ * eqs0(s1)      // true
+ * eqs0(s2)      // false
+ * ```
+ * 
+ * @template A the Sequence's element type
+ * @param mod the equatable functor
+ * @param a the first Sequence
+ * @returns the unary function which checks and returns
+ *  - `true` if `a` and `b` are equal
+ *  - `false` otherwise
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function eq<A>(mod: Functors.Equatable<A>, a: T<A>): Fn.Unary<T<A>, boolean>;
+/**
+ * Returns a binary function which checks if two sequences are equal
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence, Num } from 'tiinvo'
+ * 
+ * const s0 = Sequence.make(0, 1, 2)
+ * const s1 = Sequence.make(0, 1, 2)
+ * const s2 = Sequence.make(0, 1, 2, 3)
+ * 
+ * const eq = Sequence.eq(Num);
+ * 
+ * eq(s0, s1)      // true
+ * eq(s0, s2)      // false
+ * ```
+ * 
+ * @template A the Sequence's element type
+ * @param mod the equatable module functor
+ * @returns the binary function which checks and returns
+ *  - `true` if `a` and `b` are equal
+ *  - `false` otherwise
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function eq<A>(mod: Functors.EquatableModule<A>): Fn.Binary<T<A>, T<A>, boolean>;
+/**
+ * Returns a binary function which checks if two sequences are equal
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence, Num } from 'tiinvo'
+ * 
+ * const s0 = Sequence.make(0, 1, 2)
+ * const s1 = Sequence.make(0, 1, 2)
+ * const s2 = Sequence.make(0, 1, 2, 3)
+ * 
+ * const eq = Sequence.eq(Num.cmp);
+ * 
+ * eq(s0, s1)      // true
+ * eq(s0, s2)      // false
+ * ```
+ * 
+ * @template A the Sequence's element type
+ * @param mod the equatable functor
+ * @returns the binary function which checks and returns
+ *  - `true` if `a` and `b` are equal
+ *  - `false` otherwise
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function eq<A>(mod: Functors.Equatable<A>): Fn.Binary<T<A>, T<A>, boolean>;
+export function eq<A>(mod: Functors.EquatableModule<A> | Functors.Equatable<A>, a?: T<A>, b?: T<A>): any {
+  const eqfn = arrEq(typeof mod === 'function' ? mod : mod.eq);
 
   if (guard(a) && guard(b)) {
     return eqfn(toArray(a), toArray(b));
   } else if (guard(a) && !guard(b)) {
-    return (d: t<a>) => eqfn(toArray(a), toArray(d));
+    return (d: T<A>) => eqfn(toArray(a), toArray(d));
   } else {
-    return (d: t<a>, e: t<a>) => eqfn(toArray(d), toArray(e));
+    return (d: T<A>, e: T<A>) => eqfn(toArray(d), toArray(e));
   }
 }
 
@@ -202,7 +542,7 @@ export function eq<a>(mod: Functors.EquatableModule<a>, a?: t<a>, b?: t<a>): any
 //#region mappables
 
 /**
- * Maps a `Sequence.t<a>` to a `Sequence.t<b>` using the functor `Functors.Mappable<a, b>`.
+ * Maps a `Sequence.T<A>` to a `Sequence.T<B>` using the functor `Functors.Mappable<a, b>`.
  *
  * @example
  *
@@ -212,25 +552,50 @@ export function eq<a>(mod: Functors.EquatableModule<a>, a?: t<a>, b?: t<a>): any
  * const s = Sequence.make(1, 2, 3)
  * 
  * Sequence.map(s, Num.mul(2))        // Sequence.t(2, 4, 6)
- * Sequence.map(Num.mul(2))(s)        // Sequence.t(2, 4, 6)
  * ```
- *
+ * 
+ * @template A the sequence's element type
+ * @template B the mapped sequence's element type
+ * @param a the sequence
+ * @param m the mappable functor
+ * @returns the mapped sequence
+ * @group Mappables
  * @since 4.0.0
  */
-export function map<a, b>(a: t<a>, m: Functors.Mappable<a, b>): t<b>;
-export function map<a, b>(a: Functors.Mappable<a, b>): Fn.Unary<t<a>, t<b>>;
-export function map<a, b>(a: t<a> | Functors.Mappable<a, b>, m?: any): any {
+export function map<A, B>(a: T<A>, m: Functors.Mappable<A, B>): T<B>;
+/**
+ * Returns a unary function which maps a `Sequence.T<A>` to a `Sequence.T<B>` using the functor `Functors.Mappable<a, b>`.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence, Num } from 'tiinvo'
+ * 
+ * const s = Sequence.make(1, 2, 3)
+ * 
+ * Sequence.map(Num.mul(2))(s)        // Sequence.t(2, 4, 6)
+ * ```
+ * 
+ * @template A the sequence's element type
+ * @template B the mapped sequence's element type
+ * @param a the sequence
+ * @returns the unary function which maps Sequence.T<A> to `Sequence.T<B>`
+ * @group Mappables
+ * @since 4.0.0
+ */
+export function map<A, B>(a: Functors.Mappable<A, B>): Fn.Unary<T<A>, T<B>>;
+export function map<A, B>(a: T<A> | Functors.Mappable<A, B>, m?: any): any {
   if (guard(a) && typeof m === 'function') {
-    return make.apply(null, toArray(a).map(m));
+    return make(toArray(a).map(m));
   }
 
-  return (b: t<a>) => {
-    return make.apply(null, toArray(b).map(a as Functors.Mappable<a, b>));
+  return (b: T<A>) => {
+    return make(toArray(b).map(a as Functors.Mappable<A, B>));
   };
 }
 
 /**
- * Reduces all elements `a` to `b` of a `Sequence.t<a>`
+ * Reduces all elements `a` to `b` of a `Sequence.T<A>`
  *
  * @example
  *
@@ -240,19 +605,46 @@ export function map<a, b>(a: t<a> | Functors.Mappable<a, b>, m?: any): any {
  * const s = Sequence.make(10, 20, 30)
  * 
  * Sequence.reduce(s, Num.add, 0)  // 60
- * Sequence.reduce<number, number>(Num.add, 0)(s)  // 60
  * ```
- *
+ * 
+ * @template A the sequence's element type
+ * @template B the reduced value type
+ * @param a the sequence
+ * @param mod the reducer functor
+ * @param s the starting reduced value
+ * @returns the reduced value
+ * @group Mappables
  * @since 4.0.0
  */
-export function reduce<a, b>(a: t<a>, mod: Functors.Reduceable<a, b>, s: b): b;
-export function reduce<a, b>(a: Functors.Reduceable<a, b>, mod: b): Fn.Unary<t<a>, b>;
-export function reduce<a, b>(a: t<a> | Functors.Reduceable<a, b>, mod?: b | Functors.Reduceable<a, b>, s?: b): any {
+export function reduce<A, B>(a: T<A>, mod: Functors.Reduceable<A, B>, s: B): B;
+/**
+ * Returns a unary function which reduces all elements `a` to `b` of a `Sequence.T<A>`
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence, Num } from 'tiinvo'
+ * 
+ * const s = Sequence.make(10, 20, 30)
+ * 
+ * Sequence.reduce<number, number>(Num.add, 0)(s)  // 60
+ * ```
+ * 
+ * @template A the sequence's element type
+ * @template B the reduced value type
+ * @param a the reducer
+ * @param mod the starting reduced value
+ * @returns the unary function. This function takes a `Sequence.T<A>` and reduces it to `B`
+ * @group Mappables
+ * @since 4.0.0
+ */
+export function reduce<A, B>(a: Functors.Reduceable<A, B>, mod: B): Fn.Unary<T<A>, B>;
+export function reduce<A, B>(a: T<A> | Functors.Reduceable<A, B>, mod?: B | Functors.Reduceable<A, B>, s?: B): any {
   if (guard(a) && typeof mod === 'function') {
-    return Array.from(a).reduce((x, c) => (mod as Functors.Reduceable<a, b>)(x, c), s as b);
+    return Array.from(a).reduce((x, c) => (mod as Functors.Reduceable<A, B>)(x, c), s as B);
   }
 
-  return (b: t<a>) => Array.from(b).reduce((x, c) => (a as Functors.Reduceable<a, b>)(x, c), mod as b);
+  return (b: T<A>) => Array.from(b).reduce((x, c) => (a as Functors.Reduceable<A, B>)(x, c), mod as B);
 }
 
 //#endregion
@@ -260,7 +652,7 @@ export function reduce<a, b>(a: t<a> | Functors.Reduceable<a, b>, mod?: b | Func
 //#region filterables
 
 /**
- * Filters a `Sequence.t<a>` with a specified `Filterable<a>`
+ * Filters a `Sequence.T<A>` with a specified `Filterable<a>`
  *
  * @example
  *
@@ -270,23 +662,48 @@ export function reduce<a, b>(a: t<a> | Functors.Reduceable<a, b>, mod?: b | Func
  * const s = Sequence.make(10, 20, 30, 40)
  * 
  * Sequence.filter(s, Num.gt(20))   // Sequence.make(30, 40)
- * Sequence.filter(Num.gt(20))(s)   // Sequence.make(30, 40)
  * ```
- *
+ *  
+ * @template A the Sequence's element type
+ * @param a the sequence
+ * @param f the filterable functor 
+ * @returns the filtered sequence
+ * @group Filterables
  * @since 4.0.0
  */
-export function filter<a>(a: t<a>, f: Functors.Filterable<a>): t<a>;
-export function filter<a>(a: Functors.Filterable<a>): Fn.Unary<t<a>, t<a>>;
-export function filter<a>(a: t<a> | Functors.Filterable<a>, f?: Functors.Filterable<a>): any {
+export function filter<A>(a: T<A>, f: Functors.Filterable<A>): T<A>;
+/**
+ * Returns a unary function which filters a `Sequence.T<A>` with a specified `Filterable<a>`
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence, Num } from 'tiinvo'
+ * 
+ * const s = Sequence.make(10, 20, 30, 40)
+ * 
+ * Sequence.filter(Num.gt(20))(s)   // Sequence.make(30, 40)
+ * ```
+ *  
+ * @template A the Sequence's element type
+ * @param a the filterable functor
+ * @returns the unary function which takes a sequence and filters it with `a`
+ * @group Filterables
+ * @since 4.0.0
+ */
+export function filter<A>(a: Functors.Filterable<A>): Fn.Unary<T<A>, T<A>>;
+export function filter<A>(a: T<A> | Functors.Filterable<A>, f?: Functors.Filterable<A>): any {
   if (guard(a) && typeof f === 'function') {
-    return make.apply(null, Array.from(a).filter(f));
+    return make(Array.from(a).filter(f));
   }
 
-  return (c: t<a>) => make.apply(null, Array.from(c).filter(a as Functors.Filterable<a>));
+  return (c: T<A>) => make(Array.from(c).filter(a as Functors.Filterable<A>));
 }
 
 /**
- * Filters and reduce a `Sequence.t<a>` to `b`
+ * Filters and reduce a `Sequence.T<A>` to `B`
+ * 
+ * **Important** The filter is applied before the reduce.
  *
  * @example
  *
@@ -301,16 +718,49 @@ export function filter<a>(a: t<a> | Functors.Filterable<a>, f?: Functors.Filtera
  * }
  * 
  * Sequence.filterReduce(s, f)      // 6
- * Sequence.filterReduce(f)(s)      // 6
  * ```
  *
+ * @template A the sequence's element type
+ * @template B the reduced value type
+ * @param a the sequence
+ * @param mod the filter and reduce module functor
+ * @returns the reduced value
+ * @group Filterables
+ * @group Mappables
  * @since 4.0.0
  */
-export function filterReduce<a, b>(a: t<a>, mod: Functors.FilterReduceableModule<a, b>): b;
-export function filterReduce<a, b>(mod: Functors.FilterReduceableModule<a, b>): Fn.Unary<t<a>, b>;
-export function filterReduce<a, b>(a: t<a> | Functors.FilterReduceableModule<a, b>, mod?: Functors.FilterReduceableModule<a, b>): any {
-  const impl = (x: t<a>, y: Functors.FilterReduceableModule<a, b>): b => {
-    let out: b = y.default;
+export function filterReduce<A, B>(a: T<A>, mod: Functors.FilterReduceableModule<A, B>): B;
+/**
+ * Returns a unary function which filters and reduce a `Sequence.T<A>` to `B`
+ *
+ * **Important** The filter is applied before the reduce.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Functors, Sequence, Num } from 'tiinvo'
+ * 
+ * const fr = Sequence.filterReduce({
+ *    default: 0,
+ *    filter: Num.isEven,
+ *    reduce: Num.add,
+ * })
+ * 
+ * fr(Sequence.make(1, 2, 3, 4, 5))      // 6
+ * ```
+ *
+ * @template A the sequence's element type
+ * @template B the reduced value type
+ * @param a the filter and reduce module functor
+ * @returns the unary function which takes a sequence the filters and reduce it to `B`
+ * @group Filterables
+ * @group Mappables
+ * @since 4.0.0
+ */
+export function filterReduce<A, B>(a: Functors.FilterReduceableModule<A, B>): Fn.Unary<T<A>, B>;
+export function filterReduce<A, B>(a: T<A> | Functors.FilterReduceableModule<A, B>, mod?: Functors.FilterReduceableModule<A, B>): any {
+  const impl = (x: T<A>, y: Functors.FilterReduceableModule<A, B>): B => {
+    let out: B = y.default;
 
     for (const e of x) {
       if (y.filter(e)) {
@@ -325,39 +775,71 @@ export function filterReduce<a, b>(a: t<a> | Functors.FilterReduceableModule<a, 
     return impl(a, mod!);
   }
 
-  return (b: t<a>) => impl(b, a);
+  return (b: T<A>) => impl(b, a);
 }
 
 
 /**
- * Filters and maps a `Sequence.t<a>` to a `Sequence.t<b>` using the `FilterMappableModule<a, b>` functor.
+ * Filters and maps a `Sequence.T<A>` to a `Sequence.T<B>` using the `FilterMappableModule<A, B>` functor.
  * 
  * **Important** The filter is applied before the map.
  *
  * @example
  *
  * ```ts
- * import { Functors, Sequence, Num, Range } from 'tiinvo'
+ * import { Functors, Sequence, Num } from 'tiinvo'
  * 
  * const f: Functors.FilterMappableModule<number, string | Error> = {
  *   filter: Num.isOdd,
  *   map: Num.toBin,
  * }
- * const s = Sequence.make(... Range.make(0, 10));
+ * const s = Sequence.make(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
  * const m = Sequence.filterMap(f);
  * 
  * Sequence.filterMap(s, f)   // ["0b1", "0b11", "0b101", "0b111", "0b1001"]
- * m(s)                       // ["0b1", "0b11", "0b101", "0b111", "0b1001"]
- * 
  * ```
  *
+ * @template A the sequence's element type
+ * @template B the mapped sequence's element type
+ * @param a the sequence
+ * @param f the filterable and mappable functor
+ * @returns the filtered and mapped sequence
+ * @group Filterables
+ * @group Mappables
  * @since 4.0.0
  */
-export function filterMap<a, b>(a: t<a>, f: Functors.FilterMappableModule<a, b>): t<b>;
-export function filterMap<a, b>(a: Functors.FilterMappableModule<a, b>): Fn.Unary<t<a>, t<b>>;
-export function filterMap<a, b>(a: t<a> | Functors.FilterMappableModule<a, b>, f?: Functors.FilterMappableModule<a, b>): any {
-  const handle = (a: t<a>, mod: Functors.FilterMappableModule<a, b>) => {
-    const outvalues: b[] = [];
+export function filterMap<A, B>(a: T<A>, f: Functors.FilterMappableModule<A, B>): T<B>;
+/**
+ * Returns a unary function which filters and maps a `Sequence.T<A>` to a `Sequence.T<B>` 
+ * using the `FilterMappableModule<A, B>` functor.
+ * 
+ * **Important** The filter is applied before the map.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Functors, Sequence, Num } from 'tiinvo'
+ * 
+ * const m = Sequence.filterMap({
+ *   filter: Num.isOdd,
+ *   map: Num.toBin,
+ * });
+ * 
+ * m(Sequence.make(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10))  // ["0b1", "0b11", "0b101", "0b111", "0b1001"]
+ * ```
+ *
+ * @template A the sequence's element type
+ * @template B the mapped sequence's element type
+ * @param a the filterable and mappable functor
+ * @returns the unary function which filters and maps the input sequence `T<A>` to `T<B>`
+ * @group Filterables
+ * @group Mappables
+ * @since 4.0.0
+ */
+export function filterMap<A, B>(a: Functors.FilterMappableModule<A, B>): Fn.Unary<T<A>, T<B>>;
+export function filterMap<A, B>(a: T<A> | Functors.FilterMappableModule<A, B>, f?: Functors.FilterMappableModule<A, B>): any {
+  const handle = (a: T<A>, mod: Functors.FilterMappableModule<A, B>) => {
+    const outvalues: B[] = [];
 
     for (const v of a) {
       if (mod.filter(v)) {
@@ -365,14 +847,14 @@ export function filterMap<a, b>(a: t<a> | Functors.FilterMappableModule<a, b>, f
       }
     }
 
-    return make.apply(null, outvalues);
+    return make(outvalues);
   };
 
   if (guard(a) && typeof f === 'object') {
     return handle(a, f);
   }
 
-  return (b: t<a>) => handle(b, a as Functors.FilterMappableModule<a, b>);
+  return (b: T<A>) => handle(b, a as Functors.FilterMappableModule<A, B>);
 }
 
 //#endregion
@@ -380,7 +862,7 @@ export function filterMap<a, b>(a: t<a> | Functors.FilterMappableModule<a, b>, f
 //#region operators
 
 /**
- * Adds an element to the end of the `Sequence.t<a>` without mutating the original one.
+ * Adds an element to the end of the `Sequence.T<A>` without mutating the original one.
  *
  * @example
  *
@@ -390,23 +872,47 @@ export function filterMap<a, b>(a: t<a> | Functors.FilterMappableModule<a, b>, f
  * const s0 = Sequence.make(10, 20)
  * 
  * Sequence.append(s0, 30)       // Sequence(10, 20, 30)
+ * ```
+ *
+ * @template A the Sequence's element type
+ * @param a the sequence
+ * @param b the element to append
+ * @returns the new sequence
+ * @group Operators
+ * @since 4.0.0
+ */
+export function append<A>(a: T<A>, b: A): T<A>;
+/**
+ * Returns a unary function which adds an element to the end of the `Sequence.T<A>` 
+ * without mutating it.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence } from 'tiinvo'
+ * 
+ * const s0 = Sequence.make(10, 20)
+ * 
  * Sequence.append(30)(s0)       // Sequence(10, 20, 30)
  * ```
  *
+ * @template A the Sequence's element type
+ * @param a the element to append
+ * @returns the unary function which appends `a` to an existing sequence
+ * @group Operators
  * @since 4.0.0
  */
-export function append<a>(a: t<a>, b: a): t<a>;
-export function append<a>(a: a): Fn.Unary<t<a>, t<a>>;
-export function append<a>(a: any, b?: any): any {
+export function append<A>(a: A): Fn.Unary<T<A>, T<A>>;
+export function append<A>(a: any, b?: any): any {
   if (guard(a)) {
-    return make.apply(null, Object.values(a[indexer]()).concat(b));
+    return make(Object.values(a[indexer]()).concat(b));
   }
 
-  return (b: t<a>) => make.apply(null, Object.values(b[indexer]()).concat(a));
+  return (b: T<A>) => make(Object.values(b[indexer]()).concat(a));
 }
 
 /**
- * Concatenates two `Sequence.t<a>` and `Sequence.t<b>` and return a new `Sequence.t<a>`.
+ * Concatenates two `Sequence.T<A>` and `Sequence.T<B>` and return a new `Sequence.T<A & B>`.
  *
  * @example
  *
@@ -417,23 +923,50 @@ export function append<a>(a: any, b?: any): any {
  * const s1 = Sequence.make(30, 40)
  * 
  * Sequence.concat(s0, s1)       // Sequence(10, 20, 30, 40)
- * Sequence.concat(s1)(s0)       // Sequence(10, 20, 30, 40)
  * ```
- *
+ * 
+ * @template A the first Sequence's element type
+ * @template B the second Sequence's element type
+ * @param a the first sequence
+ * @param b the second sequence
+ * @returns the concatated sequence  
+ * @group Operators
  * @since 4.0.0
  */
-export function concat<a, b>(a: t<a>, b: t<b>): t<a & b>;
-export function concat<a, b>(a: t<a>): Fn.Unary<t<b>, t<a & b>>;
-export function concat<a, b>(a: t<a>, b?: t<b>): any {
+export function concat<A, B>(a: T<A>, b: T<B>): T<A & B>;
+/**
+ * Returns a unary function which concatenates two `Sequence.T<A>` and `Sequence.T<B>` 
+ * and return a new `Sequence.T<A & B>`.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence } from 'tiinvo'
+ * 
+ * const s0 = Sequence.make(10, 20)
+ * const s1 = Sequence.make(30, 40)
+ * 
+ * Sequence.concat(s1)(s0)       // Sequence(10, 20, 30, 40)
+ * ```
+ * 
+ * @template A the first Sequence's element type
+ * @template B the second Sequence's element type
+ * @param a the first sequence
+ * @returns the unary function which concatenates `b` to `a`
+ * @group Operators
+ * @since 4.0.0
+ */
+export function concat<A, B>(a: T<A>): Fn.Unary<T<B>, T<A & B>>;
+export function concat<A, B>(a: T<A>, b?: T<B>): any {
   if (guard(a) && guard(b)) {
-    return make.apply(null, [...a, ...b]);
+    return make([...a, ...b]);
   }
 
-  return (b: t<a>) => make.apply(null, [...b, ...a]);
+  return (b: T<A>) => make([...b, ...a]);
 }
 
 /**
- * Adds an element to the start of the `Sequence.t<a>` without mutating the original one.
+ * Adds an element to the start of the `Sequence.T<A>` without mutating the original one.
  *
  * @example
  *
@@ -445,22 +978,47 @@ export function concat<a, b>(a: t<a>, b?: t<b>): any {
  * Sequence.prepend(s0, 30)       // Sequence(30, 10, 20)
  * Sequence.prepend(30)(s0)       // Sequence(30, 10, 20)
  * ```
- *
+ * 
+ * @template A the Sequence's element type
+ * @param a the sequence
+ * @param b the element to prepend
+ * @returns the new sequence with `b` prepended to `a`
+ * @group Operators
  * @since 4.0.0
  */
-export function prepend<a>(a: t<a>, b: a): t<a>;
-export function prepend<a>(a: a): Fn.Unary<t<a>, t<a>>;
-export function prepend<a>(a: any, b?: any): any {
+export function prepend<A>(a: T<A>, b: A): T<A>;
+/**
+ * Returns a unary function which adds an element to the start of the `Sequence.T<A>` 
+ * without mutating the original one.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence } from 'tiinvo'
+ * 
+ * const s0 = Sequence.make(10, 20)
+ * 
+ * Sequence.prepend(30)(s0)       // Sequence(30, 10, 20)
+ * ```
+ * 
+ * @template A the Sequence's element type
+ * @param a the element to prepend
+ * @returns the unary function which prepends `a` to `b`
+ * @group Operators
+ * @since 4.0.0
+ */
+export function prepend<A>(a: A): Fn.Unary<T<A>, T<A>>;
+export function prepend<A>(a: any, b?: any): any {
   if (guard(a)) {
-    return make.apply(null, [b].concat([...a]));
+    return make([b].concat([...a]));
   }
 
-  return (b: t<a>) => make.apply(null, [a].concat([...b]));
+  return (b: T<A>) => make([a].concat([...b]));
 }
 
 //#endregion
 
-//#region getters
+//#region accessors
 
 /**
  * Counts the number of elements that satisfy a given predicate 
@@ -473,23 +1031,50 @@ export function prepend<a>(a: any, b?: any): any {
  * const s = Sequence.make(10, 20, 30)
  * 
  * Sequence.count(s, Num.gt(10))   // 2
- * Sequence.count(Num.gt(10))(s)   // 2
+ * Sequence.count(s, Num.gt(20))   // 1
+ * Sequence.count(s, Num.gt(50))   // 0
  * ```
  *
+ * @template A the Sequence's element type
+ * @param a the sequence
+ * @param p the Filterable functor
+ * @returns the number of elements which satisfy the predicate `p`
+ * @group Accessors
  * @since 4.0.0
  */
-export function count<a>(a: t<a>, p: Functors.Filterable<a>): number;
-export function count<a>(a: Functors.Filterable<a>): Fn.Unary<t<a>, number>;
-export function count<a>(a: t<a> | Functors.Filterable<a>, p?: Functors.Filterable<a>): any {
+export function count<A>(a: T<A>, p: Functors.Filterable<A>): number;
+/**
+ * Returns a unary function which counts the number of elements that 
+ * satisfy a given predicate 
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence, Num } from 'tiinvo'
+ * 
+ * const gt10 = Sequence.count(Num.gt(10));
+ * 
+ * gt10(Sequence.make(10, 20, 30))   // 2
+ * gt10(Sequence.make(5, 7, 9))      // 0
+ * ```
+ *
+ * @template A the Sequence's element type
+ * @param a the Filterable functor
+ * @returns the unary function which counts how many elements in `b` satisfy the predicate `p`
+ * @group Accessors
+ * @since 4.0.0
+ */
+export function count<A>(a: Functors.Filterable<A>): Fn.Unary<T<A>, number>;
+export function count<A>(a: T<A> | Functors.Filterable<A>, p?: Functors.Filterable<A>): any {
   if (guard(a) && typeof p === 'function') {
     return length(filter(a, p));
   }
 
-  return (c: t<a>) => length(filter(c, a as Functors.Filterable<a>));
+  return (b: T<A>) => length(filter(b, a as Functors.Filterable<A>));
 }
 
 /**
- * Gets a `Sequence.t<a>`'s first element.
+ * Gets a `Sequence.T<A>`'s first element.
  * 
  * Returns `Option.None` if none is found.
  *
@@ -505,18 +1090,22 @@ export function count<a>(a: t<a> | Functors.Filterable<a>, p?: Functors.Filterab
  * Sequence.first(s1)       // null
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns the first element of the sequence:
+ *  - `Option.Some<A>` if the sequence has at least one element
+ *  - `Option.None` otherwise
+ * @group Accessors
  * @since 4.0.0
  */
-export const first = <a>(a: t<a>): Option.T<a> => {
-  const f = get(a, 0);
-  return isErr(f) ? null : f as unknown as Option.T<a>;
+export const first = <A>(t: T<A>): Option.T<A> => {
+  const f = get(t, 0);
+  return isErr(f) ? null : f as unknown as Option.T<A>;
 };
 
 /**
  * Gets an element at a specific index. 
  * 
- * If the index is out of bounds, `Option.None` is returned, otherwise it returns `a` 
- *
  * @example
  *
  * ```ts
@@ -525,40 +1114,65 @@ export const first = <a>(a: t<a>): Option.T<a> => {
  * const s = Sequence.make('hello', 'world')
  * 
  * Sequence.get(s, 0)       // 'hello'
- * Sequence.get(s, 9)       // null
+ * Sequence.get(s, 9)       // RangeError(`Index out of bounds 9 for length 2`);
  * ```
  *
+ * @template A the Sequence's element type
+ * @param a the sequence
+ * @param i the index of the element
+ * @returns 
+ *  - `Result.Ok<A>` if `i` is in bound
+ *  - `Result.Err` if `i` is out of bound or negative
+ * @group Accessors
  * @since 4.0.0
  */
-export function get<a>(a: t<a>, i: number): Result.T<a>;
-export function get<a>(a: number): Fn.Unary<t<a>, Result.T<a>>;
-export function get<a>(a: any, i?: any): any {
-  if (guard(a)) {
-    const s = length(a);
+export function get<A>(a: T<A>, i: number): Result.T<A>;
+/**
+ * Returns a unary function which gets an element at a specific index. 
+ * 
+ * @example
+ *
+ * ```ts
+ * import { Sequence } from 'tiinvo'
+ * 
+ * const s = Sequence.make('hello', 'world')
+ * const get0 = Sequence.get(0);
+ * const get9 = Sequence.get(9);
+ * 
+ * get0(s)       // 'hello'
+ * get9(s)       // RangeError(`Index out of bounds 9 for length 2`);
+ * ```
+ *
+ * @template A the Sequence's element type
+ * @param a the index of the element
+ * @returns the unary function which accepts a `Sequence.T<A>` and returns
+ *  - `Result.Ok<A>` if `i` is in bound
+ *  - `Result.Err` if `i` is out of bound or negative
+ * @group Accessors
+ * @since 4.0.0
+ */
+export function get<A>(a: number): Fn.Unary<T<A>, Result.T<A>>;
+export function get<A>(a: any, i?: any): any {
+  const _get = <B>(x: T<B>, y: number) => {
+    const s = length(x);
 
-    if (i < 0 || i > s - 1) {
-      return new RangeError(`Index out of bounds ${i} for length ${s}`);
+    if (y < 0 || y > s - 1) {
+      return new RangeError(`Index out of bounds ${y} for length ${s}`);
     }
 
-    return values(a)[i];
+    return values(x)[y];
+  };
+
+  if (guard(a)) {
+    return _get(a, i);
   }
 
-  return (b: t<a>) => {
-    const s = length(b);
-
-    if (a < 0 || a > s - 1) {
-      return new RangeError(`Index out of bounds ${a} for length ${s}`);
-    }
-
-    return values(b)[a];
-  };
+  return (b: T<A>) => _get(b, a);
 }
 
 /**
- * Gets a `Sequence.t<a>`'s last element.
+ * Gets a `Sequence.T<A>`'s last element if any.
  * 
- * Returns `Option.None` if none is found.
- *
  * @example
  *
  * ```ts
@@ -571,15 +1185,21 @@ export function get<a>(a: any, i?: any): any {
  * Sequence.last(s1)       // null
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns 
+ *  - `Option.Some<A>` if the sequence is not empty
+ *  - `Option.None` otherwise
+ * @group Accessors
  * @since 4.0.0
  */
-export const last = <a>(a: t<a>): Option.T<a> => {
-  const f = get(a, length(a) - 1);
-  return isErr(f) ? null : f as any;
+export const last = <A>(t: T<A>): Option.T<A> => {
+  const r = get(t, length(t) - 1);
+  return isErr(r) ? null as Option.None : r as Option.Some<A>;
 };
 
 /**
- * Gets the length of a `Sequence.t<a>`
+ * Gets the length of a `Sequence.T<A>`
  *
  * @example
  *
@@ -590,13 +1210,17 @@ export const last = <a>(a: t<a>): Option.T<a> => {
  * 
  * Sequence.length(s)           // 3
  * ```
- *
+ * 
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns the Sequence's length
+ * @group Accessors
  * @since 4.0.0
  */
-export const length = <a>(t: t<a>): number => Object.values(t[indexer]()).length;
+export const length = <A>(t: T<A>): number => Object.values(t[indexer]()).length;
 
 /**
- * Gets values of a `Sequence.t<a>` as an immutable indexed object. 
+ * Gets values of a `Sequence.T<A>` as an immutable indexed object. 
  *
  * @example
  *
@@ -608,9 +1232,13 @@ export const length = <a>(t: t<a>): number => Object.values(t[indexer]()).length
  * Sequence.values(s)       // { 0: 'hello', 1: 'world' }
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns the sequence values as an immutable dictionary
+ * @group Accessors
  * @since 4.0.0
  */
-export const values = <a>(t: t<a>) => t[indexer]();
+export const values = <A>(t: T<A>) => t[indexer]();
 
 //#endregion
 
@@ -631,9 +1259,15 @@ export const values = <a>(t: t<a>) => t[indexer]();
  * Sequence.empty(s1)               // false
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns
+ *  - 'true' if the sequence is empty
+ *  - 'false' otherwise
+ * @group Predicates
  * @since 4.0.0
  */
-export const empty = <a>(t: t<a>) => length(t) === 0;
+export const empty = <A>(t: T<A>) => length(t) === 0;
 
 /**
  * Returns `true` if the sequence is populated.
@@ -649,16 +1283,22 @@ export const empty = <a>(t: t<a>) => length(t) === 0;
  * Sequence.populated(Sequence.make())  // false
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns
+ *  - 'true' if the sequence is populated
+ *  - 'false' otherwise
+ * @group Predicates
  * @since 4.0.0
  */
-export const populated = <a>(t: t<a>) => length(t) !== 0;
+export const populated = <a>(t: T<a>) => length(t) !== 0;
 
 //#endregion
 
 //#region sortables
 
 /**
- * Sorts and returns a new `Sequence.t<a>` values with a `Comparable<a>` or `ComparableModule<a>` functor.
+ * Sorts and returns a new `Sequence.T<A>` values with a `Comparable<a>` or `ComparableModule<a>` functor.
  *
  * @example
  *
@@ -668,21 +1308,52 @@ export const populated = <a>(t: t<a>) => length(t) !== 0;
  * const a = Sequence.make(5, 3, 1, 4, 2)
  * const b = Sequence.sort(a, Num)
  * 
- * b          // Sequence.make(1, 2, 3, 4, 5)
+ * Sequence.sort(a, Num) // Sequence.make(1, 2, 3, 4, 5)
+ * Sequence.sort(b, Num.desc)   // Sequence.make(5, 3, 1, 4, 2)
  * ```
  *
+ * @template A the Sequence's element type
+ * @param a the sequence
+ * @param mod the Comparable functor or the Comparable module functor
+ * @returns the sorted sequence
+ * @group Sortables
  * @since 4.0.0
  */
-export function sort<a>(a: t<a>, mod: Functors.Comparable<a> | Functors.ComparableModule<a>): t<a>;
-export function sort<a>(a: Functors.Comparable<a> | Functors.ComparableModule<a>): Fn.Unary<t<a>, t<a>>;
-export function sort<a>(a: t<a> | Functors.Comparable<a> | Functors.ComparableModule<a>, mod?: Functors.Comparable<a> | Functors.ComparableModule<a>): any {
-  const getcmp = (x: Functors.Comparable<a> | Functors.ComparableModule<a>) => typeof x === 'function' ? x : x.cmp;
+export function sort<A>(a: T<A>, mod: Functors.Comparable<A> | Functors.ComparableModule<A>): T<A>;
+/**
+ * Returns a unary function which sorts and returns a new `Sequence.T<A>` values 
+ * with a `Comparable<a>` or `ComparableModule<a>` functor.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Sequence, Num } from 'tiinvo'
+ * 
+ * const asc = Sequence.sort(Num.asc)
+ * const desc = Sequence.sort(Num.desc)
+ * 
+ * const s0 = Sequence.make(1, 2, 3)
+ * const s1 = Sequence.make(6, 5, 4)
+ * 
+ * asc(s1)      // Sequence.make(4, 5, 6)
+ * desc(s0)     // Sequence.make(3, 2, 1)
+ * ```
+ *
+ * @template A the Sequence's element type
+ * @param a the Comparable functor or the Comparable module functor
+ * @returns the unary function which sorts the passed sequence
+ * @group Sortables
+ * @since 4.0.0
+ */
+export function sort<A>(a: Functors.Comparable<A> | Functors.ComparableModule<A>): Fn.Unary<T<A>, T<A>>;
+export function sort<A>(a: T<A> | Functors.Comparable<A> | Functors.ComparableModule<A>, mod?: Functors.Comparable<A> | Functors.ComparableModule<A>): any {
+  const getcmp = (x: Functors.Comparable<A> | Functors.ComparableModule<A>) => typeof x === 'function' ? x : x.cmp;
 
   if (arguments.length === 2 && guard(a)) {
-    return make.apply(null, Array.from(a).sort(getcmp(mod!)));
+    return make(Array.from(a).sort(getcmp(mod!)));
   }
 
-  return (x: t<a>) => make.apply(null, Array.from(x).sort(getcmp(a as Functors.Comparable<a> | Functors.ComparableModule<a>)));
+  return (x: T<A>) => make(Array.from(x).sort(getcmp(a as Functors.Comparable<A> | Functors.ComparableModule<A>)));
 }
 
 //#endregion
@@ -690,33 +1361,7 @@ export function sort<a>(a: t<a> | Functors.Comparable<a> | Functors.ComparableMo
 //#region serializables
 
 /**
- * Try to convert a `string` to a `Sequence.t<a>`
- *
- * @example
- *
- * ```ts
- * import { Sequence } from 'tiinvo'
- * 
- * const x  = Sequence.fromString<number>(`10,20,30`)
- * const t1 = Sequence.make(10, 20, 30)
- * const t2 = Sequence.make(10, 30, 20)
- * 
- * Sequence.eq(x as any, t1)        // true
- * Sequence.eq(x as any, t2)        // false
- * ```
- *
- * @since 4.0.0
- */
-export const fromString = <c = unknown>(x: string): Result.T<t<c>> => {
-  try {
-    return make.apply(null, JSON.parse(`[${x}]`)) as t<c>;
-  } catch (err) {
-    return err as Error;
-  }
-};
-
-/**
- * Converts a `Sequence.t<a>` to an array `a[]`
+ * Converts a `Sequence.T<A>` to an array `a[]`
  *
  * @example
  *
@@ -728,12 +1373,16 @@ export const fromString = <c = unknown>(x: string): Result.T<t<c>> => {
  * Sequence.toArray(s) // [10, 20, 30]
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns the array
+ * @group Serializables
  * @since 4.0.0
  */
-export const toArray = <a>(a: t<a>): a[] => Array.from(a);
+export const toArray = <A>(t: T<A>): A[] => Array.from(t);
 
 /**
- * Serializes a `Sequence.t<a>` to json
+ * Serializes a `Sequence.T<A>` to json
  *
  * @example
  *
@@ -743,12 +1392,16 @@ export const toArray = <a>(a: t<a>): a[] => Array.from(a);
  * Sequence.toJSON(Sequence.make(1, 2))     // { 0: 1, 1: 2 }
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns the JSONised value
+ * @group Serializables
  * @since 4.0.0
  */
-export const toJSON = <a>(a: t<a>) => Array.from(a);
+export const toJSON = <a>(t: T<a>) => Array.from(t);
 
 /**
- * Serializes a `Sequence.t<a>` to a `Map<number, a>`
+ * Serializes a `Sequence.T<A>` to a `Map<number, a>`
  *
  * @example
  *
@@ -758,12 +1411,17 @@ export const toJSON = <a>(a: t<a>) => Array.from(a);
  * Sequence.toMap(Sequence.make(1, 2))     // Map([0, 1], [1, 2])
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns the Map
+ * @group Serializables
+ * @since 4.0.0
  * @since 4.0.0
  */
-export const toMap = <a>(a: t<a>) => new Map(Object.entries(a[indexer]()));
+export const toMap = <A>(t: T<A>) => new Map(Object.entries(t[indexer]()));
 
 /**
- * Converts a `Sequence.t<a>` to a Set `Set<a>`
+ * Converts a `Sequence.T<A>` to a Set `Set<a>`
  *
  * @example
  *
@@ -775,12 +1433,16 @@ export const toMap = <a>(a: t<a>) => new Map(Object.entries(a[indexer]()));
  * Sequence.toSet(s) // Set(10, 20, 30)
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns the Set
+ * @group Serializables
  * @since 4.0.0
  */
-export const toSet = <a>(a: t<a>): Set<a> => new Set(a);
+export const toSet = <A>(t: T<A>): Set<A> => new Set(t);
 
 /**
- * Stringifies a `Sequence.t<a>`  
+ * Stringifies a `Sequence.T<A>`  
  *
  * @example
  *
@@ -792,8 +1454,12 @@ export const toSet = <a>(a: t<a>): Set<a> => new Set(a);
  * Sequence.toString(s)     // '10,20,30'
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns the string
+ * @group Serializables
  * @since 4.0.0
  */
-export const toString = <a>(a: t<a>) => Array.from(a).toString();
+export const toString = <A>(t: T<A>) => Array.from(t).toString();
 
 //#endregion

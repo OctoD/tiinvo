@@ -7,7 +7,7 @@ const sortsymbol = Symbol('Sequence.sorted');
 /**
  * A sorted list is a `Sequence.t<a>` which all elements stored in it are sorted by a `Comparable<a>` functor.
  */
-export type T<a> = Sequence.t<a> & {
+export type T<a> = Sequence.T<a> & {
   [sortsymbol]: Functors.Comparable<a>;
 };
 
@@ -32,15 +32,14 @@ export type T<a> = Sequence.t<a> & {
  *
  * @since 4.0.0
  */
-export function make<a>(mod: Functors.Comparable<a>, ...args: a[]): T<a>
-export function make<a>(mod: Functors.ComparableModule<a>, ...args: a[]): T<a>
-export function make<a>(mod: Functors.Comparable<a> | Functors.ComparableModule<a>, ...args: a[]): T<a>
-{
+export function make<a>(mod: Functors.Comparable<a>, ...args: a[]): T<a>;
+export function make<a>(mod: Functors.ComparableModule<a>, ...args: a[]): T<a>;
+export function make<a>(mod: Functors.Comparable<a> | Functors.ComparableModule<a>, ...args: a[]): T<a> {
   const cmp = typeof mod === 'function' ? mod : mod.cmp;
   const seq = Sequence.make.apply(null, args.sort(cmp)) as T<a>;
 
   seq[sortsymbol] = cmp;
-  
+
   return seq;
 };
 
@@ -180,11 +179,11 @@ export function map<a, b>(a: T<a>, m: Functors.Mappable<a, b>): T<b>;
 export function map<a, b>(a: Functors.Mappable<a, b>): Fn.Unary<T<a>, T<b>>;
 export function map<a, b>(a: T<a> | Functors.Mappable<a, b>, m?: any): any {
   if (guard(a) && typeof m === 'function') {
-    return make.apply(null, [{ cmp: a[sortsymbol] }, ... [... a].map(m)]);
+    return make.apply(null, [{ cmp: a[sortsymbol] }, ...[...a].map(m)]);
   }
 
   return (c: T<a>) => {
-    return make.apply(null, [{ cmp: c[sortsymbol] as any }, ... [... c].map(a as Functors.Mappable<a, b>)]);
+    return make.apply(null, [{ cmp: c[sortsymbol] as any }, ...[...c].map(a as Functors.Mappable<a, b>)]);
   };
 }
 

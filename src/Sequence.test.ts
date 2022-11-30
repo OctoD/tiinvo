@@ -40,14 +40,25 @@ describe("Sequence", () => {
     expect(Sequence.cmp(Num, s0, s1)).toEqual(0);
     expect(Sequence.cmp(Num, s0)(s1)).toEqual(0);
     expect(Sequence.cmp(Num)(s0, s1)).toEqual(0);
+    expect(Sequence.cmp(Num.cmp, s0, s1)).toEqual(0);
+    expect(Sequence.cmp(Num.cmp, s0)(s1)).toEqual(0);
+    expect(Sequence.cmp(Num.cmp)(s0, s1)).toEqual(0);
 
     expect(Sequence.cmp(Num, s0, s2)).toEqual(-1);
-    expect(Sequence.cmp(Num, s0)(s2)).toEqual(-1);
+    expect(Sequence.cmp(Num, s0)(s2)).toEqual(1);
     expect(Sequence.cmp(Num)(s0, s2)).toEqual(-1);
 
+    expect(Sequence.cmp(Num.cmp, s0, s2)).toEqual(-1);
+    expect(Sequence.cmp(Num.cmp, s0)(s2)).toEqual(1);
+    expect(Sequence.cmp(Num.cmp)(s0, s2)).toEqual(-1);
+
     expect(Sequence.cmp(Num, s2, s0)).toEqual(1);
-    expect(Sequence.cmp(Num, s2)(s0)).toEqual(1);
+    expect(Sequence.cmp(Num, s2)(s0)).toEqual(-1);
     expect(Sequence.cmp(Num)(s2, s0)).toEqual(1);
+
+    expect(Sequence.cmp(Num.cmp, s2, s0)).toEqual(1);
+    expect(Sequence.cmp(Num.cmp, s2)(s0)).toEqual(-1);
+    expect(Sequence.cmp(Num.cmp)(s2, s0)).toEqual(1);
   });
 
   test(Sequence.eq.name, () => {
@@ -62,6 +73,14 @@ describe("Sequence", () => {
     expect(Sequence.eq(Num, s0, s2)).toEqual(false);
     expect(Sequence.eq(Num, s0)(s2)).toEqual(false);
     expect(Sequence.eq(Num)(s0, s2)).toEqual(false);
+
+    expect(Sequence.eq(Num.eq, s0, s1)).toEqual(true);
+    expect(Sequence.eq(Num.eq, s0)(s1)).toEqual(true);
+    expect(Sequence.eq(Num.eq)(s0, s1)).toEqual(true);
+
+    expect(Sequence.eq(Num.eq, s0, s2)).toEqual(false);
+    expect(Sequence.eq(Num.eq, s0)(s2)).toEqual(false);
+    expect(Sequence.eq(Num.eq)(s0, s2)).toEqual(false);
   });
 
   test(Sequence.map.name, () => {
@@ -187,13 +206,13 @@ describe("Sequence", () => {
   });
 
   test(Sequence.fromString.name, () => {
-    const x = Sequence.fromString<number>(`10,20,30`);
+    const x = Sequence.fromString<number>(`10,20,30`) as Sequence.T<number>;
     const t1 = Sequence.make(10, 20, 30);
     const t2 = Sequence.make(10, 30, 20);
 
-    expect(Sequence.eq(Num, x as any, t2)).toEqual(false);
-    expect(Sequence.eq(Num, x as any, t1)).toEqual(true);
-    expect(Sequence.fromString<number>(`asd`)).toBeInstanceOf(Error);
+    expect(Sequence.eq(Num, x, t2)).toEqual(false);
+    expect(Sequence.eq(Num, x, t1)).toEqual(true);
+    expect(Sequence.fromString<string>(`asd`)).toBeInstanceOf(Error);
   });
 
   test(Sequence.sort.name, () => {

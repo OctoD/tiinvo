@@ -40,7 +40,7 @@ let x: Bool.T = true;
 
 #### Defined in
 
-src/Bool.ts:17
+[src/Bool.ts:17](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Bool.ts#L17)
 
 ## Functions
 
@@ -78,7 +78,7 @@ x is boolean
 
 #### Defined in
 
-src/Functors.ts:338
+[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Functors.ts#L338)
 
 ___
 
@@ -115,7 +115,7 @@ Bool.flip(true)      // false
 
 #### Defined in
 
-src/Functors.ts:424
+[src/Functors.ts:424](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Functors.ts#L424)
 
 ## Serializables
 
@@ -153,4 +153,4 @@ Bool.toNumber(false) // 0
 
 #### Defined in
 
-src/Bool.ts:83
+[src/Bool.ts:83](https://github.com/OctoD/tiinvo/blob/44a62fc/src/Bool.ts#L83)

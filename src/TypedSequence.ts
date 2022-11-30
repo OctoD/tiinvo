@@ -7,7 +7,7 @@ const guardsymbol = Symbol('sequence.guard');
 /**
  * The typed version of a `Sequence.t<A>`.
  */
-export type T<A> = Sequence.t<A> & {
+export type T<A> = Sequence.T<A> & {
   [guardsymbol]: Functors.Guardable<A>;
 };
 

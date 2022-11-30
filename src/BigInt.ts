@@ -763,7 +763,7 @@ export const toOct = map(x => '0o' + x.toString(8));
  * @group Serializables
  * @since 4.0.0
  */
-export const toJSON = map(x => JSON.stringify(String(x)));
+export const toJSON = map(x => String(x));
 
 /**
  * Returns a stringified number.
