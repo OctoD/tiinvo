@@ -14,6 +14,31 @@ export type T<a> = Sequence.T<a> & {
 //#region factories
 
 /**
+ * Makes an immutable `SortedSequence.t<a>` from a `Comparable<a>` and (optionally) a list of arguments as initial values
+ *
+ * @example
+ *
+ * ```ts
+ * import { SortedSequence, Num, Str } from 'tiinvo'
+ * 
+ * const s0 = SortedSequence.make(Num.cmp, 10, 20, 30)         
+ * const s1 = SortedSequence.make(Str.cmp, 'hello', 'world')
+ * 
+ * SortedSequence.guardOf(Num.guard)(s0)    // true
+ * SortedSequence.guardOf(Num.guard)(s1)    // false
+ * SortedSequence.guardOf(Str.guard)(s0)    // false
+ * SortedSequence.guardOf(Str.guard)(s1)    // true
+ * ```
+ *
+ * @template A element's type
+ * @param mod the Comparable functor
+ * @param args a list of initial values
+ * @returns the SortedSequence
+ * @group Factories
+ * @since 4.0.0
+ */
+export function make<A>(mod: Functors.Comparable<A>, ...args: A[]): T<A>;
+/**
  * Makes an immutable `SortedSequence.t<a>` from a `ComparableModule<a>` and (optionally) a list of arguments as initial values
  *
  * @example
@@ -30,13 +55,17 @@ export type T<a> = Sequence.T<a> & {
  * SortedSequence.guardOf(Str.guard)(s1)    // true
  * ```
  *
+ * @template A element's type
+ * @param mod the Comparable module functor
+ * @param args a list of initial values
+ * @returns the SortedSequence
+ * @group Factories
  * @since 4.0.0
  */
-export function make<a>(mod: Functors.Comparable<a>, ...args: a[]): T<a>;
-export function make<a>(mod: Functors.ComparableModule<a>, ...args: a[]): T<a>;
-export function make<a>(mod: Functors.Comparable<a> | Functors.ComparableModule<a>, ...args: a[]): T<a> {
+export function make<A>(mod: Functors.ComparableModule<A>, ...args: A[]): T<A>;
+export function make<A>(mod: Functors.Comparable<A> | Functors.ComparableModule<A>, ...args: A[]): T<A> {
   const cmp = typeof mod === 'function' ? mod : mod.cmp;
-  const seq = Sequence.make.apply(null, args.sort(cmp)) as T<a>;
+  const seq = Sequence.make.apply(null, args.sort(cmp)) as T<A>;
 
   seq[sortsymbol] = cmp;
 
@@ -61,12 +90,67 @@ export function make<a>(mod: Functors.Comparable<a> | Functors.ComparableModule<
  * SortedSequence.guard([])        // false
  * ```
  *
+ * @param x the value to guard
+ * @returns
+ *  - `true` if x is a `SortedSequence.T<unknown>`
+ *  - `false` otherwise
+ * @group Guards
  * @since 4.0.0
  */
 export const guard = (x: unknown): x is T<unknown> => Sequence.guard(x) && sortsymbol in x;
 
 /**
- * Checks if the parameter `x` is a `SortedSequence.t<a>`
+ * Checks if the parameter `x` is a `SortedSequence.t<A>` using a `Guardable<A>` functor.
+ *
+ * @example
+ *
+ * ```ts
+ * import { SortedSequence, Num, Str } from 'tiinvo'
+ * 
+ * const s0 = SortedSequence.make(Num, 1, 2)
+ * const s1 = SortedSequence.make(Str, 'hello', 'world')
+ * 
+ * SortedSequence.guardOf(Str.guard, s0)      // false
+ * SortedSequence.guardOf(Str.guard, s1)      // true
+ * ```
+ *
+ * @template A the expected sequence elements type
+ * @param g the elements guard
+ * @param x the value to check
+ * @returns
+ *  - `true` if `x` is a `SortedSequence.T<A>`
+ *  - `false` otherwise
+ * @group Guardables
+ * @since 4.0.0
+ */
+export function guardOf<A>(g: Functors.Guardable<A>, x: unknown): x is T<A>
+/**
+ * Checks if the parameter `x` is a `SortedSequence.t<A>` using a `GuardableModule<A>` functor.
+ *
+ * @example
+ *
+ * ```ts
+ * import { SortedSequence, Num, Str } from 'tiinvo'
+ * 
+ * const s0 = SortedSequence.make(Num, 1, 2)
+ * const s1 = SortedSequence.make(Str, 'hello', 'world')
+ * 
+ * SortedSequence.guardOf(Str, s0)      // false
+ * SortedSequence.guardOf(Str, s1)      // true
+ * ```
+ *
+ * @template A the expected sequence elements type
+ * @param g the elements guard module
+ * @param x the value to check
+ * @returns
+ *  - `true` if `x` is a `SortedSequence.T<A>`
+ *  - `false` otherwise
+ * @group Guardables
+ * @since 4.0.0
+ */
+export function guardOf<A>(g: Functors.GuardableModule<A>, x: unknown): x is T<A>
+/**
+ * Returns a guard which checks if the parameter `x` is a `SortedSequence.t<A>`
  *
  * @example
  *
@@ -81,9 +165,52 @@ export const guard = (x: unknown): x is T<unknown> => Sequence.guard(x) && sorts
  * isStrSortedList(s1)      // true
  * ```
  *
+ * @template A the expected sequence elements type
+ * @param g the elements guard
+ * @returns the guard which takes an argument `y` and returns
+ *  - `true` if `y` is a `SortedSequence.T<A>`
+ *  - `false` otherwise
+ * @group Guardables
  * @since 4.0.0
  */
-export const guardOf = <a>(g: Functors.Guardable<a>) => (x: unknown): x is T<a> => guard(x) && toArray(x).every(g);
+export function guardOf<A>(g: Functors.Guardable<A>): (x: unknown) => x is T<A>
+/**
+ * Returns a guard which checks if the parameter `x` is a `SortedSequence.t<A>`
+ *
+ * @example
+ *
+ * ```ts
+ * import { SortedSequence, Num, Str } from 'tiinvo'
+ * 
+ * const s0 = SortedSequence.make(Num, 1, 2)
+ * const s1 = SortedSequence.make(Str, 'hello', 'world')
+ * const isStrSortedList = SortedSequence.guardOf(Str);
+ * 
+ * isStrSortedList(s0)      // false
+ * isStrSortedList(s1)      // true
+ * ```
+ *
+ * @template A the expected sequence elements type
+ * @param g the elements guard
+ * @returns the guard which takes an argument `y` and returns
+ *  - `true` if `y` is a `SortedSequence.T<A>`
+ *  - `false` otherwise
+ * @group Guardables
+ * @since 4.0.0
+ */
+export function guardOf<A>(g: Functors.GuardableModule<A>): (x: unknown) => x is T<A>
+export function guardOf<A>(g: Functors.Guardable<A> | Functors.GuardableModule<A>, x?: unknown): any
+{
+  const _g = (z: unknown): z is T<A> => {
+    return guard(z) && toArray(z).every(typeof g === 'function' ? g : g.guard)
+  }
+  
+  if (arguments.length === 2) {
+    return _g(x);
+  }
+
+  return _g;
+};
 
 //#endregion
 

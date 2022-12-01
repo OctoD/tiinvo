@@ -26,10 +26,20 @@ describe(`SortedSequence`, () => {
   test(SortedSequence.guardOf.name, () => {
     const s0 = SortedSequence.make(Num, 1, 2);
     const s1 = SortedSequence.make(Str, 'hello', 'world');
-    const isStrSortedList = SortedSequence.guardOf(Str.guard);
+    const isStrSortedList0 = SortedSequence.guardOf(Str.guard);
+    const isStrSortedList1 = SortedSequence.guardOf(Str);
 
-    expect(isStrSortedList(s0)).toEqual(false);
-    expect(isStrSortedList(s1)).toEqual(true);
+    expect(SortedSequence.guardOf(Str, s0)).toEqual(false);
+    expect(SortedSequence.guardOf(Str, s1)).toEqual(true);
+
+    expect(SortedSequence.guardOf(Str.guard, s0)).toEqual(false);
+    expect(SortedSequence.guardOf(Str.guard, s1)).toEqual(true);
+
+    expect(isStrSortedList0(s0)).toEqual(false);
+    expect(isStrSortedList0(s1)).toEqual(true);
+
+    expect(isStrSortedList1(s0)).toEqual(false);
+    expect(isStrSortedList1(s1)).toEqual(true);
   });
 
   test(SortedSequence.cmp.name, () => {
