@@ -205,11 +205,7 @@ export function guardOf<A>(g: Functors.Guardable<A> | Functors.GuardableModule<A
     return guard(z) && toArray(z).every(typeof g === 'function' ? g : g.guard)
   }
   
-  if (arguments.length === 2) {
-    return _g(x);
-  }
-
-  return _g;
+  return arguments.length === 2 ? _g(x) : _g;
 };
 
 //#endregion
