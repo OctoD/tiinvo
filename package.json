@@ -33,7 +33,7 @@
     "deploy": "npm test && npm run clean && npm run build && cd dist && npm publish && cd .. && npm run clean",
     "upgrade-interactive": "npx npm-check --update"
   },
-  "homepage": "https://tiinvo.vercel.app/",
+  "homepage": "https://github.com/octod/tiinvo",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/octod/tiinvo.git"
