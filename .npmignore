@@ -16,6 +16,7 @@ CONTRIBUTING.md
 *.svg
 *.tgz
 tsconfig.json
+typedoc.json
 
 # taking output files
 
