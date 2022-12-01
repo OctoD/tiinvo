@@ -51,10 +51,10 @@ describe(`SortedSequence`, () => {
     expect(SortedSequence.cmp(s0)(s1)).toEqual(0);
 
     expect(SortedSequence.cmp(s0, s2)).toEqual(-1);
-    expect(SortedSequence.cmp(s0)(s2)).toEqual(-1);
+    expect(SortedSequence.cmp(s0)(s2)).toEqual(1);
 
     expect(SortedSequence.cmp(s2, s0)).toEqual(1);
-    expect(SortedSequence.cmp(s2)(s0)).toEqual(1);
+    expect(SortedSequence.cmp(s2)(s0)).toEqual(-1);
   });
 
   test(SortedSequence.eq.name, () => {
@@ -71,10 +71,11 @@ describe(`SortedSequence`, () => {
 
   test(SortedSequence.map.name, () => {
     const s = SortedSequence.make<number>(Num, 3, 1, 2);
-    const m = Num.mul(2);
+    const m = SortedSequence.map(Num.mul(2));
 
-    expect(SortedSequence.map(s, m)).toEqual(SortedSequence.make(Num, 2, 4, 6));
-    expect(SortedSequence.map(m)(s)).toEqual(SortedSequence.make(Num, 2, 4, 6));
+    expect(SortedSequence.map(s, Num.mul(2))).toEqual(SortedSequence.make(Num, 2, 4, 6));
+    expect(m(SortedSequence.make<number>(Num, 3, 1, 2))).toEqual(SortedSequence.make(Num, 2, 4, 6));
+    expect(m(SortedSequence.make<number>(Num, 9, 4, 8))).toEqual(SortedSequence.make(Num, 8, 16, 18));
   });
 
   test(SortedSequence.add.name, () => {
@@ -85,8 +86,8 @@ describe(`SortedSequence`, () => {
   });
 
   test(SortedSequence.concat.name, () => {
-    const s0 = SortedSequence.make(Num, 10, 20);
-    const s1 = SortedSequence.make(Num, 30, 40);
+    const s0 = SortedSequence.make<number>(Num, 10, 20);
+    const s1 = SortedSequence.make<number>(Num, 30, 40);
 
     expect(SortedSequence.concat(s0, s1)).toEqual(SortedSequence.make(Num, 10, 20, 30, 40));
     expect(SortedSequence.concat(s1)(s0)).toEqual(SortedSequence.make(Num, 10, 20, 30, 40));

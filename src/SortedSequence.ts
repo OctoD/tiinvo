@@ -14,7 +14,7 @@ export type T<a> = Sequence.T<a> & {
 //#region factories
 
 /**
- * Makes an immutable `SortedSequence.t<a>` from a `Comparable<a>` and (optionally) a list of arguments as initial values
+ * Makes an immutable `SortedSequence.T<A>` from a `Comparable<a>` and (optionally) a list of arguments as initial values
  *
  * @example
  *
@@ -39,7 +39,7 @@ export type T<a> = Sequence.T<a> & {
  */
 export function make<A>(mod: Functors.Comparable<A>, ...args: A[]): T<A>;
 /**
- * Makes an immutable `SortedSequence.t<a>` from a `ComparableModule<a>` and (optionally) a list of arguments as initial values
+ * Makes an immutable `SortedSequence.T<A>` from a `ComparableModule<a>` and (optionally) a list of arguments as initial values
  *
  * @example
  *
@@ -100,7 +100,7 @@ export function make<A>(mod: Functors.Comparable<A> | Functors.ComparableModule<
 export const guard = (x: unknown): x is T<unknown> => Sequence.guard(x) && sortsymbol in x;
 
 /**
- * Checks if the parameter `x` is a `SortedSequence.t<A>` using a `Guardable<A>` functor.
+ * Checks if the parameter `x` is a `SortedSequence.T<A>` using a `Guardable<A>` functor.
  *
  * @example
  *
@@ -125,7 +125,7 @@ export const guard = (x: unknown): x is T<unknown> => Sequence.guard(x) && sorts
  */
 export function guardOf<A>(g: Functors.Guardable<A>, x: unknown): x is T<A>
 /**
- * Checks if the parameter `x` is a `SortedSequence.t<A>` using a `GuardableModule<A>` functor.
+ * Checks if the parameter `x` is a `SortedSequence.T<A>` using a `GuardableModule<A>` functor.
  *
  * @example
  *
@@ -150,7 +150,7 @@ export function guardOf<A>(g: Functors.Guardable<A>, x: unknown): x is T<A>
  */
 export function guardOf<A>(g: Functors.GuardableModule<A>, x: unknown): x is T<A>
 /**
- * Returns a guard which checks if the parameter `x` is a `SortedSequence.t<A>`
+ * Returns a guard which checks if the parameter `x` is a `SortedSequence.T<A>`
  *
  * @example
  *
@@ -175,7 +175,7 @@ export function guardOf<A>(g: Functors.GuardableModule<A>, x: unknown): x is T<A
  */
 export function guardOf<A>(g: Functors.Guardable<A>): (x: unknown) => x is T<A>
 /**
- * Returns a guard which checks if the parameter `x` is a `SortedSequence.t<A>`
+ * Returns a guard which checks if the parameter `x` is a `SortedSequence.T<A>`
  *
  * @example
  *
@@ -213,7 +213,7 @@ export function guardOf<A>(g: Functors.Guardable<A> | Functors.GuardableModule<A
 //#region comparables
 
 /**
- * Returns 0 if two sorted lists are the same, -1 if a is less than b or 1 if a is more than b
+ * Compares two `SortedSequence.T<A>`.
  *
  * @example
  *
@@ -234,20 +234,57 @@ export function guardOf<A>(g: Functors.Guardable<A> | Functors.GuardableModule<A
  * SortedSequence.cmp(s2)(s0)      // 1
  * ```
  *
+ * @template A SortedSequence element's type
+ * @param a the first sequence
+ * @param b the last sequence
+ * @returns
+ *  - -1 if `a` is less than `b`
+ *  - 0 if `a` equals `b`
+ *  - 1 if `a` is greater than `b`
+ * @group Comparables
  * @since 4.0.0
  */
-export function cmp<a extends T<any>>(a: a, b: a): Functors.ComparableResult;
-export function cmp<a extends T<any>>(a: a): Fn.Unary<a, Functors.ComparableResult>;
-export function cmp<a extends T<any>>(a: a, b?: a): any {
+export function cmp<A extends T<any>>(a: A, b: A): Functors.ComparableResult;
+/**
+ * Returns a unary function which compares two `SortedSequence.T<A>`.
+ *
+ * @example
+ *
+ * ```ts
+ * import { SortedSequence, Num } from 'tiinvo'
+ * 
+ * const s0 = SortedSequence.make<number>(Num, 0, 1, 2)
+ * const s1 = SortedSequence.make<number>(Num, 0, 1, 2)
+ * const s2 = SortedSequence.make<number>(Num, 0, 1, 2, 3)
+ * const s3 = SortedSequence.make<number>(Num, 0, 1)
+ * 
+ * const cmp0 = SortedSequence.cmp(s0);
+ * 
+ * cmp0(s1)                         // 0
+ * cmp0(s2)                         // 1
+ * cmp0(s3)                         // -1
+ * ```
+ *
+ * @template A `SortedSequence.T` type
+ * @param a the first sequence
+ * @returns the unary function which returns
+ *  - -1 if `b` is less than `a`
+ *  - 0 if `b` equals `a`
+ *  - 1 if `b` is greater than `a`
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function cmp<A extends T<any>>(a: A): Fn.Unary<A, Functors.ComparableResult>;
+export function cmp<A extends T<any>>(a: A, b?: A): any {
   if (guard(a) && guard(b)) {
     return Sequence.cmp({ cmp: a[sortsymbol] }, a, b);
   }
 
-  return (c: a) => Sequence.cmp({ cmp: a[sortsymbol] }, a, c);
+  return (c: A) => Sequence.cmp({ cmp: a[sortsymbol] }, c, a);
 }
 
 /**
- * Returns true if two sorted lists are the same
+ * Checks if two sorted lists are equal
  *
  * @example
  *
@@ -264,17 +301,49 @@ export function cmp<a extends T<any>>(a: a, b?: a): any {
  * SortedSequence.eq(s0, s2)      // false
  * SortedSequence.eq(s0)(s2)      // false
  * ```
- *
+ * @template A `SortedSequence.T` type
+ * @param a the first sequence
+ * @param b the second sequence
+ * @returns
+ *  - `true` if `b` equals `a`
+ *  - `false` otherwise
+ * @group Comparables
  * @since 4.0.0
  */
-export function eq<a extends T<any>>(a: a, b: a): boolean;
-export function eq<a extends T<any>>(a: a): Fn.Unary<a, boolean>;
-export function eq<a extends T<any>>(a: a, b?: a): any {
+export function eq<A extends T<any>>(a: A, b: A): boolean;
+/**
+ * Returns a unary function which checks if two sorted lists are equal
+ *
+ * @example
+ *
+ * ```ts
+ * import { SortedSequence, Num } from 'tiinvo'
+ * 
+ * const s0 = SortedSequence.make<number>(Num, 0, 1, 2)
+ * const s1 = SortedSequence.make<number>(Num, 0, 1, 2)
+ * const s2 = SortedSequence.make<number>(Num, 0, 1, 2, 3)
+ * 
+ * SortedSequence.eq(s0, s1)      // true
+ * SortedSequence.eq(s0)(s1)      // true
+ * 
+ * SortedSequence.eq(s0, s2)      // false
+ * SortedSequence.eq(s0)(s2)      // false
+ * ```
+ * @template A `SortedSequence.T` type
+ * @param a the first sequence
+ * @returns the unary function which returns
+ *  - `true` if `b` equals `a`
+ *  - `false` otherwise
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function eq<A extends T<any>>(a: A): Fn.Unary<A, boolean>;
+export function eq<A extends T<any>>(a: A, b?: A): any {
   if (guard(a) && guard(b)) {
     return Sequence.cmp({ cmp: a[sortsymbol] }, a, b) === 0;
   }
 
-  return (b: a) => Sequence.cmp({ cmp: a[sortsymbol] }, a, b) === 0;
+  return (b: A) => Sequence.cmp({ cmp: a[sortsymbol] }, a, b) === 0;
 }
 
 //#endregion
@@ -282,7 +351,7 @@ export function eq<a extends T<any>>(a: a, b?: a): any {
 //#region mappables
 
 /**
- * Maps a `SortedSequence.t<a>` to a `SortedSequence.t<b>` using the functor `Functors.Mappable<a, b>`.
+ * Maps a `SortedSequence.T<A>` to a `SortedSequence.t<b>` using the functor `Functors.Mappable<a, b>`.
  *
  * @example
  *
@@ -296,17 +365,45 @@ export function eq<a extends T<any>>(a: a, b?: a): any {
  * SortedSequence.map(m)(s)        // SortedSequence.t(2, 4, 6)
  * ```
  *
+ * @template A the SortedSequence element's type
+ * @template B the mapped SortedSequence element's type
+ * @param a the SortedSequence
+ * @param m the Mappable functor
+ * @returns the mapped `SortedSequence.T<B>`
+ * @group Mappables
  * @since 4.0.0
  */
-export function map<a, b>(a: T<a>, m: Functors.Mappable<a, b>): T<b>;
-export function map<a, b>(a: Functors.Mappable<a, b>): Fn.Unary<T<a>, T<b>>;
-export function map<a, b>(a: T<a> | Functors.Mappable<a, b>, m?: any): any {
+export function map<A, B>(a: T<A>, m: Functors.Mappable<A, B>): T<B>;
+/**
+ * Returns a unary function which maps a `SortedSequence.T<A>` to 
+ * a `SortedSequence.t<b>` using the functor `Functors.Mappable<a, b>`.
+ *
+ * @example
+ *
+ * ```ts
+ * import { SortedSequence, Num } from 'tiinvo'
+ * 
+ * const m = SortedSequence.map(Num.mul(2))
+ * 
+ * m(SortedSequence.make<number>(Num, 3, 1, 2))        // SortedSequence.t(2, 4, 6)
+ * m(SortedSequence.make<number>(Num, 9, 4, 8))        // SortedSequence.t(8, 16, 18)
+ * ```
+ *
+ * @template A the SortedSequence element's type
+ * @template B the mapped SortedSequence element's type
+ * @param a the SortedSequence
+ * @returns the unary function which maps `SortedSequence.T<A>` to `SortedSequence.T<B>`
+ * @group Mappables
+ * @since 4.0.0
+ */
+export function map<A, B>(a: Functors.Mappable<A, B>): Fn.Unary<T<A>, T<B>>;
+export function map<A, B>(a: T<A> | Functors.Mappable<A, B>, m?: any): any {
   if (guard(a) && typeof m === 'function') {
     return make.apply(null, [{ cmp: a[sortsymbol] }, ...[...a].map(m)]);
   }
 
-  return (c: T<a>) => {
-    return make.apply(null, [{ cmp: c[sortsymbol] as any }, ...[...c].map(a as Functors.Mappable<a, b>)]);
+  return (c: T<A>) => {
+    return make.apply(null, [{ cmp: c[sortsymbol] as any }, ...[...c].map(a as Functors.Mappable<A, B>)]);
   };
 }
 
@@ -328,20 +425,17 @@ export function map<a, b>(a: T<a> | Functors.Mappable<a, b>, m?: any): any {
  * SortedSequence.add(30)(s0)       // SortedSequence(10, 20, 30)
  * ```
  *
+ * @template A the SortedSequence type
+ * @template B the added value type
+ * @param a the SortedSequence
+ * @param b the added value
+ * @returns the new SortedSequence
+ * @group Operables
  * @since 4.0.0
  */
-export function add<a extends T<any>, b>(a: a, b: b): T<b>;
-export function add<a extends T<any>, b>(a: b): Fn.Unary<a, T<b>>;
-export function add<a extends T<any>, b>(a: a | b, b?: b): any {
-  if (guard(a) && arguments.length === 2) {
-    return make.apply(null, [{ cmp: a[sortsymbol] }, ...a, b]);
-  }
-
-  return (c: a) => make.apply(null, [{ cmp: c[sortsymbol] as any }, ...c, a]);
-}
-
+export function add<A extends T<any>, B>(a: A, b: B): T<A & B>;
 /**
- * Concatenates two `SortedSequence.t<a>` and `SortedSequence.t<b>` and return a new `SortedSequence.t<a>`.
+ * Returns a unary function which adds an element to the end of the `Sequence.t<a>` without mutating the original one.
  *
  * @example
  *
@@ -349,27 +443,84 @@ export function add<a extends T<any>, b>(a: a | b, b?: b): any {
  * import { SortedSequence, Num } from 'tiinvo'
  * 
  * const s0 = SortedSequence.make(Num, 10, 20)
- * const s1 = SortedSequence.make(Num, 30, 40)
+ * 
+ * SortedSequence.add(s0, 30)       // SortedSequence(10, 20, 30)
+ * SortedSequence.add(30)(s0)       // SortedSequence(10, 20, 30)
+ * ```
+ *
+ * @template A the SortedSequence type
+ * @template B the added value type
+ * @param a the added value type
+ * @returns the unary function
+ * @group Operables
+ * @since 4.0.0
+ */
+export function add<A extends T<any>, B>(a: B): Fn.Unary<A, T<A & B>>;
+export function add<A extends T<any>, B>(a: A | B, b?: B): any {
+  if (guard(a) && arguments.length === 2) {
+    return make.apply(null, [{ cmp: a[sortsymbol] }, ...a, b]);
+  }
+
+  return (c: A) => make.apply(null, [{ cmp: c[sortsymbol] as any }, ...c, a]);
+}
+
+/**
+ * Concatenates two `SortedSequence.T<A>` and `SortedSequence.T<A>` 
+ * and return a new `SortedSequence.T<A>`.
+ *
+ * @example
+ *
+ * ```ts
+ * import { SortedSequence, Num } from 'tiinvo'
+ * 
+ * const s0 = SortedSequence.make<number>(Num, 10, 20)
+ * const s1 = SortedSequence.make<number>(Num, 30, 40)
  * 
  * SortedSequence.concat(s0, s1)       // SortedSequence(10, 20, 30, 40)
  * SortedSequence.concat(s1)(s0)       // SortedSequence(10, 20, 30, 40)
  * ```
  *
+ * @template A the SortedSequence type
+ * @param a the first SortedSequence
+ * @param b the second SortedSequence
+ * @returns the concatenated SortedSequence
+ * @group Operables
  * @since 4.0.0
  */
-export function concat<a, b>(a: T<a>, b: T<b>): T<a & b>;
-export function concat<a, b>(a: T<b>): <a>(x: T<a>) => T<a & b>;
-export function concat<a, b>(a: T<a> | T<b>, b?: T<b>): any {
+export function concat<A>(a: T<A>, b: T<A>): T<A>;
+/**
+ * Returns a unary function which concatenates two `SortedSequence.T<A>` 
+ * and `SortedSequence.T<A>` and return a new `SortedSequence.T<A>`.
+ *
+ * @example
+ *
+ * ```ts
+ * import { SortedSequence, Num } from 'tiinvo'
+ * 
+ * const s0 = SortedSequence.make<number>(Num, 10, 20)
+ * const s1 = SortedSequence.make<number>(Num, 30, 40)
+ * 
+ * SortedSequence.concat(s1)(s0)       // SortedSequence(10, 20, 30, 40)
+ * ```
+ *
+ * @template A the SortedSequence type
+ * @param a the second SortedSequence
+ * @returns the unary function
+ * @group Operables
+ * @since 4.0.0
+ */
+export function concat<A>(a: T<A>): <A>(x: T<A>) => T<A>;
+export function concat<A>(a: T<A>, b?: T<A>): any {
   if (guard(a) && guard(b)) {
     return make.apply(null, [{ cmp: a[sortsymbol] }, ...a, ...b!]);
   }
 
-  return (x: T<b>) => make.apply(null, [{ cmp: x[sortsymbol] as any }, ...a, ...x]);
+  return (x: T<A>) => make.apply(null, [{ cmp: x[sortsymbol] as any }, ...a, ...x]);
 }
 
 //#endregion
 
-//#region getters
+//#region accessors
 
 /**
  * Counts the number of elements that satisfy a given predicate 
@@ -385,12 +536,17 @@ export function concat<a, b>(a: T<a> | T<b>, b?: T<b>): any {
  * SortedSequence.count(Num.gt(10))(s)   // 2
  * ```
  *
+ * @template A the Sequence's element type
+ * @param a the sequence
+ * @param p the Filterable functor
+ * @returns the number of elements which satisfy the predicate `p`
+ * @group Accessors
  * @since 4.0.0
  */
 export const count = Sequence.count;
 
 /**
- * 
+ * Gets an element at a specific index.
  *
  * @example
  *
@@ -403,12 +559,19 @@ export const count = Sequence.count;
  * SortedSequence.get(s, 9)       // null
  * ```
  *
+ * @template A the Sequence's element type
+ * @param a the sequence
+ * @param i the index of the element
+ * @returns 
+ *  - `Result.Ok<A>` if `i` is in bound
+ *  - `Result.Err` if `i` is out of bound or negative
+ * @group Accessors
  * @since 4.0.0
  */
 export const get = Sequence.get;
 
 /**
- * 
+ * Gets first element if any 
  *
  * @example
  *
@@ -422,14 +585,18 @@ export const get = Sequence.get;
  * SortedSequence.first(s1)       // null
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns the first element of the sequence:
+ *  - `Option.Some<A>` if the sequence has at least one element
+ *  - `Option.None` otherwise
+ * @group Accessors
  * @since 4.0.0
  */
 export const first = Sequence.first;
 
 /**
- * Gets a Sequence.t<a>'s last element.
- *
- * Returns Option.None if none is found.
+ * Gets last element if any.
  *
  * @example
  *
@@ -441,15 +608,21 @@ export const first = Sequence.first;
  * 
  * SortedSequence.last(s0)       // 30
  * SortedSequence.last(s1)       // null
- * ```
+ * 
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns 
+ *  - `Option.Some<A>` if the sequence is not empty
+ *  - `Option.None` otherwise
+ * @group Accessors
  * @since 4.0.0
  */
 export const last = Sequence.last;
 
 /**
- * Gets the length of a `SortedSequence.t<a>`
+ * Gets the length of a `SortedSequence.T<A>`
  *
  * @example
  *
@@ -466,7 +639,7 @@ export const last = Sequence.last;
 export const length = Sequence.length;
 
 /**
- * Gets values of a `SortedSequence.t<a>` as an immutable indexed object. 
+ * Gets values of a `SortedSequence.T<A>` as an immutable indexed object. 
  *
  * @example
  *
@@ -478,6 +651,10 @@ export const length = Sequence.length;
  * SortedSequence.values(s)       // { 0: 'hello', 1: 'world' }
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns the sequence values as an immutable dictionary
+ * @group Accessors
  * @since 4.0.0
  */
 export const values = Sequence.values;
@@ -501,6 +678,12 @@ export const values = Sequence.values;
  * SortedSequence.empty(s1)               // false
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns
+ *  - 'true' if the sequence is empty
+ *  - 'false' otherwise
+ * @group Predicates
  * @since 4.0.0
  */
 export const empty = Sequence.empty;
@@ -518,7 +701,13 @@ export const empty = Sequence.empty;
  * SortedSequence.populated(s)                      // true
  * SortedSequence.populated(SortedSequence.make(Num))   // false
  * ```
- *
+ * 
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns
+ *  - 'true' if the sequence is populated
+ *  - 'false' otherwise
+ * @group Predicates
  * @since 4.0.0
  */
 export const populated = Sequence.populated;
@@ -528,7 +717,7 @@ export const populated = Sequence.populated;
 //#region serializables
 
 /**
- * Converts a `SortedSequence.t<a>` to an array of `a[]`
+ * Converts a `SortedSequence.T<A>` to an array of `a[]`
  *
  * @example
  *
@@ -540,12 +729,16 @@ export const populated = Sequence.populated;
  * SortedSequence.toArray(sl)       // [1, 2, 3]
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns the output
+ * @group Serializables
  * @since 4.0.0
  */
 export const toArray = Sequence.toArray;
 
 /**
- * Converts a `SortedSequence.t<a>` to a jsonizable value
+ * Converts a `SortedSequence.T<A>` to a jsonizable value
  *
  * @example
  *
@@ -557,12 +750,16 @@ export const toArray = Sequence.toArray;
  * SortedSequence.toJSON(sl)       // [1, 2, 3]
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns the output
+ * @group Serializables
  * @since 4.0.0
  */
 export const toJSON = Sequence.toJSON;
 
 /**
- * Converts a `SortedSequence.t<a>` to a set of `Set<a>`
+ * Converts a `SortedSequence.T<A>` to a set of `Set<a>`
  *
  * @example
  *
@@ -574,12 +771,16 @@ export const toJSON = Sequence.toJSON;
  * SortedSequence.toMap(sl)      // Map([0, 1], [1, 2], [2, 3])
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns the output
+ * @group Serializables
  * @since 4.0.0
  */
 export const toMap = Sequence.toMap;
 
 /**
- * Converts a `SortedSequence.t<a>` to a set of `Set<a>`
+ * Converts a `SortedSequence.T<A>` to a set of `Set<a>`
  *
  * @example
  *
@@ -591,12 +792,16 @@ export const toMap = Sequence.toMap;
  * SortedSequence.toSet(sl)      // Set(1, 2, 3)
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns the output
+ * @group Serializables
  * @since 4.0.0
  */
 export const toSet = Sequence.toSet;
 
 /**
- * Converts a `SortedSequence.t<a>` to a string
+ * Converts a `SortedSequence.T<A>` to a string
  *
  * @example
  *
@@ -608,6 +813,10 @@ export const toSet = Sequence.toSet;
  * SortedSequence.toString(sl)       // "1,2,3"
  * ```
  *
+ * @template A the Sequence's element type
+ * @param t the sequence
+ * @returns the output
+ * @group Serializables
  * @since 4.0.0
  */
 export const toString = Sequence.toString;

@@ -1238,7 +1238,7 @@ export const length = <A>(t: T<A>): number => Object.values(t[indexer]()).length
  * @group Accessors
  * @since 4.0.0
  */
-export const values = <A>(t: T<A>) => t[indexer]();
+export const values = <A>(t: T<A>): Record<number, A> => t[indexer]();
 
 //#endregion
 
