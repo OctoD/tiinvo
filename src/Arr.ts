@@ -6,7 +6,7 @@ import { guard as predicateguard } from './Predicate.js';
 import type * as Result from './Result.js';
 
 /**
- * Represents an array of `a`
+ * Represents an array of elements `A`
  * 
  * @template A the array's elements' type
  * @example
@@ -14,7 +14,7 @@ import type * as Result from './Result.js';
  * ```ts
  * import { Arr } from 'tiinvo'
  * 
- * let foo: Arr.t<string> = ['hello']
+ * let foo: Arr.T<string> = ['hello']
  * ```
  * 
  * @since 4.0.0
@@ -96,7 +96,7 @@ export type Reducer<A, B> = {
  * Arr.get([10, 20], 3)   // Error("Index out of bounds 3 for length 2")
  * ```
  * 
- * @template A the type of the array `a` elements
+ * @template A the type of the array `A` elements
  * @param a is the array to search 
  * @param i is the element index
  * @returns 
@@ -116,7 +116,7 @@ export function get<A>(a: T<A>, i: number): Result.T<A>;
  * Arr.get(3)([10, 20])   // Error("Index out of bounds 3 for length 2")
  * ```
  * 
- * @template A the type of the array `a` elements
+ * @template A the type of the array `A` elements
  * @param a is the element index
  * @returns the unary function
  * @group Accessors
@@ -142,7 +142,7 @@ export function get<A>(a: T<A> | number, i?: number): any {
 };
 
 /**
- * Returns the first element of an array `a`. If the array is empty, returns `none`.
+ * Returns the first element of an array `A`. If the array is empty, returns `Option.None`.
  * 
  * @example
  * 
@@ -161,10 +161,10 @@ export function get<A>(a: T<A> | number, i?: number): any {
  * @group Accessors
  * @since 4.0.0
  */
-export const first = <A>(t: T<A>): Option.T<A> => (t[0] ?? null) as Option.T<A>;
+export const first = <A>(t: T<A>): Option.T<A> => t.length > 0 ? t[0] as Option.T<A> : null as Option.T<A>;
 
 /**
- * Returns the first element of an array `a` or `b` if the array is empty.
+ * Returns the first element of an array `A` or `b` if the array is empty.
  * 
  * @example
  * 
@@ -184,9 +184,7 @@ export const first = <A>(t: T<A>): Option.T<A> => (t[0] ?? null) as Option.T<A>;
  */
 export function firstOr<A>(t: T<A>, b: A): A;
 /**
- * After setting the fallback value `t`, returns a `Unary<t<a>, a>` function.
- * 
- * If the array has an element on index 0, it will be returned, otherwise it will return the fallback `t`
+ * Returns a unary function which gets an array's first element or returns the fallback `t`.
  * 
  * @example
  * 
@@ -215,7 +213,7 @@ export function firstOr<A>(t: T<A> | A, b?: any): any {
 }
 
 /**
- * Returns the last element of an array `a`. If the array is empty, returns `none`.
+ * Returns the last element of an array `A`. 
  * 
  * @example
  * 
@@ -237,7 +235,7 @@ export function firstOr<A>(t: T<A> | A, b?: any): any {
 export const last = <A>(t: T<A>): Option.T<A> => (t[t.length - 1] ?? null) as Option.T<A>;
 
 /**
- * Returns the last element of an array `a` or `b` if the array is empty.
+ * Returns the last element of an array `A` or the fallback `b` if the array is empty.
  * 
  * @example
  * 
@@ -250,7 +248,7 @@ export const last = <A>(t: T<A>): Option.T<A> => (t[t.length - 1] ?? null) as Op
  * 
  * @template A array's type
  * @param t the array
- * @param b the index
+ * @param b the fallback
  * @returns The last element of the array `t` or `b` if `t` is empty.
  * @group Accessors
  * @since 4.0.0
@@ -631,7 +629,7 @@ export function concat<A extends T<any>>(a: any, b?: any): any {
 }
 
 /**
- * Returns `true` if an array `a` contains `b`.
+ * Returns `true` if an array `A` contains `b`.
  * 
  * ```ts
  * import { Arr } 'tiinvo';
@@ -675,7 +673,7 @@ export function contains<A>(a: any, b?: any): any {
 }
 
 /**
- * Determines whether all the members of an array `a` satisfy the specified predicate `p`.
+ * Determines whether all the members of an array `A` satisfy the specified predicate `p`.
  * 
  * ```ts
  * import { Arr, Num } 'tiinvo';
@@ -788,7 +786,7 @@ export function fill<A>(a: T<any> | A, b?: any, start?: any, end?: any): any {
 }
 
 /**
- * Returns the elements of an array `a` that meet the condition specified in a predicate `p`.
+ * Returns the elements of an array `A` that meet the condition specified in a predicate `p`.
  * 
  * ```ts
  * import { Arr, Num } 'tiinvo';
@@ -1558,7 +1556,7 @@ export function partition<A>(a: T<A> | Functors.Filterable<A>, f?: Functors.Filt
 }
 
 /**
- * Returns a random element of an array `a`.
+ * Returns a random element of an array `A`.
  * 
  * If the array is empty, returns `Option.None`
  * 
@@ -1810,7 +1808,7 @@ export function slice<A extends T<any>>(a: A | number, s?: number, e?: number): 
 }
 
 /**
- * Determines whether some members of an array `a` satisfy the specified predicate `p`.
+ * Determines whether some members of an array `A` satisfy the specified predicate `p`.
  *
  * @example
  *

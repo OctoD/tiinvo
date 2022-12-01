@@ -46,7 +46,7 @@ Represents an error
 
 #### Defined in
 
-[src/Result.ts:9](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L9)
+[src/Result.ts:9](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L9)
 
 ___
 
@@ -64,7 +64,7 @@ Represents the successful result of an operation
 
 #### Defined in
 
-[src/Result.ts:13](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L13)
+[src/Result.ts:13](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L13)
 
 ___
 
@@ -82,7 +82,7 @@ Could represent both an Error `Err` or a successful result of an operation `Ok<a
 
 #### Defined in
 
-[src/Result.ts:17](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L17)
+[src/Result.ts:17](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L17)
 
 ## Factories
 
@@ -120,7 +120,7 @@ Result.err([10, 20, 30])          instanceof Error // true
 
 #### Defined in
 
-[src/Result.ts:39](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L39)
+[src/Result.ts:39](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L39)
 
 ## Guardables
 
@@ -157,7 +157,7 @@ true if `x` is `Err`, false otherwise
 
 #### Defined in
 
-[src/Result.ts:72](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L72)
+[src/Result.ts:72](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L72)
 
 ___
 
@@ -200,7 +200,7 @@ true if `x` is `Ok<A>`, false otherwise
 
 #### Defined in
 
-[src/Result.ts:91](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L91)
+[src/Result.ts:91](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L91)
 
 ___
 
@@ -256,7 +256,7 @@ x is A
 
 #### Defined in
 
-[src/Result.ts:112](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L112)
+[src/Result.ts:112](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L112)
 
 ## Comparables
 
@@ -316,7 +316,7 @@ cmp("a", new Error())            // 1
 
 #### Defined in
 
-[src/Result.ts:153](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L153)
+[src/Result.ts:153](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L153)
 
 ▸ **cmp**<`A`\>(`cmp`, `a`): [`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -364,7 +364,7 @@ the unary function
 
 #### Defined in
 
-[src/Result.ts:181](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L181)
+[src/Result.ts:181](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L181)
 
 ▸ **cmp**<`A`\>(`cmp`): [`Binary`](Fn.md#binary)<[`T`](Result.md#t)<`A`\>, [`T`](Result.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -413,7 +413,7 @@ the binary function
 
 #### Defined in
 
-[src/Result.ts:210](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L210)
+[src/Result.ts:210](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L210)
 
 ___
 
@@ -459,7 +459,7 @@ true if `a` equals to `b`
 
 #### Defined in
 
-[src/Result.ts:256](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L256)
+[src/Result.ts:256](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L256)
 
 ▸ **eq**<`A`\>(`eq`, `a`): [`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, `boolean`\>
 
@@ -501,7 +501,7 @@ the unary function
 
 #### Defined in
 
-[src/Result.ts:278](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L278)
+[src/Result.ts:278](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L278)
 
 ▸ **eq**<`a`\>(`eq`): [`Binary`](Fn.md#binary)<[`T`](Result.md#t)<`a`\>, [`T`](Result.md#t)<`a`\>, `boolean`\>
 
@@ -542,7 +542,7 @@ the binary function
 
 #### Defined in
 
-[src/Result.ts:299](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L299)
+[src/Result.ts:299](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L299)
 
 ## Filterables
 
@@ -585,7 +585,7 @@ Result.filter(Num.gt(1), new TypeError()) // Error("Value did not pass filter")
 
 #### Defined in
 
-[src/Result.ts:342](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L342)
+[src/Result.ts:342](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L342)
 
 ▸ **filter**<`A`\>(`f`): [`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, [`T`](Result.md#t)<`A`\>\>
 
@@ -625,7 +625,7 @@ the unary function
 
 #### Defined in
 
-[src/Result.ts:362](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L362)
+[src/Result.ts:362](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L362)
 
 ## Functions
 
@@ -679,7 +679,7 @@ m(new Error('foobar!')) // Error('foobar!')
 
 #### Defined in
 
-[src/Result.ts:392](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L392)
+[src/Result.ts:392](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L392)
 
 ___
 
@@ -734,7 +734,7 @@ map(new Error())    // 0
 
 #### Defined in
 
-[src/Result.ts:409](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L409)
+[src/Result.ts:409](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L409)
 
 ___
 
@@ -786,7 +786,7 @@ Result.isErr(await safe(3)) // true
 
 #### Defined in
 
-[src/Result.ts:442](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L442)
+[src/Result.ts:442](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L442)
 
 ___
 
@@ -838,4 +838,4 @@ Result.isErr(safe(3)) // true
 
 #### Defined in
 
-[src/Result.ts:480](https://github.com/OctoD/tiinvo/blob/5a3e691/src/Result.ts#L480)
+[src/Result.ts:480](https://github.com/OctoD/tiinvo/blob/1039368/src/Result.ts#L480)
