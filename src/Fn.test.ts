@@ -11,6 +11,11 @@ describe(`Fn`, () => {
     expect(Fn.cmp(t0, Num.add)).toEqual(1);
     expect(Fn.cmp(Num.add, t0)).toEqual(-1);
     expect(Fn.cmp(Num.add)(t0)).toEqual(1);
+
+    const cmpMul = Fn.cmp(Num.mul);
+    expect(cmpMul(Num.mul)).toEqual(0);
+    expect(cmpMul(Num.sub)).toEqual(1);
+    expect(cmpMul(Num.add)).toEqual(-1);
   });
 
   test(Fn.eq.name, () => {

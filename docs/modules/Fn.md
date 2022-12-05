@@ -54,7 +54,7 @@ Represents any async function
 
 #### Defined in
 
-[src/Fn.ts:8](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L8)
+[src/Fn.ts:8](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L8)
 
 ___
 
@@ -80,427 +80,467 @@ Represents any function
 
 #### Defined in
 
-[src/Fn.ts:13](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L13)
+[src/Fn.ts:13](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L13)
 
 ___
 
 ### Unary
 
-Ƭ **Unary**<`a`, `r`\>: (`a`: `a`) => `r`
+Ƭ **Unary**<`A`, `R`\>: (`a`: `A`) => `R`
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `a` |
-| `r` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the first value type |
+| `R` | the return type |
 
 #### Type declaration
 
-▸ (`a`): `r`
+▸ (`a`): `R`
 
 Represents any unary function
+
+**`Since`**
+
+4.0.0
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `a` | `a` |
+| `a` | `A` |
 
 ##### Returns
 
-`r`
+`R`
 
 #### Defined in
 
-[src/Fn.ts:18](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L18)
+[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L22)
 
 ___
 
 ### Binary
 
-Ƭ **Binary**<`a`, `b`, `r`\>: (`a`: `a`, `b`: `b`) => `r`
+Ƭ **Binary**<`A`, `B`, `R`\>: (`a`: `A`, `b`: `B`) => `R`
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `a` |
-| `b` |
-| `r` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the first value type |
+| `B` | the second value type |
+| `R` | the return type |
 
 #### Type declaration
 
-▸ (`a`, `b`): `r`
+▸ (`a`, `b`): `R`
 
 Represents any binary function
+
+**`Since`**
+
+4.0.0
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `a` | `a` |
-| `b` | `b` |
+| `a` | `A` |
+| `b` | `B` |
 
 ##### Returns
 
-`r`
+`R`
 
 #### Defined in
 
-[src/Fn.ts:23](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L23)
+[src/Fn.ts:32](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L32)
 
 ___
 
 ### Ternary
 
-Ƭ **Ternary**<`a`, `b`, `c`, `r`\>: (`a`: `a`, `b`: `b`, `c`: `c`) => `r`
+Ƭ **Ternary**<`A`, `B`, `C`, `R`\>: (`a`: `A`, `b`: `B`, `c`: `C`) => `R`
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `a` |
-| `b` |
-| `c` |
-| `r` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the first value type |
+| `B` | the second value type |
+| `C` | the third value type |
+| `R` | the return type |
 
 #### Type declaration
 
-▸ (`a`, `b`, `c`): `r`
+▸ (`a`, `b`, `c`): `R`
 
 Represents any ternary function
+
+**`Since`**
+
+4.0.0
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `a` | `a` |
-| `b` | `b` |
-| `c` | `c` |
+| `a` | `A` |
+| `b` | `B` |
+| `c` | `C` |
 
 ##### Returns
 
-`r`
+`R`
 
 #### Defined in
 
-[src/Fn.ts:28](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L28)
+[src/Fn.ts:43](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L43)
 
 ___
 
 ### Quaternary
 
-Ƭ **Quaternary**<`a`, `b`, `c`, `d`, `r`\>: (`a`: `a`, `b`: `b`, `c`: `c`, `d`: `d`) => `r`
+Ƭ **Quaternary**<`A`, `B`, `C`, `D`, `R`\>: (`a`: `A`, `b`: `B`, `c`: `C`, `d`: `D`) => `R`
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `a` |
-| `b` |
-| `c` |
-| `d` |
-| `r` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the 1th value type |
+| `B` | the 2th value type |
+| `C` | the 3th value type |
+| `D` | the 4th value type |
+| `R` | the return type |
 
 #### Type declaration
 
-▸ (`a`, `b`, `c`, `d`): `r`
+▸ (`a`, `b`, `c`, `d`): `R`
 
 Represents any quaternary function
+
+**`Since`**
+
+4.0.0
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `a` | `a` |
-| `b` | `b` |
-| `c` | `c` |
-| `d` | `d` |
+| `a` | `A` |
+| `b` | `B` |
+| `c` | `C` |
+| `d` | `D` |
 
 ##### Returns
 
-`r`
+`R`
 
 #### Defined in
 
-[src/Fn.ts:33](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L33)
+[src/Fn.ts:55](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L55)
 
 ___
 
 ### Quinary
 
-Ƭ **Quinary**<`a`, `b`, `c`, `d`, `e`, `r`\>: (`a`: `a`, `b`: `b`, `c`: `c`, `d`: `d`, `e`: `e`) => `r`
+Ƭ **Quinary**<`A`, `B`, `C`, `D`, `E`, `R`\>: (`a`: `A`, `b`: `B`, `c`: `C`, `d`: `D`, `e`: `E`) => `R`
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `a` |
-| `b` |
-| `c` |
-| `d` |
-| `e` |
-| `r` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the 1th value type |
+| `B` | the 2th value type |
+| `C` | the 3th value type |
+| `D` | the 4th value type |
+| `E` | the 5th value type |
+| `R` | the return type |
 
 #### Type declaration
 
-▸ (`a`, `b`, `c`, `d`, `e`): `r`
+▸ (`a`, `b`, `c`, `d`, `e`): `R`
 
 Represents any quinary function
+
+**`Since`**
+
+4.0.0
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `a` | `a` |
-| `b` | `b` |
-| `c` | `c` |
-| `d` | `d` |
-| `e` | `e` |
+| `a` | `A` |
+| `b` | `B` |
+| `c` | `C` |
+| `d` | `D` |
+| `e` | `E` |
 
 ##### Returns
 
-`r`
+`R`
 
 #### Defined in
 
-[src/Fn.ts:38](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L38)
+[src/Fn.ts:68](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L68)
 
 ___
 
 ### Senary
 
-Ƭ **Senary**<`a`, `b`, `c`, `d`, `e`, `f`, `r`\>: (`a`: `a`, `b`: `b`, `c`: `c`, `d`: `d`, `e`: `e`, `f`: `f`) => `r`
+Ƭ **Senary**<`A`, `B`, `C`, `D`, `E`, `F`, `R`\>: (`a`: `A`, `b`: `B`, `c`: `C`, `d`: `D`, `e`: `E`, `f`: `F`) => `R`
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `a` |
-| `b` |
-| `c` |
-| `d` |
-| `e` |
-| `f` |
-| `r` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the 1th value type |
+| `B` | the 2th value type |
+| `C` | the 3th value type |
+| `D` | the 4th value type |
+| `E` | the 5th value type |
+| `F` | the 6th value type |
+| `R` | the return type |
 
 #### Type declaration
 
-▸ (`a`, `b`, `c`, `d`, `e`, `f`): `r`
+▸ (`a`, `b`, `c`, `d`, `e`, `f`): `R`
 
 Represents any senary function
+
+**`Since`**
+
+4.0.0
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `a` | `a` |
-| `b` | `b` |
-| `c` | `c` |
-| `d` | `d` |
-| `e` | `e` |
-| `f` | `f` |
+| `a` | `A` |
+| `b` | `B` |
+| `c` | `C` |
+| `d` | `D` |
+| `e` | `E` |
+| `f` | `F` |
 
 ##### Returns
 
-`r`
+`R`
 
 #### Defined in
 
-[src/Fn.ts:43](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L43)
+[src/Fn.ts:82](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L82)
 
 ___
 
 ### Septenary
 
-Ƭ **Septenary**<`a`, `b`, `c`, `d`, `e`, `f`, `g`, `r`\>: (`a`: `a`, `b`: `b`, `c`: `c`, `d`: `d`, `e`: `e`, `f`: `f`, `g`: `g`) => `r`
+Ƭ **Septenary**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `R`\>: (`a`: `A`, `b`: `B`, `c`: `C`, `d`: `D`, `e`: `E`, `f`: `F`, `g`: `G`) => `R`
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `a` |
-| `b` |
-| `c` |
-| `d` |
-| `e` |
-| `f` |
-| `g` |
-| `r` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the 1th value type |
+| `B` | the 2th value type |
+| `C` | the 3th value type |
+| `D` | the 4th value type |
+| `E` | the 5th value type |
+| `F` | the 6th value type |
+| `G` | the 7th value type |
+| `R` | the return type |
 
 #### Type declaration
 
-▸ (`a`, `b`, `c`, `d`, `e`, `f`, `g`): `r`
+▸ (`a`, `b`, `c`, `d`, `e`, `f`, `g`): `R`
 
 Represents any septenary function
+
+**`Since`**
+
+4.0.0
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `a` | `a` |
-| `b` | `b` |
-| `c` | `c` |
-| `d` | `d` |
-| `e` | `e` |
-| `f` | `f` |
-| `g` | `g` |
+| `a` | `A` |
+| `b` | `B` |
+| `c` | `C` |
+| `d` | `D` |
+| `e` | `E` |
+| `f` | `F` |
+| `g` | `G` |
 
 ##### Returns
 
-`r`
+`R`
 
 #### Defined in
 
-[src/Fn.ts:48](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L48)
+[src/Fn.ts:97](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L97)
 
 ___
 
 ### Octonary
 
-Ƭ **Octonary**<`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `r`\>: (`a`: `a`, `b`: `b`, `c`: `c`, `d`: `d`, `e`: `e`, `f`: `f`, `g`: `g`, `h`: `h`) => `r`
+Ƭ **Octonary**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `R`\>: (`a`: `A`, `b`: `B`, `c`: `C`, `d`: `D`, `e`: `E`, `f`: `F`, `g`: `G`, `h`: `H`) => `R`
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `a` |
-| `b` |
-| `c` |
-| `d` |
-| `e` |
-| `f` |
-| `g` |
-| `h` |
-| `r` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the 1th value type |
+| `B` | the 2th value type |
+| `C` | the 3th value type |
+| `D` | the 4th value type |
+| `E` | the 5th value type |
+| `F` | the 6th value type |
+| `G` | the 7th value type |
+| `H` | the 8th value type |
+| `R` | the return type |
 
 #### Type declaration
 
-▸ (`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`): `r`
+▸ (`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`): `R`
 
 Represents any octonary function
+
+**`Since`**
+
+4.0.0
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `a` | `a` |
-| `b` | `b` |
-| `c` | `c` |
-| `d` | `d` |
-| `e` | `e` |
-| `f` | `f` |
-| `g` | `g` |
-| `h` | `h` |
+| `a` | `A` |
+| `b` | `B` |
+| `c` | `C` |
+| `d` | `D` |
+| `e` | `E` |
+| `f` | `F` |
+| `g` | `G` |
+| `h` | `H` |
 
 ##### Returns
 
-`r`
+`R`
 
 #### Defined in
 
-[src/Fn.ts:53](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L53)
+[src/Fn.ts:113](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L113)
 
 ___
 
 ### Nonary
 
-Ƭ **Nonary**<`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `r`\>: (`a`: `a`, `b`: `b`, `c`: `c`, `d`: `d`, `e`: `e`, `f`: `f`, `g`: `g`, `h`: `h`, `i`: `i`) => `r`
+Ƭ **Nonary**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `R`\>: (`a`: `A`, `b`: `B`, `c`: `C`, `d`: `D`, `e`: `E`, `f`: `F`, `g`: `G`, `h`: `H`, `i`: `I`) => `R`
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `a` |
-| `b` |
-| `c` |
-| `d` |
-| `e` |
-| `f` |
-| `g` |
-| `h` |
-| `i` |
-| `r` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the 1th value type |
+| `B` | the 2th value type |
+| `C` | the 3th value type |
+| `D` | the 4th value type |
+| `E` | the 5th value type |
+| `F` | the 6th value type |
+| `G` | the 7th value type |
+| `H` | the 8th value type |
+| `I` | the 9th value type |
+| `R` | the return type |
 
 #### Type declaration
 
-▸ (`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`): `r`
+▸ (`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`): `R`
 
 Represents any nonary function
+
+**`Since`**
+
+4.0.0
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `a` | `a` |
-| `b` | `b` |
-| `c` | `c` |
-| `d` | `d` |
-| `e` | `e` |
-| `f` | `f` |
-| `g` | `g` |
-| `h` | `h` |
-| `i` | `i` |
+| `a` | `A` |
+| `b` | `B` |
+| `c` | `C` |
+| `d` | `D` |
+| `e` | `E` |
+| `f` | `F` |
+| `g` | `G` |
+| `h` | `H` |
+| `i` | `I` |
 
 ##### Returns
 
-`r`
+`R`
 
 #### Defined in
 
-[src/Fn.ts:58](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L58)
+[src/Fn.ts:130](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L130)
 
 ___
 
 ### Decenary
 
-Ƭ **Decenary**<`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `l`, `r`\>: (`a`: `a`, `b`: `b`, `c`: `c`, `d`: `d`, `e`: `e`, `f`: `f`, `g`: `g`, `h`: `h`, `i`: `i`, `l`: `l`) => `r`
+Ƭ **Decenary**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `L`, `R`\>: (`a`: `A`, `b`: `B`, `c`: `C`, `d`: `D`, `e`: `E`, `f`: `F`, `g`: `G`, `h`: `H`, `i`: `I`, `l`: `L`) => `R`
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `a` |
-| `b` |
-| `c` |
-| `d` |
-| `e` |
-| `f` |
-| `g` |
-| `h` |
-| `i` |
-| `l` |
-| `r` |
+| Name | Description |
+| :------ | :------ |
+| `A` | the 1th value type |
+| `B` | the 2th value type |
+| `C` | the 3th value type |
+| `D` | the 4th value type |
+| `E` | the 5th value type |
+| `F` | the 6th value type |
+| `G` | the 7th value type |
+| `H` | the 8th value type |
+| `I` | the 9th value type |
+| `L` | the 10th value type |
+| `R` | the return type |
 
 #### Type declaration
 
-▸ (`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `l`): `r`
+▸ (`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `l`): `R`
 
 Represents any decenary function
+
+**`Since`**
+
+4.0.0
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `a` | `a` |
-| `b` | `b` |
-| `c` | `c` |
-| `d` | `d` |
-| `e` | `e` |
-| `f` | `f` |
-| `g` | `g` |
-| `h` | `h` |
-| `i` | `i` |
-| `l` | `l` |
+| `a` | `A` |
+| `b` | `B` |
+| `c` | `C` |
+| `d` | `D` |
+| `e` | `E` |
+| `f` | `F` |
+| `g` | `G` |
+| `h` | `H` |
+| `i` | `I` |
+| `l` | `L` |
 
 ##### Returns
 
-`r`
+`R`
 
 #### Defined in
 
-[src/Fn.ts:63](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L63)
+[src/Fn.ts:148](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L148)
 
 ___
 
@@ -512,13 +552,13 @@ Represents a generic function T with any arguments and any return value type.
 
 #### Defined in
 
-[src/Fn.ts:68](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L68)
+[src/Fn.ts:153](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L153)
 
 ## Functions
 
 ### pass
 
-▸ **pass**<`a`\>(`a`): `a`
+▸ **pass**<`A`\>(`a`): `A`
 
 A function which returns it's first argument.
 
@@ -541,21 +581,21 @@ Fn.pass(20)      // 20
 
 | Name |
 | :------ |
-| `a` |
+| `A` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `a` | `a` |
+| `a` | `A` |
 
 #### Returns
 
-`a`
+`A`
 
 #### Defined in
 
-[src/Fn.ts:88](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L88)
+[src/Fn.ts:173](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L173)
 
 ___
 
@@ -581,34 +621,61 @@ Fn.cmp(Num.sub, Num.add) // 1
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | [`AnyFn`](Fn.md#anyfn) |
-| `b` | [`AnyFn`](Fn.md#anyfn) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | [`AnyFn`](Fn.md#anyfn) | the first function |
+| `b` | [`AnyFn`](Fn.md#anyfn) | the second function |
 
 #### Returns
 
 [`ComparableResult`](Functors.md#comparableresult)
 
+- -1 if `a` is less than `b`
+ - 0 if `a` equals to `b`
+ - 1 if `a` is more than `b`
+
 #### Defined in
 
-[src/Fn.ts:107](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L107)
+[src/Fn.ts:198](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L198)
 
 ▸ **cmp**(`a`): [`Unary`](Fn.md#unary)<[`T`](Fn.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
+Returns a unary function which compares two function signatures and names.
+
+**`Example`**
+
+```ts
+import { Fn, Num } from 'tiinvo'
+
+const cmpMul = Fn.cmp(Num.mul);
+
+cmpMul(Num.mul) // 0
+cmpMul(Num.sub) // 1
+cmpMul(Num.add) // -1
+```
+
+**`Since`**
+
+4.0.0
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a` | [`AnyFn`](Fn.md#anyfn) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | [`AnyFn`](Fn.md#anyfn) | the second function |
 
 #### Returns
 
 [`Unary`](Fn.md#unary)<[`T`](Fn.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
+the unary function which checks
+ - -1 if `b` is less than `a`
+ - 0 if `b` equals to `a`
+ - 1 if `b` is more than `a`
+
 #### Defined in
 
-[src/Fn.ts:108](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L108)
+[src/Fn.ts:221](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L221)
 
 ___
 
@@ -622,7 +689,6 @@ It will check that both function have:
 
    - the same list of arguments
    - the same name
-   - the address in memory
 
 **`Example`**
 
@@ -654,7 +720,7 @@ Fn.eq(Num.sub, Num.add) // false
 
 #### Defined in
 
-[src/Fn.ts:156](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L156)
+[src/Fn.ts:268](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L268)
 
 ▸ **eq**(`a`): [`Unary`](Fn.md#unary)<[`T`](Fn.md#t), `boolean`\>
 
@@ -698,7 +764,7 @@ the unary function which accepts a second function and returns
 
 #### Defined in
 
-[src/Fn.ts:184](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L184)
+[src/Fn.ts:296](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L296)
 
 ___
 
@@ -735,7 +801,7 @@ arguments count
 
 #### Defined in
 
-[src/Functors.ts:424](https://github.com/OctoD/tiinvo/blob/1039368/src/Functors.ts#L424)
+[src/Functors.ts:424](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Functors.ts#L424)
 
 ___
 
@@ -772,7 +838,7 @@ the name
 
 #### Defined in
 
-[src/Functors.ts:424](https://github.com/OctoD/tiinvo/blob/1039368/src/Functors.ts#L424)
+[src/Functors.ts:424](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Functors.ts#L424)
 
 ___
 
@@ -810,7 +876,7 @@ x is AnyFn
 
 #### Defined in
 
-[src/Fn.ts:253](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L253)
+[src/Fn.ts:365](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L365)
 
 ___
 
@@ -872,4 +938,4 @@ an array of the returning values of `ml`
 
 #### Defined in
 
-[src/Fn.ts:281](https://github.com/OctoD/tiinvo/blob/1039368/src/Fn.ts#L281)
+[src/Fn.ts:393](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Fn.ts#L393)

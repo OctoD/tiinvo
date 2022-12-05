@@ -14,53 +14,138 @@ export type AnyFn = (...args: any[]) => any;
 
 /**
  * Represents any unary function
+ * 
+ * @template A the first value type
+ * @template R the return type
+ * @since 4.0.0
  */
-export type Unary<a, r> = (a: a) => r;
+export type Unary<A, R> = (a: A) => R;
 
 /**
  * Represents any binary function
+ * 
+ * @template A the first value type
+ * @template B the second value type
+ * @template R the return type
+ * @since 4.0.0
  */
-export type Binary<a, b, r> = (a: a, b: b) => r;
+export type Binary<A, B, R> = (a: A, b: B) => R;
 
 /**
  * Represents any ternary function
+ * 
+ * @template A the first value type
+ * @template B the second value type
+ * @template C the third value type
+ * @template R the return type
+ * @since 4.0.0
  */
-export type Ternary<a, b, c, r> = (a: a, b: b, c: c) => r;
+export type Ternary<A, B, C, R> = (a: A, b: B, c: C) => R;
 
 /**
  * Represents any quaternary function
+ * 
+ * @template A the 1th value type
+ * @template B the 2th value type
+ * @template C the 3th value type
+ * @template D the 4th value type
+ * @template R the return type
+ * @since 4.0.0
  */
-export type Quaternary<a, b, c, d, r> = (a: a, b: b, c: c, d: d) => r;
+export type Quaternary<A, B, C, D, R> = (a: A, b: B, c: C, d: D) => R;
 
 /**
  * Represents any quinary function
+ * 
+ * @template A the 1th value type
+ * @template B the 2th value type
+ * @template C the 3th value type
+ * @template D the 4th value type
+ * @template E the 5th value type
+ * @template R the return type
+ * @since 4.0.0
  */
-export type Quinary<a, b, c, d, e, r> = (a: a, b: b, c: c, d: d, e: e) => r;
+export type Quinary<A, B, C, D, E, R> = (a: A, b: B, c: C, d: D, e: E) => R;
 
 /**
  * Represents any senary function
+ * 
+ * @template A the 1th value type
+ * @template B the 2th value type
+ * @template C the 3th value type
+ * @template D the 4th value type
+ * @template E the 5th value type
+ * @template F the 6th value type
+ * @template R the return type
+ * @since 4.0.0
  */
-export type Senary<a, b, c, d, e, f, r> = (a: a, b: b, c: c, d: d, e: e, f: f) => r;
+export type Senary<A, B, C, D, E, F, R> = (a: A, b: B, c: C, d: D, e: E, f: F) => R;
 
 /**
  * Represents any septenary function
+ * 
+ * @template A the 1th value type
+ * @template B the 2th value type
+ * @template C the 3th value type
+ * @template D the 4th value type
+ * @template E the 5th value type
+ * @template F the 6th value type
+ * @template G the 7th value type
+ * @template R the return type
+ * @since 4.0.0
  */
-export type Septenary<a, b, c, d, e, f, g, r> = (a: a, b: b, c: c, d: d, e: e, f: f, g: g) => r;
+export type Septenary<A, B, C, D, E, F, G, R> = (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => R;
 
 /**
  * Represents any octonary function
+ * 
+ * @template A the 1th value type
+ * @template B the 2th value type
+ * @template C the 3th value type
+ * @template D the 4th value type
+ * @template E the 5th value type
+ * @template F the 6th value type
+ * @template G the 7th value type
+ * @template H the 8th value type
+ * @template R the return type
+ * @since 4.0.0
  */
-export type Octonary<a, b, c, d, e, f, g, h, r> = (a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h) => r;
+export type Octonary<A, B, C, D, E, F, G, H, R> = (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H) => R;
 
 /**
  * Represents any nonary function
+ * 
+ * @template A the 1th value type
+ * @template B the 2th value type
+ * @template C the 3th value type
+ * @template D the 4th value type
+ * @template E the 5th value type
+ * @template F the 6th value type
+ * @template G the 7th value type
+ * @template H the 8th value type
+ * @template I the 9th value type
+ * @template R the return type
+ * @since 4.0.0
  */
-export type Nonary<a, b, c, d, e, f, g, h, i, r> = (a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h, i: i) => r;
+export type Nonary<A, B, C, D, E, F, G, H, I, R> = (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I) => R;
 
 /**
  * Represents any decenary function
+ * 
+ * @template A the 1th value type
+ * @template B the 2th value type
+ * @template C the 3th value type
+ * @template D the 4th value type
+ * @template E the 5th value type
+ * @template F the 6th value type
+ * @template G the 7th value type
+ * @template H the 8th value type
+ * @template I the 9th value type
+ * @template L the 10th value type
+ * @template R the return type
+ * @since 4.0.0
  */
-export type Decenary<a, b, c, d, e, f, g, h, i, l, r> = (a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h, i: i, l: l) => r;
+export type Decenary<A, B, C, D, E, F, G, H, I, L, R> = (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, l: L) => R;
 
 /**
  * Represents a generic function T with any arguments and any return value type.
@@ -85,7 +170,7 @@ export type T = AnyFn;
  *
  * @since 4.0.0
  */
-export const pass = <a>(a: a) => a;
+export const pass = <A>(a: A) => a;
 
 //#region comparables
 
@@ -102,9 +187,37 @@ export const pass = <a>(a: a) => a;
  * Fn.cmp(Num.sub, Num.add) // 1
  * ```
  *
+ * @param a the first function
+ * @param b the second function
+ * @returns 
+ *  - -1 if `a` is less than `b`
+ *  - 0 if `a` equals to `b`
+ *  - 1 if `a` is more than `b`
  * @since 4.0.0
  */
 export function cmp(a: T, b: T): Functors.ComparableResult;
+/**
+ * Returns a unary function which compares two function signatures and names.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Fn, Num } from 'tiinvo'
+ * 
+ * const cmpMul = Fn.cmp(Num.mul);
+ * 
+ * cmpMul(Num.mul) // 0
+ * cmpMul(Num.sub) // 1
+ * cmpMul(Num.add) // -1
+ * ```
+ *
+ * @param a the second function
+ * @returns the unary function which checks
+ *  - -1 if `b` is less than `a`
+ *  - 0 if `b` equals to `a`
+ *  - 1 if `b` is more than `a`
+ * @since 4.0.0
+ */
 export function cmp(a: T): Unary<T, Functors.ComparableResult>;
 export function cmp(a: T, b?: T): any {
   const _cmp = (x: T, y: T) => {
@@ -134,7 +247,6 @@ export function cmp(a: T, b?: T): any {
  * 
  *    - the same list of arguments
  *    - the same name
- *    - the address in memory
  *
  * @example
  *
