@@ -50,7 +50,7 @@ A type alias for object
 
 #### Defined in
 
-[src/Obj.ts:10](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L10)
+[src/Obj.ts:10](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L10)
 
 ___
 
@@ -72,7 +72,7 @@ Represents the entries of an object `O` as an array of key/value pair tuples
 
 #### Defined in
 
-[src/Obj.ts:18](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L18)
+[src/Obj.ts:18](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L18)
 
 ___
 
@@ -94,7 +94,7 @@ Represents the resulting type from a struct of guards
 
 #### Defined in
 
-[src/Obj.ts:28](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L28)
+[src/Obj.ts:28](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L28)
 
 ___
 
@@ -116,7 +116,7 @@ Extracts keys `K[]` from object `O`
 
 #### Defined in
 
-[src/Obj.ts:38](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L38)
+[src/Obj.ts:38](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L38)
 
 ___
 
@@ -138,7 +138,7 @@ Extracts values `A[]` from object `O`
 
 #### Defined in
 
-[src/Obj.ts:46](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L46)
+[src/Obj.ts:46](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L46)
 
 ## Guardables
 
@@ -176,7 +176,7 @@ x is object
 
 #### Defined in
 
-[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Functors.ts#L338)
+[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Functors.ts#L338)
 
 ___
 
@@ -282,7 +282,7 @@ v is A
 
 #### Defined in
 
-[src/Obj.ts:139](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L139)
+[src/Obj.ts:139](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L139)
 
 ___
 
@@ -331,7 +331,7 @@ o is Record<K, unknown\>
 
 #### Defined in
 
-[src/Obj.ts:191](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L191)
+[src/Obj.ts:191](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L191)
 
 ▸ **hasKey**<`K`\>(`k`): (`o`: `unknown`) => o is Record<K, unknown\>
 
@@ -384,7 +384,7 @@ o is Record<K, unknown\>
 
 #### Defined in
 
-[src/Obj.ts:212](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L212)
+[src/Obj.ts:212](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L212)
 
 ___
 
@@ -432,7 +432,7 @@ o is Record<K, A\>
 
 #### Defined in
 
-[src/Obj.ts:246](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L246)
+[src/Obj.ts:246](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L246)
 
 ▸ **hasKeyOf**<`A`, `K`\>(`k`, `g`): (`o`: `unknown`) => o is Record<K, A\>
 
@@ -486,7 +486,7 @@ o is Record<K, A\>
 
 #### Defined in
 
-[src/Obj.ts:270](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L270)
+[src/Obj.ts:270](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L270)
 
 ## Natives
 
@@ -494,7 +494,9 @@ o is Record<K, A\>
 
 ▸ **assign**<`T`, `U`\>(`target`, `source`): `T` & `U`
 
-Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object.
+Copy the values of all of the enumerable own properties from one or more source objects to a new object. 
+
+**important**: This will not mutate any object, it will always return a new one instead.
 
 **`Example`**
 
@@ -539,7 +541,9 @@ node_modules/typescript/lib/lib.es2015.core.d.ts:286
 
 ▸ **assign**<`T`, `U`, `V`\>(`target`, `source1`, `source2`): `T` & `U` & `V`
 
-Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object.
+Copy the values of all of the enumerable own properties from one or more source objects to a new object. 
+
+**important**: This will not mutate any object, it will always return a new one instead.
 
 **`Example`**
 
@@ -586,7 +590,9 @@ node_modules/typescript/lib/lib.es2015.core.d.ts:295
 
 ▸ **assign**<`T`, `U`, `V`, `W`\>(`target`, `source1`, `source2`, `source3`): `T` & `U` & `V` & `W`
 
-Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object.
+Copy the values of all of the enumerable own properties from one or more source objects to a new object. 
+
+**important**: This will not mutate any object, it will always return a new one instead.
 
 **`Example`**
 
@@ -635,7 +641,9 @@ node_modules/typescript/lib/lib.es2015.core.d.ts:305
 
 ▸ **assign**(`target`, ...`sources`): `any`
 
-Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object.
+Copy the values of all of the enumerable own properties from one or more source objects to a new object. 
+
+**important**: This will not mutate any object, it will always return a new one instead.
 
 **`Example`**
 
@@ -711,7 +719,7 @@ the entries
 
 #### Defined in
 
-[src/Obj.ts:327](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L327)
+[src/Obj.ts:329](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L329)
 
 ___
 
@@ -964,7 +972,7 @@ get({});             // none
 
 #### Defined in
 
-[src/Obj.ts:385](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L385)
+[src/Obj.ts:387](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L387)
 
 ___
 
@@ -1006,7 +1014,7 @@ Obj.omit(['a', 'b'], { a: 10, b: 20, c: 30 }) // { c: 30 }
 
 #### Defined in
 
-[src/Obj.ts:406](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L406)
+[src/Obj.ts:408](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L408)
 
 ▸ **omit**<`K`, `O`\>(`k`): [`Unary`](Fn.md#unary)<`O`, `Exclude`<`O`, `K`\>\>
 
@@ -1045,7 +1053,7 @@ omit({ a: 1, b: 2 })                 // {}
 
 #### Defined in
 
-[src/Obj.ts:427](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L427)
+[src/Obj.ts:429](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L429)
 
 ___
 
@@ -1091,7 +1099,7 @@ pick({ a: 1, b: 2 });            // { a: 1, b: 2 }
 
 #### Defined in
 
-[src/Obj.ts:474](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L474)
+[src/Obj.ts:476](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L476)
 
 ▸ **pick**<`K`, `O`\>(`keys`): [`Unary`](Fn.md#unary)<`O`, `Pick`<`O`, `K`\>\>
 
@@ -1114,7 +1122,7 @@ pick({ a: 1, b: 2 });            // { a: 1, b: 2 }
 
 #### Defined in
 
-[src/Obj.ts:475](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L475)
+[src/Obj.ts:477](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L477)
 
 ## Functions
 
@@ -1169,7 +1177,7 @@ Obj.map((x: Record<string, number>) => x.a ?? 0)({ b: 10 });      // 0
 
 #### Defined in
 
-[src/Obj.ts:519](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L519)
+[src/Obj.ts:521](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L521)
 
 ___
 
@@ -1209,7 +1217,7 @@ Obj.keys({ a: 10, b: 20 })       // ['a', 'b']
 
 #### Defined in
 
-[src/Obj.ts:533](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L533)
+[src/Obj.ts:535](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L535)
 
 ___
 
@@ -1246,7 +1254,7 @@ the size (count of keys) of the object
 
 #### Defined in
 
-[src/Obj.ts:551](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L551)
+[src/Obj.ts:553](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L553)
 
 ___
 
@@ -1287,4 +1295,4 @@ Obj.values({})             // []
 
 #### Defined in
 
-[src/Obj.ts:569](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Obj.ts#L569)
+[src/Obj.ts:571](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Obj.ts#L571)

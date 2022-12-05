@@ -284,7 +284,9 @@ export function hasKeyOf<A, K extends string>(k: K | Functors.Guardable<A>, g?: 
 //#region native methods
 
 /**
- * Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object.
+ * Copy the values of all of the enumerable own properties from one or more source objects to a new object. 
+ * 
+ * **important**: This will not mutate any object, it will always return a new one instead.
  * 
  * @example
  * 
@@ -305,7 +307,7 @@ export function hasKeyOf<A, K extends string>(k: K | Functors.Guardable<A>, g?: 
  * @group Natives
  * @since 4.0.0
  */
-export const assign = Object.assign;
+export const assign: typeof Object.assign = (x: any, ... b: any[]) => Object.assign({}, x, ... b);
 
 /**
  * Returns an array of key/values of the enumerable properties of an object `o`

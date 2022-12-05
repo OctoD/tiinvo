@@ -70,4 +70,4 @@ a unary function
 
 #### Defined in
 
-[src/Catch.ts:43](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Catch.ts#L43)
+[src/Catch.ts:43](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Catch.ts#L43)

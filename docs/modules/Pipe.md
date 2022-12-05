@@ -39,7 +39,7 @@ Same as the sync version, but handles promises.
 
 #### Defined in
 
-[src/Pipe.ts:44](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Pipe.ts#L44)
+[src/Pipe.ts:44](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Pipe.ts#L44)
 
 ___
 
@@ -83,4 +83,4 @@ vat(200)     // 44
 
 #### Defined in
 
-[src/Pipe.ts:39](https://github.com/OctoD/tiinvo/blob/e1fce19/src/Pipe.ts#L39)
+[src/Pipe.ts:39](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Pipe.ts#L39)
