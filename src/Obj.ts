@@ -301,8 +301,6 @@ export function hasKeyOf<A, K extends string>(k: K | Functors.Guardable<A>, g?: 
  * // { a: 1, b: 3, c: 5, d: 6 }
  * ```
  * 
- * @param target The target object to copy to.
- * @param sources One or more source objects from which to copy properties
  * @returns The target object
  * @group Natives
  * @since 4.0.0

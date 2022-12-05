@@ -47,7 +47,7 @@ Represents a numeric range from a starting value `start` to an ending value `end
 
 #### Defined in
 
-[src/Range.ts:7](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Range.ts#L7)
+[src/Range.ts:7](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Range.ts#L7)
 
 ## Factories
 
@@ -95,7 +95,7 @@ for (const n of Range.make(0, 10, 2)) {
 
 #### Defined in
 
-[src/Range.ts:45](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Range.ts#L45)
+[src/Range.ts:45](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Range.ts#L45)
 
 ## Guardables
 
@@ -136,7 +136,7 @@ true if `x` is a `T`, false otherwise
 
 #### Defined in
 
-[src/Range.ts:98](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Range.ts#L98)
+[src/Range.ts:98](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Range.ts#L98)
 
 ## Predicates
 
@@ -174,7 +174,7 @@ Range.inRange(r, 6)    // true
 
 #### Defined in
 
-[src/Range.ts:123](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Range.ts#L123)
+[src/Range.ts:123](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Range.ts#L123)
 
 ▸ **inRange**(`t`): [`Unary`](Fn.md#unary)<[`T`](Range.md#t), `boolean`\>
 
@@ -209,7 +209,7 @@ the unary function `Fn.Unary<T, boolean>`
 
 #### Defined in
 
-[src/Range.ts:143](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Range.ts#L143)
+[src/Range.ts:143](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Range.ts#L143)
 
 ## Mappables
 
@@ -254,7 +254,7 @@ A[] if `t` is `Range.T`
 
 #### Defined in
 
-[src/Range.ts:180](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Range.ts#L180)
+[src/Range.ts:180](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Range.ts#L180)
 
 ▸ **map**<`A`\>(`t`): [`Unary`](Fn.md#unary)<[`T`](Range.md#t), `A`[]\>
 
@@ -295,7 +295,7 @@ the unary function
 
 #### Defined in
 
-[src/Range.ts:201](https://github.com/OctoD/tiinvo/blob/ecc83d7/src/Range.ts#L201)
+[src/Range.ts:201](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Range.ts#L201)
 
 ## Serializables
 
