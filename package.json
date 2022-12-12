@@ -26,7 +26,7 @@
   ],
   "scripts": {
     "build": "tsc -p .",
-    "changelog": "npx standard-changelog --first-release",
+    "changelog": "npx standard-changelog",
     "clean": "tsc --build --clean",
     "docs": "typedoc --out docs src/index.ts",
     "test": "vitest run --coverage",

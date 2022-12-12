@@ -1,3 +1,75 @@
+# [4.0.0-rc1](https://github.com/octod/tiinvo/compare/3.4.1...4.0.0-rc1) (2022-12-12)
+
+
+### Bug Fixes
+
+* avoids exceptions raising if isErr(null) ([44f4afd](https://github.com/octod/tiinvo/commit/44f4afd5ff03a7f6aa5329cf21edd68b2ad3defd))
+* fixes padding issue ([6c3a8d2](https://github.com/octod/tiinvo/commit/6c3a8d2b3ced96def3cbb02ca06c646d19c8e2e0))
+* **hot:** avoids issues while using as esmodule ([eb225d5](https://github.com/octod/tiinvo/commit/eb225d5ab3e3b4cfd401c30080dab16c775a9de5))
+* skips lib check ([651bbe4](https://github.com/octod/tiinvo/commit/651bbe434cf2c476bb6a1d75e42c47e5c77dee3d))
+
+
+### Features
+
+* adds `err` factory ([35c625d](https://github.com/octod/tiinvo/commit/35c625d9de27a08b9c98a6a05da4ba957ff8c609))
+* Adds DateRange.t type ([60c129c](https://github.com/octod/tiinvo/commit/60c129c1801e731888a4b7e9b6526be4cf83e5fb))
+* adds extra overloads ([d2fd2c3](https://github.com/octod/tiinvo/commit/d2fd2c3c2b26cb608ebd7a080920fbc442f5a320))
+* adds filterMap, filterReduce, reduce ([b33b616](https://github.com/octod/tiinvo/commit/b33b616ca8aa5298ea56fccdd87c28d90e9dd1d0))
+* adds fn overloading ([31b9954](https://github.com/octod/tiinvo/commit/31b99547463073cb7fa9263fd75b8b9e597f87d4))
+* adds guard, inRange ([c369610](https://github.com/octod/tiinvo/commit/c3696102e510e1ad694af8338fb9bd9f2ff145f7))
+* adds inverted range ([ceedf45](https://github.com/octod/tiinvo/commit/ceedf45c7f1ac320d24b9d7396ee31455a9d6b84))
+* adds mapfilter ([27f95bd](https://github.com/octod/tiinvo/commit/27f95bd48919ce89507e088551676856a0d3d335))
+* adds more overloads for cmp and eq ([f0d2a3a](https://github.com/octod/tiinvo/commit/f0d2a3a7d619d54590b5df5a3fc4134f657bed08))
+* adds overloads for cmp/eq ([3d559cd](https://github.com/octod/tiinvo/commit/3d559cd5732d93fe696df17a0f721c1a5ed40a71))
+* adds partition ([15e3365](https://github.com/octod/tiinvo/commit/15e3365aba9e6cca9aec6fda529f37c16c39af55))
+* adds prefix/suffix fns ([7a38a2f](https://github.com/octod/tiinvo/commit/7a38a2f7e0f99c68032e9d4b3f39d0a46e124e38))
+* adds Range type ([bb840ea](https://github.com/octod/tiinvo/commit/bb840eaf10e8ab0bd79c99ddbeaae974f3c67481))
+* adds Set data type ([fd1f5ad](https://github.com/octod/tiinvo/commit/fd1f5ad322635e3cde5c4f5d7af4f48e62df3730))
+* adds Str fns ([000a124](https://github.com/octod/tiinvo/commit/000a1246ed08f30a0be3830c849e59cb35ea651d))
+* adds str.reverse ([e3e2e7f](https://github.com/octod/tiinvo/commit/e3e2e7fc5d0ff732d6a55f5c6c6b16133e4cad09))
+* adds zip fn ([327ad12](https://github.com/octod/tiinvo/commit/327ad12da813606c0665ae39dc9d7abc887bbd63))
+* initial migration to 4.0 ([7a7ea2b](https://github.com/octod/tiinvo/commit/7a7ea2b36a69eb93459dddb030f1a9358df0f3d7))
+* makes predicate fn linear up to 10 arguments ([44ced02](https://github.com/octod/tiinvo/commit/44ced025d62e64676703f5f99277c0622dd78407))
+* Sequence.make can accept an array as only argument ([ddc41b5](https://github.com/octod/tiinvo/commit/ddc41b59e3fec580993e371653fe06b431710cc5))
+
+
+
+# [4.0.0-rc1](https://github.com/octod/tiinvo/compare/3.4.1...4.0.0-rc1) (2022-12-12)
+
+
+### Bug Fixes
+
+* avoids exceptions raising if isErr(null) ([44f4afd](https://github.com/octod/tiinvo/commit/44f4afd5ff03a7f6aa5329cf21edd68b2ad3defd))
+* fixes padding issue ([6c3a8d2](https://github.com/octod/tiinvo/commit/6c3a8d2b3ced96def3cbb02ca06c646d19c8e2e0))
+* **hot:** avoids issues while using as esmodule ([eb225d5](https://github.com/octod/tiinvo/commit/eb225d5ab3e3b4cfd401c30080dab16c775a9de5))
+* skips lib check ([651bbe4](https://github.com/octod/tiinvo/commit/651bbe434cf2c476bb6a1d75e42c47e5c77dee3d))
+
+
+### Features
+
+* adds `err` factory ([35c625d](https://github.com/octod/tiinvo/commit/35c625d9de27a08b9c98a6a05da4ba957ff8c609))
+* Adds DateRange.t type ([60c129c](https://github.com/octod/tiinvo/commit/60c129c1801e731888a4b7e9b6526be4cf83e5fb))
+* adds extra overloads ([d2fd2c3](https://github.com/octod/tiinvo/commit/d2fd2c3c2b26cb608ebd7a080920fbc442f5a320))
+* adds filterMap, filterReduce, reduce ([b33b616](https://github.com/octod/tiinvo/commit/b33b616ca8aa5298ea56fccdd87c28d90e9dd1d0))
+* adds fn overloading ([31b9954](https://github.com/octod/tiinvo/commit/31b99547463073cb7fa9263fd75b8b9e597f87d4))
+* adds guard, inRange ([c369610](https://github.com/octod/tiinvo/commit/c3696102e510e1ad694af8338fb9bd9f2ff145f7))
+* adds inverted range ([ceedf45](https://github.com/octod/tiinvo/commit/ceedf45c7f1ac320d24b9d7396ee31455a9d6b84))
+* adds mapfilter ([27f95bd](https://github.com/octod/tiinvo/commit/27f95bd48919ce89507e088551676856a0d3d335))
+* adds more overloads for cmp and eq ([f0d2a3a](https://github.com/octod/tiinvo/commit/f0d2a3a7d619d54590b5df5a3fc4134f657bed08))
+* adds overloads for cmp/eq ([3d559cd](https://github.com/octod/tiinvo/commit/3d559cd5732d93fe696df17a0f721c1a5ed40a71))
+* adds partition ([15e3365](https://github.com/octod/tiinvo/commit/15e3365aba9e6cca9aec6fda529f37c16c39af55))
+* adds prefix/suffix fns ([7a38a2f](https://github.com/octod/tiinvo/commit/7a38a2f7e0f99c68032e9d4b3f39d0a46e124e38))
+* adds Range type ([bb840ea](https://github.com/octod/tiinvo/commit/bb840eaf10e8ab0bd79c99ddbeaae974f3c67481))
+* adds Set data type ([fd1f5ad](https://github.com/octod/tiinvo/commit/fd1f5ad322635e3cde5c4f5d7af4f48e62df3730))
+* adds Str fns ([000a124](https://github.com/octod/tiinvo/commit/000a1246ed08f30a0be3830c849e59cb35ea651d))
+* adds str.reverse ([e3e2e7f](https://github.com/octod/tiinvo/commit/e3e2e7fc5d0ff732d6a55f5c6c6b16133e4cad09))
+* adds zip fn ([327ad12](https://github.com/octod/tiinvo/commit/327ad12da813606c0665ae39dc9d7abc887bbd63))
+* initial migration to 4.0 ([7a7ea2b](https://github.com/octod/tiinvo/commit/7a7ea2b36a69eb93459dddb030f1a9358df0f3d7))
+* makes predicate fn linear up to 10 arguments ([44ced02](https://github.com/octod/tiinvo/commit/44ced025d62e64676703f5f99277c0622dd78407))
+* Sequence.make can accept an array as only argument ([ddc41b5](https://github.com/octod/tiinvo/commit/ddc41b59e3fec580993e371653fe06b431710cc5))
+
+
+
 # [2.19.0](https://github.com/octod/tiinvo/compare/v2.18.0...v2.19.0) (2021-05-17)
 
 
