@@ -118,8 +118,6 @@ export const isOkOf = <A>(g: Functors.Guardable<A>) => (x: T<unknown>): x is A =
 /**
  * Compares two results `T<A>` by a given `Comparable<A>`.
  * 
- * Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
- * 
   * If `a` is `Err` and `b` is `Ok` returns -1, else if both are `Err` returns 0, else returns 1
  * 
  * @example
@@ -133,28 +131,50 @@ export const isOkOf = <A>(g: Functors.Guardable<A>) => (x: T<unknown>): x is A =
  * Result.cmp(Str.cmp, new Error(), new Error())    // 0
  * Result.cmp(Str.cmp, new Error(), "a")            // -1
  * Result.cmp(Str.cmp, "a", new Error())            // 1
- * 
- * const cmp = Result.cmp(Str.cmp);
- * 
- * cmp("a", "a")                    // 0
- * cmp("a", "b")                    // -1
- * cmp("b", "a")                    // 1
- * cmp(new Error(), new Error())    // 0
- * cmp(new Error(), "a")            // -1
- * cmp("a", new Error())            // 1
  * ```
  * 
  * @template A the type
  * @param cmp the comparer function
  * @param a first value
  * @param b last value
+ * @returns 
+ *  - -1 if `a` is less than `b`
+ *  - 0 if `a` is same of `b` 
+ *  - 1 if `a` is greater than `b`.
  * @since 4.0.0
  */
 export function cmp<A>(cmp: Functors.Comparable<A>, a: T<A>, b: T<A>): Functors.ComparableResult;
 /**
- * Returns a unary function which compares two results `T<A>` by a given `Comparable<A>`.
+ * Compares two results `T<A>` by a given `ComparableModule<A>`.
  * 
- * Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
+  * If `a` is `Err` and `b` is `Ok` returns -1, else if both are `Err` returns 0, else returns 1
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Str, Result } from 'tiinvo';
+ * 
+ * Result.cmp(Str, "a", "a")                    // 0
+ * Result.cmp(Str, "a", "b")                    // -1
+ * Result.cmp(Str, "b", "a")                    // 1
+ * Result.cmp(Str, new Error(), new Error())    // 0
+ * Result.cmp(Str, new Error(), "a")            // -1
+ * Result.cmp(Str, "a", new Error())            // 1
+ * ```
+ * 
+ * @template A the type
+ * @param cmp the comparer function
+ * @param a first value
+ * @returns 
+ *  - -1 if `a` is less than `b`
+ *  - 0 if `a` is same of `b` 
+ *  - 1 if `a` is greater than `b`.
+ * @param b last value
+ * @since 4.0.0
+ */
+export function cmp<A>(cmp: Functors.ComparableModule<A>, a: T<A>, b: T<A>): Functors.ComparableResult;
+/**
+ * Returns a unary function which compares two results `T<A>` by a given `Comparable<A>`.
  * 
  * If `a` is `Err` and `b` is `Ok` returns -1, else if both are `Err` returns 0, else returns 1
  * 
@@ -174,15 +194,45 @@ export function cmp<A>(cmp: Functors.Comparable<A>, a: T<A>, b: T<A>): Functors.
  * @template A the type
  * @param cmp the comparer function
  * @param a first value
- * @returns the unary function
+ * @returns the unary function which returns 
+ *  - -1 if `a` is less than `b`
+ *  - 0 if `a` is same of `b` 
+ *  - 1 if `a` is greater than `b`.
  * @group Comparables
  * @since 4.0.0
  */
 export function cmp<A>(cmp: Functors.Comparable<A>, a: T<A>): Fn.Unary<T<A>, Functors.ComparableResult>;
 /**
- * Returns a binary function which compares two results `T<A>` by a given `Comparable<A>`.
+ * Returns a unary function which compares two results `T<A>` by a given `ComparableModule<A>`.
  * 
- * Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
+ * If `a` is `Err` and `b` is `Ok` returns -1, else if both are `Err` returns 0, else returns 1
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Str, Result } from 'tiinvo';
+ * 
+ * const cmp = Result.cmp(Str, "a");
+ * 
+ * cmp("a")                    // 0
+ * cmp("b")                    // -1
+ * cmp("a")                    // 1
+ * cmp(new Error())            // 1
+ * ```
+ * 
+ * @template A the type
+ * @param cmp the comparer module
+ * @param a first value
+ * @returns the unary function which returns
+ *  - -1 if `a` is less than `b`
+ *  - 0 if `a` is same of `b` 
+ *  - 1 if `a` is greater than `b`.
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function cmp<A>(cmp: Functors.ComparableModule<A>, a: T<A>): Fn.Unary<T<A>, Functors.ComparableResult>;
+/**
+ * Returns a binary function which compares two results `T<A>` by a given `Comparable<A>`.
  * 
  * If `a` is `Err` and `b` is `Ok` returns -1, else if both are `Err` returns 0, else returns 1
  * 
@@ -203,12 +253,45 @@ export function cmp<A>(cmp: Functors.Comparable<A>, a: T<A>): Fn.Unary<T<A>, Fun
  * 
  * @template A the type
  * @param cmp the comparer function
- * @returns the binary function
+ * @returns the binary function which returns
+ *  - -1 if `a` is less than `b`
+ *  - 0 if `a` is same of `b` 
+ *  - 1 if `a` is greater than `b`.
  * @group Comparables
  * @since 4.0.0
  */
 export function cmp<A>(cmp: Functors.Comparable<A>): Fn.Binary<T<A>, T<A>, Functors.ComparableResult>;
-export function cmp<A>(cmp: Functors.Comparable<A>, a?: T<A>, b?: T<A>): any {
+/**
+ * Returns a binary function which compares two results `T<A>` by a given `ComparableModule<A>`.
+ * 
+ * If `a` is `Err` and `b` is `Ok` returns -1, else if both are `Err` returns 0, else returns 1
+ * 
+ * @example
+ * 
+ * ```ts
+ * import { Str, Result } from 'tiinvo';
+ * 
+ * const cmp = Result.cmp(Str);
+ * 
+ * cmp("a", "a")                    // 0
+ * cmp("a", "b")                    // -1
+ * cmp("b", "a")                    // 1
+ * cmp("a", new Error())            // 1
+ * cmp(new Error(), "a")            // -1
+ * cmp(new Error(), new Error())    // 0
+ * ```
+ * 
+ * @template A the type
+ * @param cmp the comparer module
+ * @returns the binary function which returns
+ *  - -1 if `a` is less than `b`
+ *  - 0 if `a` is same of `b` 
+ *  - 1 if `a` is greater than `b`.
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function cmp<A>(cmp: Functors.ComparableModule<A>): Fn.Binary<T<A>, T<A>, Functors.ComparableResult>;
+export function cmp<A>(cmp: Functors.Comparable<A> | Functors.ComparableModule<A>, a?: T<A>, b?: T<A>): any {
   const _cmp = (x: T<A>, y: T<A>) => {
     if (isErr(x) && isErr(y)) {
       return 0;
@@ -222,7 +305,7 @@ export function cmp<A>(cmp: Functors.Comparable<A>, a?: T<A>, b?: T<A>): any {
       return 1;
     }
 
-    return cmp(x, y);
+    return typeof cmp === 'function' ? cmp(x, y) : cmp.cmp(x, y);
   };
 
   switch (arguments.length) {
@@ -255,6 +338,28 @@ export function cmp<A>(cmp: Functors.Comparable<A>, a?: T<A>, b?: T<A>): any {
  */
 export function eq<A>(eq: Functors.Equatable<A>, a: T<A>, b: T<A>): boolean;
 /**
+ * Returns true if two results are equal, false otherwise.
+ * 
+ * ```ts
+ * import { Num, Result } from 'tiinvo';
+ * 
+ * Result.eq(Num, 0, 0)                         // true
+ * Result.eq(Num, new Error(), new TypeError()) // true
+ * Result.eq(Num, new Error(), 0)               // false
+ * Result.eq(Num, 0, new Error())               // false
+ * Result.eq(Num, 1_000_000, 0)                 // false
+ * ```
+ * 
+ * @template A the value type
+ * @param eq the Equatable module 
+ * @param a the left compared value
+ * @param b the right compared value
+ * @returns true if `a` equals to `b` 
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function eq<A>(eq: Functors.EquatableModule<A>, a: T<A>, b: T<A>): boolean;
+/**
  * Returns a unary function which returns true if two results are equal, false otherwise.
  * 
  * ```ts
@@ -277,6 +382,28 @@ export function eq<A>(eq: Functors.Equatable<A>, a: T<A>, b: T<A>): boolean;
  */
 export function eq<A>(eq: Functors.Equatable<A>, a: T<A>): Fn.Unary<T<A>, boolean>;
 /**
+ * Returns a unary function which returns true if two results are equal, false otherwise.
+ * 
+ * ```ts
+ * import { Num, Result } from 'tiinvo';
+ * 
+ * const is0 = Result.eq(Num, 0)
+ * 
+ * Result.eq(0)                         // true
+ * Result.eq(new TypeError())           // false
+ * Result.eq(new Error())               // false
+ * Result.eq(1_000_000)                 // false
+ * ```
+ * 
+ * @template A the value type
+ * @param eq the Equatable functor 
+ * @param a the left compared value
+ * @returns the unary function
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function eq<A>(eq: Functors.EquatableModule<A>, a: T<A>): Fn.Unary<T<A>, boolean>;
+/**
  * Returns a binary function which returns true if two results are equal, false otherwise.
  * 
  * ```ts
@@ -297,7 +424,28 @@ export function eq<A>(eq: Functors.Equatable<A>, a: T<A>): Fn.Unary<T<A>, boolea
  * @since 4.0.0
  */
 export function eq<a>(eq: Functors.Equatable<a>): Fn.Binary<T<a>, T<a>, boolean>;
-export function eq<a>(eq: Functors.Equatable<a>, a?: T<a>, b?: T<a>): any {
+/**
+ * Returns a binary function which returns true if two results are equal, false otherwise.
+ * 
+ * ```ts
+ * import { Num, Result } from 'tiinvo';
+ * 
+ * const is0 = Result.eq(Num)
+ * 
+ * Result.eq(0, 0)                         // true
+ * Result.eq(new TypeError(), new Error()) // true
+ * Result.eq(0, new Error())               // false
+ * Result.eq(1_000, 1_000)                 // true
+ * ```
+ * 
+ * @template A the value type
+ * @param eq the Equatable module
+ * @returns the binary function
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function eq<a>(eq: Functors.EquatableModule<a>): Fn.Binary<T<a>, T<a>, boolean>;
+export function eq<a>(eq: Functors.Equatable<a> | Functors.EquatableModule<a>, a?: T<a>, b?: T<a>): any {
   const _eq = (x: T<a>, y: T<a>) => {
     if (isErr(x) && isErr(y)) {
       return true;
@@ -307,7 +455,7 @@ export function eq<a>(eq: Functors.Equatable<a>, a?: T<a>, b?: T<a>): any {
       return false;
     }
 
-    return eq(x, y);
+    return typeof eq === 'function' ? eq(x, y) : eq.eq(x, y);
   };
 
   switch (arguments.length) {

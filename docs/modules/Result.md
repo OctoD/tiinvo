@@ -46,7 +46,7 @@ Represents an error
 
 #### Defined in
 
-[src/Result.ts:9](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L9)
+[src/Result.ts:9](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L9)
 
 ___
 
@@ -64,7 +64,7 @@ Represents the successful result of an operation
 
 #### Defined in
 
-[src/Result.ts:13](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L13)
+[src/Result.ts:13](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L13)
 
 ___
 
@@ -82,7 +82,7 @@ Could represent both an Error `Err` or a successful result of an operation `Ok<a
 
 #### Defined in
 
-[src/Result.ts:17](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L17)
+[src/Result.ts:17](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L17)
 
 ## Factories
 
@@ -120,7 +120,7 @@ Result.err([10, 20, 30])          instanceof Error // true
 
 #### Defined in
 
-[src/Result.ts:39](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L39)
+[src/Result.ts:39](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L39)
 
 ## Guardables
 
@@ -157,7 +157,7 @@ true if `x` is `Err`, false otherwise
 
 #### Defined in
 
-[src/Result.ts:72](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L72)
+[src/Result.ts:72](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L72)
 
 ___
 
@@ -200,7 +200,7 @@ true if `x` is `Ok<A>`, false otherwise
 
 #### Defined in
 
-[src/Result.ts:91](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L91)
+[src/Result.ts:91](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L91)
 
 ___
 
@@ -256,7 +256,7 @@ x is A
 
 #### Defined in
 
-[src/Result.ts:112](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L112)
+[src/Result.ts:112](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L112)
 
 ## Comparables
 
@@ -265,8 +265,6 @@ x is A
 ▸ **cmp**<`A`\>(`cmp`, `a`, `b`): [`ComparableResult`](Functors.md#comparableresult)
 
 Compares two results `T<A>` by a given `Comparable<A>`.
-
-Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
 
  * If `a` is `Err` and `b` is `Ok` returns -1, else if both are `Err` returns 0, else returns 1
 
@@ -281,15 +279,6 @@ Result.cmp(Str.cmp, "b", "a")                    // 1
 Result.cmp(Str.cmp, new Error(), new Error())    // 0
 Result.cmp(Str.cmp, new Error(), "a")            // -1
 Result.cmp(Str.cmp, "a", new Error())            // 1
-
-const cmp = Result.cmp(Str.cmp);
-
-cmp("a", "a")                    // 0
-cmp("a", "b")                    // -1
-cmp("b", "a")                    // 1
-cmp(new Error(), new Error())    // 0
-cmp(new Error(), "a")            // -1
-cmp("a", new Error())            // 1
 ```
 
 **`Since`**
@@ -314,15 +303,66 @@ cmp("a", new Error())            // 1
 
 [`ComparableResult`](Functors.md#comparableresult)
 
+- -1 if `a` is less than `b`
+ - 0 if `a` is same of `b` 
+ - 1 if `a` is greater than `b`.
+
 #### Defined in
 
-[src/Result.ts:153](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L153)
+[src/Result.ts:146](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L146)
+
+▸ **cmp**<`A`\>(`cmp`, `a`, `b`): [`ComparableResult`](Functors.md#comparableresult)
+
+Compares two results `T<A>` by a given `ComparableModule<A>`.
+
+ * If `a` is `Err` and `b` is `Ok` returns -1, else if both are `Err` returns 0, else returns 1
+
+**`Example`**
+
+```ts
+import { Str, Result } from 'tiinvo';
+
+Result.cmp(Str, "a", "a")                    // 0
+Result.cmp(Str, "a", "b")                    // -1
+Result.cmp(Str, "b", "a")                    // 1
+Result.cmp(Str, new Error(), new Error())    // 0
+Result.cmp(Str, new Error(), "a")            // -1
+Result.cmp(Str, "a", new Error())            // 1
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Description |
+| :------ | :------ |
+| `A` | the type |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `cmp` | [`ComparableModule`](Functors.md#comparablemodule)<`A`\> | the comparer function |
+| `a` | [`T`](Result.md#t)<`A`\> | first value |
+| `b` | [`T`](Result.md#t)<`A`\> | last value |
+
+#### Returns
+
+[`ComparableResult`](Functors.md#comparableresult)
+
+- -1 if `a` is less than `b`
+ - 0 if `a` is same of `b` 
+ - 1 if `a` is greater than `b`.
+
+#### Defined in
+
+[src/Result.ts:175](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L175)
 
 ▸ **cmp**<`A`\>(`cmp`, `a`): [`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
 Returns a unary function which compares two results `T<A>` by a given `Comparable<A>`.
-
-Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
 
 If `a` is `Err` and `b` is `Ok` returns -1, else if both are `Err` returns 0, else returns 1
 
@@ -360,17 +400,67 @@ cmp(new Error())            // 1
 
 [`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
-the unary function
+the unary function which returns 
+ - -1 if `a` is less than `b`
+ - 0 if `a` is same of `b` 
+ - 1 if `a` is greater than `b`.
 
 #### Defined in
 
-[src/Result.ts:181](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L181)
+[src/Result.ts:204](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L204)
+
+▸ **cmp**<`A`\>(`cmp`, `a`): [`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+
+Returns a unary function which compares two results `T<A>` by a given `ComparableModule<A>`.
+
+If `a` is `Err` and `b` is `Ok` returns -1, else if both are `Err` returns 0, else returns 1
+
+**`Example`**
+
+```ts
+import { Str, Result } from 'tiinvo';
+
+const cmp = Result.cmp(Str, "a");
+
+cmp("a")                    // 0
+cmp("b")                    // -1
+cmp("a")                    // 1
+cmp(new Error())            // 1
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Description |
+| :------ | :------ |
+| `A` | the type |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `cmp` | [`ComparableModule`](Functors.md#comparablemodule)<`A`\> | the comparer module |
+| `a` | [`T`](Result.md#t)<`A`\> | first value |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+
+the unary function which returns
+ - -1 if `a` is less than `b`
+ - 0 if `a` is same of `b` 
+ - 1 if `a` is greater than `b`.
+
+#### Defined in
+
+[src/Result.ts:233](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L233)
 
 ▸ **cmp**<`A`\>(`cmp`): [`Binary`](Fn.md#binary)<[`T`](Result.md#t)<`A`\>, [`T`](Result.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
 Returns a binary function which compares two results `T<A>` by a given `Comparable<A>`.
-
-Returns -1 if `a` is less than `b`, 0 if `a` is same of `b` and 1 if `a` is greater than `b`.
 
 If `a` is `Err` and `b` is `Ok` returns -1, else if both are `Err` returns 0, else returns 1
 
@@ -409,11 +499,64 @@ cmp(new Error(), new Error())    // 0
 
 [`Binary`](Fn.md#binary)<[`T`](Result.md#t)<`A`\>, [`T`](Result.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
-the binary function
+the binary function which returns
+ - -1 if `a` is less than `b`
+ - 0 if `a` is same of `b` 
+ - 1 if `a` is greater than `b`.
 
 #### Defined in
 
-[src/Result.ts:210](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L210)
+[src/Result.ts:263](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L263)
+
+▸ **cmp**<`A`\>(`cmp`): [`Binary`](Fn.md#binary)<[`T`](Result.md#t)<`A`\>, [`T`](Result.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+
+Returns a binary function which compares two results `T<A>` by a given `ComparableModule<A>`.
+
+If `a` is `Err` and `b` is `Ok` returns -1, else if both are `Err` returns 0, else returns 1
+
+**`Example`**
+
+```ts
+import { Str, Result } from 'tiinvo';
+
+const cmp = Result.cmp(Str);
+
+cmp("a", "a")                    // 0
+cmp("a", "b")                    // -1
+cmp("b", "a")                    // 1
+cmp("a", new Error())            // 1
+cmp(new Error(), "a")            // -1
+cmp(new Error(), new Error())    // 0
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Description |
+| :------ | :------ |
+| `A` | the type |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `cmp` | [`ComparableModule`](Functors.md#comparablemodule)<`A`\> | the comparer module |
+
+#### Returns
+
+[`Binary`](Fn.md#binary)<[`T`](Result.md#t)<`A`\>, [`T`](Result.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+
+the binary function which returns
+ - -1 if `a` is less than `b`
+ - 0 if `a` is same of `b` 
+ - 1 if `a` is greater than `b`.
+
+#### Defined in
+
+[src/Result.ts:293](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L293)
 
 ___
 
@@ -459,7 +602,49 @@ true if `a` equals to `b`
 
 #### Defined in
 
-[src/Result.ts:256](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L256)
+[src/Result.ts:339](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L339)
+
+▸ **eq**<`A`\>(`eq`, `a`, `b`): `boolean`
+
+Returns true if two results are equal, false otherwise.
+
+```ts
+import { Num, Result } from 'tiinvo';
+
+Result.eq(Num, 0, 0)                         // true
+Result.eq(Num, new Error(), new TypeError()) // true
+Result.eq(Num, new Error(), 0)               // false
+Result.eq(Num, 0, new Error())               // false
+Result.eq(Num, 1_000_000, 0)                 // false
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Description |
+| :------ | :------ |
+| `A` | the value type |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `eq` | [`EquatableModule`](Functors.md#equatablemodule)<`A`\> | the Equatable module |
+| `a` | [`T`](Result.md#t)<`A`\> | the left compared value |
+| `b` | [`T`](Result.md#t)<`A`\> | the right compared value |
+
+#### Returns
+
+`boolean`
+
+true if `a` equals to `b`
+
+#### Defined in
+
+[src/Result.ts:361](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L361)
 
 ▸ **eq**<`A`\>(`eq`, `a`): [`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, `boolean`\>
 
@@ -501,7 +686,49 @@ the unary function
 
 #### Defined in
 
-[src/Result.ts:278](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L278)
+[src/Result.ts:383](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L383)
+
+▸ **eq**<`A`\>(`eq`, `a`): [`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, `boolean`\>
+
+Returns a unary function which returns true if two results are equal, false otherwise.
+
+```ts
+import { Num, Result } from 'tiinvo';
+
+const is0 = Result.eq(Num, 0)
+
+Result.eq(0)                         // true
+Result.eq(new TypeError())           // false
+Result.eq(new Error())               // false
+Result.eq(1_000_000)                 // false
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Description |
+| :------ | :------ |
+| `A` | the value type |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `eq` | [`EquatableModule`](Functors.md#equatablemodule)<`A`\> | the Equatable functor |
+| `a` | [`T`](Result.md#t)<`A`\> | the left compared value |
+
+#### Returns
+
+[`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, `boolean`\>
+
+the unary function
+
+#### Defined in
+
+[src/Result.ts:405](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L405)
 
 ▸ **eq**<`a`\>(`eq`): [`Binary`](Fn.md#binary)<[`T`](Result.md#t)<`a`\>, [`T`](Result.md#t)<`a`\>, `boolean`\>
 
@@ -542,7 +769,48 @@ the binary function
 
 #### Defined in
 
-[src/Result.ts:299](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L299)
+[src/Result.ts:426](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L426)
+
+▸ **eq**<`a`\>(`eq`): [`Binary`](Fn.md#binary)<[`T`](Result.md#t)<`a`\>, [`T`](Result.md#t)<`a`\>, `boolean`\>
+
+Returns a binary function which returns true if two results are equal, false otherwise.
+
+```ts
+import { Num, Result } from 'tiinvo';
+
+const is0 = Result.eq(Num)
+
+Result.eq(0, 0)                         // true
+Result.eq(new TypeError(), new Error()) // true
+Result.eq(0, new Error())               // false
+Result.eq(1_000, 1_000)                 // true
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `a` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `eq` | [`EquatableModule`](Functors.md#equatablemodule)<`a`\> | the Equatable module |
+
+#### Returns
+
+[`Binary`](Fn.md#binary)<[`T`](Result.md#t)<`a`\>, [`T`](Result.md#t)<`a`\>, `boolean`\>
+
+the binary function
+
+#### Defined in
+
+[src/Result.ts:447](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L447)
 
 ## Filterables
 
@@ -585,7 +853,7 @@ Result.filter(Num.gt(1), new TypeError()) // Error("Value did not pass filter")
 
 #### Defined in
 
-[src/Result.ts:342](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L342)
+[src/Result.ts:490](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L490)
 
 ▸ **filter**<`A`\>(`f`): [`Unary`](Fn.md#unary)<[`T`](Result.md#t)<`A`\>, [`T`](Result.md#t)<`A`\>\>
 
@@ -625,7 +893,7 @@ the unary function
 
 #### Defined in
 
-[src/Result.ts:362](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L362)
+[src/Result.ts:510](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L510)
 
 ## Functions
 
@@ -679,7 +947,7 @@ m(new Error('foobar!')) // Error('foobar!')
 
 #### Defined in
 
-[src/Result.ts:392](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L392)
+[src/Result.ts:540](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L540)
 
 ___
 
@@ -734,7 +1002,7 @@ map(new Error())    // 0
 
 #### Defined in
 
-[src/Result.ts:409](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L409)
+[src/Result.ts:557](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L557)
 
 ___
 
@@ -786,7 +1054,7 @@ Result.isErr(await safe(3)) // true
 
 #### Defined in
 
-[src/Result.ts:442](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L442)
+[src/Result.ts:590](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L590)
 
 ___
 
@@ -838,4 +1106,4 @@ Result.isErr(safe(3)) // true
 
 #### Defined in
 
-[src/Result.ts:480](https://github.com/OctoD/tiinvo/blob/3fa8e49/src/Result.ts#L480)
+[src/Result.ts:628](https://github.com/OctoD/tiinvo/blob/419618b/src/Result.ts#L628)

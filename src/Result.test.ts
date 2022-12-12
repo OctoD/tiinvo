@@ -42,6 +42,7 @@ describe("Result", () => {
 
   test(Result.cmp.name, () => {
     const cmp = Result.cmp(Str.cmp);
+    const cmpm = Result.cmp(Str);
 
     expect(Result.cmp(Str.cmp, "a", "a")).toEqual(0);
     expect(Result.cmp(Str.cmp, "a", "b")).toEqual(-1);
@@ -51,6 +52,14 @@ describe("Result", () => {
     expect(Result.cmp(Str.cmp, "a")("b")).toEqual(1);
     expect(Result.cmp(Str.cmp, "b")("a")).toEqual(-1);
 
+    expect(Result.cmp(Str, "a", "a")).toEqual(0);
+    expect(Result.cmp(Str, "a", "b")).toEqual(-1);
+    expect(Result.cmp(Str, "b", "a")).toEqual(1);
+
+    expect(Result.cmp(Str, "a")("a")).toEqual(0);
+    expect(Result.cmp(Str, "a")("b")).toEqual(1);
+    expect(Result.cmp(Str, "b")("a")).toEqual(-1);
+
     expect(cmp("a", "a")).toEqual(0);
     expect(cmp("a", "b")).toEqual(-1);
     expect(cmp("b", "a")).toEqual(1);
@@ -58,19 +67,36 @@ describe("Result", () => {
     expect(cmp(new Error(), new Error())).toEqual(0);
     expect(cmp(new Error(), "a")).toEqual(-1);
     expect(cmp("a", new Error())).toEqual(1);
+
+    expect(cmpm("a", "a")).toEqual(0);
+    expect(cmpm("a", "b")).toEqual(-1);
+    expect(cmpm("b", "a")).toEqual(1);
+    
+    expect(cmpm(new Error(), new Error())).toEqual(0);
+    expect(cmpm(new Error(), "a")).toEqual(-1);
+    expect(cmpm("a", new Error())).toEqual(1);
   });
 
   test(Result.eq.name, () => {
     const eq = Result.eq(Num.eq);
+    const eqm = Result.eq(Num);
 
     expect(Result.eq(Num.eq, 0, 0)).toEqual(true);
     expect(Result.eq(Num.eq, 0)(0)).toEqual(true);
+    expect(Result.eq(Num, 0, 0)).toEqual(true);
+    expect(Result.eq(Num, 0)(0)).toEqual(true);
     expect(eq(0, 0)).toEqual(true);
+    expect(eqm(0, 0)).toEqual(true);
 
     expect(eq(new Error(), new TypeError())).toEqual(true);
     expect(eq(new Error(), 0)).toEqual(false);
     expect(eq(0, new Error())).toEqual(false);
     expect(eq(1_000_000, 0)).toEqual(false);
+
+    expect(eqm(new Error(), new TypeError())).toEqual(true);
+    expect(eqm(new Error(), 0)).toEqual(false);
+    expect(eqm(0, new Error())).toEqual(false);
+    expect(eqm(1_000_000, 0)).toEqual(false);
   });
 
   test(Result.filter.name, () => {
