@@ -13,7 +13,7 @@
 
 ### async
 
-▸ **async**<`f`\>(...`f`): `f`[``0``] extends () => `any` ? () => `ReturnType`<`f`[`LastIndexOf`<`f`\>]\> : `f`[``0``] extends (`arg`: `U`) => `any` ? (`arg`: `U`) => `ReturnType`<`f`[`LastIndexOf`<`f`\>]\> : `never`
+▸ **async**<`f`\>(`...f`): `f`[``0``] extends () => `any` ? () => `ReturnType`<`f`[`LastIndexOf`<`f`\>]\> : `f`[``0``] extends (`arg`: `U`) => `any` ? (`arg`: `U`) => `ReturnType`<`f`[`LastIndexOf`<`f`\>]\> : `never`
 
 Same as the sync version, but handles promises.
 
@@ -39,13 +39,13 @@ Same as the sync version, but handles promises.
 
 #### Defined in
 
-[src/Pipe.ts:44](https://github.com/OctoD/tiinvo/blob/f0d2a3a/src/Pipe.ts#L44)
+[src/Pipe.ts:47](https://github.com/OctoD/tiinvo/blob/3d559cd/src/Pipe.ts#L47)
 
 ___
 
 ### sync
 
-▸ **sync**<`f`\>(...`f`): `f`[``0``] extends () => `any` ? () => `ReturnType`<`f`[`LastIndexOf`<`f`\>]\> : `f`[``0``] extends (`arg`: `U`) => `any` ? (`arg`: `U`) => `ReturnType`<`f`[`LastIndexOf`<`f`\>]\> : `never`
+▸ **sync**<`f`\>(`...f`): `f`[``0``] extends () => `any` ? () => `ReturnType`<`f`[`LastIndexOf`<`f`\>]\> : `f`[``0``] extends (`arg`: `U`) => `any` ? (`arg`: `U`) => `ReturnType`<`f`[`LastIndexOf`<`f`\>]\> : `never`
 
 Creates a pipeline of synchronous functions
 
@@ -83,4 +83,4 @@ vat(200)     // 44
 
 #### Defined in
 
-[src/Pipe.ts:39](https://github.com/OctoD/tiinvo/blob/f0d2a3a/src/Pipe.ts#L39)
+[src/Pipe.ts:42](https://github.com/OctoD/tiinvo/blob/3d559cd/src/Pipe.ts#L42)
