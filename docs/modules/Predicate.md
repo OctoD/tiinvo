@@ -47,7 +47,7 @@ const gt10: Predicate.T<number> = x => x > 10;
 
 #### Defined in
 
-[src/Predicate.ts:19](https://github.com/OctoD/tiinvo/blob/3d559cd/src/Predicate.ts#L19)
+[src/Predicate.ts:19](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Predicate.ts#L19)
 
 ## Functions
 
@@ -107,7 +107,7 @@ and(2) // false
 
 #### Defined in
 
-[src/Predicate.ts:39](https://github.com/OctoD/tiinvo/blob/3d559cd/src/Predicate.ts#L39)
+[src/Predicate.ts:39](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Predicate.ts#L39)
 
 ___
 
@@ -147,7 +147,7 @@ Predicate.eq(0, 0)       // true
 
 #### Defined in
 
-[src/Predicate.ts:72](https://github.com/OctoD/tiinvo/blob/3d559cd/src/Predicate.ts#L72)
+[src/Predicate.ts:72](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Predicate.ts#L72)
 
 ▸ **eq**<`A`\>(`a`): [`Unary`](Fn.md#unary)<`A`, `boolean`\>
 
@@ -184,7 +184,7 @@ eq0(0)                   // true
 
 #### Defined in
 
-[src/Predicate.ts:90](https://github.com/OctoD/tiinvo/blob/3d559cd/src/Predicate.ts#L90)
+[src/Predicate.ts:90](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Predicate.ts#L90)
 
 ___
 
@@ -223,7 +223,7 @@ true if a function signature is comparable to a `T<any>`, false otherwise
 
 #### Defined in
 
-[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/3d559cd/src/Functors.ts#L338)
+[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Functors.ts#L338)
 
 ___
 
@@ -266,7 +266,7 @@ the inverted predicate
 
 #### Defined in
 
-[src/Predicate.ts:136](https://github.com/OctoD/tiinvo/blob/3d559cd/src/Predicate.ts#L136)
+[src/Predicate.ts:136](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Predicate.ts#L136)
 
 ___
 
@@ -306,7 +306,7 @@ Predicate.neq(0, 0)        // false
 
 #### Defined in
 
-[src/Predicate.ts:154](https://github.com/OctoD/tiinvo/blob/3d559cd/src/Predicate.ts#L154)
+[src/Predicate.ts:154](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Predicate.ts#L154)
 
 ▸ **neq**<`A`\>(`a`): [`Unary`](Fn.md#unary)<`A`, `boolean`\>
 
@@ -343,7 +343,7 @@ neq(0)                     // false
 
 #### Defined in
 
-[src/Predicate.ts:173](https://github.com/OctoD/tiinvo/blob/3d559cd/src/Predicate.ts#L173)
+[src/Predicate.ts:173](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Predicate.ts#L173)
 
 ___
 
@@ -405,7 +405,7 @@ n(-5) // true
 
 #### Defined in
 
-[src/Predicate.ts:202](https://github.com/OctoD/tiinvo/blob/3d559cd/src/Predicate.ts#L202)
+[src/Predicate.ts:202](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Predicate.ts#L202)
 
 ___
 
@@ -466,4 +466,4 @@ or(2)  // true
 
 #### Defined in
 
-[src/Predicate.ts:238](https://github.com/OctoD/tiinvo/blob/3d559cd/src/Predicate.ts#L238)
+[src/Predicate.ts:238](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Predicate.ts#L238)

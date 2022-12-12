@@ -1,49 +1,49 @@
-type AsChain<
-  f extends [FuncType, ...FuncType[]],
-  g extends FuncType[] = Tail<f>
-  > = {
-    [k in keyof f]: (arg: ArgType<f[k]>) => ArgType<Lookup<g, k, any>, any>;
-  };
-
-type AsAsyncChain<
+export type AsChain<
   f extends [FuncType, ...FuncType[]],
   g extends FuncType[] = Tail<f>
 > = {
-  [k in keyof f]: (
-    arg: ArgType<f[k]>
-  ) => Promise<ArgType<Lookup<g, k, any>, any>>;
-};
+    [k in keyof f]: (arg: ArgType<f[k]>) => ArgType<Lookup<g, k, any>, any>;
+  };
 
-type ArgType<F, Else = never> = F extends (arg: infer A) => any ? A : Else;
+export type AsAsyncChain<
+  f extends [FuncType, ...FuncType[]],
+  g extends FuncType[] = Tail<f>
+> = {
+    [k in keyof f]: (
+      arg: ArgType<f[k]>
+    ) => Promise<ArgType<Lookup<g, k, any>, any>>;
+  };
 
-type FuncType = (arg: any) => any;
+export type ArgType<F, Else = never> = F extends (arg: infer A) => any ? A : Else;
 
-type LastIndexOf<a extends any[]> = ((...x: a) => void) extends (
+export type FuncType = (arg: any) => any;
+
+export type LastIndexOf<a extends any[]> = ((...x: a) => void) extends (
   y: any,
   ...z: infer b
 ) => void
   ? b["length"]
   : never;
 
-type Lookup<t, k extends keyof any, el = never> = k extends keyof t
+export type Lookup<t, k extends keyof any, el = never> = k extends keyof t
   ? t[k]
   : el;
 
-type Tail<a extends any[]> = ((...t: a) => void) extends (
+export type Tail<a extends any[]> = ((...t: a) => void) extends (
   x: any,
   ...u: infer b
 ) => void
   ? b
   : never;
 
-type Pipe = <f extends [((arg: any) => any | (() => any)), ...Array<(arg: any) => any>]>(
+export type Pipe = <f extends [((arg: any) => any | (() => any)), ...Array<(arg: any) => any>]>(
   ...f: f & AsChain<f>
 ) =>
   f[0] extends () => any ? () => ReturnType<f[LastIndexOf<f>]> : f[0] extends (arg: infer U) => any ? (arg: U) => ReturnType<f[LastIndexOf<f>]> : never;
 
-type PipeAsync = <
+export type PipeAsync = <
   f extends [((arg: any) => Promise<any> | (() => Promise<any>)), ...Array<(arg: any) => Promise<any>>]
-  >(
+>(
   ...f: f & AsAsyncChain<f>
 ) =>
   f[0] extends () => any ? () => ReturnType<f[LastIndexOf<f>]> : f[0] extends (arg: infer U) => any ? (arg: U) => ReturnType<f[LastIndexOf<f>]> : never;
