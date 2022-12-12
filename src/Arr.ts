@@ -383,7 +383,7 @@ export function guardOf<A>(g: Functors.Guardable<A>, x?: unknown): any {
 //#region comparables
 
 /**
- * Compares two arrays `T<A>` with a given `Comparable<a>`.
+ * Compares two arrays `T<A>` with a given `Comparable<A>`.
  * 
  * @example 
  * 
@@ -413,6 +413,36 @@ export function guardOf<A>(g: Functors.Guardable<A>, x?: unknown): any {
  */
 export function cmp<A>(cmp: Functors.Comparable<A>, a: T<A>, b: T<A>): Functors.ComparableResult;
 /**
+ * Compares two arrays `T<A>` with a given `ComparableModule<A>`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Arr, Str } from 'tiinvo';
+ * 
+ * Arr.cmp(Str, ['a'], ['a']) // 0
+ * Arr.cmp(Str, ['a'], ['b']) // -1
+ * Arr.cmp(Str, ['b'], ['a']) // 1
+ * Arr.cmp(Str, ['a'], ['a', 'b']) // -1
+ * Arr.cmp(Str, ['a', 'b'], ['a']) // 1
+ * Arr.cmp(Str, ['a', 'b'], ['a', 'b']) // 0
+ * Arr.cmp(Str, ['a', 'b', 'c'], ['a', 'b']) // 1
+ * Arr.cmp(Str, ['a', 'b', 'c'], ['a', 'b', 'c']) // 0
+ * ```
+ * 
+ * @template A the array's type
+ * @param cmp the comparator module
+ * @param a the first array to compare
+ * @param b the second array to compare
+ * @returns 
+ *  - 1 if `a` is greater then `b`
+ *  - -1 if `a` is less than `b`
+ *  - 0 if `a` and `b` are equal
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function cmp<A>(cmp: Functors.ComparableModule<A>, a: T<A>, b: T<A>): Functors.ComparableResult;
+/**
  * Compares two arrays `T<A>` with a given `Comparable<a>`.
  * 
  * @example 
@@ -432,37 +462,104 @@ export function cmp<A>(cmp: Functors.Comparable<A>, a: T<A>, b: T<A>): Functors.
  * 
  * @param cmp the comparator
  * @param a the first array to compare
- * @returns the unary function
+ * @returns the unary function which returns 
+ *  - 1 if `b` is greater then `a`
+ *  - -1 if `b` is less than `a`
+ *  - 0 if `a` and `b` are equal
  * @group Comparables
  * @since 4.0.0
  */
 export function cmp<A>(cmp: Functors.Comparable<A>, a: T<A>): (b: T<A>) => Functors.ComparableResult;
 /**
- * Compares two arrays `T<A>` with a given `Comparable<a>`.
+ * Compares two arrays `T<A>` with a given `ComparableModule<A>`.
  * 
  * @example 
  * 
  * ```ts
  * import { Arr, Str } from 'tiinvo';
  * 
- * Arr.cmp(Str.cmp)(['a'], ['a']) // 0
- * Arr.cmp(Str.cmp)(['a'], ['b']) // -1
- * Arr.cmp(Str.cmp)(['b'], ['a']) // 1
- * Arr.cmp(Str.cmp)(['a'], ['a', 'b']) // -1
- * Arr.cmp(Str.cmp)(['a', 'b'], ['a']) // 1
- * Arr.cmp(Str.cmp)(['a', 'b'], ['a', 'b']) // 0
- * Arr.cmp(Str.cmp)(['a', 'b', 'c'], ['a', 'b']) // 1
- * Arr.cmp(Str.cmp)(['a', 'b', 'c'], ['a', 'b', 'c']) // 0
+ * Arr.cmp(Str, ['a'])(['a']) // 0
+ * Arr.cmp(Str, ['a'])(['b']) // -1
+ * Arr.cmp(Str, ['b'])(['a']) // 1
+ * Arr.cmp(Str, ['a'])(['a', 'b']) // -1
+ * Arr.cmp(Str, ['a', 'b'])(['a']) // 1
+ * Arr.cmp(Str, ['a', 'b'])(['a', 'b']) // 0
+ * Arr.cmp(Str, ['a', 'b', 'c'])(['a', 'b']) // 1
+ * Arr.cmp(Str, ['a', 'b', 'c'])(['a', 'b', 'c']) // 0
+ * ```
+ * 
+ * @param cmp the comparator module
+ * @param a the first array to compare
+ * @returns the unary function which returns 
+ *  - 1 if `b` is greater then `a`
+ *  - -1 if `b` is less than `a`
+ *  - 0 if `a` and `b` are equal
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function cmp<A>(cmp: Functors.ComparableModule<A>, a: T<A>): (b: T<A>) => Functors.ComparableResult;
+/**
+ * Compares two arrays `T<A>` with a given `Comparable<A>`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Arr, Str } from 'tiinvo';
+ * 
+ * const cmpstr = Arr.cmp(Str.cmp);
+ * 
+ * cmpstr(['a'], ['a']) // 0
+ * cmpstr(['a'], ['b']) // -1
+ * cmpstr(['b'], ['a']) // 1
+ * cmpstr(['a'], ['a', 'b']) // -1
+ * cmpstr(['a', 'b'], ['a']) // 1
+ * cmpstr(['a', 'b'], ['a', 'b']) // 0
+ * cmpstr(['a', 'b', 'c'], ['a', 'b']) // 1
+ * cmpstr(['a', 'b', 'c'], ['a', 'b', 'c']) // 0
  * ```
  * 
  * @param cmp the comparator
- * @returns the binary function
+ * @returns the binary function which returns 
+ *  - 1 if `a` is greater then `b`
+ *  - -1 if `a` is less than `b`
+ *  - 0 if `a` and `b` are equal
  * @group Comparables
  * @since 4.0.0
  */
 export function cmp<A>(cmp: Functors.Comparable<A>): (a: T<A>, b: T<A>) => Functors.ComparableResult;
-export function cmp<a>(cmp: Functors.Comparable<a>, a?: T<a>, b?: T<a>): any {
-  const _cmp = (x: T<a>, y: T<a>) => {
+/**
+ * Compares two arrays `T<A>` with a given `ComparableModule<A>`.
+ * 
+ * @example 
+ * 
+ * ```ts
+ * import { Arr, Str } from 'tiinvo';
+ * 
+ * const cmpstr = Arr.cmp(Str);
+ * 
+ * cmpstr(['a'], ['a']) // 0
+ * cmpstr(['a'], ['b']) // -1
+ * cmpstr(['b'], ['a']) // 1
+ * cmpstr(['a'], ['a', 'b']) // -1
+ * cmpstr(['a', 'b'], ['a']) // 1
+ * cmpstr(['a', 'b'], ['a', 'b']) // 0
+ * cmpstr(['a', 'b', 'c'], ['a', 'b']) // 1
+ * cmpstr(['a', 'b', 'c'], ['a', 'b', 'c']) // 0
+ * ```
+ * 
+ * @param cmp the comparator module
+ * @returns the binary function which returns 
+ *  - 1 if `a` is greater then `b`
+ *  - -1 if `a` is less than `b`
+ *  - 0 if `a` and `b` are equal
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function cmp<A>(cmp: Functors.ComparableModule<A>): (a: T<A>, b: T<A>) => Functors.ComparableResult;
+export function cmp<A>(cmp: Functors.Comparable<A> | Functors.ComparableModule<A>, a?: T<A>, b?: T<A>): any {
+  const _cmp = (x: T<A>, y: T<A>) => {
+    const c = typeof cmp === 'function' ? cmp : cmp.cmp;
+    
     if (x.length > y.length) {
       return 1;
     } else if (x.length < y.length) {
@@ -472,7 +569,7 @@ export function cmp<a>(cmp: Functors.Comparable<a>, a?: T<a>, b?: T<a>): any {
     let s = 0;
 
     for (let i = 0; i < x.length; i++) {
-      s += cmp(x[i], y[i]);
+      s += c(x[i], y[i]);
     }
 
     if (s === 0) {
@@ -487,9 +584,9 @@ export function cmp<a>(cmp: Functors.Comparable<a>, a?: T<a>, b?: T<a>): any {
   if (arguments.length === 3 && guard(a) && guard(b)) {
     return _cmp(a, b);
   } else if (arguments.length === 2 && guard(a)) {
-    return (b: T<a>) => _cmp(a, b);
+    return (b: T<A>) => _cmp(a, b);
   } else if (arguments.length === 1) {
-    return (a: T<a>, b: T<a>) => _cmp(a, b);
+    return (a: T<A>, b: T<A>) => _cmp(a, b);
   }
 };
 
@@ -509,13 +606,42 @@ export function cmp<a>(cmp: Functors.Comparable<a>, a?: T<a>, b?: T<a>): any {
  * ```
  * 
  * @template A the array's type
- * @group Comparables
+ * @param e the equatable functor
+ * @param a the first array
+ * @param b the second array
  * @returns 
  *  -  true if `a` and `b` are the equal
  *  -  false otherwise
+ * @group Comparables
  * @since 4.0.0
  */
 export function eq<A>(e: Functors.Equatable<A>, a: T<A>, b: T<A>): boolean;
+/**
+ * Compares two arrays `T<A>` with a given `EquatableModule<a>` and returns true if are identical.
+ * 
+ * ```ts
+ * import { Arr, Str } from 'tiinvo';
+ * 
+ * Arr.eq(Str, ['a'], ['a'])            // true
+ * Arr.eq(Str, ['a'], ['b'])            // false
+ * Arr.eq(Str, ['b'], ['a'])            // false
+ * Arr.eq(Str, ['a'], ['a', 'b'])       // false
+ * Arr.eq(Str, ['a', 'b'], ['a'])       // false
+ * Arr.eq(Str, ['a', 'b'], ['b', 'a'])  // false
+ * Arr.eq(Str, ['a', 'b'], ['a', 'b'])  // true
+ * ```
+ * 
+ * @template A the array's type
+ * @param e the equatable functor module
+ * @param a the first array
+ * @param b the second array
+ * @returns 
+ *  -  true if `a` and `b` are the equal
+ *  -  false otherwise
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function eq<A>(e: Functors.EquatableModule<A>, a: T<A>, b: T<A>): boolean;
 /**
  * Given an `Equatable<A>` and an array `T<A>`, returns a `Fn.Unary<T<A>, boolean>` function to compare `a` and `b`.
  * 
@@ -533,13 +659,35 @@ export function eq<A>(e: Functors.Equatable<A>, a: T<A>, b: T<A>): boolean;
  * Arr.eq(Str.eq, ['a', 'b'])(['a', 'b'])  // true
  * ```
  * 
- * @group Comparables
  * @param e the equatable functor
  * @param a the array
  * @returns the unary function
+ * @group Comparables
  * @since 4.0.0
  */
 export function eq<A>(e: Functors.Equatable<A>, a: T<A>): Fn.Unary<T<A>, boolean>;
+/**
+ * Given an `EquatableModule<A>` and an array `T<A>`, returns a `Fn.Unary<T<A>, boolean>` function to compare `a` and `b`.
+ * 
+ * ```ts
+ * import { Arr, Str } from 'tiinvo';
+ * 
+ * Arr.eq(Str, ['a'])(['a'])            // true
+ * Arr.eq(Str, ['a'])(['b'])            // false
+ * Arr.eq(Str, ['b'])(['a'])            // false
+ * Arr.eq(Str, ['a'])(['a', 'b'])       // false
+ * Arr.eq(Str, ['a', 'b'])(['a'])       // false
+ * Arr.eq(Str, ['a', 'b'])(['b', 'a'])  // false
+ * Arr.eq(Str, ['a', 'b'])(['a', 'b'])  // true
+ * ```
+ * 
+ * @param e the equatable functor module
+ * @param a the array
+ * @returns the unary function
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function eq<A>(e: Functors.EquatableModule<A>, a: T<A>): Fn.Unary<T<A>, boolean>;
 /**
  * Given an `Equatable<a>`, returns a `Fn.Binary<t<a>, t<a>, boolean>` function to compare `a` and `b`.
  * 
@@ -563,8 +711,33 @@ export function eq<A>(e: Functors.Equatable<A>, a: T<A>): Fn.Unary<T<A>, boolean
  * @since 4.0.0
  */
 export function eq<A>(e: Functors.Equatable<A>): Fn.Binary<T<A>, T<A>, boolean>;
-export function eq<A>(e: Functors.Equatable<A>, a?: T<A>, b?: T<A>): any {
+/**
+ * Given an `EquatableModule<a>`, returns a `Fn.Binary<t<a>, t<a>, boolean>` function to compare `a` and `b`.
+ * 
+ * ```ts
+ * import { Arr, Str } from 'tiinvo';
+ * 
+ * const eq = Arr.eq(Str);
+ * 
+ * eq(['a'], ['a'])            // true
+ * eq(['a'], ['b'])            // false
+ * eq(['b'], ['a'])            // false
+ * eq(['a'], ['a', 'b'])       // false
+ * eq(['a', 'b'], ['a'])       // false
+ * eq(['a', 'b'], ['b', 'a'])  // false
+ * eq(['a', 'b'], ['a', 'b'])  // true
+ * ```
+ * 
+ * @param e the equatable functor module
+ * @returns the binary function
+ * @group Comparables
+ * @since 4.0.0
+ */
+export function eq<A>(e: Functors.EquatableModule<A>): Fn.Binary<T<A>, T<A>, boolean>;
+export function eq<A>(e: Functors.Equatable<A> | Functors.EquatableModule<A>, a?: T<A>, b?: T<A>): any {
   const _eq = (x: T<A>, y: T<A>) => {
+    const _e = typeof e === 'function' ? e : e.eq;
+    
     if (x.length !== y.length) {
       return false;
     }
@@ -572,10 +745,14 @@ export function eq<A>(e: Functors.Equatable<A>, a?: T<A>, b?: T<A>): any {
     let s = 0;
 
     for (let i = 0; i < x.length; i++) {
-      s += e(x[i], y[i]) ? 0 : 1;
+      if (_e(x[i], y[i])) {
+        continue;
+      } else {
+        return false;
+      }
     }
 
-    return s === 0;
+    return true;
   };
 
   if (guard(a) && guard(b)) {

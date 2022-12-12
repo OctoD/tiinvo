@@ -15,6 +15,15 @@ describe("Arr", () => {
     expect(Arr.cmp(Num.cmp, [0, 1, 1], [1, 0])).toBe(1);
     expect(Arr.cmp(Num.cmp, [1, 0], [0, 1, 1])).toBe(-1);
 
+    expect(Arr.cmp(Num, [], [])).toBe(0);
+    expect(Arr.cmp(Num, [1], [])).toBe(1);
+    expect(Arr.cmp(Num, [1], [1])).toBe(0);
+    expect(Arr.cmp(Num, [0], [1])).toBe(-1);
+    expect(Arr.cmp(Num, [0, 1], [1, 0])).toBe(0);
+    expect(Arr.cmp(Num, [1, 0], [0, 1])).toBe(0);
+    expect(Arr.cmp(Num, [0, 1, 1], [1, 0])).toBe(1);
+    expect(Arr.cmp(Num, [1, 0], [0, 1, 1])).toBe(-1);
+
     const cmp0 = Arr.cmp(Num.cmp, [1]);
     expect(cmp0([])).toBe(1);
     expect(cmp0([1])).toBe(0);
@@ -22,6 +31,14 @@ describe("Arr", () => {
     expect(cmp0([0, 1])).toBe(-1);
     expect(cmp0([1, 0])).toBe(-1);
     expect(cmp0([0, 1, 1])).toBe(-1);
+
+    const cmp0m = Arr.cmp(Num, [1]);
+    expect(cmp0m([])).toBe(1);
+    expect(cmp0m([1])).toBe(0);
+    expect(cmp0m([1, 0])).toBe(-1);
+    expect(cmp0m([0, 1])).toBe(-1);
+    expect(cmp0m([1, 0])).toBe(-1);
+    expect(cmp0m([0, 1, 1])).toBe(-1);
 
 
     const cmp1 = Arr.cmp(Num.cmp);
@@ -35,6 +52,17 @@ describe("Arr", () => {
     expect(cmp1([0, 1, 1], [1, 0])).toBe(1);
     expect(cmp1([1, 0], [0, 1, 1])).toBe(-1);
 
+    const cmp1m = Arr.cmp(Num);
+
+    expect(cmp1m([], [])).toBe(0);
+    expect(cmp1m([1], [])).toBe(1);
+    expect(cmp1m([1], [1])).toBe(0);
+    expect(cmp1m([0], [1])).toBe(-1);
+    expect(cmp1m([0, 1], [1, 0])).toBe(0);
+    expect(cmp1m([1, 0], [0, 1])).toBe(0);
+    expect(cmp1m([0, 1, 1], [1, 0])).toBe(1);
+    expect(cmp1m([1, 0], [0, 1, 1])).toBe(-1);
+
     const cmp2 = Arr.cmp(Str.cmp);
 
     expect(cmp2(['a'], ['a'])).toEqual(0);
@@ -45,6 +73,17 @@ describe("Arr", () => {
     expect(cmp2(['a', 'b'], ['a', 'b'])).toEqual(0);
     expect(cmp2(['a', 'b', 'c'], ['a', 'b'])).toEqual(1);
     expect(cmp2(['a', 'b', 'c'], ['a', 'b', 'c'])).toEqual(0);
+
+    const cmp2m = Arr.cmp(Str);
+
+    expect(cmp2m(['a'], ['a'])).toEqual(0);
+    expect(cmp2m(['a'], ['b'])).toEqual(-1);
+    expect(cmp2m(['b'], ['a'])).toEqual(1);
+    expect(cmp2m(['a'], ['a', 'b'])).toEqual(-1);
+    expect(cmp2m(['a', 'b'], ['a'])).toEqual(1);
+    expect(cmp2m(['a', 'b'], ['a', 'b'])).toEqual(0);
+    expect(cmp2m(['a', 'b', 'c'], ['a', 'b'])).toEqual(1);
+    expect(cmp2m(['a', 'b', 'c'], ['a', 'b', 'c'])).toEqual(0);
   });
 
   test(Arr.concat.name, () => {
@@ -82,6 +121,22 @@ describe("Arr", () => {
     expect(Arr.eq(Str.eq, ['a', 'b'])(['b', 'a'])).toEqual(false);
     expect(Arr.eq(Str.eq, ['a', 'b'])(['a', 'b'])).toEqual(true);
 
+    expect(Arr.eq(Str, ['a'], ['a'])).toEqual(true);
+    expect(Arr.eq(Str, ['a'], ['b'])).toEqual(false);
+    expect(Arr.eq(Str, ['b'], ['a'])).toEqual(false);
+    expect(Arr.eq(Str, ['a'], ['a', 'b'])).toEqual(false);
+    expect(Arr.eq(Str, ['a', 'b'], ['a'])).toEqual(false);
+    expect(Arr.eq(Str, ['a', 'b'], ['b', 'a'])).toEqual(false);
+    expect(Arr.eq(Str, ['a', 'b'], ['a', 'b'])).toEqual(true);
+
+    expect(Arr.eq(Str, ['a'])(['a'])).toEqual(true);
+    expect(Arr.eq(Str, ['a'])(['b'])).toEqual(false);
+    expect(Arr.eq(Str, ['b'])(['a'])).toEqual(false);
+    expect(Arr.eq(Str, ['a'])(['a', 'b'])).toEqual(false);
+    expect(Arr.eq(Str, ['a', 'b'])(['a'])).toEqual(false);
+    expect(Arr.eq(Str, ['a', 'b'])(['b', 'a'])).toEqual(false);
+    expect(Arr.eq(Str, ['a', 'b'])(['a', 'b'])).toEqual(true);
+
     const eq2 = Arr.eq(Str.eq);
 
     expect(eq2(['a'], ['a'])).toEqual(true);
@@ -91,6 +146,16 @@ describe("Arr", () => {
     expect(eq2(['a', 'b'], ['a'])).toEqual(false);
     expect(eq2(['a', 'b'], ['b', 'a'])).toEqual(false);
     expect(eq2(['a', 'b'], ['a', 'b'])).toEqual(true);
+
+    const eq2m = Arr.eq(Str);
+
+    expect(eq2m(['a'], ['a'])).toEqual(true);
+    expect(eq2m(['a'], ['b'])).toEqual(false);
+    expect(eq2m(['b'], ['a'])).toEqual(false);
+    expect(eq2m(['a'], ['a', 'b'])).toEqual(false);
+    expect(eq2m(['a', 'b'], ['a'])).toEqual(false);
+    expect(eq2m(['a', 'b'], ['b', 'a'])).toEqual(false);
+    expect(eq2m(['a', 'b'], ['a', 'b'])).toEqual(true);
   });
 
   test(Arr.every.name, () => {
