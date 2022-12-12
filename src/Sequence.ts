@@ -8,9 +8,7 @@ import { isErr } from './Result.js';
 const indexer = Symbol("indexer");
 
 /**
- * A `Sequence.T<A>` is an iterable list of elements `a` in a particular order.
- * 
- * It's immutable by design.
+ * A `Sequence.T<A>` is an immutable and iterable list of elements `a` in a particular order.
  */
 export type T<A> = Iterable<A> & {
   [indexer](): Readonly<Record<number, A>>;

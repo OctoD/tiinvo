@@ -5,7 +5,7 @@ import * as Sequence from './Sequence.js';
 const sortsymbol = Symbol('Sequence.sorted');
 
 /**
- * A sorted list is a `Sequence.t<a>` which all elements stored in it are sorted by a `Comparable<a>` functor.
+ * A sorted sequence is a `Sequence.t<a>` which all elements stored in it are sorted by a `Comparable<a>` functor.
  */
 export type T<a> = Sequence.T<a> & {
   [sortsymbol]: Functors.Comparable<a>;

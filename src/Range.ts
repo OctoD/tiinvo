@@ -18,6 +18,8 @@ export type T = {
  *
  * If the third parameter `step` is passed, the range will increment by that step
  * 
+ * **Important**: the range accepts negative values, and the `end` does not have to be greater than the `start`.
+ * 
  * @example
  *
  * ```ts
@@ -34,6 +36,12 @@ export type T = {
  * }
  * 
  * // will log 0, 2, 4, 6, 8, 10
+ * 
+ * for (const n of Range.make(10, 0, 2)) {
+ *    console.log(n)
+ * }
+ * 
+ * // will log 10, 8, 6, 4, 2, 0
  * ```
  *
  * @param start range's starting value

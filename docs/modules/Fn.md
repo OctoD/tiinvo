@@ -54,7 +54,7 @@ Represents any async function
 
 #### Defined in
 
-[src/Fn.ts:8](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L8)
+[src/Fn.ts:8](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L8)
 
 ___
 
@@ -80,7 +80,7 @@ Represents any function
 
 #### Defined in
 
-[src/Fn.ts:13](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L13)
+[src/Fn.ts:13](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L13)
 
 ___
 
@@ -117,7 +117,7 @@ Represents any unary function
 
 #### Defined in
 
-[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L22)
+[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L22)
 
 ___
 
@@ -156,7 +156,7 @@ Represents any binary function
 
 #### Defined in
 
-[src/Fn.ts:32](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L32)
+[src/Fn.ts:32](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L32)
 
 ___
 
@@ -197,7 +197,7 @@ Represents any ternary function
 
 #### Defined in
 
-[src/Fn.ts:43](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L43)
+[src/Fn.ts:43](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L43)
 
 ___
 
@@ -240,7 +240,7 @@ Represents any quaternary function
 
 #### Defined in
 
-[src/Fn.ts:55](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L55)
+[src/Fn.ts:55](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L55)
 
 ___
 
@@ -285,7 +285,7 @@ Represents any quinary function
 
 #### Defined in
 
-[src/Fn.ts:68](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L68)
+[src/Fn.ts:68](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L68)
 
 ___
 
@@ -332,7 +332,7 @@ Represents any senary function
 
 #### Defined in
 
-[src/Fn.ts:82](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L82)
+[src/Fn.ts:82](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L82)
 
 ___
 
@@ -381,7 +381,7 @@ Represents any septenary function
 
 #### Defined in
 
-[src/Fn.ts:97](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L97)
+[src/Fn.ts:97](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L97)
 
 ___
 
@@ -432,7 +432,7 @@ Represents any octonary function
 
 #### Defined in
 
-[src/Fn.ts:113](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L113)
+[src/Fn.ts:113](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L113)
 
 ___
 
@@ -485,7 +485,7 @@ Represents any nonary function
 
 #### Defined in
 
-[src/Fn.ts:130](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L130)
+[src/Fn.ts:130](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L130)
 
 ___
 
@@ -540,7 +540,7 @@ Represents any decenary function
 
 #### Defined in
 
-[src/Fn.ts:148](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L148)
+[src/Fn.ts:148](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L148)
 
 ___
 
@@ -552,7 +552,7 @@ Represents a generic function T with any arguments and any return value type.
 
 #### Defined in
 
-[src/Fn.ts:153](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L153)
+[src/Fn.ts:153](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L153)
 
 ## Functions
 
@@ -595,7 +595,7 @@ Fn.pass(20)      // 20
 
 #### Defined in
 
-[src/Fn.ts:173](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L173)
+[src/Fn.ts:173](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L173)
 
 ___
 
@@ -636,7 +636,7 @@ Fn.cmp(Num.sub, Num.add) // 1
 
 #### Defined in
 
-[src/Fn.ts:198](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L198)
+[src/Fn.ts:198](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L198)
 
 ▸ **cmp**(`a`): [`Unary`](Fn.md#unary)<[`T`](Fn.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -675,7 +675,7 @@ the unary function which checks
 
 #### Defined in
 
-[src/Fn.ts:221](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L221)
+[src/Fn.ts:221](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L221)
 
 ___
 
@@ -720,7 +720,7 @@ Fn.eq(Num.sub, Num.add) // false
 
 #### Defined in
 
-[src/Fn.ts:268](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L268)
+[src/Fn.ts:268](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L268)
 
 ▸ **eq**(`a`): [`Unary`](Fn.md#unary)<[`T`](Fn.md#t), `boolean`\>
 
@@ -764,7 +764,7 @@ the unary function which accepts a second function and returns
 
 #### Defined in
 
-[src/Fn.ts:296](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L296)
+[src/Fn.ts:296](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L296)
 
 ___
 
@@ -801,7 +801,7 @@ arguments count
 
 #### Defined in
 
-[src/Functors.ts:424](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Functors.ts#L424)
+[src/Functors.ts:424](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Functors.ts#L424)
 
 ___
 
@@ -838,7 +838,7 @@ the name
 
 #### Defined in
 
-[src/Functors.ts:424](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Functors.ts#L424)
+[src/Functors.ts:424](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Functors.ts#L424)
 
 ___
 
@@ -876,7 +876,7 @@ x is AnyFn
 
 #### Defined in
 
-[src/Fn.ts:365](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L365)
+[src/Fn.ts:365](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L365)
 
 ___
 
@@ -938,4 +938,4 @@ an array of the returning values of `ml`
 
 #### Defined in
 
-[src/Fn.ts:393](https://github.com/OctoD/tiinvo/blob/817a7a4/src/Fn.ts#L393)
+[src/Fn.ts:393](https://github.com/OctoD/tiinvo/blob/17d71cf/src/Fn.ts#L393)
