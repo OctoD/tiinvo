@@ -30,7 +30,7 @@
     "clean": "tsc --build --clean",
     "docs": "typedoc --out docs src/index.ts",
     "test": "vitest run --coverage",
-    "deploy": "npm test && npm run clean && npm run build && cd dist && npm publish && cd .. && npm run clean",
+    "deploy": "npm test && npm run clean && npm run build && npm publish && npm run clean",
     "upgrade-interactive": "npx npm-check --update"
   },
   "homepage": "https://github.com/octod/tiinvo",
