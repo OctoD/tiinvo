@@ -70,6 +70,7 @@ This library provides several new data types like
 - `Result` handles errors gracefully.
 - `Sequence` is an immutable sequence of elements.
 - `SortedSequence` is a sorted immutable sequence of elements.
+- `TypedMap` is a typed immutable Map of elements.
 - `TypedSequence` is a typed immutable sequence of elements.
   
 wraps native types

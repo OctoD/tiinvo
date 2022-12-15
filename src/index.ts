@@ -16,6 +16,7 @@ import * as Result from './Result.js';
 import * as Sequence from './Sequence.js';
 import * as SortedSequence from './SortedSequence.js';
 import * as Str from './Str.js';
+import * as TypedMap from './TypedMap.js';
 import * as TypedSequence from './TypedSequence.js';
 
 export {
@@ -38,5 +39,6 @@ export {
   Sequence,
   SortedSequence,
   Str,
+  TypedMap,
   TypedSequence,
 };

@@ -24,6 +24,7 @@
 - [Sequence](modules/Sequence.md)
 - [SortedSequence](modules/SortedSequence.md)
 - [Str](modules/Str.md)
+- [TypedMap](modules/TypedMap.md)
 - [TypedSequence](modules/TypedSequence.md)
 
 ### References
