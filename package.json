@@ -39,12 +39,12 @@
     "url": "git+https://github.com/octod/tiinvo.git"
   },
   "devDependencies": {
-    "@types/node": "^18.11.13",
-    "@vitest/coverage-c8": "^0.25.7",
+    "@types/node": "^18.11.15",
+    "@vitest/coverage-c8": "^0.25.8",
     "typedoc": "^0.23.22",
     "typedoc-plugin-extras": "^2.3.1",
     "typedoc-plugin-markdown": "^3.14.0",
     "typescript": "^4.9.4",
-    "vitest": "^0.25.7"
+    "vitest": "^0.25.8"
   }
 }
