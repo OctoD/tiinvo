@@ -40,22 +40,22 @@ import { Arr, Option, Result } from 'https://cdn.skypack.dev/tiinvo?dts';
 
 This library is 
 
+- Simple
 - Intuitive
 - Lightweight
 - Pragmatic
 - Safe
-- Side-effect free
+- Side-effect free and fully tree-shakeable
 - Versatile
 - Battle-tested (used in dozens of production projects)
 - Well-documented (every type, function and function overload is documented properly)
 - Well-maintained
 - Well-tested
-- Simple
 
 This library is ideal for both an imperative and declarative approach, since every function
 is overloaded and can be used without the need to use curry (I love it for cooking, not for coding).
 
-It normalizes several native javascript methods (like string, number and array).
+It normalizes several native JavaScript methods (like string, number and array).
 
 # Usage
 
