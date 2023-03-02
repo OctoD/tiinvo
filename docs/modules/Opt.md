@@ -1,36 +1,36 @@
-[tiinvo](../README.md) / [Exports](../modules.md) / Option
+[tiinvo](../README.md) / [Exports](../modules.md) / Opt
 
-# Namespace: Option
+# Namespace: Opt
 
 ## Table of contents
 
 ### Type Aliases
 
-- [None](Option.md#none)
-- [Some](Option.md#some)
-- [T](Option.md#t)
+- [None](Opt.md#none)
+- [Some](Opt.md#some)
+- [T](Opt.md#t)
 
 ### Functions
 
-- [isNone](Option.md#isnone)
-- [isSome](Option.md#issome)
-- [guardOf](Option.md#guardof)
-- [tryAsync](Option.md#tryasync)
-- [trySync](Option.md#trysync)
+- [isNone](Opt.md#isnone)
+- [isSome](Opt.md#issome)
+- [guardOf](Opt.md#guardof)
+- [tryAsync](Opt.md#tryasync)
+- [trySync](Opt.md#trysync)
 
 ### Comparables
 
-- [cmp](Option.md#cmp)
-- [eq](Option.md#eq)
+- [cmp](Opt.md#cmp)
+- [eq](Opt.md#eq)
 
 ### Filterables
 
-- [filter](Option.md#filter)
+- [filter](Opt.md#filter)
 
 ### Mappables
 
-- [map](Option.md#map)
-- [mapOr](Option.md#mapor)
+- [map](Opt.md#map)
+- [mapOr](Opt.md#mapor)
 
 ## Type Aliases
 
@@ -48,13 +48,13 @@ but we can use them interchangeably within the option type.
 
 #### Defined in
 
-[src/Option.ts:12](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L12)
+[src/Option.ts:12](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L12)
 
 ___
 
 ### Some
 
-Ƭ **Some**<`A`\>: `A` extends [`None`](Option.md#none) ? `never` : `A`
+Ƭ **Some**<`A`\>: `A` extends [`None`](Opt.md#none) ? `never` : `A`
 
 `Some<A>` represents a value which cannot be `null` or `undefined`
 
@@ -70,13 +70,13 @@ ___
 
 #### Defined in
 
-[src/Option.ts:19](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L19)
+[src/Option.ts:19](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L19)
 
 ___
 
 ### T
 
-Ƭ **T**<`A`\>: [`Some`](Option.md#some)<`A`\> \| [`None`](Option.md#none)
+Ƭ **T**<`A`\>: [`Some`](Opt.md#some)<`A`\> \| [`None`](Opt.md#none)
 
 The type `Option.T<A>` represents a value that could be both `A` or `null` or `undefined`.
 
@@ -92,7 +92,7 @@ The type `Option.T<A>` represents a value that could be both `A` or `null` or `u
 
 #### Defined in
 
-[src/Option.ts:25](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L25)
+[src/Option.ts:25](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L25)
 
 ## Functions
 
@@ -129,7 +129,7 @@ x is None
 
 #### Defined in
 
-[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L338)
+[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L338)
 
 ___
 
@@ -166,13 +166,13 @@ x is unknown
 
 #### Defined in
 
-[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L338)
+[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L338)
 
 ___
 
 ### guardOf
 
-▸ **guardOf**<`A`\>(`f`): [`Guardable`](Functors.md#guardable)<[`T`](Option.md#t)<`A`\>\>
+▸ **guardOf**<`A`\>(`f`): [`Guardable`](Functors.md#guardable)<[`T`](Opt.md#t)<`A`\>\>
 
 Returns `true` if the option is `Some<A>` and the value type is satisfied by the guard, otherwise `false`.
 
@@ -213,7 +213,7 @@ isnumsome(w) // false
 
 #### Returns
 
-[`Guardable`](Functors.md#guardable)<[`T`](Option.md#t)<`A`\>\>
+[`Guardable`](Functors.md#guardable)<[`T`](Opt.md#t)<`A`\>\>
 
 the new `Guardable<T<A>>` which returns
  - `true` if `x` is `None` or is `Some<A>`
@@ -221,13 +221,13 @@ the new `Guardable<T<A>>` which returns
 
 #### Defined in
 
-[src/Option.ts:92](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L92)
+[src/Option.ts:92](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L92)
 
 ___
 
 ### tryAsync
 
-▸ **tryAsync**<`F`\>(`f`): (...`args`: `Parameters`<`F`\>) => `Promise`<[`T`](Option.md#t)<`ReturnType`<`F`\>\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`F`\>) => `Promise`<[`None`](Option.md#none) \| `Awaited`<[`Some`](Option.md#some)<`ReturnType`<`F`\>\>\>\> : (...`args`: `Parameters`<`F`\>) => `Promise`<[`T`](Option.md#t)<`ReturnType`<`F`\>\>\>
+▸ **tryAsync**<`F`\>(`f`): (...`args`: `Parameters`<`F`\>) => `Promise`<[`T`](Opt.md#t)<`ReturnType`<`F`\>\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`F`\>) => `Promise`<[`None`](Opt.md#none) \| `Awaited`<[`Some`](Opt.md#some)<`ReturnType`<`F`\>\>\>\> : (...`args`: `Parameters`<`F`\>) => `Promise`<[`T`](Opt.md#t)<`ReturnType`<`F`\>\>\>
 
 Calls a function `F` with it's arguments and returns a `Promise<Option.T<ReturnType<f>>>`
 
@@ -269,7 +269,7 @@ Option.isNone(await safe(3)) // true
 
 #### Returns
 
-(...`args`: `Parameters`<`F`\>) => `Promise`<[`T`](Option.md#t)<`ReturnType`<`F`\>\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`F`\>) => `Promise`<[`None`](Option.md#none) \| `Awaited`<[`Some`](Option.md#some)<`ReturnType`<`F`\>\>\>\> : (...`args`: `Parameters`<`F`\>) => `Promise`<[`T`](Option.md#t)<`ReturnType`<`F`\>\>\>
+(...`args`: `Parameters`<`F`\>) => `Promise`<[`T`](Opt.md#t)<`ReturnType`<`F`\>\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`F`\>) => `Promise`<[`None`](Opt.md#none) \| `Awaited`<[`Some`](Opt.md#some)<`ReturnType`<`F`\>\>\>\> : (...`args`: `Parameters`<`F`\>) => `Promise`<[`T`](Opt.md#t)<`ReturnType`<`F`\>\>\>
 
 the wrapped function
  - returns `Promise<None>` if the function catched
@@ -277,13 +277,13 @@ the wrapped function
 
 #### Defined in
 
-[src/Option.ts:629](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L629)
+[src/Option.ts:629](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L629)
 
 ___
 
 ### trySync
 
-▸ **trySync**<`F`\>(`f`): (...`args`: `Parameters`<`F`\>) => [`T`](Option.md#t)<`ReturnType`<`F`\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`F`\>) => `Promise`<[`None`](Option.md#none) \| `Awaited`<[`Some`](Option.md#some)<`ReturnType`<`F`\>\>\>\> : (...`args`: `Parameters`<`F`\>) => [`T`](Option.md#t)<`ReturnType`<`F`\>\>
+▸ **trySync**<`F`\>(`f`): (...`args`: `Parameters`<`F`\>) => [`T`](Opt.md#t)<`ReturnType`<`F`\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`F`\>) => `Promise`<[`None`](Opt.md#none) \| `Awaited`<[`Some`](Opt.md#some)<`ReturnType`<`F`\>\>\>\> : (...`args`: `Parameters`<`F`\>) => [`T`](Opt.md#t)<`ReturnType`<`F`\>\>
 
 Calls a function `F` with it's arguments and returns a `Option.T<ReturnType<f>>`
 
@@ -325,7 +325,7 @@ Option.isNone(safe(3)) // true
 
 #### Returns
 
-(...`args`: `Parameters`<`F`\>) => [`T`](Option.md#t)<`ReturnType`<`F`\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`F`\>) => `Promise`<[`None`](Option.md#none) \| `Awaited`<[`Some`](Option.md#some)<`ReturnType`<`F`\>\>\>\> : (...`args`: `Parameters`<`F`\>) => [`T`](Option.md#t)<`ReturnType`<`F`\>\>
+(...`args`: `Parameters`<`F`\>) => [`T`](Opt.md#t)<`ReturnType`<`F`\>\> extends [`AnyAsyncFn`](Fn.md#anyasyncfn) ? (...`args`: `Parameters`<`F`\>) => `Promise`<[`None`](Opt.md#none) \| `Awaited`<[`Some`](Opt.md#some)<`ReturnType`<`F`\>\>\>\> : (...`args`: `Parameters`<`F`\>) => [`T`](Opt.md#t)<`ReturnType`<`F`\>\>
 
 the wrapped function
  - returns `None` if the function catched
@@ -333,7 +333,7 @@ the wrapped function
 
 #### Defined in
 
-[src/Option.ts:670](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L670)
+[src/Option.ts:670](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L670)
 
 ## Comparables
 
@@ -371,8 +371,8 @@ Option.cmp(Str.cmp, "a", undefined)              // 1
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `c` | [`Comparable`](Functors.md#comparable)<`A`\> | the `Comparable<A>` |
-| `a` | [`T`](Option.md#t)<`A`\> | the left-hand compared `Option.T<A>` |
-| `b` | [`T`](Option.md#t)<`A`\> | the right-hand compared `Option.T<A>` |
+| `a` | [`T`](Opt.md#t)<`A`\> | the left-hand compared `Option.T<A>` |
+| `b` | [`T`](Opt.md#t)<`A`\> | the right-hand compared `Option.T<A>` |
 
 #### Returns
 
@@ -384,7 +384,7 @@ Option.cmp(Str.cmp, "a", undefined)              // 1
 
 #### Defined in
 
-[src/Option.ts:123](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L123)
+[src/Option.ts:123](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L123)
 
 ▸ **cmp**<`A`\>(`c`, `a`, `b`): [`ComparableResult`](Functors.md#comparableresult)
 
@@ -418,8 +418,8 @@ Option.cmp(Str, "a", undefined)              // 1
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `c` | [`ComparableModule`](Functors.md#comparablemodule)<`A`\> | the `ComparableModule<A>` |
-| `a` | [`T`](Option.md#t)<`A`\> | the left-hand compared `Option.T<A>` |
-| `b` | [`T`](Option.md#t)<`A`\> | the right-hand compared `Option.T<A>` |
+| `a` | [`T`](Opt.md#t)<`A`\> | the left-hand compared `Option.T<A>` |
+| `b` | [`T`](Opt.md#t)<`A`\> | the right-hand compared `Option.T<A>` |
 
 #### Returns
 
@@ -431,9 +431,9 @@ Option.cmp(Str, "a", undefined)              // 1
 
 #### Defined in
 
-[src/Option.ts:151](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L151)
+[src/Option.ts:151](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L151)
 
-▸ **cmp**<`A`\>(`c`, `a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+▸ **cmp**<`A`\>(`c`, `a`): [`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
 Compares two options `T<A>` by a given `Comparable<A>`.
 
@@ -465,11 +465,11 @@ Option.cmp(Str.cmp, "a")(undefined)              // -1
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `c` | [`Comparable`](Functors.md#comparable)<`A`\> | the `Comparable<A>` functor |
-| `a` | [`T`](Option.md#t)<`A`\> | the right-hand compared value |
+| `a` | [`T`](Opt.md#t)<`A`\> | the right-hand compared value |
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+[`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
 the unary comparer functor which takes the left-hand compared value and returns 
  - `0` if `a` equals to `b` or both `a` and `b` are `None`
@@ -478,9 +478,9 @@ the unary comparer functor which takes the left-hand compared value and returns
 
 #### Defined in
 
-[src/Option.ts:177](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L177)
+[src/Option.ts:177](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L177)
 
-▸ **cmp**<`A`\>(`c`, `a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+▸ **cmp**<`A`\>(`c`, `a`): [`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
 Compares two options `T<A>` by a given `ComparableModule<A>`.
 
@@ -512,11 +512,11 @@ Option.cmp(Str, "a")(undefined)              // -1
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `c` | [`ComparableModule`](Functors.md#comparablemodule)<`A`\> | the `ComparableModule<A>` functor |
-| `a` | [`T`](Option.md#t)<`A`\> | the right-hand compared value |
+| `a` | [`T`](Opt.md#t)<`A`\> | the right-hand compared value |
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+[`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
 the unary comparer functor which takes the left-hand compared value and returns 
  - `0` if `a` equals to `b` or both `a` and `b` are `None`
@@ -525,9 +525,9 @@ the unary comparer functor which takes the left-hand compared value and returns
 
 #### Defined in
 
-[src/Option.ts:203](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L203)
+[src/Option.ts:203](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L203)
 
-▸ **cmp**<`A`\>(`c`): [`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+▸ **cmp**<`A`\>(`c`): [`Binary`](Fn.md#binary)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
 Compares two options `T<A>` by a given `Comparable<A>`.
 
@@ -564,7 +564,7 @@ cmp("a", undefined)              // 1
 
 #### Returns
 
-[`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+[`Binary`](Fn.md#binary)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
 the binary comparer functor which takes two values `a` and `b` and returns 
  - `0` if `a` equals to `b` or both `a` and `b` are `None`
@@ -573,9 +573,9 @@ the binary comparer functor which takes two values `a` and `b` and returns
 
 #### Defined in
 
-[src/Option.ts:230](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L230)
+[src/Option.ts:230](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L230)
 
-▸ **cmp**<`A`\>(`c`): [`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+▸ **cmp**<`A`\>(`c`): [`Binary`](Fn.md#binary)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
 Compares two options `T<A>` by a given `ComparableModule<A>`.
 
@@ -612,7 +612,7 @@ cmp("a", undefined)              // 1
 
 #### Returns
 
-[`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
+[`Binary`](Fn.md#binary)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
 the binary comparer functor which takes two values `a` and `b` and returns 
  - `0` if `a` equals to `b` or both `a` and `b` are `None`
@@ -621,7 +621,7 @@ the binary comparer functor which takes two values `a` and `b` and returns
 
 #### Defined in
 
-[src/Option.ts:257](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L257)
+[src/Option.ts:257](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L257)
 
 ___
 
@@ -658,8 +658,8 @@ Option.eq(Num.eq, null, undefined)   // true
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `e` | [`Equatable`](Functors.md#equatable)<`A`\> | the equatable functor |
-| `a` | [`T`](Option.md#t)<`A`\> | the left-hand compared value |
-| `b` | [`T`](Option.md#t)<`A`\> | the right-hand compared value |
+| `a` | [`T`](Opt.md#t)<`A`\> | the left-hand compared value |
+| `b` | [`T`](Opt.md#t)<`A`\> | the right-hand compared value |
 
 #### Returns
 
@@ -670,7 +670,7 @@ Option.eq(Num.eq, null, undefined)   // true
 
 #### Defined in
 
-[src/Option.ts:306](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L306)
+[src/Option.ts:306](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L306)
 
 ▸ **eq**<`A`\>(`e`, `a`, `b`): `boolean`
 
@@ -701,8 +701,8 @@ Option.eq(Num.eq, null, undefined)   // true
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `e` | [`EquatableModule`](Functors.md#equatablemodule)<`A`\> | the equatable functor module |
-| `a` | [`T`](Option.md#t)<`A`\> | the left-hand compared value |
-| `b` | [`T`](Option.md#t)<`A`\> | the right-hand compared value |
+| `a` | [`T`](Opt.md#t)<`A`\> | the left-hand compared value |
+| `b` | [`T`](Opt.md#t)<`A`\> | the right-hand compared value |
 
 #### Returns
 
@@ -713,9 +713,9 @@ Option.eq(Num.eq, null, undefined)   // true
 
 #### Defined in
 
-[src/Option.ts:329](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L329)
+[src/Option.ts:329](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L329)
 
-▸ **eq**<`A`\>(`e`, `a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, `boolean`\>
+▸ **eq**<`A`\>(`e`, `a`): [`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, `boolean`\>
 
 Returns true if two options `T<A>` are equal, false otherwise.
 
@@ -743,11 +743,11 @@ Option.eq(Num.eq, null)(100000000)           // false
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `e` | [`Equatable`](Functors.md#equatable)<`A`\> | the equatable functor |
-| `a` | [`T`](Option.md#t)<`A`\> | the right-hand compared value |
+| `a` | [`T`](Opt.md#t)<`A`\> | the right-hand compared value |
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, `boolean`\>
+[`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, `boolean`\>
 
 the unary function which returns
  - `true` if `a` equals to `b`
@@ -755,9 +755,9 @@ the unary function which returns
 
 #### Defined in
 
-[src/Option.ts:350](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L350)
+[src/Option.ts:350](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L350)
 
-▸ **eq**<`A`\>(`e`, `a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, `boolean`\>
+▸ **eq**<`A`\>(`e`, `a`): [`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, `boolean`\>
 
 Returns true if two options `T<A>` are equal, false otherwise.
 
@@ -785,11 +785,11 @@ Option.eq(Num, null)(100000000)           // false
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `e` | [`EquatableModule`](Functors.md#equatablemodule)<`A`\> | the equatable functor module |
-| `a` | [`T`](Option.md#t)<`A`\> | the right-hand compared value |
+| `a` | [`T`](Opt.md#t)<`A`\> | the right-hand compared value |
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, `boolean`\>
+[`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, `boolean`\>
 
 the unary function which returns
  - `true` if `a` equals to `b`
@@ -797,9 +797,9 @@ the unary function which returns
 
 #### Defined in
 
-[src/Option.ts:371](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L371)
+[src/Option.ts:371](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L371)
 
-▸ **eq**<`A`\>(`e`): [`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, `boolean`\>
+▸ **eq**<`A`\>(`e`): [`Binary`](Fn.md#binary)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`A`\>, `boolean`\>
 
 Returns true if two options `T<A>` are equal, false otherwise.
 
@@ -833,7 +833,7 @@ eq(1_000_000, 0)                 // false
 
 #### Returns
 
-[`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, `boolean`\>
+[`Binary`](Fn.md#binary)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`A`\>, `boolean`\>
 
 the binary function which returns
  - `true` if `a` equals to `b`
@@ -841,9 +841,9 @@ the binary function which returns
 
 #### Defined in
 
-[src/Option.ts:394](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L394)
+[src/Option.ts:394](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L394)
 
-▸ **eq**<`A`\>(`e`): [`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, `boolean`\>
+▸ **eq**<`A`\>(`e`): [`Binary`](Fn.md#binary)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`A`\>, `boolean`\>
 
 Returns true if two options `T<A>` are equal, false otherwise.
 
@@ -877,7 +877,7 @@ eq(1_000_000, 0)                 // false
 
 #### Returns
 
-[`Binary`](Fn.md#binary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>, `boolean`\>
+[`Binary`](Fn.md#binary)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`A`\>, `boolean`\>
 
 the binary function which returns
  - `true` if `a` equals to `b`
@@ -885,13 +885,13 @@ the binary function which returns
 
 #### Defined in
 
-[src/Option.ts:417](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L417)
+[src/Option.ts:417](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L417)
 
 ## Filterables
 
 ### filter
 
-▸ **filter**<`A`\>(`a`, `b`): [`T`](Option.md#t)<`A`\>
+▸ **filter**<`A`\>(`a`, `b`): [`T`](Opt.md#t)<`A`\>
 
 Returns `Some<A>` if the value is `Some<A>` and the predicate returns true, otherwise returns `None`.
 
@@ -918,20 +918,20 @@ Option.filter(Num.gt(1), null) // null
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `a` | [`Mappable`](Functors.md#mappable)<`A`, `boolean`\> | the predicate |
-| `b` | [`T`](Option.md#t)<`A`\> | the value to filter |
+| `b` | [`T`](Opt.md#t)<`A`\> | the value to filter |
 
 #### Returns
 
-[`T`](Option.md#t)<`A`\>
+[`T`](Opt.md#t)<`A`\>
 
 - `T<A>` if the predicate is satisfied
  - `None` if the predicate is not satisfied
 
 #### Defined in
 
-[src/Option.ts:460](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L460)
+[src/Option.ts:460](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L460)
 
-▸ **filter**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>\>
+▸ **filter**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`A`\>\>
 
 Returns `Some<A>` if the value is `Some<A>` and the predicate returns true, otherwise returns `None`.
 
@@ -963,19 +963,19 @@ f(null) // null
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`A`\>\>
+[`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`A`\>\>
 
 the unary function which filters the value `b`
 
 #### Defined in
 
-[src/Option.ts:480](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L480)
+[src/Option.ts:480](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L480)
 
 ## Mappables
 
 ### map
 
-▸ **map**<`A`, `B`\>(`m`, `a`): [`T`](Option.md#t)<`B`\>
+▸ **map**<`A`, `B`\>(`m`, `a`): [`T`](Opt.md#t)<`B`\>
 
 Maps an `Option.T<A>` to another `Option.T<b>` if is `Some<A>`, otherwise returns `None`.
 
@@ -1004,19 +1004,19 @@ Option.map(Num.add(1), null) // null
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `m` | [`Mappable`](Functors.md#mappable)<`A`, `B`\> | the mappable |
-| `a` | [`T`](Option.md#t)<`A`\> | the value to map |
+| `a` | [`T`](Opt.md#t)<`A`\> | the value to map |
 
 #### Returns
 
-[`T`](Option.md#t)<`B`\>
+[`T`](Opt.md#t)<`B`\>
 
 the mapped option `T<B>`
 
 #### Defined in
 
-[src/Option.ts:513](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L513)
+[src/Option.ts:513](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L513)
 
-▸ **map**<`A`, `B`\>(`m`): [`Mappable`](Functors.md#mappable)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`B`\>\>
+▸ **map**<`A`, `B`\>(`m`): [`Mappable`](Functors.md#mappable)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`B`\>\>
 
 Maps an `Option.T<A>` to another `Option.T<b>` if is `Some<A>`, otherwise returns `None`.
 
@@ -1048,13 +1048,13 @@ m(null) // null
 
 #### Returns
 
-[`Mappable`](Functors.md#mappable)<[`T`](Option.md#t)<`A`\>, [`T`](Option.md#t)<`B`\>\>
+[`Mappable`](Functors.md#mappable)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`B`\>\>
 
 the mappable functor which maps `T<A>` to `T<B>`
 
 #### Defined in
 
-[src/Option.ts:533](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L533)
+[src/Option.ts:533](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L533)
 
 ___
 
@@ -1087,7 +1087,7 @@ Option.mapOr(Num.add(2), null, 0) // 0
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `m` | [`Mappable`](Functors.md#mappable)<`A`, `B`\> | the mappable |
-| `a` | [`T`](Option.md#t)<`A`\> | the value to map |
+| `a` | [`T`](Opt.md#t)<`A`\> | the value to map |
 | `b` | `B` | the fallback value |
 
 #### Returns
@@ -1098,9 +1098,9 @@ the mapped value `B` or the fallback value `b` if `a` is `None`
 
 #### Defined in
 
-[src/Option.ts:563](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L563)
+[src/Option.ts:563](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L563)
 
-▸ **mapOr**<`A`, `B`\>(`m`, `a`): [`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, `B`\>
+▸ **mapOr**<`A`, `B`\>(`m`, `a`): [`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, `B`\>
 
 Maps an `Option.T<A>` to another `Option.T<b>` if is `Some<A>`, otherwise returns `b`.
 
@@ -1133,10 +1133,10 @@ m(null) // 0
 
 #### Returns
 
-[`Unary`](Fn.md#unary)<[`T`](Option.md#t)<`A`\>, `B`\>
+[`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, `B`\>
 
 the mappable functor which maps `A` to `B` or returns the fallback value `a` if `b` is `None`
 
 #### Defined in
 
-[src/Option.ts:584](https://github.com/OctoD/tiinvo/blob/4076c56/src/Option.ts#L584)
+[src/Option.ts:584](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Option.ts#L584)

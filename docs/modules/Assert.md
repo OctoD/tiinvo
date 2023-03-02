@@ -49,7 +49,7 @@ Assert.check(false, 'yup it throws')     // throws
 
 #### Defined in
 
-[src/Assert.ts:28](https://github.com/OctoD/tiinvo/blob/4076c56/src/Assert.ts#L28)
+[src/Assert.ts:28](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Assert.ts#L28)
 
 ▸ **check**(`a`): [`Unary`](Fn.md#unary)<`boolean`, `void`\>
 
@@ -88,7 +88,7 @@ the unary function which returns
 
 #### Defined in
 
-[src/Assert.ts:51](https://github.com/OctoD/tiinvo/blob/4076c56/src/Assert.ts#L51)
+[src/Assert.ts:51](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Assert.ts#L51)
 
 ___
 
@@ -129,7 +129,7 @@ Assert.checkResult('yup it throws')(false)     // Error("yup it throws")
 
 #### Defined in
 
-[src/Assert.ts:87](https://github.com/OctoD/tiinvo/blob/4076c56/src/Assert.ts#L87)
+[src/Assert.ts:87](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Assert.ts#L87)
 
 ▸ **checkResult**(`a`): [`Unary`](Fn.md#unary)<`boolean`, [`T`](Result.md#t)<`boolean`\>\>
 
@@ -165,7 +165,7 @@ the unary function which returns
 
 #### Defined in
 
-[src/Assert.ts:107](https://github.com/OctoD/tiinvo/blob/4076c56/src/Assert.ts#L107)
+[src/Assert.ts:107](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Assert.ts#L107)
 
 ___
 
@@ -215,7 +215,7 @@ the asserting unary function which returns
 
 #### Defined in
 
-[src/Assert.ts:148](https://github.com/OctoD/tiinvo/blob/4076c56/src/Assert.ts#L148)
+[src/Assert.ts:148](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Assert.ts#L148)
 
 ▸ **make**<`a`\>(`p`): [`Unary`](Fn.md#unary)<[`T`](Predicate.md#t)<`a`\>, [`Unary`](Fn.md#unary)<`a`, `void`\>\>
 
@@ -260,7 +260,7 @@ the asserting unary function which returns
 
 #### Defined in
 
-[src/Assert.ts:172](https://github.com/OctoD/tiinvo/blob/4076c56/src/Assert.ts#L172)
+[src/Assert.ts:172](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Assert.ts#L172)
 
 ___
 
@@ -311,7 +311,7 @@ the asserting function which returns
 
 #### Defined in
 
-[src/Assert.ts:206](https://github.com/OctoD/tiinvo/blob/4076c56/src/Assert.ts#L206)
+[src/Assert.ts:206](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Assert.ts#L206)
 
 ▸ **makeResult**<`A`\>(`p`): [`Unary`](Fn.md#unary)<[`T`](Predicate.md#t)<`A`\>, [`Unary`](Fn.md#unary)<`A`, [`T`](Result.md#t)<`boolean`\>\>\>
 
@@ -356,4 +356,4 @@ the asserting unary function which returns
 
 #### Defined in
 
-[src/Assert.ts:230](https://github.com/OctoD/tiinvo/blob/4076c56/src/Assert.ts#L230)
+[src/Assert.ts:230](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Assert.ts#L230)

@@ -1,6 +1,6 @@
 {
   "name": "tiinvo",
-  "version": "4.0.0-rc1",
+  "version": "4.0.0-rc2",
   "author": "Paolo Roth <octod>",
   "license": "MIT",
   "description": "A library of types and utilities for your TypeScript and JavaScript projects",
@@ -14,13 +14,19 @@
     "./*": "./*.js"
   },
   "keywords": [
+    "array",
     "functional programming",
     "functions",
     "functors",
     "monads",
+    "number",
     "option",
     "pipe",
     "predicate",
+    "sequence",
+    "string",
+    "tuple",
+    "typed sequence",
     "types",
     "utility"
   ],

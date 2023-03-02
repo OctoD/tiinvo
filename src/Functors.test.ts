@@ -172,14 +172,29 @@ describe("Functors examples", () => {
 
   test("MappableModule", () => {
     const toHex = <A extends number>(
-      mod: Functors.MappableModule<A, string>, 
+      mod: Functors.MappableModule<A, string>,
       a: A,
-   ) => mod.map(Num.toHex as Functors.Mappable<A, string>, a)
+    ) => mod.map(Num.toHex as Functors.Mappable<A, string>, a);
 
     expect(toHex(Int8, 255)).toEqual("0xff");
     expect(toHex(Int8, 256)).toEqual(TypeError("Value not Int8"));
 
     expect(toHex(Int16, 256)).toEqual("0x100");
     expect(toHex(Int16, 2 ** 16)).toEqual(TypeError("Value not Int16"));
+  });
+
+  test("Guardables types (dry test)", () => {
+    expect(1).toEqual(1);
+
+    type a = Functors.GuardReturnType<typeof Str>;
+    type b = Functors.GuardArrayReturnType<[typeof Str, typeof Num]>;
+
+    let a0: a = "hello";
+    // @ts-ignore ignored, since it's an error
+    let a1: a = 10;
+
+    let b0: b = ['hello', 100];
+    // @ts-ignore ignored, since it's an error
+    let b1: b = ['hello', 'world'];
   });
 });

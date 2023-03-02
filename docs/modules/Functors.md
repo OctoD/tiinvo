@@ -33,10 +33,19 @@
 - [catchableAsync](Functors.md#catchableasync)
 - [catchableSync](Functors.md#catchablesync)
 
+### guardables
+
+- [GuardReturnType](Functors.md#guardreturntype)
+- [GuardArrayReturnType](Functors.md#guardarrayreturntype)
+
 ### Mappables
 
 - [Mappable](Functors.md#mappable)
 - [MappableModule](Functors.md#mappablemodule)
+- [MappableParameter](Functors.md#mappableparameter)
+- [MappableParameters](Functors.md#mappableparameters)
+- [MappableReturnType](Functors.md#mappablereturntype)
+- [MappableReturnTypes](Functors.md#mappablereturntypes)
 - [Reduceable](Functors.md#reduceable)
 - [ReduceableModule](Functors.md#reduceablemodule)
 
@@ -103,7 +112,7 @@ make({ name: 'John', surname: 'Doe' })
 
 #### Defined in
 
-[src/Functors.ts:38](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L38)
+[src/Functors.ts:38](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L38)
 
 ___
 
@@ -164,7 +173,7 @@ greet(User, "" as any)                         // "hello  "
 
 #### Defined in
 
-[src/Functors.ts:79](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L79)
+[src/Functors.ts:79](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L79)
 
 ## Type Aliases
 
@@ -237,7 +246,7 @@ describe(User)       // "hello name surname"
 
 #### Defined in
 
-[src/Functors.ts:133](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L133)
+[src/Functors.ts:133](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L133)
 
 ___
 
@@ -266,7 +275,7 @@ Represents a catchable functor
 
 #### Defined in
 
-[src/Functors.ts:157](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L157)
+[src/Functors.ts:157](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L157)
 
 ___
 
@@ -294,7 +303,7 @@ Represents a catchable async module functor
 
 #### Defined in
 
-[src/Functors.ts:167](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L167)
+[src/Functors.ts:167](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L167)
 
 ___
 
@@ -322,7 +331,7 @@ Represents a catchable sync module functor
 
 #### Defined in
 
-[src/Functors.ts:176](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L176)
+[src/Functors.ts:176](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L176)
 
 ___
 
@@ -344,7 +353,7 @@ Represents a catchable module functor
 
 #### Defined in
 
-[src/Functors.ts:185](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L185)
+[src/Functors.ts:185](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L185)
 
 ___
 
@@ -364,7 +373,7 @@ Is the result of a comparison made by a `Comparable<A>` functor
 
 #### Defined in
 
-[src/Functors.ts:200](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L200)
+[src/Functors.ts:200](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L200)
 
 ___
 
@@ -439,7 +448,7 @@ Is a comparable functor
 
 #### Defined in
 
-[src/Functors.ts:215](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L215)
+[src/Functors.ts:215](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L215)
 
 ___
 
@@ -467,7 +476,7 @@ Is a comparable functor module
 
 #### Defined in
 
-[src/Functors.ts:226](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L226)
+[src/Functors.ts:226](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L226)
 
 ___
 
@@ -656,7 +665,7 @@ true if a and b are equal
 
 #### Defined in
 
-[src/Functors.ts:299](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L299)
+[src/Functors.ts:299](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L299)
 
 ___
 
@@ -684,7 +693,7 @@ Is an equatable functor module
 
 #### Defined in
 
-[src/Functors.ts:310](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L310)
+[src/Functors.ts:310](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L310)
 
 ___
 
@@ -735,7 +744,7 @@ x is a
 
 #### Defined in
 
-[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L338)
+[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L338)
 
 ___
 
@@ -807,7 +816,7 @@ eqInt16(256, 256) // true
 
 #### Defined in
 
-[src/Functors.ts:388](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L388)
+[src/Functors.ts:388](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L388)
 
 ___
 
@@ -843,7 +852,7 @@ Is a filter predicate.
 
 #### Defined in
 
-[src/Functors.ts:401](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L401)
+[src/Functors.ts:442](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L442)
 
 ___
 
@@ -869,7 +878,7 @@ ___
 
 #### Defined in
 
-[src/Functors.ts:408](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L408)
+[src/Functors.ts:449](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L449)
 
 ___
 
@@ -892,7 +901,7 @@ Compound module of `ModuleFilterable<a>` and `ModuleMappable<a, b>`
 
 #### Defined in
 
-[src/Functors.ts:519](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L519)
+[src/Functors.ts:650](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L650)
 
 ___
 
@@ -915,7 +924,7 @@ Compound module of `ModuleFilterable<a>` and `ModuleMappable<a, b>` with a defau
 
 #### Defined in
 
-[src/Functors.ts:526](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L526)
+[src/Functors.ts:657](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L657)
 
 ## Variables
 
@@ -931,7 +940,7 @@ Is the symbol used to express the presence of an async catchable function
 
 #### Defined in
 
-[src/Functors.ts:144](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L144)
+[src/Functors.ts:144](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L144)
 
 ___
 
@@ -947,7 +956,73 @@ Is the symbol used to express the presence of a sync catchable function
 
 #### Defined in
 
-[src/Functors.ts:150](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L150)
+[src/Functors.ts:150](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L150)
+
+## guardables
+
+### GuardReturnType
+
+Ƭ **GuardReturnType**<`A`\>: `A` extends [`Guardable`](Functors.md#guardable)<infer U\> ? `U` : `A` extends [`GuardableModule`](Functors.md#guardablemodule)<infer U\> ? `U` : `never`
+
+The checked type of a Guardable<A> or a GuardableModule<A>
+
+**`Example`**
+
+```ts
+import type { Functors, Str } from 'tiinvo'
+
+type x = Functors.GuardReturnType<Str>
+
+type x: x = "" // ok for the compiler
+type y: x = 10 // error for the compiler
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | extends [`Guardable`](Functors.md#guardable)<`any`\> \| [`GuardableModule`](Functors.md#guardablemodule)<`any`\> |
+
+#### Defined in
+
+[src/Functors.ts:409](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L409)
+
+___
+
+### GuardArrayReturnType
+
+Ƭ **GuardArrayReturnType**<`A`\>: { [key in keyof A]: GuardReturnType<A[key]\> } & `RelativeIndexable`<`any`\>
+
+Returns an array of types from an array of `Guardable<any>` or `GuardableModule<any>`
+
+**`Example`**
+
+```ts
+import type { Functors, Str, Num, Bool } from 'tiinvo'
+
+type x: Functors.GuardArrayReturnType<[Str, Num, Bool]>
+
+const x: x = ["hello", 10, true]   // ok for the compiler
+const y: x = ["hello", "world", 0] // error for the compiler
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | extends ([`Guardable`](Functors.md#guardable)<`any`\> \| [`GuardableModule`](Functors.md#guardablemodule)<`any`\>)[] |
+
+#### Defined in
+
+[src/Functors.ts:428](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L428)
 
 ## Mappables
 
@@ -984,7 +1059,7 @@ A map function. Maps a value `A` to a value `B`
 
 #### Defined in
 
-[src/Functors.ts:424](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L424)
+[src/Functors.ts:465](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L465)
 
 ___
 
@@ -1067,7 +1142,149 @@ toHex(Int16, 2 ** 16)  // TypeError("Value not Int16")
 
 #### Defined in
 
-[src/Functors.ts:487](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L487)
+[src/Functors.ts:528](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L528)
+
+___
+
+### MappableParameter
+
+Ƭ **MappableParameter**<`A`\>: `A` extends [`Mappable`](Functors.md#mappable)<infer U, `any`\> ? `U` : `A` extends [`MappableModule`](Functors.md#mappablemodule)<infer U, `any`\> ? `U` : `never`
+
+Gets the parameter type of a Mappable<any, any> or a MappableModule<any, any>
+
+**`Example`**
+
+```ts
+import type { Functors } from 'tiinvo'
+
+type MyMap = (x: string) => number;
+type x = Functors.MappableParameter<MyMap>
+
+let x: x = "hello" // compiler gives ok
+// @ts-ignore
+let y: x = 10      // compiler gives error
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | extends [`Mappable`](Functors.md#mappable)<`any`, `any`\> \| [`MappableModule`](Functors.md#mappablemodule)<`any`, `any`\> |
+
+#### Defined in
+
+[src/Functors.ts:552](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L552)
+
+___
+
+### MappableParameters
+
+Ƭ **MappableParameters**<`A`\>: { [key in keyof A]: MappableParameter<A[key]\> } & `RelativeIndexable`<`any`\>
+
+Gets the parameters type of an array of `Mappable` or `MappableModule`s.
+
+**`Example`**
+
+```ts
+import type { Functors } from 'tiinvo'
+
+type MyMap0 = (x: string) => number;
+type MyMap1 = (x: number) => Date;
+type x = Functors.MappableParameters<[MyMap0, MyMap1]>
+
+let x: x = ["hello", 10]    // compiler gives ok
+// @ts-ignore
+let y: x = [10, new Date()] // compiler gives error
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | extends ([`Mappable`](Functors.md#mappable)<`any`, `any`\> \| [`MappableModule`](Functors.md#mappablemodule)<`any`, `any`\>)[] |
+
+#### Defined in
+
+[src/Functors.ts:574](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L574)
+
+___
+
+### MappableReturnType
+
+Ƭ **MappableReturnType**<`A`\>: `A` extends [`Mappable`](Functors.md#mappable)<`any`, infer U\> ? `U` : `A` extends [`MappableModule`](Functors.md#mappablemodule)<`any`, infer U\> ? `U` : `never`
+
+Gets the returning type of a Mappable<any, any> or a MappableModule<any, any>
+
+**`Example`**
+
+```ts
+import type { Functors } from 'tiinvo'
+
+type MyMap = (x: string) => number;
+type x = Functors.MappableReturnType<MyMap>
+
+let x: x = 10      // compiler gives ok
+// @ts-ignore
+let y: x = "hello" // compiler gives error
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | extends [`Mappable`](Functors.md#mappable)<`any`, `any`\> \| [`MappableModule`](Functors.md#mappablemodule)<`any`, `any`\> |
+
+#### Defined in
+
+[src/Functors.ts:597](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L597)
+
+___
+
+### MappableReturnTypes
+
+Ƭ **MappableReturnTypes**<`A`\>: { [key in keyof A]: MappableReturnType<A[key]\> } & `RelativeIndexable`<`any`\>
+
+Gets the return types of an array of `Mappable` or `MappableModule`s.
+
+**`Example`**
+
+```ts
+import type { Functors } from 'tiinvo'
+
+type MyMap0 = (x: string) => number;
+type MyMap1 = (x: number) => Date;
+type x = Functors.MappableParameters<[MyMap0, MyMap1]>
+
+let x: x = [10, new Date()] // compiler gives ok
+// @ts-ignore
+let y: x = ["hello", 10]    // compiler gives error
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | extends ([`Mappable`](Functors.md#mappable)<`any`, `any`\> \| [`MappableModule`](Functors.md#mappablemodule)<`any`, `any`\>)[] |
+
+#### Defined in
+
+[src/Functors.ts:619](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L619)
 
 ___
 
@@ -1105,7 +1322,7 @@ Reduce a value `A` to a value `B` aggregating the previous value `B` to the curr
 
 #### Defined in
 
-[src/Functors.ts:498](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L498)
+[src/Functors.ts:629](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L629)
 
 ___
 
@@ -1134,4 +1351,4 @@ A module with a reduce function exposed.
 
 #### Defined in
 
-[src/Functors.ts:506](https://github.com/OctoD/tiinvo/blob/4076c56/src/Functors.ts#L506)
+[src/Functors.ts:637](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L637)

@@ -16,7 +16,7 @@
 - [Functors](modules/Functors.md)
 - [Num](modules/Num.md)
 - [Obj](modules/Obj.md)
-- [Option](modules/Option.md)
+- [Opt](modules/Opt.md)
 - [Pipe](modules/Pipe.md)
 - [Predicate](modules/Predicate.md)
 - [Range](modules/Range.md)
@@ -24,15 +24,16 @@
 - [Sequence](modules/Sequence.md)
 - [SortedSequence](modules/SortedSequence.md)
 - [Str](modules/Str.md)
+- [Tuple](modules/Tuple.md)
 - [TypedMap](modules/TypedMap.md)
 - [TypedSequence](modules/TypedSequence.md)
 
 ### References
 
-- [Opt](modules.md#opt)
+- [Option](modules.md#option)
 
 ## References
 
-### Opt
+### Option
 
-Renames and re-exports [Option](modules/Option.md)
+Renames and re-exports [Opt](modules/Opt.md)

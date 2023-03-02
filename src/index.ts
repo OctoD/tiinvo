@@ -16,6 +16,7 @@ import * as Result from './Result.js';
 import * as Sequence from './Sequence.js';
 import * as SortedSequence from './SortedSequence.js';
 import * as Str from './Str.js';
+import * as Tuple from './Tuple.js';
 import * as TypedMap from './TypedMap.js';
 import * as TypedSequence from './TypedSequence.js';
 
@@ -30,8 +31,8 @@ export {
   Functors,
   Num,
   Obj,
-  Option,
   Option as Opt,
+  Option,
   Pipe,
   Predicate,
   Range,
@@ -39,6 +40,7 @@ export {
   Sequence,
   SortedSequence,
   Str,
+  Tuple,
   TypedMap,
   TypedSequence,
 };

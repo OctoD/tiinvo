@@ -389,6 +389,47 @@ export type GuardableModule<a> = {
   guard: Guardable<a>;
 };
 
+/**
+ * The checked type of a Guardable<A> or a GuardableModule<A>
+ *
+ * @example
+ *
+ * ```ts
+ * import type { Functors, Str } from 'tiinvo'
+ * 
+ * type x = Functors.GuardReturnType<Str>
+ * 
+ * type x: x = "" // ok for the compiler
+ * type y: x = 10 // error for the compiler
+ * ```
+ *
+ * @group guardables
+ * @since 4.0.0
+ */
+export type GuardReturnType<A extends (Guardable<any> | GuardableModule<any>)> = A extends Guardable<infer U> ? U : A extends GuardableModule<infer U> ? U : never;
+
+/**
+ * Returns an array of types from an array of `Guardable<any>` or `GuardableModule<any>`
+ *
+ * @example
+ *
+ * ```ts
+ * import type { Functors, Str, Num, Bool } from 'tiinvo'
+ * 
+ * type x: Functors.GuardArrayReturnType<[Str, Num, Bool]>
+ * 
+ * const x: x = ["hello", 10, true]   // ok for the compiler
+ * const y: x = ["hello", "world", 0] // error for the compiler
+ * ```
+ *
+ * @group guardables
+ * @since 4.0.0
+ */
+export type GuardArrayReturnType<A extends Array<Guardable<any> | GuardableModule<any>>> = {
+  [key in keyof A]: GuardReturnType<A[key]>;
+} & RelativeIndexable<any>;
+
+
 //#endregion
 
 //#region filterables
@@ -488,6 +529,96 @@ export type MappableModule<A, B> = {
   map(m: Mappable<A, B>, a: A): B;
   map(m: Mappable<A, B>): (a: A) => B;
 };
+
+/**
+ * Gets the parameter type of a Mappable<any, any> or a MappableModule<any, any>
+ *
+ * @example
+ *
+ * ```ts
+ * import type { Functors } from 'tiinvo'
+ * 
+ * type MyMap = (x: string) => number;
+ * type x = Functors.MappableParameter<MyMap>
+ * 
+ * let x: x = "hello" // compiler gives ok
+ * // @ts-ignore
+ * let y: x = 10      // compiler gives error
+ * ```
+ *
+ * @group Mappables
+ * @since 4.0.0
+ */
+export type MappableParameter<A extends (Mappable<any, any> | MappableModule<any, any>)> = A extends Mappable<infer U, any> ? U : A extends MappableModule<infer U, any> ? U : never
+
+/**
+ * Gets the parameters type of an array of `Mappable` or `MappableModule`s.
+ * 
+ * @example
+ *
+ * ```ts
+ * import type { Functors } from 'tiinvo'
+ * 
+ * type MyMap0 = (x: string) => number;
+ * type MyMap1 = (x: number) => Date;
+ * type x = Functors.MappableParameters<[MyMap0, MyMap1]>
+ * 
+ * let x: x = ["hello", 10]    // compiler gives ok
+ * // @ts-ignore
+ * let y: x = [10, new Date()] // compiler gives error
+ * ```
+ *
+ * @group Mappables
+ * @since 4.0.0
+ */
+export type MappableParameters<A extends Array<Mappable<any, any> | MappableModule<any, any>>> = {
+  [key in keyof A]: MappableParameter<A[key]>
+} & RelativeIndexable<any>
+
+/**
+ * Gets the returning type of a Mappable<any, any> or a MappableModule<any, any>
+ *
+ * @example
+ *
+ * ```ts
+ * import type { Functors } from 'tiinvo'
+ * 
+ * type MyMap = (x: string) => number;
+ * type x = Functors.MappableReturnType<MyMap>
+ * 
+ * let x: x = 10      // compiler gives ok
+ * // @ts-ignore
+ * let y: x = "hello" // compiler gives error
+ * ```
+ *
+ * @group Mappables
+ * @since 4.0.0
+ */
+export type MappableReturnType<A extends (Mappable<any, any> | MappableModule<any, any>)> = A extends Mappable<any, infer U> ? U : A extends MappableModule<any, infer U> ? U : never
+
+/**
+ * Gets the return types of an array of `Mappable` or `MappableModule`s.
+ * 
+ * @example
+ *
+ * ```ts
+ * import type { Functors } from 'tiinvo'
+ * 
+ * type MyMap0 = (x: string) => number;
+ * type MyMap1 = (x: number) => Date;
+ * type x = Functors.MappableParameters<[MyMap0, MyMap1]>
+ * 
+ * let x: x = [10, new Date()] // compiler gives ok
+ * // @ts-ignore
+ * let y: x = ["hello", 10]    // compiler gives error
+ * ```
+ *
+ * @group Mappables
+ * @since 4.0.0
+ */
+export type MappableReturnTypes<A extends Array<Mappable<any, any> | MappableModule<any, any>>> = {
+  [key in keyof A]: MappableReturnType<A[key]>
+} & RelativeIndexable<any>
 
 /**
  * Reduce a value `A` to a value `B` aggregating the previous value `B` to the current.
