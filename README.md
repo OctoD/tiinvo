@@ -7,7 +7,7 @@ tiinvo
 
 An opinionated lib of types and utilities for your TypeScript and JavaScript projects which aims to add missing functionalities to standard Js and replace other.
 
-[docs](./docs/modules.md)
+[docs](docs/modules.md)
 
 - [tiinvo](#tiinvo)
 - [Install](#install)
