@@ -36,8 +36,10 @@ export type T<A> = Functors.Filterable<A>;
  * @returns 
  * @since 4.0.0 
  */
-export const and = <L extends T<any>[]>(...predicates: L) => <A extends any>(value: A) => {
-  switch (predicates.length) {
+export const and = <L extends T<any>[]>(...predicates: L) => <A extends any>(value: A) =>
+{
+  switch (predicates.length)
+  {
     case 0: return true;
     case 1: return predicates[0](value);
     case 2: return predicates[0](value) && predicates[1](value);
@@ -88,8 +90,10 @@ export function eq<A>(a: A, b: A): boolean;
  * @since 4.0.0
  */
 export function eq<A>(a: A): Fn.Unary<A, boolean>;
-export function eq<A>(a: A, b?: any): any {
-  if (arguments.length === 1) {
+export function eq<A>(a: A, b?: any): any
+{
+  if (arguments.length === 1)
+  {
     return (b: A) => a === b;
   }
 
@@ -171,8 +175,10 @@ export function neq<A>(a: A, b: A): boolean;
  * @since 4.0.0
  */
 export function neq<A>(a: A): Fn.Unary<A, boolean>;
-export function neq<A>(a: A, b?: any): any {
-  if (arguments.length === 1) {
+export function neq<A>(a: A, b?: any): any
+{
+  if (arguments.length === 1)
+  {
     return (b: A) => a !== b;
   }
 
@@ -199,8 +205,10 @@ export function neq<A>(a: A, b?: any): any {
  * @returns 
  * @since 4.0.0
  */
-export const none = <L extends T<any>[]>(...predicates: L) => <a extends any>(value: a) => {
-  switch (predicates.length) {
+export const none = <L extends T<any>[]>(...predicates: L) => <a extends any>(value: a) =>
+{
+  switch (predicates.length)
+  {
     case 0: return true;
     case 1: return !predicates[0](value);
     case 2: return !predicates[0](value) && !predicates[1](value);
@@ -235,8 +243,10 @@ export const none = <L extends T<any>[]>(...predicates: L) => <a extends any>(va
  * @returns 
  * @since 4.0.0
  */
-export const or = <L extends T<any>[]>(...predicates: L) => <a extends any>(value: a) => {
-  switch (predicates.length) {
+export const or = <L extends T<any>[]>(...predicates: L) => <a extends any>(value: a) =>
+{
+  switch (predicates.length)
+  {
     case 0: return true;
     case 1: return predicates[0](value);
     case 2: return predicates[0](value) || predicates[1](value);

@@ -4,8 +4,10 @@ import * as Str from './Str.js';
 import * as Sequence from './Sequence.js';
 import * as TypedSequence from './TypedSequence.js';
 
-describe("TypedSequence", () => {
-  test(TypedSequence.make.name, () => {
+describe("TypedSequence", () =>
+{
+  test(TypedSequence.make.name, () =>
+  {
     const ts0 = TypedSequence.make(Num, 1, 2, 3);
     const ts1 = TypedSequence.make(Num.guard, 1, 2, 3);
 
@@ -15,21 +17,24 @@ describe("TypedSequence", () => {
     expect(Sequence.eq(Num, ts0, ts1)).toEqual(true);
   });
 
-  test(TypedSequence.append.name, () => {
+  test(TypedSequence.append.name, () =>
+  {
     const s0 = TypedSequence.make(Num, 10, 20);
 
     expect(TypedSequence.append(s0, 30)).toEqual(TypedSequence.make(Num, 10, 20, 30));
     expect(TypedSequence.append(30)(s0)).toEqual(TypedSequence.make(Num, 10, 20, 30));
   });
 
-  test(TypedSequence.prepend.name, () => {
+  test(TypedSequence.prepend.name, () =>
+  {
     const s0 = TypedSequence.make(Num, 10, 20);
 
     expect(TypedSequence.prepend(s0, 30)).toEqual(TypedSequence.make(Num, 30, 10, 20));
     expect(TypedSequence.prepend(30)(s0)).toEqual(TypedSequence.make(Num, 30, 10, 20));
   });
 
-  test(TypedSequence.concat.name, () => {
+  test(TypedSequence.concat.name, () =>
+  {
     const s0 = TypedSequence.make(Num, 10, 20);
     const s1 = TypedSequence.make(Num, 30, 40);
 
@@ -37,7 +42,8 @@ describe("TypedSequence", () => {
     expect(TypedSequence.concat(s1)(s0)).toEqual(TypedSequence.make(Num, 10, 20, 30, 40));
   });
 
-  test(TypedSequence.guard.name, () => {
+  test(TypedSequence.guard.name, () =>
+  {
     const a = TypedSequence.make(Num);
     const b = Sequence.make();
 
@@ -45,7 +51,8 @@ describe("TypedSequence", () => {
     expect(TypedSequence.guard(b)).toEqual(false);
   });
 
-  test(TypedSequence.sort.name, () => {
+  test(TypedSequence.sort.name, () =>
+  {
     const a = TypedSequence.make(Num, 5, 3, 1, 4, 2);
     const b = TypedSequence.sort(a, Num);
     const c = TypedSequence.sort(a, Num.cmp);
@@ -56,21 +63,24 @@ describe("TypedSequence", () => {
     expect(d).toEqual(c);
   });
 
-  test(TypedSequence.count.name, () => {
+  test(TypedSequence.count.name, () =>
+  {
     const s = TypedSequence.make(Num, 10, 20, 30);
 
     expect(TypedSequence.count(s, Num.gt(10))).toEqual(2);
     expect(TypedSequence.count(Num.gt(10))(s)).toEqual(2);
   });
 
-  test(TypedSequence.get.name, () => {
+  test(TypedSequence.get.name, () =>
+  {
     const s = TypedSequence.make(Str, 'hello', 'world');
 
     expect(TypedSequence.get(s, 0)).toEqual('hello');
     expect(TypedSequence.get(s, 9)).toEqual(new RangeError("Index out of bounds 9 for length 2"));
   });
 
-  test(TypedSequence.first.name, () => {
+  test(TypedSequence.first.name, () =>
+  {
     const s0 = TypedSequence.make(Num, 10, 20, 30);
     const s1 = TypedSequence.make(Num);
 
@@ -78,7 +88,8 @@ describe("TypedSequence", () => {
     expect(TypedSequence.first(s1)).toEqual(null);
   });
 
-  test(TypedSequence.last.name, () => {
+  test(TypedSequence.last.name, () =>
+  {
     const s0 = TypedSequence.make(Num, 10, 20, 30);
     const s1 = TypedSequence.make(Num);
 
@@ -86,19 +97,22 @@ describe("TypedSequence", () => {
     expect(TypedSequence.last(s1)).toEqual(null);
   });
 
-  test(TypedSequence.length.name, () => {
+  test(TypedSequence.length.name, () =>
+  {
     const s = TypedSequence.make(Num, 1, 2, 3);
 
     expect(TypedSequence.length(s)).toEqual(3);
   });
 
-  test(TypedSequence.values.name, () => {
+  test(TypedSequence.values.name, () =>
+  {
     const s = TypedSequence.make(Str, 'hello', 'world');
 
     expect(TypedSequence.values(s)).toEqual({ 0: 'hello', 1: 'world' });
   });
 
-  test(TypedSequence.empty.name, () => {
+  test(TypedSequence.empty.name, () =>
+  {
     const s = TypedSequence.make(Num);
     const s1 = TypedSequence.make(Num, 10);
 
@@ -106,26 +120,30 @@ describe("TypedSequence", () => {
     expect(TypedSequence.empty(s1)).toEqual(false);
   });
 
-  test(TypedSequence.populated.name, () => {
+  test(TypedSequence.populated.name, () =>
+  {
     const s = TypedSequence.make(Num, 10, 20, 30);
 
     expect(TypedSequence.populated(s)).toEqual(true);
     expect(TypedSequence.populated(TypedSequence.make(Num))).toEqual(false);
   });
 
-  test(TypedSequence.toArray.name, () => {
+  test(TypedSequence.toArray.name, () =>
+  {
     const sl = TypedSequence.make(Num, 3, 2, 1);
 
     expect(TypedSequence.toArray(sl)).toEqual([3, 2, 1]);
   });
 
-  test(TypedSequence.toJSON.name, () => {
+  test(TypedSequence.toJSON.name, () =>
+  {
     const sl = TypedSequence.make(Num, 3, 2, 1);
 
     expect(TypedSequence.toJSON(sl)).toEqual([3, 2, 1]);
   });
 
-  test(TypedSequence.toMap.name, () => {
+  test(TypedSequence.toMap.name, () =>
+  {
     const sl = TypedSequence.make(Num, 3, 2, 1);
     const m = new Map();
 
@@ -136,13 +154,15 @@ describe("TypedSequence", () => {
     expect(TypedSequence.toMap(sl)).toEqual(m);
   });
 
-  test(TypedSequence.toSet.name, () => {
+  test(TypedSequence.toSet.name, () =>
+  {
     const sl = TypedSequence.make(Num, 3, 2, 1);
 
     expect(TypedSequence.toSet(sl)).toEqual(new Set([3, 2, 1]));
   });
 
-  test(TypedSequence.toString.name, () => {
+  test(TypedSequence.toString.name, () =>
+  {
     const sl = TypedSequence.make(Num, 3, 2, 1);
 
     expect(TypedSequence.toString(sl)).toEqual("3,2,1");

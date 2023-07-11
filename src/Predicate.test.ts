@@ -2,15 +2,18 @@ import { describe, expect, test } from 'vitest';
 import * as Predicate from './Predicate.js';
 import * as Num from './Num.js';
 
-describe("Predicate", () => {
-  test(Predicate.and.name, () => {
+describe("Predicate", () =>
+{
+  test(Predicate.and.name, () =>
+  {
     const and = Predicate.and(Num.gt(3), Num.lt(10));
 
     expect(and(5)).toEqual(true);
     expect(and(2)).toEqual(false);
   });
 
-  test(Predicate.eq.name, () => {
+  test(Predicate.eq.name, () =>
+  {
     const eq0 = Predicate.eq(0);
 
     expect(eq0(10)).toEqual(false);
@@ -19,19 +22,22 @@ describe("Predicate", () => {
     expect(Predicate.eq(0, 0)).toEqual(true);
   });
 
-  test(Predicate.guard.name, () => {
+  test(Predicate.guard.name, () =>
+  {
     expect(Predicate.guard((x: number, b: number) => x + b)).toEqual(false);
     expect(Predicate.guard((x: number) => x > 0)).toEqual(true);
   });
 
-  test(Predicate.invert.name, () => {
+  test(Predicate.invert.name, () =>
+  {
     const i = Predicate.invert(Num.gt(0));
 
     expect(i(10)).toEqual(false);
     expect(i(-1)).toEqual(true);
   });
 
-  test(Predicate.neq.name, () => {
+  test(Predicate.neq.name, () =>
+  {
     const neq = Predicate.neq(0);
 
     expect(neq(10)).toEqual(true);
@@ -40,7 +46,8 @@ describe("Predicate", () => {
     expect(Predicate.neq(0, 0)).toEqual(false);
   });
 
-  test(Predicate.none.name, () => {
+  test(Predicate.none.name, () =>
+  {
     const n = Predicate.none(Num.gt(0), Num.isEven);
 
     expect(n(4)).toEqual(false);
@@ -49,7 +56,8 @@ describe("Predicate", () => {
     expect(n(-5)).toEqual(true);
   });
 
-  test(Predicate.or.name, () => {
+  test(Predicate.or.name, () =>
+  {
     const or = Predicate.or(Num.gt(0), Num.isEven);
 
     expect(or(-1)).toEqual(false);
@@ -57,7 +65,8 @@ describe("Predicate", () => {
     expect(or(2)).toEqual(true);
   });
 
-  test("and linearity", () => {
+  test("and linearity", () =>
+  {
     const and0 = Predicate.and();
     const and1 = Predicate.and(Num.gt(0));
     const and2 = Predicate.and(Num.gt(0), Num.gt(1));
@@ -97,7 +106,8 @@ describe("Predicate", () => {
     expect(and11(10)).toBe(false);
   });
 
-  test(`linearity (or)`, () => {
+  test(`linearity (or)`, () =>
+  {
     const p = Predicate;
     const or0 = p.or();
     const or1 = p.or(Num.eq(0));
@@ -127,7 +137,8 @@ describe("Predicate", () => {
     expect(or11(11)).toBe(false);
   });
 
-  test(`linearity (noneof)`, () => {
+  test(`linearity (noneof)`, () =>
+  {
     const noneof0 = Predicate.none();
     const noneof1 = Predicate.none(Num.gt(10));
     const noneof2 = Predicate.none(Num.gt(10), Num.lt(0));

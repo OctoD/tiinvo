@@ -40,25 +40,34 @@ import { catchableAsync, catchableSync } from './Functors.js';
  * @returns a unary function 
  * @since 4.0.0
  */
-export const make = <F extends Fn.AnyFn>(catchable: Functors.CatchableModule<F>): F extends Fn.AnyAsyncFn ? ((...args: Parameters<F>) => Promise<Awaited<ReturnType<F>>>) : ((...args: Parameters<F>) => ReturnType<F>) => {
+export const make = <F extends Fn.AnyFn>(catchable: Functors.CatchableModule<F>): F extends Fn.AnyAsyncFn ? ((...args: Parameters<F>) => Promise<Awaited<ReturnType<F>>>) : ((...args: Parameters<F>) => ReturnType<F>) =>
+{
   type args = Parameters<F>;
 
   const modAsync = (catchable as Functors.CatchableAsyncModule<F>)[catchableAsync]?.();
   const modSync = (catchable as Functors.CatchableSyncModule<F>)[catchableSync]?.();
 
-  if (modAsync) {
-    return (async (...args: args): Promise<Awaited<ReturnType<F>>> => {
-      try {
+  if (modAsync)
+  {
+    return (async (...args: args): Promise<Awaited<ReturnType<F>>> =>
+    {
+      try
+      {
         return await modAsync.func.apply(null, args);
-      } catch (error: unknown) {
+      } catch (error: unknown)
+      {
         return await modAsync.catch(error as Error, args) as any;
       }
     }) as any;
-  } else if (modSync) {
-    return ((...args: args): ReturnType<F> => {
-      try {
+  } else if (modSync)
+  {
+    return ((...args: args): ReturnType<F> =>
+    {
+      try
+      {
         return modSync.func.apply(null, args);
-      } catch (error: unknown) {
+      } catch (error: unknown)
+      {
         return modSync.catch(error as Error, args);
       }
     }) as any;

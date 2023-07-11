@@ -53,13 +53,16 @@ export type PipeAsync = <
  * 
  * @since 4.0.0
  */
-export const async: PipeAsync = (...args) => {
+export const async: PipeAsync = (...args) =>
+{
   const [first, ...othersFns] = args;
-  return (async (arg: any) => {
+  return (async (arg: any) =>
+  {
     const firstvalue = await first(arg);
     let latestvalue = firstvalue;
 
-    for (var i = 0; i < othersFns.length; i++) {
+    for (var i = 0; i < othersFns.length; i++)
+    {
       latestvalue = await othersFns[i](latestvalue);
     }
 
@@ -84,11 +87,13 @@ export const async: PipeAsync = (...args) => {
  *
  * @since 4.0.0
  */
-export const sync: Pipe = (...args) => {
+export const sync: Pipe = (...args) =>
+{
   const [first, ...othersFns] = args;
   type arg0 = ArgType<typeof first>;
 
-  switch (args.length) {
+  switch (args.length)
+  {
     case 0: return (a: arg0) => a;
     case 1: return first;
     case 2: return (arg: arg0) => args[1](first(arg));

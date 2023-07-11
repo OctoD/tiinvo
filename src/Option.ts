@@ -255,24 +255,30 @@ export function cmp<A>(c: Functors.Comparable<A>): Fn.Binary<T<A>, T<A>, Functor
  * @since 4.0.0
  */
 export function cmp<A>(c: Functors.ComparableModule<A>): Fn.Binary<T<A>, T<A>, Functors.ComparableResult>;
-export function cmp<A>(c: Functors.Comparable<A> | Functors.ComparableModule<A>, a?: T<A>, b?: T<A>): any {
-  const _cmp = (x: T<A>, y: T<A>) => {
-    if (isNone(x) && isNone(y)) {
+export function cmp<A>(c: Functors.Comparable<A> | Functors.ComparableModule<A>, a?: T<A>, b?: T<A>): any
+{
+  const _cmp = (x: T<A>, y: T<A>) =>
+  {
+    if (isNone(x) && isNone(y))
+    {
       return 0;
     }
 
-    if (isNone(x)) {
+    if (isNone(x))
+    {
       return -1;
     }
 
-    if (isNone(y)) {
+    if (isNone(y))
+    {
       return 1;
     }
 
     return typeof c === 'function' ? c(x, y) : c.cmp(x, y);
   };
 
-  switch (arguments.length) {
+  switch (arguments.length)
+  {
     case 3: return _cmp(a, b);
     case 2: return (b: T<A>) => _cmp(b, a);
     case 1: return (a: T<A>, b: T<A>) => _cmp(a, b);
@@ -415,18 +421,23 @@ export function eq<A>(e: Functors.Equatable<A>): Fn.Binary<T<A>, T<A>, boolean>;
  * @since 4.0.0
  */
 export function eq<A>(e: Functors.EquatableModule<A>): Fn.Binary<T<A>, T<A>, boolean>;
-export function eq<A>(e: Functors.Equatable<A> | Functors.EquatableModule<A>, a?: T<A>, b?: T<A>): any {
-  const _eq = (x: T<A>, y: T<A>): boolean => {
-    if (isSome(x) && isSome(y)) {
+export function eq<A>(e: Functors.Equatable<A> | Functors.EquatableModule<A>, a?: T<A>, b?: T<A>): any
+{
+  const _eq = (x: T<A>, y: T<A>): boolean =>
+  {
+    if (isSome(x) && isSome(y))
+    {
       return typeof e === 'function' ? e(x as A, y as A) : e.eq(x as A, y as A);
-    } else if (isNone(x) && isNone(y)) {
+    } else if (isNone(x) && isNone(y))
+    {
       return true;
     }
 
     return false;
   };
 
-  switch (arguments.length) {
+  switch (arguments.length)
+  {
     case 3: return _eq(a, b);
     case 2: return (b: T<A>) => _eq(b, a);
     case 1: return (a: T<A>, b: T<A>) => _eq(a, b);
@@ -478,8 +489,10 @@ export function filter<A>(a: Functors.Mappable<A, boolean>, b: T<A>): T<A>;
  * @since 4.0.0
  */
 export function filter<A>(a: Functors.Mappable<A, boolean>): Fn.Unary<T<A>, T<A>>;
-export function filter<A>(a: Functors.Mappable<A, boolean>, b?: T<A>): any {
-  if (arguments.length === 2) {
+export function filter<A>(a: Functors.Mappable<A, boolean>, b?: T<A>): any
+{
+  if (arguments.length === 2)
+  {
     return isNone(b) ? null : a(b) ? b : null;
   }
 
@@ -531,10 +544,12 @@ export function map<A, B>(m: Functors.Mappable<A, B>, a: T<A>): T<B>;
  * @since 4.0.0
  */
 export function map<A, B>(m: Functors.Mappable<A, B>): Functors.Mappable<T<A>, T<B>>;
-export function map<A, B>(m: Functors.Mappable<A, B>, a?: T<A>): any {
+export function map<A, B>(m: Functors.Mappable<A, B>, a?: T<A>): any
+{
   const _map = (x: T<A>) => isNone(x) ? null : m(x) as T<B>;
 
-  if (typeof m === 'function' && arguments.length === 2) {
+  if (typeof m === 'function' && arguments.length === 2)
+  {
     return _map(a);
   }
 
@@ -582,10 +597,12 @@ export function mapOr<A, B>(m: Functors.Mappable<A, B>, a: T<A>, b: B): B;
  * @since 4.0.0
  */
 export function mapOr<A, B>(m: Functors.Mappable<A, B>, a: B): Fn.Unary<T<A>, B>;
-export function mapOr<A, B>(m: Functors.Mappable<A, B>, a: T<A> | B, b?: B): any {
+export function mapOr<A, B>(m: Functors.Mappable<A, B>, a: T<A> | B, b?: B): any
+{
   const _mor = (x: T<A>, or: B) => isNone(x) ? or : m(x);
 
-  if (arguments.length === 3) {
+  if (arguments.length === 3)
+  {
     return _mor(a as T<A>, b as B);
   }
 
@@ -626,9 +643,11 @@ export function mapOr<A, B>(m: Functors.Mappable<A, B>, a: T<A> | B, b?: B): any
  *  - otherwise the function returns `Promise<ReturnValue<F>>`
  * @since 4.0.0
  */
-export const tryAsync = <F extends Fn.AnyAsyncFn>(f: F) => {
+export const tryAsync = <F extends Fn.AnyAsyncFn>(f: F) =>
+{
   return makecatch<(...args: Parameters<F>) => Promise<T<ReturnType<F>>>>({
-    [catchableAsync]() {
+    [catchableAsync]()
+    {
       return {
         catch: async (_err, _args) => null as any,
         func: f
@@ -667,9 +686,11 @@ export const tryAsync = <F extends Fn.AnyAsyncFn>(f: F) => {
  *  - otherwise the function returns `ReturnValue<F>`
  * @since 4.0.0
  */
-export const trySync = <F extends Fn.AnyFn>(f: F) => {
+export const trySync = <F extends Fn.AnyFn>(f: F) =>
+{
   return makecatch<(...args: Parameters<F>) => T<ReturnType<F>>>({
-    [catchableSync]() {
+    [catchableSync]()
+    {
       return {
         catch: () => null,
         func: f

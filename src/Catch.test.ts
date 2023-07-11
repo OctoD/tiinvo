@@ -3,10 +3,14 @@ import * as Catch from './Catch.js';
 import * as Functors from './Functors.js';
 import * as Num from './Num.js';
 
-describe("Catch", () => {
-  test(Catch.make.name, () => {
-    function catchy(arg: number) {
-      if (Num.isEven(arg)) {
+describe("Catch", () =>
+{
+  test(Catch.make.name, () =>
+  {
+    function catchy(arg: number)
+    {
+      if (Num.isEven(arg))
+      {
         throw new TypeError("I expected an odd number :(");
       }
 
@@ -14,7 +18,8 @@ describe("Catch", () => {
     }
 
     const c: Functors.CatchableModule<typeof catchy> = {
-      [Functors.catchableSync]() {
+      [Functors.catchableSync]()
+      {
         return {
           catch: (_, args) => args[0] - 1,
           func: catchy,

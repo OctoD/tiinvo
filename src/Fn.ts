@@ -219,8 +219,10 @@ export function cmp(a: T, b: T): Functors.ComparableResult;
  * @since 4.0.0
  */
 export function cmp(a: T): Unary<T, Functors.ComparableResult>;
-export function cmp(a: T, b?: T): any {
-  const _cmp = (x: T, y: T) => {
+export function cmp(a: T, b?: T): any
+{
+  const _cmp = (x: T, y: T) =>
+  {
     const namea = x.name.toLowerCase();
     const nameb = y.name.toLowerCase();
 
@@ -233,10 +235,11 @@ export function cmp(a: T, b?: T): any {
     ) as Functors.ComparableResult;
   };
 
-  if (guard(a) && guard(b)) {
+  if (guard(a) && guard(b))
+  {
     return _cmp(a, b);
   }
-  
+
   return (b: T) => _cmp(b, a);
 };
 
@@ -294,8 +297,10 @@ export function eq(a: T, b: T): boolean;
  * @since 4.0.0
  */
 export function eq(a: T): Unary<T, boolean>;
-export function eq(a: T, b?: T): any {
-  if (guard(a) && guard(b)) {
+export function eq(a: T, b?: T): any
+{
+  if (guard(a) && guard(b))
+  {
     return a === b && cmp(a, b) === 0;
   }
 

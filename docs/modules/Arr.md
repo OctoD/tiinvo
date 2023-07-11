@@ -12,6 +12,7 @@
 ### Accessors
 
 - [get](Arr.md#get)
+- [getOr](Arr.md#getor)
 - [first](Arr.md#first)
 - [firstOr](Arr.md#firstor)
 - [last](Arr.md#last)
@@ -100,7 +101,7 @@ let foo: Arr.T<string> = ['hello']
 
 #### Defined in
 
-[src/Arr.ts:22](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L22)
+[src/Arr.ts:22](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L22)
 
 ___
 
@@ -191,7 +192,7 @@ let r: Arr.Reducer<string, number> = (a, b, i, t) => a + b.length + i + t.length
 
 #### Defined in
 
-[src/Arr.ts:30](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L30)
+[src/Arr.ts:30](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L30)
 
 ## Accessors
 
@@ -233,7 +234,7 @@ Arr.get([10, 20], 3)   // Error("Index out of bounds 3 for length 2")
 
 #### Defined in
 
-[src/Arr.ts:106](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L106)
+[src/Arr.ts:106](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L106)
 
 ▸ **get**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, [`T`](Result.md#t)<`A`\>\>
 
@@ -272,7 +273,89 @@ the unary function
 
 #### Defined in
 
-[src/Arr.ts:125](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L125)
+[src/Arr.ts:125](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L125)
+
+___
+
+### getOr
+
+▸ **getOr**<`A`\>(`a`, `b`, `i`): `A`
+
+Returns the element `Option.T<A>` at index `i` of an array `T<A>`.
+
+**`Example`**
+
+```ts
+import { Arr } from 'tiinvo';
+
+Arr.getOr([10, 20], 0, 1)   // 20
+Arr.getOr([10, 20], 0, 3)   // 0
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Description |
+| :------ | :------ |
+| `A` | the type of the array `A` elements |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | [`T`](Arr.md#t)<`A`\> | is the array to search |
+| `b` | `A` | is the default value |
+| `i` | `number` | is the element index |
+
+#### Returns
+
+`A`
+
+#### Defined in
+
+[src/Arr.ts:171](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L171)
+
+▸ **getOr**<`A`\>(`a`): [`Binary`](Fn.md#binary)<[`T`](Arr.md#t)<`A`\>, `number`, `A`\>
+
+Returns a `Fn.Binary<T<A>, number, A>` to get the element `Option.T<A>` at index `i` of an array `T<A>`.
+
+**`Example`**
+
+```ts
+import { Arr } from 'tiinvo';
+
+Arr.getOr(0)([10, 20])   // 20
+Arr.getOr(0)([10, 20])   // 0
+```
+
+**`Since`**
+
+4.0.0
+
+#### Type parameters
+
+| Name | Description |
+| :------ | :------ |
+| `A` | the type of the array `A` elements |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | `A` | is the default value |
+
+#### Returns
+
+[`Binary`](Fn.md#binary)<[`T`](Arr.md#t)<`A`\>, `number`, `A`\>
+
+the binary function
+
+#### Defined in
+
+[src/Arr.ts:192](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L192)
 
 ___
 
@@ -316,7 +399,7 @@ Arr.first([])         // null;
 
 #### Defined in
 
-[src/Arr.ts:164](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L164)
+[src/Arr.ts:237](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L237)
 
 ___
 
@@ -360,7 +443,7 @@ the first element of the array or `b` as fallback
 
 #### Defined in
 
-[src/Arr.ts:185](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L185)
+[src/Arr.ts:258](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L258)
 
 ▸ **firstOr**<`A`\>(`t`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, `A`\>
 
@@ -401,7 +484,7 @@ the unary function
 
 #### Defined in
 
-[src/Arr.ts:206](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L206)
+[src/Arr.ts:279](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L279)
 
 ___
 
@@ -445,7 +528,7 @@ Arr.last([])         // null;
 
 #### Defined in
 
-[src/Arr.ts:235](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L235)
+[src/Arr.ts:310](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L310)
 
 ___
 
@@ -489,7 +572,7 @@ The last element of the array `t` or `b` if `t` is empty.
 
 #### Defined in
 
-[src/Arr.ts:257](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L257)
+[src/Arr.ts:332](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L332)
 
 ▸ **lastOr**<`A`\>(`t`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, `A`\>
 
@@ -530,7 +613,7 @@ the unary function
 
 #### Defined in
 
-[src/Arr.ts:278](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L278)
+[src/Arr.ts:353](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L353)
 
 ## Guardables
 
@@ -569,7 +652,7 @@ x is T<unknown\>
 
 #### Defined in
 
-[src/Arr.ts:311](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L311)
+[src/Arr.ts:388](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L388)
 
 ___
 
@@ -619,7 +702,7 @@ x is T<A\>
 
 #### Defined in
 
-[src/Arr.ts:337](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L337)
+[src/Arr.ts:414](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L414)
 
 ▸ **guardOf**<`A`\>(`g`): (`x`: `unknown`) => x is T<A\>
 
@@ -673,7 +756,7 @@ x is T<A\>
 
 #### Defined in
 
-[src/Arr.ts:358](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L358)
+[src/Arr.ts:435](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L435)
 
 ## Comparables
 
@@ -726,7 +809,7 @@ Arr.cmp(Str.cmp, ['a', 'b', 'c'], ['a', 'b', 'c']) // 0
 
 #### Defined in
 
-[src/Arr.ts:414](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L414)
+[src/Arr.ts:497](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L497)
 
 ▸ **cmp**<`A`\>(`cmp`, `a`, `b`): [`ComparableResult`](Functors.md#comparableresult)
 
@@ -775,7 +858,7 @@ Arr.cmp(Str, ['a', 'b', 'c'], ['a', 'b', 'c']) // 0
 
 #### Defined in
 
-[src/Arr.ts:444](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L444)
+[src/Arr.ts:527](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L527)
 
 ▸ **cmp**<`A`\>(`cmp`, `a`): (`b`: [`T`](Arr.md#t)<`A`\>) => [`ComparableResult`](Functors.md#comparableresult)
 
@@ -836,7 +919,7 @@ the unary function which returns
 
 #### Defined in
 
-[src/Arr.ts:472](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L472)
+[src/Arr.ts:555](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L555)
 
 ▸ **cmp**<`A`\>(`cmp`, `a`): (`b`: [`T`](Arr.md#t)<`A`\>) => [`ComparableResult`](Functors.md#comparableresult)
 
@@ -897,7 +980,7 @@ the unary function which returns
 
 #### Defined in
 
-[src/Arr.ts:500](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L500)
+[src/Arr.ts:583](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L583)
 
 ▸ **cmp**<`A`\>(`cmp`): (`a`: [`T`](Arr.md#t)<`A`\>, `b`: [`T`](Arr.md#t)<`A`\>) => [`ComparableResult`](Functors.md#comparableresult)
 
@@ -960,7 +1043,7 @@ the binary function which returns
 
 #### Defined in
 
-[src/Arr.ts:529](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L529)
+[src/Arr.ts:612](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L612)
 
 ▸ **cmp**<`A`\>(`cmp`): (`a`: [`T`](Arr.md#t)<`A`\>, `b`: [`T`](Arr.md#t)<`A`\>) => [`ComparableResult`](Functors.md#comparableresult)
 
@@ -1023,7 +1106,7 @@ the binary function which returns
 
 #### Defined in
 
-[src/Arr.ts:558](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L558)
+[src/Arr.ts:641](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L641)
 
 ___
 
@@ -1072,7 +1155,7 @@ Arr.eq(Str.eq, ['a', 'b'], ['a', 'b'])  // true
 
 #### Defined in
 
-[src/Arr.ts:618](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L618)
+[src/Arr.ts:712](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L712)
 
 ▸ **eq**<`A`\>(`e`, `a`, `b`): `boolean`
 
@@ -1117,7 +1200,7 @@ Arr.eq(Str, ['a', 'b'], ['a', 'b'])  // true
 
 #### Defined in
 
-[src/Arr.ts:644](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L644)
+[src/Arr.ts:738](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L738)
 
 ▸ **eq**<`A`\>(`e`, `a`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, `boolean`\>
 
@@ -1162,7 +1245,7 @@ the unary function
 
 #### Defined in
 
-[src/Arr.ts:668](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L668)
+[src/Arr.ts:762](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L762)
 
 ▸ **eq**<`A`\>(`e`, `a`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, `boolean`\>
 
@@ -1205,7 +1288,7 @@ the unary function
 
 #### Defined in
 
-[src/Arr.ts:690](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L690)
+[src/Arr.ts:784](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L784)
 
 ▸ **eq**<`A`\>(`e`): [`Binary`](Fn.md#binary)<[`T`](Arr.md#t)<`A`\>, [`T`](Arr.md#t)<`A`\>, `boolean`\>
 
@@ -1249,7 +1332,7 @@ the binary function
 
 #### Defined in
 
-[src/Arr.ts:713](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L713)
+[src/Arr.ts:807](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L807)
 
 ▸ **eq**<`A`\>(`e`): [`Binary`](Fn.md#binary)<[`T`](Arr.md#t)<`A`\>, [`T`](Arr.md#t)<`A`\>, `boolean`\>
 
@@ -1293,7 +1376,7 @@ the binary function
 
 #### Defined in
 
-[src/Arr.ts:736](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L736)
+[src/Arr.ts:830](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L830)
 
 ## Native methods
 
@@ -1334,7 +1417,7 @@ the concatenated array
 
 #### Defined in
 
-[src/Arr.ts:785](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L785)
+[src/Arr.ts:888](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L888)
 
 ▸ **concat**<`A`\>(`a`): [`Unary`](Fn.md#unary)<`A`, `A`\>
 
@@ -1370,7 +1453,7 @@ the unary function
 
 #### Defined in
 
-[src/Arr.ts:799](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L799)
+[src/Arr.ts:902](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L902)
 
 ___
 
@@ -1413,7 +1496,7 @@ Arr.contains(['a'], 'b') // false
 
 #### Defined in
 
-[src/Arr.ts:826](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L826)
+[src/Arr.ts:931](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L931)
 
 ▸ **contains**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, `boolean`\>
 
@@ -1450,7 +1533,7 @@ the unary function
 
 #### Defined in
 
-[src/Arr.ts:843](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L843)
+[src/Arr.ts:948](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L948)
 
 ___
 
@@ -1493,7 +1576,7 @@ Arr.every([10, 21], Num.isEven)      // false
 
 #### Defined in
 
-[src/Arr.ts:870](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L870)
+[src/Arr.ts:977](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L977)
 
 ▸ **every**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, `boolean`\>
 
@@ -1530,7 +1613,7 @@ the unary function
 
 #### Defined in
 
-[src/Arr.ts:887](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L887)
+[src/Arr.ts:994](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L994)
 
 ___
 
@@ -1733,7 +1816,7 @@ Arr.fill(x, 10)                 // [10, 10, 10, 10]
 
 #### Defined in
 
-[src/Arr.ts:934](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L934)
+[src/Arr.ts:1043](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1043)
 
 ▸ **fill**<`A`\>(`a`, `b?`, `start?`): (`a`: [`T`](Arr.md#t)<`any`\>, `start2?`: `number`, `end2?`: `number`) => [`T`](Arr.md#t)<`A`\>
 
@@ -1787,7 +1870,7 @@ Arr.fill(10)(x)                 // [10, 10, 10, 10]
 
 #### Defined in
 
-[src/Arr.ts:956](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L956)
+[src/Arr.ts:1065](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1065)
 
 ___
 
@@ -1829,7 +1912,7 @@ Arr.filter(Num.gt(10))(x)    // [20, 30]
 
 #### Defined in
 
-[src/Arr.ts:984](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L984)
+[src/Arr.ts:1095](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1095)
 
 ▸ **filter**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, [`T`](Arr.md#t)<`A`\>\>
 
@@ -1866,7 +1949,7 @@ Arr.filter(Num.gt(10))(x)    // [20, 30]
 
 #### Defined in
 
-[src/Arr.ts:1003](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1003)
+[src/Arr.ts:1114](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1114)
 
 ___
 
@@ -1908,7 +1991,7 @@ Arr.find(x, Num.gt(30))    // null
 
 #### Defined in
 
-[src/Arr.ts:1030](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1030)
+[src/Arr.ts:1143](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1143)
 
 ▸ **find**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, [`T`](Opt.md#t)<`A`\>\>
 
@@ -1945,7 +2028,7 @@ Arr.find(Num.gt(30))(x)    // null
 
 #### Defined in
 
-[src/Arr.ts:1049](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1049)
+[src/Arr.ts:1162](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1162)
 
 ___
 
@@ -1992,7 +2075,7 @@ the flattened array
 
 #### Defined in
 
-[src/Arr.ts:1251](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1251)
+[src/Arr.ts:1383](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1383)
 
 ▸ **flat**<`A`, `D`\>(`a?`): [`Unary`](Fn.md#unary)<`A`, `FlatArray`<`A`, `D`\>\>
 
@@ -2034,7 +2117,7 @@ the unary function
 
 #### Defined in
 
-[src/Arr.ts:1273](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1273)
+[src/Arr.ts:1405](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1405)
 
 ___
 
@@ -2083,7 +2166,7 @@ Arr.includes(40)(x)        // false
 
 #### Defined in
 
-[src/Arr.ts:1358](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1358)
+[src/Arr.ts:1494](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1494)
 
 ▸ **includes**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, `boolean`\>
 
@@ -2128,7 +2211,7 @@ the unary function which returns
 
 #### Defined in
 
-[src/Arr.ts:1383](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1383)
+[src/Arr.ts:1519](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1519)
 
 ___
 
@@ -2172,7 +2255,7 @@ the length of the array
 
 #### Defined in
 
-[src/Arr.ts:1411](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1411)
+[src/Arr.ts:1549](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1549)
 
 ___
 
@@ -2221,7 +2304,7 @@ the concatenated string
 
 #### Defined in
 
-[src/Arr.ts:1437](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1437)
+[src/Arr.ts:1575](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1575)
 
 ▸ **join**<`A`, `B`\>(`a?`): [`Unary`](Fn.md#unary)<`A`, `string`\>
 
@@ -2265,7 +2348,7 @@ the concatenated string
 
 #### Defined in
 
-[src/Arr.ts:1461](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1461)
+[src/Arr.ts:1599](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1599)
 
 ___
 
@@ -2312,7 +2395,7 @@ the mapped array
 
 #### Defined in
 
-[src/Arr.ts:1558](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1558)
+[src/Arr.ts:1702](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1702)
 
 ▸ **map**<`A`, `B`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, [`T`](Arr.md#t)<`B`\>\>
 
@@ -2354,7 +2437,7 @@ the unary function which takes an array `b` and returns an array `c` with type `
 
 #### Defined in
 
-[src/Arr.ts:1580](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1580)
+[src/Arr.ts:1724](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1724)
 
 ___
 
@@ -2402,7 +2485,7 @@ Arr.none(p)(x)       // true
 
 #### Defined in
 
-[src/Arr.ts:1613](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1613)
+[src/Arr.ts:1759](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1759)
 
 ▸ **none**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, `boolean`\>
 
@@ -2448,7 +2531,7 @@ Arr.none(p)(x)       // true
 
 #### Defined in
 
-[src/Arr.ts:1637](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1637)
+[src/Arr.ts:1783](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1783)
 
 ___
 
@@ -2537,7 +2620,7 @@ the reduced value
 
 #### Defined in
 
-[src/Arr.ts:1779](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1779)
+[src/Arr.ts:1934](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1934)
 
 ▸ **reduce**<`A`, `B`\>(`a`, `r`): (`b`: [`T`](Arr.md#t)<`A`\>) => `B`
 
@@ -2595,7 +2678,7 @@ the reduced value
 
 #### Defined in
 
-[src/Arr.ts:1805](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1805)
+[src/Arr.ts:1960](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1960)
 
 ___
 
@@ -2646,7 +2729,7 @@ the reduced value
 
 #### Defined in
 
-[src/Arr.ts:1839](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1839)
+[src/Arr.ts:1996](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1996)
 
 ▸ **reduceRight**<`A`, `B`\>(`a`, `r`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, `B`\>
 
@@ -2692,7 +2775,7 @@ the reducer unary function
 
 #### Defined in
 
-[src/Arr.ts:1865](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1865)
+[src/Arr.ts:2022](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L2022)
 
 ___
 
@@ -2734,7 +2817,7 @@ the reversed array
 
 #### Defined in
 
-[src/Arr.ts:1891](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1891)
+[src/Arr.ts:2050](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L2050)
 
 ___
 
@@ -2787,7 +2870,7 @@ the sliced array
 
 #### Defined in
 
-[src/Arr.ts:1949](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1949)
+[src/Arr.ts:2110](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L2110)
 
 ▸ **slice**<`A`\>(`a?`, `s?`): [`Unary`](Fn.md#unary)<`A`, `A`\>
 
@@ -2835,7 +2918,7 @@ the unary function which slices the array
 
 #### Defined in
 
-[src/Arr.ts:1978](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1978)
+[src/Arr.ts:2139](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L2139)
 
 ___
 
@@ -2878,7 +2961,7 @@ return true if some values satisfy the predicate
 
 #### Defined in
 
-[src/Arr.ts:2005](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L2005)
+[src/Arr.ts:2168](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L2168)
 
 ▸ **some**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, `boolean`\>
 
@@ -2918,7 +3001,7 @@ the unary function which returns
 
 #### Defined in
 
-[src/Arr.ts:2025](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L2025)
+[src/Arr.ts:2188](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L2188)
 
 ___
 
@@ -2964,7 +3047,7 @@ the sorted array
 
 #### Defined in
 
-[src/Arr.ts:2055](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L2055)
+[src/Arr.ts:2220](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L2220)
 
 ▸ **sort**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, [`T`](Arr.md#t)<`A`\>\>
 
@@ -3004,7 +3087,7 @@ the unary function which sorts the array
 
 #### Defined in
 
-[src/Arr.ts:2075](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L2075)
+[src/Arr.ts:2240](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L2240)
 
 ## Compound native methods
 
@@ -3053,7 +3136,7 @@ Arr.filterMap(x, mod)     // [20]
 
 #### Defined in
 
-[src/Arr.ts:1081](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1081)
+[src/Arr.ts:1196](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1196)
 
 ▸ **filterMap**<`A`, `B`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, [`T`](Arr.md#t)<`B`\>\>
 
@@ -3099,7 +3182,7 @@ the unary function
 
 #### Defined in
 
-[src/Arr.ts:1107](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1107)
+[src/Arr.ts:1222](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1222)
 
 ___
 
@@ -3154,7 +3237,7 @@ the filtered and reduced output
 
 #### Defined in
 
-[src/Arr.ts:1170](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1170)
+[src/Arr.ts:1293](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1293)
 
 ▸ **filterReduce**<`A`, `B`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, `B`\>
 
@@ -3204,7 +3287,7 @@ the unary function
 
 #### Defined in
 
-[src/Arr.ts:1200](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1200)
+[src/Arr.ts:1323](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1323)
 
 ___
 
@@ -3250,7 +3333,7 @@ the flatmapped array
 
 #### Defined in
 
-[src/Arr.ts:1303](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1303)
+[src/Arr.ts:1437](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1437)
 
 ▸ **flatMap**<`A`, `B`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<[`T`](Arr.md#t)<`A`\>\>, [`T`](Arr.md#t)<`B`\>\>
 
@@ -3291,7 +3374,7 @@ the unary function
 
 #### Defined in
 
-[src/Arr.ts:1324](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1324)
+[src/Arr.ts:1458](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1458)
 
 ## Factories
 
@@ -3341,7 +3424,7 @@ the array
 
 #### Defined in
 
-[src/Arr.ts:1495](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1495)
+[src/Arr.ts:1635](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1635)
 
 ▸ **make**<`A`\>(`size`, `d?`): `A` extends [`None`](Opt.md#none) ? [`T`](Arr.md#t)<[`None`](Opt.md#none)\> : [`T`](Arr.md#t)<`A`\>
 
@@ -3386,7 +3469,7 @@ the array
 
 #### Defined in
 
-[src/Arr.ts:1520](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1520)
+[src/Arr.ts:1660](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1660)
 
 ## Misc
 
@@ -3434,7 +3517,7 @@ the partitioned array
 
 #### Defined in
 
-[src/Arr.ts:1688](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1688)
+[src/Arr.ts:1836](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1836)
 
 ▸ **partition**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Arr.md#t)<`A`\>, [[`T`](Arr.md#t)<`A`\>, [`T`](Arr.md#t)<`A`\>]\>
 
@@ -3478,7 +3561,7 @@ the unary function which takes an array `T<A>` as an argument and returns
 
 #### Defined in
 
-[src/Arr.ts:1712](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1712)
+[src/Arr.ts:1860](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1860)
 
 ___
 
@@ -3522,7 +3605,7 @@ a random element of the array
 
 #### Defined in
 
-[src/Arr.ts:1754](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1754)
+[src/Arr.ts:1909](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L1909)
 
 ___
 
@@ -3564,7 +3647,7 @@ the shuffled array
 
 #### Defined in
 
-[src/Arr.ts:1910](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L1910)
+[src/Arr.ts:2069](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L2069)
 
 ___
 
@@ -3610,7 +3693,7 @@ the zipped array
 
 #### Defined in
 
-[src/Arr.ts:2105](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L2105)
+[src/Arr.ts:2272](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L2272)
 
 ▸ **zip**<`A`\>(`a`): [`Unary`](Fn.md#unary)<`A`, [`T`](Arr.md#t)<`A`\>\>
 
@@ -3652,7 +3735,7 @@ the unary function which zips the array
 
 #### Defined in
 
-[src/Arr.ts:2127](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L2127)
+[src/Arr.ts:2294](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L2294)
 
 ## Predicates
 
@@ -3688,7 +3771,7 @@ Arr.empty(['a'])  // false
 
 #### Defined in
 
-[src/Arr.ts:2171](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L2171)
+[src/Arr.ts:2342](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L2342)
 
 ___
 
@@ -3724,4 +3807,4 @@ Arr.populated(['a'])  // true
 
 #### Defined in
 
-[src/Arr.ts:2190](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Arr.ts#L2190)
+[src/Arr.ts:2361](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Arr.ts#L2361)

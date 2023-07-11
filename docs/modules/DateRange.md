@@ -66,7 +66,7 @@ for (const month of dr) {
 
 #### Defined in
 
-[src/DateRange.ts:24](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/DateRange.ts#L24)
+[src/DateRange.ts:24](https://github.com/OctoD/tiinvo/blob/5779ed4/src/DateRange.ts#L24)
 
 ## Factories
 
@@ -111,7 +111,7 @@ the step to increment. It can be:
 
 #### Defined in
 
-[src/DateRange.ts:55](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/DateRange.ts#L55)
+[src/DateRange.ts:55](https://github.com/OctoD/tiinvo/blob/5779ed4/src/DateRange.ts#L55)
 
 ## Guardables
 
@@ -151,7 +151,7 @@ returns true if x is DateRange, false otherwise
 
 #### Defined in
 
-[src/DateRange.ts:125](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/DateRange.ts#L125)
+[src/DateRange.ts:131](https://github.com/OctoD/tiinvo/blob/5779ed4/src/DateRange.ts#L131)
 
 ## Predicates
 
@@ -192,7 +192,7 @@ true if b is in range of a
 
 #### Defined in
 
-[src/DateRange.ts:152](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/DateRange.ts#L152)
+[src/DateRange.ts:158](https://github.com/OctoD/tiinvo/blob/5779ed4/src/DateRange.ts#L158)
 
 ▸ **inRange**(`a`): [`Unary`](Fn.md#unary)<[`T`](DateRange.md#t), `boolean`\>
 
@@ -228,7 +228,7 @@ the unary function which accepts a `DateRange.T` and returns true if a is in `Da
 
 #### Defined in
 
-[src/DateRange.ts:173](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/DateRange.ts#L173)
+[src/DateRange.ts:179](https://github.com/OctoD/tiinvo/blob/5779ed4/src/DateRange.ts#L179)
 
 ## Mappables
 
@@ -274,7 +274,7 @@ the mapped value
 
 #### Defined in
 
-[src/DateRange.ts:216](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/DateRange.ts#L216)
+[src/DateRange.ts:225](https://github.com/OctoD/tiinvo/blob/5779ed4/src/DateRange.ts#L225)
 
 ▸ **map**<`a`\>(`t`): [`Unary`](Fn.md#unary)<[`T`](DateRange.md#t), `a`[]\>
 
@@ -317,7 +317,7 @@ the unary function
 
 #### Defined in
 
-[src/DateRange.ts:238](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/DateRange.ts#L238)
+[src/DateRange.ts:247](https://github.com/OctoD/tiinvo/blob/5779ed4/src/DateRange.ts#L247)
 
 ## Serializables
 

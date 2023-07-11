@@ -79,8 +79,10 @@ export function cmp(a: T, b: T): Functors.ComparableResult;
  * @since 4.0.0
  */
 export function cmp(a: T): Fn.Unary<T, Functors.ComparableResult>;
-export function cmp(a: T, b?: T): any {
-  if (guard(a) && guard(b)) {
+export function cmp(a: T, b?: T): any
+{
+  if (guard(a) && guard(b))
+  {
     return a < b ? -1 : a > b ? 1 : 0;
   }
 
@@ -128,8 +130,10 @@ export function eq(a: T, b: T): boolean;
  * @since 4.0.0
  */
 export function eq(a: T): Fn.Unary<T, boolean>;
-export function eq(a: T, b?: T): any {
-  if (arguments.length === 2) {
+export function eq(a: T, b?: T): any
+{
+  if (arguments.length === 2)
+  {
     return guard(a) && guard(b) && a === b;
   }
 
@@ -185,10 +189,13 @@ export function map<A>(a: T, m: Functors.Mappable<T, A>): Result.T<A>;
  * @since 4.0.0
  */
 export function map<A>(a: Functors.Mappable<T, A>): Fn.Unary<T, Result.T<A>>;
-export function map<A>(a: T | Functors.Mappable<T, A>, m?: Functors.Mappable<T, A>): any {
-  if (guard(a) && typeof m === 'function') {
+export function map<A>(a: T | Functors.Mappable<T, A>, m?: Functors.Mappable<T, A>): any
+{
+  if (guard(a) && typeof m === 'function')
+  {
     return m(a);
-  } else if (typeof a === 'function') {
+  } else if (typeof a === 'function')
+  {
     return (b: T) => guard(b) ? a(b) : new TypeError("a is not a bigint");
   }
 
@@ -239,10 +246,13 @@ export function mapOr<A>(a: T, m: Functors.Mappable<T, A>, b: A): A;
  * @since 4.0.0
  */
 export function mapOr<A>(a: Functors.Mappable<T, A>, m: A): Fn.Unary<T, A>;
-export function mapOr<A>(a: T | Functors.Mappable<T, A>, m: any, b?: A): any {
-  if (typeof m === 'function') {
+export function mapOr<A>(a: T | Functors.Mappable<T, A>, m: any, b?: A): any
+{
+  if (typeof m === 'function')
+  {
     return guard(a) ? m(a) : b;
-  } else if (typeof a === 'function') {
+  } else if (typeof a === 'function')
+  {
     return (c: T) => guard(c) ? a(c) : m;
   }
 
@@ -295,8 +305,10 @@ export function add(a: T, b: T): T;
  * @since 4.0.0
  */
 export function add(a: T): Fn.Unary<T, T>;
-export function add(a: T, b?: T): any {
-  if (guard(b)) {
+export function add(a: T, b?: T): any
+{
+  if (guard(b))
+  {
     return a + b;
   }
 
@@ -340,8 +352,10 @@ export function div(a: T, b: T): T;
  * @since 4.0.0
  */
 export function div(a: T): Fn.Unary<T, T>;
-export function div(a: T, b?: T): any {
-  if (guard(b)) {
+export function div(a: T, b?: T): any
+{
+  if (guard(b))
+  {
     return a / b;
   }
 
@@ -387,8 +401,10 @@ export function mod(a: T, b: T): T;
  * @since 4.0.0
  */
 export function mod(a: T): Fn.Unary<T, T>;
-export function mod(a: T, b?: T): any {
-  if (guard(a) && guard(b)) {
+export function mod(a: T, b?: T): any
+{
+  if (guard(a) && guard(b))
+  {
     return a % b;
   }
 
@@ -433,8 +449,10 @@ export function mul(a: T, b: T): T;
  * @since 4.0.0
  */
 export function mul(a: T): Fn.Unary<T, T>;
-export function mul(a: T, b?: T): any {
-  if (guard(b)) {
+export function mul(a: T, b?: T): any
+{
+  if (guard(b))
+  {
     return a * b;
   }
 
@@ -477,8 +495,10 @@ export function pow(a: T, b: T): T;
  * @since 4.0.0
  */
 export function pow(a: T): Fn.Unary<T, T>;
-export function pow(a: T, b?: T): any {
-  if (guard(a) && guard(b)) {
+export function pow(a: T, b?: T): any
+{
+  if (guard(a) && guard(b))
+  {
     return a ** b;
   }
 
@@ -524,19 +544,23 @@ export function root(a: T, b: T): T;
  * @since 4.0.0
  */
 export function root(a: T): Fn.Unary<T, T>;
-export function root(a: T, b?: T): any {
-  const _r = (base: T, root: T) => {
+export function root(a: T, b?: T): any
+{
+  const _r = (base: T, root: T) =>
+  {
     let s = base + 1n;
     let k1 = root - 1n;
     let u = base;
-    while (u < s) {
+    while (u < s)
+    {
       s = u;
       u = ((u * k1) + base / (u ** k1)) / root;
     }
     return s;
   };
 
-  if (guard(b) && guard(a)) {
+  if (guard(b) && guard(a))
+  {
     return _r(a, b);
   }
 
@@ -582,8 +606,10 @@ export function sub(a: T, b: T): T;
  * @since 4.0.0
  */
 export function sub(a: T): Fn.Unary<T, T>;
-export function sub(a: T, b?: T): any {
-  if (guard(b)) {
+export function sub(a: T, b?: T): any
+{
+  if (guard(b))
+  {
     return a - b;
   }
 
@@ -638,8 +664,10 @@ export function asc(a: T, b: T): Functors.ComparableResult;
  * @since 4.0.0
  */
 export function asc(a: T): Fn.Unary<T, Functors.ComparableResult>;
-export function asc(a: T, b?: any): any {
-  if (guard(b)) {
+export function asc(a: T, b?: any): any
+{
+  if (guard(b))
+  {
     return cmp(a, b);
   }
 
@@ -673,8 +701,10 @@ export function asc(a: T, b?: any): any {
  */
 export function desc(a: T, b: T): Functors.ComparableResult;
 export function desc(a: T): Fn.Unary<T, Functors.ComparableResult>;
-export function desc(a: T, b?: any): any {
-  if (guard(b)) {
+export function desc(a: T, b?: any): any
+{
+  if (guard(b))
+  {
     return cmp(b, a);
   }
 

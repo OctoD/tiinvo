@@ -3,20 +3,24 @@ import * as Option from './Option.js';
 import * as Num from './Num.js';
 import * as Str from './Str.js';
 
-describe("Option", () => {
-  test(Option.isNone.name, () => {
+describe("Option", () =>
+{
+  test(Option.isNone.name, () =>
+  {
     expect(Option.isNone(1)).toEqual(false);
     expect(Option.isNone(null)).toEqual(true);
     expect(Option.isNone(undefined)).toEqual(true);
   });
 
-  test(Option.isSome.name, () => {
+  test(Option.isSome.name, () =>
+  {
     expect(Option.isSome(1)).toEqual(true);
     expect(Option.isSome(null)).toEqual(false);
     expect(Option.isSome(undefined)).toEqual(false);
   });
 
-  test(Option.guardOf.name, () => {
+  test(Option.guardOf.name, () =>
+  {
     const x = 1;
     const y = null;
     const z = undefined;
@@ -30,7 +34,8 @@ describe("Option", () => {
     expect(isnumsome(w)).toEqual(false);
   });
 
-  test(Option.cmp.name, () => {
+  test(Option.cmp.name, () =>
+  {
     const cmp = Option.cmp(Str.cmp);
     const cmpm = Option.cmp(Str);
 
@@ -77,7 +82,8 @@ describe("Option", () => {
     expect(Option.cmp(Str, "a")(undefined)).toEqual(-1);
   });
 
-  test(Option.eq.name, () => {
+  test(Option.eq.name, () =>
+  {
     const eq = Option.eq(Num.eq);
     const eqm = Option.eq(Num);
 
@@ -118,7 +124,8 @@ describe("Option", () => {
     expect(Option.eq(Num, 1_000_000)(0)).toEqual(false);
   });
 
-  test(Option.filter.name, () => {
+  test(Option.filter.name, () =>
+  {
     const f = Option.filter(Num.gt(1));
 
     expect(f(1)).toEqual(null);
@@ -129,7 +136,8 @@ describe("Option", () => {
     expect(Option.filter(Num.gt(1), null)).toEqual(null);
   });
 
-  test(Option.map.name, () => {
+  test(Option.map.name, () =>
+  {
     const m = Option.map(Num.add(1));
 
     expect(m(1)).toEqual(2);
@@ -139,7 +147,8 @@ describe("Option", () => {
     expect(Option.map(Num.add(1), null)).toEqual(null);
   });
 
-  test(Option.mapOr.name, () => {
+  test(Option.mapOr.name, () =>
+  {
     const m = Option.mapOr(Num.add(2), 0);
 
     expect(m(1)).toEqual(3);
@@ -148,9 +157,12 @@ describe("Option", () => {
     expect(Option.mapOr(Num.add(2), null, 0)).toEqual(0);
   });
 
-  test(Option.tryAsync.name, async () => {
-    const fn = async (arg: number) => {
-      if (Num.isEven(arg)) {
+  test(Option.tryAsync.name, async () =>
+  {
+    const fn = async (arg: number) =>
+    {
+      if (Num.isEven(arg))
+      {
         return arg * 2;
       }
 
@@ -166,9 +178,12 @@ describe("Option", () => {
     expect(Option.isNone(await safe(3))).toEqual(true);
   });
 
-  test(Option.trySync.name, () => {
-    const fn = (arg: number) => {
-      if (Num.isEven(arg)) {
+  test(Option.trySync.name, () =>
+  {
+    const fn = (arg: number) =>
+    {
+      if (Num.isEven(arg))
+      {
         return arg * 2;
       }
 

@@ -121,10 +121,12 @@ export function cmp(a: T, b: T): Functors.ComparableResult;
  * @since 4.0.0
  */
 export function cmp(a: T): Fn.Unary<T, Functors.ComparableResult>;
-export function cmp(a: T, b?: T): any {
+export function cmp(a: T, b?: T): any
+{
   const _cmp = (x: T, y: T) => x > y ? 1 : x < y ? -1 : 0;
 
-  if (guard(a) && guard(b)) {
+  if (guard(a) && guard(b))
+  {
     return _cmp(a, b);
   }
 
@@ -172,8 +174,10 @@ export function eq(a: T, b: T): boolean;
  * @since 4.0.0
  */
 export function eq(a: T): Fn.Unary<T, boolean>;
-export function eq(a: T, b?: T): any {
-  if (guard(a) && guard(b)) {
+export function eq(a: T, b?: T): any
+{
+  if (guard(a) && guard(b))
+  {
     return a === b;
   }
 
@@ -204,8 +208,10 @@ export function eq(a: T, b?: T): any {
  */
 export function asc(a: T, b: T): Functors.ComparableResult;
 export function asc(a: T): Fn.Unary<T, Functors.ComparableResult>;
-export function asc(a: T, b?: any): any {
-  if (guard(b)) {
+export function asc(a: T, b?: any): any
+{
+  if (guard(b))
+  {
     return cmp(a, b);
   }
 
@@ -232,8 +238,10 @@ export function asc(a: T, b?: any): any {
  */
 export function desc(a: T, b: T): Functors.ComparableResult;
 export function desc(a: T): Fn.Unary<T, Functors.ComparableResult>;
-export function desc(a: T, b?: any): any {
-  if (guard(b)) {
+export function desc(a: T, b?: any): any
+{
+  if (guard(b))
+  {
     return cmp(b, a);
   }
 
@@ -304,15 +312,19 @@ export function charAt(a: T, b: number): Option.T<T>;
  * @since 4.0.0
  */
 export function charAt(a: number): Fn.Unary<T, Option.T<T>>;
-export function charAt(a: any, b?: any): any {
-  if (guard(a) && typeof b === 'number') {
+export function charAt(a: any, b?: any): any
+{
+  if (guard(a) && typeof b === 'number')
+  {
     const c = a.charAt(b);
     return c === "" ? null : c;
-  } else if (typeof a !== 'number') {
+  } else if (typeof a !== 'number')
+  {
     return (_: never) => null;
   }
 
-  return (b: T) => {
+  return (b: T) =>
+  {
     const c = b.charAt(a);
     return c === "" ? null : c;
   };
@@ -365,15 +377,19 @@ export function charCodeAt(a: T, b: number): Option.T<number>;
  * @since 4.0.0
  */
 export function charCodeAt(a: number): Fn.Unary<T, Option.T<number>>;
-export function charCodeAt(a: any, b?: any): any {
-  if (guard(a) && typeof b === 'number') {
+export function charCodeAt(a: any, b?: any): any
+{
+  if (guard(a) && typeof b === 'number')
+  {
     const c = a.charCodeAt(b);
     return c >= 0 ? c : null;
-  } else if (typeof a !== 'number') {
+  } else if (typeof a !== 'number')
+  {
     return (_: never) => null;
   }
 
-  return (b: T) => {
+  return (b: T) =>
+  {
     const c = b.charCodeAt(a);
     return c >= 0 ? c : null;
   };
@@ -433,8 +449,10 @@ export function concat(a: T, b: T): T;
  * @since 4.0.0
  */
 export function concat(a: T): Fn.Unary<T, T>;
-export function concat(a: any, b?: any): any {
-  if (guard(a) && guard(b)) {
+export function concat(a: any, b?: any): any
+{
+  if (guard(a) && guard(b))
+  {
     return a.concat(b);
   }
 
@@ -481,8 +499,10 @@ export function endsWith(a: T, b: T): boolean;
  * @since 4.0.0
  */
 export function endsWith(a: T): Fn.Unary<T, boolean>;
-export function endsWith(a: any, b?: any): any {
-  if (guard(a) && guard(b)) {
+export function endsWith(a: any, b?: any): any
+{
+  if (guard(a) && guard(b))
+  {
     return a.endsWith(b);
   }
 
@@ -530,8 +550,10 @@ export function includes(a: T, b: T): boolean;
  * @since 4.0.0
  */
 export function includes(a: T): Fn.Unary<T, boolean>;
-export function includes(a: any, b?: any): any {
-  if (guard(a) && guard(b)) {
+export function includes(a: any, b?: any): any
+{
+  if (guard(a) && guard(b))
+  {
     return a.includes(b);
   }
 
@@ -582,8 +604,10 @@ export function indexOf(a: T, b: T, i?: number): Option.T<number>;
  * @since 4.0.0
  */
 export function indexOf(a: T): (b: T, i?: number) => Option.T<number>;
-export function indexOf(a: any, b?: any, i?: number): any {
-  if (guard(a) && guard(b)) {
+export function indexOf(a: any, b?: any, i?: number): any
+{
+  if (guard(a) && guard(b))
+  {
     return a.indexOf(b, i);
   }
 
@@ -629,8 +653,10 @@ export function lastIndexOf(a: T, b: T, p?: number): Option.T<number>;
  * @since 4.0.0
  */
 export function lastIndexOf(a: T): (b: T, p?: number) => Option.T<number>;
-export function lastIndexOf(a: any, b?: any, p?: any): any {
-  if (guard(a) && guard(b)) {
+export function lastIndexOf(a: any, b?: any, p?: any): any
+{
+  if (guard(a) && guard(b))
+  {
     return a.lastIndexOf(b, p);
   }
 
@@ -731,8 +757,10 @@ export function match(a: T, b: T | RegExp): Option.T<RegExpMatchArray>;
  * @since 4.0.0
  */
 export function match(a: T | RegExp): Fn.Unary<T, Option.T<RegExpMatchArray>>;
-export function match(a: any, b?: any): any {
-  if (guard(a) && (guard(b) || b instanceof RegExp)) {
+export function match(a: any, b?: any): any
+{
+  if (guard(a) && (guard(b) || b instanceof RegExp))
+  {
     return a.match(b);
   }
 
@@ -808,8 +836,10 @@ export function padEnd(a: number): (b: T, d?: T) => T;
  * @since 4.0.0
  */
 export function padEnd(a: number, b?: T): (b: T) => T;
-export function padEnd(a: any, b?: any, c?: any): any {
-  if (guard(a) && typeof b === 'number') {
+export function padEnd(a: any, b?: any, c?: any): any
+{
+  if (guard(a) && typeof b === 'number')
+  {
     return a.padEnd(b, c);
   }
 
@@ -904,8 +934,10 @@ export function padStart(a: number): (c: T, d?: T) => T;
  * @since 4.0.0
  */
 export function padStart(a: number, b?: T): (c: T) => T;
-export function padStart(a: any, b?: any, c?: any): any {
-  if (guard(a) && typeof b === 'number') {
+export function padStart(a: any, b?: any, c?: any): any
+{
+  if (guard(a) && typeof b === 'number')
+  {
     return a.padStart(b, c);
   }
 
@@ -951,8 +983,10 @@ export function repeat(a: T, b: number): T;
  * @since 4.0.0
  */
 export function repeat(a: number): (b: T) => T;
-export function repeat(a: any, b?: any): any {
-  if (guard(a) && typeof b === 'number') {
+export function repeat(a: any, b?: any): any
+{
+  if (guard(a) && typeof b === 'number')
+  {
     return a.repeat(b);
   }
 
@@ -997,8 +1031,10 @@ export function replace(a: T, b: T, c: StringReplacer): T;
  * @since 4.0.0
  */
 export function replace(a: T, b: StringReplacer): (b: T) => T;
-export function replace(a: any, b?: any, c?: any): any {
-  if (guard(a) && guard(b) && typeof c !== 'undefined') {
+export function replace(a: any, b?: any, c?: any): any
+{
+  if (guard(a) && guard(b) && typeof c !== 'undefined')
+  {
     return a.replace(b, c);
   }
 
@@ -1071,10 +1107,12 @@ export function search(a: T, b: StringSearcher): Option.T<number>;
  * @since 4.0.0
  */
 export function search(a: StringSearcher): (b: T) => Option.T<number>;
-export function search(a: any, b?: any): any {
+export function search(a: any, b?: any): any
+{
   const m: Functors.Mappable<number, Option.T<number>> = x => x >= 0 ? x : null;
 
-  if (guard(a) && typeof b !== 'undefined') {
+  if (guard(a) && typeof b !== 'undefined')
+  {
     return m(a.search(b));
   }
 
@@ -1120,8 +1158,10 @@ export function slice(a: T, b: number, c?: number): string;
  * @since 4.0.0
  */
 export function slice(a: number, b?: number): (b: T) => string;
-export function slice(a: any, b?: any, c?: any): any {
-  if (guard(a) && typeof b === 'number') {
+export function slice(a: any, b?: any, c?: any): any
+{
+  if (guard(a) && typeof b === 'number')
+  {
     return a.slice(b, c);
   }
 
@@ -1169,8 +1209,10 @@ export function split(a: T, b: StringSplitter, c?: number): T[];
  * @since 4.0.0
  */
 export function split(a: StringSplitter, b?: number): Fn.Unary<T, T[]>;
-export function split(a: any, b?: any, c?: any): any {
-  if (guard(a) && (guard(b) || b instanceof RegExp || (!!b && typeof b === 'object' && Symbol.split in b))) {
+export function split(a: any, b?: any, c?: any): any
+{
+  if (guard(a) && (guard(b) || b instanceof RegExp || (!!b && typeof b === 'object' && Symbol.split in b)))
+  {
     return a.split(b, c);
   }
 

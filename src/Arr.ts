@@ -123,23 +123,96 @@ export function get<A>(a: T<A>, i: number): Result.T<A>;
  * @since 4.0.0
  */
 export function get<A>(a: number): Fn.Unary<T<A>, Result.T<A>>;
-export function get<A>(a: T<A> | number, i?: number): any {
-  if (guard(a) && typeof i === 'number') {
-    if (i >= 0 && i < a.length) {
+export function get<A>(a: T<A> | number, i?: number): any
+{
+  if (guard(a) && typeof i === 'number')
+  {
+    if (i >= 0 && i < a.length)
+    {
       return a[i] as Result.T<A>;
     }
 
     return new RangeError(`Index out of bounds ${i} for length ${a.length}`);
   }
 
-  return (b: T<A>) => {
-    if (a >= 0 && a < b.length) {
+  return (b: T<A>) =>
+  {
+    if (a >= 0 && a < b.length)
+    {
       return b[a as number] as Result.T<A>;
     }
 
     return new RangeError(`Index out of bounds ${a} for length ${b.length}`);
   };
 };
+
+
+/**
+ * Returns the element `Option.T<A>` at index `i` of an array `T<A>`.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Arr } from 'tiinvo';
+ * 
+ * Arr.getOr([10, 20], 0, 1)   // 20
+ * Arr.getOr([10, 20], 0, 3)   // 0
+ * ```
+ * 
+ * @template A the type of the array `A` elements
+ * 
+ * @param a is the array to search
+ * @param b is the default value
+ * @param i is the element index
+ *
+ * @group Accessors
+ * @since 4.0.0
+ */
+export function getOr<A>(a: T<A>, b: A, i: number): A;
+/**
+ * Returns a `Fn.Binary<T<A>, number, A>` to get the element `Option.T<A>` at index `i` of an array `T<A>`.
+ *
+ * @example
+ *
+ * ```ts
+ * import { Arr } from 'tiinvo';
+ * 
+ * Arr.getOr(0)([10, 20])   // 20
+ * Arr.getOr(0)([10, 20])   // 0
+ * ```
+ * 
+ * @template A the type of the array `A` elements
+ *
+ * @param a is the default value
+ * @returns the binary function
+ * 
+ * @group Accessors
+ * @since 4.0.0
+ */
+export function getOr<A>(a: A): Fn.Binary<T<A>, number, A>;
+export function getOr<A>(a: T<A> | number, b?: A, i?: number): any
+{
+  if (arguments.length === 3 && Array.isArray(a) && typeof i === 'number')
+  {
+    if (i >= 0 && i < a.length)
+    {
+      return a[i] as A;
+    }
+
+    return b;
+  }
+
+  return (b: T<A>, d: number) =>
+  {
+    if (d >= 0 && d < b.length)
+    {
+      return b[d] as A;
+    }
+
+    return a;
+  };
+};
+
 
 /**
  * Returns the first element of an array `A`. If the array is empty, returns `Option.None`.
@@ -204,8 +277,10 @@ export function firstOr<A>(t: T<A>, b: A): A;
  * @since 4.0.0
  */
 export function firstOr<A>(t: A): Fn.Unary<T<A>, A>;
-export function firstOr<A>(t: T<A> | A, b?: any): any {
-  if (guard(t)) {
+export function firstOr<A>(t: T<A> | A, b?: any): any
+{
+  if (guard(t))
+  {
     return t.length > 0 ? t[0] : b;
   }
 
@@ -276,8 +351,10 @@ export function lastOr<A>(t: T<A>, b: A): A;
  * @since 4.0.0
  */
 export function lastOr<A>(t: A): Fn.Unary<T<A>, A>;
-export function lastOr<a>(t: T<a> | a, b?: a): any {
-  if (guard(t)) {
+export function lastOr<a>(t: T<a> | a, b?: a): any
+{
+  if (guard(t))
+  {
     return t[t.length - 1] ?? b;
   }
 
@@ -356,14 +433,19 @@ export function guardOf<A>(g: Functors.Guardable<A>, x: unknown): x is T<A>;
  * @since 4.0.0
  */
 export function guardOf<A>(g: Functors.Guardable<A>): (x: unknown) => x is T<A>;
-export function guardOf<A>(g: Functors.Guardable<A>, x?: unknown): any {
-  const c = (g: Functors.Guardable<A>, x: unknown): x is T<A> => {
-    if (!guard(x)) {
+export function guardOf<A>(g: Functors.Guardable<A>, x?: unknown): any
+{
+  const c = (g: Functors.Guardable<A>, x: unknown): x is T<A> =>
+  {
+    if (!guard(x))
+    {
       return false;
     }
 
-    for (let i = 0; i < x.length; i++) {
-      if (!g(x[i])) {
+    for (let i = 0; i < x.length; i++)
+    {
+      if (!g(x[i]))
+      {
         return false;
       }
     }
@@ -371,7 +453,8 @@ export function guardOf<A>(g: Functors.Guardable<A>, x?: unknown): any {
     return true;
   };
 
-  if (arguments.length === 2) {
+  if (arguments.length === 2)
+  {
     return c(g, x);
   }
 
@@ -556,36 +639,47 @@ export function cmp<A>(cmp: Functors.Comparable<A>): (a: T<A>, b: T<A>) => Funct
  * @since 4.0.0
  */
 export function cmp<A>(cmp: Functors.ComparableModule<A>): (a: T<A>, b: T<A>) => Functors.ComparableResult;
-export function cmp<A>(cmp: Functors.Comparable<A> | Functors.ComparableModule<A>, a?: T<A>, b?: T<A>): any {
-  const _cmp = (x: T<A>, y: T<A>) => {
+export function cmp<A>(cmp: Functors.Comparable<A> | Functors.ComparableModule<A>, a?: T<A>, b?: T<A>): any
+{
+  const _cmp = (x: T<A>, y: T<A>) =>
+  {
     const c = typeof cmp === 'function' ? cmp : cmp.cmp;
-    
-    if (x.length > y.length) {
+
+    if (x.length > y.length)
+    {
       return 1;
-    } else if (x.length < y.length) {
+    } else if (x.length < y.length)
+    {
       return -1;
     }
 
     let s = 0;
 
-    for (let i = 0; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++)
+    {
       s += c(x[i], y[i]);
     }
 
-    if (s === 0) {
+    if (s === 0)
+    {
       return s;
-    } else if (s >= 1) {
+    } else if (s >= 1)
+    {
       return 1;
-    } else {
+    } else
+    {
       return -1;
     }
   };
 
-  if (arguments.length === 3 && guard(a) && guard(b)) {
+  if (arguments.length === 3 && guard(a) && guard(b))
+  {
     return _cmp(a, b);
-  } else if (arguments.length === 2 && guard(a)) {
+  } else if (arguments.length === 2 && guard(a))
+  {
     return (b: T<A>) => _cmp(a, b);
-  } else if (arguments.length === 1) {
+  } else if (arguments.length === 1)
+  {
     return (a: T<A>, b: T<A>) => _cmp(a, b);
   }
 };
@@ -734,20 +828,26 @@ export function eq<A>(e: Functors.Equatable<A>): Fn.Binary<T<A>, T<A>, boolean>;
  * @since 4.0.0
  */
 export function eq<A>(e: Functors.EquatableModule<A>): Fn.Binary<T<A>, T<A>, boolean>;
-export function eq<A>(e: Functors.Equatable<A> | Functors.EquatableModule<A>, a?: T<A>, b?: T<A>): any {
-  const _eq = (x: T<A>, y: T<A>) => {
+export function eq<A>(e: Functors.Equatable<A> | Functors.EquatableModule<A>, a?: T<A>, b?: T<A>): any
+{
+  const _eq = (x: T<A>, y: T<A>) =>
+  {
     const _e = typeof e === 'function' ? e : e.eq;
-    
-    if (x.length !== y.length) {
+
+    if (x.length !== y.length)
+    {
       return false;
     }
 
     let s = 0;
 
-    for (let i = 0; i < x.length; i++) {
-      if (_e(x[i], y[i])) {
+    for (let i = 0; i < x.length; i++)
+    {
+      if (_e(x[i], y[i]))
+      {
         continue;
-      } else {
+      } else
+      {
         return false;
       }
     }
@@ -755,11 +855,14 @@ export function eq<A>(e: Functors.Equatable<A> | Functors.EquatableModule<A>, a?
     return true;
   };
 
-  if (guard(a) && guard(b)) {
+  if (guard(a) && guard(b))
+  {
     return _eq(a, b);
-  } else if (guard(a) && !guard(b)) {
+  } else if (guard(a) && !guard(b))
+  {
     return (c: T<A>) => _eq(a, c);
-  } else {
+  } else
+  {
     return (c: T<A>, d: T<A>) => _eq(c, d);
   }
 };
@@ -797,8 +900,10 @@ export function concat<A extends T<any>>(a: A, b: A): A;
  * @since 4.0.0
  */
 export function concat<A extends T<any>>(a: A): Fn.Unary<A, A>;
-export function concat<A extends T<any>>(a: any, b?: any): any {
-  if (guard(b) && guard(a)) {
+export function concat<A extends T<any>>(a: any, b?: any): any
+{
+  if (guard(b) && guard(a))
+  {
     return a.concat(b);
   }
 
@@ -841,8 +946,10 @@ export function contains<A>(a: T<A>, b: A): boolean;
  * @since 4.0.0
  */
 export function contains<A>(a: A): Fn.Unary<T<A>, boolean>;
-export function contains<A>(a: any, b?: any): any {
-  if (guard(a)) {
+export function contains<A>(a: any, b?: any): any
+{
+  if (guard(a))
+  {
     return a.indexOf(b) >= 0;
   }
 
@@ -885,8 +992,10 @@ export function every<A>(a: T<A>, p: Predicate.T<A>): boolean;
  * @since 4.0.0
  */
 export function every<A>(a: Predicate.T<A>): Fn.Unary<T<A>, boolean>;
-export function every<A>(a: any, p?: any): any {
-  if (guard(a) && typeof p === 'function') {
+export function every<A>(a: any, p?: any): any
+{
+  if (guard(a) && typeof p === 'function')
+  {
     return a.every(p);
   }
 
@@ -954,8 +1063,10 @@ export function fill<A>(a: T<any>, b: A, start?: number, end?: number): T<A>;
  * @since 4.0.0
  */
 export function fill<A>(a: A, b?: number, start?: number): (a: T<any>, start2?: number, end2?: number) => T<A>;
-export function fill<A>(a: T<any> | A, b?: any, start?: any, end?: any): any {
-  if (guard(a)) {
+export function fill<A>(a: T<any> | A, b?: any, start?: any, end?: any): any
+{
+  if (guard(a))
+  {
     return a.fill(b, start, end);
   }
 
@@ -1001,8 +1112,10 @@ export function filter<A>(a: T<A>, p: Predicate.T<A>): T<A>;
  * @since 4.0.0
  */
 export function filter<A>(a: Predicate.T<A>): Fn.Unary<T<A>, T<A>>;
-export function filter<A>(a: T<any> | Predicate.T<A>, p?: Predicate.T<A>): any {
-  if (guard(a) && predicateguard(p)) {
+export function filter<A>(a: T<any> | Predicate.T<A>, p?: Predicate.T<A>): any
+{
+  if (guard(a) && predicateguard(p))
+  {
     return a.filter(p);
   }
 
@@ -1047,8 +1160,10 @@ export function find<A>(a: T<A>, p: Predicate.T<A>): Option.T<A>;
  * @since 4.0.0
  */
 export function find<A>(a: Predicate.T<A>): Fn.Unary<T<A>, Option.T<A>>;
-export function find<A>(a: T<A> | Predicate.T<A>, p?: Predicate.T<A>): any {
-  if (guard(a) && predicateguard(p)) {
+export function find<A>(a: T<A> | Predicate.T<A>, p?: Predicate.T<A>): any
+{
+  if (guard(a) && predicateguard(p))
+  {
     return a.find(p) ?? null;
   }
 
@@ -1105,27 +1220,35 @@ export function filterMap<A, B>(a: T<A>, mod: Functors.FilterMappableModule<A, B
  * @since 4.0.0
  */
 export function filterMap<A, B>(a: Functors.FilterMappableModule<A, B>): Fn.Unary<T<A>, T<B>>;
-export function filterMap<A, B>(a: T<A> | Functors.FilterMappableModule<A, B>, mod?: Functors.FilterMappableModule<A, B>): any {
+export function filterMap<A, B>(a: T<A> | Functors.FilterMappableModule<A, B>, mod?: Functors.FilterMappableModule<A, B>): any
+{
   const gmod = (x: unknown): x is Functors.FilterMappableModule<A, B> => typeof x === 'object' && x !== null && 'filter' in x && 'map' in x;
 
-  if (guard(a) && gmod(mod)) {
+  if (guard(a) && gmod(mod))
+  {
     const r = [] as B[];
 
-    for (let i = 0; i < a.length; i++) {
+    for (let i = 0; i < a.length; i++)
+    {
       const v = a[i];
 
-      if (mod.filter(v)) {
+      if (mod.filter(v))
+      {
         r.push(mod.map(v));
       }
     }
 
     return r;
-  } else if (gmod(a) && !Array.isArray(a)) {
-    return (b: T<A>) => {
+  } else if (gmod(a) && !Array.isArray(a))
+  {
+    return (b: T<A>) =>
+    {
       const r = [] as B[];
 
-      for (let i = 0; i < b.length; i++) {
-        if (a.filter(b[i])) {
+      for (let i = 0; i < b.length; i++)
+      {
+        if (a.filter(b[i]))
+        {
           r.push(a.map(b[i]));
         }
       }
@@ -1198,30 +1321,39 @@ export function filterReduce<A, B>(a: T<A>, mod: Functors.FilterReduceableModule
  * @since 4.0.0
  */
 export function filterReduce<A, B>(a: Functors.FilterReduceableModule<A, B>): Fn.Unary<T<A>, B>;
-export function filterReduce<a, b>(a: any, mod?: Functors.FilterReduceableModule<a, b>): any {
-  if (guard(a) && typeof mod === 'object' && mod !== null && 'filter' in mod && 'reduce' in mod && 'default' in mod) {
+export function filterReduce<a, b>(a: any, mod?: Functors.FilterReduceableModule<a, b>): any
+{
+  if (guard(a) && typeof mod === 'object' && mod !== null && 'filter' in mod && 'reduce' in mod && 'default' in mod)
+  {
     let out = mod.default;
 
-    for (let i = 0; i < a.length; i++) {
-      if (mod.filter(a[i] as a)) {
+    for (let i = 0; i < a.length; i++)
+    {
+      if (mod.filter(a[i] as a))
+      {
         out = mod.reduce(out, a[i] as a);
       }
     }
 
     return out;
-  } else if (typeof a === 'object' && a !== null && 'filter' in a && 'reduce' in a && 'default' in a) {
-    return (b: T<a>) => {
+  } else if (typeof a === 'object' && a !== null && 'filter' in a && 'reduce' in a && 'default' in a)
+  {
+    return (b: T<a>) =>
+    {
       let out = a.default;
 
-      for (let i = 0; i < b.length; i++) {
-        if (a.filter(b[i])) {
+      for (let i = 0; i < b.length; i++)
+      {
+        if (a.filter(b[i]))
+        {
           out = a.reduce(out, b[i]);
         }
       }
 
       return out;
     };
-  } else {
+  } else
+  {
     throw new Error('Invalid functor passed, required Functors.FilterReduceable<a, b>');
   }
 }
@@ -1271,8 +1403,10 @@ export function flat<A extends T<any>, D extends number = 1>(a: A, d?: D): FlatA
  * @since 4.0.0
  */
 export function flat<A extends T<any>, D extends number = 1>(a?: D): Fn.Unary<A, FlatArray<A, D>>;
-export function flat<a extends T<any>, d extends number = 1>(a: a | d, d?: d): any {
-  if (guard(a)) {
+export function flat<a extends T<any>, d extends number = 1>(a: a | d, d?: d): any
+{
+  if (guard(a))
+  {
     return a.flat(d) as FlatArray<a, d>;
   }
 
@@ -1322,8 +1456,10 @@ export function flatMap<A, B>(a: T<T<A>>, m: Functors.Mappable<A, B>): T<B>;
  * @since 4.0.0
  */
 export function flatMap<A, B>(a: Functors.Mappable<A, B>): Fn.Unary<T<T<A>>, T<B>>;
-export function flatMap<A, B>(a: T<T<A>> | Functors.Mappable<A, B>, m?: any): any {
-  if (guard(a) && typeof m === 'function') {
+export function flatMap<A, B>(a: T<T<A>> | Functors.Mappable<A, B>, m?: any): any
+{
+  if (guard(a) && typeof m === 'function')
+  {
     return flat((a as T<T<A>>).map(b => b.map(m)), 1);
   }
 
@@ -1381,8 +1517,10 @@ export function includes<A>(a: T<A>, b: A): boolean;
  * @since 4.0.0
  */
 export function includes<A>(a: A): Fn.Unary<T<A>, boolean>;
-export function includes<A>(a: T<A> | A, b?: A): any {
-  if (guard(a) && arguments.length === 2) {
+export function includes<A>(a: T<A> | A, b?: A): any
+{
+  if (guard(a) && arguments.length === 2)
+  {
     return a.includes(b as A);
   }
 
@@ -1459,8 +1597,10 @@ export function join<A extends any[], B extends string>(a: A, b?: B): string;
  * @since 4.0.0
  */
 export function join<A extends any[], B extends string>(a?: B): Fn.Unary<A, string>;
-export function join<A extends any[], B extends string>(a: A | B, b?: B): any {
-  if (guard(a)) {
+export function join<A extends any[], B extends string>(a: A | B, b?: B): any
+{
+  if (guard(a))
+  {
     return a.join(b ?? '');
   }
 
@@ -1518,14 +1658,18 @@ export function make<A = undefined>(size: number, d?: A): A extends Option.None 
  * @since 4.0.0
  */
 export function make<A = undefined>(size: number, d?: Fn.Unary<number, A>): A extends Option.None ? T<Option.None> : T<A>;
-export function make<A = undefined>(size: number, d?: A | Fn.Unary<number, A>): A extends Option.None ? T<Option.None> : T<A> {
+export function make<A = undefined>(size: number, d?: A | Fn.Unary<number, A>): A extends Option.None ? T<Option.None> : T<A>
+{
   type b = A extends Option.None ? T<Option.T<A>> : T<A>;
   const a = [] as b;
 
-  for (let i = 0; i < size; i++) {
-    if (typeof d === 'function') {
+  for (let i = 0; i < size; i++)
+  {
+    if (typeof d === 'function')
+    {
       a.push((d as Fn.Unary<number, A>)(i) as any);
-    } else {
+    } else
+    {
       a.push(d as any);
     }
   }
@@ -1578,8 +1722,10 @@ export function map<A, B>(a: T<A>, m: Functors.Mappable<A, B>): T<B>;
  * @since 4.0.0
  */
 export function map<A, B>(a: Functors.Mappable<A, B>): Fn.Unary<T<A>, T<B>>;
-export function map<A, B>(a: T<A> | Functors.Mappable<A, B>, m?: any): any {
-  if (guard(a)) {
+export function map<A, B>(a: T<A> | Functors.Mappable<A, B>, m?: any): any
+{
+  if (guard(a))
+  {
     return a.map(m);
   }
 
@@ -1635,8 +1781,10 @@ export function none<A>(a: T<A>, m: Predicate.T<A>): boolean;
  * @since 4.0.0
  */
 export function none<A>(a: Predicate.T<A>): Fn.Unary<T<A>, boolean>;
-export function none<A>(a: T<A> | Predicate.T<A>, m?: Predicate.T<A>): any {
-  if (guard(a) && predicateguard(m)) {
+export function none<A>(a: T<A> | Predicate.T<A>, m?: Predicate.T<A>): any
+{
+  if (guard(a) && predicateguard(m))
+  {
     return !a.some(m);
   }
 
@@ -1710,14 +1858,19 @@ export function partition<A>(a: T<A>, f: Functors.Filterable<A>): [T<A>, T<A>];
  * @since 4.0.0
  */
 export function partition<A>(a: Functors.Filterable<A>): Fn.Unary<T<A>, [T<A>, T<A>]>;
-export function partition<A>(a: T<A> | Functors.Filterable<A>, f?: Functors.Filterable<A>): any {
-  const _part = (_x: T<A>, _f: Functors.Filterable<A>): [T<A>, T<A>] => {
+export function partition<A>(a: T<A> | Functors.Filterable<A>, f?: Functors.Filterable<A>): any
+{
+  const _part = (_x: T<A>, _f: Functors.Filterable<A>): [T<A>, T<A>] =>
+  {
     const _o: [T<A>, T<A>] = [[], []];
 
-    for (let i = 0; i < _x.length; i++) {
-      if (_f(_x[i])) {
+    for (let i = 0; i < _x.length; i++)
+    {
+      if (_f(_x[i]))
+      {
         _o[0].push(_x[i]);
-      } else {
+      } else
+      {
         _o[1].push(_x[i]);
       }
     }
@@ -1725,9 +1878,11 @@ export function partition<A>(a: T<A> | Functors.Filterable<A>, f?: Functors.Filt
     return _o;
   };
 
-  if (guard(a) && typeof f === 'function') {
+  if (guard(a) && typeof f === 'function')
+  {
     return _part(a, f);
-  } else if (typeof a === 'function') {
+  } else if (typeof a === 'function')
+  {
     return (c: T<A>) => _part(c, a);
   }
 }
@@ -1803,8 +1958,10 @@ export function reduce<A, B>(a: T<A>, r: Reducer<A, B>, b: B): B;
  * @since 4.0.0
  */
 export function reduce<A, B>(a: Reducer<A, B>, r: B): (b: T<A>) => B;
-export function reduce<A, B>(a: T<A> | Reducer<A, B>, r: any, b?: any): any {
-  if (guard(a)) {
+export function reduce<A, B>(a: T<A> | Reducer<A, B>, r: any, b?: any): any
+{
+  if (guard(a))
+  {
     return a.reduce(r, b);
   }
 
@@ -1863,8 +2020,10 @@ export function reduceRight<A, B>(a: T<A>, r: Reducer<A, B>, b: B): B;
  * @since 4.0.0
  */
 export function reduceRight<A, B>(a: Reducer<A, B>, r: B): Fn.Unary<T<A>, B>;
-export function reduceRight<A, B>(a: T<A> | Reducer<A, B>, r: any, b?: any): any {
-  if (guard(a)) {
+export function reduceRight<A, B>(a: T<A> | Reducer<A, B>, r: any, b?: any): any
+{
+  if (guard(a))
+  {
     return a.reduceRight(r, b);
   }
 
@@ -1907,10 +2066,12 @@ export const reverse = <A>(a: T<A>): T<A> => a.reverse();
  * @group Misc
  * @since 4.0.0
  */
-export const shuffle = <A>(a: T<A>): T<A> => {
+export const shuffle = <A>(a: T<A>): T<A> =>
+{
   const b: A[] = [].slice.call(a);
 
-  for (let i = b.length - 1; i > 0; i--) {
+  for (let i = b.length - 1; i > 0; i--)
+  {
     const j = Math.floor(Math.random() * (i + 1));
     [b[i], b[j]] = [b[j], b[i]];
   }
@@ -1976,8 +2137,10 @@ export function slice<A extends T<any>>(a: A, s?: number, e?: number): A;
  * @since 4.0.0
  */
 export function slice<A extends T<any>>(a?: number, s?: number): Fn.Unary<A, A>;
-export function slice<A extends T<any>>(a: A | number, s?: number, e?: number): any {
-  if (guard(a)) {
+export function slice<A extends T<any>>(a: A | number, s?: number, e?: number): any
+{
+  if (guard(a))
+  {
     return a.slice(s, e);
   }
 
@@ -2023,8 +2186,10 @@ export function some<A>(a: T<A>, p: Predicate.T<A>): boolean;
  * @since 4.0.0
  */
 export function some<A>(a: Predicate.T<A>): Fn.Unary<T<A>, boolean>;
-export function some<A>(a: T<A> | Predicate.T<A>, p?: Predicate.T<A>): any {
-  if (guard(a) && predicateguard(p)) {
+export function some<A>(a: T<A> | Predicate.T<A>, p?: Predicate.T<A>): any
+{
+  if (guard(a) && predicateguard(p))
+  {
     return a.some(p);
   }
 
@@ -2073,8 +2238,10 @@ export function sort<A>(a: T<A>, cmp: Functors.Comparable<A>): T<A>;
  * @since 4.0.0
  */
 export function sort<A>(a: Functors.Comparable<A>): Fn.Unary<T<A>, T<A>>;
-export function sort<A>(a: T<A> | Functors.Comparable<A>, cmp?: Functors.Comparable<A>): any {
-  if (guard(a)) {
+export function sort<A>(a: T<A> | Functors.Comparable<A>, cmp?: Functors.Comparable<A>): any
+{
+  if (guard(a))
+  {
     return a.sort(cmp);
   }
 
@@ -2125,11 +2292,14 @@ export function zip<A extends any[]>(a: A, b: A): T<A>;
  * @since 4.0.0
  */
 export function zip<A extends any[]>(a: A): Fn.Unary<A, T<A>>;
-export function zip<A extends any[]>(a: A, b?: A): any {
-  const _zip = (x: A, y: A): T<A> => {
+export function zip<A extends any[]>(a: A, b?: A): any
+{
+  const _zip = (x: A, y: A): T<A> =>
+  {
     const _o = new Array(Math.min(x.length, y.length)) as unknown as T<A>;
 
-    for (let i = 0; i < _o.length; i++) {
+    for (let i = 0; i < _o.length; i++)
+    {
       _o[i] = [
         x[i],
         y[i]
@@ -2139,7 +2309,8 @@ export function zip<A extends any[]>(a: A, b?: A): any {
     return _o;
   };
 
-  if (guard(a) && guard(b)) {
+  if (guard(a) && guard(b))
+  {
     return _zip(a, b);
   }
 

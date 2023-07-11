@@ -50,26 +50,31 @@ export type T = {
  * @group Factories
  * @since 4.0.0
  */
-export const make = (start: number, end: number, step = 1): T => {
+export const make = (start: number, end: number, step = 1): T =>
+{
   step = end > start ? Math.abs(step) : -1 * Math.abs(step);
 
   return {
     start,
     end,
     step,
-    [Symbol.iterator]: () => {
+    [Symbol.iterator]: () =>
+    {
       let current = start;
       let last = end;
 
       return {
         current,
         last,
-        next() {
-          if (step > 0 ? current <= last : current >= last) {
+        next()
+        {
+          if (step > 0 ? current <= last : current >= last)
+          {
             const value = current;
             current += step;
             return { done: false, value };
-          } else {
+          } else
+          {
             return { done: true, value: last };
           }
         }
@@ -149,13 +154,16 @@ export function inRange(t: T, a: number): boolean;
  * @since 4.0.0
  */
 export function inRange(t: number): Fn.Unary<T, boolean>;
-export function inRange(t: T | number, a?: number): any {
-  if (guard(t) && typeof a === 'number') {
+export function inRange(t: T | number, a?: number): any
+{
+  if (guard(t) && typeof a === 'number')
+  {
     const { start, end } = t;
     return start < end ? (end >= a && a >= start) : (end <= a && a <= start);
   }
 
-  return (b: T) => {
+  return (b: T) =>
+  {
     const { start, end } = b;
     return start < end ? (end >= t && t >= start) : (end <= t && t <= start);
   };
@@ -207,20 +215,25 @@ export function map<A>(t: T, m: Functors.Mappable<number, A>): A[];
  * @since 4.0.0
  */
 export function map<A>(t: Functors.Mappable<number, A>): Fn.Unary<T, A[]>;
-export function map<A>(t: T | Functors.Mappable<number, A>, m?: Functors.Mappable<number, A>): any {
-  const _map = (_t: T, _m: Functors.Mappable<number, A>) => {
+export function map<A>(t: T | Functors.Mappable<number, A>, m?: Functors.Mappable<number, A>): any
+{
+  const _map = (_t: T, _m: Functors.Mappable<number, A>) =>
+  {
     const out: A[] = [];
 
-    for (const x of _t) {
+    for (const x of _t)
+    {
       out.push(_m(x));
     }
 
     return out;
   };
 
-  if (guard(t) && !!m) {
-    return _map(t, m)
-  } else if (!guard(t)) {
+  if (guard(t) && !!m)
+  {
+    return _map(t, m);
+  } else if (!guard(t))
+  {
     return (b: T) => _map(b, t);
   }
 };

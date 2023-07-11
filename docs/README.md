@@ -9,7 +9,7 @@ tiinvo
 
 An opinionated lib of types and utilities for your TypeScript and JavaScript projects which aims to add missing functionalities to standard Js and replace other.
 
-[docs](./docs/README.md)
+[docs](docs/modules.md)
 
 - [tiinvo](#tiinvo)
 - [Install](#install)
@@ -70,6 +70,7 @@ This library provides several new data types like
 - `Result` handles errors gracefully.
 - `Sequence` is an immutable sequence of elements.
 - `SortedSequence` is a sorted immutable sequence of elements.
+- `Tuple` is a tuple.
 - `TypedMap` is a typed immutable Map of elements.
 - `TypedSequence` is a typed immutable sequence of elements.
   

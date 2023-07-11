@@ -41,10 +41,13 @@ export type T<A> = Iterable<A> & {
  * @group Factories
  * @since 4.0.0
  */
-export const fromString = <A = unknown>(x: string): Result.T<T<A>> => {
-  try {
+export const fromString = <A = unknown>(x: string): Result.T<T<A>> =>
+{
+  try
+  {
     return make(JSON.parse(`[${x}]`)) as T<A>;
-  } catch (err) {
+  } catch (err)
+  {
     return err as Error;
   }
 };
@@ -86,19 +89,23 @@ export function make<A>(v: A[]): T<A>;
  * @since 4.0.0
  */
 export function make<A>(...v: A[]): T<A>;
-export function make<A>(...v: A[]): T<A> {
+export function make<A>(...v: A[]): T<A>
+{
   const values: Record<number, A> = {};
 
-  if (arguments.length === 1 && Array.isArray(arguments[0])) {
+  if (arguments.length === 1 && Array.isArray(arguments[0]))
+  {
     v = arguments[0];
   }
 
-  for (let i = 0; i < v.length; i++) {
+  for (let i = 0; i < v.length; i++)
+  {
     values[i] = v[i];
   }
 
   const _t = {
-    [indexer]() {
+    [indexer]()
+    {
       return Object.freeze({ ...values });
     },
   } as T<A>;
@@ -107,12 +114,14 @@ export function make<A>(...v: A[]): T<A> {
     enumerable: false,
     writable: false,
     configurable: true,
-    value: function () {
+    value: function ()
+    {
       let i = 0;
       let keys = Object.keys(values) as unknown as number[];
 
       return {
-        next: () => {
+        next: () =>
+        {
           return {
             value: values[keys[i++]],
             done: (i > keys.length)
@@ -347,14 +356,18 @@ export function cmp<A>(mod: Functors.ComparableModule<A>): Fn.Binary<T<A>, T<A>,
  * @since 4.0.0
  */
 export function cmp<A>(mod: Functors.Comparable<A>): Fn.Binary<T<A>, T<A>, Functors.ComparableResult>;
-export function cmp<A>(mod: Functors.ComparableModule<A> | Functors.Comparable<A>, a?: T<A>, b?: T<A>): any {
+export function cmp<A>(mod: Functors.ComparableModule<A> | Functors.Comparable<A>, a?: T<A>, b?: T<A>): any
+{
   const c = arrCmp(typeof mod === 'function' ? mod : mod.cmp);
 
-  if (guard(a) && guard(b)) {
+  if (guard(a) && guard(b))
+  {
     return c(toArray(a), toArray(b));
-  } else if (guard(a) && !guard(b)) {
+  } else if (guard(a) && !guard(b))
+  {
     return (d: T<A>) => c(toArray(d), toArray(a));
-  } else {
+  } else
+  {
     return (d: T<A>, e: T<A>) => c(toArray(d), toArray(e));
   }
 }
@@ -523,14 +536,18 @@ export function eq<A>(mod: Functors.EquatableModule<A>): Fn.Binary<T<A>, T<A>, b
  * @since 4.0.0
  */
 export function eq<A>(mod: Functors.Equatable<A>): Fn.Binary<T<A>, T<A>, boolean>;
-export function eq<A>(mod: Functors.EquatableModule<A> | Functors.Equatable<A>, a?: T<A>, b?: T<A>): any {
+export function eq<A>(mod: Functors.EquatableModule<A> | Functors.Equatable<A>, a?: T<A>, b?: T<A>): any
+{
   const eqfn = arrEq(typeof mod === 'function' ? mod : mod.eq);
 
-  if (guard(a) && guard(b)) {
+  if (guard(a) && guard(b))
+  {
     return eqfn(toArray(a), toArray(b));
-  } else if (guard(a) && !guard(b)) {
+  } else if (guard(a) && !guard(b))
+  {
     return (d: T<A>) => eqfn(toArray(a), toArray(d));
-  } else {
+  } else
+  {
     return (d: T<A>, e: T<A>) => eqfn(toArray(d), toArray(e));
   }
 }
@@ -582,12 +599,15 @@ export function map<A, B>(a: T<A>, m: Functors.Mappable<A, B>): T<B>;
  * @since 4.0.0
  */
 export function map<A, B>(a: Functors.Mappable<A, B>): Fn.Unary<T<A>, T<B>>;
-export function map<A, B>(a: T<A> | Functors.Mappable<A, B>, m?: any): any {
-  if (guard(a) && typeof m === 'function') {
+export function map<A, B>(a: T<A> | Functors.Mappable<A, B>, m?: any): any
+{
+  if (guard(a) && typeof m === 'function')
+  {
     return make(toArray(a).map(m));
   }
 
-  return (b: T<A>) => {
+  return (b: T<A>) =>
+  {
     return make(toArray(b).map(a as Functors.Mappable<A, B>));
   };
 }
@@ -637,8 +657,10 @@ export function reduce<A, B>(a: T<A>, mod: Functors.Reduceable<A, B>, s: B): B;
  * @since 4.0.0
  */
 export function reduce<A, B>(a: Functors.Reduceable<A, B>, mod: B): Fn.Unary<T<A>, B>;
-export function reduce<A, B>(a: T<A> | Functors.Reduceable<A, B>, mod?: B | Functors.Reduceable<A, B>, s?: B): any {
-  if (guard(a) && typeof mod === 'function') {
+export function reduce<A, B>(a: T<A> | Functors.Reduceable<A, B>, mod?: B | Functors.Reduceable<A, B>, s?: B): any
+{
+  if (guard(a) && typeof mod === 'function')
+  {
     return Array.from(a).reduce((x, c) => (mod as Functors.Reduceable<A, B>)(x, c), s as B);
   }
 
@@ -690,8 +712,10 @@ export function filter<A>(a: T<A>, f: Functors.Filterable<A>): T<A>;
  * @since 4.0.0
  */
 export function filter<A>(a: Functors.Filterable<A>): Fn.Unary<T<A>, T<A>>;
-export function filter<A>(a: T<A> | Functors.Filterable<A>, f?: Functors.Filterable<A>): any {
-  if (guard(a) && typeof f === 'function') {
+export function filter<A>(a: T<A> | Functors.Filterable<A>, f?: Functors.Filterable<A>): any
+{
+  if (guard(a) && typeof f === 'function')
+  {
     return make(Array.from(a).filter(f));
   }
 
@@ -756,12 +780,16 @@ export function filterReduce<A, B>(a: T<A>, mod: Functors.FilterReduceableModule
  * @since 4.0.0
  */
 export function filterReduce<A, B>(a: Functors.FilterReduceableModule<A, B>): Fn.Unary<T<A>, B>;
-export function filterReduce<A, B>(a: T<A> | Functors.FilterReduceableModule<A, B>, mod?: Functors.FilterReduceableModule<A, B>): any {
-  const impl = (x: T<A>, y: Functors.FilterReduceableModule<A, B>): B => {
+export function filterReduce<A, B>(a: T<A> | Functors.FilterReduceableModule<A, B>, mod?: Functors.FilterReduceableModule<A, B>): any
+{
+  const impl = (x: T<A>, y: Functors.FilterReduceableModule<A, B>): B =>
+  {
     let out: B = y.default;
 
-    for (const e of x) {
-      if (y.filter(e)) {
+    for (const e of x)
+    {
+      if (y.filter(e))
+      {
         out = y.reduce(out, e);
       }
     }
@@ -769,7 +797,8 @@ export function filterReduce<A, B>(a: T<A> | Functors.FilterReduceableModule<A, 
     return out;
   };
 
-  if (guard(a)) {
+  if (guard(a))
+  {
     return impl(a, mod!);
   }
 
@@ -835,12 +864,16 @@ export function filterMap<A, B>(a: T<A>, f: Functors.FilterMappableModule<A, B>)
  * @since 4.0.0
  */
 export function filterMap<A, B>(a: Functors.FilterMappableModule<A, B>): Fn.Unary<T<A>, T<B>>;
-export function filterMap<A, B>(a: T<A> | Functors.FilterMappableModule<A, B>, f?: Functors.FilterMappableModule<A, B>): any {
-  const handle = (a: T<A>, mod: Functors.FilterMappableModule<A, B>) => {
+export function filterMap<A, B>(a: T<A> | Functors.FilterMappableModule<A, B>, f?: Functors.FilterMappableModule<A, B>): any
+{
+  const handle = (a: T<A>, mod: Functors.FilterMappableModule<A, B>) =>
+  {
     const outvalues: B[] = [];
 
-    for (const v of a) {
-      if (mod.filter(v)) {
+    for (const v of a)
+    {
+      if (mod.filter(v))
+      {
         outvalues.push(mod.map(v));
       }
     }
@@ -848,7 +881,8 @@ export function filterMap<A, B>(a: T<A> | Functors.FilterMappableModule<A, B>, f
     return make(outvalues);
   };
 
-  if (guard(a) && typeof f === 'object') {
+  if (guard(a) && typeof f === 'object')
+  {
     return handle(a, f);
   }
 
@@ -901,8 +935,10 @@ export function append<A>(a: T<A>, b: A): T<A>;
  * @since 4.0.0
  */
 export function append<A>(a: A): Fn.Unary<T<A>, T<A>>;
-export function append<A>(a: any, b?: any): any {
-  if (guard(a)) {
+export function append<A>(a: any, b?: any): any
+{
+  if (guard(a))
+  {
     return make(Object.values(a[indexer]()).concat(b));
   }
 
@@ -955,8 +991,10 @@ export function concat<A, B>(a: T<A>, b: T<B>): T<A & B>;
  * @since 4.0.0
  */
 export function concat<A, B>(a: T<A>): Fn.Unary<T<B>, T<A & B>>;
-export function concat<A, B>(a: T<A>, b?: T<B>): any {
-  if (guard(a) && guard(b)) {
+export function concat<A, B>(a: T<A>, b?: T<B>): any
+{
+  if (guard(a) && guard(b))
+  {
     return make([...a, ...b]);
   }
 
@@ -1006,8 +1044,10 @@ export function prepend<A>(a: T<A>, b: A): T<A>;
  * @since 4.0.0
  */
 export function prepend<A>(a: A): Fn.Unary<T<A>, T<A>>;
-export function prepend<A>(a: any, b?: any): any {
-  if (guard(a)) {
+export function prepend<A>(a: any, b?: any): any
+{
+  if (guard(a))
+  {
     return make([b].concat([...a]));
   }
 
@@ -1063,8 +1103,10 @@ export function count<A>(a: T<A>, p: Functors.Filterable<A>): number;
  * @since 4.0.0
  */
 export function count<A>(a: Functors.Filterable<A>): Fn.Unary<T<A>, number>;
-export function count<A>(a: T<A> | Functors.Filterable<A>, p?: Functors.Filterable<A>): any {
-  if (guard(a) && typeof p === 'function') {
+export function count<A>(a: T<A> | Functors.Filterable<A>, p?: Functors.Filterable<A>): any
+{
+  if (guard(a) && typeof p === 'function')
+  {
     return length(filter(a, p));
   }
 
@@ -1096,7 +1138,8 @@ export function count<A>(a: T<A> | Functors.Filterable<A>, p?: Functors.Filterab
  * @group Accessors
  * @since 4.0.0
  */
-export const first = <A>(t: T<A>): Option.T<A> => {
+export const first = <A>(t: T<A>): Option.T<A> =>
+{
   const f = get(t, 0);
   return isErr(f) ? null : f as unknown as Option.T<A>;
 };
@@ -1150,18 +1193,22 @@ export function get<A>(a: T<A>, i: number): Result.T<A>;
  * @since 4.0.0
  */
 export function get<A>(a: number): Fn.Unary<T<A>, Result.T<A>>;
-export function get<A>(a: any, i?: any): any {
-  const _get = <B>(x: T<B>, y: number) => {
+export function get<A>(a: any, i?: any): any
+{
+  const _get = <B>(x: T<B>, y: number) =>
+  {
     const s = length(x);
 
-    if (y < 0 || y > s - 1) {
+    if (y < 0 || y > s - 1)
+    {
       return new RangeError(`Index out of bounds ${y} for length ${s}`);
     }
 
     return values(x)[y];
   };
 
-  if (guard(a)) {
+  if (guard(a))
+  {
     return _get(a, i);
   }
 
@@ -1191,7 +1238,8 @@ export function get<A>(a: any, i?: any): any {
  * @group Accessors
  * @since 4.0.0
  */
-export const last = <A>(t: T<A>): Option.T<A> => {
+export const last = <A>(t: T<A>): Option.T<A> =>
+{
   const r = get(t, length(t) - 1);
   return isErr(r) ? null as Option.None : r as Option.Some<A>;
 };
@@ -1344,10 +1392,12 @@ export function sort<A>(a: T<A>, mod: Functors.Comparable<A> | Functors.Comparab
  * @since 4.0.0
  */
 export function sort<A>(a: Functors.Comparable<A> | Functors.ComparableModule<A>): Fn.Unary<T<A>, T<A>>;
-export function sort<A>(a: T<A> | Functors.Comparable<A> | Functors.ComparableModule<A>, mod?: Functors.Comparable<A> | Functors.ComparableModule<A>): any {
+export function sort<A>(a: T<A> | Functors.Comparable<A> | Functors.ComparableModule<A>, mod?: Functors.Comparable<A> | Functors.ComparableModule<A>): any
+{
   const getcmp = (x: Functors.Comparable<A> | Functors.ComparableModule<A>) => typeof x === 'function' ? x : x.cmp;
 
-  if (arguments.length === 2 && guard(a)) {
+  if (arguments.length === 2 && guard(a))
+  {
     return make(Array.from(a).sort(getcmp(mod!)));
   }
 

@@ -4,8 +4,10 @@ import * as Num from './Num.js';
 import * as Str from './Str.js';
 import * as Tuple from './Tuple.js';
 
-describe("Tuple", () => {
-  test("guardOf", () => {
+describe("Tuple", () =>
+{
+  test("guardOf", () =>
+  {
     expect(Tuple.guardOf([Str, Num], ["hello"])).toEqual(false);
     expect(Tuple.guardOf([Str, Num], ["hello", 100])).toEqual(true);
     expect(Tuple.guardOf([Str, Num], ["hello", "world"])).toEqual(false);
@@ -24,7 +26,8 @@ describe("Tuple", () => {
     expect(guard(10)).toEqual(false);
   });
 
-  test("get", () => {
+  test("get", () =>
+  {
     const t = [10, "hello"];
     const get0 = Tuple.get(0);
     const get1 = Tuple.get(1);
@@ -40,14 +43,16 @@ describe("Tuple", () => {
     expect(getWrong(t)).toEqual(null);
   });
 
-  test("length", () => {
+  test("length", () =>
+  {
     expect(Tuple.length([10, 20, 30])).toEqual(3);
   });
 
-  test("map", () => {
+  test("map", () =>
+  {
     const m0 = (x: string) => x.length;
     const m1 = (x: Date) => x.getFullYear();
-    const modulemap = { map: Str.charAt(0) } as unknown as MappableModule<string, number>
+    const modulemap = { map: Str.charAt(0) } as unknown as MappableModule<string, number>;
     const map = Tuple.map([Str.length, modulemap, Num.gt(0), Num.toHex]);
 
     expect(Tuple.map([m0, m1], ["hello", new Date(2022, 1, 2, 3, 4)])).toEqual([5, 2022]);

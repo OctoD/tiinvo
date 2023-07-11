@@ -52,7 +52,8 @@ export type T = {
  * @group Factories
  * @since 4.0.0
  */
-export const make = (start: Date, end: Date, step: T['step'] = 'year'): T => {
+export const make = (start: Date, end: Date, step: T['step'] = 'year'): T =>
+{
   const direction = start > end ? -1 : 1;
 
   start = new Date(start);
@@ -71,25 +72,30 @@ export const make = (start: Date, end: Date, step: T['step'] = 'year'): T => {
     start,
     end,
     step,
-    [Symbol.iterator]: () => {
+    [Symbol.iterator]: () =>
+    {
       let current = new Date(start);
       let last = new Date(end);
 
       return {
         current,
         last,
-        next() {
-          if (direction > 0 ? current.getTime() <= last.getTime() : current.getTime() >= last.getTime()) {
+        next()
+        {
+          if (direction > 0 ? current.getTime() <= last.getTime() : current.getTime() >= last.getTime())
+          {
             const value = new Date(current);
 
-            switch (step) {
+            switch (step)
+            {
               case 'day': current.setDate(current.getDate() + direction); break;
               case 'month': current.setMonth(current.getMonth() + direction); break;
               case 'year': current.setFullYear(current.getFullYear() + direction); break;
             }
 
             return { done: false, value };
-          } else {
+          } else
+          {
             return { done: true, value: last };
           }
         }
@@ -171,8 +177,10 @@ export function inRange(a: T, b: Date): boolean;
  * @since 4.0.0
  */
 export function inRange(a: Date): Fn.Unary<T, boolean>;
-export function inRange(a: T | Date, b?: Date): any {
-  if (guard(a) && !!b) {
+export function inRange(a: T | Date, b?: Date): any
+{
+  if (guard(a) && !!b)
+  {
     const c = new Date(b);
     c.setMilliseconds(0);
     c.setMinutes(0);
@@ -180,7 +188,8 @@ export function inRange(a: T | Date, b?: Date): any {
     return c >= a.start && c <= a.end;
   }
 
-  return (b: T) => {
+  return (b: T) =>
+  {
     const c = new Date(a as Date);
     c.setMilliseconds(0);
     c.setMinutes(0);
@@ -236,20 +245,25 @@ export function map<a>(t: T, m: Functors.Mappable<Date, a>): a[];
  * @since 4.0.0
  */
 export function map<a>(t: Functors.Mappable<Date, a>): Fn.Unary<T, a[]>;
-export function map<a>(t: T | Functors.Mappable<Date, a>, m?: Functors.Mappable<Date, a>): any {
-  const _map = (y: T, f: Functors.Mappable<Date, a>) => {
+export function map<a>(t: T | Functors.Mappable<Date, a>, m?: Functors.Mappable<Date, a>): any
+{
+  const _map = (y: T, f: Functors.Mappable<Date, a>) =>
+  {
     const out: a[] = [];
 
-    for (const x of y) {
+    for (const x of y)
+    {
       out.push(f(x));
     }
 
     return out;
   };
 
-  if (guard(t) && !!m) {
+  if (guard(t) && !!m)
+  {
     return _map(t, m);
-  } else if (!guard(t)) {
+  } else if (!guard(t))
+  {
     return (b: T) => _map(b, t);
   }
 }

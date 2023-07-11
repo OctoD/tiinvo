@@ -59,18 +59,24 @@ export function make<A>(g: Functors.Guardable<A>, ...values: A[]): T<A>;
  * @since 4.0.0
  */
 export function make<A>(g: Functors.GuardableModule<A>, ...values: A[]): T<A>;
-export function make<A>(g: Functors.Guardable<A> | Functors.GuardableModule<A>, ...values: A[]): T<A> {
-  if (typeof g === 'function' || ('guard' in g && typeof g.guard === 'function')) {
+export function make<A>(g: Functors.Guardable<A> | Functors.GuardableModule<A>, ...values: A[]): T<A>
+{
+  if (typeof g === 'function' || ('guard' in g && typeof g.guard === 'function'))
+  {
     const _t = Sequence.make.apply(null, values) as T<A>;
 
-    if (typeof g === 'function') {
-      if (values.every(g)) {
+    if (typeof g === 'function')
+    {
+      if (values.every(g))
+      {
         _t[guardsymbol] = g;
 
         return _t;
       }
-    } else {
-      if (values.every(g.guard)) {
+    } else
+    {
+      if (values.every(g.guard))
+      {
         _t[guardsymbol] = g.guard;
 
         return _t;
@@ -78,7 +84,8 @@ export function make<A>(g: Functors.Guardable<A> | Functors.GuardableModule<A>, 
     }
 
     throw new TypeError("Non homogeneous arguments");
-  } else {
+  } else
+  {
     throw new TypeError("Invalid guard argument, must be a Guardable or GuardableModule functor");
   }
 }
@@ -152,13 +159,16 @@ export function append<A>(a: T<A>, b: A): T<A>;
  * @since 4.0.0
  */
 export function append<A>(a: A): Fn.Unary<T<A>, T<A>>;
-export function append<A>(a: T<A> | A, b?: any): any {
-  if (guard(a) && arguments.length === 2) {
+export function append<A>(a: T<A> | A, b?: any): any
+{
+  if (guard(a) && arguments.length === 2)
+  {
     const p = [{ guard: a[guardsymbol] }, ...a, b] as Parameters<typeof make>;
     return make.apply(null, p);
   }
 
-  return (b: T<A>) => {
+  return (b: T<A>) =>
+  {
     const p = [{ guard: b[guardsymbol] }, ...b, a] as Parameters<typeof make>;
     return make.apply(null, p);
   };
@@ -205,8 +215,10 @@ export function concat<a extends T<any>>(a: a, b: a): a;
  * @since 4.0.0
  */
 export function concat<a extends T<any>>(a: a): Fn.Unary<a, a>;
-export function concat<a extends T<any>>(a: a, b?: a): any {
-  if (guard(a) && guard(b)) {
+export function concat<a extends T<any>>(a: a, b?: a): any
+{
+  if (guard(a) && guard(b))
+  {
     return make.apply(null, [{ guard: a[guardsymbol] }, ...a, ...b]);
   }
 
@@ -252,14 +264,17 @@ export function prepend<A>(a: T<A>, b: A): T<A>;
  * @since 4.0.0
  */
 export function prepend<A>(a: A): Fn.Unary<T<A>, T<A>>;
-export function prepend<A>(a: any, b?: any): any {
-  if (guard(a)) {
+export function prepend<A>(a: any, b?: any): any
+{
+  if (guard(a))
+  {
     const x = [{ guard: a[guardsymbol] }, b, ...a] as Parameters<typeof make>;
 
     return make.apply(null, x);
   }
 
-  return (b: T<A>) => {
+  return (b: T<A>) =>
+  {
     const p = [{ guard: b[guardsymbol] }, a, ...b] as Parameters<typeof make>;
     return make.apply(null, p);
   };
@@ -311,15 +326,18 @@ export function sort<A>(a: T<A>, mod: Functors.Comparable<A> | Functors.Comparab
  * @since 4.0.0
  */
 export function sort<A>(a: Functors.Comparable<A> | Functors.ComparableModule<A>): Fn.Unary<T<A>, T<A>>;
-export function sort<A>(a: T<A> | Functors.Comparable<A> | Functors.ComparableModule<A>, mod?: Functors.Comparable<A> | Functors.ComparableModule<A>): any {
+export function sort<A>(a: T<A> | Functors.Comparable<A> | Functors.ComparableModule<A>, mod?: Functors.Comparable<A> | Functors.ComparableModule<A>): any
+{
   const getcmp = (x: Functors.Comparable<A> | Functors.ComparableModule<A>) => typeof x === 'function' ? x : x.cmp;
 
-  if (arguments.length === 2 && guard(a)) {
+  if (arguments.length === 2 && guard(a))
+  {
     const p = [{ guard: a[guardsymbol] }, ...Array.from(a).sort(getcmp(mod!))] as Parameters<typeof make>;
     return make.apply(null, p);
   }
 
-  return (x: T<A>) => {
+  return (x: T<A>) =>
+  {
     const p = [{ guard: x[guardsymbol] }, ...Array.from(x).sort(getcmp(a as Functors.Comparable<A> | Functors.ComparableModule<A>))] as Parameters<typeof make>;
     return make.apply(null, p);
   };

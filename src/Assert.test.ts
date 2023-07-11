@@ -2,22 +2,26 @@ import { describe, expect, test } from 'vitest';
 import * as Assert from './Assert.js';
 import * as Num from './Num.js';
 
-describe(`Assert`, () => {
-  test(Assert.check.name, () => {
+describe(`Assert`, () =>
+{
+  test(Assert.check.name, () =>
+  {
     expect(() => Assert.check(true, 'will not throw')).not.toThrow();
     expect(() => Assert.check(false, 'yup it throws')).toThrow();
     expect(() => Assert.check('will not throw')(true)).not.toThrow();
     expect(() => Assert.check('yup it throws')(false)).toThrow();
   });
 
-  test(Assert.checkResult.name, () => {
+  test(Assert.checkResult.name, () =>
+  {
     expect(Assert.checkResult(true, 'will not throw')).toEqual(true);
     expect(Assert.checkResult(false, 'yup it throws')).toEqual(Error("yup it throws"));
     expect(Assert.checkResult('will not throw')(true)).toEqual(true);
     expect(Assert.checkResult('yup it throws')(false)).toEqual(Error("yup it throws"));
   });
 
-  test(Assert.make.name, () => {
+  test(Assert.make.name, () =>
+  {
     const check0 = Assert.make(Num.isEven, 'number is not even');
     const check1 = Assert.make(Num.isEven, x => `number ${x} is not even`);
     const check2 = Assert.make<number>('number is not even')(Num.isEven);
@@ -33,7 +37,8 @@ describe(`Assert`, () => {
     expect(() => check3(11)).toThrowError(Error("number 11 is not even"));
   });
 
-  test(Assert.makeResult.name, () => {
+  test(Assert.makeResult.name, () =>
+  {
     const check0 = Assert.makeResult(Num.isEven, 'number is not even');
     const check1 = Assert.makeResult(Num.isEven, x => `number ${x} is not even`);
     const check2 = Assert.makeResult<number>('number is not even')(Num.isEven);

@@ -6,13 +6,16 @@ import * as Num from './Num.js';
 import * as Functors from './Functors.js';
 import * as Predicate from './Predicate.js';
 
-function makemap<T extends number>(guard: Functors.Guardable<T>, tn: string) {
+function makemap<T extends number>(guard: Functors.Guardable<T>, tn: string)
+{
   function map<A>(m: Functors.Mappable<T, A>, t: T): A;
   function map<A>(m: Functors.Mappable<T, A>): Fn.Unary<T, A>;
-  function map<A>(m: Functors.Mappable<T, A>, t?: T): any {
+  function map<A>(m: Functors.Mappable<T, A>, t?: T): any
+  {
     const _map = (x: T) => guard(x) ? m(x) : new TypeError("Value not " + tn);
 
-    if (Num.guard(t)) {
+    if (Num.guard(t))
+    {
       return _map(t);
     }
 
@@ -22,32 +25,38 @@ function makemap<T extends number>(guard: Functors.Guardable<T>, tn: string) {
   return map;
 }
 
-module Int8 {
+module Int8
+{
   export type T = number;
   export const guard = Predicate.and(Num.guard, Num.gte(0), Num.lte(2 ** 8 - 1)) as Functors.Guardable<T>;
   export const map = makemap(guard, "Int8");
 }
 
-module Int16 {
+module Int16
+{
   export type T = number;
   export const guard = Predicate.and(Num.guard, Num.gte(0), Num.lte(2 ** 16 - 1)) as Functors.Guardable<T>;
   export const map = makemap(guard, "Int16");
 }
 
-module LivingBeen {
+module LivingBeen
+{
   export type LivingBeen<A> = {
     name: string;
   } & A;
 
   export type T<A> = LivingBeen<A>;
 
-  export const eq = <A>(a: T<A>, b: T<A>): boolean => {
+  export const eq = <A>(a: T<A>, b: T<A>): boolean =>
+  {
     return Str.eq(a.name, b.name);
   };
 }
 
-module Animal {
-  export interface Animal {
+module Animal
+{
+  export interface Animal
+  {
     name: string;
     legs: number;
   }
@@ -72,7 +81,8 @@ module Animal {
   //#endregion
 }
 
-module Person {
+module Person
+{
   export type Person = LivingBeen.T<{
     surname: string;
   }>;
@@ -84,12 +94,14 @@ module Person {
     surname: p.surname ?? '',
   });
 
-  export const eq = (a: T, b: T) => {
+  export const eq = (a: T, b: T) =>
+  {
     return LivingBeen.eq(a, b) && Str.eq(a.surname, b.surname);
   };
 }
 
-module User {
+module User
+{
   export type User = {
     name: string;
     surname: string;
@@ -115,15 +127,19 @@ module User {
   //#endregion
 }
 
-describe("Functors examples", () => {
-  test("Buildable", () => {
+describe("Functors examples", () =>
+{
+  test("Buildable", () =>
+  {
     expect(User.make()).toEqual({ name: '', surname: '' });
     expect(User.make({ name: 'John' })).toEqual({ name: 'John', surname: '' });
     expect(User.make({ name: 'John', surname: 'Doe' })).toEqual({ name: 'John', surname: 'Doe' });
   });
 
-  test("BuildableModule", () => {
-    const greet = (x: Functors.BuildableMobule<User.t>, y: Partial<ReturnType<Functors.Buildable<User.t>>>) => {
+  test("BuildableModule", () =>
+  {
+    const greet = (x: Functors.BuildableMobule<User.t>, y: Partial<ReturnType<Functors.Buildable<User.t>>>) =>
+    {
       const z = x.make(y);
       return `hello ${z.name} ${z.surname}`;
     };
@@ -132,7 +148,8 @@ describe("Functors examples", () => {
     expect(greet(User, "" as any)).toEqual("hello  ");
   });
 
-  test("Equatable", () => {
+  test("Equatable", () =>
+  {
     const duck = Animal.make({ legs: 2, name: 'duck' });
     const donaldDuck = Animal.make({ legs: 2, name: 'Donald' });
     const donald = Person.make({ name: 'Donald', surname: 'Duck' });
@@ -141,16 +158,21 @@ describe("Functors examples", () => {
     expect(LivingBeen.eq(donald, donaldDuck as LivingBeen.T<any>)).toEqual(true);
   });
 
-  test("GuardableModule", () => {
-    const makeeq = <A extends number>(mod: Functors.GuardableModule<A>): Functors.Equatable<A> => {
+  test("GuardableModule", () =>
+  {
+    const makeeq = <A extends number>(mod: Functors.GuardableModule<A>): Functors.Equatable<A> =>
+    {
       function eq(a: A, b: A): boolean;
       function eq(a: A): Fn.Unary<A, boolean>;
-      function eq(a: A, b?: A): any {
-        const _eq = (x: A, y: A) => {
+      function eq(a: A, b?: A): any
+      {
+        const _eq = (x: A, y: A) =>
+        {
           return mod.guard(x) && mod.guard(y) && Num.eq(x, y);
         };
 
-        if (Num.guard(a) && Num.guard(b)) {
+        if (Num.guard(a) && Num.guard(b))
+        {
           return _eq(a, b);
         }
 
@@ -170,7 +192,8 @@ describe("Functors examples", () => {
     expect(eqInt16(256, 256)).toEqual(true);
   });
 
-  test("MappableModule", () => {
+  test("MappableModule", () =>
+  {
     const toHex = <A extends number>(
       mod: Functors.MappableModule<A, string>,
       a: A,
@@ -183,7 +206,8 @@ describe("Functors examples", () => {
     expect(toHex(Int16, 2 ** 16)).toEqual(TypeError("Value not Int16"));
   });
 
-  test("Guardables types (dry test)", () => {
+  test("Guardables types (dry test)", () =>
+  {
     expect(1).toEqual(1);
 
     type a = Functors.GuardReturnType<typeof Str>;

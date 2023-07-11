@@ -112,7 +112,7 @@ make({ name: 'John', surname: 'Doe' })
 
 #### Defined in
 
-[src/Functors.ts:38](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L38)
+[src/Functors.ts:38](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L38)
 
 ___
 
@@ -173,7 +173,7 @@ greet(User, "" as any)                         // "hello  "
 
 #### Defined in
 
-[src/Functors.ts:79](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L79)
+[src/Functors.ts:79](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L79)
 
 ## Type Aliases
 
@@ -246,7 +246,7 @@ describe(User)       // "hello name surname"
 
 #### Defined in
 
-[src/Functors.ts:133](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L133)
+[src/Functors.ts:133](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L133)
 
 ___
 
@@ -275,7 +275,7 @@ Represents a catchable functor
 
 #### Defined in
 
-[src/Functors.ts:157](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L157)
+[src/Functors.ts:157](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L157)
 
 ___
 
@@ -303,7 +303,7 @@ Represents a catchable async module functor
 
 #### Defined in
 
-[src/Functors.ts:167](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L167)
+[src/Functors.ts:167](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L167)
 
 ___
 
@@ -331,7 +331,7 @@ Represents a catchable sync module functor
 
 #### Defined in
 
-[src/Functors.ts:176](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L176)
+[src/Functors.ts:176](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L176)
 
 ___
 
@@ -353,7 +353,7 @@ Represents a catchable module functor
 
 #### Defined in
 
-[src/Functors.ts:185](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L185)
+[src/Functors.ts:185](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L185)
 
 ___
 
@@ -373,7 +373,7 @@ Is the result of a comparison made by a `Comparable<A>` functor
 
 #### Defined in
 
-[src/Functors.ts:200](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L200)
+[src/Functors.ts:200](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L200)
 
 ___
 
@@ -448,7 +448,7 @@ Is a comparable functor
 
 #### Defined in
 
-[src/Functors.ts:215](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L215)
+[src/Functors.ts:215](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L215)
 
 ___
 
@@ -476,7 +476,7 @@ Is a comparable functor module
 
 #### Defined in
 
-[src/Functors.ts:226](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L226)
+[src/Functors.ts:226](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L226)
 
 ___
 
@@ -665,7 +665,7 @@ true if a and b are equal
 
 #### Defined in
 
-[src/Functors.ts:299](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L299)
+[src/Functors.ts:299](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L299)
 
 ___
 
@@ -693,7 +693,7 @@ Is an equatable functor module
 
 #### Defined in
 
-[src/Functors.ts:310](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L310)
+[src/Functors.ts:310](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L310)
 
 ___
 
@@ -744,7 +744,7 @@ x is a
 
 #### Defined in
 
-[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L338)
+[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L338)
 
 ___
 
@@ -816,7 +816,7 @@ eqInt16(256, 256) // true
 
 #### Defined in
 
-[src/Functors.ts:388](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L388)
+[src/Functors.ts:388](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L388)
 
 ___
 
@@ -852,7 +852,7 @@ Is a filter predicate.
 
 #### Defined in
 
-[src/Functors.ts:442](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L442)
+[src/Functors.ts:442](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L442)
 
 ___
 
@@ -878,7 +878,7 @@ ___
 
 #### Defined in
 
-[src/Functors.ts:449](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L449)
+[src/Functors.ts:449](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L449)
 
 ___
 
@@ -901,7 +901,7 @@ Compound module of `ModuleFilterable<a>` and `ModuleMappable<a, b>`
 
 #### Defined in
 
-[src/Functors.ts:650](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L650)
+[src/Functors.ts:650](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L650)
 
 ___
 
@@ -924,7 +924,7 @@ Compound module of `ModuleFilterable<a>` and `ModuleMappable<a, b>` with a defau
 
 #### Defined in
 
-[src/Functors.ts:657](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L657)
+[src/Functors.ts:657](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L657)
 
 ## Variables
 
@@ -940,7 +940,7 @@ Is the symbol used to express the presence of an async catchable function
 
 #### Defined in
 
-[src/Functors.ts:144](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L144)
+[src/Functors.ts:144](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L144)
 
 ___
 
@@ -956,7 +956,7 @@ Is the symbol used to express the presence of a sync catchable function
 
 #### Defined in
 
-[src/Functors.ts:150](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L150)
+[src/Functors.ts:150](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L150)
 
 ## guardables
 
@@ -989,7 +989,7 @@ type y: x = 10 // error for the compiler
 
 #### Defined in
 
-[src/Functors.ts:409](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L409)
+[src/Functors.ts:409](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L409)
 
 ___
 
@@ -1022,7 +1022,7 @@ const y: x = ["hello", "world", 0] // error for the compiler
 
 #### Defined in
 
-[src/Functors.ts:428](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L428)
+[src/Functors.ts:428](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L428)
 
 ## Mappables
 
@@ -1059,7 +1059,7 @@ A map function. Maps a value `A` to a value `B`
 
 #### Defined in
 
-[src/Functors.ts:465](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L465)
+[src/Functors.ts:465](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L465)
 
 ___
 
@@ -1142,7 +1142,7 @@ toHex(Int16, 2 ** 16)  // TypeError("Value not Int16")
 
 #### Defined in
 
-[src/Functors.ts:528](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L528)
+[src/Functors.ts:528](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L528)
 
 ___
 
@@ -1177,7 +1177,7 @@ let y: x = 10      // compiler gives error
 
 #### Defined in
 
-[src/Functors.ts:552](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L552)
+[src/Functors.ts:552](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L552)
 
 ___
 
@@ -1213,7 +1213,7 @@ let y: x = [10, new Date()] // compiler gives error
 
 #### Defined in
 
-[src/Functors.ts:574](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L574)
+[src/Functors.ts:574](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L574)
 
 ___
 
@@ -1248,7 +1248,7 @@ let y: x = "hello" // compiler gives error
 
 #### Defined in
 
-[src/Functors.ts:597](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L597)
+[src/Functors.ts:597](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L597)
 
 ___
 
@@ -1284,7 +1284,7 @@ let y: x = ["hello", 10]    // compiler gives error
 
 #### Defined in
 
-[src/Functors.ts:619](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L619)
+[src/Functors.ts:619](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L619)
 
 ___
 
@@ -1322,7 +1322,7 @@ Reduce a value `A` to a value `B` aggregating the previous value `B` to the curr
 
 #### Defined in
 
-[src/Functors.ts:629](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L629)
+[src/Functors.ts:629](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L629)
 
 ___
 
@@ -1351,4 +1351,4 @@ A module with a reduce function exposed.
 
 #### Defined in
 
-[src/Functors.ts:637](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Functors.ts#L637)
+[src/Functors.ts:637](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L637)

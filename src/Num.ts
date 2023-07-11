@@ -95,10 +95,12 @@ export function cmp(a: T, b: T): Functors.ComparableResult;
  * @since 4.0.0
  */
 export function cmp(a: T): Fn.Unary<T, Functors.ComparableResult>;
-export function cmp(a: T, b?: T): any {
+export function cmp(a: T, b?: T): any
+{
   const _cmp = (x: T, y: T) => x > y ? 1 : x < y ? -1 : 0;
 
-  if (guard(a) && guard(b)) {
+  if (guard(a) && guard(b))
+  {
     return _cmp(a, b);
   }
 
@@ -142,7 +144,8 @@ export function eq(a: T, b: T): boolean;
  * @since 4.0.0
  */
 export function eq(a: T): Fn.Unary<T, boolean>;
-export function eq(a: T, b?: T): any {
+export function eq(a: T, b?: T): any
+{
   return guard(a) && guard(b) ? a === b : (c: T) => eq(a, c);
 };
 
@@ -185,8 +188,10 @@ export function gt(a: T, b: T): boolean;
  * @since 4.0.0
  */
 export function gt(a: T): Fn.Unary<number, boolean>;
-export function gt(a: T, b?: any): any {
-  if (guard(b)) {
+export function gt(a: T, b?: any): any
+{
+  if (guard(b))
+  {
     return a > b;
   }
 
@@ -230,8 +235,10 @@ export function lt(a: T, b: T): boolean;
  * @since 4.0.0
  */
 export function lt(a: T): Fn.Unary<number, boolean>;
-export function lt(a: T, b?: any): any {
-  if (guard(b)) {
+export function lt(a: T, b?: any): any
+{
+  if (guard(b))
+  {
     return a < b;
   }
 
@@ -277,8 +284,10 @@ export function gte(a: T, b: T): boolean;
  * @since 4.0.0
  */
 export function gte(a: T): Fn.Unary<number, boolean>;
-export function gte(a: T, b?: any): any {
-  if (guard(b)) {
+export function gte(a: T, b?: any): any
+{
+  if (guard(b))
+  {
     return a >= b;
   }
 
@@ -326,8 +335,10 @@ export function lte(a: T, b: T): boolean;
  * @since 4.0.0
  */
 export function lte(a: T): Fn.Unary<number, boolean>;
-export function lte(a: T, b?: any): any {
-  if (guard(b)) {
+export function lte(a: T, b?: any): any
+{
+  if (guard(b))
+  {
     return a <= b;
   }
 
@@ -375,8 +386,10 @@ export function ne(a: T, b: T): boolean;
  * @since 4.0.0
  */
 export function ne(a: T): Fn.Unary<number, boolean>;
-export function ne(a: T, b?: any): any {
-  if (guard(b)) {
+export function ne(a: T, b?: any): any
+{
+  if (guard(b))
+  {
     return a !== b;
   }
 
@@ -539,8 +552,10 @@ export function toExponential(a: T, b: T): string;
  * @since 4.0.0
  */
 export function toExponential(a: T): Fn.Unary<T, string>;
-export function toExponential(a: T, b?: any): any {
-  if (guard(b)) {
+export function toExponential(a: T, b?: any): any
+{
+  if (guard(b))
+  {
     return a.toExponential(b);
   }
 
@@ -585,8 +600,10 @@ export function toFixed(a: T, b: T): string;
  * @since 4.0.0
  */
 export function toFixed(a: T): Fn.Unary<T, string>;
-export function toFixed(a: T, b?: any): any {
-  if (guard(b)) {
+export function toFixed(a: T, b?: any): any
+{
+  if (guard(b))
+  {
     return a.toFixed(b);
   }
 
@@ -631,8 +648,10 @@ export function toPrecision(a: T, b: T): string;
  * @since 4.0.0
  */
 export function toPrecision(a: T): Fn.Unary<T, string>;
-export function toPrecision(a: T, b?: any): any {
-  if (guard(b)) {
+export function toPrecision(a: T, b?: any): any
+{
+  if (guard(b))
+  {
     return a.toPrecision(b);
   }
 
@@ -682,8 +701,10 @@ export function add(a: T, b: T): T;
  * @since 4.0.0
  */
 export function add(a: T): Fn.Unary<T, T>;
-export function add(a: T, b?: T): any {
-  if (guard(b)) {
+export function add(a: T, b?: T): any
+{
+  if (guard(b))
+  {
     return a + b;
   }
 
@@ -728,8 +749,10 @@ export function div(a: T, b: T): T;
  * @since 4.0.0
  */
 export function div(a: T): Fn.Unary<T, T>;
-export function div(a: T, b?: T): any {
-  if (guard(b)) {
+export function div(a: T, b?: T): any
+{
+  if (guard(b))
+  {
     return a / b;
   }
 
@@ -776,8 +799,10 @@ export function mod(a: T, b: T): T;
  * @since 4.0.0
  */
 export function mod(a: T): Fn.Unary<T, T>;
-export function mod(a: T, b?: T): any {
-  if (guard(b)) {
+export function mod(a: T, b?: T): any
+{
+  if (guard(b))
+  {
     return a % b;
   }
 
@@ -821,8 +846,10 @@ export function mul(a: T, b: T): T;
  * @since 4.0.0
  */
 export function mul(a: T): Fn.Unary<T, T>;
-export function mul(a: T, b?: T): any {
-  if (guard(b)) {
+export function mul(a: T, b?: T): any
+{
+  if (guard(b))
+  {
     return a * b;
   }
 
@@ -866,8 +893,10 @@ export function pow(a: T, b: T): T;
  * @since 4.0.0
  */
 export function pow(a: T): Fn.Unary<T, T>;
-export function pow(a: T, b?: T): any {
-  if (guard(b)) {
+export function pow(a: T, b?: T): any
+{
+  if (guard(b))
+  {
     return a ** b;
   }
 
@@ -915,8 +944,10 @@ export function root(a: T, b: T): T;
  * @since 4.0.0
  */
 export function root(a: T): Fn.Unary<T, T>;
-export function root(a: T, b?: T): any {
-  if (guard(b)) {
+export function root(a: T, b?: T): any
+{
+  if (guard(b))
+  {
     return a ** (1 / b);
   }
 
@@ -962,8 +993,10 @@ export function sub(a: T, b: T): T;
  * @since 4.0.0
  */
 export function sub(a: T): Fn.Unary<T, T>;
-export function sub(a: T, b?: T): any {
-  if (guard(b)) {
+export function sub(a: T, b?: T): any
+{
+  if (guard(b))
+  {
     return a - b;
   }
 
@@ -1017,8 +1050,10 @@ export function asc(a: T, b: T): Functors.ComparableResult;
  * @since 4.0.0
  */
 export function asc(a: T): Fn.Unary<T, Functors.ComparableResult>;
-export function asc(a: T, b?: any): any {
-  if (guard(b)) {
+export function asc(a: T, b?: any): any
+{
+  if (guard(b))
+  {
     return cmp(a, b);
   }
 
@@ -1068,8 +1103,10 @@ export function desc(a: T, b: T): Functors.ComparableResult;
  * @since 4.0.0
  */
 export function desc(a: T): Fn.Unary<T, Functors.ComparableResult>;
-export function desc(a: T, b?: any): any {
-  if (guard(b)) {
+export function desc(a: T, b?: any): any
+{
+  if (guard(b))
+  {
     return cmp(b, a);
   }
 

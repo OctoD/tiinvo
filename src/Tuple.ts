@@ -62,25 +62,35 @@ export function guardOf<A extends Array<Guardable<any> | GuardableModule<any>>>(
  * @since 4.0.0
  */
 export function guardOf<A extends Array<Guardable<any> | GuardableModule<any>>>(a: A): (x: unknown) => x is T<GuardArrayReturnType<A>>;
-export function guardOf<a extends Array<Guardable<any> | GuardableModule<any>>>(a: a, x?: unknown): any {
-  const _g = (x: a, y: unknown): y is T<GuardArrayReturnType<a>> => {
-    if (Array.isArray(y)) {
-      if (y.length !== x.length) {
+export function guardOf<a extends Array<Guardable<any> | GuardableModule<any>>>(a: a, x?: unknown): any
+{
+  const _g = (x: a, y: unknown): y is T<GuardArrayReturnType<a>> =>
+  {
+    if (Array.isArray(y))
+    {
+      if (y.length !== x.length)
+      {
         return false;
       }
 
-      for (let i = 0; i < x.length; i++) {
+      for (let i = 0; i < x.length; i++)
+      {
         const z = x[i];
 
-        if (typeof z === 'function') {
-          if (!z(y[i])) {
+        if (typeof z === 'function')
+        {
+          if (!z(y[i]))
+          {
             return false;
           }
-        } else if (typeof z === 'object' && 'guard' in z && typeof z.guard === 'function') {
-          if (!z.guard(y[i])) {
+        } else if (typeof z === 'object' && 'guard' in z && typeof z.guard === 'function')
+        {
+          if (!z.guard(y[i]))
+          {
             return false;
           }
-        } else {
+        } else
+        {
           return false;
         }
       }
@@ -91,7 +101,8 @@ export function guardOf<a extends Array<Guardable<any> | GuardableModule<any>>>(
     return false;
   };
 
-  if (arguments.length === 2) {
+  if (arguments.length === 2)
+  {
     return _g(a, x);
   }
 
@@ -142,8 +153,10 @@ export function get<A extends any[]>(tuple: T<A>, index: number): Option.T<T<A>[
  * @since 4.0.0
  */
 export function get(tuple: number): <A extends any[]>(x: T<A>) => Option.T<T<A>[typeof tuple]>;
-export function get<A extends any[]>(tuple: T<A> | number, index?: number): any {
-  if (arguments.length === 2 && typeof tuple !== 'number' && typeof index === 'number') {
+export function get<A extends any[]>(tuple: T<A> | number, index?: number): any
+{
+  if (arguments.length === 2 && typeof tuple !== 'number' && typeof index === 'number')
+  {
     return tuple[index] ?? null;
   }
 
@@ -210,18 +223,24 @@ export function map<M extends Array<Mappable<any, any> | MappableModule<any, any
  * @since 4.0.0
  */
 export function map<M extends Array<Mappable<any, any> | MappableModule<any, any>>>(m: M): <B extends any[]>(x: T<B>) => T<MappableReturnTypes<M>>;
-export function map<M extends Array<Mappable<any, any> | MappableModule<any, any>>, B extends any[]>(m: M, t?: T<B>): any {
-  const _map = (m: M, t: T<any[]>): T<MappableReturnTypes<M>> => {
-    return m.map((x, i) => {
-      if (typeof x === 'function') {
+export function map<M extends Array<Mappable<any, any> | MappableModule<any, any>>, B extends any[]>(m: M, t?: T<B>): any
+{
+  const _map = (m: M, t: T<any[]>): T<MappableReturnTypes<M>> =>
+  {
+    return m.map((x, i) =>
+    {
+      if (typeof x === 'function')
+      {
         return x(t[i]);
-      } else if (typeof x === 'object' && !!x && typeof x === 'object' && 'map' in x && typeof x.map === 'function') {
+      } else if (typeof x === 'object' && !!x && typeof x === 'object' && 'map' in x && typeof x.map === 'function')
+      {
         return x.map(t[i]);
       }
     }) as MappableReturnTypes<M>;
   };
 
-  if (arguments.length === 2 && Array.isArray(t)) {
+  if (arguments.length === 2 && Array.isArray(t))
+  {
     return _map(m, t);
   }
 

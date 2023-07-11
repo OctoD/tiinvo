@@ -549,7 +549,7 @@ export type MappableModule<A, B> = {
  * @group Mappables
  * @since 4.0.0
  */
-export type MappableParameter<A extends (Mappable<any, any> | MappableModule<any, any>)> = A extends Mappable<infer U, any> ? U : A extends MappableModule<infer U, any> ? U : never
+export type MappableParameter<A extends (Mappable<any, any> | MappableModule<any, any>)> = A extends Mappable<infer U, any> ? U : A extends MappableModule<infer U, any> ? U : never;
 
 /**
  * Gets the parameters type of an array of `Mappable` or `MappableModule`s.
@@ -573,7 +573,7 @@ export type MappableParameter<A extends (Mappable<any, any> | MappableModule<any
  */
 export type MappableParameters<A extends Array<Mappable<any, any> | MappableModule<any, any>>> = {
   [key in keyof A]: MappableParameter<A[key]>
-} & RelativeIndexable<any>
+} & RelativeIndexable<any>;
 
 /**
  * Gets the returning type of a Mappable<any, any> or a MappableModule<any, any>
@@ -594,7 +594,7 @@ export type MappableParameters<A extends Array<Mappable<any, any> | MappableModu
  * @group Mappables
  * @since 4.0.0
  */
-export type MappableReturnType<A extends (Mappable<any, any> | MappableModule<any, any>)> = A extends Mappable<any, infer U> ? U : A extends MappableModule<any, infer U> ? U : never
+export type MappableReturnType<A extends (Mappable<any, any> | MappableModule<any, any>)> = A extends Mappable<any, infer U> ? U : A extends MappableModule<any, infer U> ? U : never;
 
 /**
  * Gets the return types of an array of `Mappable` or `MappableModule`s.
@@ -618,7 +618,7 @@ export type MappableReturnType<A extends (Mappable<any, any> | MappableModule<an
  */
 export type MappableReturnTypes<A extends Array<Mappable<any, any> | MappableModule<any, any>>> = {
   [key in keyof A]: MappableReturnType<A[key]>
-} & RelativeIndexable<any>
+} & RelativeIndexable<any>;
 
 /**
  * Reduce a value `A` to a value `B` aggregating the previous value `B` to the current.

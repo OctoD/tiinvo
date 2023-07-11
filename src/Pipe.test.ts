@@ -2,16 +2,21 @@ import { describe, expect, test, vitest } from 'vitest';
 import * as Pipe from './Pipe.js';
 import * as Num from './Num.js';
 
-describe(`Pipe`, () => {
-  test(Pipe.async.name, async () => {
+describe(`Pipe`, () =>
+{
+  test(Pipe.async.name, async () =>
+  {
 
-    async function test1(x: number) {
+    async function test1(x: number)
+    {
       return x + 1;
     }
-    async function test2(x: number) {
+    async function test2(x: number)
+    {
       return x + 2;
     }
-    async function test3(x: number) {
+    async function test3(x: number)
+    {
       return x + 3;
     }
 
@@ -29,7 +34,8 @@ describe(`Pipe`, () => {
     expect(x3).toHaveBeenCalled();
     expect(x3).toBeCalledWith(4);
   });
-  test(Pipe.sync.name, () => {
+  test(Pipe.sync.name, () =>
+  {
     const vat = Pipe.sync(Num.div(100), Num.mul(22));
 
     expect(vat(100)).toEqual(22);
@@ -37,7 +43,8 @@ describe(`Pipe`, () => {
     expect(vat(200)).toEqual(44);
   });
 
-  test(`o(n) pipe`, () => {
+  test(`o(n) pipe`, () =>
+  {
     const f = Num.add(1);
     // @ts-ignore
     const p0 = Pipe.sync();

@@ -58,15 +58,19 @@ export type T<K, V> = {
  * @group Factories
  * @since 4.0.0
  */
-export function make<K, V>(kg: Functors.Guardable<K> | Functors.GuardableModule<K>, vg: Functors.Guardable<V> | Functors.GuardableModule<V>, entries: Iterable<readonly [K, V]> = []): T<K, V> {
+export function make<K, V>(kg: Functors.Guardable<K> | Functors.GuardableModule<K>, vg: Functors.Guardable<V> | Functors.GuardableModule<V>, entries: Iterable<readonly [K, V]> = []): T<K, V>
+{
   const _kg = typeof kg === 'function' ? kg : kg.guard;
   const _vg = typeof vg === 'function' ? vg : vg.guard;
 
-  for (const [k, v] of entries) {
-    if (!_kg(k)) {
+  for (const [k, v] of entries)
+  {
+    if (!_kg(k))
+    {
       throw new TypeError(`Key ${k} is not of a valid type`);
     }
-    if (!_vg(v)) {
+    if (!_vg(v))
+    {
       throw new TypeError(`Value ${v} is not of a valid type`);
     }
   }
@@ -74,13 +78,16 @@ export function make<K, V>(kg: Functors.Guardable<K> | Functors.GuardableModule<
   const map = new Map<K, V>(entries);
 
   const _t = {
-    get [guardsymbolKey]() {
+    get [guardsymbolKey]()
+    {
       return typeof kg === 'function' ? kg : kg.guard;
     },
-    get [guardsymbolValue]() {
+    get [guardsymbolValue]()
+    {
       return typeof vg === 'function' ? vg : vg.guard;
     },
-    get [valuessymbol]() {
+    get [valuessymbol]()
+    {
       return new Map(map);
     },
   } as T<K, V>;
@@ -89,12 +96,14 @@ export function make<K, V>(kg: Functors.Guardable<K> | Functors.GuardableModule<
     enumerable: false,
     writable: false,
     configurable: true,
-    value: function () {
+    value: function ()
+    {
       let i = 0;
       let keys = Array.from(map.keys()) as K[];
 
       return {
-        next: () => {
+        next: () =>
+        {
           return {
             value: map.get(keys[i++] as K),
             done: (i > keys.length)
@@ -190,16 +199,22 @@ export function guardOf<K, V>(kg: Functors.Guardable<K> | Functors.GuardableModu
  * @since 4.0.0
  */
 export function guardOf<K, V>(kg: Functors.Guardable<K> | Functors.GuardableModule<K>, vg: Functors.Guardable<V> | Functors.GuardableModule<V>): (x: unknown) => x is T<K, V>;
-export function guardOf<K, V>(kg: Functors.Guardable<K> | Functors.GuardableModule<K>, vg: Functors.Guardable<V> | Functors.GuardableModule<V>, x?: unknown): any {
+export function guardOf<K, V>(kg: Functors.Guardable<K> | Functors.GuardableModule<K>, vg: Functors.Guardable<V> | Functors.GuardableModule<V>, x?: unknown): any
+{
   const _kg = typeof kg === 'function' ? kg : kg.guard;
   const _vg = typeof vg === 'function' ? vg : vg.guard;
-  const _g = (_x: unknown): _x is T<K, V> => {
-    if (guard(_x)) {
-      for (const [k, v] of _x[valuessymbol]) {
-        if (!_kg(k)) {
+  const _g = (_x: unknown): _x is T<K, V> =>
+  {
+    if (guard(_x))
+    {
+      for (const [k, v] of _x[valuessymbol])
+      {
+        if (!_kg(k))
+        {
           return false;
         }
-        if (!_vg(v)) {
+        if (!_vg(v))
+        {
           return false;
         }
       }
@@ -210,9 +225,11 @@ export function guardOf<K, V>(kg: Functors.Guardable<K> | Functors.GuardableModu
     return false;
   };
 
-  if (arguments.length === 3) {
+  if (arguments.length === 3)
+  {
     return _g(x);
-  } else {
+  } else
+  {
     return (y: unknown): y is T<K, V> => _g(y);
   }
 }
@@ -315,22 +332,27 @@ export function cmp<K, V>(kmod: Functors.Comparable<K> | Functors.ComparableModu
  * @since 4.0.0
  */
 export function cmp<K, V>(kmod: Functors.Comparable<K> | Functors.ComparableModule<K>, vmod: Functors.Comparable<V> | Functors.ComparableModule<V>): Fn.Binary<T<K, V>, T<K, V>, Functors.ComparableResult>;
-export function cmp<K, V>(kmod: Functors.Comparable<K> | Functors.ComparableModule<K>, vmod: Functors.Comparable<V> | Functors.ComparableModule<V>, a?: T<K, V>, b?: T<K, V>): any {
+export function cmp<K, V>(kmod: Functors.Comparable<K> | Functors.ComparableModule<K>, vmod: Functors.Comparable<V> | Functors.ComparableModule<V>, a?: T<K, V>, b?: T<K, V>): any
+{
   const _kmod = typeof kmod === 'function' ? kmod : kmod.cmp;
   const _vmod = typeof vmod === 'function' ? vmod : vmod.cmp;
 
-  const _cmp = (_kmod: Functors.Comparable<K>, _vmod: Functors.Comparable<V>, _a: T<K, V>, _b: T<K, V>): Functors.ComparableResult => {
+  const _cmp = (_kmod: Functors.Comparable<K>, _vmod: Functors.Comparable<V>, _a: T<K, V>, _b: T<K, V>): Functors.ComparableResult =>
+  {
     const keysresult = arrcmp(_kmod, Array.from(keys(_a)), Array.from(keys(_b)));
     const valuessresult = arrcmp(_vmod, Array.from(values(_a)), Array.from(values(_b)));
 
     return keysresult !== 0 ? keysresult : valuessresult;
   };
 
-  if (arguments.length === 4 && guard(a) && guard(b)) {
+  if (arguments.length === 4 && guard(a) && guard(b))
+  {
     return _cmp(_kmod, _vmod, a, b);
-  } else if (arguments.length === 3 && guard(a)) {
+  } else if (arguments.length === 3 && guard(a))
+  {
     return (c: T<K, V>) => _cmp(_kmod, _vmod, c, a);
-  } else {
+  } else
+  {
     return (c: T<K, V>, d: T<K, V>) => _cmp(_kmod, _vmod, c, d);
   }
 }
@@ -426,12 +448,16 @@ export function eq<K, V>(kmod: Functors.Comparable<K> | Functors.ComparableModul
  * @since 4.0.0
  */
 export function eq<K, V>(kmod: Functors.Comparable<K> | Functors.ComparableModule<K>, vmod: Functors.Comparable<V> | Functors.ComparableModule<V>): Fn.Binary<T<K, V>, T<K, V>, boolean>;
-export function eq<K, V>(kmod: Functors.Comparable<K> | Functors.ComparableModule<K>, vmod: Functors.Comparable<V> | Functors.ComparableModule<V>, a?: T<K, V>, b?: T<K, V>): any {
-  if (arguments.length === 4 && guard(a) && guard(b)) {
+export function eq<K, V>(kmod: Functors.Comparable<K> | Functors.ComparableModule<K>, vmod: Functors.Comparable<V> | Functors.ComparableModule<V>, a?: T<K, V>, b?: T<K, V>): any
+{
+  if (arguments.length === 4 && guard(a) && guard(b))
+  {
     return cmp(kmod, vmod, a, b) === 0;
-  } else if (arguments.length === 3 && guard(a)) {
+  } else if (arguments.length === 3 && guard(a))
+  {
     return (c: T<K, V>) => cmp(kmod, vmod, a, c) === 0;
-  } else {
+  } else
+  {
     return (c: T<K, V>, d: T<K, V>) => cmp(kmod, vmod, c, d) === 0;
   }
 }
@@ -517,8 +543,10 @@ export function get<K, V>(key: K, t: T<K, V>): Option.T<V>;
  * @since 4.0.0
  */
 export function get<K>(key: K): <V>(t: T<K, V>) => Option.T<V>;
-export function get<K, V>(key: K, t?: T<K, V>): any {
-  if (arguments.length === 2 && guard(t)) {
+export function get<K, V>(key: K, t?: T<K, V>): any
+{
+  if (arguments.length === 2 && guard(t))
+  {
     return t?.[valuessymbol].get(key) ?? null;
   }
 
@@ -574,16 +602,20 @@ export function has<K, V>(key: K, t: T<K, V>): boolean | never;
  * @since 4.0.0
  */
 export function has<K, V>(key: K): <V>(t: T<K, V>) => boolean | never;
-export function has<K, V>(key: K, t?: T<K, V>): any {
-  const _has = (_x: T<K, V>, _k: K) => {
-    if (_x[guardsymbolKey](_k)) {
+export function has<K, V>(key: K, t?: T<K, V>): any
+{
+  const _has = (_x: T<K, V>, _k: K) =>
+  {
+    if (_x[guardsymbolKey](_k))
+    {
       return _x[valuessymbol].has(_k);
     }
 
     throw new TypeError("Invalid key type for TypedMap");
   };
 
-  if (arguments.length === 2 && guard(t)) {
+  if (arguments.length === 2 && guard(t))
+  {
     return _has(t, key);
   }
 
@@ -706,22 +738,27 @@ function _delete<K, V>(key: K, t: T<K, V>): T<K, V>;
  * @since 4.0.0
  */
 function _delete<K>(key: K): <V>(t: T<K, V>) => T<K, V>;
-function _delete<K, V>(key: K, t?: T<K, V>): any {
-  const __delete = (_k: K, _t: T<K, V>) => {
+function _delete<K, V>(key: K, t?: T<K, V>): any
+{
+  const __delete = (_k: K, _t: T<K, V>) =>
+  {
     const _map = _t[valuessymbol];
 
-    if (!_t[guardsymbolKey](_k)) {
+    if (!_t[guardsymbolKey](_k))
+    {
       throw new TypeError("Invalid key type for TypedMap");
     }
 
-    if (_map.has(_k)) {
+    if (_map.has(_k))
+    {
       _map.delete(_k);
     }
 
     return make(_t[guardsymbolKey], _t[guardsymbolValue], _map);
   };
 
-  if (arguments.length === 2 && guard(t)) {
+  if (arguments.length === 2 && guard(t))
+  {
     return __delete(key, t);
   }
 
@@ -811,18 +848,23 @@ export function set<K, V>(a: K, b: V): Fn.Unary<T<K, V>, T<K, V>>;
  * @since 4.0.0
  */
 export function set<K, V>(a: T<K, V>): Fn.Binary<K, V, T<K, V>>;
-export function set<K, V>(a: K | T<K, V>, b?: V | T<K, V>, c?: T<K, V>): any {
-  const _set = (_k: K, _v: V, _t: T<K, V>) => {
+export function set<K, V>(a: K | T<K, V>, b?: V | T<K, V>, c?: T<K, V>): any
+{
+  const _set = (_k: K, _v: V, _t: T<K, V>) =>
+  {
     const _m = new Map(_t[valuessymbol]);
     _m.set(_k, _v);
     return make(_t[guardsymbolKey], _t[guardsymbolValue], _m);
   };
 
-  if (arguments.length === 3 && guard(c)) {
+  if (arguments.length === 3 && guard(c))
+  {
     return _set(a as K, b as V, c);
-  } else if (arguments.length === 2 && !guard(b)) {
+  } else if (arguments.length === 2 && !guard(b))
+  {
     return (d: T<K, V>) => _set(a as K, b as V, d);
-  } else if (guard(a)) {
+  } else if (guard(a))
+  {
     return (d: K, e: V) => _set(d, e, a);
   }
 }

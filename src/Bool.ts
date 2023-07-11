@@ -57,7 +57,7 @@ export const guard: Functors.Guardable<boolean> = (x: unknown): x is boolean => 
  *  - `true` if `x` is `false`
  * @since 4.0.0
  */
-export const flip: Functors.Mappable<T, T> = x => !x
+export const flip: Functors.Mappable<T, T> = x => !x;
 
 //#region serializables
 

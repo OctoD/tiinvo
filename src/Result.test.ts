@@ -3,8 +3,10 @@ import * as Result from './Result.js';
 import * as Num from './Num.js';
 import * as Str from './Str.js';
 
-describe("Result", () => {
-  test(`checks if is ok or err`, () => {
+describe("Result", () =>
+{
+  test(`checks if is ok or err`, () =>
+  {
     expect(Result.isOk(10)).toBe(true);
     expect(Result.isOk(Error)).toBe(true);
     expect(Result.isOk(new Error())).toBe(false);
@@ -14,7 +16,8 @@ describe("Result", () => {
     expect(Result.isErr({ name: 'foo', message: 'bar', cause: 'baz' })).toBe(true);
   });
 
-  test(Result.err.name, () => {
+  test(Result.err.name, () =>
+  {
     expect(Result.err(10) instanceof Error).toEqual(true);
     expect(Result.err(new TypeError('aaaa')) instanceof Error).toEqual(true);
     expect(Result.err({}) instanceof Error).toEqual(true);
@@ -22,17 +25,20 @@ describe("Result", () => {
     expect(Result.err([10, 20, 30]) instanceof Error).toEqual(true);
   });
 
-  test(Result.isErr.name, () => {
+  test(Result.isErr.name, () =>
+  {
     expect(Result.isErr(10)).toEqual(false);
     expect(Result.isErr(new TypeError('aaaa'))).toEqual(true);
   });
 
-  test(Result.isOk.name, () => {
+  test(Result.isOk.name, () =>
+  {
     expect(Result.isOk(10)).toEqual(true);
     expect(Result.isOk(new TypeError('aaaa'))).toEqual(false);
   });
 
-  test(Result.isOkOf.name, () => {
+  test(Result.isOkOf.name, () =>
+  {
     const guard = Result.isOkOf(Num.guard);
 
     expect(guard(10)).toEqual(true);
@@ -40,7 +46,8 @@ describe("Result", () => {
     expect(guard(new TypeError('aaaa'))).toEqual(false);
   });
 
-  test(Result.cmp.name, () => {
+  test(Result.cmp.name, () =>
+  {
     const cmp = Result.cmp(Str.cmp);
     const cmpm = Result.cmp(Str);
 
@@ -63,7 +70,7 @@ describe("Result", () => {
     expect(cmp("a", "a")).toEqual(0);
     expect(cmp("a", "b")).toEqual(-1);
     expect(cmp("b", "a")).toEqual(1);
-    
+
     expect(cmp(new Error(), new Error())).toEqual(0);
     expect(cmp(new Error(), "a")).toEqual(-1);
     expect(cmp("a", new Error())).toEqual(1);
@@ -71,13 +78,14 @@ describe("Result", () => {
     expect(cmpm("a", "a")).toEqual(0);
     expect(cmpm("a", "b")).toEqual(-1);
     expect(cmpm("b", "a")).toEqual(1);
-    
+
     expect(cmpm(new Error(), new Error())).toEqual(0);
     expect(cmpm(new Error(), "a")).toEqual(-1);
     expect(cmpm("a", new Error())).toEqual(1);
   });
 
-  test(Result.eq.name, () => {
+  test(Result.eq.name, () =>
+  {
     const eq = Result.eq(Num.eq);
     const eqm = Result.eq(Num);
 
@@ -99,7 +107,8 @@ describe("Result", () => {
     expect(eqm(1_000_000, 0)).toEqual(false);
   });
 
-  test(Result.filter.name, () => {
+  test(Result.filter.name, () =>
+  {
     const f = Result.filter(Num.gt(1));
 
     expect(f(1)).toEqual(Error("Value did not pass filter"));
@@ -112,23 +121,28 @@ describe("Result", () => {
     expect(f(new TypeError())).toEqual(Error("Value did not pass filter"));
   });
 
-  test(Result.map.name, () => {
+  test(Result.map.name, () =>
+  {
     const m = Result.map(Num.add(10));
 
     expect(m(10)).toEqual(20);
     expect(m(new Error('foobar!'))).toEqual(Error('foobar!'));
   });
 
-  test(Result.mapOr.name, () => {
+  test(Result.mapOr.name, () =>
+  {
     const map = Result.mapOr(Str.length, 0);
 
     expect(map('hello')).toEqual(5);
     expect(map(new Error())).toEqual(0);
   });
 
-  test(Result.tryAsync.name, async () => {
-    const fn = async (arg: number) => {
-      if (Num.isEven(arg)) {
+  test(Result.tryAsync.name, async () =>
+  {
+    const fn = async (arg: number) =>
+    {
+      if (Num.isEven(arg))
+      {
         return arg * 2;
       }
 
@@ -144,9 +158,12 @@ describe("Result", () => {
     expect(Result.isErr(await safe(3))).toEqual(true);
   });
 
-  test(Result.trySync.name, () => {
-    const fn = (arg: number) => {
-      if (Num.isEven(arg)) {
+  test(Result.trySync.name, () =>
+  {
+    const fn = (arg: number) =>
+    {
+      if (Num.isEven(arg))
+      {
         return arg * 2;
       }
 

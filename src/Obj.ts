@@ -136,26 +136,32 @@ export const guard: Functors.Guardable<T> = (x): x is T => typeof (x) === 'objec
  * @group Guardables
  * @since 4.0.0
  */
-export const guardOf = <A extends any>(s: GuardsFromStruct<A>) => {
-  if (!guard(s)) {
+export const guardOf = <A extends any>(s: GuardsFromStruct<A>) =>
+{
+  if (!guard(s))
+  {
     throw new TypeError("Invalid Struct guard, expected an object (GuardsFromStruct<a>), got " + typeof s);
   }
 
-  return (v: unknown): v is A => {
-    if (!guard(v)) {
+  return (v: unknown): v is A =>
+  {
+    if (!guard(v))
+    {
       return false;
     }
 
     const keys = Object.keys(s);
 
-    for (let i = 0; i < keys.length; i++) {
+    for (let i = 0; i < keys.length; i++)
+    {
       const key = keys[i];
       const currentvalue = v[key as keyof typeof v];
       const currentguard = s[key as keyof typeof s];
       const case1 = guard(currentguard) && guardOf(currentguard as any)(currentvalue);
       const case2 = typeof currentguard === 'function' && currentguard(currentvalue);
 
-      if (!case1 && !case2) {
+      if (!case1 && !case2)
+      {
         return false;
       }
     }
@@ -188,7 +194,7 @@ export const guardOf = <A extends any>(s: GuardsFromStruct<A>) => {
  * @group Guardables
  * @since 4.0.0
  */
-export function hasKey<K extends string>(k: K, o: unknown): o is Record<K, unknown>
+export function hasKey<K extends string>(k: K, o: unknown): o is Record<K, unknown>;
 /**
  * Returns a guard which checks if a is a `object` and has property `k`
  * 
@@ -209,14 +215,15 @@ export function hasKey<K extends string>(k: K, o: unknown): o is Record<K, unkno
  * @group Guardables
  * @since 4.0.0
  */
-export function hasKey<K extends string>(k: K): (o: unknown) => o is Record<K, unknown>
+export function hasKey<K extends string>(k: K): (o: unknown) => o is Record<K, unknown>;
 export function hasKey<K extends string>(k: K, o?: unknown): any
 {
-  if (arguments.length === 2) {
+  if (arguments.length === 2)
+  {
     return guard(o) && o.hasOwnProperty(k);
   }
 
-  return (b: unknown): b is Record<K, unknown> => guard(b) && b.hasOwnProperty(k)
+  return (b: unknown): b is Record<K, unknown> => guard(b) && b.hasOwnProperty(k);
 };
 
 /**
@@ -268,11 +275,13 @@ export function hasKeyOf<A, K extends string>(k: K, g: Functors.Guardable<A>, o:
  * @since 4.0.0
  */
 export function hasKeyOf<A, K extends string>(k: K, g: Functors.Guardable<A>): (o: unknown) => o is Record<K, A>;
-export function hasKeyOf<A, K extends string>(k: K | Functors.Guardable<A>, g?: any, o?: any): any {
+export function hasKeyOf<A, K extends string>(k: K | Functors.Guardable<A>, g?: any, o?: any): any
+{
   const og = (k: K, g: Functors.Guardable<A>, o: unknown): o is Record<K, A> =>
     guard(o) && o.hasOwnProperty(k) && g((o as any)[k]);
 
-  if (!!k && !!g && !!o) {
+  if (!!k && !!g && !!o)
+  {
     return og(k as K, g, o);
   }
 
@@ -305,7 +314,7 @@ export function hasKeyOf<A, K extends string>(k: K | Functors.Guardable<A>, g?: 
  * @group Natives
  * @since 4.0.0
  */
-export const assign: typeof Object.assign = (x: any, ... b: any[]) => Object.assign({}, x, ... b);
+export const assign: typeof Object.assign = (x: any, ...b: any[]) => Object.assign({}, x, ...b);
 
 /**
  * Returns an array of key/values of the enumerable properties of an object `o`
@@ -425,15 +434,19 @@ export function omit<K extends string, O extends Record<string, any>>(k: K[], o:
  * @since 4.0.0
  */
 export function omit<K extends string, O extends Record<string, any>>(k: K[]): Fn.Unary<O, Exclude<O, K>>;
-export function omit<K extends string, O extends Record<string, any>>(k: any, o?: any): any {
-  const fn = (x: K[], y: O) => {
+export function omit<K extends string, O extends Record<string, any>>(k: any, o?: any): any
+{
+  const fn = (x: K[], y: O) =>
+  {
     const omitted = {} as Exclude<O, K>;
     const ownedkeys = keys(y);
 
-    for (let index = 0; index < ownedkeys.length; index++) {
+    for (let index = 0; index < ownedkeys.length; index++)
+    {
       const key = ownedkeys[index];
 
-      if (!x.includes(key as K)) {
+      if (!x.includes(key as K))
+      {
         (omitted as any)[key] = y[key];
       }
     }
@@ -441,7 +454,8 @@ export function omit<K extends string, O extends Record<string, any>>(k: any, o?
     return omitted;
   };
 
-  if (Array.isArray(k) && !!o) {
+  if (Array.isArray(k) && !!o)
+  {
     return fn(k, o);
   }
 
@@ -473,14 +487,18 @@ export function omit<K extends string, O extends Record<string, any>>(k: any, o?
  */
 export function pick<K extends string, O extends Record<string, any>>(keys: K[], o: O): Pick<O, K>;
 export function pick<K extends string, O extends Record<string, any>>(keys: K[]): Fn.Unary<O, Pick<O, K>>;
-export function pick<K extends string, O extends Record<string, any>>(keys: any, o?: any): any {
-  const fn = (x: K[], y: O): Pick<O, K> => {
+export function pick<K extends string, O extends Record<string, any>>(keys: any, o?: any): any
+{
+  const fn = (x: K[], y: O): Pick<O, K> =>
+  {
     const o = {} as Pick<O, K>;
 
-    for (let i = 0; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++)
+    {
       const key = x[i];
 
-      if (hasKey(key)(y)) {
+      if (hasKey(key)(y))
+      {
         o[key] = y[key];
       }
     }
@@ -488,7 +506,8 @@ export function pick<K extends string, O extends Record<string, any>>(keys: any,
     return o;
   };
 
-  if (Array.isArray(keys) && !!o) {
+  if (Array.isArray(keys) && !!o)
+  {
     return fn(keys, o);
   }
 

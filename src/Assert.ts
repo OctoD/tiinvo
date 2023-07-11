@@ -49,14 +49,19 @@ export function check(a: boolean, m: string): void;
  * @since 4.0.0
  */
 export function check(a: string): Fn.Unary<boolean, void>;
-export function check(a: boolean | string, m?: any): any {
-  if (typeof a === 'boolean' && !a && strGuard(m)) {
+export function check(a: boolean | string, m?: any): any
+{
+  if (typeof a === 'boolean' && !a && strGuard(m))
+  {
     throw new Error(m);
   }
 
-  if (typeof a === 'string') {
-    return (b: boolean) => {
-      if (!b) {
+  if (typeof a === 'string')
+  {
+    return (b: boolean) =>
+    {
+      if (!b)
+      {
         throw new Error(a);
       }
     };
@@ -105,14 +110,19 @@ export function checkResult(a: boolean, b: string): Result.T<boolean>;
  * @since 4.0.0
  */
 export function checkResult(a: string): Fn.Unary<boolean, Result.T<boolean>>;
-export function checkResult(a: boolean | string, b?: any): any {
-  if (typeof a === 'boolean' && strGuard(b)) {
+export function checkResult(a: boolean | string, b?: any): any
+{
+  if (typeof a === 'boolean' && strGuard(b))
+  {
     return !a ? new Error(b) : true;
   }
 
-  if (typeof a === 'string') {
-    return (b: boolean) => {
-      if (!b) {
+  if (typeof a === 'string')
+  {
+    return (b: boolean) =>
+    {
+      if (!b)
+      {
         return new Error(a);
       }
 
@@ -170,8 +180,10 @@ export function make<a>(p: Predicate.T<a>, m: string | Functors.Mappable<a, stri
  * @since 4.0.0
  */
 export function make<a>(p: string | Functors.Mappable<a, string>): Fn.Unary<Predicate.T<a>, Fn.Unary<a, void>>;
-export function make<a>(p: string | Functors.Mappable<a, string> | Predicate.T<a>, m?: any): any {
-  if (pGuard(p) && arguments.length === 2) {
+export function make<a>(p: string | Functors.Mappable<a, string> | Predicate.T<a>, m?: any): any
+{
+  if (pGuard(p) && arguments.length === 2)
+  {
     return (a: a) => check(p(a), typeof m === 'function' ? m(a) : m);
   }
 
@@ -228,8 +240,10 @@ export function makeResult<A>(p: Predicate.T<A>, m: string | Functors.Mappable<A
  * @since 4.0.0
  */
 export function makeResult<A>(p: string | Functors.Mappable<A, string>): Fn.Unary<Predicate.T<A>, Fn.Unary<A, Result.T<boolean>>>;
-export function makeResult<A>(p: any, m?: any): any {
-  if (pGuard(p) && m) {
+export function makeResult<A>(p: any, m?: any): any
+{
+  if (pGuard(p) && m)
+  {
     return (a: A) => checkResult(p(a), typeof m === 'function' ? m(a) : m);
   }
 

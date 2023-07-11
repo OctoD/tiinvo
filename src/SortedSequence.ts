@@ -63,7 +63,8 @@ export function make<A>(mod: Functors.Comparable<A>, ...args: A[]): T<A>;
  * @since 4.0.0
  */
 export function make<A>(mod: Functors.ComparableModule<A>, ...args: A[]): T<A>;
-export function make<A>(mod: Functors.Comparable<A> | Functors.ComparableModule<A>, ...args: A[]): T<A> {
+export function make<A>(mod: Functors.Comparable<A> | Functors.ComparableModule<A>, ...args: A[]): T<A>
+{
   const cmp = typeof mod === 'function' ? mod : mod.cmp;
   const seq = Sequence.make.apply(null, args.sort(cmp)) as T<A>;
 
@@ -123,7 +124,7 @@ export const guard = (x: unknown): x is T<unknown> => Sequence.guard(x) && sorts
  * @group Guardables
  * @since 4.0.0
  */
-export function guardOf<A>(g: Functors.Guardable<A>, x: unknown): x is T<A>
+export function guardOf<A>(g: Functors.Guardable<A>, x: unknown): x is T<A>;
 /**
  * Checks if the parameter `x` is a `SortedSequence.T<A>` using a `GuardableModule<A>` functor.
  *
@@ -148,7 +149,7 @@ export function guardOf<A>(g: Functors.Guardable<A>, x: unknown): x is T<A>
  * @group Guardables
  * @since 4.0.0
  */
-export function guardOf<A>(g: Functors.GuardableModule<A>, x: unknown): x is T<A>
+export function guardOf<A>(g: Functors.GuardableModule<A>, x: unknown): x is T<A>;
 /**
  * Returns a guard which checks if the parameter `x` is a `SortedSequence.T<A>`
  *
@@ -173,7 +174,7 @@ export function guardOf<A>(g: Functors.GuardableModule<A>, x: unknown): x is T<A
  * @group Guardables
  * @since 4.0.0
  */
-export function guardOf<A>(g: Functors.Guardable<A>): (x: unknown) => x is T<A>
+export function guardOf<A>(g: Functors.Guardable<A>): (x: unknown) => x is T<A>;
 /**
  * Returns a guard which checks if the parameter `x` is a `SortedSequence.T<A>`
  *
@@ -198,13 +199,14 @@ export function guardOf<A>(g: Functors.Guardable<A>): (x: unknown) => x is T<A>
  * @group Guardables
  * @since 4.0.0
  */
-export function guardOf<A>(g: Functors.GuardableModule<A>): (x: unknown) => x is T<A>
+export function guardOf<A>(g: Functors.GuardableModule<A>): (x: unknown) => x is T<A>;
 export function guardOf<A>(g: Functors.Guardable<A> | Functors.GuardableModule<A>, x?: unknown): any
 {
-  const _g = (z: unknown): z is T<A> => {
-    return guard(z) && toArray(z).every(typeof g === 'function' ? g : g.guard)
-  }
-  
+  const _g = (z: unknown): z is T<A> =>
+  {
+    return guard(z) && toArray(z).every(typeof g === 'function' ? g : g.guard);
+  };
+
   return arguments.length === 2 ? _g(x) : _g;
 };
 
@@ -275,8 +277,10 @@ export function cmp<A extends T<any>>(a: A, b: A): Functors.ComparableResult;
  * @since 4.0.0
  */
 export function cmp<A extends T<any>>(a: A): Fn.Unary<A, Functors.ComparableResult>;
-export function cmp<A extends T<any>>(a: A, b?: A): any {
-  if (guard(a) && guard(b)) {
+export function cmp<A extends T<any>>(a: A, b?: A): any
+{
+  if (guard(a) && guard(b))
+  {
     return Sequence.cmp({ cmp: a[sortsymbol] }, a, b);
   }
 
@@ -338,8 +342,10 @@ export function eq<A extends T<any>>(a: A, b: A): boolean;
  * @since 4.0.0
  */
 export function eq<A extends T<any>>(a: A): Fn.Unary<A, boolean>;
-export function eq<A extends T<any>>(a: A, b?: A): any {
-  if (guard(a) && guard(b)) {
+export function eq<A extends T<any>>(a: A, b?: A): any
+{
+  if (guard(a) && guard(b))
+  {
     return Sequence.cmp({ cmp: a[sortsymbol] }, a, b) === 0;
   }
 
@@ -397,12 +403,15 @@ export function map<A, B>(a: T<A>, m: Functors.Mappable<A, B>): T<B>;
  * @since 4.0.0
  */
 export function map<A, B>(a: Functors.Mappable<A, B>): Fn.Unary<T<A>, T<B>>;
-export function map<A, B>(a: T<A> | Functors.Mappable<A, B>, m?: any): any {
-  if (guard(a) && typeof m === 'function') {
+export function map<A, B>(a: T<A> | Functors.Mappable<A, B>, m?: any): any
+{
+  if (guard(a) && typeof m === 'function')
+  {
     return make.apply(null, [{ cmp: a[sortsymbol] }, ...[...a].map(m)]);
   }
 
-  return (c: T<A>) => {
+  return (c: T<A>) =>
+  {
     return make.apply(null, [{ cmp: c[sortsymbol] as any }, ...[...c].map(a as Functors.Mappable<A, B>)]);
   };
 }
@@ -456,8 +465,10 @@ export function add<A extends T<any>, B>(a: A, b: B): T<A & B>;
  * @since 4.0.0
  */
 export function add<A extends T<any>, B>(a: B): Fn.Unary<A, T<A & B>>;
-export function add<A extends T<any>, B>(a: A | B, b?: B): any {
-  if (guard(a) && arguments.length === 2) {
+export function add<A extends T<any>, B>(a: A | B, b?: B): any
+{
+  if (guard(a) && arguments.length === 2)
+  {
     return make.apply(null, [{ cmp: a[sortsymbol] }, ...a, b]);
   }
 
@@ -510,8 +521,10 @@ export function concat<A>(a: T<A>, b: T<A>): T<A>;
  * @since 4.0.0
  */
 export function concat<A>(a: T<A>): <A>(x: T<A>) => T<A>;
-export function concat<A>(a: T<A>, b?: T<A>): any {
-  if (guard(a) && guard(b)) {
+export function concat<A>(a: T<A>, b?: T<A>): any
+{
+  if (guard(a) && guard(b))
+  {
     return make.apply(null, [{ cmp: a[sortsymbol] }, ...a, ...b!]);
   }
 

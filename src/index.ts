@@ -20,7 +20,8 @@ import * as Tuple from './Tuple.js';
 import * as TypedMap from './TypedMap.js';
 import * as TypedSequence from './TypedSequence.js';
 
-export {
+export
+{
   Arr,
   Assert,
   BigInt,

@@ -36,12 +36,16 @@ export type T<A> = Ok<A> | Err;
  * @group Factories
  * @since 3.8.0 
  */
-export const err = (a: unknown): Err => {
-  if (a instanceof Error) {
+export const err = (a: unknown): Err =>
+{
+  if (a instanceof Error)
+  {
     return a;
-  } else if (typeof a === 'object' && a) {
+  } else if (typeof a === 'object' && a)
+  {
     const err = new Error();
-    for (const [key, value] of Object.entries(a)) {
+    for (const [key, value] of Object.entries(a))
+    {
       (err as any)[key] = value;
     }
     return err;
@@ -291,24 +295,30 @@ export function cmp<A>(cmp: Functors.Comparable<A>): Fn.Binary<T<A>, T<A>, Funct
  * @since 4.0.0
  */
 export function cmp<A>(cmp: Functors.ComparableModule<A>): Fn.Binary<T<A>, T<A>, Functors.ComparableResult>;
-export function cmp<A>(cmp: Functors.Comparable<A> | Functors.ComparableModule<A>, a?: T<A>, b?: T<A>): any {
-  const _cmp = (x: T<A>, y: T<A>) => {
-    if (isErr(x) && isErr(y)) {
+export function cmp<A>(cmp: Functors.Comparable<A> | Functors.ComparableModule<A>, a?: T<A>, b?: T<A>): any
+{
+  const _cmp = (x: T<A>, y: T<A>) =>
+  {
+    if (isErr(x) && isErr(y))
+    {
       return 0;
     }
 
-    if (isErr(x)) {
+    if (isErr(x))
+    {
       return -1;
     }
 
-    if (isErr(y)) {
+    if (isErr(y))
+    {
       return 1;
     }
 
     return typeof cmp === 'function' ? cmp(x, y) : cmp.cmp(x, y);
   };
 
-  switch (arguments.length) {
+  switch (arguments.length)
+  {
     case 3: return _cmp(a as T<A>, b as T<A>);
     case 2: return (b: T<A>) => _cmp(b, a as T<A>);
     case 1: return (a: T<A>, b: T<A>) => _cmp(a, b);
@@ -445,20 +455,25 @@ export function eq<a>(eq: Functors.Equatable<a>): Fn.Binary<T<a>, T<a>, boolean>
  * @since 4.0.0
  */
 export function eq<a>(eq: Functors.EquatableModule<a>): Fn.Binary<T<a>, T<a>, boolean>;
-export function eq<a>(eq: Functors.Equatable<a> | Functors.EquatableModule<a>, a?: T<a>, b?: T<a>): any {
-  const _eq = (x: T<a>, y: T<a>) => {
-    if (isErr(x) && isErr(y)) {
+export function eq<a>(eq: Functors.Equatable<a> | Functors.EquatableModule<a>, a?: T<a>, b?: T<a>): any
+{
+  const _eq = (x: T<a>, y: T<a>) =>
+  {
+    if (isErr(x) && isErr(y))
+    {
       return true;
     }
 
-    if (isErr(x) || isErr(y)) {
+    if (isErr(x) || isErr(y))
+    {
       return false;
     }
 
     return typeof eq === 'function' ? eq(x, y) : eq.eq(x, y);
   };
 
-  switch (arguments.length) {
+  switch (arguments.length)
+  {
     case 3: return _eq(a as T<a>, b as T<a>);
     case 2: return (b: T<a>) => _eq(a as T<a>, b);
     case 1: return (a: T<a>, b: T<a>) => _eq(a, b);
@@ -508,9 +523,11 @@ export function filter<A>(f: Functors.Filterable<A>, a: T<A>): T<A>;
  * @since 4.0.0
  */
 export function filter<A>(f: Functors.Filterable<A>): Fn.Unary<T<A>, T<A>>;
-export function filter<A>(f: Functors.Filterable<A>, a?: T<A>): any {
+export function filter<A>(f: Functors.Filterable<A>, a?: T<A>): any
+{
   const _err = Error("Value did not pass filter");
-  if (arguments.length === 2) {
+  if (arguments.length === 2)
+  {
     return isErr(a) ? _err : f(a as A) ? a : _err;
   }
 
@@ -587,9 +604,11 @@ export const mapOr = <a, b>(m: Functors.Mappable<a, b>, b: b) => (a: T<a>): b =>
  * @returns 
  * @since 4.0.0
  */
-export const tryAsync = <f extends Fn.AnyAsyncFn>(f: f) => {
+export const tryAsync = <f extends Fn.AnyAsyncFn>(f: f) =>
+{
   return makecatch<(...args: Parameters<f>) => Promise<T<ReturnType<f>>>>({
-    [catchableAsync]() {
+    [catchableAsync]()
+    {
       return {
         catch: async (error) => error,
         func: f
@@ -625,9 +644,11 @@ export const tryAsync = <f extends Fn.AnyAsyncFn>(f: f) => {
  * @returns 
  * @since 4.0.0
  */
-export const trySync = <f extends Fn.AnyFn>(f: f) => {
+export const trySync = <f extends Fn.AnyFn>(f: f) =>
+{
   return makecatch<(...args: Parameters<f>) => T<ReturnType<f>>>({
-    [catchableSync]() {
+    [catchableSync]()
+    {
       return {
         catch: (error) => error,
         func: f

@@ -75,7 +75,7 @@ const tm1 = TypedMap.make(Num, Str, [[10, "hello"], [20, "world"]])
 
 #### Defined in
 
-[src/TypedMap.ts:26](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L26)
+[src/TypedMap.ts:26](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L26)
 
 ## Factories
 
@@ -129,7 +129,7 @@ the `TypedMap.T<K, V>`
 
 #### Defined in
 
-[src/TypedMap.ts:61](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L61)
+[src/TypedMap.ts:61](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L61)
 
 ## Guardables
 
@@ -168,7 +168,7 @@ x is T<unknown, unknown\>
 
 #### Defined in
 
-[src/TypedMap.ts:134](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L134)
+[src/TypedMap.ts:143](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L143)
 
 ___
 
@@ -216,7 +216,7 @@ x is T<K, V\>
 
 #### Defined in
 
-[src/TypedMap.ts:155](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L155)
+[src/TypedMap.ts:164](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L164)
 
 ▸ **guardOf**<`K`, `V`\>(`kg`, `vg`): (`x`: `unknown`) => x is T<K, V\>
 
@@ -288,7 +288,7 @@ x is T<K, V\>
 
 #### Defined in
 
-[src/TypedMap.ts:192](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L192)
+[src/TypedMap.ts:201](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L201)
 
 ## Comparables
 
@@ -343,7 +343,7 @@ TypedMap.cmp(Str, Num, m0, m3)   // -1
 
 #### Defined in
 
-[src/TypedMap.ts:255](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L255)
+[src/TypedMap.ts:272](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L272)
 
 ▸ **cmp**<`K`, `V`\>(`kmod`, `vmod`, `a`): [`Unary`](Fn.md#unary)<[`T`](TypedMap.md#t)<`K`, `V`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -394,7 +394,7 @@ the unary function which returns
 
 #### Defined in
 
-[src/TypedMap.ts:286](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L286)
+[src/TypedMap.ts:303](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L303)
 
 ▸ **cmp**<`K`, `V`\>(`kmod`, `vmod`): [`Binary`](Fn.md#binary)<[`T`](TypedMap.md#t)<`K`, `V`\>, [`T`](TypedMap.md#t)<`K`, `V`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -445,7 +445,7 @@ the binary function which returns
 
 #### Defined in
 
-[src/TypedMap.ts:317](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L317)
+[src/TypedMap.ts:334](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L334)
 
 ___
 
@@ -499,7 +499,7 @@ TypedMap.eq(Str, Num, m0, m3)   // false
 
 #### Defined in
 
-[src/TypedMap.ts:368](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L368)
+[src/TypedMap.ts:390](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L390)
 
 ▸ **eq**<`K`, `V`\>(`kmod`, `vmod`, `a`): [`Unary`](Fn.md#unary)<[`T`](TypedMap.md#t)<`K`, `V`\>, `boolean`\>
 
@@ -549,7 +549,7 @@ the unary function which returns
 
 #### Defined in
 
-[src/TypedMap.ts:398](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L398)
+[src/TypedMap.ts:420](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L420)
 
 ▸ **eq**<`K`, `V`\>(`kmod`, `vmod`): [`Binary`](Fn.md#binary)<[`T`](TypedMap.md#t)<`K`, `V`\>, [`T`](TypedMap.md#t)<`K`, `V`\>, `boolean`\>
 
@@ -599,7 +599,7 @@ the binary function which returns
 
 #### Defined in
 
-[src/TypedMap.ts:428](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L428)
+[src/TypedMap.ts:450](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L450)
 
 ## Accessors
 
@@ -649,7 +649,7 @@ t entries
 
 #### Defined in
 
-[src/TypedMap.ts:468](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L468)
+[src/TypedMap.ts:494](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L494)
 
 ___
 
@@ -698,7 +698,7 @@ TypedMap.get("c")  // null
 
 #### Defined in
 
-[src/TypedMap.ts:495](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L495)
+[src/TypedMap.ts:521](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L521)
 
 ▸ **get**<`K`\>(`key`): <V\>(`t`: [`T`](TypedMap.md#t)<`K`, `V`\>) => [`T`](Opt.md#t)<`V`\>
 
@@ -759,7 +759,7 @@ getC(foo)  // null
 
 #### Defined in
 
-[src/TypedMap.ts:519](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L519)
+[src/TypedMap.ts:545](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L545)
 
 ___
 
@@ -807,7 +807,7 @@ TypedMap.has("world", m)   // false
 
 #### Defined in
 
-[src/TypedMap.ts:552](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L552)
+[src/TypedMap.ts:580](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L580)
 
 ▸ **has**<`K`, `V`\>(`key`): <V\>(`t`: [`T`](TypedMap.md#t)<`K`, `V`\>) => `boolean` \| `never`
 
@@ -870,7 +870,7 @@ the unary function which accepts a TypedMap and returns
 
 #### Defined in
 
-[src/TypedMap.ts:576](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L576)
+[src/TypedMap.ts:604](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L604)
 
 ___
 
@@ -915,7 +915,7 @@ the keys iterable
 
 #### Defined in
 
-[src/TypedMap.ts:613](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L613)
+[src/TypedMap.ts:645](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L645)
 
 ___
 
@@ -960,7 +960,7 @@ the TypedMap's size
 
 #### Defined in
 
-[src/TypedMap.ts:635](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L635)
+[src/TypedMap.ts:667](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L667)
 
 ___
 
@@ -1005,7 +1005,7 @@ the keys iterable
 
 #### Defined in
 
-[src/TypedMap.ts:657](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L657)
+[src/TypedMap.ts:689](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L689)
 
 ## Operators
 
@@ -1052,7 +1052,7 @@ the new TypedMap
 
 #### Defined in
 
-[src/TypedMap.ts:685](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L685)
+[src/TypedMap.ts:717](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L717)
 
 ▸ **delete**<`K`\>(`key`): <V\>(`t`: [`T`](TypedMap.md#t)<`K`, `V`\>) => [`T`](TypedMap.md#t)<`K`, `V`\>
 
@@ -1113,7 +1113,7 @@ the unary function which deletes the key and returns the new TypedMap
 
 #### Defined in
 
-[src/TypedMap.ts:708](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L708)
+[src/TypedMap.ts:740](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L740)
 
 ___
 
@@ -1164,7 +1164,7 @@ the new TypedMap
 
 #### Defined in
 
-[src/TypedMap.ts:760](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L760)
+[src/TypedMap.ts:797](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L797)
 
 ▸ **set**<`K`, `V`\>(`a`, `b`): [`Unary`](Fn.md#unary)<[`T`](TypedMap.md#t)<`K`, `V`\>, [`T`](TypedMap.md#t)<`K`, `V`\>\>
 
@@ -1210,7 +1210,7 @@ the unary function
 
 #### Defined in
 
-[src/TypedMap.ts:786](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L786)
+[src/TypedMap.ts:823](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L823)
 
 ▸ **set**<`K`, `V`\>(`a`): [`Binary`](Fn.md#binary)<`K`, `V`, [`T`](TypedMap.md#t)<`K`, `V`\>\>
 
@@ -1256,4 +1256,4 @@ the unary function
 
 #### Defined in
 
-[src/TypedMap.ts:813](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/TypedMap.ts#L813)
+[src/TypedMap.ts:850](https://github.com/OctoD/tiinvo/blob/5779ed4/src/TypedMap.ts#L850)

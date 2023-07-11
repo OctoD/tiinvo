@@ -75,7 +75,7 @@ A sorted sequence is a `Sequence.t<a>` which all elements stored in it are sorte
 
 #### Defined in
 
-[src/SortedSequence.ts:10](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L10)
+[src/SortedSequence.ts:10](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L10)
 
 ## Factories
 
@@ -124,7 +124,7 @@ the SortedSequence
 
 #### Defined in
 
-[src/SortedSequence.ts:40](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L40)
+[src/SortedSequence.ts:40](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L40)
 
 ▸ **make**<`A`\>(`mod`, `...args`): [`T`](SortedSequence.md#t)<`A`\>
 
@@ -169,7 +169,7 @@ the SortedSequence
 
 #### Defined in
 
-[src/SortedSequence.ts:65](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L65)
+[src/SortedSequence.ts:65](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L65)
 
 ## Guards
 
@@ -209,7 +209,7 @@ x is T<unknown\>
 
 #### Defined in
 
-[src/SortedSequence.ts:100](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L100)
+[src/SortedSequence.ts:101](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L101)
 
 ## Guardables
 
@@ -257,7 +257,7 @@ x is T<A\>
 
 #### Defined in
 
-[src/SortedSequence.ts:126](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L126)
+[src/SortedSequence.ts:127](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L127)
 
 ▸ **guardOf**<`A`\>(`g`, `x`): x is T<A\>
 
@@ -301,7 +301,7 @@ x is T<A\>
 
 #### Defined in
 
-[src/SortedSequence.ts:151](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L151)
+[src/SortedSequence.ts:152](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L152)
 
 ▸ **guardOf**<`A`\>(`g`): (`x`: `unknown`) => x is T<A\>
 
@@ -358,7 +358,7 @@ x is T<A\>
 
 #### Defined in
 
-[src/SortedSequence.ts:176](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L176)
+[src/SortedSequence.ts:177](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L177)
 
 ▸ **guardOf**<`A`\>(`g`): (`x`: `unknown`) => x is T<A\>
 
@@ -415,7 +415,7 @@ x is T<A\>
 
 #### Defined in
 
-[src/SortedSequence.ts:201](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L201)
+[src/SortedSequence.ts:202](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L202)
 
 ## Comparables
 
@@ -471,7 +471,7 @@ SortedSequence.cmp(s2)(s0)      // 1
 
 #### Defined in
 
-[src/SortedSequence.ts:247](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L247)
+[src/SortedSequence.ts:249](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L249)
 
 ▸ **cmp**<`A`\>(`a`): [`Unary`](Fn.md#unary)<`A`, [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -521,7 +521,7 @@ the unary function which returns
 
 #### Defined in
 
-[src/SortedSequence.ts:277](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L277)
+[src/SortedSequence.ts:279](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L279)
 
 ___
 
@@ -573,7 +573,7 @@ SortedSequence.eq(s0)(s2)      // false
 
 #### Defined in
 
-[src/SortedSequence.ts:313](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L313)
+[src/SortedSequence.ts:317](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L317)
 
 ▸ **eq**<`A`\>(`a`): [`Unary`](Fn.md#unary)<`A`, `boolean`\>
 
@@ -621,7 +621,7 @@ the unary function which returns
 
 #### Defined in
 
-[src/SortedSequence.ts:340](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L340)
+[src/SortedSequence.ts:344](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L344)
 
 ## Mappables
 
@@ -669,7 +669,7 @@ the mapped `SortedSequence.T<B>`
 
 #### Defined in
 
-[src/SortedSequence.ts:376](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L376)
+[src/SortedSequence.ts:382](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L382)
 
 ▸ **map**<`A`, `B`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](SortedSequence.md#t)<`A`\>, [`T`](SortedSequence.md#t)<`B`\>\>
 
@@ -712,7 +712,7 @@ the unary function which maps `SortedSequence.T<A>` to `SortedSequence.T<B>`
 
 #### Defined in
 
-[src/SortedSequence.ts:399](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L399)
+[src/SortedSequence.ts:405](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L405)
 
 ## Operables
 
@@ -759,7 +759,7 @@ the new SortedSequence
 
 #### Defined in
 
-[src/SortedSequence.ts:436](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L436)
+[src/SortedSequence.ts:445](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L445)
 
 ▸ **add**<`A`, `B`\>(`a`): [`Unary`](Fn.md#unary)<`A`, [`T`](SortedSequence.md#t)<`A` & `B`\>\>
 
@@ -801,7 +801,7 @@ the unary function
 
 #### Defined in
 
-[src/SortedSequence.ts:458](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L458)
+[src/SortedSequence.ts:467](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L467)
 
 ___
 
@@ -849,7 +849,7 @@ the concatenated SortedSequence
 
 #### Defined in
 
-[src/SortedSequence.ts:490](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L490)
+[src/SortedSequence.ts:501](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L501)
 
 ▸ **concat**<`A`\>(`a`): <A\>(`x`: [`T`](SortedSequence.md#t)<`A`\>) => [`T`](SortedSequence.md#t)<`A`\>
 
@@ -909,7 +909,7 @@ the unary function
 
 #### Defined in
 
-[src/SortedSequence.ts:512](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/SortedSequence.ts#L512)
+[src/SortedSequence.ts:523](https://github.com/OctoD/tiinvo/blob/5779ed4/src/SortedSequence.ts#L523)
 
 ## Accessors
 
@@ -955,7 +955,7 @@ the number of elements which satisfy the predicate `p`
 
 #### Defined in
 
-[src/Sequence.ts:1043](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Sequence.ts#L1043)
+[src/Sequence.ts:1083](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Sequence.ts#L1083)
 
 ▸ **count**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Sequence.md#t)<`A`\>, `number`\>
 
@@ -996,7 +996,7 @@ the number of elements which satisfy the predicate `p`
 
 #### Defined in
 
-[src/Sequence.ts:1065](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Sequence.ts#L1065)
+[src/Sequence.ts:1105](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Sequence.ts#L1105)
 
 ___
 
@@ -1043,7 +1043,7 @@ SortedSequence.get(s, 9)       // null
 
 #### Defined in
 
-[src/Sequence.ts:1127](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Sequence.ts#L1127)
+[src/Sequence.ts:1170](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Sequence.ts#L1170)
 
 ▸ **get**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Sequence.md#t)<`A`\>, [`T`](Result.md#t)<`A`\>\>
 
@@ -1085,7 +1085,7 @@ SortedSequence.get(s, 9)       // null
 
 #### Defined in
 
-[src/Sequence.ts:1152](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Sequence.ts#L1152)
+[src/Sequence.ts:1195](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Sequence.ts#L1195)
 
 ___
 
@@ -1133,7 +1133,7 @@ the first element of the sequence:
 
 #### Defined in
 
-[src/Sequence.ts:1099](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Sequence.ts#L1099)
+[src/Sequence.ts:1141](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Sequence.ts#L1141)
 
 ___
 
@@ -1181,7 +1181,7 @@ SortedSequence.last(s1)       // null
 
 #### Defined in
 
-[src/Sequence.ts:1194](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Sequence.ts#L1194)
+[src/Sequence.ts:1241](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Sequence.ts#L1241)
 
 ___
 
@@ -1225,7 +1225,7 @@ the sequence values as an immutable dictionary
 
 #### Defined in
 
-[src/Sequence.ts:1239](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Sequence.ts#L1239)
+[src/Sequence.ts:1287](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Sequence.ts#L1287)
 
 ## Functions
 
@@ -1267,7 +1267,7 @@ SortedSequence.length(s)           // 3
 
 #### Defined in
 
-[src/Sequence.ts:1218](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Sequence.ts#L1218)
+[src/Sequence.ts:1266](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Sequence.ts#L1266)
 
 ## Predicates
 
@@ -1314,7 +1314,7 @@ SortedSequence.empty(s1)               // false
 
 #### Defined in
 
-[src/Sequence.ts:1268](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Sequence.ts#L1268)
+[src/Sequence.ts:1316](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Sequence.ts#L1316)
 
 ___
 
@@ -1360,7 +1360,7 @@ SortedSequence.populated(SortedSequence.make(Num))   // false
 
 #### Defined in
 
-[src/Sequence.ts:1292](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Sequence.ts#L1292)
+[src/Sequence.ts:1340](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Sequence.ts#L1340)
 
 ## Serializables
 
@@ -1404,7 +1404,7 @@ the output
 
 #### Defined in
 
-[src/Sequence.ts:1380](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Sequence.ts#L1380)
+[src/Sequence.ts:1430](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Sequence.ts#L1430)
 
 ___
 
@@ -1448,7 +1448,7 @@ the output
 
 #### Defined in
 
-[src/Sequence.ts:1399](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Sequence.ts#L1399)
+[src/Sequence.ts:1449](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Sequence.ts#L1449)
 
 ___
 
@@ -1492,7 +1492,7 @@ the output
 
 #### Defined in
 
-[src/Sequence.ts:1419](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Sequence.ts#L1419)
+[src/Sequence.ts:1469](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Sequence.ts#L1469)
 
 ___
 
@@ -1536,7 +1536,7 @@ the output
 
 #### Defined in
 
-[src/Sequence.ts:1440](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Sequence.ts#L1440)
+[src/Sequence.ts:1490](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Sequence.ts#L1490)
 
 ___
 
@@ -1580,4 +1580,4 @@ the output
 
 #### Defined in
 
-[src/Sequence.ts:1461](https://github.com/OctoD/tiinvo/blob/4c3ba7b/src/Sequence.ts#L1461)
+[src/Sequence.ts:1511](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Sequence.ts#L1511)
