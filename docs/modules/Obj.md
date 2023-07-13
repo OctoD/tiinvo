@@ -50,7 +50,7 @@ A type alias for object
 
 #### Defined in
 
-[src/Obj.ts:10](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L10)
+[src/Obj.ts:10](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L10)
 
 ___
 
@@ -72,7 +72,7 @@ Represents the entries of an object `O` as an array of key/value pair tuples
 
 #### Defined in
 
-[src/Obj.ts:18](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L18)
+[src/Obj.ts:18](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L18)
 
 ___
 
@@ -94,7 +94,7 @@ Represents the resulting type from a struct of guards
 
 #### Defined in
 
-[src/Obj.ts:28](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L28)
+[src/Obj.ts:28](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L28)
 
 ___
 
@@ -116,7 +116,7 @@ Extracts keys `K[]` from object `O`
 
 #### Defined in
 
-[src/Obj.ts:38](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L38)
+[src/Obj.ts:38](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L38)
 
 ___
 
@@ -138,7 +138,7 @@ Extracts values `A[]` from object `O`
 
 #### Defined in
 
-[src/Obj.ts:46](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L46)
+[src/Obj.ts:46](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L46)
 
 ## Guardables
 
@@ -176,7 +176,7 @@ x is object
 
 #### Defined in
 
-[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L338)
+[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/5743591/src/Functors.ts#L338)
 
 ___
 
@@ -282,7 +282,7 @@ v is A
 
 #### Defined in
 
-[src/Obj.ts:139](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L139)
+[src/Obj.ts:139](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L139)
 
 ___
 
@@ -331,7 +331,7 @@ o is Record<K, unknown\>
 
 #### Defined in
 
-[src/Obj.ts:197](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L197)
+[src/Obj.ts:197](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L197)
 
 ▸ **hasKey**<`K`\>(`k`): (`o`: `unknown`) => o is Record<K, unknown\>
 
@@ -384,7 +384,7 @@ o is Record<K, unknown\>
 
 #### Defined in
 
-[src/Obj.ts:218](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L218)
+[src/Obj.ts:218](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L218)
 
 ___
 
@@ -432,7 +432,7 @@ o is Record<K, A\>
 
 #### Defined in
 
-[src/Obj.ts:253](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L253)
+[src/Obj.ts:253](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L253)
 
 ▸ **hasKeyOf**<`A`, `K`\>(`k`, `g`): (`o`: `unknown`) => o is Record<K, A\>
 
@@ -486,7 +486,7 @@ o is Record<K, A\>
 
 #### Defined in
 
-[src/Obj.ts:277](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L277)
+[src/Obj.ts:277](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L277)
 
 ## Natives
 
@@ -719,7 +719,7 @@ the entries
 
 #### Defined in
 
-[src/Obj.ts:336](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L336)
+[src/Obj.ts:336](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L336)
 
 ___
 
@@ -972,7 +972,7 @@ get({});             // none
 
 #### Defined in
 
-[src/Obj.ts:394](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L394)
+[src/Obj.ts:394](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L394)
 
 ___
 
@@ -1014,7 +1014,7 @@ Obj.omit(['a', 'b'], { a: 10, b: 20, c: 30 }) // { c: 30 }
 
 #### Defined in
 
-[src/Obj.ts:415](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L415)
+[src/Obj.ts:415](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L415)
 
 ▸ **omit**<`K`, `O`\>(`k`): [`Unary`](Fn.md#unary)<`O`, `Exclude`<`O`, `K`\>\>
 
@@ -1053,7 +1053,7 @@ omit({ a: 1, b: 2 })                 // {}
 
 #### Defined in
 
-[src/Obj.ts:436](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L436)
+[src/Obj.ts:436](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L436)
 
 ___
 
@@ -1099,7 +1099,7 @@ pick({ a: 1, b: 2 });            // { a: 1, b: 2 }
 
 #### Defined in
 
-[src/Obj.ts:488](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L488)
+[src/Obj.ts:488](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L488)
 
 ▸ **pick**<`K`, `O`\>(`keys`): [`Unary`](Fn.md#unary)<`O`, `Pick`<`O`, `K`\>\>
 
@@ -1122,7 +1122,7 @@ pick({ a: 1, b: 2 });            // { a: 1, b: 2 }
 
 #### Defined in
 
-[src/Obj.ts:489](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L489)
+[src/Obj.ts:489](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L489)
 
 ## Functions
 
@@ -1177,7 +1177,7 @@ Obj.map((x: Record<string, number>) => x.a ?? 0)({ b: 10 });      // 0
 
 #### Defined in
 
-[src/Obj.ts:538](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L538)
+[src/Obj.ts:538](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L538)
 
 ___
 
@@ -1217,7 +1217,7 @@ Obj.keys({ a: 10, b: 20 })       // ['a', 'b']
 
 #### Defined in
 
-[src/Obj.ts:552](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L552)
+[src/Obj.ts:552](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L552)
 
 ___
 
@@ -1254,7 +1254,7 @@ the size (count of keys) of the object
 
 #### Defined in
 
-[src/Obj.ts:570](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L570)
+[src/Obj.ts:570](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L570)
 
 ___
 
@@ -1295,4 +1295,4 @@ Obj.values({})             // []
 
 #### Defined in
 
-[src/Obj.ts:588](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Obj.ts#L588)
+[src/Obj.ts:588](https://github.com/OctoD/tiinvo/blob/5743591/src/Obj.ts#L588)

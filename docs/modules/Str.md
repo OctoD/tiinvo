@@ -78,7 +78,7 @@ The type alias for string
 
 #### Defined in
 
-[src/Str.ts:10](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L10)
+[src/Str.ts:10](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L10)
 
 ___
 
@@ -99,7 +99,7 @@ It could be either:
 
 #### Defined in
 
-[src/Str.ts:22](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L22)
+[src/Str.ts:22](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L22)
 
 ___
 
@@ -115,7 +115,7 @@ A string searcher argument
 
 #### Defined in
 
-[src/Str.ts:28](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L28)
+[src/Str.ts:28](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L28)
 
 ___
 
@@ -131,7 +131,7 @@ A string splitter argument
 
 #### Defined in
 
-[src/Str.ts:36](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L36)
+[src/Str.ts:36](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L36)
 
 ## Guardables
 
@@ -172,7 +172,7 @@ x is string
 
 #### Defined in
 
-[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L338)
+[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/5743591/src/Functors.ts#L338)
 
 ## Comparables
 
@@ -221,7 +221,7 @@ Str.cmp('b', 'a')  // 1
 
 #### Defined in
 
-[src/Str.ts:100](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L100)
+[src/Str.ts:100](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L100)
 
 ▸ **cmp**(`a`): [`Unary`](Fn.md#unary)<[`T`](Str.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -259,7 +259,7 @@ the unary function
 
 #### Defined in
 
-[src/Str.ts:123](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L123)
+[src/Str.ts:123](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L123)
 
 ___
 
@@ -299,7 +299,7 @@ Str.eq('b', 'a')  // false
 
 #### Defined in
 
-[src/Str.ts:157](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L157)
+[src/Str.ts:157](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L157)
 
 ▸ **eq**(`a`): [`Unary`](Fn.md#unary)<[`T`](Str.md#t), `boolean`\>
 
@@ -333,7 +333,7 @@ the unary function
 
 #### Defined in
 
-[src/Str.ts:176](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L176)
+[src/Str.ts:176](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L176)
 
 ## Functions
 
@@ -373,7 +373,7 @@ collection.sort(Str.asc) // [ "A", "F", "a", "c", "d", "e" ]
 
 #### Defined in
 
-[src/Str.ts:209](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L209)
+[src/Str.ts:209](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L209)
 
 ▸ **asc**(`a`): [`Unary`](Fn.md#unary)<[`T`](Str.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -389,7 +389,7 @@ collection.sort(Str.asc) // [ "A", "F", "a", "c", "d", "e" ]
 
 #### Defined in
 
-[src/Str.ts:210](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L210)
+[src/Str.ts:210](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L210)
 
 ___
 
@@ -429,7 +429,7 @@ collection.sort(Str.desc) // [ "e", "d", "c", "a", "F", "A" ]
 
 #### Defined in
 
-[src/Str.ts:239](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L239)
+[src/Str.ts:239](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L239)
 
 ▸ **desc**(`a`): [`Unary`](Fn.md#unary)<[`T`](Str.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -445,7 +445,7 @@ collection.sort(Str.desc) // [ "e", "d", "c", "a", "F", "A" ]
 
 #### Defined in
 
-[src/Str.ts:240](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L240)
+[src/Str.ts:240](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L240)
 
 ___
 
@@ -477,7 +477,7 @@ Str.toInt32Array('hello') // Int32Array(5) [ 104, 101, 108, 108, 111 ]
 
 #### Defined in
 
-[src/Str.ts:1400](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L1400)
+[src/Str.ts:1400](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L1400)
 
 ## Natives
 
@@ -513,7 +513,7 @@ the camelCased string
 
 #### Defined in
 
-[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Fn.ts#L22)
+[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5743591/src/Fn.ts#L22)
 
 ___
 
@@ -554,7 +554,7 @@ Str.charAt("hello", 10)        // null
 
 #### Defined in
 
-[src/Str.ts:295](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L295)
+[src/Str.ts:295](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L295)
 
 ▸ **charAt**(`a`): [`Unary`](Fn.md#unary)<[`T`](Str.md#t), [`T`](Opt.md#t)<[`T`](Str.md#t)\>\>
 
@@ -588,7 +588,7 @@ the unary function
 
 #### Defined in
 
-[src/Str.ts:314](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L314)
+[src/Str.ts:314](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L314)
 
 ___
 
@@ -633,7 +633,7 @@ Str.charCodeAt("hello", 10)        // null
 
 #### Defined in
 
-[src/Str.ts:359](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L359)
+[src/Str.ts:359](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L359)
 
 ▸ **charCodeAt**(`a`): [`Unary`](Fn.md#unary)<[`T`](Str.md#t), [`T`](Opt.md#t)<`number`\>\>
 
@@ -668,7 +668,7 @@ the unary function
 
 #### Defined in
 
-[src/Str.ts:379](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L379)
+[src/Str.ts:379](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L379)
 
 ___
 
@@ -704,7 +704,7 @@ the array of characters
 
 #### Defined in
 
-[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Fn.ts#L22)
+[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5743591/src/Fn.ts#L22)
 
 ___
 
@@ -742,7 +742,7 @@ the concatenated string
 
 #### Defined in
 
-[src/Str.ts:434](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L434)
+[src/Str.ts:434](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L434)
 
 ▸ **concat**(`a`): [`Unary`](Fn.md#unary)<[`T`](Str.md#t), [`T`](Str.md#t)\>
 
@@ -774,7 +774,7 @@ the unary function
 
 #### Defined in
 
-[src/Str.ts:451](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L451)
+[src/Str.ts:451](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L451)
 
 ___
 
@@ -812,7 +812,7 @@ Str.endsWith("hello", "o")         // true
 
 #### Defined in
 
-[src/Str.ts:481](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L481)
+[src/Str.ts:481](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L481)
 
 ▸ **endsWith**(`a`): [`Unary`](Fn.md#unary)<[`T`](Str.md#t), `boolean`\>
 
@@ -847,7 +847,7 @@ the unary function
 
 #### Defined in
 
-[src/Str.ts:501](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L501)
+[src/Str.ts:501](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L501)
 
 ___
 
@@ -886,7 +886,7 @@ Str.includes("o")("hello")         // true
 
 #### Defined in
 
-[src/Str.ts:532](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L532)
+[src/Str.ts:532](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L532)
 
 ▸ **includes**(`a`): [`Unary`](Fn.md#unary)<[`T`](Str.md#t), `boolean`\>
 
@@ -921,7 +921,7 @@ the unary function
 
 #### Defined in
 
-[src/Str.ts:552](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L552)
+[src/Str.ts:552](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L552)
 
 ___
 
@@ -963,7 +963,7 @@ Str.indexOf("l")("hello", 3)      // 3
 
 #### Defined in
 
-[src/Str.ts:586](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L586)
+[src/Str.ts:586](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L586)
 
 ▸ **indexOf**(`a`): (`b`: [`T`](Str.md#t), `i?`: `number`) => [`T`](Opt.md#t)<`number`\>
 
@@ -1011,7 +1011,7 @@ the binary function
 
 #### Defined in
 
-[src/Str.ts:606](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L606)
+[src/Str.ts:606](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L606)
 
 ___
 
@@ -1051,7 +1051,7 @@ Str.lastIndexOf("l")("hello")         // 3
 
 #### Defined in
 
-[src/Str.ts:638](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L638)
+[src/Str.ts:638](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L638)
 
 ▸ **lastIndexOf**(`a`): (`b`: [`T`](Str.md#t), `p?`: `number`) => [`T`](Opt.md#t)<`number`\>
 
@@ -1096,7 +1096,7 @@ the binary function
 
 #### Defined in
 
-[src/Str.ts:655](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L655)
+[src/Str.ts:655](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L655)
 
 ___
 
@@ -1132,7 +1132,7 @@ the length of the string `a`
 
 #### Defined in
 
-[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Fn.ts#L22)
+[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5743591/src/Fn.ts#L22)
 
 ___
 
@@ -1166,7 +1166,7 @@ the array containing the lines
 
 #### Defined in
 
-[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Fn.ts#L22)
+[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5743591/src/Fn.ts#L22)
 
 ___
 
@@ -1202,7 +1202,7 @@ the lowercased string
 
 #### Defined in
 
-[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Fn.ts#L22)
+[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5743591/src/Fn.ts#L22)
 
 ___
 
@@ -1241,7 +1241,7 @@ Str.match("hello", "k")         // null
 
 #### Defined in
 
-[src/Str.ts:739](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L739)
+[src/Str.ts:739](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L739)
 
 ▸ **match**(`a`): [`Unary`](Fn.md#unary)<[`T`](Str.md#t), [`T`](Opt.md#t)<`RegExpMatchArray`\>\>
 
@@ -1276,7 +1276,7 @@ the unary function
 
 #### Defined in
 
-[src/Str.ts:759](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L759)
+[src/Str.ts:759](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L759)
 
 ___
 
@@ -1318,7 +1318,7 @@ the padded string
 
 #### Defined in
 
-[src/Str.ts:792](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L792)
+[src/Str.ts:792](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L792)
 
 ▸ **padEnd**(`a`): (`b`: [`T`](Str.md#t), `d?`: [`T`](Str.md#t)) => [`T`](Str.md#t)
 
@@ -1369,7 +1369,7 @@ the binary function
 
 #### Defined in
 
-[src/Str.ts:815](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L815)
+[src/Str.ts:815](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L815)
 
 ▸ **padEnd**(`a`, `b?`): (`b`: [`T`](Str.md#t)) => [`T`](Str.md#t)
 
@@ -1420,7 +1420,7 @@ Str.padEnd(5)("a", "b")    // "abbbb"
 
 #### Defined in
 
-[src/Str.ts:838](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L838)
+[src/Str.ts:838](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L838)
 
 ___
 
@@ -1456,7 +1456,7 @@ the PascalCased string
 
 #### Defined in
 
-[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Fn.ts#L22)
+[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5743591/src/Fn.ts#L22)
 
 ___
 
@@ -1498,7 +1498,7 @@ the padded string
 
 #### Defined in
 
-[src/Str.ts:889](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L889)
+[src/Str.ts:889](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L889)
 
 ▸ **padStart**(`a`): (`c`: [`T`](Str.md#t), `d?`: [`T`](Str.md#t)) => [`T`](Str.md#t)
 
@@ -1550,7 +1550,7 @@ the binary function
 
 #### Defined in
 
-[src/Str.ts:913](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L913)
+[src/Str.ts:913](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L913)
 
 ▸ **padStart**(`a`, `b?`): (`c`: [`T`](Str.md#t)) => [`T`](Str.md#t)
 
@@ -1601,7 +1601,7 @@ the binary function
 
 #### Defined in
 
-[src/Str.ts:936](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L936)
+[src/Str.ts:936](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L936)
 
 ___
 
@@ -1640,7 +1640,7 @@ the repeated string
 
 #### Defined in
 
-[src/Str.ts:966](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L966)
+[src/Str.ts:966](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L966)
 
 ▸ **repeat**(`a`): (`b`: [`T`](Str.md#t)) => [`T`](Str.md#t)
 
@@ -1686,7 +1686,7 @@ the unary function
 
 #### Defined in
 
-[src/Str.ts:985](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L985)
+[src/Str.ts:985](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L985)
 
 ___
 
@@ -1724,7 +1724,7 @@ the replaced string
 
 #### Defined in
 
-[src/Str.ts:1014](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L1014)
+[src/Str.ts:1014](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L1014)
 
 ▸ **replace**(`a`, `b`): (`b`: [`T`](Str.md#t)) => [`T`](Str.md#t)
 
@@ -1770,7 +1770,7 @@ the unary function
 
 #### Defined in
 
-[src/Str.ts:1033](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L1033)
+[src/Str.ts:1033](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L1033)
 
 ___
 
@@ -1806,7 +1806,7 @@ the reversed string
 
 #### Defined in
 
-[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Fn.ts#L22)
+[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5743591/src/Fn.ts#L22)
 
 ___
 
@@ -1848,7 +1848,7 @@ Str.search("hello", "k")         // null
 
 #### Defined in
 
-[src/Str.ts:1085](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L1085)
+[src/Str.ts:1085](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L1085)
 
 ▸ **search**(`a`): (`b`: [`T`](Str.md#t)) => [`T`](Opt.md#t)<`number`\>
 
@@ -1899,7 +1899,7 @@ the unary function
 
 #### Defined in
 
-[src/Str.ts:1109](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L1109)
+[src/Str.ts:1109](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L1109)
 
 ___
 
@@ -1938,7 +1938,7 @@ the sliced string
 
 #### Defined in
 
-[src/Str.ts:1141](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L1141)
+[src/Str.ts:1141](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L1141)
 
 ▸ **slice**(`a`, `b?`): (`b`: [`T`](Str.md#t)) => `string`
 
@@ -1984,7 +1984,7 @@ the unary function
 
 #### Defined in
 
-[src/Str.ts:1160](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L1160)
+[src/Str.ts:1160](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L1160)
 
 ___
 
@@ -2024,7 +2024,7 @@ the resulting array
 
 #### Defined in
 
-[src/Str.ts:1191](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L1191)
+[src/Str.ts:1191](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L1191)
 
 ▸ **split**(`a`, `b?`): [`Unary`](Fn.md#unary)<[`T`](Str.md#t), [`T`](Str.md#t)[]\>
 
@@ -2059,7 +2059,7 @@ the unary function
 
 #### Defined in
 
-[src/Str.ts:1211](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L1211)
+[src/Str.ts:1211](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L1211)
 
 ___
 
@@ -2095,7 +2095,7 @@ the trimmed string
 
 #### Defined in
 
-[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Fn.ts#L22)
+[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5743591/src/Fn.ts#L22)
 
 ___
 
@@ -2131,7 +2131,7 @@ the trimmed string
 
 #### Defined in
 
-[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Fn.ts#L22)
+[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5743591/src/Fn.ts#L22)
 
 ___
 
@@ -2167,7 +2167,7 @@ the trimmed string
 
 #### Defined in
 
-[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Fn.ts#L22)
+[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5743591/src/Fn.ts#L22)
 
 ___
 
@@ -2203,7 +2203,7 @@ the uppercased string
 
 #### Defined in
 
-[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Fn.ts#L22)
+[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5743591/src/Fn.ts#L22)
 
 ___
 
@@ -2237,7 +2237,7 @@ the array containing the words in string `a`
 
 #### Defined in
 
-[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Fn.ts#L22)
+[src/Fn.ts:22](https://github.com/OctoD/tiinvo/blob/5743591/src/Fn.ts#L22)
 
 ## Serializables
 
@@ -2275,7 +2275,7 @@ the resulting char array
 
 #### Defined in
 
-[src/Str.ts:1330](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L1330)
+[src/Str.ts:1330](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L1330)
 
 ___
 
@@ -2313,7 +2313,7 @@ the resulting binary strings array
 
 #### Defined in
 
-[src/Str.ts:1348](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L1348)
+[src/Str.ts:1348](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L1348)
 
 ___
 
@@ -2351,7 +2351,7 @@ the resulting char code array
 
 #### Defined in
 
-[src/Str.ts:1366](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L1366)
+[src/Str.ts:1366](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L1366)
 
 ___
 
@@ -2389,7 +2389,7 @@ the resulting hex char code array
 
 #### Defined in
 
-[src/Str.ts:1384](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L1384)
+[src/Str.ts:1384](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L1384)
 
 ___
 
@@ -2427,4 +2427,4 @@ the resulting oct char code array
 
 #### Defined in
 
-[src/Str.ts:1418](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Str.ts#L1418)
+[src/Str.ts:1418](https://github.com/OctoD/tiinvo/blob/5743591/src/Str.ts#L1418)

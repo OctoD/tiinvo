@@ -167,4 +167,65 @@ describe("TypedSequence", () =>
 
     expect(TypedSequence.toString(sl)).toEqual("3,2,1");
   });
+
+  test(TypedSequence.cmp.name, () =>
+  {
+    const s0 = TypedSequence.make(Num, 1, 2, 3);
+    const s1 = TypedSequence.make(Num, 1, 2, 3)
+
+    expect(TypedSequence.cmp(Num, s0, s1)).toEqual(0);
+
+    const c0 = TypedSequence.cmp(Num.cmp, s0)
+
+    expect(c0(s1)).toEqual(0);
+
+    const c1 = TypedSequence.cmp(Num)
+
+    expect(c1(s0, s1)).toEqual(0);
+
+    const errseq = {} as any;
+    const strseq = TypedSequence.make(Str, 'a', 'b', 'c') as any;
+    const invalidfunctor = { map: 1 } as any;
+
+    expect(() => TypedSequence.cmp(invalidfunctor, s0, s1)).toThrow(TypeError);
+    expect(() => TypedSequence.cmp(Num, s0, strseq)).toThrow(TypeError);
+    expect(() => TypedSequence.cmp(Num, s0, errseq)).toThrow(TypeError);
+    expect(() => TypedSequence.cmp(Num, errseq, s0)).toThrow(TypeError);
+    expect(() => TypedSequence.cmp(Num, errseq, errseq)).toThrow(TypeError);
+    expect(() => TypedSequence.cmp(Num, s0)(errseq)).toThrow(TypeError);
+    expect(() => TypedSequence.cmp(Num)(s0, errseq)).toThrow(TypeError);
+    expect(() => TypedSequence.cmp(Num)(errseq, s0)).toThrow(TypeError);
+    expect(() => TypedSequence.cmp(Num)(errseq, errseq)).toThrow(TypeError);
+  });
+
+  test(TypedSequence.eq.name, () =>
+  {
+    const s0 = TypedSequence.make(Num, 1, 2, 3);
+    const s1 = TypedSequence.make(Num, 1, 2, 3)
+
+    expect(TypedSequence.eq(Num, s0, s1)).toEqual(true);
+
+    const c0 = TypedSequence.eq(Num.eq, s0)
+
+    expect(c0(s1)).toEqual(true);
+
+    const c1 = TypedSequence.eq(Num)
+
+    expect(c1(s0, s1)).toEqual(true);
+
+    // tests all error cases
+    const errseq = {} as any;
+    const strseq = TypedSequence.make(Str, 'a', 'b', 'c') as any;
+    const invalidfunctor = { map: 1 } as any;
+
+    expect(() => TypedSequence.eq(invalidfunctor, s0, s1)).toThrow(TypeError);
+    expect(() => TypedSequence.eq(Num, s0, strseq)).toThrow(TypeError);
+    expect(() => TypedSequence.eq(Num, s0, errseq)).toThrow(TypeError);
+    expect(() => TypedSequence.eq(Num, errseq, s0)).toThrow(TypeError);
+    expect(() => TypedSequence.eq(Num, errseq, errseq)).toThrow(TypeError);
+    expect(() => TypedSequence.eq(Num, s0)(errseq)).toThrow(TypeError);
+    expect(() => TypedSequence.eq(Num)(s0, errseq)).toThrow(TypeError);
+    expect(() => TypedSequence.eq(Num)(errseq, s0)).toThrow(TypeError);
+    expect(() => TypedSequence.eq(Num)(errseq, errseq)).toThrow(TypeError);
+  });
 });

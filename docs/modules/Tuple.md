@@ -53,7 +53,7 @@ let c: SomeTuple = [2, 'hello', 'baz'] // wrong type
 
 #### Defined in
 
-[src/Tuple.ts:21](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Tuple.ts#L21)
+[src/Tuple.ts:21](https://github.com/OctoD/tiinvo/blob/5743591/src/Tuple.ts#L21)
 
 ## guardables
 
@@ -97,7 +97,7 @@ x is GuardArrayReturnType<A\>
 
 #### Defined in
 
-[src/Tuple.ts:43](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Tuple.ts#L43)
+[src/Tuple.ts:43](https://github.com/OctoD/tiinvo/blob/5743591/src/Tuple.ts#L43)
 
 ▸ **guardOf**<`A`\>(`a`): (`x`: `unknown`) => x is T<GuardArrayReturnType<A\>\>
 
@@ -150,7 +150,7 @@ x is T<GuardArrayReturnType<A\>\>
 
 #### Defined in
 
-[src/Tuple.ts:64](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Tuple.ts#L64)
+[src/Tuple.ts:64](https://github.com/OctoD/tiinvo/blob/5743591/src/Tuple.ts#L64)
 
 ## accessors
 
@@ -193,7 +193,7 @@ Tuple.get([10, 'hello'], 2)  // null
 
 #### Defined in
 
-[src/Tuple.ts:132](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Tuple.ts#L132)
+[src/Tuple.ts:132](https://github.com/OctoD/tiinvo/blob/5743591/src/Tuple.ts#L132)
 
 ▸ **get**(`tuple`): <A\>(`x`: [`T`](Tuple.md#t)<`A`\>) => [`T`](Opt.md#t)<[`T`](Tuple.md#t)<`A`\>[typeof `tuple`]\>
 
@@ -249,7 +249,7 @@ get2(t)  // null
 
 #### Defined in
 
-[src/Tuple.ts:155](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Tuple.ts#L155)
+[src/Tuple.ts:155](https://github.com/OctoD/tiinvo/blob/5743591/src/Tuple.ts#L155)
 
 ___
 
@@ -283,7 +283,7 @@ Tuple.length([10, 20, 30]) // 3
 
 #### Defined in
 
-[src/Tuple.ts:180](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Tuple.ts#L180)
+[src/Tuple.ts:180](https://github.com/OctoD/tiinvo/blob/5743591/src/Tuple.ts#L180)
 
 ## Mappables
 
@@ -330,7 +330,7 @@ the mapped tuple
 
 #### Defined in
 
-[src/Tuple.ts:206](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Tuple.ts#L206)
+[src/Tuple.ts:206](https://github.com/OctoD/tiinvo/blob/5743591/src/Tuple.ts#L206)
 
 ▸ **map**<`M`\>(`m`): <B\>(`x`: [`T`](Tuple.md#t)<`B`\>) => [`T`](Tuple.md#t)<[`MappableReturnTypes`](Functors.md#mappablereturntypes)<`M`\>\>
 
@@ -388,4 +388,4 @@ the Mappable function
 
 #### Defined in
 
-[src/Tuple.ts:225](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Tuple.ts#L225)
+[src/Tuple.ts:225](https://github.com/OctoD/tiinvo/blob/5743591/src/Tuple.ts#L225)

@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[src/Pipe.ts:1](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Pipe.ts#L1)
+[src/Pipe.ts:1](https://github.com/OctoD/tiinvo/blob/5743591/src/Pipe.ts#L1)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[src/Pipe.ts:8](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Pipe.ts#L8)
+[src/Pipe.ts:8](https://github.com/OctoD/tiinvo/blob/5743591/src/Pipe.ts#L8)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-[src/Pipe.ts:17](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Pipe.ts#L17)
+[src/Pipe.ts:17](https://github.com/OctoD/tiinvo/blob/5743591/src/Pipe.ts#L17)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[src/Pipe.ts:19](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Pipe.ts#L19)
+[src/Pipe.ts:19](https://github.com/OctoD/tiinvo/blob/5743591/src/Pipe.ts#L19)
 
 ___
 
@@ -110,7 +110,7 @@ ___
 
 #### Defined in
 
-[src/Pipe.ts:21](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Pipe.ts#L21)
+[src/Pipe.ts:21](https://github.com/OctoD/tiinvo/blob/5743591/src/Pipe.ts#L21)
 
 ___
 
@@ -128,7 +128,7 @@ ___
 
 #### Defined in
 
-[src/Pipe.ts:28](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Pipe.ts#L28)
+[src/Pipe.ts:28](https://github.com/OctoD/tiinvo/blob/5743591/src/Pipe.ts#L28)
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 #### Defined in
 
-[src/Pipe.ts:32](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Pipe.ts#L32)
+[src/Pipe.ts:32](https://github.com/OctoD/tiinvo/blob/5743591/src/Pipe.ts#L32)
 
 ___
 
@@ -174,7 +174,7 @@ ___
 
 #### Defined in
 
-[src/Pipe.ts:39](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Pipe.ts#L39)
+[src/Pipe.ts:39](https://github.com/OctoD/tiinvo/blob/5743591/src/Pipe.ts#L39)
 
 ___
 
@@ -204,7 +204,7 @@ ___
 
 #### Defined in
 
-[src/Pipe.ts:44](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Pipe.ts#L44)
+[src/Pipe.ts:44](https://github.com/OctoD/tiinvo/blob/5743591/src/Pipe.ts#L44)
 
 ## Functions
 
@@ -236,7 +236,7 @@ Same as the sync version, but handles promises.
 
 #### Defined in
 
-[src/Pipe.ts:44](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Pipe.ts#L44)
+[src/Pipe.ts:44](https://github.com/OctoD/tiinvo/blob/5743591/src/Pipe.ts#L44)
 
 ___
 
@@ -280,4 +280,4 @@ vat(200)     // 44
 
 #### Defined in
 
-[src/Pipe.ts:39](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Pipe.ts#L39)
+[src/Pipe.ts:39](https://github.com/OctoD/tiinvo/blob/5743591/src/Pipe.ts#L39)

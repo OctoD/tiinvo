@@ -77,7 +77,7 @@ A number type alias
 
 #### Defined in
 
-[src/Num.ts:9](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L9)
+[src/Num.ts:9](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L9)
 
 ## Guardables
 
@@ -120,7 +120,7 @@ x is number
 
 #### Defined in
 
-[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L338)
+[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/5743591/src/Functors.ts#L338)
 
 ## Comparables
 
@@ -168,7 +168,7 @@ the comparison result
 
 #### Defined in
 
-[src/Num.ts:71](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L71)
+[src/Num.ts:71](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L71)
 
 ▸ **cmp**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -208,7 +208,7 @@ cmp0(-2)  // -1
 
 #### Defined in
 
-[src/Num.ts:97](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L97)
+[src/Num.ts:97](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L97)
 
 ___
 
@@ -245,7 +245,7 @@ true if a equals to b
 
 #### Defined in
 
-[src/Num.ts:128](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L128)
+[src/Num.ts:128](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L128)
 
 ▸ **eq**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), `boolean`\>
 
@@ -278,7 +278,7 @@ the unary function
 
 #### Defined in
 
-[src/Num.ts:146](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L146)
+[src/Num.ts:146](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L146)
 
 ___
 
@@ -316,7 +316,7 @@ true if `a` is greater than `b`
 
 #### Defined in
 
-[src/Num.ts:170](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L170)
+[src/Num.ts:170](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L170)
 
 ▸ **gt**(`a`): [`Unary`](Fn.md#unary)<`number`, `boolean`\>
 
@@ -351,7 +351,7 @@ the unary function
 
 #### Defined in
 
-[src/Num.ts:190](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L190)
+[src/Num.ts:190](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L190)
 
 ___
 
@@ -389,7 +389,7 @@ true if a is less than b
 
 #### Defined in
 
-[src/Num.ts:219](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L219)
+[src/Num.ts:219](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L219)
 
 ▸ **lt**(`a`): [`Unary`](Fn.md#unary)<`number`, `boolean`\>
 
@@ -422,7 +422,7 @@ lt5(-2)                   // false
 
 #### Defined in
 
-[src/Num.ts:237](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L237)
+[src/Num.ts:237](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L237)
 
 ___
 
@@ -461,7 +461,7 @@ true if a is greater or equal to b
 
 #### Defined in
 
-[src/Num.ts:265](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L265)
+[src/Num.ts:265](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L265)
 
 ▸ **gte**(`a`): [`Unary`](Fn.md#unary)<`number`, `boolean`\>
 
@@ -497,7 +497,7 @@ the unary function
 
 #### Defined in
 
-[src/Num.ts:286](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L286)
+[src/Num.ts:286](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L286)
 
 ___
 
@@ -536,7 +536,7 @@ true if a is less or equal than b
 
 #### Defined in
 
-[src/Num.ts:316](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L316)
+[src/Num.ts:316](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L316)
 
 ▸ **lte**(`a`): [`Unary`](Fn.md#unary)<`number`, `boolean`\>
 
@@ -572,7 +572,7 @@ the unary function
 
 #### Defined in
 
-[src/Num.ts:337](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L337)
+[src/Num.ts:337](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L337)
 
 ___
 
@@ -611,7 +611,7 @@ true if a is not equal to b
 
 #### Defined in
 
-[src/Num.ts:367](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L367)
+[src/Num.ts:367](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L367)
 
 ▸ **ne**(`a`): [`Unary`](Fn.md#unary)<`number`, `boolean`\>
 
@@ -647,7 +647,7 @@ the unary function
 
 #### Defined in
 
-[src/Num.ts:388](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L388)
+[src/Num.ts:388](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L388)
 
 ## Mappables
 
@@ -702,7 +702,7 @@ toHex("a")     // Error("a is not a number")
 
 #### Defined in
 
-[src/Num.ts:420](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L420)
+[src/Num.ts:420](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L420)
 
 ___
 
@@ -758,7 +758,7 @@ toHex("a")     // 0x0
 
 #### Defined in
 
-[src/Num.ts:439](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L439)
+[src/Num.ts:439](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L439)
 
 ## Predicates
 
@@ -793,7 +793,7 @@ Num.isEven(91)   // false
 
 #### Defined in
 
-[src/Functors.ts:442](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L442)
+[src/Functors.ts:442](https://github.com/OctoD/tiinvo/blob/5743591/src/Functors.ts#L442)
 
 ___
 
@@ -828,7 +828,7 @@ Num.isOdd(91)   // true
 
 #### Defined in
 
-[src/Functors.ts:442](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L442)
+[src/Functors.ts:442](https://github.com/OctoD/tiinvo/blob/5743591/src/Functors.ts#L442)
 
 ___
 
@@ -863,7 +863,7 @@ Num.isNegative(10)   // false
 
 #### Defined in
 
-[src/Functors.ts:442](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L442)
+[src/Functors.ts:442](https://github.com/OctoD/tiinvo/blob/5743591/src/Functors.ts#L442)
 
 ___
 
@@ -898,7 +898,7 @@ Num.isPositive(10)   // true
 
 #### Defined in
 
-[src/Functors.ts:442](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L442)
+[src/Functors.ts:442](https://github.com/OctoD/tiinvo/blob/5743591/src/Functors.ts#L442)
 
 ## Natives
 
@@ -937,7 +937,7 @@ Num.toExponential(10, 2)        // "1.00e+1"
 
 #### Defined in
 
-[src/Num.ts:535](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L535)
+[src/Num.ts:535](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L535)
 
 ▸ **toExponential**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), `string`\>
 
@@ -971,7 +971,7 @@ Num.toExponential(10)(2)        // "2.0000000000e+0"
 
 #### Defined in
 
-[src/Num.ts:554](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L554)
+[src/Num.ts:554](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L554)
 
 ___
 
@@ -1010,7 +1010,7 @@ Num.toFixed(10.505, 2)        // "10.51"
 
 #### Defined in
 
-[src/Num.ts:583](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L583)
+[src/Num.ts:583](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L583)
 
 ▸ **toFixed**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), `string`\>
 
@@ -1044,7 +1044,7 @@ Num.toFixed(10.505)(2)        // "2.0000000000"
 
 #### Defined in
 
-[src/Num.ts:602](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L602)
+[src/Num.ts:602](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L602)
 
 ___
 
@@ -1083,7 +1083,7 @@ Num.toPrecision(10, 2)        // "10"
 
 #### Defined in
 
-[src/Num.ts:631](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L631)
+[src/Num.ts:631](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L631)
 
 ▸ **toPrecision**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), `string`\>
 
@@ -1117,7 +1117,7 @@ Num.toPrecision(10)(2)        // "2.000000000"
 
 #### Defined in
 
-[src/Num.ts:650](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L650)
+[src/Num.ts:650](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L650)
 
 ## Operables
 
@@ -1155,7 +1155,7 @@ the sum
 
 #### Defined in
 
-[src/Num.ts:683](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L683)
+[src/Num.ts:683](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L683)
 
 ▸ **add**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
@@ -1192,7 +1192,7 @@ the unary function
 
 #### Defined in
 
-[src/Num.ts:703](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L703)
+[src/Num.ts:703](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L703)
 
 ___
 
@@ -1230,7 +1230,7 @@ the division
 
 #### Defined in
 
-[src/Num.ts:732](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L732)
+[src/Num.ts:732](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L732)
 
 ▸ **div**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
@@ -1264,7 +1264,7 @@ the unary function
 
 #### Defined in
 
-[src/Num.ts:751](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L751)
+[src/Num.ts:751](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L751)
 
 ___
 
@@ -1302,7 +1302,7 @@ the modulus
 
 #### Defined in
 
-[src/Num.ts:780](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L780)
+[src/Num.ts:780](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L780)
 
 ▸ **mod**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
@@ -1338,7 +1338,7 @@ the unary function
 
 #### Defined in
 
-[src/Num.ts:801](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L801)
+[src/Num.ts:801](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L801)
 
 ___
 
@@ -1376,7 +1376,7 @@ the multiplication
 
 #### Defined in
 
-[src/Num.ts:830](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L830)
+[src/Num.ts:830](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L830)
 
 ▸ **mul**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
@@ -1408,7 +1408,7 @@ mul5(10)                   // 50
 
 #### Defined in
 
-[src/Num.ts:848](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L848)
+[src/Num.ts:848](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L848)
 
 ___
 
@@ -1446,7 +1446,7 @@ the result
 
 #### Defined in
 
-[src/Num.ts:877](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L877)
+[src/Num.ts:877](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L877)
 
 ▸ **pow**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
@@ -1478,7 +1478,7 @@ pow5(10)                   // 100_000
 
 #### Defined in
 
-[src/Num.ts:895](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L895)
+[src/Num.ts:895](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L895)
 
 ___
 
@@ -1516,7 +1516,7 @@ the result
 
 #### Defined in
 
-[src/Num.ts:924](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L924)
+[src/Num.ts:924](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L924)
 
 ▸ **root**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
@@ -1552,7 +1552,7 @@ root2(9)                   // 3
 
 #### Defined in
 
-[src/Num.ts:946](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L946)
+[src/Num.ts:946](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L946)
 
 ___
 
@@ -1590,7 +1590,7 @@ the result
 
 #### Defined in
 
-[src/Num.ts:975](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L975)
+[src/Num.ts:975](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L975)
 
 ▸ **sub**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`T`](Num.md#t)\>
 
@@ -1625,7 +1625,7 @@ the unary function
 
 #### Defined in
 
-[src/Num.ts:995](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L995)
+[src/Num.ts:995](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L995)
 
 ## Sortables
 
@@ -1666,7 +1666,7 @@ the comparison result
 
 #### Defined in
 
-[src/Num.ts:1031](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L1031)
+[src/Num.ts:1031](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L1031)
 
 ▸ **asc**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -1702,7 +1702,7 @@ the unary function
 
 #### Defined in
 
-[src/Num.ts:1052](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L1052)
+[src/Num.ts:1052](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L1052)
 
 ___
 
@@ -1743,7 +1743,7 @@ the comparison result
 
 #### Defined in
 
-[src/Num.ts:1084](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L1084)
+[src/Num.ts:1084](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L1084)
 
 ▸ **desc**(`a`): [`Unary`](Fn.md#unary)<[`T`](Num.md#t), [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -1779,7 +1779,7 @@ the unary function
 
 #### Defined in
 
-[src/Num.ts:1105](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L1105)
+[src/Num.ts:1105](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L1105)
 
 ## Serializables
 
@@ -1817,7 +1817,7 @@ the binary string
 
 #### Defined in
 
-[src/Num.ts:420](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L420)
+[src/Num.ts:420](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L420)
 
 ___
 
@@ -1855,7 +1855,7 @@ the hexadecimal string
 
 #### Defined in
 
-[src/Num.ts:420](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L420)
+[src/Num.ts:420](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L420)
 
 ___
 
@@ -1893,7 +1893,7 @@ the octal string
 
 #### Defined in
 
-[src/Num.ts:420](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L420)
+[src/Num.ts:420](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L420)
 
 ___
 
@@ -1931,7 +1931,7 @@ the string
 
 #### Defined in
 
-[src/Num.ts:420](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L420)
+[src/Num.ts:420](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L420)
 
 ___
 
@@ -1969,4 +1969,4 @@ the string
 
 #### Defined in
 
-[src/Num.ts:420](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Num.ts#L420)
+[src/Num.ts:420](https://github.com/OctoD/tiinvo/blob/5743591/src/Num.ts#L420)

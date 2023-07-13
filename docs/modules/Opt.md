@@ -48,7 +48,7 @@ but we can use them interchangeably within the option type.
 
 #### Defined in
 
-[src/Option.ts:12](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L12)
+[src/Option.ts:12](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L12)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-[src/Option.ts:19](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L19)
+[src/Option.ts:19](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L19)
 
 ___
 
@@ -92,7 +92,7 @@ The type `Option.T<A>` represents a value that could be both `A` or `null` or `u
 
 #### Defined in
 
-[src/Option.ts:25](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L25)
+[src/Option.ts:25](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L25)
 
 ## Functions
 
@@ -129,7 +129,7 @@ x is None
 
 #### Defined in
 
-[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L338)
+[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/5743591/src/Functors.ts#L338)
 
 ___
 
@@ -166,7 +166,7 @@ x is unknown
 
 #### Defined in
 
-[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Functors.ts#L338)
+[src/Functors.ts:338](https://github.com/OctoD/tiinvo/blob/5743591/src/Functors.ts#L338)
 
 ___
 
@@ -221,7 +221,7 @@ the new `Guardable<T<A>>` which returns
 
 #### Defined in
 
-[src/Option.ts:92](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L92)
+[src/Option.ts:92](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L92)
 
 ___
 
@@ -277,7 +277,7 @@ the wrapped function
 
 #### Defined in
 
-[src/Option.ts:646](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L646)
+[src/Option.ts:646](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L646)
 
 ___
 
@@ -333,7 +333,7 @@ the wrapped function
 
 #### Defined in
 
-[src/Option.ts:689](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L689)
+[src/Option.ts:689](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L689)
 
 ## Comparables
 
@@ -384,7 +384,7 @@ Option.cmp(Str.cmp, "a", undefined)              // 1
 
 #### Defined in
 
-[src/Option.ts:123](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L123)
+[src/Option.ts:123](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L123)
 
 ▸ **cmp**<`A`\>(`c`, `a`, `b`): [`ComparableResult`](Functors.md#comparableresult)
 
@@ -431,7 +431,7 @@ Option.cmp(Str, "a", undefined)              // 1
 
 #### Defined in
 
-[src/Option.ts:151](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L151)
+[src/Option.ts:151](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L151)
 
 ▸ **cmp**<`A`\>(`c`, `a`): [`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -478,7 +478,7 @@ the unary comparer functor which takes the left-hand compared value and returns
 
 #### Defined in
 
-[src/Option.ts:177](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L177)
+[src/Option.ts:177](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L177)
 
 ▸ **cmp**<`A`\>(`c`, `a`): [`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -525,7 +525,7 @@ the unary comparer functor which takes the left-hand compared value and returns
 
 #### Defined in
 
-[src/Option.ts:203](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L203)
+[src/Option.ts:203](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L203)
 
 ▸ **cmp**<`A`\>(`c`): [`Binary`](Fn.md#binary)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -573,7 +573,7 @@ the binary comparer functor which takes two values `a` and `b` and returns
 
 #### Defined in
 
-[src/Option.ts:230](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L230)
+[src/Option.ts:230](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L230)
 
 ▸ **cmp**<`A`\>(`c`): [`Binary`](Fn.md#binary)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`A`\>, [`ComparableResult`](Functors.md#comparableresult)\>
 
@@ -621,7 +621,7 @@ the binary comparer functor which takes two values `a` and `b` and returns
 
 #### Defined in
 
-[src/Option.ts:257](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L257)
+[src/Option.ts:257](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L257)
 
 ___
 
@@ -670,7 +670,7 @@ Option.eq(Num.eq, null, undefined)   // true
 
 #### Defined in
 
-[src/Option.ts:312](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L312)
+[src/Option.ts:312](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L312)
 
 ▸ **eq**<`A`\>(`e`, `a`, `b`): `boolean`
 
@@ -713,7 +713,7 @@ Option.eq(Num.eq, null, undefined)   // true
 
 #### Defined in
 
-[src/Option.ts:335](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L335)
+[src/Option.ts:335](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L335)
 
 ▸ **eq**<`A`\>(`e`, `a`): [`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, `boolean`\>
 
@@ -755,7 +755,7 @@ the unary function which returns
 
 #### Defined in
 
-[src/Option.ts:356](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L356)
+[src/Option.ts:356](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L356)
 
 ▸ **eq**<`A`\>(`e`, `a`): [`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, `boolean`\>
 
@@ -797,7 +797,7 @@ the unary function which returns
 
 #### Defined in
 
-[src/Option.ts:377](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L377)
+[src/Option.ts:377](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L377)
 
 ▸ **eq**<`A`\>(`e`): [`Binary`](Fn.md#binary)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`A`\>, `boolean`\>
 
@@ -841,7 +841,7 @@ the binary function which returns
 
 #### Defined in
 
-[src/Option.ts:400](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L400)
+[src/Option.ts:400](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L400)
 
 ▸ **eq**<`A`\>(`e`): [`Binary`](Fn.md#binary)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`A`\>, `boolean`\>
 
@@ -885,7 +885,7 @@ the binary function which returns
 
 #### Defined in
 
-[src/Option.ts:423](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L423)
+[src/Option.ts:423](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L423)
 
 ## Filterables
 
@@ -929,7 +929,7 @@ Option.filter(Num.gt(1), null) // null
 
 #### Defined in
 
-[src/Option.ts:471](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L471)
+[src/Option.ts:471](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L471)
 
 ▸ **filter**<`A`\>(`a`): [`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`A`\>\>
 
@@ -969,7 +969,7 @@ the unary function which filters the value `b`
 
 #### Defined in
 
-[src/Option.ts:491](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L491)
+[src/Option.ts:491](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L491)
 
 ## Mappables
 
@@ -1014,7 +1014,7 @@ the mapped option `T<B>`
 
 #### Defined in
 
-[src/Option.ts:526](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L526)
+[src/Option.ts:526](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L526)
 
 ▸ **map**<`A`, `B`\>(`m`): [`Mappable`](Functors.md#mappable)<[`T`](Opt.md#t)<`A`\>, [`T`](Opt.md#t)<`B`\>\>
 
@@ -1054,7 +1054,7 @@ the mappable functor which maps `T<A>` to `T<B>`
 
 #### Defined in
 
-[src/Option.ts:546](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L546)
+[src/Option.ts:546](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L546)
 
 ___
 
@@ -1098,7 +1098,7 @@ the mapped value `B` or the fallback value `b` if `a` is `None`
 
 #### Defined in
 
-[src/Option.ts:578](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L578)
+[src/Option.ts:578](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L578)
 
 ▸ **mapOr**<`A`, `B`\>(`m`, `a`): [`Unary`](Fn.md#unary)<[`T`](Opt.md#t)<`A`\>, `B`\>
 
@@ -1139,4 +1139,4 @@ the mappable functor which maps `A` to `B` or returns the fallback value `a` if 
 
 #### Defined in
 
-[src/Option.ts:599](https://github.com/OctoD/tiinvo/blob/5779ed4/src/Option.ts#L599)
+[src/Option.ts:599](https://github.com/OctoD/tiinvo/blob/5743591/src/Option.ts#L599)

@@ -464,6 +464,264 @@ export const values = Sequence.values;
 
 //#endregion
 
+//#region comparables
+
+/**
+ * Compares two `TypedSequence.t<A>` values with a `Comparable<A>` or `ComparableModule<A>` functor.
+ *
+ * @example
+ *
+ * ```ts
+ * import { TypedSequence, Num } from 'tiinvo'
+ * 
+ * const s0 = TypedSequence.make(Num, 1, 2, 3)
+ * const s1 = TypedSequence.make(Num, 1, 2, 3)
+ * 
+ * TypedSequence.cmp(Num, s0, s1)       // 0
+ * TypedSequence.cmp(Num)(s0, s1)       // 0
+ * TypedSequence.cmp(Num, s0)(s1)       // 0
+ * TypedSequence.cmp(Num)(s0)(s1)       // 0
+ * ```
+ * 
+ * @template A the sequence's element type
+ * 
+ * @param cmp the `Comparable<A>` or `ComparableModule<A>` functor
+ * @param a the first sequence
+ * @param b the second sequence
+ * @returns the comparison result
+ *
+ * @group comparables
+ * @since 4.0.0
+ */
+export function cmp<A>(cmp: Functors.Comparable<A> | Functors.ComparableModule<A>, a: T<A>, b: T<A>): Functors.ComparableResult;
+/**
+ * Returns a comparer function that compares two `TypedSequence.t<A>` values with a `Comparable<A>` or `ComparableModule<A>` functor.
+ *
+ * @example
+ *
+ * ```ts
+ * import { TypedSequence, Num } from 'tiinvo'
+ * 
+ * const s0 = TypedSequence.make(Num, 1, 2, 3)
+ * const s1 = TypedSequence.make(Num, 1, 2, 3)
+ * 
+ * const c = TypedSequence.cmp(Num, s0)
+ * 
+ * c(s1)       // 0
+ * ```
+ * 
+ * @template A the sequence's element type
+ * 
+ * @param cmp the `Comparable<A>` or `ComparableModule<A>` functor
+ * @param a the first sequence
+ * 
+ * @returns the comparer function
+ * 
+ * @group comparables
+ * @since 4.0.0
+ */
+export function cmp<A>(cmp: Functors.Comparable<A> | Functors.ComparableModule<A>, a: T<A>): Fn.Unary<T<A>, Functors.ComparableResult>;
+/**
+ * Returns a comparer function that compares two `TypedSequence.t<A>` values with a `Comparable<A>` or `ComparableModule<A>` functor.
+ *
+ * @example
+ *
+ * ```ts
+ * import { TypedSequence, Num } from 'tiinvo'
+ * 
+ * const s0 = TypedSequence.make(Num, 1, 2, 3)
+ * const s1 = TypedSequence.make(Num, 1, 2, 3)
+ * 
+ * const c = TypedSequence.cmp(Num)
+ * 
+ * c(s0, s1)       // 0
+ * ```
+ * 
+ * @template A the sequence's element type
+ * 
+ * @param cmp the `Comparable<A>` or `ComparableModule<A>` functor
+ * 
+ * @returns the comparer function
+ * 
+ * @group comparables
+ * @since 4.0.0
+ */
+export function cmp<A>(cmp: Functors.Comparable<A> | Functors.ComparableModule<A>): Fn.Binary<T<A>, T<A>, Functors.ComparableResult>;
+export function cmp<A>(cmp: Functors.Comparable<A> | Functors.ComparableModule<A>, a?: T<A>, b?: T<A>): any
+{
+  const cmpfn = typeof cmp === 'function' ? cmp : cmp.cmp;
+
+  if (cmpfn === undefined)
+  {
+    throw new TypeError('Invalid Comparable<A> or ComparableModule<A> functor');
+  }
+
+  if (a && b && (!guard(a) || !guard(b)))
+  {
+    throw new TypeError('Cannot compare TypedSequence A and B of different types');
+  }
+
+  if (guard(a) && guard(b))
+  {
+    if (a[guardsymbol] !== b[guardsymbol])
+    {
+      throw new TypeError('Cannot compare TypedSequence A and B of different types');
+    }
+
+    return Sequence.cmp(cmpfn, a, b);
+  } else if (guard(a))
+  {
+    return (b: T<A>) =>
+    {
+      if (guard(b) && a[guardsymbol] === b[guardsymbol])
+      {
+        return Sequence.cmp(cmpfn, a, b);
+      }
+
+      throw new TypeError('Cannot compare TypedSequence A and B of different types');
+    };
+  } else
+  {
+    return (a: T<A>, b: T<A>) =>
+    {
+      if (guard(a) && guard(b) && a[guardsymbol] === b[guardsymbol])
+      {
+        return Sequence.cmp(cmpfn, a, b);
+      }
+
+      throw new TypeError('Cannot compare TypedSequence A and B of different types');
+    };
+  }
+}
+
+/**
+ * Checks if two `TypedSequence.t<A>` values are equal with an `Equatable<A>` or `EquatableModule<A>` functor.
+ *
+ * @example
+ *
+ * ```ts
+ * import { TypedSequence, Num } from 'tiinvo'
+ * 
+ * const s0 = TypedSequence.make(Num, 1, 2, 3)
+ * const s1 = TypedSequence.make(Num, 1, 2, 3)
+ * 
+ * TypedSequence.eq(Num, s0, s1)       // true
+ * ```
+ *
+ * @template A the sequence's element type
+ * 
+ * @param eq the `Equatable<A>` or `EquatableModule<A>` functor
+ * @param a the first sequence
+ * @param b the second sequence
+ * @returns `true` if the sequences are equal, `false` otherwise
+ * 
+ * @group comparables
+ * @since 4.0.0
+ */
+export function eq<A>(eq: Functors.Equatable<A> | Functors.EquatableModule<A>, a: T<A>, b: T<A>): boolean;
+/**
+ * Returns a comparer function that checks if two `TypedSequence.t<A>` values are equal with an `Equatable<A>` or `EquatableModule<A>` functor.
+ *
+ * @example
+ *
+ * ```ts
+ * import { TypedSequence, Num } from 'tiinvo'
+ * 
+ * const s2 = TypedSequence.make(Num, 1, 2, 3)
+ * const s3 = TypedSequence.make(Num, 1, 2, 3)
+ * 
+ * const c = TypedSequence.eq(Num, s0)
+ * 
+ * c(s1)       // true
+ * ```
+ * 
+ * @template A the sequence's element type
+ * 
+ * @param eq the `Equatable<A>` or `EquatableModule<A>` functor
+ * @param a the first sequence
+ * 
+ * @returns the comparer function
+ * 
+ * @group comparables
+ * @since 4.0.0
+ */
+export function eq<A>(eq: Functors.Equatable<A> | Functors.EquatableModule<A>, a: T<A>): Fn.Unary<T<A>, boolean>;
+/**
+ * Returns a comparer function that checks if two `TypedSequence.t<A>` values are equal with an `Equatable<A>` or `EquatableModule<A>` functor.
+ *
+ * @example
+ *
+ * ```ts
+ * import { TypedSequence, Num } from 'tiinvo'
+ * 
+ * const s0 = TypedSequence.make(Num, 1, 2, 3)
+ * const s1 = TypedSequence.make(Num, 1, 2, 3)
+ * 
+ * const c = TypedSequence.eq(Num)
+ * 
+ * c(s0, s1)       // true
+ * ```
+ * 
+ * @template A the sequence's element type
+ * 
+ * @param eq the `Equatable<A>` or `EquatableModule<A>` functor
+ * 
+ * @returns the comparer function
+ * 
+ * @group comparables
+ * @since 4.0.0
+ */
+export function eq<A>(eq: Functors.Equatable<A> | Functors.EquatableModule<A>): Fn.Binary<T<A>, T<A>, boolean>;
+export function eq<A>(eq: Functors.Equatable<A> | Functors.EquatableModule<A>, a?: T<A>, b?: T<A>): any
+{
+  const eqfn = typeof eq === 'function' ? eq : eq.eq;
+
+  if (eqfn === undefined)
+  {
+    throw new TypeError('Invalid Equatable<A> or EquatableModule<A> functor');
+  }
+
+  if (a && b && (!guard(a) || !guard(b)))
+  {
+    throw new TypeError('Cannot compare TypedSequence A and B of different types');
+  }
+
+  if (guard(a) && guard(b))
+  {
+    if (a[guardsymbol] !== b[guardsymbol])
+    {
+      throw new TypeError('Cannot compare sequences of different types');
+    }
+
+    return Sequence.eq(eqfn, a, b);
+  } else if (guard(a))
+  {
+    return (b: T<A>) =>
+    {
+      if (guard(b) && a[guardsymbol] === b[guardsymbol])
+      {
+        return Sequence.eq(eqfn, a, b);
+      }
+
+      throw new TypeError('Cannot compare sequences of different types');
+    };
+  } else
+  {
+    return (a: T<A>, b: T<A>) =>
+    {
+      if (guard(a) && guard(b) && a[guardsymbol] === b[guardsymbol])
+      {
+        return Sequence.eq(eqfn, a, b);
+      }
+
+      throw new TypeError('Cannot compare sequences of different types');
+    };
+  }
+}
+
+
+//#endregion
+
 //#region predicates
 
 /**
