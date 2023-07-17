@@ -1,6 +1,6 @@
 {
   "name": "tiinvo",
-  "version": "4.0.0-rc2",
+  "version": "4.0.0-rc3",
   "author": "Paolo Roth <octod>",
   "license": "MIT",
   "description": "A library of types and utilities for your TypeScript and JavaScript projects",
